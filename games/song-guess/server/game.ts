@@ -216,6 +216,7 @@ export function createSongGame(deps: {
       year: null,
       link: `https://www.deezer.com/track/${track.id}`,
       previewUrl: media.urlFor(m.token, 'full'),
+      poolName: catalog.poolOfTrack(track.id, state.settings.pools),
       results: [...state.players.values()]
         .filter((p) => p.solved !== 'none')
         .map((p) => ({ playerId: p.id, stage: p.solvedStage ?? 0, points: p.roundPoints, kind: p.solved as 'artist' | 'correct' }))
@@ -230,8 +231,14 @@ export function createSongGame(deps: {
     const done = state.ending || (state.total !== null && state.round >= state.total);
     if (!done) {
       setPhase(ctx, state, 'loading', null);
-      const next = await state.next;
-      if (state.disposed) return;
+      // Beklerken ayarlar değişirse `state.next` yenilenir; en güncel olanı bekle.
+      let next: Prepared | null = null;
+      for (;;) {
+        const pending = state.next;
+        next = await pending;
+        if (state.disposed) return;
+        if (pending === state.next) break;
+      }
       if (next && !state.ending) return beginRound(ctx, state, next);
       if (!next) ctx.log('ran out of tracks', { round: state.round });
     }
@@ -412,12 +419,17 @@ export function createSongGame(deps: {
       const pools = settings.pools.filter((id) => !catalog.missingPools([id]).length);
       state.settings = { ...settings, pools };
       state.poolNames = catalog.poolNames(pools);
-      // Liste ya da zorluk değiştiyse sıradaki şarkılar yeni seçimden gelir.
-      // (Arka planda hazırlanmış bir sonraki şarkı korunur; ondan sonrası yenilenir.)
-      if (prev.pools.join() !== pools.join() || prev.difficulty !== settings.difficulty) state.queue = [];
       if (settings.rounds === 0) state.total = null;
       else state.total = Math.max(settings.rounds, state.round);
-      if (state.total !== null && state.round < state.total && !state.next && state.phase !== 'podium') {
+      const more = state.phase !== 'podium' && (state.total === null || state.round < state.total);
+      // Liste ya da zorluk değiştiyse sıradaki şarkı da yeni seçimden gelsin:
+      // eski seçimden önceden hazırlanmış şarkı atılır, yenisi hazırlanır.
+      if (prev.pools.join() !== pools.join() || prev.difficulty !== settings.difficulty) {
+        state.queue = [];
+        const stale = state.next;
+        state.next = more ? prepareNext(ctx, state) : null;
+        void stale?.then((n) => n && media.release(n.media.token));
+      } else if (more && !state.next) {
         state.next = prepareNext(ctx, state);
       }
       log(ctx, state, ctx.hostId(), 'settings', { text: `${state.poolNames.join(', ')}` });

@@ -564,6 +564,10 @@
   color: var(--text-2);
 }
 
+.rv-pool {
+  font-size: 12px;
+}
+
 .rv-links {
   display: flex;
   flex-wrap: wrap;

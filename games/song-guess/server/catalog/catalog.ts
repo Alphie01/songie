@@ -207,6 +207,17 @@ export class Catalog {
     return ids.map((id) => byId.get(id) ?? id);
   }
 
+  poolOfTrack(trackId: number, poolIds: string[]): string | null {
+    if (!poolIds.length) return null;
+    const row = this.db
+      .prepare(
+        `SELECT p.name FROM sg_pool_tracks pt JOIN sg_pools p ON p.id = pt.pool_id
+         WHERE pt.track_id = ? AND pt.pool_id IN (${poolIds.map(() => '?').join(',')}) LIMIT 1`,
+      )
+      .get(trackId, ...poolIds) as { name: string } | undefined;
+    return row?.name ?? null;
+  }
+
   missingPools(ids: string[]): string[] {
     const have = new Set(this.pools().map((p) => p.id));
     return ids.filter((id) => !have.has(id));

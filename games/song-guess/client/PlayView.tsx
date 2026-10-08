@@ -351,6 +351,7 @@ function Reveal({
         {r.artist}
         {r.album ? ` · ${r.album}` : ''}
       </p>
+      {r.poolName && <p className="rv-pool dim">{s.reveal.fromPool(r.poolName)}</p>}
       <div className="rv-links">
         <button type="button" className="btn btn-ghost" onClick={() => (playing ? player.stop() : void player.play(r.previewUrl))}>
           <Icon name={playing ? 'pause' : 'play'} size={14} />

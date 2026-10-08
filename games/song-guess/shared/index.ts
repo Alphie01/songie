@@ -89,6 +89,8 @@ export interface RevealInfo {
   year: number | null;
   link: string;
   previewUrl: string;
+  /** Şarkının geldiği liste (seçili listelerden). */
+  poolName: string | null;
   results: { playerId: string; stage: number; points: number; kind: 'artist' | 'correct' }[];
 }
 

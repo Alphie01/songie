@@ -62,7 +62,8 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
     try {
       const res = await api.post<{ pool: PoolInfo; matched?: number; total?: number }>('/pools', { url });
       setPools((ps) => [...(ps ?? []).filter((p) => p.id !== res.pool.id), res.pool]);
-      if (!selected.has(res.pool.id)) set({ pools: [...settings.pools, res.pool.id] });
+      // Yeni eklenen liste tek başına seçilir; diğer listeler istenirse katalogdan yeniden eklenir.
+      set({ pools: [res.pool.id] });
       setAddMsg({
         text:
           res.total !== undefined

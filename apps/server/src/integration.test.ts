@@ -32,6 +32,17 @@ const TRACKS = [
   album: { id: t.id * 100, title: `${t.title} albüm`, cover_medium: null },
 }));
 
+// İkinci liste: tamamen farklı şarkılar.
+const TRACKS2 = Array.from({ length: 10 }, (_, i) => ({
+  id: 301 + i,
+  title: `İkinci ${i + 1}`,
+  readable: true,
+  rank: 5000 - i,
+  preview: `https://cdn.test/${301 + i}.mp3`,
+  artist: { id: 9000 + i, name: `Grup ${i + 1}` },
+  album: { id: 9100 + i, title: 'İkinci albüm', cover_medium: null },
+}));
+
 let mp3: Buffer;
 const fakeFetch: typeof fetch = async (input) => {
   const url = new URL(String(input));
@@ -39,8 +50,10 @@ const fakeFetch: typeof fetch = async (input) => {
   if (url.host === 'cdn.test') return new Response(new Uint8Array(mp3));
   if (url.pathname === '/playlist/1') return json({ id: 1, title: 'Test listesi', nb_tracks: TRACKS.length });
   if (url.pathname === '/playlist/1/tracks') return json({ data: TRACKS });
+  if (url.pathname === '/playlist/2') return json({ id: 2, title: 'İkinci liste', nb_tracks: TRACKS2.length });
+  if (url.pathname === '/playlist/2/tracks') return json({ data: TRACKS2 });
   const track = url.pathname.match(/^\/track\/(\d+)$/);
-  if (track) return json(TRACKS.find((t) => t.id === Number(track[1])) ?? { error: { code: 800, message: 'no', type: 'x' } });
+  if (track) return json([...TRACKS, ...TRACKS2].find((t) => t.id === Number(track[1])) ?? { error: { code: 800, message: 'no', type: 'x' } });
   if (url.pathname === '/search/track') {
     const q = (url.searchParams.get('q') ?? '').toLowerCase();
     return json({ data: TRACKS.filter((t) => q.includes(t.artist.name.toLowerCase())).map((t) => ({ ...t, duration: 200 })) });
@@ -126,6 +139,7 @@ beforeAll(async () => {
   });
   const catalog = (app.games.get('song-guess') as unknown as { catalog: { importPool(d: object): Promise<unknown> } }).catalog;
   await catalog.importPool({ id: 'test', name: 'Test listesi', category: 'turkce', playlist: '1' });
+  await catalog.importPool({ id: 'test2', name: 'İkinci liste', category: 'ozel', playlist: '2' });
   await app.http.listen({ port: 0, host: '127.0.0.1' });
   base = `http://127.0.0.1:${(app.http.server.address() as AddressInfo).port}`;
 }, 30_000);
@@ -343,6 +357,32 @@ describe('song-guess over sockets', () => {
     h!.socket.close();
     g!.socket.close();
   }, 15_000);
+
+  it('plays the very next song from a list the host switches to mid-game', async () => {
+    const s = await client(await profile('Değiştiren'));
+    const base = { rounds: 5, pools: ['test'], difficulty: 'easy', timer: 0, startAt: 'start', startStage: 0, easySearch: false, artistCredit: true };
+    await s.emit('room:create', { gameId: 'song-guess', settings: base });
+    await s.emit('room:start');
+    let v = await s.waitView((x) => x.phase === 'stage' && x.round === 1);
+    // Sıradaki şarkı arka planda eski listeden hazırlanmış olabilir; liste değişince atılmalı.
+    await new Promise((r) => setTimeout(r, 300));
+    expect(await s.emit('room:settings', { settings: { ...base, pools: ['test2'] } })).toMatchObject({ ok: true });
+    for (let stage = 0; stage < 5; stage++) {
+      await s.waitView((x) => x.phase === 'stage' && x.stage === stage);
+      await s.emit('game:action', { action: { type: 'skip' } });
+    }
+    await s.waitView((x) => x.phase === 'reveal');
+    await s.emit('game:action', { action: { type: 'next' } });
+    v = await s.waitView((x) => x.phase === 'stage' && x.round === 2, 6000);
+    expect(media().trackOf(tokenOf(v))).toBeGreaterThanOrEqual(301);
+    for (let stage = 0; stage < 5; stage++) {
+      await s.waitView((x) => x.phase === 'stage' && x.stage === stage);
+      await s.emit('game:action', { action: { type: 'skip' } });
+    }
+    v = await s.waitView((x) => x.phase === 'reveal' && x.round === 2);
+    expect(v.reveal?.poolName).toBe('İkinci liste');
+    s.socket.close();
+  }, 20_000);
 
   it('imports a Spotify playlist by matching its songs on Deezer', async () => {
     const token = await profile('Spotifyci');
