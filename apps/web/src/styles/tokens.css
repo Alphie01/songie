@@ -1,0 +1,43 @@
+/* Tasarım token'ları: songspot.net görünümü (kullanıcının isteği). Ayrıntı: docs/design.md */
+:root {
+  --bg: #030704;
+  --panel: #101511;
+  --panel-2: #161c17;
+  --panel-3: #1d241e;
+  --line: rgb(255 255 255 / 0.08);
+  --line-2: rgb(255 255 255 / 0.14);
+
+  --text: #ffffff;
+  --text-2: #b4b8b4;
+  --text-3: #7c837c;
+
+  --accent: #19df70;
+  --accent-hi: #39e887;
+  --accent-ink: #04160b;
+  --accent-soft: rgb(25 223 112 / 0.09);
+  --accent-soft-2: rgb(25 223 112 / 0.16);
+  --accent-glow: 0 0 32px rgb(25 223 112 / 0.35);
+
+  /* Zorluk renkleri */
+  --yellow: #ffd234;
+  --orange: #ff8631;
+  --red: #f66464;
+  --purple: #ae67ed;
+
+  --font: 'Poppins', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --r-sm: 10px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-pill: 999px;
+
+  --gutter: 16px;
+  --col: 420px;
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 24px;
+  }
+}

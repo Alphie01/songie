@@ -1,0 +1,35 @@
+# Sunucudaki diğer projelerden tamamen ayrı: kendi ağı, kendi volume'ü, kendi tüneli.
+# Host'ta yalnızca 127.0.0.1:4310 açılır (bakım için); dışarıya erişim Cloudflare Tunnel ile.
+name: songie
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    restart: unless-stopped
+    environment:
+      ALLOWED_ORIGINS: ${PUBLIC_ORIGIN:-}
+    volumes:
+      - songie-data:/data
+    ports:
+      - "127.0.0.1:4310:8080"
+    networks: [songie]
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.9.1
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:-}
+    depends_on:
+      app:
+        condition: service_healthy
+    networks: [songie]
+    profiles: [tunnel]
+
+volumes:
+  songie-data:
+
+networks:
+  songie:

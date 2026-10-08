@@ -1,0 +1,28 @@
+{
+  "name": "@songie/game-kit",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./server": "./src/server.ts",
+    "./client": "./src/client.ts",
+    "./ui": "./src/ui/index.ts",
+    "./audio": "./src/audio.ts"
+  },
+  "dependencies": {
+    "@songie/shared": "workspace:*",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "fastify": "^5.1.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "fastify": {
+      "optional": true
+    }
+  }
+}

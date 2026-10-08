@@ -1,0 +1,316 @@
+.room-wait {
+  display: grid;
+  place-items: center;
+  min-height: 60dvh;
+}
+
+.room-missing {
+  display: grid;
+  gap: 28px;
+  padding-top: 72px;
+}
+
+.room-missing-card {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  text-align: center;
+}
+
+.room-missing-code {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+/* ---------- Lobi: songspot gibi üç sütun ---------- */
+
+.lobby {
+  display: grid;
+  gap: 28px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 72px var(--gutter) 48px;
+}
+
+.lobby-center {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  width: 100%;
+  max-width: var(--col);
+  margin: 0 auto;
+}
+
+.lobby-side {
+  width: 100%;
+  max-width: var(--col);
+  margin: 0 auto;
+}
+
+/* Mobilde: önce oda, sonra ayarlar */
+.lobby-left {
+  order: 2;
+}
+
+.lobby-center {
+  order: 1;
+}
+
+.lobby-right {
+  order: 3;
+}
+
+@media (min-width: 1100px) {
+  .lobby {
+    grid-template-columns: 200px minmax(0, 1fr) 200px;
+    gap: 40px;
+    padding-top: 40px;
+  }
+
+  .lobby-left,
+  .lobby-center,
+  .lobby-right {
+    order: 0;
+  }
+
+  .lobby-side {
+    padding-top: 112px;
+  }
+}
+
+.lobby-room {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+}
+
+.lobby-room-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.lobby-game {
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--text-2);
+}
+
+.lobby-code {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  color: var(--accent-hi);
+  user-select: all;
+}
+
+.lobby-block {
+  display: grid;
+  gap: 10px;
+}
+
+.lobby-cta {
+  display: grid;
+  gap: 8px;
+}
+
+.lobby-note {
+  font-size: 12px;
+  text-align: center;
+}
+
+.lobby-leave {
+  justify-self: center;
+}
+
+/* Satır listesi (oyuncular, sıralama) */
+.rows {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 46px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.row[data-first] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.2);
+}
+
+.row-rank {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.row-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row-score {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.row[data-first] .row-score {
+  color: var(--accent-hi);
+}
+
+.row-tags {
+  display: flex;
+  gap: 4px;
+}
+
+.row-kick {
+  margin-left: auto;
+}
+
+.tag {
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--panel-3);
+  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.tag-off {
+  background: rgb(246 100 100 / 0.1);
+  color: var(--red);
+}
+
+.tag-ready {
+  background: var(--accent-soft);
+  color: var(--accent-hi);
+}
+
+/* Sohbet */
+.chat-list {
+  display: grid;
+  gap: 4px;
+  max-height: 180px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.chat-nick {
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+
+.chat-empty {
+  font-size: 13px;
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-form .input {
+  min-height: 44px;
+  font-size: 14px;
+}
+
+/* Oyun sırasında */
+.playing {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.playing-footer {
+  display: flex;
+  justify-content: center;
+  padding: 8px var(--gutter) max(16px, env(safe-area-inset-bottom));
+}
+
+.conn-banner {
+  position: sticky;
+  top: 0;
+  z-index: 110;
+  padding: 8px var(--gutter);
+  background: var(--red);
+  color: #1a0505;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Oyun içi sohbet (sağ alt) */
+.chat-dock {
+  position: fixed;
+  right: 16px;
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 100;
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+}
+
+.chat-dock-panel {
+  width: min(320px, calc(100vw - 32px));
+  padding: 14px;
+  box-shadow: 0 16px 48px rgb(0 0 0 / 0.6);
+}
+
+.chat-compact {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-compact .chat-list {
+  max-height: 240px;
+}
+
+.chat-dock-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--text);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.45);
+}
+
+.chat-dock-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+}

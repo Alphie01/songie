@@ -1,0 +1,30 @@
+{
+  "name": "@songie/server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/main.ts",
+    "start": "node dist/main.js",
+    "build": "esbuild src/main.ts scripts/seed.ts --bundle --platform=node --format=esm --target=node22 --outdir=dist --packages=external --sourcemap",
+    "seed": "tsx scripts/seed.ts",
+    "check:media": "tsx scripts/check-media.ts"
+  },
+  "dependencies": {
+    "@songie/shared": "workspace:*",
+    "@songie/game-kit": "workspace:*",
+    "@songie/song-guess": "workspace:*",
+    "@fastify/static": "^8.0.3",
+    "better-sqlite3": "^11.7.0",
+    "fastify": "^5.1.0",
+    "ffmpeg-static": "^5.2.0",
+    "socket.io": "^4.8.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "esbuild": "^0.24.0",
+    "socket.io-client": "^4.8.1",
+    "tsx": "^4.19.2"
+  }
+}

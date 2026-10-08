@@ -1,0 +1,89 @@
+.home {
+  display: grid;
+  gap: 20px;
+  padding-top: 72px;
+  padding-bottom: 48px;
+}
+
+.home-hello {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: -6px;
+}
+
+.home-join {
+  display: grid;
+  gap: 8px;
+}
+
+.home-join-row {
+  display: flex;
+  gap: 8px;
+}
+
+.home-code {
+  flex: 1;
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+.home-code::placeholder {
+  letter-spacing: 0.35em;
+}
+
+.home-join-btn {
+  min-height: 48px;
+  padding: 0 22px;
+}
+
+.home-hint {
+  font-size: 12px;
+}
+
+.home-games {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.home-games-title {
+  text-align: center;
+}
+
+.home-game {
+  display: grid;
+  gap: 16px;
+  padding: 16px;
+}
+
+.home-game-head {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.home-game-name {
+  font-size: 18px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.2;
+}
+
+.home-game-pitch {
+  margin-top: 2px;
+  font-size: 13px;
+}
+
+.home-game-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.home-game-actions .btn-outline {
+  border-radius: var(--r-pill);
+}

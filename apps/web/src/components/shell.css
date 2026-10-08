@@ -1,0 +1,207 @@
+.shell-menu-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--panel);
+  color: var(--text-2);
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
+}
+
+.shell-menu-btn:hover {
+  color: var(--text);
+}
+
+.shell-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 129;
+  background: rgb(0 0 0 / 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms;
+}
+
+.shell-scrim[data-open] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shell-drawer {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 130;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: min(340px, 86vw);
+  padding: 20px 18px max(20px, env(safe-area-inset-bottom));
+  overflow-y: auto;
+  border-right: 1px solid var(--line);
+  background: #0a0f0b;
+  transform: translateX(-102%);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.shell-drawer[data-open] {
+  transform: none;
+}
+
+.shell-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.shell-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.shell-close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--text-2);
+}
+
+.shell-section {
+  display: grid;
+  gap: 10px;
+}
+
+.shell-volume {
+  display: grid;
+  gap: 10px;
+}
+
+.shell-volume-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-3);
+}
+
+/* Ses kaydırıcısı: yeşil dolum çizgisi */
+input[type='range'] {
+  flex: 1;
+  height: 4px;
+  appearance: none;
+  border-radius: var(--r-pill);
+  background: linear-gradient(to right, var(--accent) var(--v, 50%), var(--panel-3) var(--v, 50%));
+}
+
+input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text);
+}
+
+input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--text);
+}
+
+.shell-title {
+  margin-bottom: 2px;
+}
+
+.shell-games {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Oyun kartı (songspot'taki "Borderspot / Countspot" kartları) */
+.game-tile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  text-align: left;
+}
+
+.game-tile:hover {
+  border-color: rgb(25 223 112 / 0.35);
+}
+
+.game-tile-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.game-tile-text {
+  display: grid;
+  min-width: 0;
+}
+
+.game-tile-name {
+  font-size: 15px;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.game-tile-pitch {
+  overflow: hidden;
+  font-size: 12px;
+  color: var(--text-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shell-note {
+  font-size: 12px;
+}
+
+.shell-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  text-decoration: none;
+}
+
+.shell-profile > span:last-child {
+  display: grid;
+}
+
+.shell-profile-nick {
+  font-weight: 700;
+}
+
+.shell-profile-sub {
+  font-size: 12px;
+  color: var(--text-3);
+}

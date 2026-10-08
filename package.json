@@ -1,0 +1,21 @@
+{
+  "name": "songie",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.21.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter @songie/server --filter @songie/web dev",
+    "build": "pnpm --filter @songie/web build && pnpm --filter @songie/server build",
+    "test": "vitest run",
+    "typecheck": "tsc -b",
+    "seed": "pnpm --filter @songie/server seed"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  }
+}

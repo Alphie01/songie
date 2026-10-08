@@ -1,0 +1,31 @@
+{
+  "name": "@songie/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
+    "@songie/game-kit": "workspace:*",
+    "@songie/shared": "workspace:*",
+    "@songie/song-guess": "workspace:*",
+    "motion": "^11.13.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.0.2",
+    "socket.io-client": "^4.8.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "playwright": "1.49.1",
+    "vite": "^6.0.3"
+  }
+}

@@ -1,0 +1,24 @@
+.welcome {
+  display: grid;
+  align-content: center;
+  gap: 28px;
+  min-height: 100dvh;
+  padding-block: 48px;
+}
+
+.welcome-card {
+  padding: 28px 22px 22px;
+}
+
+.welcome-title {
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.welcome-lead {
+  margin: 8px auto 22px;
+  max-width: 34ch;
+  font-size: 13px;
+  text-align: center;
+}

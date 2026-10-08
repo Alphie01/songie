@@ -1,0 +1,47 @@
+.pf {
+  display: grid;
+  gap: 18px;
+}
+
+.pf-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pf-nick {
+  flex: 1;
+}
+
+.pf-colors {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.pf-swatches {
+  display: flex;
+  gap: 10px;
+}
+
+.pf-swatch {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: 0.55;
+  transition: opacity 120ms, box-shadow 120ms;
+}
+
+.pf-swatch:hover {
+  opacity: 0.85;
+}
+
+.pf-swatch[aria-pressed='true'] {
+  opacity: 1;
+  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--c);
+}

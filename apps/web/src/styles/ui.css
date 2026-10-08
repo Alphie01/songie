@@ -1,0 +1,305 @@
+/* Ortak parçalar. */
+
+/* Ortadaki dar sütun (songspot'taki oyun sütunu) */
+.col {
+  width: 100%;
+  max-width: calc(var(--col) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* Soluk büyük logo */
+.wordmark {
+  display: block;
+  font-size: clamp(44px, 11vw, 64px);
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #1a201b;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+}
+
+.wordmark-sm {
+  font-size: 22px;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Küçük, aralıklı bölüm etiketi (songspot'taki "DIFFICULTY") */
+.eyebrow {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* Butonlar */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: var(--r-pill);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 120ms,
+    color 120ms,
+    box-shadow 120ms,
+    transform 80ms;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hi);
+  box-shadow: var(--accent-glow);
+}
+
+.btn-primary:disabled {
+  background: var(--panel-2);
+  color: var(--text-3);
+}
+
+.btn-outline {
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--line-2);
+  border-radius: var(--r-md);
+}
+
+.btn-outline:hover:not(:disabled) {
+  box-shadow: inset 0 0 0 1px var(--accent);
+  color: var(--accent-hi);
+}
+
+.btn-outline:disabled {
+  color: var(--text-3);
+}
+
+.btn-ghost {
+  min-height: 36px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--text-2);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-lg {
+  min-height: 52px;
+  font-size: 15px;
+}
+
+/* Input */
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 15px;
+}
+
+.input::placeholder {
+  color: var(--text-3);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Panel / kart */
+.card {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+}
+
+.error-text {
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.dim {
+  color: var(--text-3);
+}
+
+/* Seçim çipleri (songspot'taki "0.1s 0.5s 2s" kutuları) */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  min-width: 52px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: rgb(255 255 255 / 0.035);
+  color: var(--text-3);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.chip:hover:not(:disabled) {
+  color: var(--text-2);
+}
+
+.chip[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--accent-hi);
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.25);
+}
+
+.chip:disabled {
+  cursor: default;
+}
+
+.chip-count {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  opacity: 0.7;
+}
+
+/* Liste satırı seçici (songspot'taki sol sütun "Easy / Medium …") */
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.option:hover:not(:disabled) {
+  color: var(--text);
+}
+
+.option[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--accent-hi);
+}
+
+/* Aç/kapa anahtarı */
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px 0 14px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: rgb(255 255 255 / 0.035);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.toggle-knob {
+  position: relative;
+  flex: none;
+  width: 28px;
+  height: 16px;
+  border-radius: var(--r-pill);
+  background: var(--panel-3);
+  transition: background 150ms;
+}
+
+.toggle-knob::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  transition: transform 150ms;
+}
+
+.toggle[aria-checked='true'] .toggle-knob {
+  background: var(--accent);
+}
+
+.toggle[aria-checked='true'] .toggle-knob::after {
+  transform: translateX(12px);
+  background: var(--accent-ink);
+}
+
+/* Bildirim */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 200;
+  max-width: calc(100% - 2 * var(--gutter));
+  padding: 12px 18px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  transform: translateX(-50%);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.5);
+}
