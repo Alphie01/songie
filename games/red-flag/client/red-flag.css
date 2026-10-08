@@ -1,0 +1,659 @@
+/* Red Flag / Green Flag. Ortak düzen game-kit/ui/game-layout.css; renkler tokens.css.
+   Vurgu: green = --accent, red = --red, "asla olmaz" = koyu kırmızı. */
+
+.rf,
+.rf-podium,
+.rf-settings {
+  --rf-green: var(--accent);
+  --rf-green-hi: var(--accent-hi);
+  --rf-red: var(--red);
+  --rf-never: #a3263a;
+  --rf-never-hi: #ff8f9c;
+}
+
+.rf [data-vote='green'],
+.rf-podium [data-vote='green'] {
+  --v: var(--rf-green);
+  --v-hi: var(--rf-green-hi);
+  --v-ink: var(--accent-ink);
+}
+
+.rf [data-vote='red'],
+.rf-podium [data-vote='red'] {
+  --v: var(--rf-red);
+  --v-hi: #ff8a8a;
+  --v-ink: #1a0505;
+}
+
+.rf [data-vote='never'],
+.rf-podium [data-vote='never'] {
+  --v: var(--rf-never);
+  --v-hi: var(--rf-never-hi);
+  --v-ink: #fff;
+}
+
+.rf-small {
+  font-size: 12.5px;
+}
+
+.rf-center {
+  text-align: center;
+}
+
+/* ---------- Üst bilgi: süre ---------- */
+.rf-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rf-timer[data-low] {
+  color: var(--red);
+}
+
+.rf-timer-bar {
+  width: 64px;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.rf-timer-bar span {
+  display: block;
+  height: 100%;
+  background: currentColor;
+  transition: width 200ms linear;
+}
+
+/* ---------- Durum kartı: üstte yarı yeşil yarı kırmızı dikiş ---------- */
+.rf-card {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  overflow: hidden;
+  padding: 26px 22px 22px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgb(25 223 112 / 0.07), transparent 60%),
+    radial-gradient(120% 80% at 100% 0%, rgb(246 100 100 / 0.08), transparent 60%),
+    var(--panel);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  animation: rf-card-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.rf-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rf-green) 0 50%, var(--rf-red) 50% 100%);
+}
+
+@keyframes rf-card-in {
+  from {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+.rf-card-cat {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.rf-card-text {
+  font-size: clamp(21px, 6vw, 26px);
+  font-weight: 700;
+  line-height: 1.3;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Oy: iki büyük bayrak ---------- */
+.rf-vote {
+  display: grid;
+  gap: 14px;
+}
+
+.rf-q {
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-2);
+}
+
+.rf-flags {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rf-flag {
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  min-height: 132px;
+  padding: 14px 8px;
+  border: 2px solid color-mix(in srgb, var(--v) 45%, transparent);
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--v) 8%, var(--panel));
+  color: var(--v-hi);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 120ms,
+    background 160ms,
+    box-shadow 160ms,
+    border-color 160ms;
+}
+
+.rf-flag:hover:not(:disabled) {
+  border-color: var(--v);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--v) 30%, transparent);
+}
+
+.rf-flag:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.rf-flag:focus-visible {
+  outline: 2px solid var(--v-hi);
+  outline-offset: 3px;
+}
+
+.rf-flag[aria-pressed='true'] {
+  border-color: var(--v);
+  background: var(--v);
+  color: var(--v-ink);
+  box-shadow: 0 0 36px color-mix(in srgb, var(--v) 45%, transparent);
+}
+
+.rf-flag[aria-pressed='true'] .rf-ico {
+  animation: rf-wave 600ms ease-out;
+  transform-origin: 20% 90%;
+}
+
+@keyframes rf-wave {
+  30% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(6deg);
+  }
+}
+
+.rf-flag:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Üçüncü seçenek: tam genişlik, daha alçak */
+.rf-flag[data-vote='never'] {
+  grid-column: 1 / -1;
+  grid-auto-flow: column;
+  min-height: 56px;
+  font-size: 15px;
+}
+
+/* ---------- Tahmin ---------- */
+.rf-guess {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  transition: opacity 160ms;
+}
+
+.rf-guess[data-locked] {
+  opacity: 0.6;
+}
+
+.rf-guess-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 10px;
+}
+
+.rf-guess-head h3 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rf-guess-opts {
+  display: flex;
+  gap: 6px;
+}
+
+.rf-guess-opt {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--v-hi);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rf-guess-opt[aria-pressed='true'] {
+  border-color: var(--v);
+  background: color-mix(in srgb, var(--v) 18%, transparent);
+}
+
+.rf-guess-opt:disabled {
+  cursor: default;
+}
+
+.rf-progress {
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-3);
+}
+
+.rf-host {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ---------- Dağılım çubuğu (açıklamada büyür) ---------- */
+.rf-bar {
+  display: flex;
+  gap: 3px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: var(--r-sm);
+  background: var(--panel-2);
+}
+
+.rf-bar span {
+  display: grid;
+  place-items: center;
+  flex-basis: 0;
+  min-width: 0;
+  background: var(--v);
+  color: var(--v-ink);
+  transform-origin: left center;
+  animation: rf-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.rf-bar span[data-vote='none'] {
+  background: transparent;
+}
+
+.rf-bar b {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@keyframes rf-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* ---------- Açıklama ---------- */
+.rf-reveal {
+  display: grid;
+  gap: 14px;
+}
+
+.rf-verdict {
+  font-size: clamp(26px, 8vw, 34px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.1;
+  text-align: center;
+  color: var(--v-hi, var(--text));
+}
+
+.rf-verdict[data-vote='split'] {
+  background: linear-gradient(90deg, var(--rf-green-hi), var(--rf-red));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.rf-rows {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-row {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--v);
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.rf-row[data-top] {
+  background: color-mix(in srgb, var(--v) 9%, var(--panel));
+}
+
+.rf-row-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--v-hi);
+}
+
+.rf-row-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.rf-row-n {
+  display: inline-flex;
+  gap: 8px;
+  margin-left: auto;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rf-row-pct {
+  font-weight: 400;
+}
+
+.rf-who {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.rf-who-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 3px;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  font-size: 12.5px;
+  font-weight: 600;
+  animation: rf-pop 260ms ease-out both;
+}
+
+.rf-who-chip[data-me] {
+  box-shadow: inset 0 0 0 1px var(--v);
+}
+
+@keyframes rf-pop {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+}
+
+.rf-mine {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.rf-mine-vote,
+.rf-mine-guess {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  background: var(--panel);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.rf-mine-vote {
+  color: var(--v-hi);
+}
+
+.rf-mine-guess[data-hit] {
+  background: var(--accent-soft-2);
+  color: var(--accent-hi);
+}
+
+.rf-next {
+  display: grid;
+  gap: 8px;
+}
+
+/* ---------- Oyuncular ---------- */
+.rf-players {
+  display: grid;
+  gap: 10px;
+}
+
+.rf-tag {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.rf-player[data-done] .rf-tag {
+  background: var(--accent-soft-2);
+  color: var(--accent-hi);
+}
+
+.rf-player .sg-score-pts {
+  margin-left: auto;
+}
+
+.rf-player .rf-tag + .sg-score-pts {
+  margin-left: 8px;
+}
+
+.rf-player .rf-tag {
+  margin-left: auto;
+}
+
+/* ---------- Lobi: durum ekle ---------- */
+.rf-add {
+  display: grid;
+  gap: 6px;
+}
+
+.rf-add-text {
+  min-height: 84px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+.rf-add-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ---------- Oyun sonu ---------- */
+.rf-podium {
+  gap: 24px;
+}
+
+.rf-podium .rf-podium-title {
+  background: linear-gradient(90deg, var(--rf-green-hi) 20%, var(--rf-red) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.08em;
+}
+
+.rf-sum-totals .rf-bar {
+  height: 22px;
+}
+
+.rf-awards {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.rf-awards li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    'ico label note'
+    'ico who note';
+  align-items: center;
+  gap: 2px 12px;
+  padding: 12px 2px;
+  border-bottom: 1px solid var(--line);
+}
+
+.rf-awards .rf-ico {
+  grid-area: ico;
+  color: var(--v-hi);
+}
+
+.rf-award-label {
+  grid-area: label;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.rf-award-who {
+  grid-area: who;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.rf-award-note {
+  grid-area: note;
+  font-size: 12px;
+}
+
+.rf-sum-sec {
+  display: grid;
+  gap: 10px;
+}
+
+.rf-sum-h {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rf-profiles {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-profiles li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.rf-profiles li[data-me] {
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+}
+
+.rf-prof-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rf-prof-pct {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+
+.rf-profiles .rf-pbar {
+  grid-column: 1 / -1;
+}
+
+.rf-pbar {
+  display: flex;
+  gap: 2px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.rf-pbar span {
+  flex-basis: 0;
+  background: var(--v);
+  transform-origin: left center;
+  animation: rf-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.rf-divisive {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-divisive li {
+  display: grid;
+  gap: 6px;
+}
+
+.rf-divisive p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-card,
+  .rf-bar span,
+  .rf-pbar span,
+  .rf-who-chip,
+  .rf-flag[aria-pressed='true'] .rf-ico {
+    animation: none;
+  }
+}

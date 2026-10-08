@@ -1,0 +1,542 @@
+/* 5 Saniye — ortak düzen game-kit/ui/game-layout.css'te. Tek gösterişli öğe: dev geri sayım halkası. */
+
+[data-team='a'].fs-team,
+[data-team='a'].fs-teambox,
+.fs-podium .podium-name[data-team='a'] {
+  --team: var(--accent);
+}
+
+[data-team='b'].fs-team,
+[data-team='b'].fs-teambox,
+.fs-podium .podium-name[data-team='b'] {
+  --team: var(--purple);
+}
+
+.fs-small {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.fs-center {
+  text-align: center;
+}
+
+.fs-self-center {
+  justify-self: center;
+}
+
+.fs-legend {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+/* ---------- Hazırlık ---------- */
+.fs-ready,
+.fs-turn {
+  display: grid;
+  gap: 16px;
+}
+
+.fs-next {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding-top: 8px;
+  text-align: center;
+}
+
+.fs-next-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.fs-ready .fs-next-label:only-child {
+  font-size: clamp(30px, 9vw, 44px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--accent-hi);
+}
+
+.fs-next-name {
+  font-size: clamp(30px, 9vw, 44px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.fs-go {
+  font-size: 17px;
+}
+
+.fs-steal {
+  display: grid;
+  gap: 4px;
+  text-align: center;
+}
+
+.fs-steal-title {
+  font-size: 22px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--yellow);
+}
+
+.fs-steal-tag {
+  margin-right: 8px;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--yellow) 14%, transparent);
+  color: var(--yellow);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.fs-who {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-align: center;
+}
+
+/* ---------- Görev kartı ---------- */
+.fs-prompt {
+  display: grid;
+  gap: 8px;
+  padding: 20px 20px 22px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  animation: fs-reveal 320ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.fs-prompt[data-dim] {
+  animation: none;
+  padding: 14px 16px;
+}
+
+.fs-prompt-cat {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--accent-hi);
+}
+
+.fs-prompt-text {
+  font-size: clamp(22px, 6.6vw, 28px);
+  font-weight: 800;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.fs-prompt[data-dim] .fs-prompt-text {
+  font-size: 17px;
+  font-weight: 700;
+}
+
+@keyframes fs-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Geri sayım halkası ---------- */
+.fs-ring {
+  --ring: var(--accent);
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: min(76vw, 300px);
+  aspect-ratio: 1;
+}
+
+.fs-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.fs-ring-track {
+  fill: none;
+  stroke: var(--panel-2);
+  stroke-width: 10;
+}
+
+.fs-ring-fill {
+  fill: none;
+  stroke: var(--ring);
+  stroke-width: 10;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ring) 55%, transparent));
+  transition: stroke 200ms;
+}
+
+.fs-ring-num {
+  position: relative;
+  font-size: clamp(84px, 30vw, 128px);
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  transition: color 200ms;
+}
+
+.fs-ring[data-low] {
+  --ring: var(--red);
+  animation: fs-shake 260ms linear infinite;
+}
+
+.fs-ring[data-low] .fs-ring-num {
+  color: var(--red);
+}
+
+@keyframes fs-shake {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  25% {
+    transform: translate(-3px, 1px) rotate(-1deg);
+  }
+  50% {
+    transform: translate(2px, -1px) rotate(0.6deg);
+  }
+  75% {
+    transform: translate(-1px, 2px) rotate(-0.4deg);
+  }
+}
+
+/* ---------- 3 şey sayacı (yalnızca görsel) ---------- */
+.fs-three {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  justify-self: center;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--text-3);
+  cursor: pointer;
+}
+
+.fs-three-pips {
+  display: flex;
+  gap: 12px;
+}
+
+.fs-pip {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px var(--line-2);
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+  transition: background 120ms, color 120ms, box-shadow 120ms;
+}
+
+.fs-pip[data-on] {
+  background: var(--accent);
+  box-shadow: var(--accent-glow);
+  color: var(--accent-ink);
+}
+
+.fs-three-label {
+  font-size: 11.5px;
+}
+
+/* ---------- Oylama ---------- */
+.fs-vote-title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.fs-vote {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.fs-vote .btn {
+  min-height: 64px;
+  border-radius: var(--r-md);
+  font-size: 16px;
+}
+
+.fs-yes {
+  background: var(--accent-soft);
+  color: var(--accent-hi);
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.35);
+}
+
+.fs-yes[aria-pressed='true'] {
+  background: var(--accent);
+  color: var(--accent-ink);
+  box-shadow: var(--accent-glow);
+}
+
+.fs-no {
+  background: color-mix(in srgb, var(--red) 8%, transparent);
+  color: var(--red);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 40%, transparent);
+}
+
+.fs-no[aria-pressed='true'] {
+  background: var(--red);
+  color: #1a0505;
+}
+
+.fs-vote-meta {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.fs-vote-bar {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--panel-2);
+  overflow: hidden;
+}
+
+.fs-vote-bar span {
+  display: block;
+  height: 100%;
+  background: var(--text-3);
+}
+
+/* ---------- Oda sahibi ve son sonuç ---------- */
+.fs-host {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.fs-last {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--red);
+  border-radius: var(--r-sm);
+  background: var(--panel);
+}
+
+.fs-last[data-ok] {
+  border-left-color: var(--accent);
+}
+
+.fs-last-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.fs-last-pts {
+  color: var(--accent-hi);
+}
+
+/* ---------- Skorlar ---------- */
+.fs-board {
+  display: grid;
+  gap: 18px;
+}
+
+.fs-board-head,
+.fs-team-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.fs-team {
+  display: grid;
+  gap: 14px;
+}
+
+.fs-team-head {
+  color: var(--team);
+}
+
+.fs-row[data-active] {
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.fs-rank {
+  width: 16px;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* ---------- Takım seçimi (lobi) ---------- */
+.fs-teambox {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
+}
+
+.fs-teambox-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fs-team-name {
+  color: var(--team, var(--text-2));
+}
+
+.fs-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.fs-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.fs-player:hover:not(:disabled) {
+  background: var(--panel-3);
+}
+
+.fs-player:disabled {
+  cursor: default;
+}
+
+.fs-addprompt {
+  display: grid;
+  gap: 6px;
+}
+
+/* ---------- Podyum ---------- */
+.fs-podium-title {
+  font-size: clamp(32px, 9vw, 48px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  text-align: center;
+}
+
+.fs-steps {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fs-step {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 120px;
+  min-width: 0;
+  text-align: center;
+}
+
+.fs-step[data-place='1'] {
+  order: 2;
+}
+
+.fs-step[data-place='2'] {
+  order: 1;
+}
+
+.fs-step[data-place='3'] {
+  order: 3;
+}
+
+.fs-step-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-step-pts {
+  font-size: 11.5px;
+  color: var(--text-2);
+}
+
+.fs-step-block {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 64px;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+  background: var(--panel-2);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.fs-step[data-place='1'] .fs-step-block {
+  height: 104px;
+  background: var(--accent-soft-2);
+  color: var(--accent-hi);
+  box-shadow: inset 0 1px 0 var(--accent);
+}
+
+.fs-step[data-place='2'] .fs-step-block {
+  height: 80px;
+}
+
+.fs-step[data-me] .fs-step-name {
+  color: var(--accent-hi);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fs-prompt,
+  .fs-ring[data-low] {
+    animation: none;
+  }
+
+  .fs-ring-fill,
+  .fs-ring-num,
+  .fs-pip {
+    transition: none;
+  }
+}

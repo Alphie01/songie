@@ -41,6 +41,8 @@ export interface ServerGame<Settings = unknown, State = unknown, Action = unknow
   onAction(ctx: GameContext, state: State, playerId: string, action: Action): unknown | Promise<unknown>;
   onPlayerJoin?(ctx: GameContext, state: State, playerId: string): void;
   onPlayerLeave?(ctx: GameContext, state: State, playerId: string): void;
+  /** Oyuncunun bağlantısı koptu ya da geri geldi (oyuncu odada kalır). */
+  onPlayerConnection?(ctx: GameContext, state: State, playerId: string, connected: boolean): void;
   viewFor(state: State, playerId: string): unknown;
   /**
    * Oda sahibi oyun sürerken ayarları değiştirdi. Tanımlıysa oyun yeni ayarları kendi uygun

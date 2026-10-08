@@ -1,0 +1,551 @@
+/* Aramızdaki En — ortak düzen game-kit/ui/game-layout.css'te, token'lar tokens.css'te.
+   Tek gösterişli öğe büyük soru; geri kalanı sakin. Oy = yeşil, tahmin = mor. */
+
+.ml-center {
+  text-align: center;
+}
+
+.ml-small {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+/* ---------- Soru ---------- */
+.ml-q {
+  margin: 0;
+  font-size: clamp(30px, 8.6vw, 40px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+  animation: ml-q-in 360ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.ml-q[data-compact] {
+  font-size: clamp(20px, 5.6vw, 24px);
+  animation: none;
+}
+
+.ml-q-frame {
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.ml-q-text {
+  font-style: italic;
+  color: var(--text);
+}
+
+@keyframes ml-q-in {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}
+
+/* ---------- Süre ---------- */
+.ml-timer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ml-timer-bar {
+  flex: 1;
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.ml-timer-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  box-shadow: var(--accent-glow);
+  transition: width 200ms linear;
+}
+
+.ml-timer-bar span[data-low] {
+  background: var(--red);
+}
+
+.ml-timer-num {
+  min-width: 2ch;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+  color: var(--accent-hi);
+}
+
+.ml-timer-num[data-low] {
+  color: var(--red);
+}
+
+/* ---------- Oylama ---------- */
+.ml-vote,
+.ml-reveal {
+  display: grid;
+  gap: 18px;
+}
+
+.ml-hint {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.ml-mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--r-pill);
+  background: var(--panel);
+}
+
+.ml-mode button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-3);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ml-mode button[aria-selected='true'] {
+  background: var(--accent-soft-2);
+  color: var(--accent-hi);
+}
+
+.ml-mode button[data-kind='guess'][aria-selected='true'] {
+  background: color-mix(in srgb, var(--purple) 18%, transparent);
+  color: var(--purple);
+}
+
+.ml-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-tile {
+  --sel: var(--accent);
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  width: 100%;
+  min-height: 116px;
+  padding: 14px 6px 10px;
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  transition:
+    background 120ms,
+    box-shadow 160ms,
+    transform 120ms;
+}
+
+.ml-grid[data-mode='guess'] .ml-tile {
+  --sel: var(--purple);
+}
+
+.ml-tile:hover:not(:disabled) {
+  background: var(--panel-2);
+}
+
+.ml-tile:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.ml-tile[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--sel) 10%, var(--panel));
+  box-shadow:
+    inset 0 0 0 2px var(--sel),
+    0 0 28px color-mix(in srgb, var(--sel) 25%, transparent);
+}
+
+.ml-tile:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.ml-tile:focus-visible {
+  outline: 2px solid var(--sel);
+  outline-offset: 2px;
+}
+
+.ml-tile-av {
+  position: relative;
+  display: inline-flex;
+}
+
+/* "Oy verdi" işareti: kime verdiği değil, verdiği bilgisi */
+.ml-tile-done {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--panel);
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.ml-tile-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-tile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ml-tag {
+  padding: 2px 7px;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft-2);
+  color: var(--accent-hi);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.ml-tag[data-kind='guess'] {
+  background: color-mix(in srgb, var(--purple) 18%, transparent);
+  color: var(--purple);
+}
+
+.ml-status {
+  display: grid;
+  gap: 8px;
+}
+
+.ml-progress {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.ml-progress-bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.ml-progress-bar span {
+  display: block;
+  height: 100%;
+  background: var(--text-3);
+  transition: width 300ms ease-out;
+}
+
+.ml-host {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ---------- Açıklama ---------- */
+.ml-winner {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 8px 0 4px;
+  text-align: center;
+}
+
+.ml-winner-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.ml-winner-avs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  animation: ml-crown 520ms cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+
+.ml-winner-avs .gk-avatar {
+  box-shadow:
+    inset 0 0 0 2px currentColor,
+    0 0 40px rgb(25 223 112 / 0.25) !important;
+}
+
+@keyframes ml-crown {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
+.ml-winner-name {
+  font-size: clamp(32px, 9vw, 48px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--accent-hi);
+  text-shadow: 0 0 36px rgb(25 223 112 / 0.3);
+  overflow-wrap: anywhere;
+}
+
+.ml-winner[data-tie] .ml-winner-name {
+  font-size: clamp(24px, 7vw, 34px);
+}
+
+.ml-winner-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.ml-winner-title .mono {
+  margin-left: 6px;
+  font-size: 12px;
+}
+
+.ml-empty {
+  padding: 24px 0;
+  font-size: 15px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.ml-bars {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-bar {
+  display: grid;
+  gap: 6px;
+}
+
+.ml-bar-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ml-bar-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ml-bar[data-me] .ml-bar-name {
+  color: var(--text);
+}
+
+.ml-bar-n {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.ml-bar[data-win] .ml-bar-n {
+  color: var(--accent-hi);
+}
+
+.ml-bar-track {
+  height: 10px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel);
+}
+
+.ml-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--panel-3);
+  transform-origin: left center;
+  animation: ml-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 150ms);
+}
+
+.ml-bar[data-win] .ml-bar-fill {
+  background: var(--accent);
+  box-shadow: var(--accent-glow);
+}
+
+@keyframes ml-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.ml-bar-voters {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.ml-guessers {
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--purple) 10%, transparent);
+  color: var(--purple);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ---------- Yan sütunlar ---------- */
+.ml-side {
+  display: grid;
+  gap: 10px;
+}
+
+.ml-side-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ml-score-pts {
+  display: grid;
+  justify-items: end;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ml-history {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-history li {
+  display: grid;
+  gap: 1px;
+  padding: 8px 12px;
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: var(--panel);
+}
+
+.ml-history-who {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ml-history-what {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+/* ---------- Soru ekle ---------- */
+.ml-add {
+  display: grid;
+  gap: 8px;
+}
+
+.ml-add-frame {
+  display: grid;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ml-add .input {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+/* ---------- Podyum ---------- */
+.ml-podium .podium-name {
+  font-size: clamp(30px, 9vw, 48px);
+}
+
+.ml-final {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ml-final li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.ml-final li[data-me] {
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+}
+
+.ml-final-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ml-final-name .mono {
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.ml-final-titles {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+@media (min-width: 1100px) {
+  .ml-grid {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ml-q,
+  .ml-winner-avs,
+  .ml-bar-fill {
+    animation: none;
+  }
+
+  .ml-tile {
+    transition: none;
+  }
+}

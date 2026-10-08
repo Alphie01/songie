@@ -1,0 +1,576 @@
+/* Sessiz Sinema — ortak düzen game-kit/ui/game-layout.css'te. Takım renkleri: a = yeşil, b = mor. */
+
+.ch [data-team='a'],
+.ch-teambox[data-team='a'],
+.podium-name[data-team='a'] {
+  --team: var(--accent);
+}
+
+.ch [data-team='b'],
+.ch-teambox[data-team='b'],
+.podium-name[data-team='b'] {
+  --team: var(--purple);
+}
+
+.ch-small {
+  font-size: 12.5px;
+}
+
+.ch-center {
+  text-align: center;
+}
+
+/* Skorlar */
+.ch-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ch-score {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.ch-score[data-active] {
+  border-color: color-mix(in srgb, var(--team) 55%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--team) 18%, transparent);
+}
+
+.ch-score-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--team);
+}
+
+.ch-score-pts {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Tur arası */
+.ch-ready {
+  display: grid;
+  gap: 14px;
+}
+
+.ch-next {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding: 18px 0 6px;
+  text-align: center;
+}
+
+.ch-next-label {
+  font-size: 12.5px;
+  color: var(--text-3);
+}
+
+.ch-next-name {
+  font-size: clamp(30px, 9vw, 44px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--team);
+  overflow-wrap: anywhere;
+}
+
+.ch-host {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.ch-last {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border-left: 3px solid var(--team);
+}
+
+.ch-last-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ch-last-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ch-last-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.ch-last-list li[data-result='correct'] > svg {
+  color: var(--accent-hi);
+}
+
+.ch-last-list li[data-result='foul'] > svg {
+  color: var(--red);
+}
+
+.ch-last-list li[data-result='pass'] > svg,
+.ch-last-list li[data-result='pass'] .ch-last-title {
+  color: var(--text-3);
+}
+
+.ch-last-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.ch-last-kind {
+  display: inline-flex;
+  color: var(--text-3);
+}
+
+/* Tur */
+.ch-turn {
+  display: grid;
+  gap: 14px;
+}
+
+.ch-timer {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.ch-timer-num {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-hi);
+}
+
+.ch-timer-num[data-low] {
+  color: var(--red);
+  animation: ch-tick 1s steps(1) infinite;
+}
+
+@keyframes ch-tick {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.ch-timer-bar {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.ch-timer-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 200ms linear;
+}
+
+.ch-who {
+  font-size: 13px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.ch-who b {
+  color: var(--team);
+}
+
+/* Başlık kartı: tür, kelime sayısı ve numaralı kelimeler */
+.ch-card {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  animation: ch-card-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes ch-card-in {
+  from {
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+.ch-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel-2);
+}
+
+.ch-kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+
+.ch-count {
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--yellow) 14%, transparent);
+  color: var(--yellow);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ch-title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 14px;
+  padding: 26px 16px 18px;
+  font-size: clamp(26px, 8vw, 36px);
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.ch-word {
+  display: inline-grid;
+  justify-items: center;
+  gap: 4px;
+}
+
+.ch-word-text {
+  overflow-wrap: anywhere;
+}
+
+.ch-word-n {
+  min-width: 20px;
+  padding-top: 3px;
+  border-top: 2px solid var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-hi);
+}
+
+.ch-gesture {
+  padding: 0 16px 16px;
+  font-size: 12.5px;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.ch-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: 800;
+  pointer-events: none;
+  animation: ch-flash 900ms ease-out forwards;
+}
+
+.ch-flash[data-kind='correct'] {
+  background: rgb(25 223 112 / 0.85);
+  color: var(--accent-ink);
+}
+
+.ch-flash[data-kind='foul'] {
+  background: rgb(246 100 100 / 0.92);
+  color: #1a0505;
+}
+
+.ch-flash[data-kind='pass'] {
+  background: rgb(22 28 23 / 0.9);
+  color: var(--text);
+}
+
+@keyframes ch-flash {
+  0%,
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.ch-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ch-span {
+  grid-column: 1 / -1;
+}
+
+.ch-undo {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.ch-watch {
+  color: var(--yellow);
+}
+
+.ch-foul {
+  min-height: 64px;
+  background: var(--red);
+  color: #1a0505;
+  font-size: 22px;
+  font-weight: 800;
+  box-shadow: 0 0 32px rgb(246 100 100 / 0.35);
+}
+
+.ch-foul:hover {
+  box-shadow: 0 0 44px rgb(246 100 100 / 0.55);
+}
+
+/* Takım arkadaşının ekranı: başlık yok */
+.ch-guess {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 28px 18px;
+  text-align: center;
+  border-color: color-mix(in srgb, var(--team) 35%, transparent);
+}
+
+.ch-guess-title {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ch-guess-count {
+  margin-top: 8px;
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-hi);
+}
+
+.ch-flash-text {
+  font-size: 16px;
+  font-weight: 800;
+  animation: ch-flash 1.2s ease-out forwards;
+}
+
+.ch-flash-text[data-kind='correct'] {
+  color: var(--accent-hi);
+}
+
+.ch-flash-text[data-kind='foul'] {
+  color: var(--red);
+}
+
+.ch-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0;
+}
+
+.ch-stats div {
+  display: grid;
+  justify-items: center;
+  padding: 8px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.ch-stats dt {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.ch-stats dd {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ch-stats [data-kind='correct'] dd {
+  color: var(--accent-hi);
+}
+
+.ch-stats [data-kind='foul'] dd {
+  color: var(--red);
+}
+
+/* İşaret rehberi */
+.ch-signs-title {
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ch-signs {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.ch-signs div {
+  display: grid;
+  gap: 2px;
+  padding-left: 12px;
+  border-left: 2px solid var(--line-2);
+}
+
+.ch-signs dt {
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.ch-signs dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* Takım listeleri */
+.ch-rosters {
+  display: grid;
+  gap: 20px;
+}
+
+.ch-roster {
+  display: grid;
+  gap: 8px;
+}
+
+.ch-roster-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--team);
+}
+
+.ch-tag {
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--accent-soft-2);
+  color: var(--accent-hi);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Lobi: takım kutuları */
+.ch-teambox {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
+}
+
+.ch-teambox-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ch-team-name {
+  color: var(--team, var(--text-2));
+}
+
+.ch-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ch-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ch-player:hover:not(:disabled) {
+  background: var(--panel-3);
+}
+
+.ch-player:disabled {
+  cursor: default;
+}
+
+.ch-kind-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ch-diff[data-diff='kolay'][aria-pressed='true'] {
+  border-color: var(--accent);
+}
+
+.ch-diff[data-diff='zor'][aria-pressed='true'] {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.ch-addtitle {
+  display: grid;
+  gap: 8px;
+}
+
+.ch-addtitle .input {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+.podium-name[data-team] {
+  color: var(--team, var(--text));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ch-card,
+  .ch-flash,
+  .ch-flash-text,
+  .ch-timer-num[data-low] {
+    animation: none;
+  }
+  .ch-flash {
+    display: none;
+  }
+}

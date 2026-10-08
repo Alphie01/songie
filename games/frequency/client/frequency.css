@@ -1,0 +1,649 @@
+/* Frekans: ortak düzen game-kit/ui/game-layout.css'te. Takım renkleri: a = yeşil, b = mor.
+   Kadran bantları: 4 yeşil, 3 sarı, 2 turuncu (songspot zorluk renkleri). */
+
+.fq [data-team='a'],
+.fq-teambox[data-team='a'],
+.fq-podium [data-team='a'] {
+  --team: var(--accent);
+}
+
+.fq [data-team='b'],
+.fq-teambox[data-team='b'],
+.fq-podium [data-team='b'] {
+  --team: var(--purple);
+}
+
+.fq-small {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.fq-center {
+  text-align: center;
+}
+
+.fq-h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--team, var(--text-2));
+}
+
+/* ---------- Skor ve pist ---------- */
+.fq-scores {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.fq-scores[data-mode='coop'] {
+  grid-template-columns: 1fr;
+}
+
+.fq-score {
+  display: grid;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.fq-score[data-active] {
+  border-color: color-mix(in srgb, var(--team) 55%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--team) 16%, transparent);
+}
+
+.fq-score-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--team, var(--text-2));
+}
+
+.fq-score-pts {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.fq-track {
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-3);
+}
+
+.fq-track span {
+  display: block;
+  height: 100%;
+  background: var(--team);
+  transition: width 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---------- Sahne ---------- */
+.fq-stage {
+  display: grid;
+  gap: 16px;
+}
+
+.fq-who {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.fq-off,
+.fq-badge {
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.fq-badge {
+  margin-left: auto;
+  background: color-mix(in srgb, var(--team, var(--accent)) 14%, transparent);
+  color: var(--team, var(--accent-hi));
+}
+
+/* ---------- Kadran ---------- */
+.fq-dial {
+  display: grid;
+  gap: 10px;
+  margin-inline: -8px;
+}
+
+.fq-dial-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fq-dial[data-editable] .fq-dial-svg {
+  cursor: grab;
+}
+
+.fq-dial[data-active] .fq-dial-svg {
+  cursor: grabbing;
+}
+
+.fq-dial-svg:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.fq-face {
+  fill: var(--panel);
+  stroke: var(--line-2);
+  stroke-width: 1;
+}
+
+.fq-zone path[data-points='2'] {
+  fill: var(--orange);
+}
+
+.fq-zone path[data-points='3'] {
+  fill: var(--yellow);
+}
+
+.fq-zone path[data-points='4'] {
+  fill: var(--accent);
+}
+
+.fq-zone-num {
+  fill: var(--accent-ink);
+  font-family: var(--mono);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.fq-hatch-bg {
+  fill: var(--panel-2);
+}
+
+.fq-hatch-line {
+  stroke: rgb(255 255 255 / 0.05);
+  stroke-width: 2;
+}
+
+.fq-curtain {
+  transform-box: view-box;
+  transform-origin: 120px 124px;
+}
+
+.fq-curtain-edge {
+  stroke: var(--line-2);
+  stroke-width: 1;
+}
+
+/* Açıklama: perde kadranın merkezinden dönerek aşağı iner. */
+.fq-curtain[data-state='opening'] {
+  animation: fq-open 1100ms cubic-bezier(0.65, 0, 0.25, 1) 250ms both;
+}
+
+@keyframes fq-open {
+  to {
+    transform: rotate(180deg);
+  }
+}
+
+.fq-tick {
+  stroke: var(--text-3);
+  stroke-width: 0.8;
+  stroke-linecap: round;
+}
+
+.fq-tick[data-major] {
+  stroke: var(--text-2);
+  stroke-width: 1.4;
+}
+
+.fq-needle {
+  transform-box: view-box;
+  transform-origin: 120px 124px;
+  transition: transform 110ms linear;
+}
+
+.fq-dial[data-active] .fq-needle {
+  transition: none;
+}
+
+.fq-needle-line {
+  stroke: var(--text);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.fq-needle-tip {
+  fill: var(--text);
+}
+
+.fq-dial[data-editable] .fq-needle-tip {
+  fill: var(--accent);
+  filter: drop-shadow(0 0 4px rgb(25 223 112 / 0.7));
+}
+
+.fq-hub {
+  fill: var(--panel-3);
+  stroke: var(--text);
+  stroke-width: 2;
+}
+
+.fq-ends {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  min-height: 24px;
+  padding-inline: 8px;
+  font-size: clamp(15px, 4.4vw, 18px);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.fq-end {
+  position: relative;
+  padding-top: 10px;
+  overflow-wrap: anywhere;
+}
+
+.fq-end::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 28px;
+  height: 3px;
+  border-radius: var(--r-pill);
+}
+
+.fq-end-left {
+  color: #d2b0f4;
+}
+
+.fq-end-left::before {
+  left: 0;
+  background: var(--purple);
+}
+
+.fq-end-right {
+  color: #ffe387;
+  text-align: right;
+}
+
+.fq-end-right::before {
+  right: 0;
+  background: var(--yellow);
+}
+
+/* ---------- İpucu ---------- */
+.fq-clue {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 14px 16px;
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  text-align: center;
+}
+
+.fq-clue-label {
+  font-size: 11.5px;
+  color: var(--text-3);
+}
+
+.fq-clue-text {
+  font-size: clamp(22px, 7vw, 30px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.fq-clue-spoken {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+/* ---------- Süre ---------- */
+.fq-timer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.fq-timer-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.fq-timer-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 250ms linear;
+}
+
+.fq-timer-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+
+.fq-timer[data-low] .fq-timer-bar span {
+  background: var(--red);
+}
+
+.fq-timer[data-low] .fq-timer-num {
+  color: var(--red);
+}
+
+/* ---------- Aşama paneli ---------- */
+.fq-panel {
+  display: grid;
+  gap: 10px;
+}
+
+.fq-prompt {
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.fq-wait {
+  padding: 14px 8px;
+  font-size: 14px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.fq-options {
+  display: grid;
+  gap: 8px;
+}
+
+.fq-option {
+  display: grid;
+  grid-template-columns: 1fr 44px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 60px;
+  padding: 10px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fq-option:hover {
+  border-color: rgb(25 223 112 / 0.45);
+  background: var(--panel-2);
+}
+
+.fq-option:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.fq-option-l {
+  color: #d2b0f4;
+  text-align: left;
+}
+
+.fq-option-r {
+  color: #ffe387;
+  text-align: right;
+}
+
+.fq-option-bar {
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: linear-gradient(90deg, var(--purple), var(--yellow));
+}
+
+.fq-sides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.fq-sides .btn {
+  gap: 6px;
+}
+
+.fq-host {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  padding: 12px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-md);
+  text-align: center;
+}
+
+/* ---------- Açıklama ---------- */
+.fq-result {
+  animation: fq-result-in 400ms ease-out 1300ms both;
+}
+
+@keyframes fq-result-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.fq-points {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.fq-points-num {
+  font-size: 40px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  color: var(--text-3);
+}
+
+.fq-result[data-points='2'] .fq-points-num {
+  color: var(--orange);
+}
+
+.fq-result[data-points='3'] .fq-points-num {
+  color: var(--yellow);
+}
+
+.fq-result[data-points='4'] .fq-points-num {
+  color: var(--accent-hi);
+  text-shadow: 0 0 24px rgb(25 223 112 / 0.45);
+}
+
+.fq-points-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+
+.fq-again {
+  color: var(--yellow);
+  font-weight: 600;
+}
+
+.fq-over {
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  color: var(--accent-hi);
+}
+
+/* ---------- Geçmiş ---------- */
+.fq-history {
+  display: grid;
+  gap: 8px;
+}
+
+.fq-history ol {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fq-history li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 10px;
+  padding: 8px 12px;
+  border-left: 3px solid var(--team, var(--line-2));
+  border-radius: var(--r-sm);
+  background: var(--panel);
+}
+
+.fq-hist-card {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.fq-hist-clue {
+  grid-column: 1;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fq-hist-pts {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.fq-hist-pts[data-points='2'] {
+  color: var(--orange);
+}
+
+.fq-hist-pts[data-points='3'] {
+  color: var(--yellow);
+}
+
+.fq-hist-pts[data-points='4'] {
+  color: var(--accent-hi);
+}
+
+/* ---------- Takım listeleri ---------- */
+.fq-rosters {
+  display: grid;
+  gap: 20px;
+}
+
+.fq-roster {
+  display: grid;
+  gap: 8px;
+}
+
+/* ---------- Lobi: takım kutuları ---------- */
+.fq-teambox {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
+}
+
+.fq-teambox-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fq-team-name {
+  color: var(--team, var(--text-2));
+}
+
+.fq-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.fq-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.fq-player:hover:not(:disabled) {
+  background: var(--panel-3);
+}
+
+.fq-player:disabled {
+  cursor: default;
+}
+
+.fq-addcard {
+  display: grid;
+  gap: 6px;
+}
+
+.fq-addcard .input {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+.fq-podium .podium-name[data-team] {
+  color: var(--team);
+}
+
+@media (min-width: 1100px) {
+  .fq-dial {
+    margin-inline: -40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fq-needle,
+  .fq-track span,
+  .fq-timer-bar span,
+  .fq-score {
+    transition: none;
+  }
+
+  .fq-curtain[data-state='opening'] {
+    animation: none;
+    opacity: 0;
+  }
+
+  .fq-result {
+    animation: none;
+  }
+}

@@ -9,18 +9,19 @@ import { gameApi } from '../lib/api';
 import { useSession } from '../lib/session';
 import './room.css';
 
+/** Oyunun ekran kodunu yükler. Başka bir oyunun odasına geçilince eski modül asla yeni ayarlarla çizilmez. */
 function useGameModule(gameId: string | undefined) {
-  const [mod, setMod] = useState<ClientGameModule | null>(null);
+  const [loaded, setLoaded] = useState<{ id: string; mod: ClientGameModule } | null>(null);
   useEffect(() => {
     const game = gameId ? findGame(gameId) : undefined;
     if (!game) return;
     let alive = true;
-    void game.load().then((m) => alive && setMod(m));
+    void game.load().then((mod) => alive && setLoaded({ id: game.id, mod }));
     return () => {
       alive = false;
     };
   }, [gameId]);
-  return mod;
+  return loaded && loaded.id === gameId ? loaded.mod : null;
 }
 
 export function RoomPage() {
@@ -79,7 +80,9 @@ export function RoomPage() {
 }
 
 function Playing({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
-  const { gameView, profile, emit, connection, notify } = useSession();
+  const { gameView: payload, profile, emit, connection, notify } = useSession();
+  // Yalnızca bu odanın ve bu oyunun görünümü kullanılır (önceki odadan kalan görünüm değil).
+  const gameView = payload && payload.room === room.code && payload.game === room.gameId ? payload.view : null;
   const isHost = room.hostId === profile!.id;
   const api = useMemo(() => gameApi(room.gameId), [room.gameId]);
   const act = useMemo(() => (action: unknown) => emit('game:action', { action }), [emit]);

@@ -44,7 +44,7 @@ export function socketTransport(io: IO): RoomTransport {
     },
     chat: (code, msg) => io.to(roomChannel(code)).emit('room:chat', msg),
     react: (code, playerId, emoji) => io.to(roomChannel(code)).emit('room:react', { playerId, emoji }),
-    gameView: (id, view) => io.to(playerChannel(id)).emit('game:view', view),
+    gameView: (id, view, tag) => io.to(playerChannel(id)).emit('game:view', tag ? { ...tag, view } : null),
   };
 }
 

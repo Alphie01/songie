@@ -139,6 +139,7 @@ export function createHarness<View = unknown>(
     setConnected(playerId, connected) {
       const p = players.find((x) => x.id === playerId);
       if (p) p.connected = connected;
+      game.onPlayerConnection?.(ctx, state, playerId, connected);
       ctx.pushViews();
     },
     join(playerId, nick = playerId) {

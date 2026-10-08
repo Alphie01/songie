@@ -1,0 +1,623 @@
+/* Kimim Ben? — ortak düzen game-kit/ui/game-layout.css'te.
+   Tek gösterişli öğe: alına yapıştırılmış sarı not kâğıtları. Gerisi sakin. */
+
+.wa {
+  --note: var(--yellow);
+  --note-ink: #231c00;
+  --note-done: var(--accent);
+  --a-yes: var(--accent-hi);
+  --a-no: var(--red);
+  --a-maybe: var(--yellow);
+  --a-irrelevant: var(--text-3);
+}
+
+@media (min-width: 1100px) {
+  .wa .sg-center {
+    max-width: 520px;
+  }
+}
+
+.wa-small {
+  font-size: 12.5px;
+}
+
+.wa-soft {
+  color: var(--text-2);
+}
+
+.wa-center {
+  text-align: center;
+}
+
+.wa-self-center {
+  justify-self: center;
+}
+
+.wa-h2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Ayar başlıkları cümle düzeninde */
+.wa-legend,
+.sgs-legend.wa-legend {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+/* ---------- Not kâğıdı ---------- */
+.wa-note {
+  position: relative;
+  display: grid;
+  place-content: center;
+  gap: 2px;
+  width: 100%;
+  min-height: 64px;
+  padding: 12px 8px 8px;
+  border-radius: 3px;
+  background: var(--note);
+  color: var(--note-ink);
+  text-align: center;
+  transform: rotate(var(--tilt, 0deg));
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.35) inset,
+    0 10px 18px -8px rgb(0 0 0 / 0.7);
+}
+
+/* Bant */
+.wa-note::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 38px;
+  height: 14px;
+  border-radius: 2px;
+  background: rgb(255 255 255 / 0.32);
+  transform: translateX(-50%) rotate(calc(var(--tilt, 0deg) * -1.6));
+}
+
+.wa-note-name {
+  font-size: 14.5px;
+  font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+.wa-note-cat {
+  font-size: 10.5px;
+  font-weight: 600;
+  opacity: 0.62;
+}
+
+.wa-note[data-done] {
+  background: var(--note-done);
+  color: var(--accent-ink);
+}
+
+/* Kendi kartın: kapalı, yalnızca soru işareti */
+.wa-note[data-hidden] {
+  background: var(--panel-2);
+  color: var(--accent-hi);
+  box-shadow: inset 0 0 0 1.5px rgb(25 223 112 / 0.35);
+}
+
+.wa-note[data-hidden]::before {
+  background: rgb(255 255 255 / 0.1);
+}
+
+.wa-note-q {
+  font-size: 34px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+}
+
+.wa-note[data-size='lg'] {
+  min-height: 84px;
+  padding: 16px 14px 12px;
+}
+
+.wa-note[data-size='lg'] .wa-note-name {
+  font-size: 20px;
+}
+
+/* ---------- Alınlar ızgarası ---------- */
+.wa-faces {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 22px 12px;
+  margin: 0;
+  padding: 10px 0 0;
+  list-style: none;
+}
+
+.wa-face {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+  padding: 0 2px 8px;
+  border-radius: var(--r-md);
+}
+
+.wa-face[data-asking] {
+  background: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.35);
+}
+
+.wa-face[data-left] {
+  opacity: 0.45;
+}
+
+.wa-face-who {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  margin-top: 4px;
+}
+
+.wa-face-nick {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wa-face[data-me] .wa-face-nick {
+  color: var(--accent-hi);
+}
+
+.wa-face-ghost {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--panel-2);
+}
+
+.wa-face-meta {
+  min-height: 16px;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.wa-asking {
+  color: var(--accent-hi);
+}
+
+.wa-done-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--accent-hi);
+}
+
+/* ---------- Sahne ---------- */
+.wa-stage {
+  display: grid;
+  gap: 12px;
+  padding: 18px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+}
+
+.wa-stage[data-tone='mine'] {
+  border-color: rgb(25 223 112 / 0.4);
+  box-shadow: var(--accent-glow);
+}
+
+.wa-stage-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 112px;
+  align-items: center;
+  gap: 14px;
+}
+
+.wa-stage-kicker {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.wa-stage-title {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.wa-myturn {
+  font-size: clamp(28px, 8vw, 36px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--accent-hi);
+}
+
+.wa-quote {
+  font-size: 20px;
+}
+
+.wa-form {
+  display: grid;
+  gap: 8px;
+}
+
+.wa-guess {
+  display: grid;
+  gap: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.wa-guess-label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wa-guess-row {
+  display: flex;
+  gap: 6px;
+}
+
+.wa-guess-row .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.wa-last {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.wa-compare {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: 4px 0 6px;
+}
+
+.wa-compare .wa-note {
+  width: min(220px, 80%);
+}
+
+/* Cevap butonları: her cevap kendi renginde */
+.wa-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.wa-answer {
+  --c: var(--a-yes);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background: color-mix(in srgb, var(--c) 8%, transparent);
+  color: var(--c);
+  font-weight: 700;
+}
+
+.wa-answer[data-answer='no'] {
+  --c: var(--a-no);
+}
+
+.wa-answer[data-answer='maybe'] {
+  --c: var(--a-maybe);
+}
+
+.wa-answer[data-answer='irrelevant'] {
+  --c: var(--text-2);
+}
+
+.wa-answer:hover {
+  background: color-mix(in srgb, var(--c) 16%, transparent);
+}
+
+.wa-answer[aria-pressed='true'] {
+  background: var(--c);
+  color: var(--accent-ink);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--c) 35%, transparent);
+}
+
+.wa-verify {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.wa-btn-yes,
+.wa-btn-no {
+  --c: var(--a-yes);
+  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
+  background: transparent;
+  color: var(--c);
+  font-weight: 700;
+}
+
+.wa-btn-no {
+  --c: var(--a-no);
+}
+
+.wa-btn-yes[aria-pressed='true'],
+.wa-btn-no[aria-pressed='true'] {
+  background: var(--c);
+  color: var(--accent-ink);
+}
+
+/* Canlı sayım */
+.wa-tally {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wa-tally li {
+  --c: var(--a-yes);
+  display: grid;
+  grid-template-columns: 64px 1fr 18px;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.wa-tally li[data-answer='no'] {
+  --c: var(--a-no);
+}
+
+.wa-tally li[data-answer='maybe'] {
+  --c: var(--a-maybe);
+}
+
+.wa-tally li[data-answer='irrelevant'] {
+  --c: var(--a-irrelevant);
+}
+
+.wa-tally-label {
+  color: var(--text-2);
+}
+
+.wa-tally-bar {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.wa-tally-bar span {
+  display: block;
+  height: 100%;
+  background: var(--c);
+  transition: width 240ms ease-out;
+}
+
+.wa-tally-n {
+  text-align: right;
+}
+
+/* Cevap etiketi */
+.wa-pill {
+  --c: var(--a-yes);
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 9px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  color: var(--c);
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.wa-pill[data-answer='no'] {
+  --c: var(--a-no);
+}
+
+.wa-pill[data-answer='maybe'] {
+  --c: var(--a-maybe);
+}
+
+.wa-pill[data-answer='irrelevant'] {
+  --c: var(--text-2);
+}
+
+/* ---------- Benim köşem ---------- */
+.wa-mine {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  align-items: start;
+  gap: 16px;
+  padding: 4px 2px;
+}
+
+.wa-mine-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.wa-mine[data-done] .wa-mine-title {
+  color: var(--accent-hi);
+}
+
+.wa-hints {
+  display: grid;
+  gap: 6px;
+}
+
+.wa-hint-list {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0 0 0 18px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.wa-hint-btn {
+  justify-self: start;
+  padding: 0 6px;
+  color: var(--yellow);
+}
+
+/* ---------- Soru geçmişi ---------- */
+.wa-history {
+  display: grid;
+  gap: 10px;
+}
+
+.wa-history-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.wa-filter .chip {
+  min-height: 30px;
+  font-size: 11.5px;
+}
+
+.wa-history-list {
+  display: grid;
+  gap: 4px;
+  max-height: 420px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.wa-hrow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.wa-hrow-body {
+  display: grid;
+  min-width: 0;
+}
+
+.wa-hrow-who {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.wa-hrow-text {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Yan sütun ---------- */
+.wa-progress {
+  display: grid;
+  gap: 10px;
+}
+
+.wa-check {
+  flex: none;
+  color: var(--accent-hi);
+}
+
+/* ---------- Sonuç ---------- */
+.wa-rank {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wa-rank-row {
+  display: grid;
+  grid-template-columns: 24px auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.wa-rank-row[data-me] {
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+}
+
+.wa-rank-row:first-child[data-done] {
+  background: var(--accent-soft);
+}
+
+.wa-rank-n {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-hi);
+}
+
+.wa-rank-who {
+  display: grid;
+  min-width: 0;
+}
+
+.wa-rank-nick {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wa-rank-id {
+  font-size: 12.5px;
+  color: var(--yellow);
+  overflow-wrap: anywhere;
+}
+
+.wa-rank-q {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.wa-rank-row:not([data-done]) .wa-rank-q {
+  color: var(--text-3);
+}
+
+.wa-addcard {
+  display: grid;
+  gap: 6px;
+}
+
+.wa-addcard .input {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+@media (max-width: 380px) {
+  .wa-faces {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .wa-stage-head {
+    grid-template-columns: minmax(0, 1fr) 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-tally-bar span {
+    transition: none;
+  }
+}

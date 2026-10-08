@@ -5,6 +5,7 @@ import type {
   ChatMessage,
   ClientEventName,
   ClientEventPayload,
+  GameViewPayload,
   Profile,
   ProfileInput,
   ProfileStats,
@@ -21,7 +22,7 @@ interface Session {
   profile: Profile | null;
   stats: ProfileStats | null;
   room: RoomState | null;
-  gameView: unknown;
+  gameView: GameViewPayload | null;
   chat: ChatMessage[];
   reactions: { id: number; playerId: string; emoji: string }[];
   notice: string | null;
@@ -39,7 +40,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [stats, setStats] = useState<ProfileStats | null>(null);
   const [room, setRoom] = useState<RoomState | null>(null);
-  const [gameView, setGameView] = useState<unknown>(null);
+  const [gameView, setGameView] = useState<GameViewPayload | null>(null);
   const [chat, setChat] = useState<ChatMessage[]>([]);
   const [reactions, setReactions] = useState<Session['reactions']>([]);
   const [notice, setNotice] = useState<string | null>(null);
@@ -101,7 +102,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       setReactions((rs) => [...rs, { id, ...r }]);
       setTimeout(() => setReactions((rs) => rs.filter((x) => x.id !== id)), 2200);
     });
-    socket.on('game:view', (v: unknown) => setGameView(v));
+    socket.on('game:view', (v: GameViewPayload | null) => setGameView(v));
     return () => {
       socket.close();
       socketRef.current = null;

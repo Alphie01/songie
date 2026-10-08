@@ -111,7 +111,7 @@ async function client(token: string): Promise<Client> {
       }, ms, 'view'),
     waitRoom: (pred, ms = 4000) => until(() => (c.room && pred(c.room) ? c.room : undefined), ms, 'room'),
   };
-  socket.on('game:view', (v: SongView | null) => v && c.views.push(v));
+  socket.on('game:view', (p: { view: SongView } | null) => p && c.views.push(p.view));
   socket.on('room:state', (r: RoomState) => (c.room = r));
   await new Promise<void>((resolve, reject) => {
     socket.on('connect', () => resolve());

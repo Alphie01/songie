@@ -1,0 +1,736 @@
+/* Ajanlar — ortak düzen game-kit/ui/game-layout.css'te. a = yeşil takım, b = mor takım. */
+
+.ag {
+  --ag-neutral: #8d8a7c;
+  --ag-neutral-bg: #262822;
+  --ag-assassin: var(--red);
+  --ag-assassin-bg: #1c0909;
+}
+
+.ag [data-team='a'],
+.ag-teambox[data-team='a'],
+.ag-leaderpick[data-team='a'] {
+  --team: var(--accent);
+}
+
+.ag [data-team='b'],
+.ag-teambox[data-team='b'],
+.ag-leaderpick[data-team='b'] {
+  --team: var(--purple);
+}
+
+.ag [data-color='a'] {
+  --c: var(--accent);
+}
+
+.ag [data-color='b'] {
+  --c: var(--purple);
+}
+
+.ag [data-color='neutral'] {
+  --c: var(--ag-neutral);
+}
+
+.ag [data-color='assassin'] {
+  --c: var(--ag-assassin);
+}
+
+.ag-small {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.ag-error {
+  text-align: center;
+}
+
+.ag-span {
+  grid-column: 1 / -1;
+}
+
+/* Tablo için orta sütun daha geniş */
+@media (min-width: 720px) {
+  .ag .ag-center {
+    max-width: 640px;
+  }
+}
+
+.ag-wins {
+  display: inline-flex;
+  gap: 6px;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+.ag-wins b {
+  color: var(--team);
+}
+
+/* ---------- Kalan ajan sayaçları ---------- */
+.ag-counters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.ag-counter {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 4px 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  transition:
+    border-color 200ms,
+    box-shadow 200ms;
+}
+
+.ag-counter[data-active],
+.ag-counter[data-won] {
+  border-color: color-mix(in srgb, var(--team) 55%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--team) 16%, transparent);
+}
+
+.ag-counter-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--team);
+}
+
+.ag-counter-num {
+  grid-row: span 2;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.ag-pips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.ag-pips span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--team);
+}
+
+.ag-pips span[data-on] {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--team) 45%, transparent);
+}
+
+/* ---------- Durum ---------- */
+.ag-status {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.ag-turn {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--team);
+}
+
+.ag-wait {
+  font-size: 15px;
+  color: var(--text-2);
+}
+
+.ag-clue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  max-width: 100%;
+}
+
+.ag-clue-word {
+  font-size: clamp(32px, 10vw, 48px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+
+.ag-clue-num {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: var(--r-pill);
+  background: var(--team);
+  color: var(--accent-ink);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.ag-clue-meta {
+  display: grid;
+  gap: 2px;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.ag-clue-meta .dim {
+  font-weight: 400;
+}
+
+.ag-timer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.ag-timer-bar {
+  height: 4px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.ag-timer-bar span {
+  display: block;
+  height: 100%;
+  background: var(--team);
+  transition: width 250ms linear;
+}
+
+.ag-timer-num {
+  min-width: 52px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: right;
+  color: var(--text-2);
+}
+
+.ag-timer-num[data-low] {
+  color: var(--red);
+}
+
+/* Lider: anahtar + ipucu formu */
+.ag-leader {
+  display: grid;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--team) 35%, transparent);
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--team) 5%, var(--panel));
+  text-align: left;
+}
+
+@media (min-width: 520px) {
+  .ag-leader {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+  }
+}
+
+.ag-clueform {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ag-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.ag-clue-input {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ag-clue-input[aria-invalid='true'] {
+  border-color: var(--red);
+}
+
+.ag-counts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ag .ag-count {
+  min-width: 34px;
+  min-height: 34px;
+  padding: 0 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
+.ag-key {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.ag-key-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 16px);
+  gap: 3px;
+}
+
+.ag-key-grid span {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background: var(--c);
+}
+
+.ag-key-grid span[data-color='neutral'] {
+  background: var(--ag-neutral-bg);
+  box-shadow: inset 0 0 0 1px var(--ag-neutral);
+}
+
+.ag-key-grid span[data-color='assassin'] {
+  background: var(--ag-assassin-bg);
+  box-shadow: inset 0 0 0 2px var(--ag-assassin);
+}
+
+.ag-key-grid span[data-revealed] {
+  opacity: 0.25;
+}
+
+.ag-key figcaption {
+  max-width: 120px;
+  font-size: 11px;
+  line-height: 1.35;
+  text-align: center;
+}
+
+/* Tablo sonu */
+.ag-over {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.ag-over-title {
+  font-size: clamp(32px, 9vw, 46px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--team, var(--text));
+}
+
+.ag-over-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+/* ---------- Tablo ---------- */
+.ag-board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 5px;
+}
+
+@media (min-width: 720px) {
+  .ag-board {
+    gap: 8px;
+  }
+}
+
+.ag-card {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  aspect-ratio: 5 / 4;
+  padding: 4px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--panel-2);
+  color: var(--text);
+  text-align: center;
+  transition:
+    border-color 120ms,
+    background 120ms,
+    transform 80ms;
+}
+
+.ag-card:disabled {
+  cursor: default;
+}
+
+.ag-word {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+  font-weight: 700;
+  line-height: 1.15;
+  /* Kelimeler bölünmesin; dar ekranda yazı küçülür (en uzun kelime ~12 harf). */
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+  font-size: clamp(9px, 2.55vw, 14px);
+  letter-spacing: -0.01em;
+}
+
+/* 9+ harfli kelimeler (Helikopter, Tahterevalli) mobilde tek satıra sığsın. */
+.ag-word[data-long] {
+  font-size: clamp(8px, 2.15vw, 13px);
+}
+
+.ag-board[data-can] .ag-card:not(:disabled):hover {
+  border-color: color-mix(in srgb, var(--team, var(--accent)) 70%, transparent);
+  background: var(--panel-3);
+}
+
+.ag-board[data-can] .ag-card:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+.ag-card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ag-card[data-mine] {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+/* Lider (ve tablo sonunda herkes): açılmamış kartın rengi kenarda */
+.ag-card[data-color]:not([data-revealed]) {
+  border-color: color-mix(in srgb, var(--c) 70%, transparent);
+  background: color-mix(in srgb, var(--c) 9%, var(--panel-2));
+}
+
+.ag-card[data-color='neutral']:not([data-revealed]) {
+  border-color: var(--line-2);
+  background: var(--panel-2);
+}
+
+.ag-card[data-color='assassin']:not([data-revealed]) {
+  border-width: 2px;
+  background: var(--ag-assassin-bg);
+}
+
+.ag-glyph {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 7px;
+  height: 7px;
+  background: var(--c);
+}
+
+.ag-glyph[data-color='a'] {
+  border-radius: 50%;
+}
+
+.ag-glyph[data-color='b'] {
+  transform: rotate(45deg);
+}
+
+.ag-glyph[data-color='assassin'] {
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--c);
+  border-radius: 50%;
+  background: transparent;
+}
+
+/* Açılmış kartlar */
+.ag-card[data-revealed] {
+  border-color: transparent;
+  background: var(--c);
+  color: var(--accent-ink);
+}
+
+.ag-card[data-revealed][data-color='b'] {
+  color: #17051f;
+}
+
+.ag-card[data-revealed][data-color='neutral'] {
+  background:
+    repeating-linear-gradient(135deg, rgb(255 255 255 / 0.04) 0 6px, transparent 6px 12px),
+    var(--ag-neutral-bg);
+  color: var(--ag-neutral);
+}
+
+.ag-card[data-revealed][data-color='assassin'] {
+  border: 2px solid var(--ag-assassin);
+  background: var(--ag-assassin-bg);
+  color: #ffb4b4;
+}
+
+.ag-card[data-revealed] .ag-word {
+  font-weight: 800;
+}
+
+.ag-mark {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 62%;
+  height: 62%;
+  stroke: currentColor;
+  opacity: 0.22;
+  transform: translate(-50%, -50%);
+}
+
+.ag-card[data-color='assassin'] .ag-mark {
+  color: var(--ag-assassin);
+  opacity: 0.55;
+}
+
+.ag-card[data-fresh][data-revealed] {
+  animation: ag-flip 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes ag-flip {
+  from {
+    transform: perspective(400px) rotateX(80deg);
+    filter: brightness(1.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-card[data-fresh][data-revealed] {
+    animation: none;
+  }
+}
+
+/* Oylar */
+.ag-votes {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 4px 1px 1px;
+  border-radius: var(--r-pill);
+  background: rgb(3 7 4 / 0.85);
+}
+
+.ag-votes-n {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .ag-votes .gk-avatar:nth-child(n + 2) {
+    display: none;
+  }
+}
+
+.ag-guessbar {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+/* ---------- Takımlar ---------- */
+.ag-teams {
+  display: grid;
+  gap: 22px;
+}
+
+.ag-roster {
+  display: grid;
+  gap: 8px;
+}
+
+.ag-roster-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--team);
+}
+
+.ag-roster-head .ag-small {
+  font-weight: 500;
+}
+
+.ag-tag {
+  flex: none;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--team) 16%, transparent);
+  color: var(--team);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.ag-tag-next {
+  background: transparent;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--team) 45%, transparent);
+}
+
+.ag-make {
+  flex: none;
+  margin-left: auto;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-3);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.ag-make:hover {
+  background: var(--panel-3);
+  color: var(--text);
+}
+
+.ag .sg-score .ag-tag {
+  margin-left: auto;
+}
+
+.ag .sg-score .ag-tag + .ag-make {
+  margin-left: 0;
+}
+
+/* ---------- İpucu geçmişi ---------- */
+.ag-history {
+  display: grid;
+  gap: 10px;
+}
+
+.ag-history-title {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ag-history-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ag-history-list li {
+  display: grid;
+  gap: 4px;
+  padding-left: 10px;
+  border-left: 2px solid var(--team);
+}
+
+.ag-history-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.ag-history-head b {
+  font-weight: 800;
+}
+
+.ag-history-head .mono {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--team);
+}
+
+.ag-history-who {
+  margin-left: auto;
+  font-size: 11.5px;
+}
+
+.ag-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 11.5px;
+}
+
+.ag-pick {
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--c) 16%, transparent);
+  color: var(--c);
+  font-weight: 600;
+}
+
+/* ---------- Lobi ---------- */
+.ag-teambox {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
+}
+
+.ag-teambox-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ag-team-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--team, var(--text-2));
+}
+
+.ag-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ag-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 4px;
+  border: 0;
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.ag-player:hover:not(:disabled) {
+  background: var(--panel-3);
+}
+
+.ag-player:disabled {
+  cursor: default;
+}
+
+.ag-leaderpick {
+  display: grid;
+  gap: 6px;
+}
+
+.ag-leaderpick .chip[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--team) 12%, transparent);
+  color: var(--team);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--team) 35%, transparent);
+}

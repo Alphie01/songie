@@ -1,0 +1,397 @@
+/* Şişe Çevirmece — ortak düzen game-kit/ui/game-layout.css'te. Doğruluk = yeşil, cesaret = turuncu.
+   Şişenin kapağı sarı; sırası gelen oyuncunun işareti de sarı (kim çevirecek). */
+
+.bt [data-kind='truth'],
+.bt-add [data-kind='truth'] {
+  --kind: var(--accent-hi);
+}
+
+.bt [data-kind='dare'],
+.bt-add [data-kind='dare'] {
+  --kind: var(--orange);
+}
+
+.bt-legend {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.bt-small {
+  font-size: 12.5px;
+}
+
+.bt-center {
+  text-align: center;
+}
+
+/* ---------- Masa ---------- */
+.bt-table {
+  --seat: 36px;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  margin: 4px auto 0;
+}
+
+.bt-felt {
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(25 223 112 / 0.07), transparent 62%),
+    var(--panel);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    inset 0 0 0 14px #0c110d,
+    inset 0 0 0 15px var(--line);
+}
+
+.bt-seats {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bt-seat {
+  position: absolute;
+  display: grid;
+  justify-items: center;
+  gap: 3px;
+  width: 76px;
+  transform: translate(-50%, calc(-1 * var(--seat) / 2 - 2px));
+  z-index: 1;
+}
+
+.bt-seat-ring {
+  position: relative;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  transition:
+    box-shadow 300ms,
+    transform 300ms;
+}
+
+.bt-seat-empty {
+  width: var(--seat);
+  height: var(--seat);
+  border: 1px dashed var(--line-2);
+  border-radius: 50%;
+}
+
+.bt-seat-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bt-seat[data-me] .bt-seat-name {
+  color: var(--text);
+}
+
+.bt-seat[data-off] .bt-seat-name {
+  color: var(--text-3);
+}
+
+/* Sırası gelen: kapak rengi nokta */
+.bt-seat[data-spinner] .bt-seat-ring::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: var(--yellow);
+}
+
+/* Şişenin gösterdiği: animasyon bitince */
+.bt-seat[data-target] .bt-seat-ring {
+  transform: scale(1.18);
+  box-shadow:
+    0 0 0 3px var(--bg),
+    0 0 0 5px var(--accent),
+    var(--accent-glow);
+  animation: bt-pop 420ms cubic-bezier(0.2, 0.9, 0.3, 1.4);
+}
+
+.bt-seat[data-target] .bt-seat-name {
+  color: var(--accent-hi);
+  font-weight: 800;
+}
+
+@keyframes bt-pop {
+  from {
+    transform: scale(0.9);
+  }
+}
+
+.bt-bottle {
+  position: absolute;
+  top: 27%;
+  left: 50%;
+  width: 14%;
+  height: 46%;
+  margin-left: -7%;
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.6));
+  will-change: transform;
+}
+
+.bt-bottle svg {
+  display: block;
+  overflow: visible;
+}
+
+/* Kalabalık masa ve dar ekran: koltuklar küçülür */
+.bt-table[data-n='many'] .bt-seat {
+  width: 60px;
+}
+
+.bt-table[data-n='many'] .bt-seat-ring {
+  scale: 0.8;
+}
+
+.bt-table[data-n='many'] .bt-seat-name {
+  font-size: 10.5px;
+}
+
+@media (max-width: 420px) {
+  .bt-table {
+    --seat: 30px;
+  }
+
+  .bt-seat {
+    width: 64px;
+  }
+
+  .bt-seat-ring {
+    scale: 0.84;
+  }
+
+  .bt-table[data-n='many'] .bt-seat {
+    width: 50px;
+  }
+
+  .bt-table[data-n='many'] .bt-seat-ring {
+    scale: 0.68;
+  }
+
+  .bt-seat-name {
+    font-size: 10.5px;
+  }
+
+  .bt-table[data-n='many'] .bt-seat-name {
+    font-size: 9.5px;
+  }
+}
+
+/* ---------- Masanın altı ---------- */
+.bt-stage {
+  display: grid;
+  gap: 14px;
+}
+
+.bt-status {
+  font-size: 14px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.bt-status-spin {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.bt-pointed {
+  font-size: clamp(22px, 6.5vw, 28px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.bt-host {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bt-choose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bt-choice {
+  min-height: 84px;
+  border: 1px solid color-mix(in srgb, var(--kind) 40%, transparent);
+  border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--kind) 10%, var(--panel));
+  color: var(--kind);
+  font: inherit;
+  font-size: 21px;
+  font-weight: 800;
+  font-style: italic;
+  cursor: pointer;
+  transition:
+    background 160ms,
+    box-shadow 160ms;
+}
+
+.bt-choice:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--kind) 18%, var(--panel));
+  box-shadow: 0 0 28px color-mix(in srgb, var(--kind) 30%, transparent);
+}
+
+.bt-choice:focus-visible {
+  outline: 2px solid var(--kind);
+  outline-offset: 2px;
+}
+
+.bt-card {
+  display: grid;
+  gap: 10px;
+  padding: 20px 18px 22px;
+  border: 1px solid color-mix(in srgb, var(--kind) 35%, transparent);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  animation: bt-card-in 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes bt-card-in {
+  from {
+    transform: translateY(8px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+.bt-card-kind {
+  font-size: 13px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--kind);
+}
+
+.bt-card-text {
+  font-size: clamp(18px, 5.2vw, 21px);
+  font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.bt-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.bt-span {
+  grid-column: 1 / -1;
+}
+
+.bt-vote {
+  display: grid;
+  gap: 10px;
+}
+
+.bt-vote-title {
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bt-vote .btn[aria-pressed='true'] {
+  box-shadow: var(--accent-glow);
+}
+
+.bt-vote .btn-outline[aria-pressed='true'] {
+  border-color: var(--red);
+  color: var(--red);
+  box-shadow: none;
+}
+
+.bt-last {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.bt-last-head {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bt-last[data-outcome='done'] .bt-last-head {
+  color: var(--accent-hi);
+}
+
+.bt-last[data-outcome='failed'] .bt-last-head {
+  color: var(--red);
+}
+
+.bt-last-text {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.bt-last-text span {
+  font-weight: 700;
+  color: var(--kind);
+}
+
+/* ---------- Ayarlar ---------- */
+.bt-cat-count {
+  font-size: 10.5px;
+  color: var(--text-3);
+}
+
+.bt-cat[aria-pressed='true'] .bt-cat-count {
+  color: inherit;
+  opacity: 0.75;
+}
+
+.bt-cat[data-bold][aria-pressed='true'] {
+  background: color-mix(in srgb, var(--orange) 12%, transparent);
+  color: var(--orange);
+}
+
+.bt-add {
+  display: grid;
+  gap: 8px;
+}
+
+.bt-add .chip[aria-pressed='true'] {
+  color: var(--kind);
+}
+
+.bt-add-text {
+  min-height: 76px;
+  padding-top: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  resize: vertical;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bt-seat[data-target] .bt-seat-ring,
+  .bt-card {
+    animation: none;
+  }
+}

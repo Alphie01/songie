@@ -26,12 +26,19 @@ export type ClientEventPayload<E extends ClientEventName> = z.infer<(typeof clie
 
 export type Ack<T = object> = ({ ok: true } & T) | { ok: false; error: string };
 
+/** Oyun görünümü, hangi odaya ve oyuna ait olduğuyla birlikte (oda/oyun değişince eski görünüm kullanılmasın). */
+export interface GameViewPayload {
+  room: string;
+  game: string;
+  view: unknown;
+}
+
 export interface ServerToClient {
   'room:state': (state: RoomState) => void;
   'room:closed': (reason: string) => void;
   'room:chat': (msg: ChatMessage) => void;
   'room:react': (r: { playerId: string; emoji: string }) => void;
-  'game:view': (view: unknown) => void;
+  'game:view': (payload: GameViewPayload | null) => void;
 }
 
 export type ClientToServer = {

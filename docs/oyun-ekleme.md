@@ -28,7 +28,7 @@ export function <ad>Server(deps: { db: Database.Database; timing?: Partial<…> 
 - Oyuncuya gösterilecek hatalar: `class GameError extends UserFacingError` (Türkçe, ne yapılacağını söyleyen).
 - `onAction` her hamlede yetkiyi kontrol eder (sıra kimde, rolü ne, aşama doğru mu). Gecikmiş/çift
   tıklamalara dayanıklı ol (kart/soru kimliği ile eşleştir, eski hamleyi `{ ok: true, stale: true }` ile yut).
-- `onPlayerJoin` / `onPlayerLeave` ve bağlantısı kopan oyuncular (`ctx.players()[i].connected`) oyunu
+- `onPlayerJoin` / `onPlayerLeave` / `onPlayerConnection` (bağlantı koptu/geri geldi) ve bağlantısı kopan oyuncular (`ctx.players()[i].connected`) oyunu
   kilitlememeli; gerekirse oda sahibine (`ctx.hostId()`) "atla" hamlesi ver.
 - `end(ctx, state)`: oda sahibi "Oyunu bitir" dediğinde podyum/özet göster, sonra `ctx.finish(results)`.
 - Uygunsa `onSettings` (oyun sırasında ayar değişikliği, sıradaki turdan itibaren).

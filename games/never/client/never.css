@@ -1,0 +1,461 @@
+/* Ben Hiç — ortak düzen game-kit/ui/game-layout.css'te. "Yaptım" turuncu (can götürür), "Yapmadım" yeşil. */
+
+.nv,
+.nv-podium {
+  --did: var(--orange);
+  --did-ink: #1f0d02;
+}
+
+.nv-small {
+  font-size: 12.5px;
+}
+
+.nv-center {
+  text-align: center;
+}
+
+.nv-side-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* ---------- Cümle kartı: sayfanın tek gösterişli parçası ---------- */
+.nv-card {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  overflow: hidden;
+  padding: 26px 22px 16px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
+  animation: nv-card-in 280ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.nv-card[data-phase='reveal'] {
+  border-color: color-mix(in srgb, var(--did) 40%, transparent);
+}
+
+@keyframes nv-card-in {
+  from {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+.nv-statement {
+  display: grid;
+  gap: 6px;
+  min-height: 7.5em;
+  align-content: center;
+}
+
+.nv-lead {
+  font-size: 20px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  color: var(--accent-hi);
+}
+
+.nv-rest {
+  font-size: clamp(24px, 7vw, 31px);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.nv-card-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+}
+
+.nv-secs {
+  color: var(--accent-hi);
+  font-weight: 700;
+}
+
+.nv-secs[data-low] {
+  color: var(--red);
+}
+
+.nv-timer {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: var(--panel-2);
+}
+
+.nv-timer span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 200ms linear;
+}
+
+.nv-timer span[data-low] {
+  background: var(--red);
+}
+
+/* ---------- Cevap ---------- */
+.nv-question {
+  display: grid;
+  gap: 12px;
+}
+
+.nv-answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.nv-answer {
+  --c: var(--accent);
+  --ink: var(--accent-ink);
+  min-height: 84px;
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 55%, transparent);
+  color: var(--c);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    background 140ms,
+    color 140ms,
+    box-shadow 140ms,
+    transform 80ms;
+}
+
+.nv-answer[data-kind='did'] {
+  --c: var(--did);
+  --ink: var(--did-ink);
+}
+
+.nv-answer:hover {
+  background: color-mix(in srgb, var(--c) 10%, var(--panel));
+}
+
+.nv-answer:active {
+  transform: scale(0.98);
+}
+
+.nv-answer:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.nv-answer[aria-pressed='true'] {
+  background: var(--c);
+  color: var(--ink);
+  box-shadow: 0 0 32px color-mix(in srgb, var(--c) 35%, transparent);
+}
+
+.nv-note {
+  padding: 16px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+  color: var(--text-2);
+  font-size: 13.5px;
+  text-align: center;
+}
+
+.nv-progress {
+  font-size: 12px;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.nv-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+}
+
+.nv-controls .btn-ghost[aria-pressed='true'] {
+  color: var(--did);
+}
+
+/* ---------- Açıklama ---------- */
+.nv-reveal {
+  display: grid;
+  gap: 16px;
+}
+
+.nv-tally {
+  display: grid;
+  gap: 8px;
+}
+
+.nv-tally-head {
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.nv-bar {
+  height: 8px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--accent) 22%, var(--panel-2));
+}
+
+.nv-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--did);
+  animation: nv-grow 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: left;
+}
+
+@keyframes nv-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.nv-tally-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 14px;
+}
+
+.nv-doers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nv-doer {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  width: 76px;
+  animation: nv-pop 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.nv-doer:nth-child(2) { animation-delay: 60ms; }
+.nv-doer:nth-child(3) { animation-delay: 120ms; }
+.nv-doer:nth-child(4) { animation-delay: 180ms; }
+.nv-doer:nth-child(n + 5) { animation-delay: 240ms; }
+
+@keyframes nv-pop {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+
+.nv-doer-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nv-doer[data-me] .nv-doer-name {
+  color: var(--did);
+}
+
+.nv-out {
+  color: var(--red);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---------- Parmaklar (can) ---------- */
+.nv-fingers {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.nv-fingers svg {
+  fill: var(--accent);
+  stroke: var(--accent-ink);
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.nv-fingers svg[data-down] {
+  fill: none;
+  stroke: var(--text-3);
+  opacity: 0.45;
+  transform: scaleY(0.55);
+  transform-origin: bottom;
+}
+
+/* ---------- Oyuncular ---------- */
+.nv-players,
+.nv-history {
+  display: grid;
+  gap: 10px;
+}
+
+.nv-mobile {
+  display: grid;
+  gap: 24px;
+}
+
+.sg-score[data-out] .sg-score-name {
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+
+.nv-score-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.nv-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.nv-tag[data-kind='answered'] {
+  color: var(--accent-hi);
+}
+
+.nv-tag[data-kind='out'] {
+  color: var(--red);
+}
+
+/* ---------- Geçmiş ---------- */
+.nv-history-list {
+  display: grid;
+  gap: 10px;
+  max-height: 360px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.nv-history-list li {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.nv-history-text {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+/* ---------- Ayarlar: cümle ekle ---------- */
+.nv-add {
+  display: grid;
+  gap: 8px;
+}
+
+.nv-add-field {
+  display: grid;
+  gap: 4px;
+}
+
+.nv-add-prefix {
+  font-size: 12px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--accent-hi);
+}
+
+.nv-add .input {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+/* ---------- Sonuç ---------- */
+.nv-podium-line {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--did);
+}
+
+.nv-hot {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+}
+
+.nv-hot-text {
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.nv-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.nv-table th,
+.nv-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+
+.nv-table thead th {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.nv-table tbody th {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.nv-table th:first-child {
+  text-align: left;
+}
+
+.nv-table tr[data-me] th {
+  color: var(--accent-hi);
+}
+
+.nv-table tr[data-out] th span {
+  color: var(--text-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nv-card,
+  .nv-doer,
+  .nv-bar span {
+    animation: none;
+  }
+}

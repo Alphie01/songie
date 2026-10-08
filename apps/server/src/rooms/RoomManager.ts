@@ -16,7 +16,8 @@ export interface RoomTransport {
   roomClosed(code: string, playerIds: string[], reason: string): void;
   chat(code: string, msg: ChatMessage): void;
   react(code: string, playerId: string, emoji: string): void;
-  gameView(playerId: string, view: unknown): void;
+  /** `tag` yoksa görünüm temizlenir (null). */
+  gameView(playerId: string, view: unknown, tag?: { room: string; game: string }): void;
 }
 
 export interface ResultSink {
@@ -99,7 +100,7 @@ export class RoomManager {
     const room = this.roomFor(playerId);
     if (!room) return;
     this.transport.roomState(room.code, this.snapshot(room));
-    if (room.game) this.transport.gameView(playerId, room.game.impl.viewFor(room.game.state, playerId));
+    if (room.game) this.transport.gameView(playerId, room.game.impl.viewFor(room.game.state, playerId), { room: room.code, game: room.gameId });
   }
 
   // ---------- bağlantı ----------
@@ -115,6 +116,7 @@ export class RoomManager {
     if (room.emptyTimer) clearTimeout(room.emptyTimer);
     room.emptyTimer = null;
     this.broadcast(room);
+    if (m.connections === 1) this.notifyConnection(room, profile.id, true);
   }
 
   disconnected(playerId: string): void {
@@ -131,6 +133,17 @@ export class RoomManager {
       room.emptyTimer = setTimeout(() => this.close(room, 'Oda boş kaldığı için kapandı.'), this.timings.emptyRoomMs);
     }
     this.broadcast(room);
+    this.notifyConnection(room, playerId, false);
+  }
+
+  private notifyConnection(room: Room, playerId: string, connected: boolean): void {
+    const game = room.game;
+    if (!game || game.state === null || !game.impl.onPlayerConnection) return;
+    try {
+      game.impl.onPlayerConnection(this.context(room), game.state, playerId, connected);
+    } catch (err) {
+      console.error(`[room ${room.code}] onPlayerConnection error`, err);
+    }
   }
 
   // ---------- oda yaşam döngüsü ----------
@@ -333,7 +346,7 @@ export class RoomManager {
   private pushViews(room: Room): void {
     const game = room.game;
     if (!game || game.state === null) return;
-    for (const id of room.members.keys()) this.transport.gameView(id, game.impl.viewFor(game.state, id));
+    for (const id of room.members.keys()) this.transport.gameView(id, game.impl.viewFor(game.state, id), { room: room.code, game: room.gameId });
   }
 
   private finishGame(room: Room, results: GameResult[]): void {
