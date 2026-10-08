@@ -1,14 +1,13 @@
 import type { ClientGame } from '@songie/game-kit/client';
-import { GAME_ID, soloSettings } from '../shared/index.js';
+import { GAME_ID } from '../shared/index.js';
 import { s } from './strings';
 
-export const songGuessClient: ClientGame = {
+export const tabooClient: ClientGame = {
   id: GAME_ID,
   name: s.name,
   pitch: s.pitch,
-  icon: 'music',
-  minPlayers: 1,
+  icon: 'cards',
+  minPlayers: 4,
   maxPlayers: 12,
-  soloSettings,
   load: () => import('./module').then((m) => m.default),
 };

@@ -401,6 +401,19 @@ describe('song-guess over sockets', () => {
       payload: { url: 'https://example.com/list' },
     });
     expect(bad.json().error).toContain('Spotify');
+
+    // Eklenen liste kişiye özel: başkası görmez, ama odada seçiliyse adı için istenebilir.
+    const list = (t: string, q = '') =>
+      app.http.inject({ method: 'GET', url: `/api/games/song-guess/pools${q}`, headers: { authorization: `Bearer ${t}` } }).then((r) => r.json().pools.map((p: { id: string }) => p.id) as string[]);
+    const other = await profile('Başkası');
+    const spId = 'custom-sp-0123456789abcdefABCDEF';
+    expect(await list(token)).toContain(spId);
+    expect(await list(other)).not.toContain(spId);
+    expect(await list(other, `?selected=${spId}`)).toContain(spId);
+    expect(await list(other)).toContain('test');
+    // Kendi listesinden çıkarınca o kişiden kaybolur.
+    await app.http.inject({ method: 'POST', url: `/api/games/song-guess/pools/${spId}/remove`, headers: { authorization: `Bearer ${token}` }, payload: {} });
+    expect(await list(token)).not.toContain(spId);
   });
 
   it('limits easy search to the given pools', async () => {

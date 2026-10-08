@@ -95,7 +95,7 @@ export function Home() {
           <article key={g.id} className="home-game card">
             <div className="home-game-head">
               <span className="game-tile-icon">
-                <Icon name="music" size={18} />
+                <Icon name={g.icon} size={18} />
               </span>
               <div>
                 <h3 className="home-game-name">{g.name}</h3>

@@ -47,6 +47,13 @@ const PATHS = {
     </>
   ),
   flag: <path d="M6 20V5m0 0h10l-2 4 2 4H6" />,
+  cards: (
+    <>
+      <rect x="7" y="4" width="11" height="15" rx="2" />
+      <path d="M5 7.5v11a2 2 0 0 0 2 2h8" />
+      <path d="M10 9h5M10 12.5h5" />
+    </>
+  ),
   chat: <path d="M5 18.5V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H8.5z" />,
   shuffle: <path d="M4 7h3.5c2 0 3 1 4 2.5l2 3c1 1.5 2 2.5 4 2.5H20M17 4l3 3-3 3M4 17h3.5c1.4 0 2.3-.5 3-1.3M13.5 8.3c.7-.8 1.6-1.3 3-1.3H20M17 14l3 3-3 3" />,
 } as const;

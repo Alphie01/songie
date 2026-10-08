@@ -261,14 +261,15 @@
   text-align: center;
 }
 
-/* Oyun içi sohbet (sağ alt) */
+/* Oyun içi sohbet: menü butonunun karşısında, sağ üstte (oyun içeriğinin üstüne binmesin) */
 .chat-dock {
   position: fixed;
+  top: 16px;
   right: 16px;
-  bottom: max(16px, env(safe-area-inset-bottom));
   z-index: 100;
-  display: grid;
-  justify-items: end;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
   gap: 10px;
 }
 
@@ -291,8 +292,8 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--line-2);
   border-radius: 50%;
   background: var(--panel-2);

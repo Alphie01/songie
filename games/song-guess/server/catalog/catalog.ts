@@ -79,6 +79,14 @@ export class Catalog {
     readonly deezer: DeezerClient = new DeezerClient(),
   ) {
     db.exec(SCHEMA);
+    // Eklenen listeler kişiye özel: her kullanıcı yalnızca kendi eklediklerini görür.
+    db.exec(`CREATE TABLE IF NOT EXISTS sg_pool_owners (
+      pool_id TEXT NOT NULL REFERENCES sg_pools(id) ON DELETE CASCADE,
+      player_id TEXT NOT NULL,
+      PRIMARY KEY (pool_id, player_id)
+    );
+    INSERT OR IGNORE INTO sg_pool_owners (pool_id, player_id)
+      SELECT id, created_by FROM sg_pools WHERE custom = 1 AND created_by IS NOT NULL;`);
   }
 
   // ---------- şarkılar ----------
@@ -195,11 +203,32 @@ export class Catalog {
 
   // ---------- listeler ----------
 
-  pools(): PoolInfo[] {
+  /**
+   * Listeler. `viewer` verilirse: hazır listeler + o kişinin eklediği listeler + `include`
+   * (ör. odada seçili olan, başkasının eklediği liste; adı görünsün diye).
+   */
+  pools(viewer?: { playerId: string | null; include?: string[] }): PoolInfo[] {
+    let where = 'track_count >= ?';
+    const args: unknown[] = [MIN_POOL_TRACKS];
+    if (viewer) {
+      const include = viewer.include ?? [];
+      where += ` AND (custom = 0 OR id IN (SELECT pool_id FROM sg_pool_owners WHERE player_id = ?)${
+        include.length ? ` OR id IN (${include.map(() => '?').join(',')})` : ''
+      })`;
+      args.push(viewer.playerId ?? '', ...include);
+    }
     const rows = this.db
-      .prepare('SELECT id, name, category, cover, track_count, custom FROM sg_pools WHERE track_count >= ? ORDER BY custom, rowid')
-      .all(MIN_POOL_TRACKS) as { id: string; name: string; category: PoolCategory; cover: string | null; track_count: number; custom: number }[];
+      .prepare(`SELECT id, name, category, cover, track_count, custom FROM sg_pools WHERE ${where} ORDER BY custom, rowid`)
+      .all(...args) as { id: string; name: string; category: PoolCategory; cover: string | null; track_count: number; custom: number }[];
     return rows.map((r) => ({ id: r.id, name: r.name, category: r.category, cover: r.cover, trackCount: r.track_count, custom: !!r.custom }));
+  }
+
+  addOwner(poolId: string, playerId: string): void {
+    this.db.prepare('INSERT OR IGNORE INTO sg_pool_owners (pool_id, player_id) VALUES (?, ?)').run(poolId, playerId);
+  }
+
+  removeOwner(poolId: string, playerId: string): void {
+    this.db.prepare('DELETE FROM sg_pool_owners WHERE pool_id = ? AND player_id = ?').run(poolId, playerId);
   }
 
   poolNames(ids: string[]): string[] {
@@ -284,6 +313,7 @@ export class Catalog {
       this.db.prepare('DELETE FROM sg_pool_tracks WHERE pool_id = ?').run(def.id);
       const ins = this.db.prepare('INSERT OR IGNORE INTO sg_pool_tracks (pool_id, track_id, position) VALUES (?, ?, ?)');
       unique.forEach((id, i) => ins.run(def.id, id, i));
+      if (opts.custom && opts.createdBy) this.addOwner(def.id, opts.createdBy);
     })();
     return { id: def.id, name: def.name, category: def.category, cover, trackCount: unique.length, custom: !!opts.custom };
   }

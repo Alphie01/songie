@@ -1,0 +1,373 @@
+/* Oyun ekranlarının ortak düzeni (songspot tarzı): üç sütun, skor listesi, ayar grupları, nasıl oynanır, podyum.
+   Tüm oyunlar kullanır; token'lar apps/web/src/styles/tokens.css. */
+/* Şarkıyı Bil — songspot.net görünümü. Token'lar: apps/web/src/styles/tokens.css */
+
+/* ---------- Yerleşim: masaüstünde sol skor, orta oyun, sağ bilgi ---------- */
+.sg {
+  display: grid;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 72px var(--gutter) 24px;
+}
+
+.sg-side {
+  display: none;
+}
+
+.sg-center {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+@media (min-width: 1100px) {
+  .sg {
+    grid-template-columns: 220px minmax(0, 1fr) 220px;
+    gap: 40px;
+    padding-top: 40px;
+  }
+
+  .sg-side {
+    display: grid;
+    align-content: start;
+    gap: 28px;
+    padding-top: 40px;
+  }
+
+  .sg-mobile-only {
+    display: none;
+  }
+}
+
+.sg-top {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-height: 24px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.sg-round {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.sg-code {
+  margin-left: auto;
+  letter-spacing: 0.15em;
+  color: var(--text-3);
+}
+
+/* ---------- Skor listesi ---------- */
+.sg-scores {
+  display: grid;
+  gap: 10px;
+}
+
+.sg-score-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sg-score {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.sg-score[data-me] {
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+}
+
+.sg-score[data-first] {
+  background: var(--accent-soft);
+}
+
+.sg-score-name {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sg-score-streak {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+.sg-score-pts {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sg-info {
+  display: grid;
+  gap: 8px;
+}
+
+.sg-info-text {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* ---------- Podyum ---------- */
+.podium {
+  display: grid;
+  gap: 18px;
+  padding-top: 72px;
+  padding-bottom: 32px;
+}
+
+.podium-kicker {
+  text-align: center;
+}
+
+.podium-winner {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.podium-name {
+  font-size: clamp(36px, 10vw, 56px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  color: var(--accent-hi);
+  overflow-wrap: anywhere;
+}
+
+.podium-score {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.podium-back {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ---------- Ayarlar (lobi yan sütunları) ---------- */
+.sgs {
+  display: grid;
+  gap: 22px;
+}
+
+.sgs-readonly {
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.sgs-group {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sgs-legend {
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.sgs-hint {
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--text-3);
+}
+
+.sgs-stack {
+  display: grid;
+  gap: 6px;
+}
+
+.sgs-pool-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.option:disabled {
+  cursor: default;
+}
+
+.option:disabled:not([aria-pressed='true']) {
+  opacity: 0.55;
+}
+
+/* Zorluk: seçili olan kendi renginde */
+.sgs-diff[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--c) 12%, transparent);
+  color: var(--c);
+}
+
+.sgs-browse {
+  justify-self: start;
+  padding: 0 6px;
+}
+
+.sgs-catalog {
+  display: grid;
+  gap: 14px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: #0a0f0b;
+}
+
+.sgs-cat {
+  display: grid;
+  gap: 6px;
+}
+
+.sgs-cat-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.sgs-catalog .chip {
+  min-width: 0;
+  min-height: 32px;
+  font-size: 11.5px;
+}
+
+.sgs-add {
+  display: grid;
+  gap: 6px;
+}
+
+.sgs-add-row {
+  display: flex;
+  gap: 6px;
+}
+
+.sgs-add-row .input {
+  min-height: 40px;
+  font-size: 13px;
+}
+
+.sgs-add-row .btn {
+  min-height: 40px;
+}
+
+.sgs-opt-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sgs-guess-after .chip {
+  min-width: 0;
+  flex: 1;
+}
+
+.toggle:disabled {
+  cursor: default;
+}
+
+@media (min-width: 1100px) {
+  .sgs-catalog .chips {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* ---------- Mobil seçenekler ---------- */
+.sg-mobile-only {
+  display: grid;
+  gap: 22px;
+}
+
+.sg-options {
+  display: grid;
+  gap: 12px;
+}
+
+.sg-options-body {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: #0a0f0b;
+}
+
+.sg-volume {
+  display: grid;
+  gap: 12px;
+}
+
+/* ---------- Nasıl oynanır ---------- */
+.howto {
+  display: grid;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.howto-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.howto-list {
+  display: grid;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.howto-list li {
+  display: flex;
+  gap: 14px;
+}
+
+.howto-n {
+  flex: none;
+  padding-top: 2px;
+  font-size: 12px;
+  color: var(--accent-hi);
+}
+
+.howto-list h3 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.howto-list p {
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* Masaüstünde skor ve seçenekler yan sütunlarda; ortadaki mobil kopyaları gizle.
+   (Bu kural .sg-mobile-only tanımından sonra gelmeli.) */
+@media (min-width: 1100px) {
+  .sg-mobile-only {
+    display: none;
+  }
+}

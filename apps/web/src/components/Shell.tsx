@@ -94,7 +94,7 @@ export function Shell({ children }: { children: ReactNode }) {
               <li key={g.id}>
                 <button type="button" className="game-tile" onClick={() => void createRoom(g.id)}>
                   <span className="game-tile-icon">
-                    <Icon name="music" size={18} />
+                    <Icon name={g.icon} size={18} />
                   </span>
                   <span className="game-tile-text">
                     <span className="game-tile-name">{g.name}</span>

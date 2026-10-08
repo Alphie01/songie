@@ -1,5 +1,6 @@
 import type { ComponentType } from 'react';
-import type { Ack, RoomState } from '@songie/shared';
+import type { Ack, RoomPlayer, RoomState } from '@songie/shared';
+import type { IconName } from './ui/Icon';
 
 /** Oyunun kendi HTTP uçlarına (`/api/games/<id>`) yetkili istek. */
 export interface GameApi {
@@ -17,6 +18,9 @@ export interface SettingsPanelProps<S> {
    * `secondary` sağ (nasıl oynanacak). Verilmezse hepsi tek sütunda.
    */
   section?: 'primary' | 'secondary';
+  /** Odadaki oyuncular (ör. takım ataması için). */
+  players: readonly RoomPlayer[];
+  meId: string;
 }
 
 export interface PlayViewProps<V, S = unknown> {
@@ -41,6 +45,7 @@ export interface ClientGame {
   name: string;
   /** Rafta oyunun altında görünen tek cümle. */
   pitch: string;
+  icon: IconName;
   minPlayers: number;
   maxPlayers: number;
   /** Tek kişilik modu varsa, ana sayfadaki "Tek başına oyna" bu ayarlarla oda kurar. */

@@ -9,7 +9,7 @@ export const s = {
     tur: 'Türler',
     donem: 'Dönemler',
     ulke: 'Ülke listeleri',
-    ozel: 'Eklenen listeler',
+    ozel: 'Eklediğin listeler',
   } satisfies Record<PoolCategory, string>,
   difficulty: {
     easy: 'Kolay',
@@ -31,6 +31,8 @@ export const s = {
     openCatalog: 'Liste ekle / çıkar',
     closeCatalog: 'Kapat',
     addPool: 'Deezer ya da Spotify playlist linki',
+    removeMine: (name: string) => `${name} listesini listelerimden çıkar`,
+    mineHint: 'Eklediğin listeler yalnızca sana görünür.',
     addPoolPlaceholder: 'open.spotify.com/playlist/…',
     addingSpotify: 'Spotify listesi Deezer’da eşleştiriliyor…',
     addedSpotify: (name: string, n: number, total: number) => `${name} eklendi ve seçildi: ${total} şarkının ${n} tanesi bulundu.`,

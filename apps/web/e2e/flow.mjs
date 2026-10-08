@@ -38,14 +38,14 @@ await shot(host, '01-welcome-mobile');
 await host.getByLabel('Takma ad').fill('Ayşe');
 await host.getByRole('button', { name: 'Mor' }).click();
 await host.getByRole('button', { name: 'Devam et' }).click();
-await host.getByRole('button', { name: 'Oda kur' }).waitFor();
+await host.locator('.home-game', { hasText: 'Şarkıyı Bil' }).getByRole('button', { name: 'Oda kur' }).waitFor();
 await shot(host, '02-home-mobile');
 await host.getByRole('button', { name: 'Menüyü aç' }).click();
 await host.waitForTimeout(400);
 await shot(host, '03-drawer-mobile', false);
 await host.getByRole('button', { name: 'Menüyü kapat' }).click();
 
-await host.getByRole('button', { name: 'Oda kur' }).click();
+await host.locator('.home-game', { hasText: 'Şarkıyı Bil' }).getByRole('button', { name: 'Oda kur' }).click();
 await host.waitForURL(/\/r\/[A-Z]{4}$/);
 const code = host.url().split('/').pop();
 await host.getByRole('button', { name: '5', exact: true }).click();

@@ -1,0 +1,8 @@
+[
+  { "w": "Baklava", "t": ["Tatlı", "Şerbet", "Fıstık", "Hamur", "Gaziantep"] },
+  { "w": "Deniz", "t": ["Su", "Mavi", "Dalga", "Yüzmek", "Kumsal"] },
+  { "w": "Kedi", "t": ["Miyav", "Hayvan", "Fare", "Tüy", "Evcil"] },
+  { "w": "Saat", "t": ["Zaman", "Dakika", "Kol", "Akrep", "Yelkovan"] },
+  { "w": "Kitap", "t": ["Okumak", "Sayfa", "Yazar", "Roman", "Kütüphane"] },
+  { "w": "Uçak", "t": ["Pilot", "Havalimanı", "Uçmak", "Kanat", "Bilet"] }
+]

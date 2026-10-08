@@ -53,7 +53,7 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
   const [optionsOpen, setOptionsOpen] = useState(false);
   const members = useMemo(() => new Map(room.players.map((p) => [p.id, p])), [room.players]);
   const isHost = room.hostId === meId;
-  const [pools] = usePools(api);
+  const [pools] = usePools(api, true, settings.pools);
 
   const stageUrl = view.phase === 'stage' ? view.clips[view.stage] : null;
   const previewUrl = view.phase === 'reveal' ? view.reveal?.previewUrl : null;
@@ -97,6 +97,8 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     settings,
     editable: isHost,
     api,
+    players: room.players,
+    meId,
     onChange: (next: SongSettings) => void setSettings(next),
   };
   const playingStage = playing ? view.clips.findIndex((u) => u === playing.url) : -1;

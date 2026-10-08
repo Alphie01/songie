@@ -65,7 +65,17 @@ export function songGuessServer(deps: SongGameDeps): ServerGame<SongSettings, So
     routes(app: FastifyInstance) {
       media.routes(app);
 
-      app.get('/pools', async () => ({ pools: catalog.pools() }));
+      app.get<{ Querystring: { selected?: string } }>('/pools', async (req: Authed) => {
+        const selected = String((req.query as { selected?: string }).selected ?? '').split(',').filter(Boolean).slice(0, 12);
+        return { pools: catalog.pools({ playerId: req.profile?.id ?? null, include: selected }) };
+      });
+
+      // Listeyi kendi kataloğundan çıkar (şarkılar ve başkalarının kopyası durur).
+      app.post<{ Params: { id: string } }>('/pools/:id/remove', async (req: Authed, reply) => {
+        if (!req.profile) return reply.code(401).send({ error: 'Profil bulunamadı.' });
+        catalog.removeOwner((req.params as { id: string }).id, req.profile.id);
+        return { ok: true };
+      });
 
       app.get<{ Querystring: { q?: string; pools?: string } }>('/search', async (req: Authed, reply) => {
         if (!req.profile) return reply.code(401).send({ error: 'Profil bulunamadı.' });
@@ -85,7 +95,10 @@ export function songGuessServer(deps: SongGameDeps): ServerGame<SongSettings, So
         const spotifyId = parseSpotifyPlaylistRef(url);
         if (spotifyId) {
           const existing = catalog.poolByPlaylist(`spotify:${spotifyId}`);
-          if (existing) return { pool: existing };
+          if (existing) {
+            catalog.addOwner(existing.id, req.profile.id);
+            return { pool: existing };
+          }
           try {
             const res = await catalog.importSpotify(spotifyId, { createdBy: req.profile.id, fetchImpl: deps.fetchImpl });
             if (res.pool.trackCount < 10) {
@@ -101,7 +114,10 @@ export function songGuessServer(deps: SongGameDeps): ServerGame<SongSettings, So
         const ref = parsePlaylistRef(url);
         if (!ref) return reply.code(400).send({ error: 'Deezer ya da Spotify playlist linkini yapıştır.' });
         const existing = catalog.poolByPlaylist(ref);
-        if (existing) return { pool: existing };
+        if (existing) {
+          catalog.addOwner(existing.id, req.profile.id);
+          return { pool: existing };
+        }
         try {
           const meta = await catalog.deezer.playlist(ref);
           const pool = await catalog.importPool(

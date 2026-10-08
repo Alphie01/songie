@@ -7,7 +7,7 @@ Arkadaşlar arası, gelirsiz bir çok oyunculu oyun platformu. İlk oyun: `games
 - `apps/web` — React 19 + Vite + React Router. Saf CSS, token'lar `apps/web/src/styles/tokens.css`.
 - `packages/shared` — socket sözleşmeleri, ortak tipler, Türkçe metin normalizasyonu.
 - `packages/game-kit` — oyun eklenti arayüzleri (`/server`, `/client`).
-- `games/<oyun>/{shared,server,client}` — oyun modülü. Kayıt: `apps/server/src/games.ts` ve `apps/web/src/games.ts`.
+- `games/<oyun>/{shared,server,client}` — oyun modülü (`song-guess`, `taboo`). Kayıt: `apps/server/src/games.ts` ve `apps/web/src/games.ts`. Oyun ekranlarının ortak düzeni: `packages/game-kit/src/ui/game-layout.css`.
 - `deploy/` — Docker Compose projesi `songie` (app + kendi cloudflared'ı).
 
 ## Komutlar
@@ -18,7 +18,8 @@ Arkadaşlar arası, gelirsiz bir çok oyunculu oyun platformu. İlk oyun: `games
 - Yayın: `cd deploy && docker compose -p songie up -d --build`
 
 ## Kurallar
-- **Her UI işinden önce `frontend-design` skill'ini yükle** ve `docs/design.md`'deki token ve ilkelere uy. Yapay zekâ "tell"lerinden kaçın (eyebrow, ALL CAPS etiket, "→", orta nokta zinciri, eşit kart ızgarası, neon-siyah).
+- **Her UI işinden önce `frontend-design` skill’ini yükle.** Kullanıcının açık isteği: arayüz songspot.net görünümünde (ayrıntı `docs/design.md`); yeni oyunlar da bu düzeni izler.
+- E2E: `apps/web/e2e/{flow,taboo}.mjs`, Playwright Docker imajıyla çalıştırılır (host’ta Chromium kütüphaneleri yok, kurma).
 - Arayüz metni Türkçe, cümle düzeninde, `apps/web/src/i18n/tr.ts` içinde.
 - Server otoriterdir: client'a yalnızca `viewFor` görünümü gider; cevabı ya da açılmamış klipleri sızdırma.
 - Sunucu paylaşımlı: host nginx'e, başka projelerin container'larına ve Postgres/Redis'ine dokunma. Host'ta yalnızca `127.0.0.1:4310` açılır.

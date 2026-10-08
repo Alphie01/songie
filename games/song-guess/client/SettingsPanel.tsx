@@ -34,7 +34,7 @@ function Group({ title, children, hint }: { title: string; children: React.React
 export function SettingsPanel({ settings, editable, onChange, api, section }: SettingsPanelProps<SongSettings>) {
   const showPrimary = section !== 'secondary';
   const showSecondary = section !== 'primary';
-  const [pools, setPools] = usePools(api, showPrimary);
+  const [pools, setPools] = usePools(api, showPrimary, settings.pools);
   const [browsing, setBrowsing] = useState(false);
   const [url, setUrl] = useState('');
   const [adding, setAdding] = useState<null | 'deezer' | 'spotify'>(null);
@@ -124,16 +124,26 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                       <h3 className="sgs-cat-name">{s.categories[cat]}</h3>
                       <div className="chips">
                         {list.map((p) => (
-                          <button
-                            key={p.id}
-                            type="button"
-                            className="chip"
-                            aria-pressed={selected.has(p.id)}
-                            onClick={() => togglePool(p.id)}
-                          >
-                            {p.name}
-                            <span className="chip-count">{p.trackCount}</span>
-                          </button>
+                          <span key={p.id} className="sgs-chip-wrap">
+                            <button type="button" className="chip" aria-pressed={selected.has(p.id)} onClick={() => togglePool(p.id)}>
+                              {p.name}
+                              <span className="chip-count">{p.trackCount}</span>
+                            </button>
+                            {p.custom && !selected.has(p.id) && (
+                              <button
+                                type="button"
+                                className="sgs-chip-remove"
+                                aria-label={s.settings.removeMine(p.name)}
+                                title={s.settings.removeMine(p.name)}
+                                onClick={async () => {
+                                  await api.post(`/pools/${encodeURIComponent(p.id)}/remove`, {});
+                                  setPools((ps) => (ps ?? []).filter((x) => x.id !== p.id));
+                                }}
+                              >
+                                <Icon name="x" size={12} />
+                              </button>
+                            )}
+                          </span>
                         ))}
                       </div>
                     </div>
@@ -157,6 +167,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                     </button>
                   </div>
                   {adding === 'spotify' && <p className="sgs-hint">{s.settings.addingSpotify}</p>}
+                  {!adding && !addMsg && <p className="sgs-hint">{s.settings.mineHint}</p>}
                   {addMsg && (
                     <p className={addMsg.error ? 'error-text' : 'sgs-hint'} role="status">
                       {addMsg.text}

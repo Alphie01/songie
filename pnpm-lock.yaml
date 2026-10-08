@@ -41,6 +41,9 @@ importers:
       '@songie/song-guess':
         specifier: workspace:*
         version: link:../../games/song-guess
+      '@songie/taboo':
+        specifier: workspace:*
+        version: link:../../games/taboo
       better-sqlite3:
         specifier: ^11.7.0
         version: 11.10.0
@@ -87,6 +90,9 @@ importers:
       '@songie/song-guess':
         specifier: workspace:*
         version: link:../../games/song-guess
+      '@songie/taboo':
+        specifier: workspace:*
+        version: link:../../games/taboo
       motion:
         specifier: ^11.13.1
         version: 11.18.2(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
@@ -139,6 +145,27 @@ importers:
       ffmpeg-static:
         specifier: ^5.2.0
         version: 5.3.0
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+
+  games/taboo:
+    dependencies:
+      '@songie/game-kit':
+        specifier: workspace:*
+        version: link:../../packages/game-kit
+      '@songie/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      better-sqlite3:
+        specifier: ^11.7.0
+        version: 11.10.0
+      fastify:
+        specifier: ^5.1.0
+        version: 5.12.5
       react:
         specifier: ^19.0.0
         version: 19.3.0

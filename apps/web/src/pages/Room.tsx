@@ -176,6 +176,8 @@ function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
     settings: room.settings,
     editable: isHost,
     api,
+    players: room.players,
+    meId: me.id,
     onChange: async (next: unknown) => {
       const res = await emit('room:settings', { settings: next });
       if (!res.ok) notify(res.error);
