@@ -1,5 +1,29 @@
 /** Platform metinleri. Oyunlar kendi metinlerini kendi klasöründe tutar. */
 export const tr = {
+  guide: {
+    open: 'Nasıl oynanır?',
+    back: 'Geri',
+    next: 'İleri',
+    done: 'Anladım',
+    players: 'Oyuncu',
+    duration: 'Süre',
+  },
+  tour: {
+    kicker: 'songie',
+    title: 'Arkadaşlarla oyun gecesi, tek linkle',
+    steps: [
+      ['Oyun seç', 'Ana sayfadan bir oyun seç ve “Oda kur”a bas. Her oyunun “Nasıl oynanır?” rehberi var.'],
+      ['Arkadaşlarını çağır', 'Odanın 4 harfli kodunu ya da davet linkini paylaş. Gelenler adını yazıp doğrudan odaya girer.'],
+      ['Ayarları seç', 'Oda sahibi lobide süreyi, tur sayısını, kategorileri ve takımları seçer; herkes ayarları görür.'],
+      ['Oyna', 'Her şey telefondan oynanır. Gizli bilgiler (roller, kartlar, cevaplar) yalnızca görmesi gerekenin ekranına gelir.'],
+      ['Menü', 'Sol üstteki menüden ses seviyesini değiştirir, başka bir oyuna geçer ya da profilini düzenlersin.'],
+    ] as [string, string][],
+    toGames: 'Oyunlara bak',
+    gamesTitle: (n: number) => `${n} oyun`,
+    gamesLead: 'Birine dokun, nasıl oynandığını anlatalım.',
+    start: 'Başla',
+    replay: 'Oyunları tanı',
+  },
   shell: {
     open: 'Menüyü aç',
     close: 'Menüyü kapat',

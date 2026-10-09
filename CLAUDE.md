@@ -7,7 +7,7 @@ Arkadaşlar arası, gelirsiz bir çok oyunculu oyun platformu. İlk oyun: `games
 - `apps/web` — React 19 + Vite + React Router. Saf CSS, token'lar `apps/web/src/styles/tokens.css`.
 - `packages/shared` — socket sözleşmeleri, ortak tipler, Türkçe metin normalizasyonu.
 - `packages/game-kit` — oyun eklenti arayüzleri (`/server`, `/client`).
-- `games/<oyun>/{shared,server,client}` — oyun modülleri (15 oyun: `song-guess`, `taboo`, `never`, `bottle`, `most-likely`, `secret-hitler`, `charades`, `paranoia`, `confessions`, `kitten`, `red-flag`, `five-seconds`, `who-am-i`, `agents`, `frequency`). Yeni oyun: `docs/oyun-ekleme.md`. Kayıt: `apps/server/src/games.ts` ve `apps/web/src/games.ts`. Oyun ekranlarının ortak düzeni: `packages/game-kit/src/ui/game-layout.css`.
+- `games/<oyun>/{shared,server,client}` — oyun modülleri (18 oyun: `song-guess`, `taboo`, `never`, `bottle`, `most-likely`, `secret-hitler`, `charades`, `paranoia`, `confessions`, `kitten`, `red-flag`, `five-seconds`, `who-am-i`, `agents`, `frequency`, `intrigue`, `color-cards`, `werewolf`; her birinde `client/guide.ts` tanıtımı). Yeni oyun: `docs/oyun-ekleme.md`. Kayıt: `apps/server/src/games.ts` ve `apps/web/src/games.ts`. Oyun ekranlarının ortak düzeni: `packages/game-kit/src/ui/game-layout.css`.
 - `deploy/` — Docker Compose projesi `songie` (app + kendi cloudflared'ı).
 
 ## Komutlar

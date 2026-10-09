@@ -1,0 +1,1154 @@
+/* Kurt Adam — ortak düzen game-kit/ui/game-layout.css'te, token'lar apps/web/src/styles/tokens.css.
+   Gece: koyu lacivert-mor gök, lavanta ay. Gündüz: sıcak kehribar alacakaranlık. Vurgu yeşili yalnızca eylem butonlarında. */
+
+.ww {
+  --ww-night-1: #070a1f;
+  --ww-night-2: #161a4a;
+  --ww-moon: #c9c2ff;
+  --ww-day-1: #2b1709;
+  --ww-day-2: #120b05;
+  --ww-sun: #ffb35c;
+  --ww-witch: #6aa8ff;
+  --ww-cupid: #ff7eb6;
+  --ww-tone: var(--ww-moon);
+  position: relative;
+}
+
+.ww[data-time='day'],
+.ww[data-time='over'] {
+  --ww-tone: var(--ww-sun);
+}
+
+.ww > :not(.ww-sky) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rol renkleri */
+.ww [data-role='wolf'] { --role: var(--red); }
+.ww [data-role='villager'] { --role: var(--text-2); }
+.ww [data-role='seer'] { --role: var(--purple); }
+.ww [data-role='doctor'] { --role: var(--accent-hi); }
+.ww [data-role='hunter'] { --role: var(--orange); }
+.ww [data-role='witch'] { --role: var(--ww-witch); }
+.ww [data-role='cupid'] { --role: var(--ww-cupid); }
+.ww [data-role='fool'] { --role: var(--yellow); }
+
+/* Ayar paneli lobide .ww dışında görünür: aynı rol renkleri */
+.ww-settings [data-role='wolf'] { --role: var(--red); }
+.ww-settings [data-role='villager'] { --role: var(--text-2); }
+.ww-settings [data-role='seer'] { --role: var(--purple); }
+.ww-settings [data-role='doctor'] { --role: var(--accent-hi); }
+.ww-settings [data-role='hunter'] { --role: var(--orange); }
+.ww-settings [data-role='witch'] { --role: #6aa8ff; }
+.ww-settings [data-role='cupid'] { --role: #ff7eb6; }
+.ww-settings [data-role='fool'] { --role: var(--yellow); }
+
+/* ---------- Gök: gece ve gündüz katmanları ---------- */
+.ww-sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ww-sky::before,
+.ww-sky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transition: opacity 1.6s ease;
+}
+
+.ww-sky::before {
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.55), transparent),
+    radial-gradient(1px 1px at 72% 12%, rgb(255 255 255 / 0.45), transparent),
+    radial-gradient(1.5px 1.5px at 38% 8%, rgb(255 255 255 / 0.5), transparent),
+    radial-gradient(1px 1px at 88% 30%, rgb(255 255 255 / 0.35), transparent),
+    radial-gradient(1px 1px at 55% 26%, rgb(255 255 255 / 0.3), transparent),
+    radial-gradient(circle at 80% -10%, rgb(201 194 255 / 0.16), transparent 45%),
+    linear-gradient(180deg, var(--ww-night-2) 0%, var(--ww-night-1) 55%, var(--bg) 100%);
+  opacity: 0;
+}
+
+.ww-sky::after {
+  background:
+    radial-gradient(circle at 50% -15%, rgb(255 179 92 / 0.22), transparent 50%),
+    linear-gradient(180deg, var(--ww-day-1) 0%, var(--ww-day-2) 50%, var(--bg) 100%);
+  opacity: 0;
+}
+
+.ww[data-time='night'] .ww-sky::before {
+  opacity: 1;
+}
+
+.ww[data-time='day'] .ww-sky::after,
+.ww[data-time='over'] .ww-sky::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ww-sky::before,
+  .ww-sky::after {
+    transition: none;
+  }
+}
+
+/* ---------- Genel ---------- */
+.ww-center {
+  text-align: center;
+}
+
+.ww-h,
+.ww-legend {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.ww-sub {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.ww-hint {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-3);
+}
+
+.ww-block {
+  display: grid;
+  gap: 10px;
+}
+
+.ww-block-head,
+.ww-chat-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ww-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.ww-title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.ww-wait,
+.ww-done {
+  padding: 18px 16px;
+  border-radius: var(--r-md);
+  background: rgb(255 255 255 / 0.04);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.ww-done {
+  color: var(--ww-tone);
+}
+
+.ww-rule {
+  padding: 10px 12px;
+  border-left: 2px solid var(--ww-tone);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: rgb(255 255 255 / 0.03);
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.ww-count {
+  min-width: 22px;
+  padding: 1px 6px;
+  border-radius: var(--r-pill);
+  background: rgb(255 255 255 / 0.08);
+  font-size: 11px;
+  text-align: center;
+}
+
+/* ---------- Gök saati ---------- */
+.ww-clock {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ww-clock-disc {
+  position: relative;
+  flex: none;
+  width: 92px;
+  height: 92px;
+}
+
+.ww-disc {
+  display: block;
+}
+
+.ww-disc-track {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.08);
+  stroke-width: 3;
+}
+
+.ww-disc-arc {
+  fill: none;
+  stroke: var(--ww-tone);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s linear;
+}
+
+.ww-disc-moon circle {
+  fill: var(--ww-moon);
+  opacity: 0.22;
+}
+
+.ww-disc-moon .ww-disc-bite {
+  fill: var(--ww-night-1);
+  opacity: 1;
+}
+
+.ww-disc-sun circle {
+  fill: var(--ww-sun);
+  opacity: 0.22;
+}
+
+.ww-disc-sun line {
+  stroke: var(--ww-sun);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.4;
+}
+
+.ww-clock-sec {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ww-clock-text {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ww-clock-title {
+  font-size: 28px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.05;
+  color: var(--ww-tone);
+}
+
+.ww-clock-sub {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.ww-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-steps li {
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: rgb(255 255 255 / 0.04);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.ww-steps li[data-state='done'] {
+  opacity: 0.5;
+}
+
+.ww-steps li[data-state='now'] {
+  background: rgb(201 194 255 / 0.14);
+  color: var(--ww-moon);
+}
+
+/* ---------- Rol kartı ---------- */
+.ww-rolecard {
+  display: grid;
+  width: 100%;
+  min-height: 92px;
+  padding: 16px 18px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background:
+    repeating-linear-gradient(135deg, transparent 0 9px, rgb(255 255 255 / 0.025) 9px 10px),
+    rgb(16 21 17 / 0.85);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+}
+
+.ww-rolecard:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ww-rolecard[data-open] {
+  border-color: color-mix(in srgb, var(--role) 55%, transparent);
+  background: color-mix(in srgb, var(--role) 10%, var(--panel));
+}
+
+.ww-rolecard[data-dead]:not([data-open]) {
+  opacity: 0.7;
+}
+
+.ww-rolecard-back {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+}
+
+.ww-rolecard-hold {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ww-rolecard-hint {
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.ww-rolecard-face {
+  display: grid;
+  gap: 8px;
+}
+
+.ww-rolecard-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ww-rolecard-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--role) 14%, transparent);
+  color: var(--role);
+}
+
+.ww-rolecard-role {
+  font-size: 30px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  color: var(--role);
+}
+
+.ww-rolecard-blurb,
+.ww-rolecard-line {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.ww-rolecard-line b {
+  color: var(--text);
+}
+
+.ww-rolecard-line[data-kind='lover'] {
+  color: var(--ww-cupid);
+}
+
+/* ---------- Rol rozeti ---------- */
+.ww-rolechip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-self: start;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--role) 14%, transparent);
+  color: var(--role);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* ---------- Gece: uyku ekranı ---------- */
+.ww-sleep {
+  display: grid;
+  gap: 8px;
+  padding: 36px 20px;
+  border: 1px solid rgb(201 194 255 / 0.12);
+  border-radius: var(--r-lg);
+  background: rgb(7 10 31 / 0.55);
+  text-align: center;
+}
+
+.ww-sleep-title {
+  font-size: 22px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.2;
+  color: var(--ww-moon);
+}
+
+.ww-sleep-body {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* ---------- Oyuncu ızgarası ---------- */
+.ww-grid {
+  --pick: var(--ww-tone);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-grid[data-tone='wolf'],
+.ww-grid[data-tone='poison'] { --pick: var(--red); }
+.ww-grid[data-tone='love'] { --pick: var(--ww-cupid); }
+.ww-grid[data-tone='seer'] { --pick: var(--purple); }
+.ww-grid[data-tone='heal'] { --pick: var(--accent-hi); }
+.ww-grid[data-tone='day'] { --pick: var(--ww-sun); }
+
+.ww-tile {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 6px;
+  width: 100%;
+  min-height: 96px;
+  padding: 12px 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgb(16 21 17 / 0.7);
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.ww-tile:hover:not(:disabled) {
+  border-color: var(--line-2);
+}
+
+.ww-tile:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ww-tile[aria-pressed='true'] {
+  border-color: color-mix(in srgb, var(--pick) 70%, transparent);
+  background: color-mix(in srgb, var(--pick) 14%, var(--panel));
+}
+
+.ww-tile:disabled {
+  cursor: default;
+}
+
+.ww-tile:disabled:not([aria-pressed='true']) {
+  opacity: 0.5;
+}
+
+.ww-tile-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ww-tile-note {
+  font-size: 10.5px;
+  color: var(--text-3);
+}
+
+.ww-tile-badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+
+.ww-tile-badge:empty {
+  display: none;
+}
+
+.ww-claw {
+  padding: 1px 6px;
+  border-radius: var(--r-pill);
+  background: rgb(246 100 100 / 0.18);
+  color: var(--red);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+/* ---------- Kahin sonucu ---------- */
+.ww-reveal {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 22px 16px;
+  border-radius: var(--r-lg);
+  background: rgb(174 103 237 / 0.1);
+  color: var(--purple);
+  text-align: center;
+}
+
+.ww-reveal p {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.ww-reveal[data-wolf] {
+  background: rgb(246 100 100 / 0.12);
+  color: var(--red);
+}
+
+.ww-witch-victim {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------- Sabah duyurusu ---------- */
+.ww-dawn {
+  display: grid;
+  gap: 10px;
+  padding: 16px 18px;
+  border: 1px solid rgb(255 179 92 / 0.2);
+  border-radius: var(--r-lg);
+  background: linear-gradient(180deg, rgb(255 179 92 / 0.1), rgb(255 179 92 / 0.02));
+}
+
+.ww-dawn-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ww-sun);
+}
+
+.ww-dawn-none {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ww-dawn-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-dawn-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.ww-dawn-name {
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration: line-through;
+  text-decoration-color: rgb(255 255 255 / 0.35);
+}
+
+/* ---------- Adaylar ---------- */
+.ww-cands {
+  display: grid;
+  gap: 8px;
+}
+
+.ww-cand-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-cand-list li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  background: rgb(255 179 92 / 0.08);
+  font-size: 13px;
+}
+
+.ww-cand-list .dim {
+  font-size: 11.5px;
+}
+
+/* ---------- Oy pusulası ---------- */
+.ww-ballot {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-ballot-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: rgb(16 21 17 / 0.75);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ww-ballot-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.ww-ballot-btn[aria-pressed='true'] {
+  border-color: rgb(255 179 92 / 0.7);
+  background: rgb(255 179 92 / 0.12);
+}
+
+.ww-ballot-btn[data-none] {
+  color: var(--text-2);
+}
+
+.ww-ballot-btn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.ww-ballot-none {
+  width: 32px;
+  height: 32px;
+  border: 1.5px dashed var(--line-2);
+  border-radius: 50%;
+}
+
+.ww-ballot-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ww-ballot-who {
+  padding: 4px 14px 0;
+  font-size: 11.5px;
+  color: var(--text-3);
+}
+
+/* ---------- Karar ---------- */
+.ww-verdict-title {
+  font-size: 26px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.ww-verdict[data-hanged] .ww-verdict-title {
+  color: var(--ww-sun);
+}
+
+.ww-tally {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-tally li {
+  display: grid;
+  grid-template-columns: minmax(0, 7.5em) 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.ww-tally-name {
+  overflow: hidden;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ww-tally-bar {
+  height: 8px;
+  border-radius: var(--r-pill);
+  background: rgb(255 255 255 / 0.06);
+  overflow: hidden;
+}
+
+.ww-tally-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--text-3);
+}
+
+.ww-tally li[data-top] .ww-tally-bar span {
+  background: var(--ww-sun);
+}
+
+.ww-tally-who {
+  grid-column: 1 / -1;
+  font-size: 11.5px;
+  color: var(--text-3);
+}
+
+.ww-tally-who:empty {
+  display: none;
+}
+
+/* ---------- Oyun sonu ---------- */
+.ww-over {
+  padding-top: 24px;
+}
+
+.ww-over-title {
+  font-size: clamp(34px, 9vw, 52px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1;
+  text-align: center;
+  color: var(--ww-sun);
+}
+
+.ww-over[data-winner='wolves'] .ww-over-title { color: var(--red); }
+.ww-over[data-winner='village'] .ww-over-title { color: var(--accent-hi); }
+.ww-over[data-winner='fool'] .ww-over-title { color: var(--yellow); }
+.ww-over[data-winner='lovers'] .ww-over-title { color: var(--ww-cupid); }
+
+.ww-over-reason {
+  font-size: 14px;
+  text-align: center;
+  color: var(--text-2);
+}
+
+.ww-over-roles {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-over-roles li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+  color: var(--role);
+  font-size: 13px;
+}
+
+.ww-over-roles li[data-won] {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--role) 45%, transparent);
+}
+
+.ww-over-roles li[data-dead] .ww-over-name {
+  text-decoration: line-through;
+  text-decoration-color: rgb(255 255 255 / 0.3);
+}
+
+.ww-over-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 600;
+  color: var(--text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ww-secret {
+  border-radius: var(--r-md);
+  background: rgb(255 255 255 / 0.03);
+  padding: 10px 12px;
+}
+
+.ww-secret summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.ww-secret ol {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0 0 0 18px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+/* ---------- Sohbet ---------- */
+.ww-chat {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: rgb(16 21 17 / 0.75);
+}
+
+.ww-chat[data-kind='wolf'] {
+  border-color: rgb(246 100 100 / 0.3);
+  background: rgb(40 10 14 / 0.55);
+}
+
+.ww-chat[data-kind='ghost'] {
+  border-style: dashed;
+  border-color: rgb(201 194 255 / 0.25);
+}
+
+.ww-chat-list {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  max-height: 200px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.ww-chat-list b {
+  color: var(--text-2);
+}
+
+.ww-chat-list li[data-me] b {
+  color: var(--ww-tone);
+}
+
+.ww-chat-form {
+  display: flex;
+  gap: 6px;
+}
+
+.ww-chat-form .input {
+  min-width: 0;
+  min-height: 40px;
+  font-size: 13px;
+}
+
+.ww-chat-form .btn {
+  min-height: 40px;
+}
+
+.ww-ghosts {
+  display: grid;
+  gap: 10px;
+}
+
+/* ---------- Köy listesi ---------- */
+.ww-seats {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-seat {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: var(--r-md);
+  background: rgb(16 21 17 / 0.75);
+}
+
+.ww-seat[data-me] {
+  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+}
+
+.ww-seat[data-dead] .ww-seat-name {
+  color: var(--text-3);
+  text-decoration: line-through;
+}
+
+.ww-seat-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ww-seat-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ww-tag {
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  background: rgb(255 255 255 / 0.06);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.ww-tag[data-kind='dead'] { color: var(--text-3); }
+.ww-tag[data-kind='ready'] { color: var(--accent-hi); background: var(--accent-soft); }
+.ww-tag[data-kind='voted'] { color: var(--ww-sun); }
+.ww-tag[data-kind='nom'] { color: var(--ww-sun); background: rgb(255 179 92 / 0.1); }
+
+.ww-ingame {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-ingame li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--role);
+}
+
+.ww-ingame li span:first-of-type {
+  flex: 1;
+  color: var(--text-2);
+}
+
+/* ---------- Kurallar ve günlük ---------- */
+.ww-rules {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.ww-rules div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.ww-rules dt {
+  color: var(--text-3);
+}
+
+.ww-rules dd {
+  margin: 0;
+  flex: none;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.ww-rules div[data-off] dd {
+  color: var(--text-3);
+}
+
+.ww-log {
+  display: grid;
+  gap: 8px;
+  max-height: 420px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.ww-log li[data-k='night'] { color: var(--ww-moon); }
+.ww-log li[data-k='dawn'],
+.ww-log li[data-k='hanged'],
+.ww-log li[data-k='shot'],
+.ww-log li[data-k='grief'] { color: var(--text); }
+.ww-log li[data-k='over'] { color: var(--ww-sun); font-weight: 700; }
+
+/* ---------- Lobi ayarları: roller ---------- */
+.ww-rolepick {
+  display: grid;
+  gap: 6px;
+}
+
+.ww-rolerow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: var(--r-md);
+  background: rgb(255 255 255 / 0.035);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.ww-rolerow-toggle {
+  cursor: pointer;
+}
+
+.ww-rolerow-toggle:disabled {
+  cursor: default;
+}
+
+.ww-rolerow-toggle[aria-checked='false'] .ww-rolerow-icon {
+  opacity: 0.4;
+}
+
+.ww-rolerow-toggle[aria-checked='true'] .toggle-knob {
+  background: var(--accent);
+}
+
+.ww-rolerow-toggle[aria-checked='true'] .toggle-knob::after {
+  transform: translateX(12px);
+  background: var(--accent-ink);
+}
+
+.ww-rolerow-icon {
+  display: inline-flex;
+  color: var(--role);
+}
+
+.ww-rolerow-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.ww-rolerow[data-off] {
+  color: var(--red);
+}
+
+.ww-stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ww-stepper-btn {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: rgb(255 255 255 / 0.06);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ww-stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.ww-stepper-n {
+  min-width: 22px;
+  font-size: 14px;
+  text-align: center;
+  color: var(--text);
+}
+
+.ww-settings-problem {
+  font-size: 12px;
+}
+
+/* ---------- Nasıl oynanır: rol tablosu ---------- */
+.ww-roletable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.ww-roletable th,
+.ww-roletable td {
+  padding: 8px 0;
+  border-top: 1px solid var(--line);
+  vertical-align: top;
+  text-align: left;
+}
+
+.ww-roletable th {
+  width: 9.5em;
+  padding-right: 12px;
+  font-weight: 700;
+  color: var(--role);
+  white-space: nowrap;
+}
+
+.ww-roletable th svg {
+  margin-right: 6px;
+  vertical-align: -3px;
+}
+
+.ww-roletable td {
+  color: var(--text-2);
+}
+
+@media (max-width: 420px) {
+  .ww-clock-title {
+    font-size: 24px;
+  }
+
+  .ww-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ww-roletable th {
+    width: auto;
+    white-space: normal;
+  }
+}

@@ -1,9 +1,10 @@
-import { useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router';
 import { ROOM_CODE_LENGTH } from '@songie/shared';
 import { Icon } from '@songie/game-kit/ui';
 import { GAMES } from '../games';
 import { tr } from '../i18n/tr';
+import { useGuide } from '../lib/guide';
 import { useSession } from '../lib/session';
 import './home.css';
 
@@ -13,6 +14,10 @@ export function Home() {
   const [code, setCode] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
+  const { openGuide, openTour, showTourOnce } = useGuide();
+
+  // İlk girişte platformu ve oyunları tanıt.
+  useEffect(() => showTourOnce(), [showTourOnce]);
 
   async function join(e: FormEvent) {
     e.preventDefault();
@@ -88,9 +93,14 @@ export function Home() {
       </form>
 
       <section className="home-games" aria-labelledby="games-title">
-        <h2 id="games-title" className="eyebrow home-games-title">
-          {tr.home.games}
-        </h2>
+        <div className="home-games-head">
+          <h2 id="games-title" className="eyebrow home-games-title">
+            {tr.home.games}
+          </h2>
+          <button type="button" className="btn btn-ghost" onClick={openTour}>
+            {tr.tour.replay}
+          </button>
+        </div>
         {GAMES.map((g) => (
           <article key={g.id} className="home-game card">
             <div className="home-game-head">
@@ -102,6 +112,11 @@ export function Home() {
                 <p className="home-game-pitch dim">{g.pitch}</p>
               </div>
             </div>
+            {g.guide && (
+              <button type="button" className="home-game-guide" onClick={() => openGuide(g.id)}>
+                {tr.guide.open}
+              </button>
+            )}
             <div className="home-game-actions">
               <button className="btn btn-primary" disabled={busy !== null} onClick={() => void create(g.id)}>
                 {busy === g.id ? '…' : tr.home.create}

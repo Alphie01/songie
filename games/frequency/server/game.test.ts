@@ -247,11 +247,11 @@ describe('frequency (harness)', () => {
     await h.act('p1', { type: 'next', round: h.view('p1').roundId });
     expect(h.view('p1').phase).toBe('podium');
     h.advance(DEFAULT_TIMING.podiumMs);
-    // 7 / (2 tur × 4) = 0.875 → en yüksek derece
+    // Ek tur da paydaya girer: 7 / (3 oynanan tur × 4) = 0.58 → derece 2 ("Aynı kanaldasınız").
     expect(h.finished).toEqual([
-      { playerId: 'p1', score: 7, meta: { mode: 'coop', rating: 4 } },
-      { playerId: 'p2', score: 7, meta: { mode: 'coop', rating: 4 } },
-      { playerId: 'p3', score: 7, meta: { mode: 'coop', rating: 4 } },
+      { playerId: 'p1', score: 7, meta: { mode: 'coop', rating: 2 } },
+      { playerId: 'p2', score: 7, meta: { mode: 'coop', rating: 2 } },
+      { playerId: 'p3', score: 7, meta: { mode: 'coop', rating: 2 } },
     ]);
   });
 

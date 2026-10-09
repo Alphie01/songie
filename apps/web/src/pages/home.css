@@ -50,8 +50,40 @@
   margin-top: 12px;
 }
 
+.home-games-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .home-games-title {
-  text-align: center;
+  text-align: left;
+}
+
+.home-game {
+  position: relative;
+}
+
+.home-game-guide {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  padding: 4px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.home-game-guide:hover {
+  color: var(--accent-hi);
+  border-color: rgb(25 223 112 / 0.4);
+}
+
+.home-game-head {
+  padding-right: 120px;
 }
 
 .home-game {

@@ -20,7 +20,21 @@ const GAMES = [
   ['Frekans', 4],
   ['Ajanlar', 4],
   ['Tabu', 4],
+  ['Renk Renk', 4],
+  ['Entrika', 4],
+  ['Kurt Adam', 5],
 ].filter(([n]) => !only || n === only);
+
+
+// İlk girişte açılan tanıtım pencerelerini kapat (test akışını engellemesin).
+async function closeDialogs(p) {
+  for (let i = 0; i < 3; i++) {
+    const d = p.locator('.dlg');
+    if (!(await d.count())) return;
+    await p.keyboard.press('Escape');
+    await p.waitForTimeout(150);
+  }
+}
 
 const browser = await chromium.launch();
 const errors = [];
@@ -34,6 +48,14 @@ for (let i = 0; i < 5; i++) {
   await p.goto(base);
   await p.getByLabel('Takma ad').fill(names[i]);
   await p.getByRole('button', { name: 'Devam et' }).click();
+  // İlk girişte platform turu açılmalı.
+  await p.locator('.dlg').waitFor({ timeout: 8000 });
+  if (i === 0) {
+    await p.screenshot({ path: `${out}/0-tour-1.png` });
+    await p.getByRole('button', { name: 'Oyunlara bak' }).click();
+    await p.screenshot({ path: `${out}/0-tour-2.png`, fullPage: false });
+  }
+  await closeDialogs(p);
   await p.locator('.home-game').first().waitFor();
   pages.push(p);
 }
@@ -47,7 +69,19 @@ for (const [name, count] of GAMES) {
     await A.locator('.home-game').filter({ has: A.locator('.home-game-name', { hasText: new RegExp(`^${name.replace(/[?/]/g, '\\$&')}$`) }) }).getByRole('button', { name: 'Oda kur' }).click();
     await A.waitForURL(/\/r\/[A-Z]{4}$/, { timeout: 10000 });
     const url = A.url();
-    for (const p of rest.slice(0, count - 1)) await p.goto(url);
+    // Oyuna ilk girişte rehber açılmalı.
+    const guide = await A.locator('.dlg').waitFor({ timeout: 6000 }).then(() => true).catch(() => false);
+    if (guide) {
+      await A.screenshot({ path: `${out}/${slug(name)}-0-guide-1.png` });
+      await A.getByRole('button', { name: 'İleri' }).click().catch(() => {});
+      await A.screenshot({ path: `${out}/${slug(name)}-0-guide-2.png` });
+    }
+    await closeDialogs(A);
+    for (const p of rest.slice(0, count - 1)) {
+      await p.goto(url);
+      await p.locator('.dlg').waitFor({ timeout: 4000 }).catch(() => {});
+      await closeDialogs(p);
+    }
     await A.waitForFunction((n) => document.querySelectorAll('.row').length >= n, count, { timeout: 10000 }).catch(() => {});
     await A.waitForTimeout(800);
     await A.screenshot({ path: `${out}/${slug(name)}-1-lobby-mobile.png`, fullPage: true });
@@ -59,7 +93,7 @@ for (const [name, count] of GAMES) {
     await rest[0].screenshot({ path: `${out}/${slug(name)}-4-game-desktop.png` });
     await rest[1].screenshot({ path: `${out}/${slug(name)}-5-game-other.png`, fullPage: true });
     const playing = (await A.locator('.lobby-cta').count()) === 0;
-    results.push(`${playing ? 'ok ' : 'NO '} ${name}${startErr ? ` — başlatılamadı: ${startErr}` : ''}${errors.length > before ? ` — ${errors.length - before} sayfa hatası` : ''}`);
+    results.push(`${playing ? 'ok ' : 'NO '} ${guide ? 'rehber ✓' : 'REHBER YOK'} ${name}${startErr ? ` — başlatılamadı: ${startErr}` : ''}${errors.length > before ? ` — ${errors.length - before} sayfa hatası` : ''}`);
     if (playing) {
       await A.getByRole('button', { name: 'Oyunu bitir' }).click().catch(() => {});
       await A.waitForTimeout(500);

@@ -50,7 +50,7 @@ export function sideOf(dial: number, target: number): 'left' | 'right' | null {
   return null;
 }
 
-/** Birlikte modu derecesi: 0 (en kötü) – 4 (en iyi), temel tur sayısının en yüksek puanına oranla. */
+/** Birlikte modu derecesi: 0 (en kötü) – 4 (en iyi), oynanan tur sayısının (ek turlar dahil) en yüksek puanına oranla. */
 export const RATING_THRESHOLDS = [0.25, 0.45, 0.6, 0.75] as const;
 export function ratingFor(score: number, rounds: number): number {
   const ratio = rounds > 0 ? score / (rounds * BULLSEYE) : 0;

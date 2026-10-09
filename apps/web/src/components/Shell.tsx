@@ -4,6 +4,7 @@ import { player } from '@songie/game-kit/audio';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import { GAMES } from '../games';
 import { tr } from '../i18n/tr';
+import { useGuide } from '../lib/guide';
 import { useSession } from '../lib/session';
 import './shell.css';
 
@@ -20,6 +21,7 @@ export function Shell({ children }: { children: ReactNode }) {
   const volume = useVolume();
   const location = useLocation();
   const navigate = useNavigate();
+  const { openTour } = useGuide();
 
   useEffect(() => setOpen(false), [location.pathname]);
   useEffect(() => {
@@ -104,7 +106,9 @@ export function Shell({ children }: { children: ReactNode }) {
               </li>
             ))}
           </ul>
-          <p className="shell-note dim">{tr.shell.moreSoon}</p>
+          <button type="button" className="btn btn-ghost shell-tour" onClick={() => { setOpen(false); openTour(); }}>
+            {tr.tour.replay}
+          </button>
         </section>
 
         {profile && (

@@ -10,6 +10,10 @@ Bir oyun `games/<id>/` altında üç parçadan oluşur: `shared` (ayarlar, hamle
 ## Kapsam kuralı (paralel çalışırken)
 - Yalnızca kendi `games/<id>/` klasörüne yaz. `package.json` ve `tsconfig.json` hazır; bağımlılık ekleme,
   `pnpm install` çalıştırma.
+- **Süreç öldürme:** Arka planda bir süreç (önizleme sunucusu vb.) başlattıysan PID'ini başlatırken sakla
+  (`cmd & echo $! > pid`) ve yalnızca onu kapat. `ss`/`ps`/`grep` ile port ya da metin arayıp bulduğun PID'i
+  ASLA öldürme: sunucu paylaşımlı, başka projelerin `docker-proxy` süreçleri de eşleşir (bir kez oldu,
+  başka projenin portu düştü).
 - Sunucu/web kayıt dosyalarına (`apps/server/src/games.ts`, `apps/web/src/games.ts`), game-kit'e,
   başka oyunlara, deploy'a ve git'e dokunma. Ortak bir şey gerekiyorsa raporuna yaz.
 
@@ -43,6 +47,10 @@ export function <ad>Server(deps: { db: Database.Database; timing?: Partial<…> 
 - `index.ts`: `export const <ad>Client: ClientGame = { id, name, pitch, icon, minPlayers, maxPlayers, load }`
   (`soloSettings` yalnızca tek başına oynanabiliyorsa). `icon` game-kit `Icon` adlarından biri; yeni bir
   simge gerekiyorsa oyunun kendi bileşeninde satır içi SVG kullan.
+- `guide.ts`: `export const guide: GameGuide` (game-kit/client) ve `index.ts`'te `guide` alanı. Oyuna ilk girişte
+  ve "Nasıl oynanır?" ile açılan adım adım tanıtım: `summary`, `players`, `duration`, 3–7 `sections`
+  (amaç, akış, kartlar/roller sözlüğü `items` ile, puanlama, ipuçları). Kısa, somut, Türkçe; kodda
+  gerçekten olan kuralları ve ayarları anlat.
 - `module.ts`: `export default { SettingsPanel, PlayView }` ve `import './<id>.css'`.
 - `SettingsPanel`: `section` = `'primary'` (sol sütun: ne oynanacak), `'secondary'` (sağ: nasıl oynanacak),
   yoksa hepsi. `editable` yalnızca oda sahibinde true; diğerleri aynı kontrolleri pasif görür.

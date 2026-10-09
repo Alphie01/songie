@@ -348,7 +348,7 @@ export function createFrequencyGame(deps: {
     state.cancelTimer = ctx.schedule(timing.podiumMs, () => {
       state.cancelTimer = null;
       if (state.mode === 'coop') {
-        const rating = ratingFor(state.scores.a, state.settings.rounds);
+        const rating = ratingFor(state.scores.a, Math.max(state.settings.rounds, state.completed));
         ctx.finish(state.teams.a.map((id) => ({ playerId: id, score: state.scores.a, meta: { mode: 'coop', rating } })));
         return;
       }
@@ -593,7 +593,7 @@ export function createFrequencyGame(deps: {
         result: state.phase === 'reveal' || state.phase === 'podium' ? state.result : null,
         history: state.history,
         winner: state.phase === 'reveal' || state.phase === 'podium' ? state.winner : null,
-        rating: state.mode === 'coop' ? ratingFor(state.scores.a, state.settings.rounds) : null,
+        rating: state.mode === 'coop' ? ratingFor(state.scores.a, Math.max(state.settings.rounds, state.completed)) : null,
         serverNow: state.clock(),
         endsAt: r?.endsAt ?? 0,
         durationMs: r?.durationMs ?? 0,

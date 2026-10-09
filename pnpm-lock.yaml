@@ -41,6 +41,9 @@ importers:
       '@songie/charades':
         specifier: workspace:*
         version: link:../../games/charades
+      '@songie/color-cards':
+        specifier: workspace:*
+        version: link:../../games/color-cards
       '@songie/confessions':
         specifier: workspace:*
         version: link:../../games/confessions
@@ -53,6 +56,9 @@ importers:
       '@songie/game-kit':
         specifier: workspace:*
         version: link:../../packages/game-kit
+      '@songie/intrigue':
+        specifier: workspace:*
+        version: link:../../games/intrigue
       '@songie/kitten':
         specifier: workspace:*
         version: link:../../games/kitten
@@ -80,6 +86,9 @@ importers:
       '@songie/taboo':
         specifier: workspace:*
         version: link:../../games/taboo
+      '@songie/werewolf':
+        specifier: workspace:*
+        version: link:../../games/werewolf
       '@songie/who-am-i':
         specifier: workspace:*
         version: link:../../games/who-am-i
@@ -129,6 +138,9 @@ importers:
       '@songie/charades':
         specifier: workspace:*
         version: link:../../games/charades
+      '@songie/color-cards':
+        specifier: workspace:*
+        version: link:../../games/color-cards
       '@songie/confessions':
         specifier: workspace:*
         version: link:../../games/confessions
@@ -141,6 +153,9 @@ importers:
       '@songie/game-kit':
         specifier: workspace:*
         version: link:../../packages/game-kit
+      '@songie/intrigue':
+        specifier: workspace:*
+        version: link:../../games/intrigue
       '@songie/kitten':
         specifier: workspace:*
         version: link:../../games/kitten
@@ -168,6 +183,9 @@ importers:
       '@songie/taboo':
         specifier: workspace:*
         version: link:../../games/taboo
+      '@songie/werewolf':
+        specifier: workspace:*
+        version: link:../../games/werewolf
       '@songie/who-am-i':
         specifier: workspace:*
         version: link:../../games/who-am-i
@@ -269,6 +287,27 @@ importers:
         specifier: ^3.23.8
         version: 3.25.76
 
+  games/color-cards:
+    dependencies:
+      '@songie/game-kit':
+        specifier: workspace:*
+        version: link:../../packages/game-kit
+      '@songie/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      better-sqlite3:
+        specifier: ^11.7.0
+        version: 11.10.0
+      fastify:
+        specifier: ^5.1.0
+        version: 5.12.5
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+
   games/confessions:
     dependencies:
       '@songie/game-kit':
@@ -312,6 +351,27 @@ importers:
         version: 3.25.76
 
   games/frequency:
+    dependencies:
+      '@songie/game-kit':
+        specifier: workspace:*
+        version: link:../../packages/game-kit
+      '@songie/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      better-sqlite3:
+        specifier: ^11.7.0
+        version: 11.10.0
+      fastify:
+        specifier: ^5.1.0
+        version: 5.12.5
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+
+  games/intrigue:
     dependencies:
       '@songie/game-kit':
         specifier: workspace:*
@@ -483,6 +543,27 @@ importers:
         version: 3.25.76
 
   games/taboo:
+    dependencies:
+      '@songie/game-kit':
+        specifier: workspace:*
+        version: link:../../packages/game-kit
+      '@songie/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      better-sqlite3:
+        specifier: ^11.7.0
+        version: 11.10.0
+      fastify:
+        specifier: ^5.1.0
+        version: 5.12.5
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+
+  games/werewolf:
     dependencies:
       '@songie/game-kit':
         specifier: workspace:*

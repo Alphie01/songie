@@ -3,6 +3,15 @@ import { chromium, devices } from 'playwright';
 
 const base = process.argv[2] ?? 'http://127.0.0.1:4310';
 const out = process.argv[3] ?? 'screenshots';
+
+// Tanıtım pencereleri bu testte konu dışı: hepsini görülmüş say.
+const skipGuides = () => {
+  const get = Storage.prototype.getItem;
+  Storage.prototype.getItem = function (k) {
+    return /^songie\.(tour|guide)\./.test(k) ? '1' : get.call(this, k);
+  };
+};
+
 const browser = await chromium.launch();
 const shot = (p, n, full = false) => p.screenshot({ path: `${out}/${n}.png`, fullPage: full });
 function check(cond, msg) {
@@ -10,7 +19,9 @@ function check(cond, msg) {
   console.log('✓', msg);
 }
 async function page(nick, opts) {
-  const p = await (await browser.newContext({ ...opts, locale: 'tr-TR' })).newPage();
+  const ctx = await browser.newContext({ ...opts, locale: 'tr-TR' });
+  await ctx.addInitScript(skipGuides);
+  const p = await ctx.newPage();
   p.on('pageerror', (e) => console.log('PAGE ERROR', nick, e.message));
   p.on('dialog', (d) => d.accept());
   return p;

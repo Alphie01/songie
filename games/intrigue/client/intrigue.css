@@ -1,0 +1,856 @@
+/* Entrika — ortak düzen game-kit/ui/game-layout.css'te, token'lar apps/web/src/styles/tokens.css.
+   Her rolün kendi rengi var (--c). Ekranın tek gösterişli anı itiraz penceresi: büyük geri sayım ve "Yalan!". */
+
+.ig {
+  --ig-sky: #6aa8ff;
+  --ig-coin: var(--yellow);
+  --ig-coin-ink: #3a2a00;
+}
+
+@media (min-width: 1100px) {
+  .ig .sg-center {
+    max-width: 540px;
+  }
+
+  .ig.sg {
+    grid-template-columns: 240px minmax(0, 1fr) 260px;
+  }
+}
+
+.ig-small {
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.ig-center {
+  text-align: center;
+}
+
+.ig-warn {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+.ig-row {
+  display: flex;
+  gap: 8px;
+}
+
+.ig-grow {
+  flex: 1;
+}
+
+.ig-side-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+/* ---------- Roller: renk ---------- */
+:is(.ig-card, .ig-claim, .ig-action, .ig-block, .ig-table tr)[data-role='treasurer'] {
+  --c: var(--yellow);
+}
+:is(.ig-card, .ig-claim, .ig-action, .ig-block, .ig-table tr)[data-role='assassin'] {
+  --c: var(--red);
+}
+:is(.ig-card, .ig-claim, .ig-action, .ig-block, .ig-table tr)[data-role='guard'] {
+  --c: var(--purple);
+}
+:is(.ig-card, .ig-claim, .ig-action, .ig-block, .ig-table tr)[data-role='pirate'] {
+  --c: var(--orange);
+}
+:is(.ig-card, .ig-claim, .ig-action, .ig-block, .ig-table tr)[data-role='spy'] {
+  --c: var(--ig-sky, #6aa8ff);
+}
+
+.ig-coin {
+  flex: none;
+  color: var(--ig-coin, var(--yellow));
+}
+
+/* ---------- Rol kartı ---------- */
+.ig-card {
+  position: relative;
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  width: 84px;
+  height: 118px;
+  padding: 8px 4px;
+  border: 1px solid color-mix(in srgb, var(--c) 50%, transparent);
+  border-radius: 10px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--c) 20%, transparent), transparent 62%),
+    var(--panel-2);
+  color: var(--c);
+}
+
+/* İnce iç çerçeve: saray kartı hissi */
+.ig-card::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid color-mix(in srgb, var(--c) 18%, transparent);
+  border-radius: 7px;
+  pointer-events: none;
+}
+
+.ig-card-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.ig-card-tag {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  padding: 0 5px;
+  border-radius: var(--r-pill);
+  background: var(--c);
+  color: #0a0a0a;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.ig-card[data-size='mini'] {
+  gap: 0;
+  width: 18px;
+  height: 25px;
+  padding: 0;
+  border-radius: 4px;
+}
+
+.ig-card[data-size='mini']::before {
+  display: none;
+}
+
+.ig-card[data-size='big'] {
+  width: 132px;
+  height: 184px;
+  gap: 12px;
+  border-radius: 14px;
+}
+
+.ig-card[data-size='big'] .ig-card-name {
+  font-size: 15px;
+}
+
+.ig-card[data-dead] {
+  opacity: 0.5;
+  filter: grayscale(0.55);
+}
+
+.ig-card[data-dead]:not([data-size='mini']) .ig-card-name {
+  text-decoration: line-through;
+}
+
+.ig-back {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: 84px;
+  height: 118px;
+  border: 1px solid rgb(25 223 112 / 0.3);
+  border-radius: 10px;
+  background:
+    repeating-linear-gradient(45deg, rgb(25 223 112 / 0.06) 0 4px, transparent 4px 8px),
+    var(--panel);
+  color: var(--accent);
+}
+
+.ig-back[data-size='mini'] {
+  width: 18px;
+  height: 25px;
+  border-radius: 4px;
+}
+
+.ig-glyph {
+  display: block;
+}
+
+/* ---------- Rakipler ---------- */
+.ig-rivals {
+  display: flex;
+  gap: 8px;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 4px var(--gutter);
+  overflow-x: auto;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+@media (min-width: 720px) {
+  .ig-rivals {
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.ig-rival {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 8px;
+  min-width: 118px;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.ig-rival[data-current] {
+  border-color: rgb(25 223 112 / 0.55);
+  box-shadow: 0 0 22px rgb(25 223 112 / 0.16);
+}
+
+.ig-rival[data-target] {
+  border-color: rgb(246 100 100 / 0.5);
+}
+
+.ig-rival[data-out] {
+  opacity: 0.5;
+}
+
+.ig-rival[data-out] .ig-rival-name {
+  text-decoration: line-through;
+}
+
+.ig-rival-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.ig-rival-name {
+  min-width: 0;
+  max-width: 84px;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ig-say {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: var(--yellow);
+}
+
+.ig-say[data-say='passed'] {
+  background: var(--text-3);
+}
+
+.ig-say[data-say='deciding'] {
+  animation: ig-pulse 1s ease-in-out infinite;
+}
+
+.ig-rival-cards {
+  display: flex;
+  gap: 4px;
+}
+
+.ig-rival-coins {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+/* ---------- Durum ve süre ---------- */
+.ig-status {
+  display: grid;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  font-size: 14px;
+  text-align: center;
+}
+
+.ig-bar {
+  display: block;
+  height: 5px;
+  overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--panel-3);
+}
+
+.ig-bar span {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 200ms linear;
+}
+
+/* ---------- Eylem paneli ---------- */
+.ig-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgb(25 223 112 / 0.35);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+}
+
+.ig-panel-alert {
+  border-color: rgb(246 100 100 / 0.5);
+}
+
+.ig-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ig-panel-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.ig-purse {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+.ig-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ig-action {
+  --c: var(--text-2);
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+  min-height: 74px;
+  padding: 10px 11px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 120ms,
+    background 120ms;
+}
+
+.ig-action:hover:not(:disabled) {
+  border-color: var(--line-2);
+  background: var(--panel-3);
+}
+
+.ig-action[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.ig-action:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ig-action:focus-visible,
+.ig-cardbtn:focus-visible {
+  outline: 2px solid var(--accent-hi);
+  outline-offset: 2px;
+}
+
+.ig-action[data-action='coup'] {
+  border-color: rgb(246 100 100 / 0.35);
+}
+
+.ig-action-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.ig-action-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ig-claim {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 7px 1px 5px;
+  border-radius: var(--r-pill);
+  background: color-mix(in srgb, var(--c) 14%, transparent);
+  color: var(--c);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.ig-action-effect {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--text-2);
+}
+
+.ig-action:disabled .ig-action-effect {
+  color: var(--orange);
+}
+
+.ig-target {
+  display: grid;
+  gap: 10px;
+  padding-top: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.ig-target-label {
+  padding-top: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+/* ---------- İtiraz penceresi ---------- */
+.ig-window {
+  --w: var(--yellow);
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--w) 55%, transparent);
+  border-radius: var(--r-lg);
+  background:
+    radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--w) 10%, transparent), transparent 60%),
+    var(--panel);
+  box-shadow: 0 0 40px color-mix(in srgb, var(--w) 14%, transparent);
+  animation: ig-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.ig-window[data-kind='counter'] {
+  --w: var(--purple);
+}
+
+.ig-window[data-kind='block'] {
+  --w: var(--ig-sky);
+}
+
+.ig-window .ig-bar span {
+  background: var(--w);
+}
+
+.ig-window-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+}
+
+.ig-count {
+  min-width: 1.2em;
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 0.9;
+  color: var(--w);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ig-count[data-low] {
+  color: var(--red);
+}
+
+.ig-window-title {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ig-window-hint {
+  margin-top: 4px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.ig-window .ig-card {
+  width: 64px;
+  height: 90px;
+  gap: 4px;
+}
+
+.ig-window .ig-card .ig-card-name {
+  font-size: 10px;
+}
+
+.ig-passed {
+  margin-top: -4px;
+}
+
+.ig-responses {
+  display: grid;
+  gap: 8px;
+}
+
+.ig-lie {
+  min-height: 68px;
+  border: 0;
+  background: var(--red);
+  color: #1a0505;
+  font-size: 28px;
+  font-weight: 800;
+  font-style: italic;
+  box-shadow: 0 0 32px rgb(246 100 100 / 0.35);
+}
+
+.ig-lie:hover {
+  box-shadow: 0 0 48px rgb(246 100 100 / 0.55);
+}
+
+.ig-block {
+  gap: 10px;
+  border-color: color-mix(in srgb, var(--c) 60%, transparent);
+  color: var(--c);
+}
+
+/* ---------- Kart seçiciler ---------- */
+.ig-pick {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+
+.ig-cardbtn {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ig-cardbtn .ig-card {
+  transition:
+    transform 140ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 140ms;
+}
+
+.ig-cardbtn:hover .ig-card {
+  transform: translateY(-3px);
+}
+
+.ig-cardbtn[aria-pressed='true'] .ig-card {
+  transform: translateY(-8px);
+  box-shadow:
+    0 0 0 2px var(--accent),
+    var(--accent-glow);
+}
+
+.ig-panel-alert .ig-cardbtn[aria-pressed='true'] .ig-card {
+  box-shadow:
+    0 0 0 2px var(--red),
+    0 0 28px rgb(246 100 100 / 0.4);
+}
+
+/* ---------- Oda sahibi ---------- */
+.ig-host {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 1px dashed var(--line-2);
+  border-radius: var(--r-md);
+  text-align: center;
+}
+
+/* ---------- El ---------- */
+.ig-hand {
+  display: grid;
+  gap: 12px;
+}
+
+.ig-hand-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ig-hand-cards li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: var(--r-md);
+  background: var(--panel);
+}
+
+.ig-hand-ability {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+@media (max-width: 420px) {
+  .ig-hand-cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- İtiraz sonucu ---------- */
+.ig-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgb(3 7 4 / 0.86);
+  backdrop-filter: blur(6px);
+  animation: ig-fade 160ms ease-out both;
+}
+
+.ig-overlay-body {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.ig-overlay-title {
+  font-size: clamp(24px, 7vw, 32px);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.15;
+}
+
+.ig-overlay-body:not([data-had]) .ig-overlay-title {
+  color: var(--red);
+}
+
+.ig-flip {
+  display: block;
+  perspective: 600px;
+}
+
+.ig-flip .ig-card {
+  animation: ig-flip 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* ---------- Günlük ---------- */
+.ig-log {
+  display: grid;
+  gap: 10px;
+}
+
+.ig-log-list {
+  display: grid;
+  gap: 7px;
+  max-height: 520px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+.ig-log-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.ig-log-list li .ig-glyph {
+  flex: none;
+  margin-top: 2px;
+}
+
+.ig-log-list li:first-child {
+  color: var(--text);
+}
+
+.ig-log-list li[data-t='challenge'] {
+  font-weight: 600;
+}
+
+.ig-log-list li[data-t='challenge'][data-ok='false'],
+.ig-log-list li[data-t='out'] {
+  color: var(--red);
+}
+
+.ig-log-list li[data-t='lose'] .ig-glyph {
+  opacity: 0.6;
+}
+
+.ig-log-list li[data-t='start'] {
+  color: var(--text-3);
+}
+
+@media (max-width: 1099px) {
+  .ig-log-list {
+    max-height: 260px;
+  }
+}
+
+/* ---------- Rol tablosu ---------- */
+.ig-roles {
+  display: grid;
+  gap: 10px;
+}
+
+.ig-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.ig-table th,
+.ig-table td {
+  padding: 8px 6px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.ig-table thead th {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.ig-table td {
+  color: var(--text-2);
+}
+
+.ig-table-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--c);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ig-roles[data-compact] .ig-table {
+  font-size: 11.5px;
+}
+
+.ig-howto-sub {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ig-legend {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.ig-legend-row {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 10px;
+  font-size: 13px;
+}
+
+.ig-legend-row dt {
+  font-weight: 700;
+}
+
+.ig-legend-row dd {
+  margin: 0;
+  color: var(--text-2);
+}
+
+/* ---------- Ayarlar ---------- */
+.ig-deckinfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ig-deckinfo-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+}
+
+/* ---------- Podyum ---------- */
+.ig-podium-list {
+  display: grid;
+  gap: 10px;
+}
+
+.ig-podium-cards {
+  display: flex;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.ig-podium-cards + .sg-score-pts {
+  margin-left: 8px;
+}
+
+/* ---------- Hareket ---------- */
+@keyframes ig-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+
+@keyframes ig-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ig-flip {
+  from {
+    transform: rotateY(90deg);
+  }
+}
+
+@keyframes ig-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-window,
+  .ig-overlay,
+  .ig-flip .ig-card,
+  .ig-say[data-say='deciding'] {
+    animation: none;
+  }
+}

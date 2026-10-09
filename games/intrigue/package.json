@@ -1,0 +1,32 @@
+{
+  "name": "@songie/intrigue",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./shared": "./shared/index.ts",
+    "./server": "./server/index.ts",
+    "./client": "./client/index.ts"
+  },
+  "dependencies": {
+    "@songie/shared": "workspace:*",
+    "@songie/game-kit": "workspace:*",
+    "zod": "^3.23.8"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "fastify": "^5.1.0",
+    "better-sqlite3": "^11.7.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "fastify": {
+      "optional": true
+    },
+    "better-sqlite3": {
+      "optional": true
+    }
+  }
+}

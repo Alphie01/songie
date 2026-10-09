@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
 import { Shell } from './components/Shell';
+import { GuideProvider } from './lib/guide';
 import { SessionProvider, useSession } from './lib/session';
 import { Home } from './pages/Home';
 import { ProfilePage } from './pages/Profile';
@@ -14,14 +15,16 @@ function Routed() {
         // Davet linkiyle gelen önce adını yazar, sonra aynı adreste odaya girer.
         <Welcome />
       ) : (
-        <Shell>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/r/:code" element={<RoomPage />} />
-            <Route path="/profil" element={<ProfilePage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Shell>
+        <GuideProvider>
+          <Shell>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/r/:code" element={<RoomPage />} />
+              <Route path="/profil" element={<ProfilePage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Shell>
+        </GuideProvider>
       )}
       {notice && (
         <div className="toast" role="status">

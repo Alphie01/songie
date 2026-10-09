@@ -6,6 +6,7 @@ import { MAX_ROOM_PLAYERS, type RoomState } from '@songie/shared';
 import { findGame } from '../games';
 import { tr } from '../i18n/tr';
 import { gameApi } from '../lib/api';
+import { useGuide } from '../lib/guide';
 import { useSession } from '../lib/session';
 import './room.css';
 
@@ -48,6 +49,12 @@ export function RoomPage() {
   }, [room, upper, navigate]);
 
   const mod = useGameModule(room?.code === upper ? room.gameId : undefined);
+  const { showGuideOnce } = useGuide();
+  // Bu oyuna ilk kez giriliyorsa tanıtımı aç.
+  const gameId = room?.code === upper ? room.gameId : undefined;
+  useEffect(() => {
+    if (gameId) showGuideOnce(gameId);
+  }, [gameId, showGuideOnce]);
 
   if (joinError) {
     return (
@@ -81,6 +88,7 @@ export function RoomPage() {
 
 function Playing({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
   const { gameView: payload, profile, emit, connection, notify } = useSession();
+  const { openGuide } = useGuide();
   // Yalnızca bu odanın ve bu oyunun görünümü kullanılır (önceki odadan kalan görünüm değil).
   const gameView = payload && payload.room === room.code && payload.game === room.gameId ? payload.view : null;
   const isHost = room.hostId === profile!.id;
@@ -114,6 +122,18 @@ function Playing({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
           </p>
         </main>
       )}
+      {findGame(room.gameId)?.guide && (
+        <button
+          type="button"
+          className="guide-fab"
+          data-solo={room.players.length <= 1 || undefined}
+          aria-label={tr.guide.open}
+          title={tr.guide.open}
+          onClick={() => openGuide(room.gameId)}
+        >
+          ?
+        </button>
+      )}
       {room.players.length > 1 && <ChatDock room={room} />}
       {isHost && (
         <footer className="playing-footer">
@@ -135,6 +155,7 @@ function Playing({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
 
 function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
   const { profile, emit, notify } = useSession();
+  const { openGuide } = useGuide();
   const navigate = useNavigate();
   const me = profile!;
   const isHost = room.hostId === me.id;
@@ -210,6 +231,11 @@ function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
             <Icon name="copy" size={16} />
             {tr.room.copyLink}
           </button>
+          {game.guide && (
+            <button type="button" className="btn btn-ghost lobby-guide" onClick={() => openGuide(game.id)}>
+              {tr.guide.open}
+            </button>
+          )}
         </section>
 
         {room.lastStandings && room.lastStandings.length > 0 && (

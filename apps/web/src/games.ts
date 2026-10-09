@@ -1,6 +1,9 @@
 import type { ClientGame } from '@songie/game-kit/client';
 import { songGuessClient } from '@songie/song-guess/client';
 import { tabooClient } from '@songie/taboo/client';
+import { werewolfClient } from '@songie/werewolf/client';
+import { intrigueClient } from '@songie/intrigue/client';
+import { colorCardsClient } from '@songie/color-cards/client';
 import { agentsClient } from '@songie/agents/client';
 import { frequencyClient } from '@songie/frequency/client';
 import { whoAmIClient } from '@songie/who-am-i/client';
@@ -19,6 +22,9 @@ import { redFlagClient } from '@songie/red-flag/client';
 export const GAMES: ClientGame[] = [
   songGuessClient,
   tabooClient,
+  werewolfClient,
+  intrigueClient,
+  colorCardsClient,
   neverClient,
   bottleClient,
   mostLikelyClient,

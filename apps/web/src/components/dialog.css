@@ -1,0 +1,370 @@
+.dlg-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgb(0 0 0 / 0.72);
+  animation: dlg-fade 160ms ease-out;
+}
+
+@keyframes dlg-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.dlg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(560px, 100%);
+  max-height: min(760px, calc(100dvh - 32px));
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  box-shadow: 0 30px 80px rgb(0 0 0 / 0.6);
+  outline: none;
+  animation: dlg-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes dlg-in {
+  from {
+    transform: translateY(10px) scale(0.98);
+    opacity: 0;
+  }
+}
+
+.dlg-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--text-2);
+}
+
+.dlg-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 24px 12px;
+}
+
+.dlg-foot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.dlg-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.dlg-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--panel-3);
+  transition: width 160ms, background 160ms;
+}
+
+.dlg-dots span[data-on] {
+  width: 18px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+}
+
+.dlg-count {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.dlg-nav {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+/* Rehber içeriği */
+.guide-cover {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.guide-icon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--r-lg);
+  background: var(--accent-soft-2);
+  color: var(--accent);
+  box-shadow: var(--accent-glow);
+}
+
+.guide-name {
+  font-size: 28px;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.guide-summary {
+  max-width: 42ch;
+  color: var(--text-2);
+}
+
+.guide-facts {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 0;
+}
+
+.guide-facts div {
+  padding: 8px 14px;
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+}
+
+.guide-facts dt {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.guide-facts dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.guide-toc {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+
+.guide-toc button {
+  width: 100%;
+  padding: 10px 12px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: transparent;
+  color: var(--text-2);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.guide-toc button:hover {
+  background: var(--panel-2);
+  color: var(--text);
+}
+
+.guide-toc .mono {
+  margin-right: 8px;
+  font-size: 12px;
+  color: var(--accent-hi);
+}
+
+.guide-page {
+  display: grid;
+  gap: 12px;
+}
+
+.guide-kicker {
+  font-size: 12px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--accent-hi);
+}
+
+.guide-title {
+  padding-right: 32px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.guide-p {
+  color: var(--text-2);
+  font-size: 14.5px;
+}
+
+.guide-items {
+  display: grid;
+  gap: 6px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.guide-items li {
+  --c: var(--text-3);
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--c);
+  border-radius: var(--r-sm);
+  background: var(--panel-2);
+}
+
+.guide-items li[data-tone='green'] {
+  --c: var(--accent);
+}
+.guide-items li[data-tone='yellow'] {
+  --c: var(--yellow);
+}
+.guide-items li[data-tone='orange'] {
+  --c: var(--orange);
+}
+.guide-items li[data-tone='red'] {
+  --c: var(--red);
+}
+.guide-items li[data-tone='purple'] {
+  --c: var(--purple);
+}
+
+.guide-term {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.guide-text {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+.guide-tip {
+  padding: 10px 12px;
+  border-radius: var(--r-sm);
+  background: var(--accent-soft);
+  color: var(--accent-hi);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.tour-steps {
+  display: grid;
+  gap: 14px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour-steps li {
+  display: flex;
+  gap: 12px;
+}
+
+.tour-steps .mono {
+  padding-top: 2px;
+  font-size: 12px;
+  color: var(--accent-hi);
+}
+
+.tour-steps h3 {
+  font-size: 15px;
+}
+
+.tour-steps p {
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+
+.tour-games {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tour-games button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+  color: var(--text-3);
+  text-align: left;
+}
+
+.tour-games button:hover {
+  border-color: rgb(25 223 112 / 0.35);
+}
+
+.tour-game-text {
+  display: grid;
+  flex: 1;
+  min-width: 0;
+}
+
+.tour-game-name {
+  font-size: 15px;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--text);
+}
+
+.tour-game-sum {
+  font-size: 12.5px;
+  color: var(--text-2);
+}
+
+.tour-game-meta {
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* "Nasıl oynanır?" yuvarlak butonu (oyun sırasında sağ üstte, sohbetin yanında) */
+.guide-fab {
+  position: fixed;
+  top: 16px;
+  right: 66px;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--text);
+  font-weight: 800;
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.45);
+}
+
+.guide-fab[data-solo] {
+  right: 16px;
+}
+
+@media (max-width: 520px) {
+  .dlg-scrim {
+    align-items: end;
+    padding: 0;
+  }
+
+  .dlg {
+    width: 100%;
+    max-height: 92dvh;
+    border-radius: var(--r-lg) var(--r-lg) 0 0;
+  }
+}

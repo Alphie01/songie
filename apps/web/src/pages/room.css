@@ -315,3 +315,7 @@
   font-weight: 700;
   line-height: 20px;
 }
+
+.lobby-guide {
+  justify-self: center;
+}
