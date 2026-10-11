@@ -1,0 +1,40 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Komiser Selma Akdoğan": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "ramazan": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "#Elif Durmaz": {
+      "voice_id": "xsGHrtxT5AdDzYXTQT0d",
+      "name": "Gönül Filiz - Airy and Soft"
+    },
+    "baris": {
+      "voice_id": "Q5n6GDIjpN0pLOlycRFT",
+      "name": "Yunus - Charismatic Turkish Male"
+    }
+  },
+  "tags": {
+    "yavaş, hatırlamaya çalışarak": "slow, trying to recall",
+    "gözünü kaçırarak, alçak sesle": "avoiding eye contact, low voice",
+    "duraksayarak": "hesitant, pause",
+    "biraz gücenmiş": "slightly offended",
+    "yorgun, neredeyse yalvarır gibi": "tired, almost pleading",
+    "çekinerek": "hesitant, shy",
+    "net": "clear, firm",
+    "düşünerek, yavaş": "thoughtful, slow",
+    "alçak sesle": "low voice",
+    "hızlı, rahat görünmeye çalışarak": "fast, trying to sound casual",
+    "bir an durup, sonra hızla": "brief pause, then fast",
+    "kelimeleri tek tek, fazla vurgulu": "each word stressed",
+    "yutkunarak, sesi alçalarak": "swallowing, voice lowering",
+    "zoraki bir gülüşle": "forced laugh"
+  }
+}

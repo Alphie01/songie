@@ -1,0 +1,56 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı karşılayıcı": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "tarik": {
+      "voice_id": "Vbx8qgYYdsXg0blBt1S8",
+      "name": "Mustafa Erkek - Charismatic Male Voice"
+    },
+    "leyla": {
+      "voice_id": "xFsOR54lR471QiCvQ5re",
+      "name": "İlknur Önal - Clear, Warm and Young"
+    },
+    "mujgan": {
+      "voice_id": "xbDrc2x8CZgoKHbSCuRg",
+      "name": "Nursel - Natural and Calm"
+    },
+    "bora": {
+      "voice_id": "z2ObNnp0E5ZGeTlSXkX0",
+      "name": "Mert Aksoy"
+    },
+    "kerem": {
+      "voice_id": "D1U9fDt671vz7Bpo0FQM",
+      "name": "Kerem - Young and Deep"
+    },
+    "#Selin Aksoy (Aldbury & Finch)": {
+      "voice_id": "gyxPK6bLXQAkBSCeAKvk",
+      "name": "Sultan - Theatrical, Narrator"
+    }
+  },
+  "tags": {
+    "nefes nefese ama kendini toplamaya çalışarak": "breathless, trying to compose",
+    "duraksayarak": "hesitant, pause",
+    "zorlanarak": "struggling, strained",
+    "uzaktan, titreyen bir sesle": "distant, trembling voice",
+    "arka planda, ağlayarak": "background, crying",
+    "kendi kendine konuşur gibi": "muttering, self talking",
+    "sesini yükselterek, odadakilere": "raising voice, to others",
+    "motor sesine karşı bağırarak": "shouting, over engine noise",
+    "dişleri birbirine vurarak, hızlı": "teeth chattering, fast",
+    "gülerek": "laughing",
+    "sesini alçaltarak": "lowering voice, quiet",
+    "aceleyle": "hurried, fast",
+    "alçak sesle, hızlı": "quiet, fast",
+    "şaşkın": "surprised",
+    "kendini toparlayarak": "composed, steady",
+    "sabırsız": "impatient",
+    "yorgun, rahatlamış": "tired, relaxed",
+    "kısa bir duraksamadan sonra": "brief pause, then"
+  }
+}
