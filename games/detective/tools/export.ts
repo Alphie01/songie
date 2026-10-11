@@ -101,7 +101,7 @@ c.acts.forEach((a, i) => {
   prevLeads = now;
   part.push(`\n### Bu bölümde açılabilen izler ve getirdikleri`);
   for (const l of fresh) {
-    part.push(`\n#### İz [${l.id}] ${l.title} (${l.hours} sa)\n${l.description}\nSonuç: ${l.outcome}\nYeni izler: ${l.leadsTo.join(', ') || '—'}\n`);
+    part.push(`\n#### İz [${l.id}] ${l.title} (${l.hours} sa)${l.from.length ? ` — şu belge okununca görünür: ${l.from.join(' / ')}` : ''}${l.minAct ? ` — en erken ${l.minAct}. bölümde` : ''}\n${l.description}\nSonuç: ${l.outcome}\nYeni izler: ${l.leadsTo.join(', ') || '—'}\n`);
     for (const id of l.unlocks) part.push(evText(evById.get(id)!));
   }
   // Bu bölümde açılabilen sorgular
