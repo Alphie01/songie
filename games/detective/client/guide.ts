@@ -15,7 +15,7 @@ export const guide: GameGuide = {
     {
       title: 'İzler ve saat bütçesi',
       body:
-        'Sağ sütunda açılabilir izler durur: "Kapıcıyla yeniden görüş", "Banka kayıtlarını iste" gibi. Her izin bir saat maliyeti vardır ve vakanın toplam bir saat bütçesi bulunur. Bütçe dolunca yeni iz açılamaz.\n\nOylama modunda biri bir iz önerir, gereken evet sayısına ulaşınca iz açılır. Aynı anda tek öneri olur; öneren ya da oda sahibi geri çekebilir. Oda sahibi modunda herkes önerir ama izi oda sahibi açar. Oda sahibi her iki modda da izi doğrudan açabilir.',
+        'Sağ sütunda açılabilir izler durur: "Kapıcıyla yeniden görüş", "Banka kayıtlarını iste" gibi. Her izin bir saat maliyeti vardır ve vakanın bir saat bütçesi bulunur. Bütçe aşılabilir; oyun sizi durdurmaz, ama aşılan her 2 saat sonuçtan 1 puan düşer (en fazla 10).\n\nOylama modunda biri bir iz önerir, gereken evet sayısına ulaşınca iz açılır. Aynı anda tek öneri olur; öneren ya da oda sahibi geri çekebilir. Oda sahibi modunda herkes önerir ama izi oda sahibi açar. Oda sahibi her iki modda da izi doğrudan açabilir.',
       tip: 'Her iz yeni belge getirmez ama her saat puandan yer. Önce elinizdeki belgeleri iyice okuyun.',
     },
     {

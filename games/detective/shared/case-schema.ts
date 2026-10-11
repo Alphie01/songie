@@ -342,6 +342,11 @@ export const leadSchema = z.object({
   minAct: z.number().int().min(1).max(5).optional(),
   /** Bu iz açılınca başlayan sorgular (interviews). */
   interviews: z.array(id).default([]),
+  /**
+   * İzi doğuran belgeler: bunlardan biri dosyadayken biri belgeyi OKUYUNCA iz keşfedilir
+   * ("İfadede adı geçen bahçıvanı bul" ← kâhyanın ifadesi). Oyuncu bilmediği bir şeyi açmasın.
+   */
+  from: z.array(id).default([]),
 });
 
 /** Sorguda bir cevabın sonuçları (soru ya da belge gösterme). */

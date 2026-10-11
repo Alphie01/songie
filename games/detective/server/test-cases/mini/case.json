@@ -804,6 +804,18 @@
       ],
       "leadsTo": [],
       "outcome": "Otopark fişi verildi."
+    },
+    {
+      "id": "l-noter",
+      "title": "Noteri ara",
+      "description": "E-postada adı geçen noterle konuşun.",
+      "hours": 1,
+      "unlocks": [],
+      "leadsTo": [],
+      "outcome": "Noter randevuyu doğruladı.",
+      "from": [
+        "e-email"
+      ]
     }
   ],
   "acts": [

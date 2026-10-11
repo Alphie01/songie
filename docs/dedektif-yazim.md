@@ -74,6 +74,13 @@ Hedef: 3–6 arkadaşın 45–90 dakikada, birlikte, gerçekten düşünerek ç�
   - `truth.story` 250–500 kelime.
 
 ## İzler (lead) nasıl yazılır
+
+### İzler belgelerden doğar (`from`)
+Oyuncu bilmediği bir şeyi açmamalı. İz, onu anlamlı kılan belge biri tarafından okununca listeye düşer. Örnek: kâhyanın ifadesi okununca "İfadede adı geçen bahçıvanı bul" izi açılır.
+- Bölüm başında yalnızca 2–3 genel iz açık olsun (olay yeri, otopsi, ilk ifadeler gibi).
+- Diğer bütün izlerde `from` dolu olsun. Ya belgenin içinde geçen bir ad, yer, saat ya da nesneye bağlansın ya da `leadsTo` ile önceki bir izden, `leadsTo` ile bir sorgu cevabından gelsin.
+- İz başlığı ve açıklaması kaynağı ima etsin: "HTS'de 22:05'te aranan numaranın sahibini bul".
+
 - İz bir **eylem** olarak yazılır: "Yalının bahçıvanını bul", "Kurbanın son altı aylık banka hareketlerini iste", "Otel resepsiyonundaki kamera kaydını incele".
 - `description` neden mantıklı olduğunu söyler, sonucu söylemez.
 - Bir iz 1–3 belge açar. Bazı izler başka izleri açar (`leadsTo`). Bir dal 3–4 iz derinliğe inebilir.

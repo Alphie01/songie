@@ -4,6 +4,8 @@ import {
   GAME_ID,
   HINTS_PER_ACT,
   HINT_PENALTY,
+  OVERTIME_MAX,
+  OVERTIME_STEP,
   MAX_PLAYERS,
   MAX_TIME_BONUS,
   MIN_PLAYERS,
@@ -53,6 +55,10 @@ export interface Saved {
   hintsUsed: { act: number; index: number }[];
   /** Açılmış sorgular ve açıldıkları bölüm. */
   interviewsOpen: { id: string; act: number }[];
+  /** En az bir oyuncunun açıp okuduğu belgeler (belgeden doğan izler için). */
+  read: string[];
+  /** İzin keşfine yol açan belge (iz kimliği → kanıt kimliği). */
+  leadFrom: Record<string, string>;
   /** Sorgu tutanağı: q:<soru> | c:<belge> (tepki) | d:<belge> (kaçamak). */
   asked: { iv: string; key: string; by: string; at: number }[];
   sceneReady: string[];
@@ -108,6 +114,8 @@ function fresh(slug: string): Saved {
     pins: [],
     hintsUsed: [],
     interviewsOpen: [],
+    read: [],
+    leadFrom: {},
     asked: [],
     sceneReady: [],
     answers: {},
@@ -252,16 +260,13 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
     if (byLeads || byHours || stuck) enterAct(ctx, st, st.actIndex + 1);
   }
 
-  /** Bütçe bitti ya da açılabilecek iz kalmadıysa dosya 1. bölümde de kapanabilir. */
+  /** 2. bölümden itibaren; 1. bölümde ancak açılabilecek iz kalmadıysa ya da bütçe aşıldıysa. */
   function canClose(st: DetectiveState): boolean {
-    if (st.actIndex >= 1) return true;
-    const left = hoursLeft(st);
-    return available(st).every((id) => leadOf(st, id).hours > left);
+    return st.actIndex >= 1 || available(st).length === 0 || hoursLeft(st) <= 0;
   }
 
   function openLead(ctx: GameContext, st: DetectiveState, lead: Lead, by: string | null) {
     if (isOpened(st, lead.id)) return;
-    if (lead.hours > hoursLeft(st)) throw new GameError('Bu iz için yeterli soruşturma saati kalmadı. Başka bir iz seçin ya da dosyayı kapatın.');
     st.hoursSpent += lead.hours;
     // Önceki bölümlerden kalan izler bölüm saatini doldurmaz (bölümü ucuzca atlamasınlar).
     if ((st.discoveredAct[lead.id] ?? st.actIndex) >= st.actIndex) st.actHours += lead.hours;
@@ -374,7 +379,10 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
     const earned = questions.reduce((s, q) => s + q.points, 0);
     const bonus = solved ? Math.min(MAX_TIME_BONUS, Math.max(0, c.meta.targetHours - st.hoursSpent) * TIME_BONUS_PER_HOUR) : 0;
     const penalty = st.hintsUsed.length * HINT_PENALTY;
-    const score = Math.max(0, earned + bonus - penalty);
+    // Rekabet değil, çözmek önemli: bütçe aşımı hafif ve orantılı ceza.
+    const over = Math.max(0, st.hoursSpent - c.meta.hoursBudget);
+    const overtime = Math.min(OVERTIME_MAX, Math.floor(over / OVERTIME_STEP));
+    const score = Math.max(0, earned + bonus - penalty - overtime);
     const ratio = total ? score / total : 0;
     const rank = !solved ? 'Stajyer' : ratio >= 0.85 ? 'Başkomiser' : ratio >= 0.65 ? 'Komiser' : ratio >= 0.45 ? 'Komiser Yardımcısı' : 'Stajyer';
     const evTitle = (id: string) => c.evidence.find((e) => e.id === id)?.title ?? id;
@@ -388,6 +396,7 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
         { label: 'Doğru cevaplar', points: earned },
         { label: 'Süre bonusu', points: bonus },
         { label: 'İpucu cezası', points: -penalty },
+        ...(overtime ? [{ label: `Bütçe aşımı (${over} sa)`, points: -overtime }] : []),
       ],
       questions,
       individual: Object.entries(st.answers).map(([playerId, ans]) => ({
@@ -519,6 +528,17 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
         case 'doc': {
           const ev = c.evidence.find((e) => e.id === action.evidenceId);
           if (!ev || !isUnlocked(st, ev.id)) throw new GameError('Bu belge henüz dosyada değil.');
+          // Belgeyi ilk okuyan, belgeden doğan izleri herkes için açar.
+          if (!st.read.includes(ev.id)) {
+            st.read.push(ev.id);
+            const born = c.leads.filter((l) => l.from.includes(ev.id) && !st.discovered.includes(l.id));
+            if (born.length) {
+              discover(st, born.map((l) => l.id));
+              for (const l of born) st.leadFrom[l.id] = ev.id;
+              log(ctx, st, `${nick(ctx, pid)} "${ev.title}" belgesini okudu: ${born.length} yeni iz.`);
+            }
+            commit(ctx, st);
+          }
           const res: DocResponse = {
             doc: ev.doc,
             title: ev.title,
@@ -533,7 +553,6 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
           requirePhase(st, 'investigate');
           const lead = leadOf(st, action.leadId);
           if (!available(st).includes(lead.id)) throw new GameError('Bu iz şu an açılabilir değil.');
-          if (lead.hours > hoursLeft(st)) throw new GameError('Bu iz için yeterli soruşturma saati kalmadı.');
           if (st.proposal) throw new GameError('Önce oylamadaki öneri sonuçlansın.');
           if (st.settings.leadMode === 'host' && isHost(ctx, pid)) {
             openLead(ctx, st, lead, pid);
@@ -885,7 +904,8 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
           .sort((a, b) => a.at.localeCompare(b.at)),
         leads: available(st).map((id) => {
           const l = c.leads.find((x) => x.id === id)!;
-          return { id: l.id, title: l.title, description: l.description, hours: l.hours };
+          const from = st.leadFrom[id];
+          return { id: l.id, title: l.title, description: l.description, hours: l.hours, from: from ? { id: from, title: evById.get(from)?.title ?? from } : null };
         }),
         opened: st.opened.map((o) => {
           const l = c.leads.find((x) => x.id === o.id)!;

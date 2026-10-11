@@ -78,7 +78,11 @@ export class CaseLibrary {
     log: (m: string) => void = (m) => console.warn(m),
   ) {
     if (!fs.existsSync(dir)) return;
+    // published.json varsa yalnızca listedeki vakalar yüklenir (yazımı süren vakalar yayına girmesin).
+    const listFile = path.join(dir, 'published.json');
+    const published = fs.existsSync(listFile) ? new Set(JSON.parse(fs.readFileSync(listFile, 'utf8')) as string[]) : null;
     for (const name of fs.readdirSync(dir).sort()) {
+      if (published && !published.has(name)) continue;
       const caseDir = path.join(dir, name);
       if (!fs.existsSync(path.join(caseDir, 'case.json'))) continue;
       try {

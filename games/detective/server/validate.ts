@@ -22,8 +22,10 @@ export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>
     act.interviews.forEach((i) => interviews.add(i));
     queue.push(...act.leads);
   }
-  for (let changed = true; changed; ) {
-    changed = false;
+  // Sabit noktaya kadar: bir turda küme büyümediyse dur (minAct yüzünden açılamayan izler döngü yaratmasın).
+  const size = () => evidence.size + leads.size + interviews.size;
+  for (let before = -1; before !== size(); ) {
+    before = size();
     while (queue.length) {
       const id = queue.shift()!;
       if (leads.has(id)) continue;
@@ -31,10 +33,13 @@ export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>
       if (!lead) continue;
       if (lead.minAct && lead.minAct - 1 > uptoAct) continue;
       leads.add(id);
-      changed = true;
       lead.unlocks.forEach((e) => evidence.add(e));
       lead.interviews.forEach((i) => interviews.add(i));
       queue.push(...lead.leadsTo);
+    }
+    // Belgeden doğan izler
+    for (const l of c.leads) {
+      if (!leads.has(l.id) && l.from.some((e) => evidence.has(e))) queue.push(l.id);
     }
     for (const ivId of interviews) {
       const iv = ivById.get(ivId);
@@ -44,8 +49,8 @@ export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>
         ...iv.confront.filter((x) => evidence.has(x.evidence)),
       ];
       for (const o of outcomes) {
-        for (const e of o.unlocks) if (!evidence.has(e)) (evidence.add(e), (changed = true));
-        for (const l of o.leadsTo) if (!leads.has(l)) (queue.push(l), (changed = true));
+        for (const e of o.unlocks) evidence.add(e);
+        for (const l of o.leadsTo) if (!leads.has(l)) queue.push(l);
       }
     }
   }
@@ -182,6 +187,7 @@ export function checkCase(c: CaseFile, imageExists?: (key: string) => boolean): 
   for (const l of c.leads) {
     l.unlocks.forEach((e) => need(evs, e, 'kanıt', `iz ${l.id} unlocks`));
     l.leadsTo.forEach((x) => need(leads, x, 'iz', `iz ${l.id} leadsTo`));
+    l.from.forEach((e) => need(evs, e, 'kanıt', `iz ${l.id} from`));
     if (l.unlocks.length === 0 && l.interviews.length === 0) warn(`İz ${l.id} hiçbir belge ya da sorgu açmıyor.`);
   }
 

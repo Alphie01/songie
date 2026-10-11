@@ -3172,7 +3172,7 @@ button.dt-tl-item:hover {
 }
 
 .dt-lead[data-off] {
-  opacity: 0.6;
+  border-style: dashed;
 }
 
 .dt-lead-top {
@@ -5249,4 +5249,34 @@ button.dt-tl-item:hover {
 
 @media (prefers-reduced-motion: reduce) {
   .dt-entry-stamp { animation: none; }
+}
+
+/* Bütçe aşımı: izler açılmaya devam eder, aşım kırmızı görünür */
+.dt-hours-over {
+  margin-left: 10px;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: rgb(246 100 100 / 0.12);
+  color: var(--red);
+  font-size: 13px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.dt-hours-bar span[data-over][data-on] {
+  background: var(--red);
+}
+
+/* İzi doğuran belge */
+.dt-lead-from {
+  justify-self: start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-hi);
+  font-size: 12px;
+  text-align: left;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
 }

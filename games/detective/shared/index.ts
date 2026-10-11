@@ -11,6 +11,9 @@ export const NOTEBOOK_MAX = 8000;
 export const NOTE_MAX = 400;
 export const HINTS_PER_ACT = 2;
 export const HINT_PENALTY = 5;
+/** Bütçe aşılabilir; aşılan her OVERTIME_STEP saat için 1 puan, en fazla OVERTIME_MAX. */
+export const OVERTIME_STEP = 2;
+export const OVERTIME_MAX = 10;
 export const MAX_TIME_BONUS = 20;
 export const TIME_BONUS_PER_HOUR = 2;
 
@@ -167,6 +170,8 @@ export interface LeadView {
   title: string;
   description: string;
   hours: number;
+  /** İzi doğuran belge (belge okununca keşfedildiyse). */
+  from?: { id: string; title: string } | null;
 }
 
 export interface OpenedLeadView extends LeadView {

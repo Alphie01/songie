@@ -127,6 +127,18 @@ describe('dedektif: sahne ve izler', () => {
     expect(h.view('ali').hours.actSpent).toBe(3);
   });
 
+  it('belgeden doğan iz, belge okununca herkes için açılır', async () => {
+    const { h } = await investigating();
+    await h.act('ali', { type: 'open', leadId: 'l-camera' });
+    await h.act('ali', { type: 'continue' });
+    await h.act('ali', { type: 'open', leadId: 'l-email' });
+    expect(h.view('cem').leads.map((l) => l.id)).not.toContain('l-noter');
+    await h.act('ayse', { type: 'doc', evidenceId: 'e-email' });
+    const lead = h.view('cem').leads.find((l) => l.id === 'l-noter');
+    expect(lead).toMatchObject({ from: { id: 'e-email', title: 'Noterle yazışma' } });
+    expect(h.view('cem').log.at(-1)!.text).toContain('1 yeni iz');
+  });
+
   it('önceki bölümden kalan izler bölüm saatini doldurmaz', async () => {
     const { h } = await investigating(['ali']);
     await h.act('ali', { type: 'open', leadId: 'l-camera' });
@@ -149,19 +161,23 @@ describe('dedektif: sahne ve izler', () => {
     expect(h.view('ali').hours.spent).toBe(3);
   });
 
-  it('saat bütçesi aşılamaz', async () => {
+  it('saat bütçesi aşılabilir; aşım orantılı ve hafif puan cezası getirir', async () => {
     const { h } = await investigating(['ali']);
     for (const id of ['l-leyla', 'l-sevim', 'l-camera']) await h.act('ali', { type: 'open', leadId: id });
     await h.act('ali', { type: 'continue' });
-    for (const id of ['l-kerem-phone']) await h.act('ali', { type: 'open', leadId: id });
+    await h.act('ali', { type: 'open', leadId: 'l-kerem-phone' });
     await h.act('ali', { type: 'continue' });
-    await h.act('ali', { type: 'open', leadId: 'l-email' });
-    // 2+1+2+2+2 = 9; kalan 3: l-kerem-msg (3) açılır, sonra l-wallet (1) açılamaz
-    await h.act('ali', { type: 'open', leadId: 'l-kerem-msg' });
-    expect(h.view('ali').hours.spent).toBe(12);
-    const res = await h.act('ali', { type: 'open', leadId: 'l-wallet' });
-    expect(res).toMatchObject({ ok: false });
-    if (!res.ok) expect(res.error).toContain('saat');
+    for (const id of ['l-email', 'l-kerem-msg', 'l-wallet']) {
+      expect(await h.act('ali', { type: 'open', leadId: id })).toMatchObject({ ok: true });
+    }
+    // 2+1+2+2+2+3+1 = 13 saat; bütçe 12 → 1 saat aşım (2 saatte 1 puan → ceza yok)
+    expect(h.view('ali').hours).toMatchObject({ spent: 13, budget: 12 });
+    await h.act('ali', { type: 'close' });
+    await h.act('ali', { type: 'answer', answers: { who: 'kerem', how: 'poison', why: 'debt', proof: 'e-cam' } });
+    await h.act('ali', { type: 'submit' });
+    const res = h.view('ali').result!;
+    expect(res.breakdown.find((b) => b.label.startsWith('Bütçe'))).toBeUndefined();
+    expect(res.score).toBe(100);
   });
 });
 

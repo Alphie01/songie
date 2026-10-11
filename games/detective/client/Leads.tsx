@@ -24,6 +24,8 @@ function Hours() {
   const { view } = useDesk();
   const { spent, budget, target, actSpent, actLimit } = view.hours;
   const out = spent >= budget;
+  const over = Math.max(0, spent - budget);
+  const cells = Math.max(budget, spent);
   return (
     <section className="dt-hours" aria-labelledby="dt-hours-t" data-out={out || undefined} data-over={spent > target || undefined}>
       <h2 id="dt-hours-t" className="dt-label">
@@ -32,10 +34,11 @@ function Hours() {
       <p className="dt-hours-big">
         <span className="dt-hours-n">{spent}</span>
         <span className="dt-hours-of">/ {budget} sa</span>
+        {over > 0 && <span className="dt-hours-over">{s.leads.overBy(over)}</span>}
       </p>
-      <div className="dt-hours-bar" role="meter" aria-valuemin={0} aria-valuemax={budget} aria-valuenow={spent} aria-label={s.leads.hoursOf(spent, budget)}>
-        {Array.from({ length: budget }, (_, i) => (
-          <span key={i} data-on={i < spent || undefined} data-target={i === target - 1 || undefined} />
+      <div className="dt-hours-bar" role="meter" aria-valuemin={0} aria-valuemax={cells} aria-valuenow={spent} aria-label={s.leads.hoursOf(spent, budget)}>
+        {Array.from({ length: cells }, (_, i) => (
+          <span key={i} data-on={i < spent || undefined} data-over={i >= budget || undefined} data-target={i === target - 1 || undefined} />
         ))}
       </div>
       <p className="dt-hours-note">{out ? s.leads.budgetOut : s.leads.target(target)}</p>
@@ -141,7 +144,7 @@ function Available() {
 }
 
 function LeadCard({ l }: { l: LeadView }) {
-  const { view, isHost, send } = useDesk();
+  const { view, isHost, send, openEvidence } = useDesk();
   const left = view.hours.budget - view.hours.spent;
   const tooMuch = l.hours > left;
   const busy = !!view.proposal;
@@ -156,9 +159,13 @@ function LeadCard({ l }: { l: LeadView }) {
         <span className="dt-cost">{s.leads.cost(l.hours)}</span>
       </div>
       <p className="dt-lead-desc">{l.description}</p>
-      {tooMuch ? (
-        <p className="dt-small dt-warn">{s.leads.tooExpensive}</p>
-      ) : (
+      {l.from && (
+        <button type="button" className="dt-lead-from" onClick={() => openEvidence(l.from!.id)}>
+          {s.leads.from(l.from.title)}
+        </button>
+      )}
+      {tooMuch && <p className="dt-small dt-warn">{s.leads.tooExpensive}</p>}
+      {(
         !proposed && (
           <div className="dt-lead-actions">
             {isHost && !voting ? (
