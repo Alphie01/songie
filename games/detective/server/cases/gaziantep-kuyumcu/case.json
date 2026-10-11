@@ -108,12 +108,12 @@
     },
     "cam-bakircilar": {
       "kind": "cctv",
-      "prompt": "High-angle wide security camera view at night of an arched stone bazaar gate with an iron door, exactly two men walking out, each carrying a heavy dark sports bag that pulls one shoulder down, low resolution, greenish street light, grainy",
+      "prompt": "High-angle wide security camera view at night of an arched stone bazaar gate with an iron door, exactly two men walking out side by side: on the left a heavy-set, big-bellied Turkish man in his mid fifties with thinning grey hair and a thick black-grey moustache, wearing a beige jacket; on the right a leaner middle-aged man in a dark jacket; each carrying a heavy dark sports bag that pulls one shoulder down, low resolution, greenish street light, grainy",
       "alt": "Gece, kemerli taş bir çarşı kapısı; yüksek açıdan, düşük çözünürlüklü. İki adam dışarı çıkıyor; her biri omzunu aşağı çeken ağır, koyu renk bir spor çantası taşıyor."
     },
     "cam-eczane-1": {
       "kind": "cctv",
-      "prompt": "High-angle wide security camera view at night looking across a narrow street at a tall arched wooden double door of an old stone inn, exactly one figure in dark clothes with a hood and a cap, two folded empty bags over the shoulder, unlocking the small wicket door, face not visible, low resolution, grainy",
+      "prompt": "High-angle wide security camera view at night looking across a narrow street at a tall arched wooden double door of an old stone inn, exactly one adult man of average height and slim build, clearly male, in dark clothes with a hood pulled up over a cap, broad masculine shoulders seen from behind and slightly from the side, two folded empty bags over the shoulder, unlocking the small wicket door, face not visible, low resolution, grainy",
       "alt": "Gece, dar bir sokağın karşısındaki eski bir hanın yüksek, kemerli ahşap kapısı. Tek bir kişi: koyu giysili, kapüşonlu ve şapkalı; omzunda katlanmış iki boş çanta. Kapının küçük kanadını açıyor; yüzü görünmüyor."
     },
     "cam-eczane-2": {
@@ -128,7 +128,7 @@
     },
     "cam-atolye": {
       "kind": "cctv",
-      "prompt": "High-angle security camera view inside a cramped jewellery workshop at night, exactly two men at a small induction melting furnace, one in a leather apron pouring glowing molten metal from a crucible into an ingot mould, the other heavy-set man holding a tray of scrap jewellery, low resolution, grainy",
+      "prompt": "High-angle security camera view inside a cramped jewellery workshop at night, exactly two men at a small induction melting furnace: one middle-aged man with dark hair in a leather apron pouring glowing molten metal from a crucible into an ingot mould; the other a heavy-set, big-bellied Turkish man in his mid fifties with thinning grey hair and a thick black-grey moustache, sleeves rolled up, holding a tray of scrap jewellery, low resolution, grainy",
       "alt": "Gece, dar bir kuyumcu atölyesi; yüksek açılı kamera. İki adam küçük bir indüksiyon ocağının başında. Deri önlüklü olan potadan kızgın erimiş metali külçe kalıbına döküyor; iri yapılı diğeri elinde hurda takılarla dolu bir tepsi tutuyor."
     },
     "cam-kgys": {

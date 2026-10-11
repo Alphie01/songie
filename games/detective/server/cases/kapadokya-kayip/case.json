@@ -72,8 +72,8 @@
     },
     "scene-1": {
       "kind": "scene",
-      "prompt": "Early morning in Goreme, a gendarmerie pickup and an old station wagon parked on a narrow cobbled street outside a small cave hotel, two uniformed gendarmes talking with a man at the arched door, balloons drifting low in the far sky, soft golden light, dust in the air",
-      "alt": "Sabah, Göreme’de dar bir sokak. Küçük bir mağara otelin kemerli kapısının önünde bir jandarma aracı; iki üniformalı jandarma kapıdaki bir adamla konuşuyor. Uzakta alçalan balonlar."
+      "prompt": "Early morning in Goreme, a gendarmerie pickup and an old station wagon parked on a narrow cobbled street outside a small cave hotel, at the arched door a uniformed Turkish female gendarmerie senior sergeant in her forties with dark hair tied back under her cap talks with the hotel owner, a sturdy heavy-set Turkish man in his early fifties with a receding hairline, salt-and-pepper hair and a thick grey moustache, wearing an olive green quilted vest over a checked flannel shirt, offering her a small tulip glass of tea, a second male gendarme stands a little behind, balloons drifting low in the far sky, soft golden light, dust in the air",
+      "alt": "Sabah, Göreme’de dar bir sokak. Küçük bir mağara otelin kemerli kapısının önünde bir jandarma aracı. Üniformalı bir kadın astsubay kapıda; kır bıyıklı, zeytin yeşili yelekli otel sahibi ona bir ince belli bardakta çay uzatıyor. Uzakta alçalan balonlar."
     },
     "scene-2": {
       "kind": "scene",
@@ -97,7 +97,7 @@
     },
     "img-bar": {
       "kind": "object",
-      "prompt": "Candid evening photo inside a cosy cave bar in Cappadocia, a young woman with very short dark hair and a man in a navy fleece leaning over a wooden table looking at an unfolded topographic map without readable text, two glasses of beer, warm string lights, the man pointing at a spot on the map",
+      "prompt": "Candid evening photo inside a cosy cave bar in Cappadocia, a young woman with very short dark hair and a sun-tanned man in his late thirties with short sandy light-brown hair, light stubble and aviator sunglasses pushed up on his head, wearing a navy fleece leaning over a wooden table looking at an unfolded topographic map without readable text, two glasses of beer, warm string lights, the man pointing at a spot on the map",
       "alt": "Akşam, sıcak ışıklı bir mağara barı. Çok kısa koyu saçlı genç bir kadınla lacivert polarlı bir adam, ahşap masada açılmış bir haritanın üstüne eğilmiş; adam haritada bir noktayı gösteriyor. Masada iki bira bardağı."
     },
     "img-istasyon": {
@@ -132,8 +132,8 @@
     },
     "tl-0850": {
       "kind": "cctv",
-      "prompt": "Grainy wide-angle time-lapse trail camera frame on a pale tuff ridge, a small grey instrument box in the lower foreground, a woman in a grey fleece kneeling beside the open box, a heavier-set man in a dark olive vest standing over her with one hand stretched toward a small grey shoulder bag she is holding, valley and fairy chimneys behind, morning light, low resolution",
-      "alt": "Grenli, geniş açılı bir zaman atlamalı kamera karesi. Ön planda küçük gri kutu; yanında gri polarlı bir kadın diz çökmüş. Başında koyu zeytin yeşili yelekli, iri yapılı bir adam ayakta; bir elini kadının tuttuğu küçük gri omuz çantasına uzatmış. Arkada vadi ve peri bacaları."
+      "prompt": "Grainy wide-angle time-lapse trail camera frame on a pale tuff ridge, a small grey instrument box in the lower foreground, a slim Turkish woman of 29 kneeling beside the open box, with very short cropped dark hair completely hidden under a snug grey knitted beanie, no hair visible on her neck or shoulders, wearing a grey technical fleece, holding a small light grey nylon shoulder bag; standing over her a sturdy heavy-set Turkish man in his early fifties with a receding hairline, short salt-and-pepper hair and a thick grey moustache, wearing an olive green quilted vest over a checked flannel shirt and dark trousers with work boots, one hand stretched toward the light grey shoulder bag she is holding, faces small and indistinct, valley and fairy chimneys behind, morning daylight, low resolution",
+      "alt": "Grenli, geniş açılı bir zaman atlamalı kamera karesi. Ön planda küçük gri kutu; yanında gri bereli, gri polarlı bir kadın diz çökmüş. Başında kareli gömleğin üstüne zeytin yeşili yelek giymiş, kır bıyıklı, iri yapılı bir adam ayakta; bir elini kadının tuttuğu küçük gri omuz çantasına uzatmış. Arkada vadi ve peri bacaları."
     }
   },
   "characters": [

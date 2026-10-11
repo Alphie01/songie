@@ -40,7 +40,7 @@
     },
     "scene-archive": {
       "kind": "scene",
-      "prompt": "Police evidence storage room with metal shelves, rows of charred and water-soaked cardboard archive boxes on a long table, blackened bundles of ledgers fused together, a fluorescent ceiling light, a lone investigator in a dark coat seen from behind looking at the boxes, cold blue-grey tones",
+      "prompt": "Police evidence storage room with metal shelves, rows of charred and water-soaked cardboard archive boxes on a long table, blackened bundles of ledgers fused together, a fluorescent ceiling light, a lone Turkish policewoman in her forties, clearly a woman, with dark hair tied in a low bun, wearing a dark coat, seen from behind looking at the boxes, cold blue-grey tones",
       "alt": "Metal raflı bir polis emanet odası. Uzun bir masada sıra sıra kömürleşmiş, ıslanmış karton koliler; birbirine yapışmış kararmış defter destesi. Floresan ışık. Koyu paltolu bir müfettiş arkadan, kolilere bakarken görülüyor."
     },
     "scene-hospital": {
@@ -112,7 +112,7 @@
     },
     "photo-dinner": {
       "kind": "document-photo",
-      "prompt": "Group photo at a long restaurant table in a traditional Turkish meat restaurant at night, exactly fourteen middle-aged men and two women seated and standing behind, plates of grilled meat and tea glasses, warm yellow light, everyone looking at the camera, casual celebratory mood, smartphone photo quality",
+      "prompt": "Group photo at a long restaurant table in a traditional Turkish meat restaurant at night, exactly sixteen people: nine seated at the table and seven standing in a row behind; among the sixteen exactly two women, both seated; the seven standing are all men; third from the left in the standing row is a slim Turkish man aged 47 with short neatly combed dark hair greying at the temples, clean-shaven, in a light blue shirt buttoned to the top; right next to him, fourth from the left, a stocky Turkish man aged 44 with short curly black hair and a thick black moustache in a navy zip-up fleece; the others middle-aged men, plates of grilled meat and tea glasses, warm yellow light, everyone looking at the camera, casual celebratory mood, smartphone photo quality",
       "alt": "Gece, geleneksel bir et lokantasında uzun bir masa. On dört orta yaşlı erkek ile iki kadın; kimi oturuyor, kimi arkada ayakta. Masada ızgara et tabakları ve çay bardakları. Sarı, sıcak ışık; herkes objektife bakıyor."
     },
     "photo-pitch": {

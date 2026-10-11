@@ -113,12 +113,12 @@
     },
     "ph-k2-a": {
       "kind": "cctv",
-      "prompt": "High-angle wide security camera still of a long university corridor at night, low resolution, greyish tint, a single figure seen from behind walking away from the camera toward a door on the left side, the figure wears a knee-length dark coat and a light-coloured scarf and holds two paper cups, one in each hand, several closed doors along both walls, a fire exit at the far end",
+      "prompt": "High-angle wide security camera still of a long university corridor at night, low resolution, greyish tint, a single figure, an elderly man in his early sixties with neat short white hair, broad-shouldered, seen from behind walking away from the camera toward a door on the left side, the figure wears a knee-length dark coat and a light-coloured scarf and holds two paper cups, one in each hand, several closed doors along both walls, a fire exit at the far end",
       "alt": "Güvenlik kamerası karesi, yüksek ve geniş açı, düşük çözünürlük. Gece, uzun bir koridor. Arkası dönük tek bir kişi soldaki bir kapıya yürüyor: koyu renk, uzun bir dış giyim; boynunda açık renk bir şey; iki elinde birer karton bardak. Yüz görünmüyor. Koridorun iki yanında kapalı kapılar, dipte yangın çıkışı."
     },
     "ph-k2-b": {
       "kind": "cctv",
-      "prompt": "High-angle wide security camera still of a long university corridor at night, low resolution, greyish tint, a figure has just stepped out of a door with a frosted glass panel on the left side and is turning toward a door on the opposite right side further down, wearing a knee-length dark coat and a light-coloured scarf, hands empty, face not visible, the frosted door panel glowing with office light",
+      "prompt": "High-angle wide security camera still of a long university corridor at night, low resolution, greyish tint, in the foreground on the left a door with a frosted glass panel stands half open with office light glowing through it, an elderly man in his early sixties with neat short white hair, broad-shouldered, is standing on the threshold of that door, half a step into the corridor, body turning toward a closed door on the opposite right wall, wearing a knee-length dark coat and a light-coloured scarf, hands empty, face not visible",
       "alt": "Güvenlik kamerası karesi, yüksek ve geniş açı, düşük çözünürlük. Gece, koridor. Bir kişi soldaki buzlu camlı bir kapıdan yeni çıkmış, koridorun ilerisinde karşı taraftaki bir kapıya dönüyor: koyu renk, uzun bir dış giyim; boynunda açık renk bir şey; elleri boş. Yüz görünmüyor. Buzlu cam panelden oda ışığı sızıyor."
     },
     "ph-gate-a": {
@@ -128,7 +128,7 @@
     },
     "ph-gate-b": {
       "kind": "cctv",
-      "prompt": "Wide security camera still of the inside of a faculty building lobby at night at the turnstiles, low resolution, a single person seen from the side holding a card to a turnstile reader, wearing a knee-length dark coat and a light-coloured scarf and carrying a leather briefcase, a security desk with a guard seated behind it in the background, face not clearly visible",
+      "prompt": "Wide security camera still of the inside of a faculty building lobby at night at the turnstiles, low resolution, a single person, an elderly man in his early sixties with neat short white hair, broad-shouldered, seen from the side holding a card to a turnstile reader, wearing a knee-length dark coat and a light-coloured scarf and carrying a leather briefcase, a security desk with a guard seated behind it in the background, face not clearly visible",
       "alt": "Güvenlik kamerası karesi, gece, fakülte lobisinde turnikeler. Yandan görünen tek bir kişi kartını turnike okuyucusuna tutuyor: diz boyu koyu kaban, açık renk atkı, elinde deri evrak çantası. Arkada güvenlik masası ve oturan bir görevli. Yüz net seçilmiyor."
     },
     "ph-cekmece": {

@@ -110,7 +110,7 @@
     "scene-study": {
       "kind": "document-photo",
       "aspect": "landscape",
-      "prompt": "Crime-scene flash photograph of an old-fashioned study in a wooden mansion at night, an elderly man slumped sideways in a leather armchair at a mahogany desk, a porcelain tea glass with a little amber liquid and a saucer near his hand, reading glasses and a closed phone on the desk, a dark green velvet sofa against the wall with three burgundy velvet cushions, the middle cushion turned so its zip faces upward, evidence markers on the floor, a small gold cufflink under the desk",
+      "prompt": "Crime-scene flash photograph of an old-fashioned study in a wooden mansion at night, a clean-shaven seventy-year-old man with no beard, silver hair combed back, in a navy jacket and white shirt, slumped sideways in a leather armchair at a mahogany desk, a porcelain tea glass with a little amber liquid and a saucer near his hand, reading glasses and a closed phone on the desk, a dark green velvet sofa against the wall with three burgundy velvet cushions, the middle cushion turned so its zip faces upward, evidence markers on the floor, a small gold cufflink under the desk",
       "alt": "Flaşlı olay yeri fotoğrafı: Maun masanın başındaki deri koltukta yana doğru çökmüş yaşlı bir adam. Elinin yanında dibinde biraz kehribar renkli sıvı kalmış bir çay bardağı ve tabağı; masada okuma gözlüğü ve telefon. Duvar dibindeki yeşil kadife kanepede üç bordo kırlent var; ortadakinin fermuarı diğerlerinin aksine üste dönük. Masanın altında küçük, altın bir kol düğmesi ve delil numaraları."
     },
     "obj-pills": {
@@ -122,13 +122,13 @@
     "cam-van": {
       "kind": "cctv",
       "aspect": "landscape",
-      "prompt": "Low-resolution dashboard camera view through a wet windshield at night in a very narrow cobbled seaside street, headlights illuminating a man in a dark peacoat holding a flashlight and gesturing at the driver, to the left a garden wall and gate with a large wooden house behind it completely dark, further down the street several street lamps are lit and the windows of a neighbouring mansion glow yellow",
+      "prompt": "Low-resolution dashboard camera view through a wet windshield at night in a very narrow cobbled seaside street, headlights illuminating a weathered Turkish man in his early sixties with short grey hair and grey stubble, wearing a heavy navy wool peacoat and dark trousers, holding a flashlight and gesturing at the driver, to the left a garden wall and gate with a large wooden house behind it completely dark, further down the street several street lamps are lit and the windows of a neighbouring mansion glow yellow",
       "alt": "Gece, ıslak ön camdan araç kamerası görüntüsü. Dar, parke taşlı sokakta farların aydınlattığı, koyu paltolu, elinde fener olan bir adam sürücüye işaret ediyor. Soldaki bahçe kapısının ardındaki büyük ahşap ev tamamen karanlık. Sokağın ilerisinde sokak lambaları yanıyor, komşu yalının pencereleri sarı sarı ışıyor."
     },
     "cam-pier-a": {
       "kind": "cctv",
       "aspect": "landscape",
-      "prompt": "High-angle grainy night security camera frame from the end of a wet wooden pier looking back at a dark two-storey wooden waterside mansion, a young man in an olive parka with the hood up stands on the pier holding a large flat rectangular package wrapped in a blanket, in the middle of the upper floor one window shows a faint small white light spot, on the ground-floor sea terrace to the left a seated figure is lit bluish from below by a laptop screen, rain streaks",
+      "prompt": "High-angle grainy night security camera frame from the end of a wet wooden pier looking back at a two-storey wooden waterside mansion during a total power cut: every window is pitch dark, no lamps, no interior lights, no terrace lights, except in the middle of the upper floor one window shows a single faint small white light spot like a phone screen; a young man in an olive parka with the hood up stands on the pier holding a large flat thin rectangular package the size of a framed painting, wrapped in a blanket; on the ground-floor sea terrace to the left a seated woman around forty with dark hair pulled into a low bun and a black blazer sits at a table, her face lit bluish from below by a laptop screen, the laptop being the only light on the terrace; rain streaks",
       "alt": "Yüksek açılı, grenli gece kamerası karesi. Islak iskelede, kapüşonu başında haki parkalı genç bir adam battaniyeye sarılı, büyük, yassı, dikdörtgen bir paket tutuyor. Arkadaki yalı karanlık; üst katın ortasındaki bir pencerede küçük, soluk beyaz bir ışık lekesi var. Soldaki zemin kat terasında oturan birinin yüzü, aşağıdan bir dizüstü bilgisayar ekranının mavimsi ışığıyla aydınlanmış."
     },
     "cam-pier-b": {

@@ -110,7 +110,7 @@
   },
   "cam-pasaport": {
    "kind": "cctv",
-   "prompt": "High-angle wide security camera still at night of a seaside promenade in front of a small ferry pier entrance, low resolution, slight fisheye distortion, sodium street lights, a single tall figure in a long light-coloured coat and a brimmed hat walking quickly away from the camera along the walkway, face not visible, palm trees and dark water at the edge of the frame",
+   "prompt": "High-angle wide security camera still at night of a completely deserted seaside promenade in front of a small ferry pier entrance, low resolution, slight fisheye distortion, sodium street lights. The ONLY person in the entire frame, nobody else anywhere, no pedestrians in the background: a tall slim Turkish woman in her early fifties walking quickly away from the camera, seen from behind, in a belted light beige cotton trench coat reaching below the knee, a dark grey soft-brimmed man's fedora hat pulled low, her shoulder-length dark blonde hair mostly tucked up under the hat with a few strands at the nape, black high-heeled shoes. Her right elbow is bent and her right hand is held against her chest in front of her (hand hidden from view), only her left arm hangs down. Face not visible. Palm trees and dark empty water at the edge of the frame, no legible text",
    "alt": "Yüksek açılı, geniş açılı, düşük çözünürlüklü bir gece karesi. İskele girişinin önündeki sahil yürüyüş yolu, turuncu sokak lambaları. Açık renk, diz altına inen uzun bir dış giysi ve kenarlı şapka giymiş tek bir uzun boylu kişi, kameradan uzaklaşarak hızlı yürüyor; yüzü görünmüyor. Kadrajın kenarında palmiyeler ve karanlık su."
   },
   "ph-wedding-2014": {
@@ -151,7 +151,7 @@
   },
   "ph-0112": {
    "kind": "object",
-   "prompt": "Grainy night photograph taken from about ten metres away with a telephoto lens, through the windscreen of a dark luxury sedan in a gravel car park lit by string lights, a slim blonde woman in a pale evening dress sitting in the driver seat with both hands on the steering wheel, a man with a dark moustache in the passenger seat with his right forearm in a dark arm sling, 2014 digital camera look, no legible text",
+   "prompt": "Grainy night photograph taken from about ten metres away with a telephoto lens, straight through the windscreen of a dark Mercedes luxury sedan from the 2010s parked in a gravel car park lit by string lights. It is a left-hand-drive car, so the driver seat is on the RIGHT side of the image: in the driver seat a slim Turkish woman around forty with blonde hair pinned up in a bun, wearing a pale cream sleeveless evening dress, both hands on the steering wheel. In the passenger seat on the LEFT side of the image a Turkish man in his mid forties with short dark hair and a thick dark moustache, wearing a white summer suit jacket with his right arm not in the sleeve: his right forearm rests horizontally across his stomach inside a clearly visible dark navy triangular fabric arm sling hung from his neck, a white plaster cast showing at the wrist. No seatbelts. 2014 digital camera look, no legible text, number plate blurred",
    "alt": "Gece, teleobjektifle on metre kadar uzaktan çekilmiş grenli bir kare. Ampullerle aydınlatılmış çakıllı bir otoparkta koyu renk lüks bir sedan. Ön camdan görünen sürücü koltuğunda, açık renk gece elbiseli sarışın ince bir kadın, iki eli direksiyonda. Yolcu koltuğunda koyu bıyıklı bir adam; sağ ön kolu koyu bir askıda."
   }
  },

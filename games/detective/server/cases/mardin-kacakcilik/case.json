@@ -98,8 +98,8 @@
     "scene-hastane": {
       "kind": "scene",
       "aspect": "landscape",
-      "prompt": "Night photograph of a hospital intensive care corridor, a woman in a dark coat seen from behind standing at a glass partition, beyond the glass a patient bed with monitors glowing green, dim blue lighting, empty chairs along the wall",
-      "alt": "Gece, bir yoğun bakım koridoru. Koyu paltolu bir kadın arkadan görünüyor; cam bölmenin önünde duruyor. Camın ardında yeşil ışıklı monitörlerin yanında bir hasta yatağı."
+      "prompt": "Morning photograph of a hospital intensive care corridor in daylight, a Turkish woman police inspector in her forties in a dark coat seen from behind standing at a glass partition, beyond the glass a patient bed with monitors, pale morning sunlight from a window at the end of the corridor, empty chairs along the wall, quiet atmosphere",
+      "alt": "Sabah, bir yoğun bakım koridoru. Koyu paltolu bir kadın arkadan görünüyor; cam bölmenin önünde duruyor. Camın ardında monitörlerin yanında bir hasta yatağı; koridorun ucundaki pencereden sabah ışığı giriyor."
     },
     "obj-kaza": {
       "kind": "object",

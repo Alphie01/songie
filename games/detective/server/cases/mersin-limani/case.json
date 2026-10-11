@@ -80,8 +80,8 @@
     "scene-adli-tip": {
       "kind": "scene",
       "aspect": "landscape",
-      "prompt": "A long institutional basement corridor of a forensic medicine building, pale green tiled walls, fluorescent tube lights, a steel trolley parked against the wall, a closed double door with frosted glass at the end, a man in a dark coat waiting on a plastic chair, no readable signs",
-      "alt": "Uzun bir bodrum koridoru: açık yeşil fayanslar, floresan lambalar, duvar dibinde çelik bir sedye. Koridorun sonunda buzlu camlı çift kanat kapı; plastik sandalyede koyu paltolu bir adam bekliyor."
+      "prompt": "A long institutional basement corridor of a forensic medicine building, pale green tiled walls, fluorescent tube lights, a steel trolley parked against the wall, a closed double door with frosted glass at the end, a Turkish woman police detective with dark hair tied back, in a dark coat, waiting on a plastic chair, seen from the side, no readable signs",
+      "alt": "Uzun bir bodrum koridoru: açık yeşil fayanslar, floresan lambalar, duvar dibinde çelik bir sedye. Koridorun sonunda buzlu camlı çift kanat kapı; plastik sandalyede koyu paltolu bir kadın bekliyor."
     },
     "scene-depo": {
       "kind": "scene",
@@ -128,7 +128,7 @@
     "cam-dernek": {
       "kind": "cctv",
       "aspect": "landscape",
-      "prompt": "High-angle wide still from a ceiling event camera in a hotel banquet hall, round dinner tables with white cloths, about forty seated guests, a heavy-set man with a white moustache speaking at a lectern on the left, a bearded man in a navy suit seated at the front table turned towards the lectern, slightly grainy",
+      "prompt": "Evening event at night: windows covered by closed heavy curtains, no daylight anywhere, warm artificial chandelier light. High-angle wide still from a ceiling event camera in a hotel banquet hall, round dinner tables with white cloths, about forty seated guests, a heavy-set Turkish man in his sixties with grey hair and a thick white moustache, wearing a dark suit, speaking at a lectern on the left, a man in his late forties with a neatly trimmed salt-and-pepper beard in a navy suit seated at the front table turned towards the lectern, slightly grainy",
       "alt": "Otel balo salonunda tavan kamerasından geniş, yüksek açılı kare. Beyaz örtülü yuvarlak masalarda kırk kadar konuk. Solda kürsüde beyaz bıyıklı iri bir adam konuşuyor; ön masada lacivert takımlı, sakallı bir adam kürsüye dönmüş oturuyor."
     },
     "cam-tesis": {
@@ -140,7 +140,7 @@
     "cam-tantuni": {
       "kind": "cctv",
       "aspect": "landscape",
-      "prompt": "At night (dark street outside the shop window, street lamps lit), High-angle low-resolution security camera still inside a small street food shop, a man seen from the side and slightly behind at the counter wearing a flat cap and a plain navy blazer with smooth sleeves and no elbow patches, holding up a smartphone with a card on its back to a payment terminal, a cook behind the counter by a large flat griddle, the man seen mostly from behind and the side so his face cannot be made out",
+      "prompt": "At night (dark street outside the shop window, street lamps lit), high-angle low-resolution security camera still inside a small street food shop, a tall lean young Turkish man in his late twenties with a slim build and narrow shoulders, short black hair visible under a flat cap at the nape, seen from the side and slightly behind at the counter, wearing a flat cap and a plain navy blazer that is slightly loose on him, with smooth sleeves and no elbow patches, holding up a smartphone with a card on its back to a payment terminal, a cook behind the counter by a large flat griddle, the customer seen mostly from behind and the side so his face cannot be made out, no grey hair",
       "alt": "Küçük bir tantuni dükkânında yüksek açılı güvenlik kamerası karesi. Tezgâhta, yandan ve biraz arkadan görülen, kasket ve lacivert ceket giymiş bir adam. Ceketin kolları düz, dirseklerinde yama yok. Arkasında kart olan bir telefonu ödeme cihazına uzatıyor. Tezgâhın arkasında saç başında bir usta."
     },
     "img-depo": {

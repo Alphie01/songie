@@ -110,7 +110,7 @@
     "scene-office-photo": {
       "kind": "object",
       "aspect": "landscape",
-      "prompt": "Forensic flash photograph of a government engineer office desk at night: a man slumped in a black office chair seen from the side and behind, his head tilted to the left, a dark semi-automatic pistol lying loosely in his right hand on his thigh, on the desk a keyboard with a computer mouse and mousepad placed on the left side of the keyboard, a white mug, a closed notebook, an open desk drawer on the right with a key in its lock, a wristwatch on his right wrist, no blood pooling shown, clinical and restrained",
+      "prompt": "Forensic flash photograph of a government engineer office desk at night: a fifty-four-year-old Turkish man with short greying hair (grey at the temples, salt-and-pepper on top), wearing a brown tweed jacket over a light blue shirt, slumped in a black office chair seen from the side and behind, his head tilted to the left, a dark semi-automatic pistol lying loosely in his right hand on his thigh, on the desk a keyboard with a computer mouse and mousepad placed on the left side of the keyboard, a white mug, a closed notebook, an open desk drawer on the right with a key in its lock, a wristwatch on his right wrist, no blood pooling shown, clinical and restrained. IMPORTANT: he is clearly a middle-aged man in his mid fifties with visibly grey hair, not a young man.",
       "alt": "Flaşlı olay yeri fotoğrafı: siyah ofis koltuğunda başı sola düşmüş bir adam, yandan ve arkadan. Sağ elinde, uyluğunun üstünde gevşekçe duran siyah bir tabanca. Masada klavye; fare ve fare altlığı klavyenin solunda. Beyaz bir kupa, kapalı bir defter. Sağdaki çekmece açık, kilidinde anahtar. Kol saati sağ bileğinde."
     },
     "obj-suzgec": {
@@ -122,7 +122,7 @@
     "cam-lobi-giris": {
       "kind": "cctv",
       "aspect": "landscape",
-      "prompt": "High-angle wide security camera view of a small office lobby at night, low resolution and grainy, a security guard in a dark uniform holding a turnstile gate open for a visitor in a long light-coloured overcoat carrying a briefcase, marble floor, no readable text",
+      "prompt": "High-angle wide security camera view of a small office lobby at night, low resolution and grainy, a security guard in his early sixties — a Turkish man with grey stubble, a dark navy uniform jacket and a dark wool watch cap — holding a turnstile gate open for a visitor: a heavily built Turkish man in his early sixties with thick white hair combed straight back, wearing a long light-coloured overcoat over a dark suit and carrying a briefcase, seen from the side and slightly behind, marble floor, no readable text",
       "alt": "Gece, yüksek açılı lobi kamerası: koyu üniformalı görevli turnikeyi açık tutuyor; açık renk uzun paltolu, evrak çantalı bir ziyaretçi içeri geçiyor."
     },
     "cam-lobi-cikis": {
@@ -170,7 +170,7 @@
     "arch-protokol": {
       "kind": "document-photo",
       "aspect": "landscape",
-      "prompt": "Archival newspaper-style photograph of a signing ceremony in a government meeting room, a greying engineer with rimless glasses and moustache seated at a table signing a document with a pen held in his left hand, two officials standing behind, flags blurred out of focus, no readable text",
+      "prompt": "Archival newspaper-style photograph of a signing ceremony in a government meeting room, a Turkish engineer in his early fifties with greying hair, rimless glasses and a grey moustache seated at a table facing the camera, signing a document. He is LEFT-HANDED: the pen is held in his LEFT hand, which from the viewer's side appears on the RIGHT side of the picture, while his right hand rests flat on the page holding it steady and wears a wristwatch on the right wrist. Two officials standing behind, flags blurred out of focus, no readable text",
       "alt": "Arşiv fotoğrafı: bir protokol töreninde, kır saçlı, bıyıklı, çerçevesiz gözlüklü bir mühendis masada belge imzalıyor; kalemi sol elinde. Arkasında ayakta iki yetkili."
     }
   },

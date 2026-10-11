@@ -124,6 +124,7 @@ Oyuncu bilmediği bir şeyi açmamalı. İz, onu anlamlı kılan belge biri tara
   - Kayıt başına 2–4 konuşmacı olsun.
   - Konuşan her karakterin `voice` alanı dolu olsun. `style` Türkçe tarif içersin (yaş, tavır, ağız), oyuncu seçimi buna göre yapılıyor.
 - **Görseller.** Kişi sayısı, sargı ya da saç gibi görsel ipuçları `prompt`'ta açıkça ve sayıyla yazılsın ("exactly six figures"). Görsel üretildikten sonra gözle kontrol edilir.
+- **Her görselde kişinin kimliği yazılsın.** Kamera karesinde, sahnede ya da grup fotoğrafında görünen her karakterin cinsiyeti, yaşı, saçı ve yapısı `prompt`'ta portresiyle aynı biçimde tarif edilsin. Yüz gizlense bile ("seen from behind") bu bilgiler kalsın. "A figure in a dark coat" yazılırsa model rastgele birini çizer. Ekim 2026 denetiminde 34 kare bu yüzden yeniden üretildi.
 
 ## Sorgular (`interviews`): etkileşimli sorgu
 Oyuncular karakterleri kendileri sorgular. Listeden soru seçerler ve dosyadaki herhangi bir belgeyi karaktere gösterebilirler. Cevaplar yazarın hazırladığı metinlerdir. Sorulan her şey ortak bir sorgu tutanağında herkese görünür; soru sormak saat harcatmaz, sorguyu açan iz harcatır.

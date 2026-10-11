@@ -152,7 +152,7 @@
   "cam-lobi-0107": {
    "kind": "cctv",
    "aspect": "landscape",
-   "prompt": "High-angle wide security camera still of a small mountain hotel lobby at night: a reception desk on the right with exactly one receptionist behind it, a plain service door on the left wall opening, exactly one slim man in a grey sweater and dark trousers with visibly wet darker trouser legs below the knee and snow on his boots stepping out of that door into the lobby, a low table with a backgammon board near a fireplace in the foreground, exactly one barman standing by it, grainy",
+   "prompt": "High-angle wide security camera still of a small mountain hotel lobby at night: a reception desk on the right with exactly one receptionist behind it, a young Turkish woman in her late twenties with long straight black hair worn loose past her shoulders and a dark blazer uniform; a plain service door on the left wall opening, exactly one slim Turkish man in his early forties with short dark neatly side-parted hair and thin dark-rimmed glasses, wearing a grey quarter-zip sweater and plain dark trousers with no stripes, the trouser legs visibly wet and darker below the knee, snow on the toes of his boots, stepping out of that door into the lobby; a low table with a backgammon board near a fireplace in the foreground, exactly one barman, a Turkish man about thirty with short dark hair in a black shirt, standing by it, grainy",
    "alt": "Yüksek açılı kamera karesi: gece, küçük bir otel lobisi. Sağda resepsiyon ve arkasında bir görevli. Sol duvardaki sade servis kapısından gri kazaklı, zayıf bir adam lobiye çıkıyor; pantolonunun paçaları dizden aşağı koyulaşmış, botlarında kar var. Ön planda şöminenin yanında üstünde tavla duran alçak bir masa ve yanında ayakta bir barmen."
   },
   "cam-lobi-0138": {
@@ -164,7 +164,7 @@
   "cam-teles": {
    "kind": "cctv",
    "aspect": "landscape",
-   "prompt": "High-angle wide security camera still inside a small chairlift operator hut at night: a control panel along the window, a round wall clock above the single door, a small table with a bottle and two tea glasses, exactly two men seated at it: one older man in a dark operator jacket and one younger man in a red ski instructor jacket, an electric heater glowing, grainy low resolution",
+   "prompt": "High-angle wide security camera still inside a small chairlift operator hut at night: a control panel along the window, a round wall clock above the single door, its hands clearly showing 12:32 (hour hand just past twelve, minute hand pointing straight down at the six), a small table with a bottle and two tea glasses, exactly two men seated at it: one Turkish man in his early fifties with short grey hair in a dark operator jacket, and one young Turkish man in his late twenties with short-cropped sandy brown hair (no ponytail, no long hair), sun-tanned, broad-shouldered, in a red ski instructor jacket, an electric heater glowing, grainy low resolution",
    "alt": "Yüksek açılı kamera karesi: gece, telesiyej operatör kulübesinin içi. Pencere boyunca kumanda paneli; tek kapının üstünde yuvarlak bir duvar saati. Küçük bir masada bir şişe ve iki çay bardağı; masada iki adam oturuyor: koyu renk operatör montlu yaşlıca biri ve kırmızı kayak hocası montlu genç biri. Bir elektrikli soba yanıyor."
   },
   "ph-cem": {

@@ -78,8 +78,8 @@
     },
     "scene-salon": {
       "kind": "scene",
-      "prompt": "Interior of an elegant small art gallery room in the early morning, dark except for the violet glow of a handheld ultraviolet lamp aimed at a large oil painting of a Bosphorus shoreline in a heavy gilded frame, a woman in a blazer holding the lamp, a pale middle-aged man in a blazer standing behind her, leftover catering glasses on a side table",
-      "alt": "Sabah, karanlık bir galeri salonu. Bir kadın, ağır yaldızlı çerçevedeki büyük bir Boğaz kıyısı resmine mor ışıklı bir lamba tutuyor. Arkasında ceketli, solgun yüzlü orta yaşlı bir adam duruyor. Yan masada açılıştan kalmış kadehler."
+      "prompt": "Interior of an elegant small art gallery room in the early morning, dark except for the violet glow of a handheld ultraviolet lamp aimed at a large oil painting of a Bosphorus shoreline in a heavy gilded frame, a Turkish woman in her early forties with shoulder-length auburn hair and a charcoal blazer holding the lamp, behind her a pale Turkish man in his late fifties, completely bald with a short grey beard, in a navy blazer over an open white shirt, leftover catering glasses on a side table",
+      "alt": "Sabah, karanlık bir galeri salonu. Kızıl kahve saçlı bir kadın, ağır yaldızlı çerçevedeki büyük bir Boğaz kıyısı resmine mor ışıklı bir lamba tutuyor. Arkasında lacivert ceketli, kel, kır sakallı, solgun yüzlü bir adam duruyor. Yan masada açılıştan kalmış kadehler."
     },
     "scene-board": {
       "kind": "scene",
@@ -108,12 +108,12 @@
     },
     "cam-service-night": {
       "kind": "cctv",
-      "prompt": "High-angle security camera view of a narrow back street at night, grainy low resolution, exactly six figures (count them: six people, not five) in identical black jackets and black caps walking in single file toward a lit metal service door, all of similar build, faces hidden under the caps, cigarette smoke in the air, wet cobblestones",
+      "prompt": "High-angle security camera view of a narrow back street at night, grainy low resolution, a single-file line of exactly SIX people (1, 2, 3, 4, 5, 6 — six separate figures clearly spaced apart, not five) in identical black jackets and black caps walking toward a lit metal service door; five of them are men and one, the third in line, is a slim woman with a short dark ponytail under her cap; all of similar height, faces hidden under the caps, cigarette smoke in the air, wet cobblestones",
       "alt": "Gece, dar bir arka sokak; kumlu, düşük çözünürlüklü görüntü. Aynı siyah ceket ve siyah kasketi giymiş figürler tek sıra halinde ışıklı metal kapıya yürüyor: kapıdan sırayla giren altı kişi seçiliyor. Kasketler yüzleri gizliyor; boyları ve yapıları birbirine yakın. Havada sigara dumanı."
     },
     "cam-corridor": {
       "kind": "cctv",
-      "prompt": "High-angle security camera view of a narrow ground-floor service corridor at night, low resolution, exactly five figures in black jackets and black caps loading stacked plastic crates and folding trolleys toward an open metal back door, the steel doors of a small freight elevator closed at the far end of the corridor",
+      "prompt": "High-angle wide security camera view of a narrow ground-floor service corridor at night, low resolution, exactly FIVE people (1, 2, 3, 4, 5 — five separate figures, all fully visible, not four) in black jackets and black caps loading stacked plastic crates and folding trolleys toward an open metal back door; four of them are young men and one is a slim young woman with a short dark ponytail under her cap; the steel doors of a small freight elevator closed at the far end of the corridor",
       "alt": "Gece, zemin kattaki dar servis koridoru; yüksek açılı, düşük çözünürlüklü görüntü. Siyah ceketli, kasketli beş kişi plastik kasaları ve katlanır servis arabalarını açık arka kapıya doğru taşıyor. Koridorun ucundaki küçük yük asansörünün çelik kapıları kapalı."
     },
     "cam-street": {
