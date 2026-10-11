@@ -60,7 +60,7 @@ function docText(d: CaseDoc): string {
       const loc = c.locations.find((l) => l.id === d.location);
       const p = loc?.plan;
       return [`KROKİ — ${loc?.name ?? d.location}: ${d.caption}`, ...(p ? [
-        `Odalar: ${p.rooms.map((r) => `${r.label} (${r.x},${r.y} ${r.w}x${r.h})`).join('; ')}`,
+        `Bölümler: ${p.rooms.map((r) => `${r.label} (${r.x},${r.y} ${r.w}x${r.h})`).join('; ')}`,
         `Kapılar: ${p.doors.map((x) => `${x.label ?? 'kapı'} (${x.x},${x.y})`).join('; ')}`,
         `Pencereler: ${p.windows.map((x) => `(${x.x},${x.y})`).join('; ')}`,
         `İşaretler: ${p.markers.map((m) => `${m.label} [${m.kind}] (${m.x},${m.y})`).join('; ')}`,
@@ -115,10 +115,12 @@ c.acts.forEach((a, i) => {
       const cond = [q.after.length ? `önce: ${q.after.join(', ')}` : '', q.needs.length ? `belge gerekir: ${q.needs.join(', ')}` : ''].filter(Boolean).join('; ');
       const out = [q.unlocks.length ? `belge açar: ${q.unlocks.join(', ')}` : '', q.leadsTo.length ? `iz açar: ${q.leadsTo.join(', ')}` : ''].filter(Boolean).join('; ');
       part.push(`- [${q.id}]${cond ? ` (${cond})` : ''} SORU: ${q.ask}\n  CEVAP: ${q.answer}${out ? `\n  → ${out}` : ''}`);
+      for (const id of q.unlocks) if (evById.has(id)) part.push(evText(evById.get(id)!));
     }
     for (const x of iv.confront) {
       const out = [x.unlocks.length ? `belge açar: ${x.unlocks.join(', ')}` : '', x.leadsTo.length ? `iz açar: ${x.leadsTo.join(', ')}` : ''].filter(Boolean).join('; ');
       part.push(`- BELGE GÖSTERİLİRSE [${x.evidence}]: ${x.answer}${out ? `\n  → ${out}` : ''}`);
+      for (const id of x.unlocks) if (evById.has(id)) part.push(evText(evById.get(id)!));
     }
     part.push(`- Başka bir belge gösterilirse: ${iv.deflect.join(' / ')}`);
   }
