@@ -5,3 +5,7 @@ data
 screenshots
 test-results
 deploy/.env
+**/.env.local
+**/.image-spend.json
+**/.export
+**/_candidates
