@@ -6,6 +6,7 @@ import { Cabinet } from './Cabinet';
 import { Accuse, Reconcile, Result } from './Final';
 import { Leads } from './Leads';
 import { Log, Notebook } from './Notebook';
+import { NarrationPill, stopNarration } from './Bits';
 import { Scene } from './Scene';
 import { s } from './strings';
 import { DeskProvider, useDocStore, useMedia, useSeen, type Desk, type Send, type Tab } from './util';
@@ -34,6 +35,8 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
     errTimer.current = setTimeout(() => setError(null), 5000);
   }, []);
   useEffect(() => () => void (errTimer.current && clearTimeout(errTimer.current)), []);
+  // Masadan çıkınca (lobi, başka oyun) anlatı da sussun.
+  useEffect(() => () => stopNarration(), []);
 
   const send: Send = useCallback(
     async (a) => {
@@ -199,6 +202,7 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
         </header>
         {body}
         {view.phase === 'scene' && <Scene />}
+        <NarrationPill hidden={view.phase === 'scene' || replay !== null} />
         {replay !== null && view.phase !== 'scene' && <Scene replay={replay} onClose={() => setReplay(null)} />}
         {error && (
           <p className="toast dt-toast" role="alert">

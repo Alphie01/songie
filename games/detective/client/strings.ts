@@ -83,6 +83,8 @@ export const s = {
     hostSkip: 'Beklemeden başlat',
     narration: 'Anlatıcıyı dinle',
     narrationPause: 'Anlatıcıyı duraklat',
+    narrationNow: 'Anlatıcı okuyor',
+    narrationStop: 'Durdur',
     close: 'Masaya dön',
     replay: 'Bölüm sahneleri',
     imageMissing: 'Sahne fotoğrafı',

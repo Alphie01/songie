@@ -4418,3 +4418,65 @@ button.dt-tl-item:hover {
     display: none;
   }
 }
+
+/* Sahne kapandıktan sonra süren anlatı */
+.dt-narration-pill {
+  position: fixed;
+  left: 50%;
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  z-index: 105;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 32px);
+  padding: 6px 6px 6px 14px;
+  border: 1px solid var(--line-2);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+  box-shadow: 0 12px 36px rgb(0 0 0 / 0.5);
+  transform: translateX(-50%);
+  font-size: 13px;
+}
+
+.dt-narration-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: dt-pulse 1.4s ease-in-out infinite;
+}
+
+.dt-narration-label {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-2);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dt-narration-label b {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.dt-narration-stop {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+@media (min-width: 1100px) {
+  .dt-narration-pill {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@keyframes dt-pulse {
+  50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dt-narration-dot { animation: none; }
+}

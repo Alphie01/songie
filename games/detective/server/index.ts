@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import type Database from 'better-sqlite3';
-import type { FastifyInstance, FastifyRequest } from 'fastify';
+import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import type { ServerGame } from '@songie/game-kit/server';
 import type { CaseCard, CasesResponse, DetectiveAction, DetectiveSettings, SessionCard } from '../shared/index.js';
 import { createDetectiveGame, type DetectiveState } from './game.js';
@@ -10,6 +10,27 @@ import { SessionStore } from './sessions.js';
 export { CaseLibrary, SessionStore, createDetectiveGame };
 
 type Authed = FastifyRequest & { profile?: { id: string } | null };
+
+/**
+ * Dosyayı boyutuyla ve kısmi indirme (Range) desteğiyle gönderir. Tarayıcılar sesin süresini ancak
+ * böyle doğru hesaplar; Safari/iOS Range olmadan kaydı yarıda keser, ileri sarma da çalışmaz.
+ */
+function sendFile(req: FastifyRequest, reply: FastifyReply, file: string, type: string) {
+  const size = fs.statSync(file).size;
+  reply.header('cache-control', 'private, max-age=86400').header('accept-ranges', 'bytes').type(type);
+  const m = /^bytes=(\d*)-(\d*)$/.exec(String(req.headers.range ?? ''));
+  if (!m || (!m[1] && !m[2])) {
+    reply.header('content-length', size);
+    return reply.send(fs.createReadStream(file));
+  }
+  let start = m[1] ? Number(m[1]) : size - Number(m[2]);
+  let end = m[1] && m[2] ? Number(m[2]) : size - 1;
+  start = Math.max(0, start);
+  end = Math.min(end, size - 1);
+  if (start > end) return reply.code(416).header('content-range', `bytes */${size}`).send();
+  reply.code(206).header('content-range', `bytes ${start}-${end}/${size}`).header('content-length', end - start + 1);
+  return reply.send(fs.createReadStream(file, { start, end }));
+}
 
 const RANK_ORDER = ['Stajyer', 'Komiser Yardımcısı', 'Komiser', 'Başkomiser'];
 
@@ -72,16 +93,14 @@ export function detectiveServer(deps: {
         const token = req.params.file.replace(/\.mp3$/, '');
         const file = /^[a-f0-9]{20}$/.test(token) ? library.audioFile(req.params.slug, token) : undefined;
         if (!file || !fs.existsSync(file)) return reply.code(404).send({ error: 'Kayıt bulunamadı.' });
-        reply.header('cache-control', 'private, max-age=86400').type('audio/mpeg');
-        return reply.send(fs.createReadStream(file));
+        return sendFile(req, reply, file, 'audio/mpeg');
       });
 
       app.get<{ Params: { slug: string; file: string } }>('/img/:slug/:file', async (req, reply) => {
         const token = req.params.file.replace(/\.webp$/, '');
         const file = /^[a-f0-9]{20}$/.test(token) ? library.file(req.params.slug, token) : undefined;
         if (!file || !fs.existsSync(file)) return reply.code(404).send({ error: 'Görsel bulunamadı.' });
-        reply.header('cache-control', 'private, max-age=86400').type('image/webp');
-        return reply.send(fs.createReadStream(file));
+        return sendFile(req, reply, file, 'image/webp');
       });
     },
   };

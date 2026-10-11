@@ -51,6 +51,7 @@ export function Scene({ replay, onClose }: { replay?: number; onClose?: () => vo
               url={act.narrationUrl}
               seed={`act-${act.index}`}
               variant="narration"
+              label={s.scene.act(act.index, view.act.total)}
               playLabel={s.scene.narration}
               pauseLabel={s.scene.narrationPause}
               missing=""

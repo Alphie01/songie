@@ -292,9 +292,53 @@ const fmtTime = (sec: number) => {
   return `${m}:${String(s2).padStart(2, '0')}`;
 };
 
+// Anlatıcı sahne kapandıktan sonra da sürsün: bileşenden bağımsız tek ses öğesi. (Sayfadan kaldırılan
+// <audio> öğesini tarayıcı durdurur; oyuncu "Okudum, devam" deyince sahne kapanır ama anlatı bitmemiş olabilir.)
+const narration = { audio: null as HTMLAudioElement | null, label: '', listeners: new Set<() => void>() };
+
+function narrationAudio(): HTMLAudioElement {
+  if (!narration.audio) {
+    const a = new Audio();
+    a.preload = 'metadata';
+    for (const ev of ['play', 'pause', 'ended', 'timeupdate', 'loadedmetadata', 'durationchange', 'error', 'emptied']) {
+      a.addEventListener(ev, () => narration.listeners.forEach((f) => f()));
+    }
+    narration.audio = a;
+  }
+  return narration.audio;
+}
+
+const absUrl = (u: string) => new URL(u, window.location.href).href;
+
+/** Anlatıcının durumu (masadaki "Anlatıcı çalıyor" düğmesi için). */
+export function useNarration() {
+  const [, force] = useState(0);
+  useEffect(() => {
+    const f = () => force((x) => x + 1);
+    narration.listeners.add(f);
+    return () => {
+      narration.listeners.delete(f);
+    };
+  }, []);
+  const a = narration.audio;
+  return {
+    playing: !!a && !a.paused && !a.ended,
+    label: narration.label,
+    time: a?.currentTime ?? 0,
+    dur: a && Number.isFinite(a.duration) ? a.duration : 0,
+    stop: () => a?.pause(),
+  };
+}
+
+/** Odadan çıkınca ya da oyun bitince anlatıyı sustur. */
+export function stopNarration() {
+  narration.audio?.pause();
+}
+
 /**
  * Basit oynatıcı: oynat/duraklat, sahte dalga formu (tıklayınca konum), süre.
  * Otomatik başlatmaz. `url` null ise `missing` metnini gösterir.
+ * `narration`: ortak anlatıcı öğesini kullanır; oynatıcı kapansa da ses sürer.
  */
 export function AudioPlayer({
   url,
@@ -302,6 +346,7 @@ export function AudioPlayer({
   playLabel,
   pauseLabel,
   missing,
+  label = '',
   variant = 'device',
 }: {
   url: string | null;
@@ -309,29 +354,36 @@ export function AudioPlayer({
   playLabel: string;
   pauseLabel: string;
   missing: string;
+  /** Anlatıcıda masadaki düğmede görünen ad ("Bölüm 2: Kalp değil"). */
+  label?: string;
   variant?: 'device' | 'narration';
 }) {
   const ref = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [time, setTime] = useState(0);
-  const [dur, setDur] = useState(0);
+  const shared = variant === 'narration';
+  const [, force] = useState(0);
   const [failed, setFailed] = useState(false);
   const bars = useMemo(() => {
     let h = hash(seed);
-    return Array.from({ length: variant === 'narration' ? 56 : 72 }, (_, i) => {
+    return Array.from({ length: shared ? 56 : 72 }, (_, i) => {
       h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0;
       const env = 0.55 + 0.45 * Math.sin((i / 9) * Math.PI) ** 2;
       return Math.max(0.12, Math.min(1, ((h % 1000) / 1000) * env + 0.1));
     });
-  }, [seed, variant]);
+  }, [seed, shared]);
 
+  useEffect(() => setFailed(false), [url]);
+
+  // Ortak anlatıcı öğesinin olaylarını dinle.
   useEffect(() => {
-    setPlaying(false);
-    setTime(0);
-    setDur(0);
-    setFailed(false);
-  }, [url]);
+    if (!shared) return;
+    const f = () => force((x) => x + 1);
+    narration.listeners.add(f);
+    return () => {
+      narration.listeners.delete(f);
+    };
+  }, [shared]);
 
+  // Cihaz kaydı: kanıttan çıkınca dursun.
   useEffect(() => () => ref.current?.pause(), []);
 
   if (!url || failed)
@@ -341,31 +393,54 @@ export function AudioPlayer({
       </div>
     );
 
+  /** Bu oynatıcının kontrol ettiği ses öğesi (anlatıcıda, ortak öğe bu kayda aitse). */
+  const mine = (): HTMLAudioElement | null => {
+    if (!shared) return ref.current;
+    const a = narration.audio;
+    return a && a.src === absUrl(url) ? a : null;
+  };
+  const el = mine();
+  const playing = !!el && !el.paused && !el.ended;
+  const time = el?.currentTime ?? 0;
+  const dur = el && Number.isFinite(el.duration) ? el.duration : 0;
   const progress = dur > 0 ? time / dur : 0;
+
   const toggle = () => {
-    const a = ref.current;
+    let a = mine();
+    if (shared && !a) {
+      a = narrationAudio();
+      a.src = url;
+      narration.label = label;
+      a.onerror = () => setFailed(true);
+    }
     if (!a) return;
-    if (a.paused) void a.play().catch(() => setFailed(true));
+    if (a.paused || a.ended) void a.play().catch(() => setFailed(true));
     else a.pause();
+  };
+  const seek = (to: number) => {
+    const a = mine();
+    if (a && dur) a.currentTime = Math.max(0, Math.min(dur, to));
   };
 
   return (
     <div className="dt-audio" data-variant={variant} data-playing={playing || undefined}>
-      <audio
-        ref={ref}
-        src={url}
-        preload="metadata"
-        onPlay={() => setPlaying(true)}
-        onPause={() => setPlaying(false)}
-        onEnded={() => setPlaying(false)}
-        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
-        onLoadedMetadata={(e) => setDur(e.currentTarget.duration)}
-        onDurationChange={(e) => setDur(e.currentTarget.duration)}
-        onError={() => setFailed(true)}
-      />
+      {!shared && (
+        <audio
+          ref={ref}
+          src={url}
+          preload="metadata"
+          onPlay={() => force((x) => x + 1)}
+          onPause={() => force((x) => x + 1)}
+          onEnded={() => force((x) => x + 1)}
+          onTimeUpdate={() => force((x) => x + 1)}
+          onLoadedMetadata={() => force((x) => x + 1)}
+          onDurationChange={() => force((x) => x + 1)}
+          onError={() => setFailed(true)}
+        />
+      )}
       <button type="button" className="dt-audio-play" onClick={toggle} aria-label={playing ? pauseLabel : playLabel}>
-        <Icon name={playing ? 'pause' : 'play'} size={variant === 'narration' ? 18 : 20} />
-        {variant === 'narration' && <span>{playing ? pauseLabel : playLabel}</span>}
+        <Icon name={playing ? 'pause' : 'play'} size={shared ? 18 : 20} />
+        {shared && <span>{playing ? pauseLabel : playLabel}</span>}
       </button>
       <div
         className="dt-wave"
@@ -377,16 +452,12 @@ export function AudioPlayer({
         aria-valuenow={Math.round(time)}
         aria-valuetext={`${fmtTime(time)} / ${fmtTime(dur)}`}
         onClick={(e) => {
-          const a = ref.current;
-          if (!a || !dur) return;
           const r = e.currentTarget.getBoundingClientRect();
-          a.currentTime = ((e.clientX - r.left) / r.width) * dur;
+          seek(((e.clientX - r.left) / r.width) * dur);
         }}
         onKeyDown={(e) => {
-          const a = ref.current;
-          if (!a || !dur) return;
-          if (e.key === 'ArrowRight') a.currentTime = Math.min(dur, a.currentTime + 5);
-          else if (e.key === 'ArrowLeft') a.currentTime = Math.max(0, a.currentTime - 5);
+          if (e.key === 'ArrowRight') seek(time + 5);
+          else if (e.key === 'ArrowLeft') seek(time - 5);
           else if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
             toggle();
@@ -400,6 +471,27 @@ export function AudioPlayer({
       <span className="dt-audio-time">
         {fmtTime(time)} / {fmtTime(dur)}
       </span>
+    </div>
+  );
+}
+
+/** Sahne kapandıktan sonra süren anlatı için masadaki küçük düğme. */
+export function NarrationPill({ hidden }: { hidden: boolean }) {
+  const n = useNarration();
+  if (hidden || !n.playing) return null;
+  return (
+    <div className="dt-narration-pill" role="status">
+      <span className="dt-narration-dot" aria-hidden="true" />
+      <span className="dt-narration-label">
+        {s.scene.narrationNow}
+        {n.label && <b>{n.label}</b>}
+      </span>
+      <span className="dt-audio-time">
+        {fmtTime(n.time)} / {fmtTime(n.dur)}
+      </span>
+      <button type="button" className="btn btn-ghost dt-narration-stop" onClick={n.stop}>
+        {s.scene.narrationStop}
+      </button>
     </div>
   );
 }
