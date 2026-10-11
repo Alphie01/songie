@@ -1,0 +1,90 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı karşılayıcı": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "ipek": {
+      "voice_id": "KwaeIqNikLVCR098EG82",
+      "name": "Ela - Storyteller & Audiobook Narrator"
+    },
+    "cemal": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "duru": {
+      "voice_id": "FfbOUcE3Zu2P8ZZFLaiW",
+      "name": "İrem - Dynamic and Friendly Storyteller"
+    },
+    "gulseren": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "levent": {
+      "voice_id": "7VqWGAWwo2HMrylfKrcm",
+      "name": "Fatih Yıldırım - Deep, Clear and Rich"
+    },
+    "selin": {
+      "voice_id": "mBUB5zYuPwfVE6DTcEjf",
+      "name": "Eda Atlas - Smooth, Clear and Balanced"
+    },
+    "#Atış sorumlusu Hasan Gök": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "tolga": {
+      "voice_id": "Zpbxhg6LG47cY8y5BJrf",
+      "name": "Celil-Documentary Narrator – Deep Male"
+    },
+    "#Telesekreter": {
+      "voice_id": "MzfWWOj9g3sIKex1YFMV",
+      "name": "Duygu Eris - Warm, Encouraging and Soft"
+    },
+    "doruk": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    }
+  },
+  "tags": {
+    "nefes nefese, hızlı": "breathless, fast",
+    "arka planda, sakin ama kesin": "calm, sure, background",
+    "sesi kırılarak": "breaking, emotional",
+    "ağır, tane tane": "slow, clear",
+    "alçak sesle, yakından": "quiet, close",
+    "neşeyle, hızlı": "cheerful, fast",
+    "alaycı, biraz yüksek sesle": "sarcastic, slightly loud",
+    "soğuk": "cold",
+    "sesi yumuşayarak": "softening voice",
+    "heyecanla": "excited",
+    "tane tane, sunum yapar gibi": "clear, presenting",
+    "kışkırtır gibi, gülerek": "teasing, laughing",
+    "yüzünü buruşturarak": "disgusted",
+    "şaşırmış": "surprised",
+    "bağırarak": "shouting",
+    "uzaktan": "distant",
+    "kısa, gergin": "short, tense",
+    "rahatlamış": "relaxed",
+    "sesi sertleşerek": "harshening voice",
+    "yorgun, alçak sesle": "tired, quiet",
+    "sesi titreyerek, öfkeyle": "trembling, angry",
+    "yavaşça, kendi kendine konuşur gibi": "slow, selftalk",
+    "yutkunarak, sesi alçalarak": "swallowing, lowering voice",
+    "sıkılmış, alçak sesle": "bored, quiet",
+    "öfkeyle, masaya vurarak": "angry, forceful",
+    "yorgun, ağır ağır": "tired, dragging",
+    "başını ellerinin arasına alarak": "defeated",
+    "pes ederek": "resigned",
+    "kısık sesle, kesin": "low, certain",
+    "bezi tezgâha bırakarak, yorgun": "tired",
+    "kısa bir duraksamadan sonra, düz bir sesle": "flat, after pause",
+    "ağlamaklı, sesi yükselerek": "tearful, rising",
+    "boğuk, gözlerini kaçırarak": "hoarse, avoiding gaze",
+    "öfkeyle, ama sesi çatlayarak": "angry, breaking voice",
+    "ilk kez sesi çatlayarak, fısıltıya yakın": "breaking, whispering",
+    "soğuk, kelimeleri tartarak": "cold, measured"
+  }
+}
