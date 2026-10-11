@@ -1,0 +1,81 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı karşılayıcı": {
+      "voice_id": "fnJjHAY6lhrGd5hWLRyU",
+      "name": "Sevval - Call Center"
+    },
+    "onur": {
+      "voice_id": "dLAxUPEUCZ9cz4KHisnL",
+      "name": "Sercan Esen - Dramatic Turkish Storyteller"
+    },
+    "nehir": {
+      "voice_id": "eUUtjbi66JcWz3T4Gvvo",
+      "name": "Ayça - Dynamic, Youthful and Warm"
+    },
+    "tolga": {
+      "voice_id": "rSuyucEH95GpZEfLV0AM",
+      "name": "Can Seçkin - Breathy and Deep"
+    },
+    "#İsimsiz arayan": {
+      "voice_id": "Q5n6GDIjpN0pLOlycRFT",
+      "name": "Yunus - Charismatic Turkish Male"
+    },
+    "#Sesli mesaj sistemi": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "kemal": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "murat": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "ferhat": {
+      "voice_id": "ZsYcqahfiS2dy4J6XYC5",
+      "name": "Ahmet - Steady, Confident and Deep"
+    },
+    "emine": {
+      "voice_id": "o9DOmAyPjfFu8AfoFAnM",
+      "name": "Nazlı Yeni - Friendly, Sympathetic"
+    }
+  },
+  "tags": {
+    "hızlı, nefes nefese": "fast, breathless",
+    "duraksayarak, sesi düşerek": "hesitant, lowering voice",
+    "savunmacı, aceleyle": "defensive, hurried",
+    "heyecanla, gülerek": "excited, laughing",
+    "uzaktan, bağırarak, neşeli": "distant, shouting, cheerful",
+    "sesini alçaltarak, hızlı": "quiet, fast",
+    "yumuşayarak": "softening",
+    "fısıltıya yakın, boğuk": "whispery, hoarse",
+    "aceleyle": "hurried",
+    "kesip atarak": "abrupt",
+    "sert, kısa": "harsh, short",
+    "sesini yumuşatmaya çalışarak, alçak sesle": "trying to soften voice, low",
+    "yorgun, aceleyle bitirerek": "tired, hurried to finish",
+    "çabuk, sesini yükselterek": "quick, raising voice",
+    "tespihi bırakıp, alçak sesle": "low voice, releasing tension",
+    "uzun bir sessizlikten sonra, boğuk": "hoarse, after long silence",
+    "gözlerini kaçırarak, yavaş": "avoiding eyes, slow",
+    "öfkeyle, masaya eğilerek": "angry",
+    "sesi titreyerek, yüzünü ellerine gömüp": "voice trembling",
+    "utançla, kesik kesik": "ashamed, broken",
+    "çaresizce, hızlı": "desperate, fast",
+    "rahatlayarak, elini masaya vurup": "relieved",
+    "gülümsemesi silinmiş, yavaş ve net": "smile faded, slow, clear",
+    "esprisi kaybolmuş, sıkıntıyla": "joke lost, troubled",
+    "soğuk, kelimeleri tek tek bastırarak": "cold, suppressing words",
+    "savunmacı, sesini yükselterek": "defensive, loud",
+    "yavaş, yorgun, her kelimeyi tartarak": "slow, tired, measured",
+    "boğuk, gözlerini kaçırarak": "hoarse, avoiding eyes",
+    "fısıldayarak, uzun bir sessizlikten sonra": "whispering, after long silence",
+    "ağlamaklı, fısıldayarak": "tearful, whispering",
+    "hıçkırarak, sonra bir an sakinleşip": "sob, then calm"
+  }
+}
