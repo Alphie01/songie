@@ -1,0 +1,80 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Operatör": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "#Cemal Er": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "riza": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "levent": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "#Sesli mesaj sistemi": {
+      "voice_id": "mBUB5zYuPwfVE6DTcEjf",
+      "name": "Eda Atlas - Smooth, Clear and Balanced"
+    },
+    "#Tülin Aksel (sunucu)": {
+      "voice_id": "X5CGTTx85DmIuopBFHlz",
+      "name": "Nikole - Natural, Clear and Light"
+    },
+    "halit": {
+      "voice_id": "D1xRw7f8ZHedI7xJgfvz",
+      "name": "Cem - Heroic, Intense and Crisp"
+    },
+    "deniz": {
+      "voice_id": "xgYIZvUB5h2eFY3HUFNj",
+      "name": "Melek - Dynamic, Energetic and Soft"
+    },
+    "sinan": {
+      "voice_id": "7VqWGAWwo2HMrylfKrcm",
+      "name": "Fatih Yıldırım - Deep, Clear and Rich"
+    },
+    "ece": {
+      "voice_id": "xsGHrtxT5AdDzYXTQT0d",
+      "name": "Gönül Filiz - Airy and Soft"
+    },
+    "nermin": {
+      "voice_id": "WgkQ6iX2TeKqW6ww3mEZ",
+      "name": "Nuray - Turkish Professional Narrator"
+    }
+  },
+  "tags": {
+    "nefes nefese, telaşla": "breathless, anxious",
+    "sesi titreyerek": "voice trembling",
+    "sinirli, alçak sesle": "angry, low voice",
+    "kısa bir gülüşle, alaycı": "short laugh, sarcastic",
+    "tane tane, sesini alçaltarak": "articulate, lowering voice",
+    "biraz çakırkeyif, yavaş": "slightly tipsy, slow",
+    "gülümseyerek": "smiling",
+    "kürsüden konuşur gibi, kendinden emin": "confident, speaking clearly",
+    "iç çekerek, sesini alçaltarak": "sighing, lowering voice",
+    "öfkeyle başlayıp yorgun bitirerek": "starting angry, ending tired",
+    "gülümsemesi silinerek, soğuk": "smile fading, cold",
+    "hızlı, savunmacı, gözlüğünü düzelterek": "fast, defensive",
+    "birden soğuk, kısa": "suddenly cold, short",
+    "yavaş, gözlerini balkona çevirerek": "slow, distant",
+    "yorgun, sesi kısılarak": "tired, hoarse voice",
+    "duraksayarak, gözünü avukatına çevirerek": "hesitant, thoughtful",
+    "öfkeyle, kelimeleri bastırarak": "angry, suppressing words",
+    "yavaşça, her kelimeyi tartarak": "slow, deliberate",
+    "çok alçak sesle, yutkunarak": "very low voice, swallowing",
+    "titreyerek, cümlelerin arasında durarak": "trembling, pausing",
+    "birden sakin, ezberlenmiş gibi": "suddenly calm, rehearsed",
+    "yorgun, sesi düşerek": "tired, voice falling",
+    "boğuk, kendine kızarak": "hoarse, self-critical",
+    "derin bir nefesle, düz bir sesle": "deep breath, flat voice",
+    "çok yavaş, sesi kırılarak": "very slow, broken voice",
+    "boğuk, gözlerini kapayarak": "hoarse, eyes closed"
+  }
+}
