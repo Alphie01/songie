@@ -1,0 +1,86 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı görevlisi": {
+      "voice_id": "fnJjHAY6lhrGd5hWLRyU",
+      "name": "Sevval - Call Center"
+    },
+    "sevgi": {
+      "voice_id": "vWs6DV3PkGKMP80V1Hv6",
+      "name": "Dilek Iyigun - Emotional Story Voice"
+    },
+    "#Telesekreter": {
+      "voice_id": "cbqdgvVi3C6sgxIWpqIh",
+      "name": "Füsun Tuncer"
+    },
+    "erol": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "kaan": {
+      "voice_id": "D1xRw7f8ZHedI7xJgfvz",
+      "name": "Cem - Heroic, Intense and Crisp"
+    },
+    "levent": {
+      "voice_id": "lV90UmdRoVFQHzkxUPeu",
+      "name": "Polat - Deep, Dynamic and Confident"
+    },
+    "#Komiser Defne Yalçın": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "#Av. Cengiz Sarp": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "hikmet": {
+      "voice_id": "0DihkedLJYKoWg7H1u4d",
+      "name": "Ergun Kalbak - Deep, Calm and Clear"
+    },
+    "baris": {
+      "voice_id": "sqN4QwtcnanCCWx6TTYj",
+      "name": "Eyyup Okan - Dynamic and Authentic"
+    },
+    "cemil": {
+      "voice_id": "dLAxUPEUCZ9cz4KHisnL",
+      "name": "Sercan Esen - Dramatic Turkish Storyteller"
+    },
+    "nihan": {
+      "voice_id": "KwaeIqNikLVCR098EG82",
+      "name": "Ela - Storyteller & Audiobook Narrator"
+    }
+  },
+  "tags": {
+    "sesi titreyerek, alçak": "trembling, low",
+    "yutkunarak": "swallowing, nervous",
+    "duraksayarak": "pausing, hesitant",
+    "alçak sesle, çekinerek": "quiet, hesitant",
+    "yutkunarak, sesi kısılarak": "swallowing, hoarse",
+    "aceleyle, kapatmadan önce derin bir nefes": "hurried, deep breath",
+    "gergin, hızlı": "tense, fast",
+    "sakin, alçak sesle": "calm, low",
+    "tane tane, sertleşerek": "clear, firm",
+    "sesi titreyerek": "trembling",
+    "çok alçak, soğuk": "very low, cold",
+    "kesin, kapatmadan önce": "firm, before ending",
+    "ölçülü, yavaş": "measured, slow",
+    "kısa, soğuk": "short, cold",
+    "gözünü kaçırmadan, alçak sesle": "steady, low",
+    "ilk kez duraksayarak": "first time, hesitant",
+    "yorgun, sesi kısılarak": "tired, hoarse",
+    "ağır, gururu kırılmış": "slow, hurt pride",
+    "öfkeyle, sesi yükselerek": "angry, rising voice",
+    "utançla, alçak sesle": "ashamed, low",
+    "ölçülü, bir an duraksayarak": "measured, brief pause",
+    "yavaş, kelimeleri seçerek, ilk kez yorgun": "slow, careful, tired",
+    "öfkeyle, dişlerini sıkarak": "angry, teeth clenched",
+    "yutkunarak, sesi titreyerek": "swallowing, trembling",
+    "ağlamaklı, kesik kesik": "choked, broken",
+    "titreyerek, alçak sesle": "trembling, low",
+    "yavaş, utançla ama dik": "slow, ashamed, proud",
+    "sessizce, kendi kendine konuşur gibi": "quiet, musing"
+  }
+}

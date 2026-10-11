@@ -314,7 +314,9 @@ async function main() {
   const before = await credits();
   console.log(`${todo.length} kayıt, ~${chars} karakter · kredi ${before.character_count}/${before.character_limit}`);
   if (args.includes('--dry')) return;
-  if (before.character_count + chars > before.character_limit) throw new Error('Bu ayın kredisi yetmiyor.');
+  // Karakter sayısı üst sınırdır; v3 diyaloglarda faturalanan kredi bunun ~%40'ı çıkıyor. Yetmezse API hata verir,
+  // üretilen kayıtlar kalır ve komut yeniden çalıştırılınca eksikten devam eder.
+  if (before.character_count + chars > before.character_limit) console.warn('Uyarı: kredi sınıra yakın; yetmezse yarıda kalabilir.');
 
   for (const job of todo) {
     const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dt-el-'));
