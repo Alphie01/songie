@@ -1,0 +1,72 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı karşılayıcı": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "kemal": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "#Sesli mesaj sistemi": {
+      "voice_id": "gyxPK6bLXQAkBSCeAKvk",
+      "name": "Sultan - Theatrical, Narrator"
+    },
+    "hasim": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "okan": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "erol": {
+      "voice_id": "GLHtjkeLJ9Rxcv9JhLmh",
+      "name": "Muhammer Arabacı - Enthusiastic, Direct"
+    },
+    "cengiz": {
+      "voice_id": "D1xRw7f8ZHedI7xJgfvz",
+      "name": "Cem - Heroic, Intense and Crisp"
+    },
+    "deniz": {
+      "voice_id": "KAGDtM2gzDrjWlUp2KNe",
+      "name": "Deniz - Soft, Friendly Narrator"
+    },
+    "yusuf": {
+      "voice_id": "tOqnHSMt5y3uRBgH7e8J",
+      "name": "Yusuf Suratlı - Storyteller"
+    }
+  },
+  "tags": {
+    "nefesi kesik, sesi titreyerek": "breathless, trembling voice",
+    "telaşla": "hurried, anxious",
+    "sesi kırılarak, kendi kendine": "broken voice, to oneself",
+    "nefes nefese, rüzgâra karşı yüksek sesle": "out of breath, loud against wind",
+    "alçalarak, kendi kendine": "lowering voice, to oneself",
+    "sertleşerek, yorgun": "harsh, tired",
+    "alçak sesle, telaşlı": "low voice, restless",
+    "sesi sertleşerek": "voice harshening",
+    "sesi titreyerek": "trembling voice",
+    "yorgun, alçalarak": "tired, lowering voice",
+    "fısıltıya yakın, kesin": "near whisper, firm",
+    "sesi titreyerek ama dik durmaya çalışarak": "trembling voice, trying to stay strong",
+    "uzun bir sessizlikten sonra, kısık sesle": "long silence, hushed voice",
+    "gözleri dolarak, sesi çatlayarak": "teary, cracking voice",
+    "ağlayarak, kesik kesik": "crying, choppy voice",
+    "öfkeyle, sesi kırılarak": "angry, broken voice",
+    "bağırarak, masaya vurarak": "shouting, intense",
+    "yutkunarak, sesi alçalarak": "swallowing, lowering voice",
+    "yüzünü ellerine gömerek, boğuk": "muffled, subdued",
+    "sabırsızca, elini masaya vurarak": "impatient, forceful",
+    "bağırarak": "shouting",
+    "öfkeden titreyerek": "trembling with anger",
+    "derin bir nefes alıp, hızlı ve net": "deep breath, rapid clear",
+    "omuzları düşerek, kısık sesle": "slumped, hushed voice",
+    "kekeleyerek, sonra bir çırpıda": "stammering, then fluent",
+    "fısıltıyla, gözlerini kaçırarak": "whispering, avoiding eye contact"
+  }
+}
