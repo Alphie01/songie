@@ -1,0 +1,78 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#112 operatörü": {
+      "voice_id": "HpvPCQYbrNIxlW357V4h",
+      "name": "Luna - Calm Turkish Meditation"
+    },
+    "sabri": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "#Komiser Nazlı Aydemir": {
+      "voice_id": "I8PntRGWO35zIGM4lnWO",
+      "name": "Nazlı - Formal and Assertive News Anchor"
+    },
+    "burak": {
+      "voice_id": "Q5n6GDIjpN0pLOlycRFT",
+      "name": "Yunus - Charismatic Turkish Male"
+    },
+    "cengiz": {
+      "voice_id": "7VqWGAWwo2HMrylfKrcm",
+      "name": "Fatih Yıldırım - Deep, Clear and Rich"
+    },
+    "serkan": {
+      "voice_id": "DM4ogDUNaqwcuIIRkVZK",
+      "name": "Fatih Çetinkaya - Storyteller"
+    },
+    "emre": {
+      "voice_id": "rSuyucEH95GpZEfLV0AM",
+      "name": "Can Seçkin - Breathy and Deep"
+    },
+    "tarik": {
+      "voice_id": "Y2T2O1csKPgWgyuKcU0a",
+      "name": "Cavit Pancar - Epic Powerful Historical"
+    },
+    "sevim": {
+      "voice_id": "H9xk2HncwpOKhhzbyWsd",
+      "name": "Sevim - Encouraging, Warm and Clear"
+    },
+    "volkan": {
+      "voice_id": "Vv1QW9Yx3WB2mLKFmyZG",
+      "name": "Kaya – Friendly and Powerful"
+    }
+  },
+  "tags": {
+    "nefes nefese, öksürerek": "breathless, coughing",
+    "kesik kesik": "choppy, hesitant",
+    "acıyla, sesi kısılarak": "pained, voice hoarse",
+    "inleyerek": "moaning, pained",
+    "zayıf, yalvarır gibi": "weak, pleading",
+    "çekinerek": "hesitant, timid",
+    "emin olmadan, duraksayarak": "uncertain, faltering",
+    "hızlı, lafı uzatarak": "fast, rambling",
+    "mahcup": "embarrassed, shy",
+    "fısıltıyla, kısık sesle": "whispering, quiet",
+    "yutkunarak": "gulping, nervous",
+    "yorgun, sesi titreyerek": "tired, trembling voice",
+    "bir an duraksayıp, sonra hızlı": "pausing, then fast",
+    "sesini alçaltarak, avukatına bakmadan": "lowered voice, avoiding gaze",
+    "kısa bir sessizlikten sonra, dişlerinin arasından": "brief pause, through teeth",
+    "yorgun, ama hâlâ inatla": "tired, stubborn",
+    "rahatlamış, biraz kendini beğenmiş": "relaxed, slightly smug",
+    "sesi yükselerek, sonra çatallanarak": "voice rising, then breaking",
+    "yenik, derin bir nefes alarak": "defeated, deep breath",
+    "sesi kırılarak": "voice cracking",
+    "birden kavrayarak, yavaşça": "sudden understanding, slow",
+    "yüzünü ellerine gömerek": "face in hands, distressed",
+    "soğuk, ilk kez sarsılarak": "cold, shaken",
+    "gözlüğünü çıkarıp, yorgun bir dürüstlükle": "removing glasses, weary honesty",
+    "çekinerek, sesini alçaltarak": "hesitant, voice lowered",
+    "önce sert, sonra çökerek": "harsh then collapsing",
+    "öfkeyle, hızlı": "angry, fast",
+    "omuzları düşerek, sesini alçaltarak": "slumped, voice lowered"
+  }
+}
