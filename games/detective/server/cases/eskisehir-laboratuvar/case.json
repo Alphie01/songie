@@ -8,8 +8,8 @@
     "minutes": 120,
     "teaser": "Büyük bir proje başvurusunun teslim gecesi, Biyokimya Bölümü’nün en hırslı araştırmacısı laboratuvarının soğuk odasında ölü bulunur. Kapının iç kolu boşta dönmektedir; başvuru ise gece 23:41’de, onun hesabından gönderilmiştir.\n\nArızalı bir kapı mı, yoksa birinin kusursuz kurduğu bir gece mi? Kartlı geçişler, sunucu kayıtları, bir soğutma cihazının hafızası ve bir laboratuvar defteri aynı soruyu soruyor: Sinan Oktay en son ne zaman nefes alıyordu?",
     "cover": "cover",
-    "hoursBudget": 36,
-    "targetHours": 22,
+    "hoursBudget": 39,
+    "targetHours": 24,
     "narrator": {
       "gender": "female",
       "age": "adult",
@@ -103,8 +103,8 @@
     },
     "ph-kapi-dis": {
       "kind": "scene",
-      "prompt": "Forensic photograph of the closed exterior of a stainless steel walk-in cold room door in a laboratory, a single small yellow square sticky note stuck at eye level with handwriting that is not legible, a wheeled two-tier steel service cart parked flush against the wall right next to the door, an ice bucket and an empty plastic tube rack on the cart, an evidence marker number on the floor",
-      "alt": "Olay yeri fotoğrafı: kapalı çelik soğuk oda kapısı. Göz hizasında tek bir küçük sarı yapışkan not; yazısı okunmuyor. Kapının hemen sağında, duvara dayalı iki katlı tekerlekli çelik bir servis arabası; üstünde buz kovası ve boş bir tüp rafı. Yerde delil numarası."
+      "prompt": "Forensic photograph of a stainless steel walk-in cold room door in a laboratory standing wide open, cold mist at the threshold, a single small square pale paper sticky note stuck at eye level on the outer face of the open door with handwriting that is not legible, a wheeled two-tier steel service cart parked flush against the wall right next to the door frame, an ice bucket and an empty plastic tube rack on the cart, an evidence marker number on the floor",
+      "alt": "Olay yeri fotoğrafı: çelik soğuk oda kapısı ardına kadar açık, eşikte soğuk buğu. Açık kapının dış yüzünde, göz hizasında küçük, kare bir yapışkan not; yazısı okunmuyor. Kapı kasasının hemen sağında, duvara dayalı iki katlı tekerlekli çelik bir servis arabası; üstünde buz kovası ve boş bir tüp rafı. Yerde delil numarası."
     },
     "ph-b205": {
       "kind": "scene",
@@ -114,12 +114,12 @@
     "ph-k2-a": {
       "kind": "cctv",
       "prompt": "High-angle wide security camera still of a long university corridor at night, low resolution, greyish tint, a single figure seen from behind walking away from the camera toward a door on the left side, the figure wears a knee-length dark coat and a light-coloured scarf and holds two paper cups, one in each hand, several closed doors along both walls, a fire exit at the far end",
-      "alt": "Güvenlik kamerası karesi, yüksek ve geniş açı, düşük çözünürlük. Gece, uzun bir koridor. Arkası dönük tek bir kişi soldaki bir kapıya yürüyor: diz boyu koyu kaban, açık renk atkı, iki elinde birer karton bardak. Yüz görünmüyor. Koridorun iki yanında kapalı kapılar, dipte yangın çıkışı."
+      "alt": "Güvenlik kamerası karesi, yüksek ve geniş açı, düşük çözünürlük. Gece, uzun bir koridor. Arkası dönük tek bir kişi soldaki bir kapıya yürüyor: koyu renk, uzun bir dış giyim; boynunda açık renk bir şey; iki elinde birer karton bardak. Yüz görünmüyor. Koridorun iki yanında kapalı kapılar, dipte yangın çıkışı."
     },
     "ph-k2-b": {
       "kind": "cctv",
       "prompt": "High-angle wide security camera still of a long university corridor at night, low resolution, greyish tint, a figure has just stepped out of a door with a frosted glass panel on the left side and is turning toward a door on the opposite right side further down, wearing a knee-length dark coat and a light-coloured scarf, hands empty, face not visible, the frosted door panel glowing with office light",
-      "alt": "Güvenlik kamerası karesi, yüksek ve geniş açı, düşük çözünürlük. Gece, koridor. Bir kişi soldaki buzlu camlı bir kapıdan yeni çıkmış, koridorun ilerisinde karşı taraftaki bir kapıya dönüyor: diz boyu koyu kaban, açık renk atkı, elleri boş. Yüz görünmüyor. Buzlu cam panelden oda ışığı sızıyor."
+      "alt": "Güvenlik kamerası karesi, yüksek ve geniş açı, düşük çözünürlük. Gece, koridor. Bir kişi soldaki buzlu camlı bir kapıdan yeni çıkmış, koridorun ilerisinde karşı taraftaki bir kapıya dönüyor: koyu renk, uzun bir dış giyim; boynunda açık renk bir şey; elleri boş. Yüz görünmüyor. Buzlu cam panelden oda ışığı sızıyor."
     },
     "ph-gate-a": {
       "kind": "cctv",
@@ -158,7 +158,7 @@
       "name": "Prof. Dr. Halil Ersoy",
       "age": 61,
       "role": "Biyokimya Bölümü başkanı",
-      "relation": "Başvuruyu kurum adına onaylayan yetkili; olay akşamı laboratuvara kahve götürdü",
+      "relation": "Başvuruyu kurum adına onaylayan yetkili; teslim akşamı laboratuvara uğradı",
       "summary": "Otuz yıllık öğretim üyesi, 2019’dan beri bölüm başkanı. Fakültede sözü dinlenen, ölçülü ve kibar biri. Teslim gecesi 23:00’ten sonra Odunpazarı’nda meslektaşlarıyla yemekteydi.",
       "portrait": "p-halil",
       "suspect": true,
@@ -189,7 +189,7 @@
       "age": 54,
       "role": "Biyokimya Bölümü laboratuvar teknisyeni",
       "relation": "Cesedi bulan ve 112’yi arayan kişi; soğuk odanın bakımından sorumlu",
-      "summary": "Yirmi iki yıldır bölümde. Cihazlar, kimyasal stoklar ve soğuk oda onun işi. Soğuk odanın iç açma kolunu ölümden bir gün önce onardığını söylüyor.",
+      "summary": "Yirmi iki yıldır bölümde. Cihazlar, kimyasal stoklar ve soğuk oda onun işi. Soğuk odanın iç açma kolunu 11 Şubat’ta, teslim gecesinden bir gün önce onardığını söylüyor.",
       "portrait": "p-yusuf",
       "suspect": true,
       "voice": {
@@ -565,7 +565,7 @@
     },
     {
       "id": "f-pin-1707",
-      "text": "12 Şubat 17:07–17:10’da, laboratuvarda yalnızca Halil varken soğuk oda kapısı açıldı; pimi o sırada Halil söktü."
+      "text": "İç kol 14:09’da hâlâ çalışıyordu; ondan sonraki tek açılış 17:07–17:10’da, laboratuvarda yalnızca Halil varken oldu. Pimi o sırada Halil söktü."
     },
     {
       "id": "f-zolpidem",
@@ -641,7 +641,7 @@
     },
     {
       "id": "f-burak-hotel",
-      "text": "Burak 21:39’da yerleşkeden çıktı; 21:58’den sonra otelindeydi."
+      "text": "Burak 20:09’da binadan, 20:12’de yerleşkeden çıktı; 20:33’ten sonra otelindeydi."
     },
     {
       "id": "f-recep-mistake",
@@ -768,7 +768,8 @@
         "sinan",
         "yusuf",
         "halil",
-        "ece"
+        "ece",
+        "recep"
       ],
       "reveals": [],
       "timeline": [
@@ -799,11 +800,11 @@
           },
           {
             "title": "İlk tespit",
-            "text": "Kurban soğuk odanın (yaklaşık 2,4 × 3,1 m, +4 °C) iç kısmında, çelik rafa sırtını dayamış, oturur vaziyette bulunmuştur. Üzerinde laboratuvar önlüğü, kazak ve gömlek vardır. Görünür bir yara veya boğuşma izi yoktur.\n\nSoğuk oda kapısı yaylıdır, kendiliğinden kapanır ve dışarıdan normal açılmaktadır. İçerideki acil açma kolunun mil bağlantısı boşta dönmekte, kapı içeriden açılamamaktadır. Kapının dış yüzünde el yazısıyla “KOLON DENGEDE — AÇMAYIN” yazılı sarı bir not bulunmuştur."
+            "text": "Kurban soğuk odanın (yaklaşık 2,4 × 3,1 m, +4 °C) iç kısmında, çelik rafa sırtını dayamış, oturur vaziyette bulunmuştur. Üzerinde laboratuvar önlüğü, kazak ve gömlek vardır. Görünür bir yara veya boğuşma izi yoktur.\n\nSoğuk oda kapısı yaylıdır, kendiliğinden kapanır ve dışarıdan normal açılmaktadır. İçerideki acil açma kolunun mil bağlantısı boşta dönmekte, kapı içeriden açılamamaktadır. Kapının dış yüzünde el yazısıyla “KOLON DENGEDE — AÇMAYIN” yazılı yapışkan bir not bulunmuştur."
           },
           {
             "title": "Öğrenilenler",
-            "text": "Bölüm başkanı Prof. Dr. Halil Ersoy’un 08:31’de olay yerine geldiği, kurbanın 12.02.2026 gecesi Ulusal Bilim ve Teknoloji Ajansı’nın (UBTA) “Öncü Ar-Ge 2026-1” çağrısına başvuru yapmak için laboratuvarda kaldığı öğrenilmiştir. Halil Ersoy’un beyanına ve portal bildirimine göre başvuru, kurbanın hesabından 23:41’de gönderilmiş, kurum onayı 23:46’da verilmiştir.\n\nDoktora öğrencisi Ece Durmaz, telefonuna kurbanın hesabından 23:44’te “Gönderdim” içerikli bir mesaj geldiğini, laboratuvardan 23:52’de ayrıldığını beyan etmiştir."
+            "text": "Bölüm başkanı Prof. Dr. Halil Ersoy’un 08:31’de olay yerine geldiği, kurbanın 12.02.2026 gecesi Ulusal Bilim ve Teknoloji Ajansı’nın (UBTA) “Öncü Ar-Ge 2026-1” çağrısına başvuru yapmak için laboratuvarda kaldığı öğrenilmiştir. Halil Ersoy’un beyanına ve portal bildirimine göre başvuru, kurbanın hesabından 23:41’de gönderilmiş, kurum onayı 23:46’da verilmiştir.\n\nDoktora öğrencisi Ece Durmaz, telefonuna kurbanın hesabından 23:44’te “Gönderdim” içerikli bir mesaj geldiğini, laboratuvardan 23:52’de ayrıldığını beyan etmiştir. Gece güvenlik görevlisi Recep Sarı’nın 20:00’den sabaha kadar binanın giriş masasında görevli olduğu öğrenilmiştir."
           },
           {
             "title": "İlk değerlendirme",
@@ -836,14 +837,14 @@
     {
       "id": "ph-kapi-dis",
       "title": "Soğuk oda kapısının dışı",
-      "summary": "Kapı açılmadan önce çekilen ilk fotoğraf: not ve servis arabası.",
+      "summary": "Olay Yeri İnceleme’nin kapının dış yüzünü ve servis arabasını gösteren fotoğrafı.",
       "people": [],
       "reveals": [],
       "timeline": [],
       "doc": {
         "kind": "photo",
         "image": "ph-kapi-dis",
-        "caption": "Soğuk oda SO-1, kapı dış yüzü, 13.02.2026 08:44. Kapı kapalı. Göz hizasında 76 × 76 mm sarı yapışkan not; mavi tükenmezle, büyük harflerle: “KOLON DENGEDE — AÇMAYIN”. Kapının sağında, duvara bitişik iki katlı servis arabası; üstünde buz kovası (su) ve boş bir tüp rafı. Teknisyen, sabah kapıyı açtığında arabanın bu konumda olduğunu beyan etti.",
+        "caption": "Soğuk oda SO-1, kapı dış yüzü, 13.02.2026 08:44. Kapı, teknisyenin 07:35’te açtığı konumda, açık. Kapının dış yüzünde göz hizasında 76 × 76 mm yapışkan not; mavi tükenmezle, büyük harflerle: “KOLON DENGEDE — AÇMAYIN”. Kapı kasasının sağında, duvara bitişik iki katlı servis arabası; üstünde buz kovası (su) ve boş bir tüp rafı. Teknisyen, sabah geldiğinde kapının kapalı, arabanın bu konumda olduğunu beyan etti.",
         "tag": "OYİ 2026/311 · Fotoğraf 2/38"
       }
     },
@@ -984,7 +985,7 @@
         "sections": [
           {
             "title": "Soğuk oda SO-1",
-            "text": "İnceleme 08:40–10:15 arasında yapıldı. Oda sıcaklığı 08:45’te +6,8 °C (kapı açık). Raflarda numune kutuları, tampon şişeleri. Sol duvarda FPLC protein saflaştırma cihazı çalışır durumdaydı; ekranında “Bekleme” yazıyordu, ekibimizce 07:41’de kapatıldı.\n\nKurban, FPLC’nin yanındaki rafın dibinde oturur vaziyetteydi. Sağ dizinde kumaş altında küçük bir sıyrık. Ellerinde, parmak eklemlerinde ve önkollarında darbe, sıyrık ya da tırnak kırığı yoktur. Kapının iç yüzünde el izi lekesi saptanmadı. Sol bileğinde siyah kayışlı bir akıllı saat vardır; saat kurbanla birlikte Adli Tıp’a gönderildi."
+            "text": "İnceleme 08:40–10:15 arasında yapıldı. Oda sıcaklığı 08:45’te +6,8 °C (kapı açık). Raflarda numune kutuları, tampon şişeleri. Sol duvarda FPLC protein saflaştırma cihazı var; teknisyen Yusuf Bozkurt, cesedi bulduktan sonra ötmekte olan cihazı 07:41’de kapattığını beyan etti.\n\nKurban, FPLC’nin yanındaki rafın dibinde oturur vaziyetteydi. Sağ dizinde kumaş altında küçük bir sıyrık. Ellerinde, parmak eklemlerinde ve önkollarında darbe, sıyrık ya da tırnak kırığı yoktur. Kapının iç yüzünde el izi lekesi saptanmadı. Sol bileğinde siyah kayışlı bir akıllı saat vardır; saat kurbanla birlikte Adli Tıp’a gönderildi."
           },
           {
             "title": "Kapı mekanizması",
@@ -992,15 +993,15 @@
           },
           {
             "title": "Kapının dışı ve B-204",
-            "text": "Kapının sağında, duvara bitişik servis arabası (delil 3). Kapı üzerindeki sarı not (delil 4) alındı: 76 × 76 mm, mavi tükenmez, büyük harf. Arabanın tutma kolunda kurban ve Yusuf Bozkurt’a ait parmak izleri; ayrıca tanımlanamayan kısmi, silinmiş izler.\n\nB-204’te tezgâhlarda olağan çalışma düzeni. Beyaz tahtanın sağ alt köşesinde: “UzakDestek: katılımsız parola — Lab2026!bk (Yusuf)”."
+            "text": "Kapının sağında, duvara bitişik servis arabası (delil 3). Kapı üzerindeki not (delil 4) alındı: 76 × 76 mm yapışkan not kâğıdı, mavi tükenmez, büyük harf. Arabanın tutma kolunda kurban ve Yusuf Bozkurt’a ait parmak izleri; ayrıca tanımlanamayan kısmi, silinmiş izler.\n\nB-204’te tezgâhlarda olağan çalışma düzeni. Beyaz tahtanın sağ alt köşesinde: “UzakDestek: katılımsız parola — Lab2026!bk (Yusuf)”."
           },
           {
             "title": "B-205 (kurbanın odası)",
-            "text": "Oda ışığı ve bilgisayar açık; ekran kilidi devre dışı bırakılmış. Masada şarja takılı cep telefonu (delil 9), laboratuvar defteri (delil 10). Ofis sandalyesinin arkalığına diz boyu, koyu lacivert yün bir kaban asılı; kabanın cebinde kurbanın cüzdanı ve araba anahtarı. Çöp kovasında iki adet beyaz karton kahve bardağı (delil 7 ve 8); birinin dibinde 2–3 ml kahve kalıntısı."
+            "text": "Oda ışığı ve bilgisayar açık; ekran kilidi devre dışı bırakılmış. Masada şarja takılı cep telefonu (delil 9), laboratuvar defteri (delil 10). Masada ve masa üstündeki evrak tepsisinde imza bekleyen bir evrak ya da imza sayfası yoktur; tepside yalnızca iki ders kataloğu ve bir cihaz faturası var. Ofis sandalyesinin arkalığına diz boyu, koyu lacivert yün bir kaban asılı; kabanın cebinde kurbanın cüzdanı ve araba anahtarı. Çöp kovasında iki adet beyaz karton kahve bardağı (delil 7 ve 8); birinin dibinde 2–3 ml kahve kalıntısı."
           },
           {
             "title": "B-202 (teknisyen odası)",
-            "text": "Eksik pim ve vida için arama yapıldı. Yusuf Bozkurt’un huzurunda, ona ait gri takım dolabının çekmeceleri açıldı. Üst çekmece: kırmızı tutuculu 9 parçalı alyan takımı (1,5–10 mm, tam; 2,5 mm yerinde), 6 tornavida, pense, yan keski, izole bant, el feneri, multimetre. Alt çekmece: açılmış XL nitril eldiven kutusu, temizlik bezleri, iki boş etiketsiz cam şişe. Pim ve vida bulunamadı. Çekmeceler incelemeden sonra kapatıldı; oda mühürlenmedi."
+            "text": "Eksik pim ve vida için 10:05–10:12 arasında, Yusuf Bozkurt’un huzurunda kısa bir bakış yapıldı: tezgâh, çöp kutusu ve alet çantası. Pim ve vida görülmedi. Gri takım dolabı kilitliydi; Yusuf Bozkurt anahtarın kapının yanındaki askıda durduğunu söyledi, dolap bu aşamada açılmadı. Ekip ve Yusuf Bozkurt 10:12’de birlikte çıktı; oda mühürlenmedi."
           },
           {
             "title": "Diğer",
@@ -1057,7 +1058,7 @@
           },
           {
             "title": "Ön kanaat",
-            "text": "Bulgular hipotermi ile uyumludur. Ellerde direnç ya da kurtulma çabasına ait iz bulunmaması dikkat çekicidir. Kan, idrar, göz içi sıvısı ve mide içeriği toksikolojik inceleme için alınmıştır; sonuç beklenmektedir."
+            "text": "Bulgular hipotermi ile uyumludur. Ellerde direnç ya da kurtulma çabasına ait iz bulunmaması dikkat çekicidir. +4 °C’de giyinik, sağlıklı bir erişkinin birkaç saat içinde hipotermiden ölmesi olağan değildir; bilinci ve titreme tepkisini baskılayan bir etken (ilaç, alkol) araştırılmalıdır. Kan, idrar, göz içi sıvısı ve mide içeriği toksikolojik inceleme için alınmıştır; sonuç beklenmektedir."
           }
         ],
         "signature": "Uzm. Dr. Hande Aksoy, Adli Tıp Uzmanı"
@@ -1289,17 +1290,24 @@
             "result": "GEÇİŞ"
           },
           {
-            "time": "12.02 19:58",
-            "card": "P-0342",
-            "holder": "Sinan Oktay",
-            "door": "B-204",
-            "result": "GEÇİŞ"
-          },
-          {
             "time": "12.02 20:02",
             "card": "G-0007",
             "holder": "Recep Sarı (güvenlik)",
             "door": "Turnike",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "12.02 20:09",
+            "card": "ZYR-03",
+            "holder": "Ziyaretçi: Burak Esen",
+            "door": "Turnike",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "12.02 20:11",
+            "card": "P-0342",
+            "holder": "Sinan Oktay",
+            "door": "B-204",
             "result": "GEÇİŞ"
           },
           {
@@ -1317,14 +1325,7 @@
             "result": "GEÇİŞ"
           },
           {
-            "time": "12.02 21:36",
-            "card": "ZYR-03",
-            "holder": "Ziyaretçi: Burak Esen",
-            "door": "Turnike",
-            "result": "ÇIKIŞ"
-          },
-          {
-            "time": "12.02 21:58",
+            "time": "12.02 21:45",
             "card": "P-0298",
             "holder": "Gülşen Tan",
             "door": "B-212",
@@ -1465,7 +1466,7 @@
           },
           {
             "q": "Ziyaretçi kartlarını kim verir?",
-            "a": "Akşam sekizden sonra ben. Öncesini gündüz arkadaş verir, deftere yazar. Feronya’dan gelen bey benim vardiyamda çıktı, dokuz buçuğu biraz geçe. Kartı bıraktı, otoparka yürüdü, arabasıyla gitti."
+            "a": "Akşam sekizden sonra ben. Öncesini gündüz arkadaş verir, deftere yazar. Feronya’dan gelen bey benim vardiyamda çıktı, sekizi on geçe. Kartı bıraktı, otoparka yürüdü, arabasıyla gitti."
           },
           {
             "q": "Halil Hoca’yı gördünüz mü?",
@@ -1485,7 +1486,11 @@
           },
           {
             "q": "Yüzünü gördünüz mü?",
-            "a": "Yok, buzlu cam o, gölge gibi görünür. Ama oturan biri vardı, eminim. Omuzları, başı… Kaban gibi koyu bir şey giymişti."
+            "a": "Yok, buzlu cam o, gölge gibi görünür. Ama oturan biri vardı, eminim. Omuzları, başı… Ekranın ışığı vuruyordu."
+          },
+          {
+            "q": "Gece ikideki ve sabah beşteki turlarınızda ne gördünüz?",
+            "a": "Koridorda kimse yoktu. Sinan Hoca’nın odasının ışığı hâlâ yanıyordu. Sabaha karşı “masada uyuyakaldı herhalde” dedim, kapısını çalmadım."
           },
           {
             "q": "Yusuf Bozkurt’u gece gördünüz mü?",
@@ -1542,7 +1547,7 @@
         "qa": [
           {
             "q": "Dün akşamı anlatır mısınız?",
-            "a": "Başvurunun son şekillerini düzenliyordum. Hoca odasında Feronya’dan gelen beyle toplantıdaydı, dokuz buçuğa kadar sürdü. Bir ara sesleri yükseldi. Hoca “Bu dizi sizin elinize nereden geçti?” diye sordu galiba, tam duymadım."
+            "a": "Başvurunun son şekillerini düzenliyordum. Hoca odasında Feronya’dan gelen beyle toplantıdaydı, sekize kadar sürdü. Sona doğru sesleri yükseldi. Hoca “Bu dizi sizin elinize nereden geçti?” diye sordu galiba, tam duymadım."
           },
           {
             "q": "Sinan Hoca’yla aranızda bir tartışma oldu mu?",
@@ -1558,7 +1563,7 @@
           },
           {
             "q": "Siz ne yapıyordunuz?",
-            "a": "Tezgâhımdaydım, kulaklıkla çalışıyordum. On gibi “aşağı inip yemeğimi alacağım” dedim. 22:03’te çıktım. O sırada Halil Hoca hâlâ Sinan Hoca’nın odasındaydı, seslerini duyuyordum."
+            "a": "Tezgâhımdaydım, kulaklığın tekini takmış çalışıyordum. On gibi “aşağı inip yemeğimi alacağım” dedim. 22:03’te çıktım. O sırada Halil Hoca hâlâ Sinan Hoca’nın odasındaydı, seslerini duyuyordum."
           },
           {
             "q": "Döndüğünüzde?",
@@ -1769,7 +1774,7 @@
           },
           {
             "q": "Dün öğlen bir ziyaretçiniz olmuş.",
-            "a": "Damadım Can. Kızım Selda’yla Ankara’da yaşarlar, ikisi de kimyacı. Annemin gönderdiği birkaç şeyi getirdi, birlikte yemek yedik, laboratuvarı gezdirdim, akşamüstü trenle döndü."
+            "a": "Damadım Can. Kızım Selda’yla Ankara’da yaşarlar, ikisi de kimyacı. Kızım annesine birkaç şey göndermişti, Can getirdi; birlikte yemek yedik, laboratuvarı gezdirdim, akşamüstü trenle döndü."
           },
           {
             "q": "Eklemek istediğiniz bir şey?",
@@ -1843,7 +1848,7 @@
           },
           {
             "q": "Eklemek istediğiniz?",
-            "a": "Halil’in o gece bir yere ayrılması mümkün değildi, burnumun dibindeydi."
+            "a": "Halil’in o gece masadan ayrılması mümkün değildi, burnumun dibindeydi."
           }
         ]
       }
@@ -2016,7 +2021,7 @@
           },
           {
             "q": "İzniniz ne zaman bitiyor?",
-            "a": "Pazartesi dahil izinliyim. Kızımın nişanı var, Kütahya’ya gidiyoruz. Telefonum açık."
+            "a": "Salı dâhil izinliyim. Kızımın nişanı var, Kütahya’ya gidiyoruz. Telefonum açık."
           }
         ]
       }
@@ -2070,7 +2075,7 @@
           },
           {
             "q": "Seminer sırasında ne oldu?",
-            "a": "Dörtte buçukta bölüm semineri vardı, aşağıda amfide. Hepimiz oradaydık, Halil Hoca da. Halil Hoca beş gibi telefonla konuşarak çıktı, dönmedi. Yusuf Abi seminere gelmez, dört buçukta çıkar."
+            "a": "Dört buçukta bölüm semineri vardı, aşağıda amfide. Hepimiz oradaydık: Sinan Hoca ön sırada oturdu, konuşmacıya iki soru sordu, sonuna kadar kaldı; Ece, ben, Gülşen Hoca, Halil Hoca da. Halil Hoca beş gibi telefonla konuşarak çıktı, dönmedi. Seminer altıya on kala bitti, Sinan Hoca’yla birlikte yukarı çıktık. Yusuf Abi seminere gelmez, dört buçukta çıkar."
           },
           {
             "q": "Öğlen laboratuvara kim geldi?",
@@ -2086,7 +2091,7 @@
           },
           {
             "q": "Feronya toplantısını duydunuz mu?",
-            "a": "Sesler yükseldi. Hoca “imzalamam” dedi. Sonra ben çıktım."
+            "a": "Sekize doğru sesler yükseldi. Hoca “imzalamam” dedi. Adam sekizi on geçe çıkıp gitti."
           },
           {
             "q": "Gülşen Hoca’yla ilgili bir şey biliyor musunuz?",
@@ -2153,7 +2158,7 @@
         "cc": "Mert Kaya <mert.kaya@ogr.porsuk.edu.tr>",
         "date": "12.02.2026 21:05",
         "subject": "Şekil 3",
-        "body": "Ece,\n\nŞekil 3’ü başvurudan çıkardım. 2. ve 5. kuyucuklar 2023 Mart jelinle piksel piksel aynı; kontrastla oynanmış. Bu gece FPLC ile saflaştırmayı tekrarlıyorum, temiz veri çıkarsa onu koyarım, çıkmazsa şekilsiz göndeririz.\n\nBaşvurudan sonra seninle ve etik kurulla oturacağız. Bunu örtmem, ama seni de ateşe atmam. Kimseye bir şey söyleme, panik yapma.\n\nMert, bilgin olsun; dosyaya dokunma.\n\n— Sinan\n\n— 21:12, Ece Durmaz —\nHocam lütfen. Açıklayabilirim. Etik kurul benim bittiğim gündür.",
+        "body": "Ece,\n\nŞekil 3’ü başvurudan çıkardım. 2. ve 5. kuyucuklar Mart 2023 jelinle piksel piksel aynı; kontrastla oynanmış. Bu gece FPLC ile saflaştırmayı tekrarlıyorum, temiz veri çıkarsa onu koyarım, çıkmazsa şekilsiz göndeririz.\n\nBaşvurudan sonra seninle ve etik kurulla oturacağız. Bunu örtmem, ama seni de ateşe atmam. Kimseye bir şey söyleme, panik yapma.\n\nMert, bilgin olsun; dosyaya dokunma.\n\n— Sinan\n\n— 21:12, Ece Durmaz —\nHocam lütfen. Açıklayabilirim. Etik kurul benim bittiğim gündür.",
         "attachments": []
       }
     },
@@ -2178,7 +2183,7 @@
         "to": "Sinan Oktay <soktay@porsuk.edu.tr>",
         "date": "12.02.2026 21:47",
         "subject": "Bu akşamki görüşme",
-        "body": "Sinan Bey,\n\nBu akşamki tavrınızı anlayamadım. Size iki yıldır bu enzime inanan tek şirket olarak geldik. Malzeme transfer sözleşmesi standarttır; “dizinin geçmişi” diye bir konuyu toplantının son yarım saatinde açmanız ve bize karşı ithamlarda bulunmanız kabul edilemez.\n\nYarın 10:00’da hukuk müdürümüzle fakültede olacağım. İmza atılmazsa başvurunuzdaki destek mektubumuzu geri çekmek zorunda kalırız ve bunun bütün sonuçları sizin sorumluluğunuzda olur.\n\nSaygılarımla,\nBurak Esen\nİş Geliştirme Müdürü, Feronya Biyoteknoloji A.Ş.",
+        "body": "Sinan Bey,\n\nOtele döndüm, hâlâ bu akşamki tavrınızı anlayamıyorum. Size iki yıldır bu enzime inanan tek şirket olarak geldik. Malzeme transfer sözleşmesi standarttır; “dizinin geçmişi” diye bir konuyu toplantının son yarım saatinde açmanız ve bize karşı ithamlarda bulunmanız kabul edilemez.\n\nYarın 10:00’da hukuk müdürümüzle fakültede olacağım. İmza atılmazsa başvurunuzdaki destek mektubumuzu geri çekmek zorunda kalırız ve bunun bütün sonuçları sizin sorumluluğunuzda olur.\n\nSaygılarımla,\nBurak Esen\nİş Geliştirme Müdürü, Feronya Biyoteknoloji A.Ş.",
         "attachments": [
           "MTS_Feronya_PRS7_taslak_v3.pdf"
         ]
@@ -2203,7 +2208,7 @@
         "kind": "letter",
         "hand": "handwritten",
         "date": "11–12.02.2026",
-        "body": "11.02 — G3 varyantı, 65 °C aktivite tekrarı: %62 ± 4 (n=3). Ece’nin Şekil 3’ü %91 gösteriyor?! Parti farkı açıklamaz.\n\n11.02 — Şekil 3, kuyucuk 2 ve 5 → 2023-03 jeli? Üst üste koy. EVET. Aynı.\n\n11.02 gece — TR 2024/011873 — bülten 10.02 — “termostabil esteraz varyantları”. İstem 1–6: G3 halkası + K117R. Bizim dizi?? K117R’yi kimseye vermedik. T.S.’ye yaz.\n\n12.02 — 10:15 Bölüm bşk. ile görüştüm. “Bakarız, aceleci olma.” Bekleyemem.\n\n12.02 — 20:15 FPLC kontrol saflaştırması başladı (SO-1), kolon 5 ml, akış 1 ml/dk. Kapıyı arabayla sabitledim (biliyorum Yusuf).\n\n12.02 — 21:05 Şekil 3 çıkarıldı. 21:18 4.5 eklendi. Yarın 09:00 Rektör.\n\n12.02 — 21:50 Kahve. Çok yorgunum. Run 23:05’te bitiyor → pik var mı bak → PDF → gönder.",
+        "body": "11.02 — G3 varyantı, 65 °C aktivite tekrarı: %62 ± 4 (n=3). Ece’nin Şekil 3’ü %91 gösteriyor?! Parti farkı açıklamaz.\n\n11.02 — Şekil 3, kuyucuk 2 ve 5 → Mart 2023 jeli? Üst üste koy. EVET. Aynı.\n\n11.02 gece — TR 2024/011873 — bülten 10.02 — “termostabil esteraz varyantları”. İstem 1–6: G3 halkası + K117R. Bizim dizi?? K117R’yi kimseye vermedik. T.S.’ye yaz.\n\n12.02 — 10:15 Bölümde konuştum. “Bakarız, aceleci olma.” Bekleyemem.\n\n12.02 — 20:15 FPLC kontrol saflaştırması başladı (SO-1), kolon 5 ml, akış 1 ml/dk. Kapıyı arabayla sabitledim (biliyorum Yusuf).\n\n12.02 — 21:05 Şekil 3 çıkarıldı. 21:18 4.5 eklendi. Yarın 09:00 Rektör.\n\n12.02 — 21:50 Kahve bitti. Çok yorgunum. Run 23:05’te bitiyor → pik var mı bak → PDF → gönder.",
         "condition": "Mavi tükenmez, küçük harfli, sağa yatık el yazısı. Son satırın harfleri iri ve düzensiz, satır çizgisinden kayıyor."
       }
     },
@@ -2688,7 +2693,7 @@
       "doc": {
         "kind": "report",
         "variant": "lab",
-        "agency": "Adli Tıp Kurumu — Ankara Kimya İhtisas Dairesi (ivedi inceleme)",
+        "agency": "Adli Tıp Kurumu — Ankara Grup Başkanlığı Kimya İhtisas Dairesi (ivedi inceleme)",
         "docNo": "Kimya No: 2026/K-3318 · Ön rapor",
         "datetime": "16.02.2026 14:20",
         "heading": "Toksikolojik ön inceleme — Sinan Oktay (Otopsi No: 2026/146)",
@@ -2703,11 +2708,11 @@
           },
           {
             "title": "Değerlendirme",
-            "text": "Saptanan zolpidem düzeyi, ölümden birkaç saat önce yaklaşık 15–20 mg zolpidem alımıyla uyumludur. Bu doz, alımdan 20–40 dakika sonra belirgin uyku hali, koordinasyon bozukluğu ve bilinç bulanıklığı yapar; soğuk ortamda titreme ve uyanma tepkisini baskılayarak hipotermiyi hızlandırır. Mide içeriğindeki ilaç, son içilen sıvıyla (sütlü kahve) birlikte alındığını düşündürmektedir."
+            "text": "Saptanan zolpidem düzeyi, ölümden birkaç saat önce yaklaşık 15–20 mg zolpidem alımıyla uyumludur. Bu doz, alımdan 20–40 dakika sonra belirgin uyku hali, koordinasyon bozukluğu ve bilinç bulanıklığı yapar; soğuk ortamda titreme ve uyanma tepkisini baskılayarak hipotermiyi hızlandırır. +4 °C’de giyinik bir erişkinin birkaç saat içinde hipotermiden ölmesi, ancak böyle bir etkenle açıklanabilir. Mide içeriğindeki ilaç, son içilen sıvıyla (sütlü kahve) birlikte alındığını düşündürmektedir."
           },
           {
             "title": "Not",
-            "text": "Kurumun Sağlık Bakanlığı reçete sorgusunda kurbana son iki yılda zolpidem ya da başka bir uyku ilacı reçete edilmemiştir. Kesin rapor ayrıca gönderilecektir."
+            "text": "Kurumun yaptığı Sağlık Bakanlığı reçete sorgusuna göre kurbana son iki yılda zolpidem ya da başka bir uyku ilacı reçete edilmemiştir. Kesin rapor ayrıca gönderilecektir."
           }
         ],
         "signature": "Uzm. Kimyager Dr. Okan Erdem, Kimya İhtisas Dairesi"
@@ -2737,7 +2742,7 @@
         "sections": [
           {
             "title": "Arama",
-            "text": "Arama 17.02.2026 günü 09:40–10:50 arasında, bölüm sekreteri Filiz Akgün’ün huzurunda yapıldı. Yusuf Bozkurt yıllık izinde olduğundan telefonla bilgilendirildi."
+            "text": "Arama 17.02.2026 günü 09:40–10:50 arasında, bölüm sekreteri Filiz Akgün’ün huzurunda yapıldı. Yusuf Bozkurt yıllık izinde olduğundan telefonla bilgilendirildi. Gri takım dolabı kilitliydi; anahtarı kapının yanındaki askıda asılı bulundu ve dolap bu anahtarla açıldı."
           },
           {
             "title": "Bulunanlar",
@@ -2802,28 +2807,22 @@
             "21:34",
             "B-210",
             "B-208",
-            "Diz boyu koyu kaban, açık renk atkı"
+            "Koyu renk, uzun dış giyim"
           ],
           [
-            "21:38",
-            "B-208",
-            "B-204",
-            "Aynı giyimli kişi; iki elinde birer karton bardak. B-204 kapısında durur, kapı açılır, girer"
-          ],
-          [
-            "21:40",
-            "B-205",
-            "Merdiven",
-            "Lacivert takım, kolunda kaban, evrak çantası. B-205 kapısında beyaz önlüklü biri uğurlar, içeri döner"
-          ],
-          [
-            "21:51",
+            "21:37",
             "B-212",
             "Tuvaletler",
             "Kırmızı mont"
           ],
           [
-            "22:05",
+            "21:38",
+            "B-208",
+            "B-204",
+            "Koyu renk, uzun dış giyim; iki elinde birer karton bardak. B-204 kapısında durur, kapı açılır, girer"
+          ],
+          [
+            "21:52",
             "Tuvaletler",
             "B-212",
             "Kırmızı mont; B-212 kapısında kart okutur"
@@ -2838,7 +2837,7 @@
             "22:23",
             "B-205",
             "B-210",
-            "Diz boyu koyu kaban, açık renk atkı; elleri boş. B-205 kapısını arkasından çeker"
+            "Koyu renk, uzun dış giyim; boynunda açık renk bir şey var. Elleri boş"
           ],
           [
             "22:25",
@@ -2850,7 +2849,7 @@
             "22:53",
             "B-210",
             "Merdiven",
-            "Diz boyu koyu kaban, açık renk atkı, evrak çantası"
+            "Koyu renk, uzun dış giyim, elinde çanta"
           ],
           [
             "23:15",
@@ -2949,7 +2948,7 @@
       "doc": {
         "kind": "photo",
         "image": "ph-k2-a",
-        "caption": "Kamera K2. Diz boyu koyu kabanlı, açık renk atkılı biri, iki elinde birer karton bardakla B-204 kapısına yürüyor.",
+        "caption": "Kamera K2. Koyu renk, uzun dış giyimli biri, iki elinde birer karton bardakla B-204 kapısına yürüyor.",
         "cctv": {
           "camera": "K2 — 2. KAT KORİDOR",
           "timestamp": "12.02.2026 21:38:12"
@@ -2968,7 +2967,7 @@
       "doc": {
         "kind": "photo",
         "image": "ph-k2-b",
-        "caption": "Kamera K2. Diz boyu koyu kabanlı, açık renk atkılı biri B-205’in buzlu camlı kapısından çıkıp koridorun karşı tarafına dönüyor.",
+        "caption": "Kamera K2. Koyu renk, uzun dış giyimli biri B-205’in buzlu camlı kapısından çıkıp koridorun karşı tarafına dönüyor.",
         "cctv": {
           "camera": "K2 — 2. KAT KORİDOR",
           "timestamp": "12.02.2026 22:23:40"
@@ -3077,7 +3076,7 @@
       "doc": {
         "kind": "photo",
         "image": "ph-gate-b",
-        "caption": "Kamera G2. Diz boyu koyu kabanlı, açık renk atkılı, elinde evrak çantası olan biri turnikeye kart okutuyor. Turnike kaydı: 22:48, P-0117.",
+        "caption": "Kamera G2. Diz boyu koyu kabanlı, açık renk atkılı, elinde evrak çantası olan biri turnikeye kart okutuyor.",
         "cctv": {
           "camera": "G2 — B BLOK LOBİ",
           "timestamp": "12.02.2026 22:48:06"
@@ -3099,7 +3098,7 @@
       "doc": {
         "kind": "report",
         "variant": "lab",
-        "agency": "Jandarma ve Emniyet ortak — Ankara Kriminal Polis Laboratuvarı Müdürlüğü",
+        "agency": "Emniyet Genel Müdürlüğü — Ankara Kriminal Polis Laboratuvarı Müdürlüğü",
         "docNo": "Lab. No: 2026/AKP-2291",
         "datetime": "17.02.2026 16:00",
         "heading": "Delil 7 ve 8 (karton kahve bardakları) inceleme raporu",
@@ -3225,7 +3224,7 @@
       "doc": {
         "kind": "table",
         "heading": "Toplantı “UBTA son okuma” — katılımcı raporu (platform yöneticisi çıktısı, saatler TSİ)",
-        "note": "Kamera ve mikrofon durumları platformun otomatik kaydıdır. “Bağlantı kesintisi: yok” katılımcının toplantıdan hiç düşmediğini gösterir. Gülşen Tan’ın bağlantısı Porsuk Üniversitesi kablolu ağından (B-212) yapılmıştır.",
+        "note": "Kamera ve mikrofon durumları platformun otomatik kaydıdır. “Bağlantı kesintisi: yok” katılımcının toplantıdan hiç düşmediğini gösterir. Gülşen Tan’ın bağlantısı Porsuk Üniversitesi kablolu ağından (B-212) yapılmıştır. Platform, kayıt zamanlarını düzenleyenin bilgisayar saatine göre yazar; bu saat ulusal zaman sunucusuna göre 12 saniye geridir (platform destek ekibinin notu).",
         "columns": [
           "Katılımcı",
           "Katılma",
@@ -3248,7 +3247,7 @@
             "21:52:10",
             "22:37:38",
             "Açık, kesintisiz",
-            "Açık; 22:21:05–22:22:40 sessize alındı",
+            "Açık",
             "Yok"
           ],
           [
@@ -3526,7 +3525,7 @@
           },
           {
             "title": "21:18 ve 21:40 sürümleri",
-            "text": "“4. Yaygın etki” başlığına yeni bir alt bölüm eklenmiştir: “4.5 Fikri mülkiyet durumu” (182 kelime). Metin: “Başvuru konusu G3 varyant dizisinin (K117R dahil), ekibimizin bilgisi ve izni dışında, TR 2024/011873 sayılı ulusal patent başvurusunda istem konusu yapıldığı 10.02.2026 tarihinde tespit edilmiştir. Başvuru sahibi Ersa Biyoteknoloji Ltd. Şti.’dir. Söz konusu dizi yalnızca 2024 yılında kurumumuzun BAP birimine sunulan gizli ara rapor ekinde yer almış, başka hiçbir yerde paylaşılmamıştır. Kurumumuzdan inceleme talep edilmiş olup UBTA’nın da bilgilendirilmesini isteriz.” 21:40 sürümünde yalnızca yazım düzeltmeleri vardır."
+            "text": "“4. Yaygın etki” başlığına yeni bir alt bölüm eklenmiştir: “4.5 Fikri mülkiyet durumu” (182 kelime). Metin: “Başvuru konusu G3 varyant dizisinin (K117R dâhil), ekibimizin bilgisi ve izni dışında, TR 2024/011873 sayılı ulusal patent başvurusunda istem konusu yapıldığı 10.02.2026 tarihinde tespit edilmiştir. Başvuru sahibi Ersa Biyoteknoloji Ltd. Şti.’dir. Söz konusu dizi yalnızca 2024 yılında kurumumuzun BAP birimine sunulan gizli ara rapor ekinde yer almış, başka hiçbir yerde paylaşılmamıştır. Kurumumuzdan inceleme talep edilmiş olup UBTA’nın da bilgilendirilmesini isteriz.” 21:40 sürümünde yalnızca yazım düzeltmeleri vardır."
           },
           {
             "title": "23:36 ve 23:38 sürümleri",
@@ -3562,7 +3561,7 @@
         "variant": "voicemail",
         "source": "Av. Tülin Sezer’in cep telefonu sesli mesaj kutusu (vekil tarafından 18.02.2026’da teslim edildi)",
         "datetime": "12.02.2026 21:22",
-        "ambience": "küçük bir odada bilgisayar fanı; arada uzaktan bir kapının çarpması",
+        "ambience": "küçük bir odada bilgisayar fanı; uzakta bir cihazın hafif uğultusu",
         "lines": [
           {
             "name": "Sesli mesaj sistemi",
@@ -3575,7 +3574,7 @@
           },
           {
             "character": "sinan",
-            "text": "Tülin Hanım, iyi akşamlar, Sinan Oktay. E-postanızı okudum, çok teşekkür ederim. Evet… istemlerin hepsi bizim G3 dizisi. K117R dahil. O mutasyonu biz dışarıya hiç vermedik, hiç. Yalnızca 2024’teki BAP ara raporunun gizli ekinde vardı.",
+            "text": "Tülin Hanım, iyi akşamlar, Sinan Oktay. E-postanızı okudum, çok teşekkür ederim. Evet… istemlerin hepsi bizim G3 dizisi. K117R dâhil. O mutasyonu biz dışarıya hiç vermedik, hiç. Yalnızca 2024’teki BAP ara raporunun gizli ekinde vardı.",
             "delivery": "yorgun ama kararlı"
           },
           {
@@ -3799,7 +3798,7 @@
       "doc": {
         "kind": "newspaper",
         "paper": "Porsuk Haber",
-        "date": "20 Şubat 2026, cuma",
+        "date": "20 Şubat 2026 Cuma",
         "headline": "Soğuk odadaki ölüm: soruşturma genişliyor",
         "subhead": "Porsuk Üniversitesi’nde laboratuvarında ölü bulunan Doç. Dr. Sinan Oktay’ın dosyasında savcılık “kaza” ihtimalini geride bıraktı.",
         "body": "Porsuk Üniversitesi Fen Fakültesi’nde 13 Şubat sabahı laboratuvarının soğuk odasında ölü bulunan Doç. Dr. Sinan Oktay’ın ölümüne ilişkin soruşturmada yeni gelişmeler yaşanıyor. Edinilen bilgiye göre Adli Tıp raporunda Oktay’ın kanında uyku ilacı bulundu.\n\nOktay’ın ölüm gecesi yaklaşık 10 milyon liralık bir proje başvurusunu son dakikada gönderdiği, başvurunun ise Ulusal Bilim ve Teknoloji Ajansı tarafından “inceleme sürecinde” askıya alındığı öğrenildi. Üniversiteden yapılan açıklamada, “Değerli hocamızın kaybının bütün yönleriyle aydınlatılması için adli makamlarla tam iş birliği içindeyiz” denildi.\n\nMeslektaşları, Oktay’ın son haftalarda bir patent meselesi nedeniyle gergin olduğunu anlatıyor. Bölümde adı geçen bir teknisyenin evinde ve iş yerinde arama yapıldığı, ancak gözaltı kararı verilmediği belirtildi. Oktay’ın eşi Derya Oktay, “Sinan o kapıyı herkesten iyi bilirdi. Kendi kendine orada kalmaz” dedi.\n\nCumhuriyet Başsavcılığı, soruşturmanın gizliliği nedeniyle açıklama yapmadı."
@@ -3812,7 +3811,8 @@
       "people": [],
       "reveals": [
         "f-locked-2214",
-        "f-pin-removed"
+        "f-pin-removed",
+        "f-pin-1707"
       ],
       "timeline": [],
       "doc": {
@@ -3834,6 +3834,10 @@
           {
             "title": "İç açma mekanizması",
             "text": "Kol, mile 4 × 38 mm çelik pimle bağlanır; pim M4 set vidasıyla sabitlenir. Vida yalnızca 2,5 mm alyan anahtarıyla sökülebilir. Pim ve vida titreşim ya da kullanımla kendiliğinden çıkamaz. Pim çıkarılırsa kol mil etrafında boşta döner ve kapı içeriden açılamaz. Sökme işlemi deneyimli biri için 1–2 dakika sürer."
+          },
+          {
+            "title": "İç kol anahtarı",
+            "text": "SO-1’in iç açma kolunda, kolun kullanıldığını bildiren bir mikro anahtar vardır. Bu veri bulut tablosunda gösterilmez; ham kayıttan çıkarılmıştır. 12.02.2026’da iç kol üç kez kullanılmıştır: 09:14:01, 11:30:58 ve 14:09:44. Her biri bir kapanış kaydından birkaç saniye öncedir; yani içerideki kişi kapıyı içeriden kolla açıp çıkmıştır. 14:09:44’ten sonra iç kol hiç kullanılmamıştır. 20:31 ve 22:14 kapanışlarında iç kol sinyali yoktur."
           },
           {
             "title": "Kapı açık uyarısı",
@@ -4253,7 +4257,7 @@
       ],
       "timeline": [
         {
-          "at": "2026-02-12T10:40",
+          "at": "2026-02-12T10:22",
           "text": "Halil Ersoy, Can Özer’i aradı (6 dk 12 sn)."
         },
         {
@@ -4310,7 +4314,7 @@
             "tower": "Tepebaşı – Batı Yerleşkesi"
           },
           {
-            "datetime": "12.02 10:40",
+            "datetime": "12.02 10:22",
             "type": "giden arama",
             "other": "0533 207 41 19 (Can Özer)",
             "duration": "6 dk 12 sn",
@@ -4331,14 +4335,14 @@
             "tower": "Tepebaşı – Batı Yerleşkesi"
           },
           {
-            "datetime": "12.02 12:20",
+            "datetime": "12.02 12:48",
             "type": "gelen arama",
             "other": "0533 207 41 19 (Can Özer)",
             "duration": "1 dk 02 sn",
             "tower": "Tepebaşı – Batı Yerleşkesi"
           },
           {
-            "datetime": "12.02 12:38",
+            "datetime": "12.02 12:55",
             "type": "giden SMS",
             "other": "0533 207 41 19 (Can Özer)",
             "tower": "Tepebaşı – Batı Yerleşkesi"
@@ -4558,8 +4562,57 @@
         "kind": "accessLog",
         "system": "KampüsKart geçiş denetimi (Rektörlük Bilgi İşlem)",
         "site": "Fen Fakültesi B Blok — zemin turnike, B-202, B-204, B-212",
-        "period": "13.02.2026 12:00 – 17.02.2026 10:00 · B-204 ve B-205, 13.02 14:00’ten 16.02 08:00’e kadar mühürlüdür. B-202 mühürlenmemiştir. B-202’yi açabilen kartlar: Y. Bozkurt (P-0561), güvenlik (G-0007) ve ana kart (P-0117). Y. Bozkurt 13.02 12:00 – 16.02 gün sonu yıllık izindedir.",
+        "period": "13.02.2026 08:00 – 17.02.2026 10:00 · B-204 ve B-205, 13.02 14:00’ten 16.02 08:00’e kadar mühürlüdür. B-202 mühürlenmemiştir. B-202’yi açabilen kartlar: Y. Bozkurt (P-0561), güvenlik (G-0007, G-0012) ve ana kart (P-0117). Ziyaretçi kartları B-202’yi açmaz. Y. Bozkurt 13.02 12:00 – 17.02 gün sonu yıllık izindedir.",
         "rows": [
+          {
+            "time": "13.02 08:31",
+            "card": "P-0117",
+            "holder": "Halil Ersoy",
+            "door": "Turnike",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "13.02 08:38",
+            "card": "ZYR-04",
+            "holder": "Ziyaretçi: Olay Yeri İnceleme",
+            "door": "Turnike",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "13.02 09:02",
+            "card": "D-1186",
+            "holder": "Ece Durmaz",
+            "door": "Turnike",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "13.02 09:31",
+            "card": "D-1203",
+            "holder": "Mert Kaya",
+            "door": "Turnike",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "13.02 09:48",
+            "card": "P-0298",
+            "holder": "Gülşen Tan",
+            "door": "Turnike",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "13.02 10:05",
+            "card": "P-0561",
+            "holder": "Yusuf Bozkurt (OYİ ekibiyle)",
+            "door": "B-202",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "13.02 11:40",
+            "card": "D-1186",
+            "holder": "Ece Durmaz",
+            "door": "Turnike",
+            "result": "ÇIKIŞ"
+          },
           {
             "time": "13.02 12:06",
             "card": "P-0561",
@@ -4803,7 +4856,7 @@
         "to": "Sinan Oktay <sinan.oktay.lab@gmail.com>",
         "date": "12.02.2026 12:30",
         "subject": "TR 2024/011873 — ön değerlendirme",
-        "body": "Sinan Bey merhaba,\n\nDün gece sorduğunuz başvuruyu inceledim.\n\nBaşvuru no: TR 2024/011873. Başvuru tarihi: 14.08.2024. Yayım: 10.02.2026 tarihli bülten. Başlık: “Organofosfat parçalayan termostabil esteraz varyantları ve kullanımları.” Başvuru sahibi: Ersa Biyoteknoloji Araştırma Danışmanlık Ltd. Şti., Ankara. Buluşçu: Can Özer.\n\nİstem 1–6 doğrudan SEQ ID NO:1’e dayanıyor. Gönderdiğiniz G3 dizisiyle karşılaştırdım: 312 amino asidin tamamı aynı; G3 halkası ve K117R mutasyonu dahil. K117R’nin literatürde yayımlanmış hiçbir dizide olmadığını teyit ettim. Bu, bağımsız bir buluş olasılığını neredeyse ortadan kaldırıyor.\n\nYayımdan itibaren üçüncü kişilerin görüş bildirme süresi başladı. Kaynağın sizin çalışmanız olduğunu gösteren tarihli belgeler (defter, ara rapor, sunucu kaydı) çok önemli. Dizi 14.08.2024’ten önce nerede, kimlerle paylaşıldı? Bunu netleştirelim. Üçüncü kişiyle temas kurmadan önce mutlaka kurumunuzla birlikte hareket edin.\n\nSaygılarımla,\nAv. Tülin Sezer\nSezer Patent ve Marka Danışmanlık, Ankara",
+        "body": "Sinan Bey merhaba,\n\nDün gece sorduğunuz başvuruyu inceledim.\n\nBaşvuru no: TR 2024/011873. Başvuru tarihi: 14.08.2024. Yayım: 10.02.2026 tarihli bülten. Başlık: “Organofosfat parçalayan termostabil esteraz varyantları ve kullanımları.” Başvuru sahibi: Ersa Biyoteknoloji Araştırma Danışmanlık Ltd. Şti., Ankara. Buluşçu: Can Özer.\n\nİstem 1–6 doğrudan SEQ ID NO:1’e dayanıyor. Gönderdiğiniz G3 dizisiyle karşılaştırdım: 312 amino asidin tamamı aynı; G3 halkası ve K117R mutasyonu dâhil. K117R’nin literatürde yayımlanmış hiçbir dizide olmadığını teyit ettim. Bu, bağımsız bir buluş olasılığını neredeyse ortadan kaldırıyor.\n\nYayımdan itibaren üçüncü kişilerin görüş bildirme süresi başladı. Kaynağın sizin çalışmanız olduğunu gösteren tarihli belgeler (defter, ara rapor, sunucu kaydı) çok önemli. Dizi 14.08.2024’ten önce nerede, kimlerle paylaşıldı? Bunu netleştirelim. Üçüncü kişiyle temas kurmadan önce mutlaka kurumunuzla birlikte hareket edin.\n\nSaygılarımla,\nAv. Tülin Sezer\nSezer Patent ve Marka Danışmanlık, Ankara",
         "attachments": [
           "TR2024011873_istemler.pdf",
           "SEQ_karsilastirma.pdf"
@@ -4864,7 +4917,7 @@
       ],
       "timeline": [
         {
-          "at": "2026-02-12T21:58",
+          "at": "2026-02-12T20:33",
           "text": "Burak Esen’in otel odası kartı kullanıldı."
         }
       ],
@@ -4884,15 +4937,15 @@
           },
           {
             "label": "Otopark bariyeri (otel)",
-            "value": "12.02.2026 21:56 giriş, 34 ABC 412 plakalı araç"
+            "value": "12.02.2026 20:31 giriş, 34 ABC 412 plakalı araç"
           },
           {
             "label": "Oda kapısı kartı",
-            "value": "12.02 21:58 · 12.02 23:40 · 13.02 07:15 · 13.02 08:30"
+            "value": "12.02 20:33 · 12.02 23:40 · 13.02 07:15 · 13.02 08:30"
           },
           {
             "label": "Lobi bar adisyonu",
-            "value": "12.02 22:04 açıldı, 23:36 kapandı, odaya yazıldı: 2 kadeh viski, 1 tost, 1 su"
+            "value": "12.02 20:41 açıldı, 23:36 kapandı, odaya yazıldı: 2 kadeh viski, 1 tost, 1 su, 2 çay"
           },
           {
             "label": "Lobi bar personeli notu",
@@ -4900,7 +4953,7 @@
           },
           {
             "label": "Fakülte otoparkı bariyeri",
-            "value": "12.02.2026 21:39 çıkış (üniversite kaydı, plaka 34 ABC 412)"
+            "value": "12.02.2026 20:12 çıkış (üniversite kaydı, plaka 34 ABC 412)"
           }
         ]
       }
@@ -4932,7 +4985,7 @@
         "sections": [
           {
             "title": "Ara rapor",
-            "text": "Yürütücü Doç. Dr. Sinan Oktay’ın 01.07.2024’te sunduğu ara rapor ve “Ek-2 (gizli): G3 varyantının tam amino asit dizisi, K117R dahil” incelenmiştir. Yürütücünün talebiyle Ek-2, patent hakları gözetilerek gizli olarak işaretlenmiş; yalnızca proje hakemine açılmıştır."
+            "text": "Yürütücü Doç. Dr. Sinan Oktay’ın 01.07.2024’te sunduğu ara rapor ve “Ek-2 (gizli): G3 varyantının tam amino asit dizisi, K117R dâhil” incelenmiştir. Yürütücünün talebiyle Ek-2, patent hakları gözetilerek gizli olarak işaretlenmiş; yalnızca proje hakemine açılmıştır."
           },
           {
             "title": "Hakem",
@@ -5006,7 +5059,7 @@
       ],
       "timeline": [
         {
-          "at": "2026-02-12T12:28",
+          "at": "2026-02-12T12:50",
           "text": "Can Özer’in treni Eskişehir’e vardı."
         },
         {
@@ -5022,7 +5075,7 @@
         "fields": [
           {
             "label": "Gidiş",
-            "value": "12.02.2026 Ankara Gar 10:55 → Eskişehir 12:28, vagon 3, koltuk 14"
+            "value": "12.02.2026 Ankara Gar 11:20 → Eskişehir 12:50, vagon 3, koltuk 14"
           },
           {
             "label": "Dönüş",
@@ -5030,11 +5083,11 @@
           },
           {
             "label": "Biniş doğrulama",
-            "value": "Gidiş 10:47 (Ankara Gar turnike) · Dönüş 17:12 (Eskişehir Garı turnike)"
+            "value": "Gidiş 11:10 (Ankara Gar turnike) · Dönüş 17:12 (Eskişehir Garı turnike)"
           },
           {
             "label": "Satın alma",
-            "value": "10.02.2026 21:14, internet, kart ****5508"
+            "value": "12.02.2026 10:31 (gidiş ve dönüş birlikte), internet, kart ****5508"
           },
           {
             "label": "Not",
@@ -5100,7 +5153,7 @@
         "sections": [
           {
             "title": "2026/09 — Ece Durmaz",
-            "text": "Doktora öğrencisi Ece Durmaz’ın UBTA başvurusu için hazırladığı Şekil 3’te, 2023 Mart tarihli bir jel görüntüsünden iki kuyucuğun kopyalanıp kontrastının değiştirildiği; öğrencinin kendi beyanıyla doğrulanmıştır. Şekil, yürütücü tarafından gönderimden önce çıkarılmıştır. Öğrencinin ifadesi ve özrü kayda alınmış, disiplin soruşturması açılmasına karar verilmiştir."
+            "text": "Doktora öğrencisi Ece Durmaz’ın UBTA başvurusu için hazırladığı Şekil 3’te, Mart 2023 tarihli bir jel görüntüsünden iki kuyucuğun kopyalanıp kontrastının değiştirildiği; öğrencinin kendi beyanıyla doğrulanmıştır. Şekil, yürütücü tarafından gönderimden önce çıkarılmıştır. Öğrencinin ifadesi ve özrü kayda alınmış, disiplin soruşturması açılmasına karar verilmiştir."
           },
           {
             "title": "2026/10 — Gülşen Tan",
@@ -5152,7 +5205,7 @@
     {
       "id": "e-hts-can",
       "title": "Can Özer’in HTS kaydı",
-      "summary": "Can Özer’in cep hattının 12 Şubat 08:00 – 13 Şubat 01:00 arası dökümü.",
+      "summary": "Can Özer’in cep hattının 12 Şubat 07:00 – 13 Şubat 01:00 arası dökümü.",
       "people": [
         "can",
         "halil"
@@ -5166,12 +5219,24 @@
         "kind": "phoneLog",
         "subscriber": "Can Özer",
         "number": "0533 207 41 19",
-        "period": "12.02.2026 08:00 – 13.02.2026 01:00 (Eskişehir 2. Sulh Ceza Hâkimliği, 2026/488 D. İş)",
+        "period": "12.02.2026 07:00 – 13.02.2026 01:00 (Eskişehir 2. Sulh Ceza Hâkimliği, 2026/488 D. İş)",
         "rows": [
+          {
+            "datetime": "12.02 07:42",
+            "type": "veri",
+            "other": "Mobil internet",
+            "tower": "Çankaya – Ümitköy"
+          },
           {
             "datetime": "12.02 08:20",
             "type": "veri",
             "other": "Mobil internet",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
+            "datetime": "12.02 08:51",
+            "type": "gelen SMS",
+            "other": "Banka bilgilendirme",
             "tower": "Çankaya – Ümitköy"
           },
           {
@@ -5182,51 +5247,76 @@
             "tower": "Çankaya – Ümitköy"
           },
           {
-            "datetime": "12.02 10:20",
+            "datetime": "12.02 09:40",
+            "type": "veri",
+            "other": "Mobil internet",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
+            "datetime": "12.02 10:22",
+            "type": "gelen arama",
+            "other": "0532 614 22 08 (Halil Ersoy)",
+            "duration": "6 dk 12 sn",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
+            "datetime": "12.02 10:31",
+            "type": "veri",
+            "other": "Mobil internet",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
+            "datetime": "12.02 10:35",
+            "type": "giden arama",
+            "other": "0533 207 41 20 (Selda Özer)",
+            "duration": "0 dk 45 sn",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
+            "datetime": "12.02 10:58",
             "type": "veri",
             "other": "Mobil internet",
             "tower": "Altındağ – Ankara Gar"
           },
           {
-            "datetime": "12.02 10:40",
-            "type": "gelen arama",
-            "other": "0532 614 22 08 (Halil Ersoy)",
-            "duration": "6 dk 12 sn",
-            "tower": "Altındağ – Ankara Gar"
-          },
-          {
-            "datetime": "12.02 11:05",
+            "datetime": "12.02 11:35",
             "type": "veri",
             "other": "Mobil internet",
             "tower": "Sincan – Yenikent"
           },
           {
-            "datetime": "12.02 11:32",
+            "datetime": "12.02 12:00",
             "type": "veri",
             "other": "Mobil internet",
             "tower": "Polatlı – Merkez"
           },
           {
-            "datetime": "12.02 12:02",
+            "datetime": "12.02 12:25",
             "type": "veri",
             "other": "Mobil internet",
             "tower": "Alpu – Merkez"
           },
           {
-            "datetime": "12.02 12:20",
+            "datetime": "12.02 12:48",
             "type": "giden arama",
             "other": "0532 614 22 08 (Halil Ersoy)",
             "duration": "1 dk 02 sn",
             "tower": "Tepebaşı – İstasyon"
           },
           {
-            "datetime": "12.02 12:38",
+            "datetime": "12.02 12:55",
             "type": "gelen SMS",
             "other": "0532 614 22 08 (Halil Ersoy)",
             "tower": "Tepebaşı – İstasyon"
           },
           {
             "datetime": "12.02 13:20",
+            "type": "veri",
+            "other": "Mobil internet",
+            "tower": "Tepebaşı – Batı Yerleşkesi"
+          },
+          {
+            "datetime": "12.02 14:05",
             "type": "veri",
             "other": "Mobil internet",
             "tower": "Tepebaşı – Batı Yerleşkesi"
@@ -5308,10 +5398,22 @@
             "tower": "Çankaya – Ümitköy"
           },
           {
+            "datetime": "12.02 22:10",
+            "type": "gelen SMS",
+            "other": "Kargo bilgilendirme",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
             "datetime": "12.02 22:51",
             "type": "gelen arama",
             "other": "0532 614 22 08 (Halil Ersoy)",
             "duration": "4 dk 05 sn",
+            "tower": "Çankaya – Ümitköy"
+          },
+          {
+            "datetime": "12.02 23:12",
+            "type": "veri",
+            "other": "Mobil internet",
             "tower": "Çankaya – Ümitköy"
           },
           {
@@ -5329,8 +5431,8 @@
           },
           {
             "datetime": "13.02 00:40",
-            "type": "gelen SMS",
-            "other": "Kargo bilgilendirme",
+            "type": "veri",
+            "other": "Mobil internet",
             "tower": "Çankaya – Ümitköy"
           }
         ]
@@ -5359,7 +5461,7 @@
         "bank": "Anadolu Kalkınma Bankası A.Ş. — Ümitköy Şubesi",
         "holder": "Ersa Biyoteknoloji Araştırma Danışmanlık Ltd. Şti. (yetkili: Can Özer)",
         "iban": "TR62 0012 4000 0000 7718 3304 02",
-        "period": "01.08.2024 – 28.02.2026 (MASAK aracılığıyla, savcılık talebi)",
+        "period": "01.08.2024 – 28.02.2026 (Eskişehir Cumhuriyet Başsavcılığı yazısı üzerine banka tarafından verildi)",
         "rows": [
           {
             "date": "01.08.2024",
@@ -5465,63 +5567,63 @@
           },
           {
             "date": "24.11.2025",
-            "desc": "Stopaj ve KDV ödemesi",
-            "amount": -324000,
-            "balance": 1553450
+            "desc": "KDV ödemesi (%20)",
+            "amount": -360000,
+            "balance": 1517450
           },
           {
             "date": "03.12.2025",
             "desc": "Giden EFT — Nermin Ersoy, “danışmanlık bedeli”",
             "amount": -600000,
-            "balance": 953450
+            "balance": 917450
           },
           {
             "date": "05.12.2025",
             "desc": "Giden EFT — Can Özer, “ortak payı”",
             "amount": -250000,
-            "balance": 703450
+            "balance": 667450
           },
           {
             "date": "05.12.2025",
             "desc": "Giden EFT — Selda Özer, “ortak payı”",
             "amount": -250000,
-            "balance": 453450
+            "balance": 417450
           },
           {
             "date": "15.12.2025",
             "desc": "Muhasebe hizmeti",
             "amount": -3500,
-            "balance": 449950
+            "balance": 413950
           },
           {
             "date": "06.01.2026",
             "desc": "Kira",
             "amount": -12000,
-            "balance": 437950
+            "balance": 401950
           },
           {
             "date": "20.01.2026",
             "desc": "Kalaycı Fikri Haklar — yıllık takip ücreti",
             "amount": -15000,
-            "balance": 422950
+            "balance": 386950
           },
           {
             "date": "02.02.2026",
             "desc": "Muhasebe hizmeti",
             "amount": -3500,
-            "balance": 419450
+            "balance": 383450
           },
           {
-            "date": "11.02.2026",
+            "date": "12.02.2026",
             "desc": "TCDD — internet bilet satışı (2 adet)",
             "amount": -1240,
-            "balance": 418210
+            "balance": 382210
           },
           {
             "date": "16.02.2026",
             "desc": "Giden EFT — Av. Rıza Tekin, “hukuki danışmanlık avansı”",
             "amount": -150000,
-            "balance": 268210
+            "balance": 232210
           }
         ]
       }
@@ -5545,7 +5647,7 @@
       "timeline": [],
       "doc": {
         "kind": "table",
-        "heading": "Sağlık Bakanlığı reçete sistemi — 01.07.2025 – 28.02.2026 arası uyku, sakinleştirici ve antihistaminik grubu reçeteler",
+        "heading": "Eskişehir Cumhuriyet Başsavcılığı’nın yazısı üzerine Sağlık Bakanlığı reçete sisteminden alınan döküm — 01.07.2025 – 28.02.2026 arası uyku, sakinleştirici ve antihistaminik grubu reçeteler",
         "note": "Sorgu; zolpidem, zopiklon, benzodiazepinler, hidroksizin, trazodon ve mirtazapin etken maddelerini kapsar. Listede adı olup reçetesi bulunmayanlar “kayıt yok” olarak gösterilmiştir.",
         "columns": [
           "Kişi",
@@ -5620,6 +5722,172 @@
           ]
         ]
       }
+    },
+    {
+      "id": "e-arama-b210",
+      "title": "B-210 bölüm başkanı odası arama tutanağı",
+      "summary": "Hâkimlik kararıyla 23 Şubat’ta bölüm başkanının odasında yapılan arama ve el konulan eşya listesi.",
+      "people": [
+        "halil"
+      ],
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2026-02-23T09:30",
+          "text": "B-210’da arama yapıldı."
+        }
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "police",
+        "agency": "Eskişehir İl Emniyet Müdürlüğü — Cinayet Büro Amirliği",
+        "docNo": "Soruşturma No: 2026/2187 · Eskişehir 2. Sulh Ceza Hâkimliği’nin 22.02.2026 tarih ve 2026/530 D. İş sayılı kararı",
+        "datetime": "23.02.2026 12:40",
+        "heading": "Arama ve el koyma tutanağı — B-210 bölüm başkanı odası",
+        "sections": [
+          {
+            "title": "Arama",
+            "text": "Arama 23.02.2026 günü 09:30–11:15 arasında, Halil Ersoy ve avukatı Av. Rıza Tekin’in huzurunda yapıldı. Oda anahtarı Halil Ersoy’dadır; sekreterlikteki yedek anahtar sekreter Filiz Akgün’ün kilitli çekmecesinde durur ve 12–15 Şubat arasında çekmeceden çıkarılmamıştır (sekreterin beyanı)."
+          },
+          {
+            "title": "Masa üst çekmecesi",
+            "text": "Zımba, iki kutu ataş, bölüm mührü ve ıstampa, kırmızı ve mavi tükenmez kalemler (11 adet), 76 × 76 mm sarı yapışkan not bloğu (yarısı kullanılmış), bir paket kartvizit, USB bellek (2 adet), okuma gözlüğü, bölüm kurulu karar defteri."
+          },
+          {
+            "title": "Masa alt çekmecesi",
+            "text": "Kâğıt mendil, el kremi, bir paket ıslak mendil, açılmış bir kutu mavi nitril eldiven (S), üç ilaç kutusu, plastik bir tablet kesici, ağrı kesici şurubu, şarj kablosu, iki adet eski sınav zarfı."
+          },
+          {
+            "title": "Askı ve dolap",
+            "text": "Diz boyu koyu antrasit yün kaban, açık bej kaşmir atkı, şemsiye. Dolapta bölüm arşiv klasörleri (2019–2025), iki plaket, yedek gömlek."
+          },
+          {
+            "title": "El konulanlar",
+            "text": "Not bloğu, kalemler, eldiven kutusu, ilaç kutuları, tablet kesici, USB bellekler, kaban ve atkı, masadaki tablet bilgisayar. Eşyalar incelenmek üzere Kriminal Polis Laboratuvarı’na gönderildi."
+          },
+          {
+            "title": "Beyan",
+            "text": "Halil Ersoy, el konulan eşyaların kendi kişisel eşyaları olduğunu, eldivenlerin sekreterlikten bırakıldığını söyledi; başka açıklama yapmadı."
+          }
+        ],
+        "signature": "Komiser Aslı Yıldırım · Av. Rıza Tekin (şerh: “Müvekkil delillerin değerlendirilmesine itiraz eder.”)"
+      }
+    },
+    {
+      "id": "e-esda",
+      "title": "B-210 eşyaları inceleme raporu",
+      "summary": "B-210’dan el konulan eşyaların kriminal laboratuvar incelemesi.",
+      "people": [
+        "halil"
+      ],
+      "reveals": [
+        "f-zolpidem"
+      ],
+      "timeline": [],
+      "doc": {
+        "kind": "report",
+        "variant": "lab",
+        "agency": "Emniyet Genel Müdürlüğü — Ankara Kriminal Polis Laboratuvarı Müdürlüğü",
+        "docNo": "Lab. No: 2026/AKP-2507",
+        "datetime": "03.03.2026 15:00",
+        "heading": "B-210’dan el konulan eşyaların inceleme raporu",
+        "sections": [
+          {
+            "title": "Not bloğu",
+            "text": "En üstteki boş yaprakta çıplak gözle görülmeyen yazı izi elektrostatik iz tespit yöntemiyle incelendi. Okunan iz, büyük harflerle: “KOLON DENGEDE — AÇMAYIN”. İzin harf biçimi ve satır düzeni, soğuk oda kapısından alınan notla (delil 4) örtüşmektedir. Delil 4’ün kâğıdı aynı ölçü, renk ve yapıştırıcı tipindedir."
+          },
+          {
+            "title": "İlaç kutuları",
+            "text": "Tansiyon ilacı (1), mide koruyucu (1), zolpidem tartarat 10 mg (1). Zolpidem kutusunun eczane etiketi: “Halil Ersoy — 12.01.2026”; kutuda iki boş, bir yarım blister."
+          },
+          {
+            "title": "Tablet kesici-ezici",
+            "text": "Ezme haznesindeki beyaz toz kalıntısında zolpidem saptandı. Kalıntıdaki dolgu maddeleri (mikrokristal selüloz, laktoz), delil 7 kahve bardağındaki çözünmemiş taneciklerle aynı türdendir."
+          },
+          {
+            "title": "Sonuç",
+            "text": "Kapıdaki not, bu bloğun bir önceki yaprağına yazılmıştır. Bardaktaki ilaç, bu ezicide ezilmiş tabletlerle aynı türdendir."
+          }
+        ],
+        "signature": "Belge İnceleme Uzmanı Cem Akın; Kimya Mühendisi Gizem Aydoğan"
+      }
+    },
+    {
+      "id": "e-yusuf-mesaj",
+      "title": "Yusuf Bozkurt’un telefonu: “Halil Hoca” yazışması",
+      "summary": "Teknisyenin gönüllü olarak gösterdiği yazışmanın Şubat bölümü.",
+      "people": [
+        "yusuf",
+        "halil",
+        "can"
+      ],
+      "reveals": [
+        "f-can-visit"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-12T13:52",
+          "text": "Halil Ersoy, Yusuf’a UzakDestek parolasını sordu."
+        }
+      ],
+      "doc": {
+        "kind": "messages",
+        "owner": "Yusuf Bozkurt",
+        "with": "Halil Hoca",
+        "source": "Tanığın telefonundan, gönüllü gösterim üzerine ekran görüntüleri (21.02.2026)",
+        "messages": [
+          {
+            "from": "them",
+            "time": "06.02 09:10",
+            "text": "Yusuf, soğuk oda talebini imzaladım. Parça lazımsa söyle."
+          },
+          {
+            "from": "me",
+            "time": "06.02 09:12",
+            "text": "Sağ olun hocam."
+          },
+          {
+            "from": "them",
+            "time": "11.02 14:52",
+            "text": "Kol tamam mı? Pim sağlam mı?"
+          },
+          {
+            "from": "me",
+            "time": "11.02 14:53",
+            "text": "Tamam hocam, iki buçuk alyanla sıktım, üç kere denedim. Pimi tutan vida var, kendi kendine çıkmaz."
+          },
+          {
+            "from": "them",
+            "time": "11.02 14:55",
+            "text": "Eline sağlık."
+          },
+          {
+            "from": "them",
+            "time": "12.02 13:52",
+            "text": "Yusuf, UzakDestek parolası hâlâ tahtadaki mi? Damadım kendi şirketine kuracakmış, nasıl kullanıyoruz diye soruyor."
+          },
+          {
+            "from": "me",
+            "time": "12.02 13:53",
+            "text": "Evet hocam Lab2026!bk. Katılımsız erişim açık. Her bilgisayarın kimlik numarası monitörün yanında etikette yazıyor."
+          },
+          {
+            "from": "them",
+            "time": "12.02 13:54",
+            "text": "Tamam, sağ ol."
+          },
+          {
+            "from": "me",
+            "time": "13.02 07:40",
+            "text": "Hocam Sinan Hoca soğuk odada… Polisi aradım. Gelin."
+          },
+          {
+            "from": "them",
+            "time": "13.02 08:22",
+            "text": "Geliyorum."
+          }
+        ]
+      }
     }
   ],
   "leads": [
@@ -5675,7 +5943,11 @@
       "leadsTo": [
         "l-rekon"
       ],
-      "outcome": "Recep Sarı ifade verdi."
+      "outcome": "Recep Sarı ifade verdi.",
+      "from": [
+        "e-tutanak",
+        "e-kart"
+      ]
     },
     {
       "id": "l-ece",
@@ -5692,6 +5964,9 @@
       "outcome": "Ece Durmaz ifade verdi, telefonundaki yazışmayı gösterdi ve sorgu için bekliyor.",
       "interviews": [
         "iv-ece-1"
+      ],
+      "from": [
+        "e-tutanak"
       ]
     },
     {
@@ -5709,6 +5984,10 @@
       "outcome": "Halil Ersoy ifade verdi ve soruları cevaplamaya hazır.",
       "interviews": [
         "iv-halil-1"
+      ],
+      "from": [
+        "e-tutanak",
+        "e-bakim"
       ]
     },
     {
@@ -5723,7 +6002,11 @@
       "leadsTo": [
         "l-hts-halil"
       ],
-      "outcome": "Nihat Ural ifade verdi; restoran adisyonun suretini gönderdi."
+      "outcome": "Nihat Ural ifade verdi; restoran adisyonun suretini gönderdi.",
+      "minAct": 2,
+      "from": [
+        "e-halil-1"
+      ]
     },
     {
       "id": "l-yusuf",
@@ -5739,6 +6022,10 @@
       "outcome": "Yusuf Bozkurt ifade verdi; izne çıkmadan önce sorgu için zaman ayırdı.",
       "interviews": [
         "iv-yusuf-1"
+      ],
+      "from": [
+        "e-112",
+        "e-tutanak"
       ]
     },
     {
@@ -5752,7 +6039,11 @@
       "leadsTo": [
         "l-sunucu"
       ],
-      "outcome": "Mert Kaya ifade verdi."
+      "outcome": "Mert Kaya ifade verdi.",
+      "from": [
+        "e-kart",
+        "e-mail-ece"
+      ]
     },
     {
       "id": "l-gulsen",
@@ -5766,6 +6057,11 @@
       "outcome": "Gülşen Tan görüşmeyi kabul etti.",
       "interviews": [
         "iv-gulsen"
+      ],
+      "from": [
+        "e-mail-gulsen",
+        "e-recep",
+        "e-kart"
       ]
     },
     {
@@ -5780,6 +6076,11 @@
       "outcome": "Burak Esen, İstanbul’a dönmeden önce görüşmeyi kabul etti.",
       "interviews": [
         "iv-burak"
+      ],
+      "from": [
+        "e-kart",
+        "e-ece-1",
+        "e-mail-burak"
       ]
     },
     {
@@ -5794,25 +6095,34 @@
       "outcome": "Can Özer, Ankara’daki emniyet binasından görüntülü bağlantıyla görüşmeyi kabul etti.",
       "interviews": [
         "iv-can"
+      ],
+      "from": [
+        "e-kart",
+        "e-halil-1",
+        "e-mert-1"
       ]
     },
     {
       "id": "l-eposta",
       "hours": 2,
-      "title": "Kurbanın kurum e-postasını incele",
-      "description": "Teslim akşamı kurbana kimlerin, ne yazdığını görmek gerek.",
+      "title": "Kurbanın açık bilgisayarındaki kurum e-postasını incele",
+      "description": "Bilgisayar sabah açık bulundu. Teslim akşamı kurbana kimlerin, ne yazdığını görmek gerek.",
       "unlocks": [
         "e-mail-gulsen",
         "e-mail-ece",
         "e-mail-burak"
       ],
       "leadsTo": [],
-      "outcome": "Kurum e-posta kutusundan 12 Şubat akşamına ait üç yazışma çıktı."
+      "outcome": "Kurum e-posta kutusundan 12 Şubat akşamına ait üç yazışma çıktı.",
+      "from": [
+        "e-oyi",
+        "ph-b205"
+      ]
     },
     {
       "id": "l-defter",
       "hours": 1,
-      "title": "Laboratuvar defterini oku",
+      "title": "Masadaki laboratuvar defterini oku",
       "description": "Kurban her deneyi deftere işlerdi. Son iki günü ne düşündüğünü gösterebilir.",
       "unlocks": [
         "e-defter"
@@ -5820,7 +6130,26 @@
       "leadsTo": [
         "l-avukat"
       ],
-      "outcome": "Defterin son iki gününün suretini aldınız."
+      "outcome": "Defterin son iki gününün suretini aldınız.",
+      "from": [
+        "e-oyi"
+      ]
+    },
+    {
+      "id": "l-logger",
+      "hours": 3,
+      "title": "Soğuk odanın SoğukNet izleme kaydını firmadan iste",
+      "description": "Teknisyen, soğuk odanın sıcaklığı ve kapının her açılıp kapanmasını kaydeden bir izleme sistemine bağlı olduğunu söyledi. Firma kaydı bulutta tutuyor; savcılık yazısı gerekiyor.",
+      "unlocks": [
+        "e-logger"
+      ],
+      "leadsTo": [],
+      "outcome": "SoğukNet firması 12–13 Şubat kaydını savcılığa gönderdi.",
+      "minAct": 2,
+      "from": [
+        "e-yusuf-1",
+        "e-bakim"
+      ]
     },
     {
       "id": "l-kamera",
@@ -5836,7 +6165,11 @@
         "l-dvr"
       ],
       "outcome": "Bilgi İşlem, K2 kaydının dökümünü ve iki kareyi gönderdi.",
-      "minAct": 2
+      "minAct": 2,
+      "from": [
+        "e-kroki",
+        "e-kart"
+      ]
     },
     {
       "id": "l-dvr",
@@ -5847,7 +6180,10 @@
         "e-dvr-servis"
       ],
       "leadsTo": [],
-      "outcome": "Bilgi İşlem kameraların saatlerini ölçtü."
+      "outcome": "Bilgi İşlem kameraların saatlerini ölçtü.",
+      "from": [
+        "e-kamera"
+      ]
     },
     {
       "id": "l-giris",
@@ -5860,19 +6196,27 @@
       ],
       "leadsTo": [],
       "outcome": "Giriş ve lobi kameralarından iki kare alındı.",
-      "minAct": 2
+      "minAct": 2,
+      "from": [
+        "e-kart",
+        "e-recep"
+      ]
     },
     {
       "id": "l-bardak",
       "hours": 1,
       "title": "B-205’teki kahve bardaklarını incelet",
-      "description": "Odada iki karton bardak bulundu. Toksikoloji sonucu geldikten sonra içlerinde ne olduğu önem kazandı.",
+      "description": "Odada iki karton bardak bulundu. Toksikoloji sonucu geldikten sonra içlerinde ne olduğu önem kazandı. Laboratuvarın yoğunluğu nedeniyle sonuç birkaç gün sürecek.",
       "unlocks": [
         "e-bardak"
       ],
       "leadsTo": [],
       "outcome": "Kriminal laboratuvar bardakların raporunu gönderdi.",
-      "minAct": 2
+      "minAct": 3,
+      "from": [
+        "e-tox",
+        "e-oyi"
+      ]
     },
     {
       "id": "l-ece-2",
@@ -5885,6 +6229,10 @@
       "minAct": 2,
       "interviews": [
         "iv-ece-2"
+      ],
+      "from": [
+        "e-mail-ece",
+        "e-tox"
       ]
     },
     {
@@ -5896,10 +6244,13 @@
       "leadsTo": [
         "l-hafta"
       ],
-      "outcome": "Yusuf Bozkurt Kütahya’dan döndü ve sorguya geldi.",
+      "outcome": "Yusuf Bozkurt izninin bitmesini beklemeden Kütahya’dan döndü ve sorguya geldi.",
       "minAct": 2,
       "interviews": [
         "iv-yusuf-2"
+      ],
+      "from": [
+        "e-arama-b202"
       ]
     },
     {
@@ -5913,7 +6264,11 @@
       ],
       "leadsTo": [],
       "outcome": "Orhan Kılıç toplantının bulut kaydını ve katılım raporunu verdi.",
-      "minAct": 2
+      "minAct": 2,
+      "from": [
+        "e-recep",
+        "e-mail-gulsen"
+      ]
     },
     {
       "id": "l-sunucu",
@@ -5928,7 +6283,10 @@
         "l-uzak"
       ],
       "outcome": "Sistem yöneticisi Levent Okur erişim kaydını gönderdi.",
-      "minAct": 2
+      "minAct": 2,
+      "from": [
+        "e-mert-1"
+      ]
     },
     {
       "id": "l-surum",
@@ -5939,7 +6297,10 @@
         "e-surum"
       ],
       "leadsTo": [],
-      "outcome": "Bilgi İşlem, 12 Şubat sürümlerinin karşılaştırmasını yaptı."
+      "outcome": "Bilgi İşlem, 12 Şubat sürümlerinin karşılaştırmasını yaptı.",
+      "from": [
+        "e-sunucu"
+      ]
     },
     {
       "id": "l-avukat",
@@ -5953,7 +6314,10 @@
         "l-patent"
       ],
       "outcome": "Patent vekili Av. Tülin Sezer’e ulaşıldı. Yurt dışında olduğu için önce telefonundaki sesli mesajı gönderdi; dosyasıyla dönüşte görüşecek.",
-      "minAct": 2
+      "minAct": 2,
+      "from": [
+        "e-defter"
+      ]
     },
     {
       "id": "l-portal",
@@ -5965,7 +6329,11 @@
       ],
       "leadsTo": [],
       "outcome": "UBTA Bilgi Güvenliği Birimi işlem kaydını gönderdi.",
-      "minAct": 2
+      "minAct": 2,
+      "from": [
+        "e-tutanak",
+        "e-halil-1"
+      ]
     },
     {
       "id": "l-uzak",
@@ -5979,19 +6347,26 @@
         "l-operator"
       ],
       "outcome": "Adli Bilişim Büro BK-205’in inceleme raporunu gönderdi.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-sunucu",
+        "e-portal-log"
+      ]
     },
     {
       "id": "l-saat",
       "hours": 2,
-      "title": "Kurbanın akıllı saatinin belleğini okut",
-      "description": "Kurbanın bileğindeki saat nabız ve adım kaydeder; telefon olmadan da.",
+      "title": "Kurbanın bileğindeki akıllı saatin belleğini okut",
+      "description": "OYİ raporuna göre kurbanın sol bileğinde bir akıllı saat vardı. Bu saatler nabız ve adım kaydeder; telefon olmadan da.",
       "unlocks": [
         "e-saat"
       ],
       "leadsTo": [],
       "outcome": "Adli Bilişim saatin belleğini okudu.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-oyi"
+      ]
     },
     {
       "id": "l-telefon",
@@ -6003,12 +6378,16 @@
       ],
       "leadsTo": [],
       "outcome": "Derya Oktay parolayı verdi; Adli Bilişim telefonu inceledi.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-oyi",
+        "e-ece-mesaj"
+      ]
     },
     {
       "id": "l-hts-halil",
       "hours": 2,
-      "title": "Halil Ersoy’un HTS kaydını iste",
+      "title": "Restoranda gelen telefon için Halil Ersoy’un HTS kaydını iste",
       "description": "Gece yarısına doğru gelen telefonun kimden geldiği, Halil Ersoy’un anlatısının dayanağı.",
       "unlocks": [
         "e-hts-halil"
@@ -6018,7 +6397,10 @@
         "l-hts-can"
       ],
       "outcome": "Hâkimlik kararıyla Halil Ersoy’un HTS kaydı geldi.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-nihat"
+      ]
     },
     {
       "id": "l-hafta",
@@ -6030,7 +6412,10 @@
       ],
       "leadsTo": [],
       "outcome": "Bilgi İşlem 13–17 Şubat kart dökümünü gönderdi.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-arama-b202"
+      ]
     },
     {
       "id": "l-patent",
@@ -6045,7 +6430,10 @@
         "l-bap"
       ],
       "outcome": "Av. Tülin Sezer, 12 Şubat’ta kurbana gönderdiği e-postanın suretini verdi.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-sesli"
+      ]
     },
     {
       "id": "l-sicil",
@@ -6056,7 +6444,12 @@
         "e-gazete"
       ],
       "leadsTo": [],
-      "outcome": "Ticaret Sicili Gazetesi’ndeki kuruluş ilanı bulundu."
+      "outcome": "Ticaret Sicili Gazetesi’ndeki kuruluş ilanı bulundu.",
+      "minAct": 3,
+      "from": [
+        "e-surum",
+        "e-avukat-mail"
+      ]
     },
     {
       "id": "l-bap",
@@ -6067,7 +6460,12 @@
         "e-bap"
       ],
       "leadsTo": [],
-      "outcome": "BAP Koordinasyon Birimi tutanağı ve erişim kaydını gönderdi."
+      "outcome": "BAP Koordinasyon Birimi tutanağı ve erişim kaydını gönderdi.",
+      "minAct": 3,
+      "from": [
+        "e-sesli",
+        "e-surum"
+      ]
     },
     {
       "id": "l-burak-2",
@@ -6081,8 +6479,11 @@
       "leadsTo": [
         "l-banka"
       ],
-      "outcome": "Burak Esen avukatıyla geldi; sözleşme suretini ve otel kaydını teslim etti. Sorgu dosyası yeniden açıldı.",
-      "minAct": 3
+      "outcome": "Burak Esen avukatıyla geldi; sözleşme suretini ve otel kaydını teslim etti. Yeni belgelerle sorusu olanlar onun sorgu dosyasına dönebilir.",
+      "minAct": 3,
+      "from": [
+        "e-gazete"
+      ]
     },
     {
       "id": "l-rekon",
@@ -6094,7 +6495,10 @@
       ],
       "leadsTo": [],
       "outcome": "Olay Yeri İnceleme gece saatinde görsel deneme yaptı.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-recep"
+      ]
     },
     {
       "id": "l-tren",
@@ -6106,7 +6510,11 @@
       ],
       "leadsTo": [],
       "outcome": "Demiryolu işletmesi bilet ve biniş kayıtlarını gönderdi.",
-      "minAct": 3
+      "minAct": 3,
+      "from": [
+        "e-kart",
+        "e-halil-1"
+      ]
     },
     {
       "id": "l-halil-2",
@@ -6119,6 +6527,63 @@
       "minAct": 3,
       "interviews": [
         "iv-halil-2"
+      ],
+      "from": [
+        "e-hts-halil",
+        "e-kamera",
+        "e-logger"
+      ]
+    },
+    {
+      "id": "l-can-2",
+      "hours": 1,
+      "title": "Can Özer’le avukatı huzurunda yeniden görüş",
+      "description": "Can Özer’in adı yeni belgelerde geçiyor; ilk görüşmede anlattıklarıyla örtüşmeyen şeyler var.",
+      "unlocks": [],
+      "leadsTo": [],
+      "outcome": "Can Özer, Ankara’da avukatıyla birlikte ikinci görüşmeye geldi.",
+      "minAct": 3,
+      "interviews": [
+        "iv-can-2"
+      ],
+      "from": [
+        "e-hts-halil",
+        "e-gazete",
+        "e-avukat-mail"
+      ]
+    },
+    {
+      "id": "l-arama-b210",
+      "hours": 2,
+      "title": "Bölüm başkanlığı odası için arama kararı iste",
+      "description": "Teknisyen odası ve laboratuvar arandı. Koridordaki diğer odalar için de hâkimlikten karar istenebilir.",
+      "unlocks": [
+        "e-arama-b210"
+      ],
+      "leadsTo": [
+        "l-esda"
+      ],
+      "outcome": "Sulh ceza hâkimliği kararı verdi; B-210’da arama yapıldı.",
+      "minAct": 3,
+      "from": [
+        "e-kart-hafta",
+        "e-kamera",
+        "e-bardak"
+      ]
+    },
+    {
+      "id": "l-esda",
+      "hours": 1,
+      "title": "B-210’dan el konulan eşyaları incelet",
+      "description": "Aramada el konulan eşyalar laboratuvara gönderildi.",
+      "unlocks": [
+        "e-esda"
+      ],
+      "leadsTo": [],
+      "outcome": "Kriminal laboratuvar not bloğu ve tablet ezicinin raporunu gönderdi.",
+      "minAct": 4,
+      "from": [
+        "e-arama-b210"
       ]
     },
     {
@@ -6131,7 +6596,10 @@
       ],
       "leadsTo": [],
       "outcome": "Operatör abone bilgisini gönderdi.",
-      "minAct": 4
+      "minAct": 4,
+      "from": [
+        "e-uzak"
+      ]
     },
     {
       "id": "l-hts-can",
@@ -6143,31 +6611,41 @@
       ],
       "leadsTo": [],
       "outcome": "Hâkimlik kararıyla Can Özer’in HTS kaydı geldi.",
-      "minAct": 4
+      "minAct": 4,
+      "from": [
+        "e-hts-halil"
+      ]
     },
     {
       "id": "l-banka",
       "hours": 2,
-      "title": "MASAK aracılığıyla patent sahibi şirketin hesaplarını iste",
+      "title": "Savcılık yazısıyla patent sahibi şirketin hesap dökümünü iste",
       "description": "Feronya’nın ödediği paranın nereye gittiği motifin son halkası.",
       "unlocks": [
         "e-banka"
       ],
       "leadsTo": [],
-      "outcome": "MASAK, Ersa Biyoteknoloji’nin hesap dökümünü gönderdi.",
-      "minAct": 4
+      "outcome": "Banka, savcılık yazısı üzerine Ersa Biyoteknoloji’nin hesap dökümünü gönderdi.",
+      "minAct": 4,
+      "from": [
+        "e-opsiyon",
+        "e-gazete"
+      ]
     },
     {
       "id": "l-recete",
       "hours": 1,
-      "title": "Şüphelilerin uyku ilacı reçetelerini sorgula",
+      "title": "Savcılıktan şüphelilerin uyku ilacı reçetelerini sorgulamasını iste",
       "description": "Kurbana zolpidem reçete edilmemişti. İlacın kaynağı reçete kayıtlarında olabilir.",
       "unlocks": [
         "e-recete"
       ],
       "leadsTo": [],
-      "outcome": "Sağlık Bakanlığı reçete sorgusunun sonucu geldi.",
-      "minAct": 4
+      "outcome": "Savcılığın yazısıyla Sağlık Bakanlığı reçete sorgusunun sonucu geldi.",
+      "minAct": 4,
+      "from": [
+        "e-tox"
+      ]
     }
   ],
   "interviews": [
@@ -6199,7 +6677,7 @@
         {
           "id": "h1-kim",
           "ask": "Laboratuvarda sizden başka kim vardı?",
-          "answer": "Ece Hanım. Tezgâhında kulaklıkla çalışıyordu. Bir ara Sinan bana FPLC’yi göstermek istedi, soğuk odanın kapısına kadar gittik, penceresinden baktık. Bardaklar odada, masada kaldı. Ece Hanım laboratuvarda yalnızdı o birkaç dakika. Bunu söylemem gerekiyor mu bilmiyorum."
+          "answer": "Ece Hanım. Tezgâhında kulaklıkla çalışıyordu. Bir ara Sinan bana FPLC’yi göstermek istedi, soğuk odanın kapısına kadar gittik, penceresinden baktık. Bardaklar odada, masada kaldı; Ece Hanım tezgâhındaydı."
         },
         {
           "id": "h1-fplc",
@@ -6217,7 +6695,7 @@
         {
           "id": "h1-oda",
           "ask": "Odanızda ne yaptınız?",
-          "answer": "Bekleyen evrakı imzaladım. Kurum onayı ekranını tabletimde hazır ettim; ajans sistemi gece bazen yavaşlar. On bire çeyrek kala çıktım.",
+          "answer": "Bekleyen evrakı imzaladım. Kurum onayı ekranını telefonumda hazır ettim; ajans sistemi gece bazen yavaşlar. On bire çeyrek kala çıktım.",
           "after": [
             "h1-saat"
           ]
@@ -6236,10 +6714,11 @@
         },
         {
           "id": "h1-defter",
-          "ask": "Defterinde “10:15 Bölüm bşk. ile görüştüm. ‘Bakarız, aceleci olma.’” yazıyor.",
-          "answer": "Ha… Sabah uğradı, evet. Bir patent başvurusu bulmuş, kendi dizisine benziyormuş. Çok karışıktı. “Acele etme, önce hukukçuyla konuşalım, başvuruyu teslim et” dedim. Bölüm başkanı olarak başka ne diyebilirdim? Bir telaşın sonu yoktu ki.",
+          "ask": "Sinan sesli mesajında patenti o sabah size gösterdiğini söylüyor. Defterinde de “10:15 Bölümde konuştum. ‘Bakarız, aceleci olma.’” yazıyor.",
+          "answer": "Ha… Sabah uğradı, evet. Bir patent başvurusu bulmuş, kendi dizisine benziyormuş. Çok karışıktı. “Acele etme, önce hukukçuyla konuşalım, başvuruyu teslim et” dedim. Bölüm başkanı olarak başka ne diyebilirdim? Sinan her şeye yangın varmış gibi koşardı.",
           "needs": [
-            "e-defter"
+            "e-defter",
+            "e-sesli"
           ]
         },
         {
@@ -6252,10 +6731,11 @@
         },
         {
           "id": "h1-1706",
-          "ask": "Kartınız 17:06’da B-204’te okunmuş.",
+          "ask": "Kartınız 17:06’da B-204’te okunmuş; bir dakika sonra soğuk odanın kapısı açılmış.",
           "answer": "Öyle mi? Evet… Sinan’ın masasına bir imza sayfası bıraktım. Laboratuvardan iç kapıyla odasına geçtim, bıraktım, çıktım. Bir dakikalık iş. Unutmuşum.",
           "needs": [
-            "e-kart"
+            "e-kart",
+            "e-logger"
           ]
         },
         {
@@ -6358,15 +6838,16 @@
         },
         {
           "id": "h2-2216",
-          "ask": "Koridor kamerası sizi B-205’ten saat düzeltildiğinde 22:16’da çıkarken gösteriyor. Size göre 22:05’ti.",
-          "answer": "On dakika… On dakikanın hesabını mı soruyorsunuz? Sinan’la konuşuyorduk, saat tutmadım.",
+          "ask": "Koridor kamerası, saat farkı düzeltilince, uzun koyu dış giyimli birini B-205’ten 22:16’da çıkarken gösteriyor. Siz 22:05’te çıktığınızı söylemiştiniz.",
+          "answer": "Kamerada yüz görünüyor mu? Görünmüyor. Kabanı olan herkes ben miyim? Ben çıktım, odama gittim. Saat tutmadım.",
           "needs": [
-            "e-kamera"
+            "e-kamera",
+            "e-dvr-servis"
           ]
         },
         {
           "id": "h2-sinanyer",
-          "ask": "O on dakikada Sinan neredeydi?",
+          "ask": "Siz çıkarken Sinan neredeydi?",
           "answer": "Masasındaydı. Ben çıktım, o oturuyordu.",
           "after": [
             "h2-2216"
@@ -6421,7 +6902,7 @@
         },
         {
           "id": "h2-uzak",
-          "ask": "Sinan’ın bilgisayarına 23:29’da Ankara’dan uzaktan bağlanılmış. Başvuru oradan gönderilmiş, Ece’ye mesaj oradan atılmış.",
+          "ask": "Adli bilişim raporuna göre Sinan’ın bilgisayarına 20:29 UTC’de Ankara’dan uzaktan bağlanılmış. Başvuru ve Ece’ye giden mesaj o bağlantı açıkken gönderilmiş.",
           "answer": "Ben o gece restorandaydım. Beş kişi gördü, garson gördü, adisyon var. Ankara’dan kim ne yaptıysa beni ilgilendirmez.",
           "needs": [
             "e-uzak"
@@ -6430,11 +6911,28 @@
           "delivery": "soğuk, kesin, her kelimeyi bastırarak"
         },
         {
-          "id": "h2-eldiven",
-          "ask": "Teknisyenin çekmecesindeki eldiven S beden. Sizin eliniz küçük, Yusuf’un eli iri.",
-          "answer": "Ellerime bakmanızı istemiyorum. Avukatım…",
+          "id": "h2-ilacb210",
+          "ask": "Masanızdaki ilaç kutularından biri zolpidem; yanında bir tablet ezici var.",
+          "answer": "Kendi ilacım. Yutamıyorum, eziyorum. Bunda suç yok. Sinan’ın kahvesine benim ilacımın girdiğini kim söylüyor?",
           "needs": [
+            "e-esda"
+          ]
+        },
+        {
+          "id": "h2-eldiven",
+          "ask": "Masanızın çekmecesinde açılmış bir kutu S beden nitril eldiven var. Teknisyenin dolabındaki eldiven de S beden.",
+          "answer": "Sekreterlik bırakmış. Ben laboratuvar eldiveni kullanmam. Bir eldiven kutusundan ne çıkarıyorsunuz?",
+          "needs": [
+            "e-arama-b210",
             "e-arama-b202"
+          ]
+        },
+        {
+          "id": "h2-not",
+          "ask": "Not bloğunuzun en üst yaprağında, soğuk oda kapısındaki notun izi çıktı.",
+          "answer": "Bir not bloğu… O bloklar sekreterlikte de var, herkes alır. Ben o gece hiçbir kapıya not asmadım.",
+          "needs": [
+            "e-esda"
           ]
         }
       ],
@@ -6454,6 +6952,10 @@
         {
           "evidence": "e-opsiyon",
           "answer": "Madde 7.3’teki “öğretim üyesi” ben değilim. İmza yemeğine kızımın davetiyle gittim; bir akşam yemeği. Feronya’dan bir kuruş almadım."
+        },
+        {
+          "evidence": "e-arama-b210",
+          "answer": "İlaçlarım, kabanım, eldiven kutusu… Bunlar benim odamın eşyaları. Yirmi yıldır o odadayım. Bir odadaki eşyadan cinayet çıkmaz."
         },
         {
           "evidence": "e-banka",
@@ -6481,7 +6983,7 @@
         {
           "id": "e1-feronya",
           "ask": "Feronya toplantısında ne duydunuz?",
-          "answer": "Dokuz buçuğa doğru sesler yükseldi. Hoca “Bu dizi sizin elinize nereden geçti?” dedi. Öteki adam “bilmiyorum, standart sözleşme” diye bir şey söyledi. Sonra çıktı gitti."
+          "answer": "Sekize doğru sesler yükseldi. Hoca “Bu dizi sizin elinize nereden geçti?” dedi. Öteki adam “bilmiyorum, standart sözleşme” diye bir şey söyledi. Sonra çıktı gitti."
         },
         {
           "id": "e1-halil",
@@ -6548,9 +7050,12 @@
         {
           "id": "e1-tuhaf",
           "ask": "Mesaj size tuhaf geldi mi?",
-          "answer": "Şimdi düşününce… Hoca hep küçük harfle, noktasız yazar. “tmm” der, “sağol” bitişik yazar. Bu mesaj düzgündü. Büyük harf, nokta, virgül. O an sevinçten hiç düşünmedim.",
+          "answer": "Şimdi düşününce… Hoca bana hep küçük harfle başlayarak yazar, kısaltır; “tmm” der. Bu mesaj büyük harfle başlıyordu, her cümle ayrı, virgüller yerinde. Bana hiç “Sağ ol” yazmazdı. O an sevinçten hiç düşünmedim.",
           "after": [
             "e1-2344"
+          ],
+          "needs": [
+            "e-telefon-sinan"
           ]
         },
         {
@@ -6596,7 +7101,7 @@
         {
           "id": "e2-sekil",
           "ask": "Şekil 3’ü anlatın.",
-          "answer": "İki kuyucuk kötü çıkmıştı. 2023 Martındaki jelden iki bandı kopyaladım, kontrastla oynadım. Bir gece. Çok korkuyordum; başvuruya yetişmezse burs bitiyordu. Hoca çarşamba gecesi fark etti. Bu benim yaptığım en aptalca şey.",
+          "answer": "İki kuyucuk kötü çıkmıştı. Mart 2023’teki jelden iki bandı kopyaladım, kontrastla oynadım. Bir gece. Çok korkuyordum; başvuruya yetişmezse burs bitiyordu. Hoca çarşamba gecesi fark etti. Bu benim yaptığım en aptalca şey.",
           "voiced": true,
           "delivery": "sesi titreyerek, ama dik durarak",
           "reveals": [
@@ -6627,12 +7132,12 @@
         {
           "id": "e2-2158",
           "ask": "Saat 22:00’ye doğru ne gördünüz?",
-          "answer": "Hoca ayağa kalktı, bir an sendeledi. “FPLC’ye bakayım, raf dolmuştur” dedi. Halil Hoca da kalktı. Ben montumu giyiyordum."
+          "answer": "Hoca ayağa kalktı, bir an sendeledi. “FPLC’ye bakayım, raf dolmuştur” dedi, sonra bilgisayarına bir şey yazmak için yeniden oturdu. Halil Hoca da kalktı. Ben montumu giyip çıktım."
         },
         {
           "id": "e2-halil",
           "ask": "Halil Hoca soğuk odaya gitti mi?",
-          "answer": "Bilmiyorum. Hoca soğuk odaya yürüdü; Halil Hoca hocanın odasının kapısında, iç kapıda duruyordu. Ben çıktım.",
+          "answer": "Bilmiyorum. Ben çıkarken hoca hâlâ masasındaydı; Halil Hoca hocanın odasının kapısında, iç kapıda duruyordu.",
           "after": [
             "e2-2158"
           ]
@@ -6645,7 +7150,7 @@
         {
           "id": "e2-not",
           "ask": "Not kimin el yazısı?",
-          "answer": "Hocanınki değil gibi. Hoca büyük harf kullanmaz, defterine bakın. Laboratuvarda pembe not kâğıdı kullanırız; sarılar sekreterlikten, başkanlık odasından gelir. O gece bunu düşünemedim."
+          "answer": "Hocanınki değil gibi. Hoca büyük harf kullanmaz, defterine bakın. O gece bunu düşünemedim."
         },
         {
           "id": "e2-kamera",
@@ -6775,14 +7280,19 @@
           "answer": "Öğleden sonra ikide. Tampon şişelerini koydum. “Kolu yaptın mı Yusuf” dedi, “yaptım hocam” dedim. Güldü, “aferin” dedi."
         },
         {
-          "id": "y1-halil",
-          "ask": "Bölüm başkanı onarımı biliyor muydu?",
-          "answer": "Bilir tabii, talebi o imzaladı. Çarşamba onarım yaparken de kapıdan uğradı. “Oldu mu Yusuf” dedi, mekanizmaya eğilip baktı, “alyanın kaç numara” diye sordu. Hocalar böyle şeyleri merak etmez ama o etti."
+          "id": "y1-izin",
+          "ask": "İzne çıkmadan önce birine bir şey teslim ettiniz mi?",
+          "answer": "Stok defterini, cihaz listesini bölüm sekreterine bıraktım. Teknisyen odasının anahtarı da kapının yanındaki askıda; dolabın anahtarı da orada, hep orada durur."
         },
         {
           "id": "y1-not",
           "ask": "Kapıdaki notu kim yazmış olabilir?",
-          "answer": "Bilmem. Ama laboratuvarda biz pembe yapışkan not kullanırız, ben alırım onları. Sarıyı sekreterlik alır, başkanlıkla sekreterlik kullanır."
+          "answer": "Bilmem. Hocanın yazısına benzemiyor ama gece yarısı insanın yazısı değişir. Ben o notu sabah ilk gördüğümde kolon bitmiştir diye düşündüm."
+        },
+        {
+          "id": "y1-cihaz",
+          "ask": "FPLC’yi siz mi kapattınız?",
+          "answer": "Ben kapattım. Ötüp duruyordu, hocayı görünce elim ayağım boşaldı, ekrana bastım. Yanlış mı yaptım?"
         }
       ],
       "confront": [
@@ -6829,18 +7339,21 @@
         },
         {
           "id": "y2-ilk",
-          "ask": "13 Şubat sabahı çekmeceyi kim açtı?",
-          "answer": "Polis, benim önümde. Pim yoktu. Sizinkiler tek tek yazdı, hepsini saydılar."
+          "ask": "13 Şubat sabahı teknisyen odasına kim baktı?",
+          "answer": "Polis, benim önümde. Tezgâha, çöpe, alet çantama baktılar. Dolap kilitliydi, anahtar askıdaydı; açmadılar. On dakika sonra hep birlikte çıktık, bir daha girmedim."
         },
         {
           "id": "y2-izin",
           "ask": "Sonra B-202’ye girdiniz mi?",
-          "answer": "Cuma öğlen çıktım, Kütahya’ya gittim. Pazartesi akşam döndüm. Salı arama olmuş. Odaya hiç girmedim, kartıma bakın."
+          "answer": "Cuma öğlen çıktım, Kütahya’ya gittim. Salı arama olmuş, haberi alınca gece döndüm. O odaya hiç girmedim, kartıma bakın."
         },
         {
           "id": "y2-kart",
           "ask": "B-202’ye kimler girebilir?",
-          "answer": "Ben, güvenlik, bir de ana kart. Ana kart bölüm başkanındadır."
+          "answer": "Ben, güvenlik, bir de ana kart. Ana kart bölüm başkanındadır.",
+          "needs": [
+            "e-kart-hafta"
+          ]
         },
         {
           "id": "y2-neden",
@@ -6867,7 +7380,7 @@
           "ask": "Etanolü kime satıyordunuz?",
           "answer": "Şirintepe’de bir kolonya imalathanesi. Ayda dört beş şişe. Kızımın çeyizi, borç… Biliyorum, hırsızlık. Ama hocama dokunmadım.",
           "needs": [
-            "e-kamera"
+            "e-stok"
           ]
         },
         {
@@ -6881,14 +7394,20 @@
         {
           "id": "y2-onarim",
           "ask": "Onarım sırasında başka kim vardı?",
-          "answer": "Ece Hanım tanık imzası attı. Halil Hoca da kapıya geldi, “alyanın kaç numara” dedi. “İki buçuk hocam” dedim. Pimin nasıl çıktığını da gösterdim ona, merak etmişti."
+          "answer": "Ece Hanım tanık imzası attı. Halil Hoca da kapıya geldi, “alyanın kaç numara” dedi. “İki buçuk hocam” dedim. Pimin nasıl çıktığını da gösterdim ona, merak etmişti.",
+          "needs": [
+            "e-teknik"
+          ]
         },
         {
           "id": "y2-ogle",
           "ask": "Perşembe öğlen Halil Hoca damadıyla laboratuvara geldiğinde siz neredeydiniz?",
-          "answer": "B-202’deydim, kapı açıktı. Halil Hoca genç adamı getirdi, “Yusuf, bu UzakDestek’i sen mi kurdun” dedi. Genç adam hocanın monitöründeki numara etiketine baktı, “katılımsız parola mı kullanıyorsunuz” diye sordu. Ben de tahtayı gösterdim, “orada yazıyor” dedim. Ne bileyim ben…",
+          "answer": "B-202’deydim. Halil Hoca bir genci laboratuvara getirdi, gezdirdi. Yarım saat sonra bana mesaj attı, UzakDestek parolasını sordu; damadı kendi şirketine kuracakmış. Ben de yazdım. Telefonumda duruyor, bakın.",
           "needs": [
-            "e-kart"
+            "e-uzak"
+          ],
+          "unlocks": [
+            "e-yusuf-mesaj"
           ]
         },
         {
@@ -6909,7 +7428,7 @@
         },
         {
           "evidence": "e-oyi",
-          "answer": "İşte! Cuma sabahı çekmeceyi polis açtı, pim yoktu. Burada yazıyor: “Pim ve vida bulunamadı.” Biri sonradan koydu oraya."
+          "answer": "Burada yazıyor: polis cuma sabahı odaya baktı, pim yoktu. Dolabı açmadılar ama ben de saat on ikide çıktım, bir daha girmedim. Anahtar askıda duruyor, herkes alabilir. Biri sonradan koydu oraya."
         },
         {
           "evidence": "e-arama-b202",
@@ -6978,12 +7497,15 @@
         {
           "id": "g-halil",
           "ask": "Halil Ersoy’la Sinan arasında bir şey fark ettiniz mi?",
-          "answer": "Halil Bey hep onu kayırdı. Ama perşembe sabah on buçuk gibi başkanlık odasının önünden geçerken Sinan’ın sesini duydum: “Hocam bunu rektöre götüreceğim, bekleyemem.” Halil Bey kapıyı kapattı. Neyle ilgili, bilmiyorum."
+          "answer": "Halil Bey hep onu kayırdı. Ama perşembe sabah on buçuk gibi başkanlık odasının önünden geçerken Sinan’ın sesini duydum: “Hocam bunu rektöre götüreceğim, bekleyemem.” Halil Bey kapıyı kapattı. Neyle ilgili, bilmiyorum.",
+          "needs": [
+            "e-sesli"
+          ]
         },
         {
           "id": "g-video",
-          "ask": "Kayıttaki çarpma sesi 22:14’te.",
-          "answer": "22:14 mü?… Demek ki o zamandı. Görüşmenin ortasıymış. Ben on bir sanmışım. Gece her şey birbirine karışıyor. Özür dilerim, yanlış söyledim.",
+          "ask": "Görüşme kaydında arka planda bir çarpma sesi var.",
+          "answer": "Kayıtta mı?… Demek ki görüşme sırasındaymış, ben on bir sanmışım. Orhan Hoca da sordu, hatırladım şimdi. Gece her şey birbirine karışıyor. Özür dilerim, yanlış söyledim.",
           "needs": [
             "e-video"
           ],
@@ -7006,7 +7528,7 @@
         {
           "id": "g-ece",
           "ask": "Ece Durmaz hakkında ne düşünüyorsunuz?",
-          "answer": "Zeki bir kız, Sinan’ın baskısı altında ezilmiş. Akşam laboratuvardan ağladığını duydum, sekiz buçuk dokuz gibi."
+          "answer": "Zeki bir kız, Sinan’ın baskısı altında ezilmiş. Akşam laboratuvarda ağladığını duydum, sekiz buçuk dokuz gibi."
         },
         {
           "id": "g-klasor",
@@ -7057,7 +7579,7 @@
         {
           "id": "b-toplanti",
           "ask": "Akşamki toplantıda ne oldu?",
-          "answer": "Standart bir malzeme transfer sözleşmesi konuştuk. Üç saat iyi gitti. Son yarım saatte Sinan Bey saçma bir soru açtı."
+          "answer": "Standart bir malzeme transfer sözleşmesi konuştuk. Bir buçuk saat iyi gitti. Son yarım saatte Sinan Bey saçma bir soru açtı."
         },
         {
           "id": "b-soru",
@@ -7078,12 +7600,12 @@
         {
           "id": "b-mail",
           "ask": "21:47’deki e-postanız tehdit gibi okunuyor.",
-          "answer": "Yorgundum. İş e-postası. Destek mektubunu geri çekmek bir hak, tehdit değil."
+          "answer": "Otelin barından yazdım, yorgundum. İş e-postası. Destek mektubunu geri çekmek bir hak, tehdit değil."
         },
         {
           "id": "b-sonra",
           "ask": "Fakülteden çıktıktan sonra nereye gittiniz?",
-          "answer": "Otele, Köprübaşı’na. Lobi barında dizüstü bilgisayarla çalıştım, İstanbul’la görüştüm. On bir buçukta odama çıktım."
+          "answer": "Sekizi on geçe çıktım, otele, Köprübaşı’na döndüm. Odaya çantamı bıraktım, sonra lobi barında dizüstü bilgisayarla çalıştım, İstanbul’la görüştüm. On bir buçukta odama çıktım."
         },
         {
           "id": "b-temas",
@@ -7122,9 +7644,17 @@
           "delivery": "alçak sesle, avukatına bakarak"
         },
         {
+          "id": "b-hol",
+          "ask": "O akşam fakültede Halil Ersoy’la karşılaştınız mı?",
+          "answer": "Çıkarken, merdiven holünde. Selamlaştık. “Nasıl geçti” dedi; “imzalamıyor” dedim. “Ben bir konuşurum” dedi, odasına yürüdü.",
+          "needs": [
+            "e-opsiyon"
+          ]
+        },
+        {
           "id": "b-sordu",
           "ask": "Sinan Bey size Ersa’yı sordu mu?",
-          "answer": "Sordu. Ağzımdan çıkmadı. “Bilmiyorum” dedim. Belki de o gece söyleseydim…",
+          "answer": "Sordu. Söyleyemedim. “Bilmiyorum” dedim. Belki de o gece söyleseydim…",
           "after": [
             "b-baska"
           ],
@@ -7140,7 +7670,7 @@
         {
           "id": "b-otel",
           "ask": "Otel kaydınızı gördük.",
-          "answer": "Görüyorsunuz. 21:58’de odamdaydım, sonra bardaydım. Bütün gece. Barmen de söyler.",
+          "answer": "Görüyorsunuz. 20:33’te odamdaydım, sonra bardaydım. Bütün gece. Barmen de söyler.",
           "needs": [
             "e-burak-otel"
           ]
@@ -7174,14 +7704,19 @@
     {
       "id": "iv-can",
       "character": "can",
-      "title": "Can Özer",
+      "title": "Can Özer, ilk görüşme",
       "place": "Çankaya İlçe Emniyet Müdürlüğü (görüntülü bağlantı)",
       "intro": "Ekranda Can Özer, Ankara’da bir görüşme odasında, kameraya fazla yakın oturuyor. Gözlüğünü sık sık düzeltiyor. Her sorudan sonra bir saniye bekleyip öyle cevap veriyor.",
       "questions": [
         {
           "id": "c-neden",
           "ask": "Eskişehir’e neden geldiniz?",
-          "answer": "Kayınvalidem kayınpederime kavanozlar göndermişti, reçel, tarhana. Bir de öğle yemeği yedik. Akşamüstü döndüm."
+          "answer": "Eşim annesine birkaç şey göndermişti; ilaç, bir de el işi bir şal. Ben de getirdim, kayınpederimle öğle yemeği yedik. Akşamüstü döndüm."
+        },
+        {
+          "id": "c-ne-zaman",
+          "ask": "Gelmeye ne zaman karar verdiniz?",
+          "answer": "Birkaç gün önceden. Selda ısrar ediyordu, annesi bekliyordu."
         },
         {
           "id": "c-gezi",
@@ -7195,6 +7730,11 @@
           "after": [
             "c-gezi"
           ]
+        },
+        {
+          "id": "c-yemek",
+          "ask": "Öğle yemeğinde ne konuştunuz?",
+          "answer": "Aile meseleleri. Selda hamile, ilk torun. Kayınpederim çok heyecanlı."
         },
         {
           "id": "c-aksam",
@@ -7212,17 +7752,27 @@
           "answer": "Serbest danışmanlık. Ar-Ge projeleri, patent dosyaları. Küçük işler."
         },
         {
-          "id": "c-etiket",
-          "ask": "Öğlen laboratuvarda UzakDestek’i ve tahtadaki parolayı sorduğunuzu söyleyen bir tanık var.",
-          "answer": "Biz de kullanıyoruz, laf olsun diye sordum. Her yerde var o program. Parolayı ezberleyecek değilim ya.",
-          "needs": [
-            "e-uzak"
-          ]
+          "id": "c-kayin",
+          "ask": "Kayınpederinizle aranız nasıldır?",
+          "answer": "İyidir. Bana kimya konusunda hep yol gösterdi. Saygı duyduğum biri."
+        },
+        {
+          "id": "c-sinan",
+          "ask": "Sinan Oktay’ı tanır mıydınız?",
+          "answer": "Adını duymuştum. Kayınpederim bölümünün en çalışkan hocası derdi. Hiç tanışmadık."
+        },
+        {
+          "id": "c-feronya",
+          "ask": "Feronya Biyoteknoloji adlı bir şirketi tanır mısınız?",
+          "answer": "Sektörde duyulmuş bir şirket. Neden sordunuz?"
         },
         {
           "id": "c-patent",
-          "ask": "Adınıza patent başvurusu var mı?",
-          "answer": "Neden sordunuz?… Var, bir iki tane. Danışmanlık işi."
+          "ask": "Adınıza bir patent başvurusu var mı?",
+          "answer": "Neden sordunuz?… Var, bir iki tane. Danışmanlık işi.",
+          "needs": [
+            "e-surum"
+          ]
         },
         {
           "id": "c-tren",
@@ -7231,72 +7781,20 @@
           "needs": [
             "e-tren"
           ]
-        },
-        {
-          "id": "c-hts",
-          "ask": "Kayınpederiniz sizi 22:51’de aramış, siz de onu 23:43’te.",
-          "answer": "…Konuştuk. Ailevi. Selda’nın bir doktor kontrolü vardı. Kayınpederim merak ediyordu.",
-          "needs": [
-            "e-hts-halil"
-          ]
-        },
-        {
-          "id": "c-ersa",
-          "ask": "Ersa Biyoteknoloji sizin ve eşinizin şirketi.",
-          "answer": "Evet. Söylemedim, çünkü sormadınız. Yasal bir şirket.",
-          "needs": [
-            "e-gazete"
-          ]
-        },
-        {
-          "id": "c-uzak",
-          "ask": "Saat 23:29’da Ankara’dan Sinan Oktay’ın bilgisayarına uzaktan bağlanılmış.",
-          "answer": "Bunu ben yapmadım. Ankara’da beş milyon insan var.",
-          "needs": [
-            "e-uzak"
-          ]
-        },
-        {
-          "id": "c-ip",
-          "ask": "Bağlantının IP adresi sizin evinize ait. Modemde “CAN-DIZUSTU” görünüyor.",
-          "answer": "…Kayınpederim aradı. “Sinan rahatsızlandı, eve gitti, dosyası hazır. Sen bağlan, gönder” dedi. Kimlik numarasını ve parolayı verdi. Gönderdim. Bir de mesaj atmamı istedi, öğrencisi merak etmesin diye. Ben… Sinan’ın orada olduğunu bilmiyordum. Yemin ederim bilmiyordum.",
-          "needs": [
-            "e-operator"
-          ],
-          "voiced": true,
-          "delivery": "boğuk, yavaş, gözlerini kameradan kaçırarak"
-        },
-        {
-          "id": "c-45",
-          "ask": "4.5 bölümünü neden sildiniz?",
-          "answer": "Kayınpederim “Sinan sinirle yazdı, yarın pişman olur, o paragrafı sil” dedi. Okudum. Ersa yazıyordu, bizim başvurumuz… Sildim. O an ne yaptığımı biliyordum.",
-          "after": [
-            "c-ip"
-          ],
-          "voiced": true,
-          "delivery": "sesi çatallanarak"
-        },
-        {
-          "id": "c-2343",
-          "ask": "23:43’te onu neden aradınız?",
-          "answer": "“Gönderildi” demek için. O telefonu açınca “Tamam Sinan, aferin” dedi. Garip geldi. Sonra anladım: Masadakilere oynuyordu.",
-          "after": [
-            "c-ip"
-          ]
         }
       ],
       "confront": [
         {
-          "evidence": "e-hts-halil",
-          "answer": "Konuştuk, evet. Bir damadın kayınpederiyle konuşması suç mu? Ailevi."
+          "evidence": "e-mert-1",
+          "answer": "Mert mi? FPLC’yi sordum, evet. Laboratuvarı gezen herkes bir şey sorar."
+        },
+        {
+          "evidence": "e-kart",
+          "answer": "Ziyaretçi kartı, evet. Bir saat kaldım. Saklayacak bir şeyim yok."
         },
         {
           "evidence": "e-avukat-mail",
           "answer": "Buluşçu benim, evet. Bu bir bilimsel çalışma. Patent ofisi başvuruyu kabul etti."
-        },
-        {
-          "evidence": "e-gazete",
-          "answer": "Şirketimiz yasal, her şey kayıtlı. Bunu gizlemedim."
         }
       ],
       "deflect": [
@@ -7304,13 +7802,158 @@
         "Bunu kayınpederime sormanız gerekir.",
         "Ben Ankara’daydım. Eskişehir’de olanlardan haberim yok."
       ]
+    },
+    {
+      "id": "iv-can-2",
+      "character": "can",
+      "title": "Can Özer, ikinci görüşme",
+      "place": "Çankaya İlçe Emniyet Müdürlüğü, görüşme odası",
+      "intro": "Can Özer bu kez yanında bir avukatla oturuyor; avukat, Ersa’nın hukuk danışmanı. Masada bir şişe su, Can’ın önünde katlanmış bir kâğıt. Bir kez bile kameraya bakmıyor.",
+      "questions": [
+        {
+          "id": "c2-avukat",
+          "ask": "Neden avukatla geldiniz?",
+          "answer": "Şirketimizin adı geçiyor. Avukatsız konuşmamam söylendi."
+        },
+        {
+          "id": "c2-hts",
+          "ask": "Kayınpederiniz sizi 22:51’de aramış, siz de onu 23:43’te. İlk görüşmede akşam konuşmadığınızı söylediniz.",
+          "answer": "…Konuştuk. Ailevi. Selda’nın bir doktor kontrolü vardı, kayınpederim merak ediyordu. Unutmuşum.",
+          "needs": [
+            "e-hts-halil"
+          ]
+        },
+        {
+          "id": "c2-2343",
+          "ask": "Gece yarısına on yedi kala onu neden aradınız?",
+          "answer": "Selda’nın durumunu söylemek için. İyiydi.",
+          "after": [
+            "c2-hts"
+          ]
+        },
+        {
+          "id": "c2-ersa",
+          "ask": "Ersa Biyoteknoloji sizin ve eşinizin şirketi. Serbest danışman olduğunuzu söylemiştiniz.",
+          "answer": "Ersa benim şirketim, evet. Danışmanlık şirketi. Yalan söylemedim, ayrıntı vermedim.",
+          "needs": [
+            "e-gazete"
+          ]
+        },
+        {
+          "id": "c2-dizi",
+          "ask": "Patentinizdeki dizi, Sinan Oktay’ın dizisiyle amino asidi amino asidine aynı. K117R dâhil.",
+          "answer": "Bağımsız çalıştım. Literatürü taradım, modelledim.",
+          "needs": [
+            "e-avukat-mail"
+          ]
+        },
+        {
+          "id": "c2-bap",
+          "ask": "O dizi yalnızca BAP ara raporunun gizli ekindeydi ve o eke yalnızca kayınpederiniz erişti. Beş hafta sonra siz patent başvurusu yaptınız.",
+          "answer": "…Bu soruya cevap vermeyeceğim. Avukatım… Hayır, bir şey söyleyeceğim: Ben dizinin nereden geldiğini sormadım. Bana “sahipsiz bir fikir, kimse patentlemedi” dendi. Sormamam gerekiyordu, ben de sormadım.",
+          "needs": [
+            "e-bap"
+          ],
+          "voiced": true,
+          "delivery": "boğuk, duraksayarak"
+        },
+        {
+          "id": "c2-feronya",
+          "ask": "Feronya size 1,8 milyon lira ödedi.",
+          "answer": "Ticari bir sözleşme. Opsiyon bedeli. Vergisi ödendi.",
+          "needs": [
+            "e-opsiyon"
+          ]
+        },
+        {
+          "id": "c2-nermin",
+          "ask": "Bu paradan 600 bin lira kayınvalidenize gitmiş.",
+          "answer": "Aile içi bir borçtu. Ev için almıştık.",
+          "needs": [
+            "e-banka"
+          ]
+        },
+        {
+          "id": "c2-etiket",
+          "ask": "Kayınpederiniz öğlen teknisyene UzakDestek parolasını sordurmuş; “damadım kendi şirketine kuracakmış” diye.",
+          "answer": "Biz de kullanıyoruz, laf olsun diye sordum. Her yerde var o program. Parolayı ezberleyecek değilim ya.",
+          "needs": [
+            "e-yusuf-mesaj"
+          ]
+        },
+        {
+          "id": "c2-uzak",
+          "ask": "Adli bilişim raporuna göre Sinan Oktay’ın bilgisayarına 20:29 UTC’de, Ankara’daki bir fiber hattan bağlanılmış.",
+          "answer": "Bunu ben yapmadım. Ankara’da beş milyon insan var.",
+          "needs": [
+            "e-uzak"
+          ]
+        },
+        {
+          "id": "c2-mesaj",
+          "ask": "Ece Durmaz’a giden “Gönderdim” mesajı o bağlantı açıkken, bilgisayardaki WhatsApp’tan atılmış.",
+          "answer": "Ben Ece diye birini tanımıyorum.",
+          "needs": [
+            "e-uzak",
+            "e-telefon-sinan"
+          ]
+        },
+        {
+          "id": "c2-45",
+          "ask": "Aynı bağlantı sırasında başvuru dosyası iki kez kaydedilmiş ve 4.5 bölümü silinmiş.",
+          "answer": "Hangi bölüm? Ben dosyaya bakmadım.",
+          "needs": [
+            "e-uzak",
+            "e-surum"
+          ]
+        },
+        {
+          "id": "c2-oda",
+          "ask": "Mert Kaya, öğlen kayınpederinizle Sinan’ın odasına da baktığınızı söylüyor. Teknisyene göre de aynı saatlerde UzakDestek’i ve monitördeki kimlik etiketini sordunuz.",
+          "answer": "Kapıdan baktım dedim. Belki bir adım attım. Bunun ne önemi var?",
+          "needs": [
+            "e-mert-1",
+            "e-yusuf-mesaj"
+          ]
+        },
+        {
+          "id": "c2-ev",
+          "ask": "O gece evinizde başka biri var mıydı?",
+          "answer": "Eşim. Erken yattı. Hamile."
+        }
+      ],
+      "confront": [
+        {
+          "evidence": "e-operator",
+          "answer": "Bağlandım. Evet, ben bağlandım. Kayınpederim aradı; Sinan rahatsızlanmış, eve gitmiş, dosya hazırmış, “sen gönder, Sinan böyle istedi” dedi. Kimlik numarası ve parola zaten bendeydi. Gönderdim. Bir iyilik yaptığımı sandım. Başka bir şey söylemeyeceğim.",
+          "voiced": true,
+          "delivery": "yavaş, gözlerini masadan kaldırmadan"
+        },
+        {
+          "evidence": "e-uzak",
+          "answer": "Ankara’da milyonlarca insan var. Bu kayıt beni göstermiyor."
+        },
+        {
+          "evidence": "e-hts-can",
+          "answer": "Konuştuk, evet. Bir damadın kayınpederiyle konuşması suç mu? Ailevi."
+        },
+        {
+          "evidence": "e-banka",
+          "answer": "Şirketin hesabı denetimden geçer. Her kuruşun faturası var."
+        }
+      ],
+      "deflect": [
+        "Müvekkilim bu belge hakkında açıklama yapmayacak. (Avukat)",
+        "Bunu kayınpederime sorun.",
+        "Ben bir mühendisim. Bu kâğıtların hukuki anlamını avukatım bilir."
+      ]
     }
   ],
   "acts": [
     {
       "title": "Soğuk Oda",
       "sceneImage": "scene-1",
-      "scene": "Cuma sabahı. Saat yediyi otuz beş geçiyor. Porsuk Üniversitesi’nin Fen Fakültesi’nde, ikinci katın en dibindeki laboratuvarda bir cihaz kısa kısa ötüyor.\n\nTeknisyen Yusuf Bozkurt soğuk odanın çelik kapısını açıyor. İçeriden buz gibi bir hava çıkıyor. Doçent Sinan Oktay rafın dibinde oturuyor. Başı göğsüne düşmüş. Beyaz önlüğünün yakası kalkık.\n\nKomiser Aslı Yıldırım yarım saat sonra eşikte duruyor. Kapının içindeki kolu çeviriyor. Kol boşta dönüyor. Bir pim yok, bir vida yok. Teknisyen aynı kolu iki gün önce onardığına yemin ediyor. Kapının dışında sarı bir not: “Kolon dengede, açmayın.”\n\nSinan Oktay dün gece on milyon liralık bir proje başvurusu yetiştiriyordu. Başvuru gece on biri kırk bir geçe onun hesabından gönderilmiş. Üç dakika sonra öğrencisine bir mesaj gitmiş: “Gönderdim.”\n\nO gece binada bir bölüm başkanı, iki doktora öğrencisi, bir rakip, bir şirket temsilcisi ve bir gece bekçisi vardı. Biri yalan söylüyor. Belki birden fazlası.\n\nAslı kapının önündeki servis arabasına bakıyor. Sonra saatine. Bu odada bir adam öldü. Ama ne zaman?",
+      "scene": "Cuma sabahı. Saat yediyi otuz beş geçiyor. Porsuk Üniversitesi’nin Fen Fakültesi’nde, ikinci katın en dibindeki laboratuvarda bir cihaz kısa kısa ötüyor.\n\nTeknisyen Yusuf Bozkurt soğuk odanın çelik kapısını açıyor. İçeriden buz gibi bir hava çıkıyor. Doçent Sinan Oktay rafın dibinde oturuyor. Başı göğsüne düşmüş. Beyaz önlüğünün yakası kalkık.\n\nKomiser Aslı Yıldırım yarım saat sonra eşikte duruyor. Kapının içindeki kolu çeviriyor. Kol boşta dönüyor. Bir pim yok, bir vida yok. Teknisyen aynı kolu çarşamba günü onardığına yemin ediyor. Kapının dışında el yazısıyla bir not: “Kolon dengede, açmayın.”\n\nSinan Oktay dün gece on milyon liralık bir proje başvurusu yetiştiriyordu. Başvuru gece on biri kırk bir geçe onun hesabından gönderilmiş. Üç dakika sonra öğrencisine bir mesaj gitmiş: “Gönderdim.”\n\nO gece binada bir bölüm başkanı, iki doktora öğrencisi, bir rakip grup lideri ve bir gece güvenlik görevlisi vardı. Akşam saatlerinde bir şirket temsilcisi de uğramıştı. Biri yalan söylüyor. Belki birden fazlası.\n\nAslı kapının önündeki servis arabasına bakıyor. Sonra saatine. Bu odada bir adam öldü. Ama ne zaman?",
       "evidence": [
         "e-112",
         "e-tutanak",
@@ -7322,17 +7965,7 @@
       "leads": [
         "l-oyi",
         "l-otopsi",
-        "l-kart",
-        "l-recep",
-        "l-ece",
-        "l-halil",
-        "l-yusuf",
-        "l-mert",
-        "l-gulsen",
-        "l-burak",
-        "l-can",
-        "l-eposta",
-        "l-defter"
+        "l-kart"
       ],
       "hints": [
         "Önce “kaza mı” sorusunu kapatın. Kol en son ne zaman sağlamdı, pim kendiliğinden düşebilir mi? Sonra o geceyi saat saat kurun: Sinan’ı en son kim, nerede, hangi belgeye göre gördü?",
@@ -7341,28 +7974,26 @@
       "advance": {
         "leads": [
           "l-oyi",
-          "l-restoran"
+          "l-halil"
         ],
-        "hours": 13
+        "hours": 12
       }
     },
     {
       "title": "Kapı Kaydı",
       "sceneImage": "scene-2",
-      "scene": "Pazartesi öğleden sonra. Olaydan dört gün sonra Aslı Yıldırım’ın masasına aynı saat içinde iki zarf düşüyor.\n\nBirincisi Ankara’dan, Adli Tıp’tan. Sinan Oktay’ın kanında uyku ilacı var. Kendisine yazılmamış bir ilaç. Midesinde, son içtiği sütlü kahveyle birlikte.\n\nİkincisi soğutma firmasından. Soğuk odanın kapısı her açılıp kapandığında saniyesiyle bir kayıt düşüyor. Bütün bir günün kaydı, sabaha kadar.\n\nSalı sabahı teknisyen odasında bir arama yapılıyor. Yusuf Bozkurt’un takım çekmecesinde, bir eldivenin içinde, kayıp pim ve bir alyan anahtarı çıkıyor. Teknisyen izinde. Telefonda sesi titriyor.\n\nAslı koridorun başında, kameranın altında duruyor. Kâğıtlardaki saatlerle koridordaki kapıları tek tek eşleştiriyor. Bir yerde dakikalar tutmuyor. Bir yerde bir adamın anlattığı saat, bir makinenin kaydettiği saatle çelişiyor.\n\nGece on biri kırk bir geçe biri o başvuruyu gönderdi. Ama kim? Ve o sırada Sinan Oktay neredeydi?",
+      "scene": "Pazartesi öğleden sonra. Olaydan üç gün sonra Ankara’dan, Adli Tıp’tan ivedi bir zarf geliyor.\n\nSinan Oktay’ın kanında uyku ilacı var. Kendisine yazılmamış bir ilaç. Midesinde, son içtiği sütlü kahveyle birlikte. Olay Yeri İnceleme de soğuk odadaki cihazın hafızasını indiriyor: Sinan o gece cihazın başında, ekrana dokunarak çalışmış.\n\nSalı sabahı teknisyen odasında bir arama yapılıyor. Yusuf Bozkurt’un kilitli takım dolabında, bir eldivenin içinde, kayıp pim ve bir alyan anahtarı çıkıyor. Teknisyen izinde. Telefonda sesi titriyor.\n\nAslı Yıldırım koridorun başında, kameranın altında duruyor. Kâğıtlardaki saatlerle koridordaki kapıları tek tek eşleştiriyor. Bir uyku ilacı, bir kahve, bir pim. Hepsi aynı gecenin parçaları; ama hangi saatin?\n\nGece on biri kırk bir geçe biri o başvuruyu gönderdi. Sinan mıydı? Uyuşmuş bir adam, o saatte hâlâ ekrana dokunabilir miydi?",
       "evidence": [
-        "e-logger",
         "e-fplc",
         "e-tox",
         "e-arama-b202",
         "ph-cekmece"
       ],
       "leads": [
-        "l-yusuf-2",
-        "l-portal"
+        "l-yusuf-2"
       ],
       "hints": [
-        "Soğuk odanın kapı kaydını FPLC günlüğü, Gülşen Tan’ın görüşme kaydı ve Ece’nin 22:20 mesajıyla birlikte okuyun. Koridor kamerasının saatini başka bir kayıtla karşılaştırarak düzeltmeden hiçbir kamera saatine güvenmeyin.",
+        "Soğuk odanın kapısı ne zaman açılıp kapandı? Teknisyenin sözünü ettiği izleme sistemini, FPLC günlüğünü, Gülşen Tan’ın görüşme kaydını ve Ece’nin 22:20 mesajını birlikte okuyun. Koridor kamerasının saatini başka bir kayıtla karşılaştırarak düzeltmeden hiçbir kamera saatine güvenmeyin.",
         "23:33–23:44 arasında kurbanın bilgisayarında işlem yapılırken laboratuvardaki herkes nerede? Kamera saatini düzelttiğinizde Ece’nin o dakikalarda nerede olduğuna bakın. Dosyadan neyin silindiğine ve bunun kimin işine yaradığına da bakın."
       ],
       "advance": {
@@ -7370,13 +8001,13 @@
           "l-kamera",
           "l-surum"
         ],
-        "hours": 13
+        "hours": 15
       }
     },
     {
       "title": "Uzak Masa",
       "sceneImage": "scene-3",
-      "scene": "Yirmi Şubat. Yerel gazete haberi manşetten veriyor: kaza ihtimali geride kaldı. Fakültede kimse koridorda yüksek sesle konuşmuyor.\n\nSoğutma firması kapı kaydının neden güvenilir olduğunu yazıyla anlatıyor. Çay ocağındaki kahve otomatının satış dökümü de geliyor; kim, hangi saatte, ne içmiş.\n\nAslı Yıldırım B-205’te, Sinan Oktay’ın masasında oturuyor. Bilgisayar hâlâ orada. Sandalyenin arkalığında koyu lacivert kaban asılı. Kapının buzlu camından koridorun ışığı sızıyor.\n\nBir odada oturan bir adam, bir ekranın ışığı, bir telefon zili, bir kadeh. O gece birkaç kişi gördüklerine, duyduklarına dürüstçe inandı. Aslı onların yalan söylediğini düşünmüyor. Yanıldıklarını düşünüyor.\n\nŞimdi soru şu: Bu yanılgıların hepsi aynı kişinin işine mi yarıyor?",
+      "scene": "Yirmi Şubat. Yerel gazete haberi manşetten veriyor: kaza ihtimali geride kaldı. Fakültede kimse koridorda yüksek sesle konuşmuyor. Öğrenciler laboratuvarın önünden geçerken başlarını çeviriyor.\n\nSoğutma firmasının teknik müdürü kapı kaydının nasıl çalıştığını uzun bir yazıyla anlatıyor. Çay ocağındaki kahve otomatının işletmecisi de satış dökümünü gönderiyor; kim, hangi saatte, ne içmiş.\n\nAslı Yıldırım B-205’te, Sinan Oktay’ın masasında oturuyor. Bilgisayar hâlâ orada, mühürlü bir poşetin yanında. Masada kurbanın defteri, bir kalemlik, kurumuş bir çay bardağı izi. Kapının buzlu camından koridorun ışığı sızıyor.\n\nO gece birkaç kişi gördüklerine, duyduklarına dürüstçe inandı. Aslı onların yalan söylediğini düşünmüyor. Ama bir tanığın inandığıyla bir makinenin kaydettiği aynı şey değil; ikisinin arasında bir yerde biri, herkesin neye inanacağını önceden hesaplamış olabilir.\n\nMasadaki ekran kararmış. Aslı fareye dokunmuyor. Bu bilgisayarın o gece neler gördüğünü, onu açmadan önce bilmek istiyor.",
       "evidence": [
         "e-haber",
         "e-teknik",
@@ -7384,25 +8015,24 @@
       ],
       "leads": [
         "l-saat",
-        "l-telefon",
-        "l-halil-2"
+        "l-telefon"
       ],
       "hints": [
-        "Kurbanın bilgisayarı, telefonu ve saati, 23:20–23:50 arasında üç ayrı şey söylüyor. Adli bilişim raporunun saatlerinin hangi saat diliminde olduğuna dikkat edin.",
-        "Restoranda gelen telefonun gerçekte kimden geldiğini HTS’ten bulun. Uzak bağlantının yapıldığı şehri, o numaranın sahibini ve patent sahibi şirketin ortaklarını yan yana koyun. Teknisyenin çekmecesindeki eldivenin bedenine ve 13 Şubat’taki ilk çekmece dökümüne de bakın."
+        "Kurbanın bilgisayarı, telefonu ve bileği 23:20–23:50 arasında ne yapıyordu? Her belgenin saatinin hangi saate göre yazıldığına dikkat edin.",
+        "Tanıkların “gördüm” ve “duydum” dediği her şeyi bir kayıtla eşleştirmeye çalışın; eşleşmeyenler size bir şey söyler. Teknisyenin dolabı için de 13 Şubat’ta dolabın açılmadığını ve o günden sonra B-202’ye kimin girdiğini düşünün."
       ],
       "advance": {
         "leads": [
           "l-uzak",
           "l-saat"
         ],
-        "hours": 14
+        "hours": 16
       }
     },
     {
       "title": "Mühür",
       "sceneImage": "scene-4",
-      "scene": "Mart başı. Eskişehir’e geç bir kar yağıyor. Tramvaylar yavaş gidiyor, yerleşkenin yolları yeni temizlenmiş.\n\nAjans, Sinan Oktay’ın başvurusunu askıya alıyor. Ajansa gelen bir ihbar var; başvuru metninin son halini kimin hazırladığını soruyorlar. Üniversitenin etik kurulu da iki ayrı dosyayı karara bağlıyor; o gece saklanan küçük günahlar teker teker kayda geçiyor.\n\nAslı Yıldırım dosyanın başına son kez oturuyor. Elinde bir saat, bir kapı, bir kahve, bir ekran ve bir telefon zili var. Geriye, bunları birbirine bağlayan ipi resmî belgelerle mühürlemek kalıyor.\n\nBir adresin abonesi. Bir hattın gece yarısı nereden konuştuğu. Bir hesaptan çıkan para. Bir reçete.\n\nSavcı sabırlı. Ama Aslı biliyor: Dosya mahkemeye ancak her halkası iki belgeye dayanırsa gider.",
+      "scene": "Eskişehir’e mart başında geç bir kar yağıyor. Tramvaylar yavaş gidiyor, yerleşkenin yolları yeni temizlenmiş. Porsuk’un kıyısındaki ağaçlar beyaz.\n\nAjans, Sinan Oktay’ın başvurusunu askıya alıyor. Ajansa bir ihbar gelmiş; başvuru metninin son halini kimin hazırladığını soruyorlar. Üniversitenin etik kurulu da iki ayrı dosyayı karara bağlıyor. O gece saklanan küçük günahlar, büyüğünün gölgesinde, teker teker kayda geçiyor.\n\nAslı Yıldırım dosyanın başına son kez oturuyor. Elinde bir saat, bir kapı, bir kahve, bir ekran ve bir telefon zili var. Geriye, bunları birbirine bağlayan ipi resmî belgelerle mühürlemek kalıyor.\n\nBir adresin abonesi. Bir hattın gece yarısı nereden konuştuğu. Bir hesaptan çıkan para. Bir reçete.\n\nSavcı sabırlı. Ama Aslı biliyor: Dosya mahkemeye ancak her halkası iki belgeye dayanırsa gider. Sonra bir avukat o halkaları tek tek çekiştirecek.",
       "evidence": [
         "e-ubta-yazi",
         "e-etik"
@@ -7413,48 +8043,48 @@
       ],
       "hints": [
         "Uzak bağlantının IP adresinin abonesini, patent şirketinin adresiyle karşılaştırın. Can Özer’in hattının gece nerede olduğuna bakın.",
-        "Fail, bütün gece restoranda oturan kişidir: Kahveye ilacı o kattı, kapıyı 22:14’te o kapattı, alibisini damadının Ankara’dan yaptığı uzak bağlantı ve “Sinan” sanılan telefonla kurdu. Motif, aile şirketinin çaldığı patent ve Feronya’nın parasıdır."
+        "Kahveyi kim getirdi, 22:14’te laboratuvarda Sinan’dan başka kim vardı ve gece yarısına doğru “Sinan’ın” telefonu gerçekte kimden geldi? Bu üç cevabı patent şirketinin ortaklarıyla yan yana koyun."
       ]
     }
   ],
   "questions": [
     {
       "id": "who",
-      "prompt": "Sinan Oktay’ı kim öldürdü?",
+      "prompt": "Kurbanı kim öldürdü?",
       "kind": "suspect",
       "points": 22
     },
     {
       "id": "accomplice",
-      "prompt": "Failin alibisini kurmasına ve başvurunun değiştirilmesine yardım eden kim?",
+      "prompt": "Failin bir suç ortağı var mıydı? Varsa kimdi?",
       "kind": "suspect",
       "points": 11
     },
     {
       "id": "how",
-      "prompt": "Sinan Oktay nasıl öldürüldü?",
+      "prompt": "Kurban nasıl öldü?",
       "kind": "choice",
       "points": 10,
       "options": [
         {
           "id": "h-kaza",
-          "text": "Öldürülmedi: başvuruyu gönderdikten sonra soğuk odaya girdi, arızalı kol yüzünden mahsur kaldı."
+          "text": "Kendisi girdi ve kapı kendiliğinden kapandı; iç kol zaten arızalıydı."
         },
         {
           "id": "h-gece",
-          "text": "Gece yarısından sonra laboratuvara gelen biri, Sinan soğuk odadayken kapıyı kapattı ve pimi söktü."
+          "text": "Gece yarısından sonra gelen biri kapıyı kapattı; iç kolu da o bozdu."
         },
         {
           "id": "h-ilac",
-          "text": "Kahvesine uyku ilacı katıldı; iç açma kolunun pimi önceden söküldü; soğuk odaya girdiğinde kapıyı tutan araba çekilip kapı kapatıldı."
+          "text": "Bir ilaçla uyutulup içeride kapatıldı; iç kol önceden bozulmuştu."
         },
         {
           "id": "h-sekil",
-          "text": "Kahvesine öğrencisinin alerji ilacı katıldı; uykulu haldeyken soğuk odada düşüp bayıldı, kapı kendiliğinden kapandı."
+          "text": "Bir ilaçla sersemledi ve içeride düşüp bayıldı; kapı yayla kapandı."
         },
         {
           "id": "h-darbe",
-          "text": "Odasında bayıltılıp gece boyunca soğuk odaya taşındı ve kapı dışarıdan kilitlendi."
+          "text": "Odasında bayıltılıp soğuk odaya taşındı; kapı dışarıdan kilitlendi."
         }
       ]
     },
@@ -7466,51 +8096,51 @@
       "options": [
         {
           "id": "y-veri",
-          "text": "Etik kurula gitmeden Şekil 3’teki veri uydurmasının ortaya çıkmasını önlemek"
+          "text": "Bir veri uydurmasının etik kurula gitmesini önlemek"
         },
         {
           "id": "y-rakip",
-          "text": "Rakip başvuruyu saf dışı bırakıp aynı çağrıdaki fonu kazanmak"
+          "text": "Aynı çağrıdaki rakip başvuruyu saf dışı bırakmak"
         },
         {
           "id": "y-etanol",
-          "text": "Laboratuvardan yapılan solvent hırsızlığının ortaya çıkmasını önlemek"
+          "text": "Laboratuvardaki bir hırsızlığın ortaya çıkmasını önlemek"
         },
         {
           "id": "y-patent",
-          "text": "Kurbanın dizisinin aile şirketi adına patentlendiğinin ve bundan para alındığının ortaya çıkmasını önlemek"
+          "text": "Çalınmış bir buluştan gelen parayı korumak"
         },
         {
           "id": "y-lisans",
-          "text": "Lisans sözleşmesini imzalamayı reddeden araştırmacıyı aradan çıkarıp enzimi şirkete kazandırmak"
+          "text": "İmzalanmayan bir lisans anlaşmasının önünü açmak"
         }
       ]
     },
     {
       "id": "alibi",
-      "prompt": "Fail, Sinan’ın gece yarısına doğru hâlâ hayatta olduğu izlenimini nasıl yarattı?",
+      "prompt": "Kurbanın gece yarısına doğru hayatta olduğu izlenimi nasıl yaratıldı?",
       "kind": "choice",
       "points": 12,
       "options": [
         {
           "id": "a-uzak",
-          "text": "Ankara’daki bir suç ortağı Sinan’ın bilgisayarına uzaktan bağlanıp başvuruyu gönderdi ve onun hesabından mesaj attı; aynı kişi restorandaki faili aradı, fail bunu Sinan’ın araması gibi gösterdi."
+          "text": "Kurbanın bilgisayarını başkası kullandı; tanıklar da yanlış bir şeye inandı."
         },
         {
           "id": "a-ece",
-          "text": "Laboratuvarda kalan doktora öğrencisi iç kapıdan Sinan’ın odasına geçip başvuruyu gönderdi ve mesajı kendisine attı."
+          "text": "Laboratuvarda kalan biri kurbanın bilgisayarını kullandı; mesajı da o kendine yazdı."
         },
         {
           "id": "a-zaman",
-          "text": "Başvuru ve mesaj Sinan tarafından ileri bir saate zamanlanmıştı; fail bunu biliyordu."
+          "text": "Gönderim ve mesaj önceden zamanlanmıştı; kurban o saatte çoktan baygındı."
         },
         {
           "id": "a-donus",
-          "text": "Fail restorandan kısa bir süreliğine ayrılıp yerleşkeye döndü, gönderimi kendisi yaptı."
+          "text": "Fail yemekten kısa süreliğine ayrıldı; yerleşkeye dönüp gönderimi kendisi yaptı."
         },
         {
           "id": "a-kamera",
-          "text": "Fail koridor kamerasının saatini değiştirerek laboratuvardan çıkış saatini gizledi."
+          "text": "Fail kamera saatini değiştirdi; laboratuvardan çıkışı daha erken görünüyordu."
         }
       ]
     },
@@ -7522,11 +8152,11 @@
       "options": [
         {
           "id": "s-patent",
-          "text": "Kurbanın yayımlanmamış enzim dizisinin BAP ara raporundan alınıp bir aile şirketi adına patentlenmesi ve bir firmaya opsiyonla satılması"
+          "text": "Gizli bir rapordaki dizinin başkası adına patentlenmesi"
         },
         {
           "id": "s-veri",
-          "text": "Başvurudaki Şekil 3’te jel görüntüsünün kopyalanması"
+          "text": "Başvurudaki bir jel görüntüsünün kopyalanıp değiştirilmesi"
         },
         {
           "id": "s-etanol",
@@ -7534,17 +8164,17 @@
         },
         {
           "id": "s-sizinti",
-          "text": "Rakip grup liderinin başvuru klasörüne izinsiz girip dosyaları kopyalaması"
+          "text": "Bir başvuru klasörüne izinsiz girilip dosya kopyalanması"
         },
         {
           "id": "s-intihal",
-          "text": "Başvurunun 2.3 bölümünün başka bir projeden kopyalanması"
+          "text": "Başvurunun bir bölümünün başka bir projeden alınması"
         }
       ]
     },
     {
       "id": "when",
-      "prompt": "Sinan Oktay hangi dakikada soğuk odaya kapatıldı?",
+      "prompt": "Kurban hangi dakikada soğuk odaya kapatıldı?",
       "kind": "choice",
       "points": 8,
       "options": [
@@ -7572,23 +8202,23 @@
     },
     {
       "id": "proof",
-      "prompt": "Failin, kurbanla gece yarısına doğru temas ettiğine dayanan anlatısını en açık hangi belge çürütür?",
+      "prompt": "Failin, gece yarısına doğru kurbanla telefonda konuştuğu iddiasını en açık hangi belge çürütür?",
       "kind": "evidence",
       "points": 12
     },
     {
       "id": "plant",
-      "prompt": "Kayıp pim ve alyan, teknisyenin çekmecesine ne zaman konuldu?",
+      "prompt": "Kayıp pim ve alyan, bulundukları dolaba ne zaman konuldu?",
       "kind": "choice",
       "points": 4,
       "options": [
         {
           "id": "p-1707",
-          "text": "12 Şubat 17:07’de, pim söküldükten hemen sonra"
+          "text": "12 Şubat akşamüstü, laboratuvar boşken"
         },
         {
           "id": "p-0005",
-          "text": "13 Şubat 00:05’te, teknisyen gece laboratuvara geldiğinde"
+          "text": "13 Şubat 00:05’te, gece binaya gelen biri tarafından"
         },
         {
           "id": "p-sabah",
@@ -7596,11 +8226,11 @@
         },
         {
           "id": "p-pazar",
-          "text": "15 Şubat Pazar öğleden sonra, teknisyen izindeyken"
+          "text": "15 Şubat Pazar öğleden sonra, hafta sonunda"
         },
         {
           "id": "p-sali",
-          "text": "17 Şubat sabahı, arama sırasında"
+          "text": "17 Şubat sabahı, arama ekibi odadayken"
         }
       ]
     },
@@ -7612,15 +8242,15 @@
       "options": [
         {
           "id": "r-sekil3",
-          "text": "Şekil 3 ve açıklaması"
+          "text": "Ön verilerdeki şekil ve açıklaması"
         },
         {
           "id": "r-45",
-          "text": "“4.5 Fikri mülkiyet durumu” bölümü"
+          "text": "Fikri mülkiyet durumu bölümü"
         },
         {
           "id": "r-mektup",
-          "text": "Feronya’nın destek mektubu"
+          "text": "Sanayi ortağının destek mektubu"
         },
         {
           "id": "r-butce",
@@ -7628,7 +8258,7 @@
         },
         {
           "id": "r-23",
-          "text": "2.3 numaralı literatür bölümü"
+          "text": "Literatür özeti bölümünün yarısı"
         }
       ]
     }
@@ -7658,8 +8288,8 @@
     "proof": [
       "e-hts-halil",
       "e-telefon-sinan",
-      "e-uzak",
-      "e-saat"
+      "e-saat",
+      "e-uzak"
     ],
     "plant": [
       "p-pazar"
@@ -7699,12 +8329,20 @@
         "text": "Sinan, patenti Halil’e gösterdi ve rektöre gideceğini söyledi."
       },
       {
-        "at": "2026-02-12T10:40",
+        "at": "2026-02-12T10:22",
         "text": "Halil, Can’ı arayıp Eskişehir’e çağırdı."
+      },
+      {
+        "at": "2026-02-12T10:31",
+        "text": "Can, aynı gün için gidiş-dönüş tren bileti aldı."
       },
       {
         "at": "2026-02-12T13:34",
         "text": "Halil, Can’a laboratuvarı ve Sinan’ın bilgisayarını gösterdi."
+      },
+      {
+        "at": "2026-02-12T13:52",
+        "text": "Halil, Yusuf’a mesajla UzakDestek parolasını sordu."
       },
       {
         "at": "2026-02-12T17:07",
@@ -7713,6 +8351,18 @@
       {
         "at": "2026-02-12T17:20",
         "text": "Can, trenle Ankara’ya döndü."
+      },
+      {
+        "at": "2026-02-13T10:12",
+        "text": "OYİ ve Yusuf B-202’ye baktı ve birlikte çıktı; dolap açılmadı."
+      },
+      {
+        "at": "2026-02-12T20:08",
+        "text": "Burak Esen çıkarken merdiven holünde Halil’le karşılaştı."
+      },
+      {
+        "at": "2026-02-12T20:09",
+        "text": "Burak Esen binadan çıktı."
       },
       {
         "at": "2026-02-12T20:13",
@@ -7737,10 +8387,6 @@
       {
         "at": "2026-02-12T21:27",
         "text": "Halil, otomattan iki sütlü kahve aldı ve birine zolpidem kattı."
-      },
-      {
-        "at": "2026-02-12T21:36",
-        "text": "Burak Esen binadan çıktı."
       },
       {
         "at": "2026-02-12T22:04",
@@ -7833,19 +8479,28 @@
           "“Restoranda arayanı Sinan sandım; Can kızımın kontrolü için aramıştı.”",
           "“22:51’de Can’la ailevi konuştuk.”",
           "“Pazar günü B-202’den bölüm arşivi için klasör aldım.”",
-          "“Ersa’yla ya da Feronya’yla bir ilgim yok.”"
+          "“Ersa’yla ya da Feronya’yla bir ilgim yok.”",
+          "“Can, kızımın annesine gönderdiklerini getirmek için geldi.” (Ziyaret aynı sabah planlandı.)",
+          "“Not bloğu herkesin; ben kapıya not asmadım.”",
+          "“Tablet eziciyi kendi ilacım için kullanıyorum.”"
         ]
       },
       {
         "id": "can",
         "secret": "Ersa’nın kurucusu ve patentin “buluşçusu”. Halil’in talimatıyla 23:29’da Ankara’dan Sinan’ın bilgisayarına bağlanıp 4.5 bölümünü sildi, başvuruyu gönderdi, Ece’ye mesaj attı ve 23:43’te Halil’i arayarak sahte “Sinan araması”nı mümkün kıldı.",
-        "whereabouts": "12:28’de Eskişehir’e geldi, 13:12–14:20 fakültede, 17:20 treniyle Ankara’ya döndü; gece Ümitköy’deki evindeydi.",
+        "whereabouts": "12:50’de Eskişehir’e geldi, 13:12–14:20 fakültede, 17:20 treniyle Ankara’ya döndü; gece Ümitköy’deki evindeydi ve 23:29–23:48 arasında Sinan’ın bilgisayarına uzaktan bağlandı.",
         "lies": [
           "“Akşam kayınpederimle konuşmadım.”",
           "“Serbest danışmanım.” (Ersa’nın müdürü.)",
           "“UzakDestek etiketine laf olsun diye baktım.”",
           "“Sinan’ın bilgisayarına ben bağlanmadım.”",
-          "“22:51 ve 23:43’te ailevi konuştuk.”"
+          "“22:51 ve 23:43’te ailevi konuştuk.”",
+          "“Ertesi sabah kayınpederim aradı, haberi o verdi.”",
+          "“Gelmeye birkaç gün önceden karar verdik.” (Bilet aynı sabah 10:31’de alındı.)",
+          "“Sinan’ın odasına girmedim, kapıdan baktım.”",
+          "“Dosyaya bakmadım.” (4.5’i sildi.)",
+          "“Sinan rahatsızlanıp eve gitti sandım; onun isteğiyle gönderdiğimi düşündüm.”",
+          "“Dizinin nereden geldiğini sormadım; bağımsız çalıştım.”"
         ]
       },
       {
@@ -7860,7 +8515,7 @@
       {
         "id": "yusuf",
         "secret": "Aylardır laboratuvardan mutlak etanol alıp Şirintepe’de bir kolonya imalathanesine satıyordu.",
-        "whereabouts": "16:41’de çıktı, Şirintepe’deydi; 23:58–00:10 etanol almak için fakülteye geldi, soğuk odayı açmadı. 13–16 Şubat Kütahya’da izindeydi.",
+        "whereabouts": "16:41’de çıktı, Şirintepe’deydi; 23:58–00:10 etanol almak için fakülteye geldi, soğuk odayı açmadı. 13 Şubat öğleden 17 Şubat sonuna kadar Kütahya’da izindeydi.",
         "lies": [
           "“Gece fakülteye gelmedim.”",
           "“Unuttuğum ilacımı almaya geldim.”",
@@ -7879,11 +8534,12 @@
       {
         "id": "burak",
         "secret": "Feronya, Ersa’yla kaynağı şüpheli patent için opsiyon sözleşmesi yapmıştı; Burak, Sinan’ı da bir sözleşmeyle bağlayıp itirazı önlemeye çalışıyordu. İmza yemeğinde Halil’le tanışmıştı.",
-        "whereabouts": "21:36’da binadan, 21:39’da otoparktan çıktı; 21:58’den sonra otel odasında ve lobi barındaydı.",
+        "whereabouts": "20:09’da binadan, 20:12’de otoparktan çıktı; 20:33’ten sonra otel odasında ve lobi barındaydı.",
         "lies": [
           "“Bu enzim için başka bir firmayla görüşmüyoruz.”",
           "“Halil Ersoy’u yakından tanımam.”",
-          "“Ersa’yı bilmiyorum.”"
+          "“Ersa’yı bilmiyorum.”",
+          "“Toplantı iyi gitti, anlaşmaya yakındık.”"
         ]
       },
       {
@@ -7905,7 +8561,7 @@
     ],
     "chain": [
       {
-        "step": "Kaza değil: iç kolun pimi 11 Şubat onarımından sonra söküldü; söküm 12 Şubat 17:07–17:10’da, laboratuvar boşken ve B-204’e giren tek kart Halil’inkiyken yapıldı.",
+        "step": "Kaza değil: iç kolun pimi 11 Şubat onarımından sonra söküldü. İç kol 14:09’da hâlâ çalışıyordu; sonraki tek açılış 17:07–17:10’da, laboratuvarda yalnızca Halil varken oldu (B-205’te imza bekleyen evrak yok).",
         "evidence": [
           "e-bakim",
           "e-oyi",
@@ -7928,6 +8584,8 @@
           "e-ece-1",
           "e-otomat",
           "e-otopsi",
+          "e-arama-b210",
+          "e-esda",
           "e-recete"
         ],
         "facts": [
@@ -8036,15 +8694,19 @@
         ]
       },
       {
-        "step": "Teknisyene kurulan tuzak: 13 Şubat sabahı çekmece sayılmış ve pim yoktu; Yusuf izindeyken 15 Şubat pazar günü B-202’ye yalnızca Halil’in ana kartı girdi; eldiven S beden, alyan Yusuf’un tam takımından değil.",
+        "step": "Teknisyene kurulan tuzak: pim 14:09’dan sonra söküldü, Yusuf 16:41’de binadan çıkmıştı. 13 Şubat 10:12’de OYİ ile B-202’den çıkan Yusuf, izni bitene kadar odaya hiç girmedi; bu sürede B-202’ye giren tek kart 15 Şubat Pazar 14:31’de Halil’in ana kartıydı. Eldiven S beden ve Halil’in çekmecesinde açılmış bir S kutusu var; alyan Yusuf’un tam takımından değil; kapıdaki not Halil’in bloğundan.",
         "evidence": [
           "e-oyi",
           "e-arama-b202",
           "e-kart-hafta",
-          "e-yusuf-1"
+          "e-teknik",
+          "e-yusuf-1",
+          "e-arama-b210",
+          "e-esda"
         ],
         "facts": [
-          "f-plant"
+          "f-plant",
+          "f-pin-1707"
         ]
       },
       {
@@ -8069,11 +8731,11 @@
     "redHerrings": [
       {
         "evidence": "e-mail-ece",
-        "explanation": "Ece’nin veri uydurması gerçek bir suç ve güçlü bir motif. Ama kapı 22:14’te kapandığında Ece binanın dışında kuryeden yemek alıyordu (G1 kamerası, kart kaydı, sipariş). 23:41–23:44’te çay ocağındaydı (kamera saati düzeltilince, otomat kaydı). Kanda çıkan ilaç onun hidroksizini değil. Gece silinen bölüm de Şekil 3 değil, 4.5’tir; Şekil 3 çıkarılmış olarak kaldı."
+        "explanation": "Ece’nin veri uydurması gerçek bir suç ve güçlü bir motif. Ama kapı 22:14’te kapandığında Ece binanın dışında kuryeden yemek alıyordu (G1 kamerası, kart kaydı, sipariş). 23:41–23:44’te çay ocağındaydı (kamera saati düzeltilince, otomat kaydı). Kanda çıkan ilaç onun hidroksizini değil; zolpidem ve kalıntılı tablet ezici Halil’in odasından çıktı. Gece silinen bölüm de Şekil 3 değil, 4.5’tir; Şekil 3 çıkarılmış olarak kaldı."
       },
       {
         "evidence": "e-arama-b202",
-        "explanation": "Pim ve alyan Yusuf’un çekmecesinde bulundu. Ama Olay Yeri İnceleme aynı çekmeceyi 13 Şubat sabahı saymış ve pim bulamamıştı. Yusuf 13–16 Şubat izindeydi, B-202’ye 15 Şubat pazar günü yalnızca Halil’in ana kartı girdi. Eldiven S beden, Yusuf XL kullanıyor. Alyan Yusuf’un tam takımına ait değil."
+        "explanation": "Pim ve alyan Yusuf’un kilitli dolabında bulundu; dolabın anahtarı ise herkesin ulaşabildiği askıda duruyordu. İç kol 14:09’da hâlâ çalışıyordu ve Yusuf 16:41’de binadan çıkmıştı; pimi o sökemezdi. 13 Şubat 10:12’den izninin bittiği 17 Şubat’a kadar B-202’ye girmedi; bu sürede giren tek kart 15 Şubat Pazar 14:31’de Halil’in ana kartıdır. Eldiven S beden, Yusuf XL kullanıyor; alyan onun tam takımına ait değil."
       },
       {
         "evidence": "e-mail-gulsen",
@@ -8081,7 +8743,7 @@
       },
       {
         "evidence": "e-mail-burak",
-        "explanation": "Burak’ın tehditkâr e-postası ve gizlediği Ersa sözleşmesi onu şüpheli yapar. Ama 21:36’da binadan, 21:39’da otoparktan çıktı ve 21:58’den itibaren otelindeydi. Feronya için canlı ve imza atmış bir Sinan değerliydi."
+        "explanation": "Burak’ın tehditkâr e-postası ve gizlediği Ersa sözleşmesi onu şüpheli yapar. Ama 20:09’da binadan, 20:12’de otoparktan çıktı ve 20:33’ten itibaren otelindeydi. Feronya için canlı ve imza atmış bir Sinan değerliydi."
       },
       {
         "evidence": "e-recep",

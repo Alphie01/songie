@@ -1,0 +1,77 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı görevlisi": {
+      "voice_id": "dDcfsSsiSzmphdMGCECb",
+      "name": "Umit Dogan - Energetic and Dynamic"
+    },
+    "hamdi": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "#Operatör Burcu (O-14)": {
+      "voice_id": "5RqXmIU9ikjifeWoXHMG",
+      "name": "Ayça -  Young and Energetic"
+    },
+    "riza": {
+      "voice_id": "rSuyucEH95GpZEfLV0AM",
+      "name": "Can Seçkin - Breathy and Deep"
+    },
+    "selcuk": {
+      "voice_id": "2olWvHmrPO1obgZX9ivZ",
+      "name": "Emin - Storyteller"
+    },
+    "gulten": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "#Av. Kerem Tunç": {
+      "voice_id": "tXRnby5LTnvbvDWMCJWO",
+      "name": "Aytuğ Akıncılar -  Scripted-Toned"
+    },
+    "yusuf": {
+      "voice_id": "BQnJrtsrT9aT7kziS653",
+      "name": "Serhat - Young, Calm and Rich"
+    },
+    "onur": {
+      "voice_id": "lxZLq5dcyw12UangGJgN",
+      "name": "Cavit - Energetic and Fast-Paced"
+    },
+    "cemal": {
+      "voice_id": "sqN4QwtcnanCCWx6TTYj",
+      "name": "Eyyup Okan - Dynamic and Authentic"
+    },
+    "halil": {
+      "voice_id": "QAABwpMjK3YR9pYW5FDO",
+      "name": "Recep Sağlık - Mature, Deep and Clear"
+    }
+  },
+  "tags": {
+    "nefesi kesik, titrek": "breathless, trembling",
+    "duraksayarak": "hesitant, pause",
+    "sesi kısılarak": "voice hushed, soft",
+    "uykulu, boğuk": "sleepy, muffled",
+    "esneyerek, yavaşça": "yawning, slow",
+    "sakin ama sert": "calm, firm",
+    "alçak sesle": "low voice, quiet",
+    "gergin": "nervous, tense",
+    "yorgun, alçak sesle": "tired, low voice",
+    "yutkunarak": "swallowing, hesitant",
+    "sesi titreyerek": "voice trembling",
+    "sesi düşerek, gözlerini kaçırarak": "voice fading, avoiding eyes",
+    "ağır ağır, her kelimeyi tartarak": "slow, deliberate",
+    "sesi kırılarak, yavaş": "voice breaking, slow",
+    "hızlı, sesi incelerek": "fast, high pitched",
+    "öfkeyle, masaya yaslanarak": "angry, intense",
+    "uzun bir sessizlikten sonra, dişlerinin arasından": "quiet, gritted teeth",
+    "gözlerini kapatarak, yorgun": "eyes closed, tired",
+    "mahcup, başını öne eğerek": "embarrassed, shy",
+    "patronun durduğu cama bakarak, alçak sesle": "low voice, cautious",
+    "gülümsemesi silinerek, yavaşça": "smile fading, slow",
+    "kasketini sıkarak, titrek sesle": "gripping cap, trembling voice",
+    "soğukkanlı, ama bir an duraksayarak": "calm, brief hesitation"
+  }
+}

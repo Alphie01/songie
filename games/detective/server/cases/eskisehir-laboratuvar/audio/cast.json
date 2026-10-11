@@ -1,0 +1,73 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#112 operatörü": {
+      "voice_id": "fnJjHAY6lhrGd5hWLRyU",
+      "name": "Sevval - Call Center"
+    },
+    "yusuf": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "gulsen": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "#Prof. Dr. Orhan Kılıç": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "#Sesli mesaj sistemi": {
+      "voice_id": "bGmbiluBMaeupKCFxoOk",
+      "name": "Gülsu Çağıran"
+    },
+    "sinan": {
+      "voice_id": "Rn6ATQ4HFbyhBC6mze4Z",
+      "name": "Sinan - Deep & Clear Turkish Narrator"
+    },
+    "halil": {
+      "voice_id": "QAABwpMjK3YR9pYW5FDO",
+      "name": "Recep Sağlık - Mature, Deep and Clear"
+    },
+    "ece": {
+      "voice_id": "5MSp7yE6sGgawegWrMgt",
+      "name": "Ece"
+    },
+    "burak": {
+      "voice_id": "D1xRw7f8ZHedI7xJgfvz",
+      "name": "Cem - Heroic, Intense and Crisp"
+    },
+    "can": {
+      "voice_id": "ctoYieZ4J7WwcdhujpMq",
+      "name": "Doga - Audiobook Master"
+    }
+  },
+  "tags": {
+    "nefes nefese, titreyen sesle": "out of breath, trembling",
+    "şaşkın, sesi yükselerek": "surprised, raising voice",
+    "sesi kırılarak": "breaking voice",
+    "umursamaz, hafif gülerek": "casual, light laughing",
+    "alaycı": "sarcastic",
+    "yorgun ama kararlı": "tired, determined",
+    "sesi alçalarak": "lowering voice",
+    "yumuşak, hüzünlü": "soft, sad",
+    "duraksayarak, sesini kontrol etmeye çalışarak": "hesitant, controlling voice",
+    "öfkeyle, sonra kendini toparlayarak": "angry, then composed",
+    "soğuk, kesin, her kelimeyi bastırarak": "cold, firm, restrained",
+    "ağlamaklı, hızlı": "tearful, fast",
+    "sesi titreyerek, ama dik durarak": "trembling voice, steadfast",
+    "çaresiz, sesini yükselterek": "desperate, raising voice",
+    "panikle, cümleleri yutarak": "panicked, stumbling",
+    "ağlamaklı, sesi kırılarak": "tearful, breaking voice",
+    "kırılarak, sonra hıçkırarak": "broken, sobbing",
+    "şaşkın, bir an sesi yumuşayarak": "surprised, voice softening",
+    "savunmaya geçerek, öfkeyle": "defensive, angry",
+    "alçak sesle, avukatına bakarak": "low voice, directed",
+    "yorgun, kurumsal maskesi düşmüş": "tired, vulnerable",
+    "boğuk, duraksayarak": "hoarse, hesitant",
+    "yavaş, gözlerini masadan kaldırmadan": "slow, focused"
+  }
+}
