@@ -1,0 +1,92 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı karşılayıcı": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "#Ramazan Yıldız (tır şoförü)": {
+      "voice_id": "rSuyucEH95GpZEfLV0AM",
+      "name": "Can Seçkin - Breathy and Deep"
+    },
+    "#Sesli mesaj sistemi": {
+      "voice_id": "mBUB5zYuPwfVE6DTcEjf",
+      "name": "Eda Atlas - Smooth, Clear and Balanced"
+    },
+    "nesrin": {
+      "voice_id": "dOQlT8TikdF47jfPQXpe",
+      "name": "Beyda - Young and Friendly"
+    },
+    "ishak": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "#0551 hattının kullanıcısı (kadın)": {
+      "voice_id": "PVbzZmwmdI99VcmuRK7G",
+      "name": "Ecem - Steady, Serious and Calm"
+    },
+    "adrien": {
+      "voice_id": "Y2T2O1csKPgWgyuKcU0a",
+      "name": "Cavit Pancar - Epic Powerful Historical"
+    },
+    "gonul": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "baran": {
+      "voice_id": "Q5n6GDIjpN0pLOlycRFT",
+      "name": "Yunus - Charismatic Turkish Male"
+    },
+    "selahattin": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "feyza": {
+      "voice_id": "MzfWWOj9g3sIKex1YFMV",
+      "name": "Duygu Eris - Warm, Encouraging and Soft"
+    },
+    "tuncay": {
+      "voice_id": "Vv1QW9Yx3WB2mLKFmyZG",
+      "name": "Kaya – Friendly and Powerful"
+    }
+  },
+  "tags": {
+    "nefes nefese, hızlı": "out of breath, fast",
+    "yutkunarak": "swallowing, hesitant",
+    "sesi titreyerek": "trembling voice",
+    "aceleyle, nefesini toplayarak": "hurried, catching breath",
+    "sesi titreyerek, hızlanarak": "trembling, accelerating",
+    "kararlı, alçak sesle": "determined, low voice",
+    "hızlı, gergin": "fast, tense",
+    "duraksayarak, temkinli": "pausing, cautious",
+    "alçak sesle, tane tane": "low voice, clear",
+    "sesi çatallanarak": "broken voice",
+    "çaresiz, yumuşak": "desperate, soft",
+    "fısıldayarak": "whispering",
+    "soğuk, alçak sesle": "cold, low voice",
+    "sesi gerilerek": "strained voice",
+    "öfkeyle, titreyerek": "angry, trembling",
+    "ağlamaklı, hızlanarak": "tearful, fast",
+    "kesin, sabırsız": "definite, impatient",
+    "yutkunarak, sesi alçalarak": "swallowing, lowering voice",
+    "soğuk, kırgın bir sükûnetle": "cold, resentful calm",
+    "savunmacı, sesi biraz yükselerek": "defensive, slightly raised voice",
+    "yavaş, yutkunarak": "slow, swallowing",
+    "kendini düzelterek, telaşla": "correcting, anxious",
+    "sesi kırılarak, gözleri dolu": "breaking voice, teary",
+    "öfkeyle, hızlanarak": "angrily, speeding up",
+    "yenilmiş, yorgun bir sesle": "defeated, tired voice",
+    "şaşkın, sesi yükselerek": "surprised, raised voice",
+    "yorgun, mahcup": "tired, embarrassed",
+    "utançla, ağır ağır": "shameful, slow",
+    "isteksizce, sesini alçaltarak": "reluctant, lowering voice",
+    "savunmacı, sonra çaresiz": "defensive, then hopeless",
+    "rahat, hafif alaycı": "relaxed, slightly sarcastic",
+    "kendinden emin, gülümseyerek": "confident, smiling",
+    "uzun bir sessizlikten sonra, ilk kez alçak sesle": "after long silence, low voice",
+    "kendini toparlayarak, hesaplı": "composed, calculated"
+  }
+}
