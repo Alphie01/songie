@@ -37,7 +37,7 @@ export async function buildApp(opts: AppOptions): Promise<App> {
   const deps: GameDeps = { db, dataDir: opts.dataDir, ffmpegPath: opts.ffmpegPath, fetchImpl: opts.fetchImpl, background: opts.background, overrides: opts.gameOverrides };
   const games = loadGames(deps);
 
-  const http = Fastify({ logger: opts.logger ?? false, trustProxy: opts.trustProxy ?? false, bodyLimit: 64 * 1024 });
+  const http = Fastify({ logger: opts.logger ?? false, trustProxy: opts.trustProxy ?? false, bodyLimit: 64 * 1024, forceCloseConnections: true });
   const io = createIO(http.server, opts.allowedOrigins ?? []);
   const rooms = new RoomManager(
     games,

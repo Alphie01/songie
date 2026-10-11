@@ -47,6 +47,9 @@ importers:
       '@songie/confessions':
         specifier: workspace:*
         version: link:../../games/confessions
+      '@songie/detective':
+        specifier: workspace:*
+        version: link:../../games/detective
       '@songie/five-seconds':
         specifier: workspace:*
         version: link:../../games/five-seconds
@@ -144,6 +147,9 @@ importers:
       '@songie/confessions':
         specifier: workspace:*
         version: link:../../games/confessions
+      '@songie/detective':
+        specifier: workspace:*
+        version: link:../../games/detective
       '@songie/five-seconds':
         specifier: workspace:*
         version: link:../../games/five-seconds
@@ -328,6 +334,31 @@ importers:
       zod:
         specifier: ^3.23.8
         version: 3.25.76
+
+  games/detective:
+    dependencies:
+      '@songie/game-kit':
+        specifier: workspace:*
+        version: link:../../packages/game-kit
+      '@songie/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
+      better-sqlite3:
+        specifier: ^11.7.0
+        version: 11.10.0
+      fastify:
+        specifier: ^5.1.0
+        version: 5.12.5
+      react:
+        specifier: ^19.0.0
+        version: 19.3.0
+      zod:
+        specifier: ^3.23.8
+        version: 3.25.76
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.23.15
 
   games/five-seconds:
     dependencies:

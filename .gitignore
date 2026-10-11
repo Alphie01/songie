@@ -5,3 +5,8 @@ data
 *.log
 test-results
 screenshots
+.export
+.env.local
+.image-spend.json
+_candidates
+tsconfig.tsbuildinfo

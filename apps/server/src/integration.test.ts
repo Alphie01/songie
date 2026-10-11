@@ -97,8 +97,11 @@ function until<T>(check: () => T | undefined, ms: number, what: string): Promise
   });
 }
 
+const openSockets: ReturnType<typeof connect>[] = [];
+
 async function client(token: string): Promise<Client> {
   const socket = connect(base, { auth: { token }, transports: ['websocket'] });
+  openSockets.push(socket);
   const c: Client = {
     socket,
     views: [],
@@ -145,6 +148,8 @@ beforeAll(async () => {
 }, 30_000);
 
 afterAll(async () => {
+  // Açık kalan istemciler yeniden bağlanmaya çalışıp sunucunun kapanmasını bekletir.
+  for (const s of openSockets) s.disconnect();
   await app?.close();
   fs.rmSync(tmp, { recursive: true, force: true });
 });

@@ -1,0 +1,4767 @@
+{
+  "meta": {
+    "slug": "pera-gecesi",
+    "title": "Pera Gecesi",
+    "subtitle": "Galata, İstanbul — Ekim 2025",
+    "genre": "hırsızlık",
+    "difficulty": "orta",
+    "minutes": 55,
+    "teaser": "Galata’daki Galeri Nirengi, Osmanlı resmi sergisini kalabalık bir geceyle açtı. Ertesi sabah sigorta eksperi ultraviyole lambasını yaktığında, sergideki en değerli tablonun yerinde başka bir resim asılıydı.\n\nÇerçeve aynı, duvar aynı, alarm bütün gece susmuş. Altmış milyon liralık bir eser, kimse kapıyı zorlamadan galeriden çıktı.",
+    "cover": "cover",
+    "hoursBudget": 31,
+    "targetHours": 19,
+    "narrator": {
+      "gender": "male",
+      "age": "adult",
+      "style": "Tok ve sakin, ağır tempolu bir polisiye anlatıcısı; İstanbul Türkçesi"
+    }
+  },
+  "images": {
+    "cover": {
+      "kind": "cover",
+      "aspect": "portrait",
+      "prompt": "Night exterior of a narrow nineteenth-century stone building on a steep cobbled street in Galata, Istanbul, tall arched windows glowing with warm gallery light, silhouettes of framed paintings on the inner walls, wet cobblestones reflecting the light, an empty street with a single old street lamp, moody cinematic atmosphere",
+      "alt": "Gece, dik ve arnavutkaldırımlı bir Galata sokağında dar, taş bir bina. Yüksek kemerli pencerelerden sıcak bir ışık taşıyor; içeride duvarlarda çerçeveli resimlerin gölgeleri seçiliyor. Sokak boş; yalnızca eski bir sokak lambası yanıyor."
+    },
+    "loc-gallery": {
+      "kind": "location",
+      "prompt": "Daytime exterior of a restored late nineteenth-century Levantine stone apartment building in Galata, Istanbul, four storeys, cast-iron balconies, a heavy dark wooden double door at street level, large arched ground-floor windows, steep narrow street, overcast autumn light",
+      "alt": "Gündüz, Galata’da restore edilmiş dört katlı, taş cepheli eski bir apartman. Dökme demir balkonlar, sokak seviyesinde koyu ahşap çift kanatlı kapı ve kemerli büyük vitrin pencereleri."
+    },
+    "p-ferit": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a Turkish man aged 58, bald with a short grey beard, navy blazer over an open white shirt, reading glasses hanging on a cord around his neck, tired puffy eyes, forced polite expression, neutral grey background",
+      "alt": "Elli yaşlarının sonunda, kel, kısa kır sakallı bir adam. Lacivert ceket, yakası açık beyaz gömlek; boynunda kordona asılı okuma gözlüğü. Gözaltları şiş, nezaketen gülümsüyor."
+    },
+    "p-cemil": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of an elegant Turkish man aged 72, swept-back silver hair, brown tweed jacket with a silk pocket square, faint age spots on his temples, stern and proud expression, neutral dark background",
+      "alt": "Yetmişlerinde, gümüş rengi saçlarını geriye taramış zarif bir adam. Kahverengi tüvit ceket, göğüs cebinde ipek mendil; şakaklarında yaşlılık lekeleri. Bakışı sert ve mağrur."
+    },
+    "p-defne": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a Turkish woman aged 36, dark chin-length bob haircut, thin round metal-framed glasses, black turtleneck, a small silver brooch, alert guarded expression, neutral light background",
+      "alt": "Otuzlu yaşlarının ortasında, koyu renk küt saçları çene hizasında bir kadın. İnce, yuvarlak metal çerçeveli gözlük, siyah balıkçı yaka kazak, küçük gümüş bir broş. Tetikte ve temkinli bakıyor."
+    },
+    "p-tuncay": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a heavy-set Turkish man aged 51, short grey hair, thick dark moustache, black security suit with a coiled earpiece wire on his collar, defensive frowning expression, neutral grey background",
+      "alt": "Elli yaşlarında, iri yapılı bir adam. Kısa kır saç, kalın koyu bıyık; siyah takım elbise, yakasında kulaklık kablosu. Kaşları çatık, savunmada."
+    },
+    "p-ilker": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a Turkish man aged 45, long grey hair tied in a low ponytail at the nape, two-day stubble, rumpled off-white linen shirt, faint traces of paint on his fingertips resting near his chin, calm slightly ironic expression, neutral warm background",
+      "alt": "Kırk beş yaşlarında bir adam. Uzun kır saçlarını ensesinde at kuyruğu yapmış, iki günlük sakal. Kırışık, kırık beyaz keten gömlek; çenesine yakın duran parmak uçlarında silik boya izleri. Sakin, hafif alaycı bir ifade."
+    },
+    "p-baris": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a lean Turkish man aged 26, shaved head, a small scar through his left eyebrow, black work shirt with rolled sleeves, nervous sideways glance, neutral grey background",
+      "alt": "Yirmili yaşlarında, zayıf bir genç adam. Kafası kazınmış, sol kaşında küçük bir yara izi. Kolları sıvanmış siyah iş gömleği. Gözleri yana kaçıyor."
+    },
+    "p-ramazan": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a thin Turkish man aged 60, short white hair, navy security guard uniform shirt with epaulettes, deep wrinkles, weary and anxious expression, neutral grey background",
+      "alt": "Altmış yaşlarında, zayıf bir adam. Kısa beyaz saç, apoletli lacivert güvenlik gömleği. Yüzünde derin çizgiler, yorgun ve tedirgin."
+    },
+    "p-gonul": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Head-and-shoulders portrait of a Turkish woman aged 42, shoulder-length auburn hair, charcoal blazer, holding a small black handheld ultraviolet torch near her shoulder, composed and precise expression, neutral light background",
+      "alt": "Kırk yaşlarının başında, omuz hizasında kızıl kahve saçlı bir kadın. Antrasit ceket; omzunun yanında küçük, siyah bir el tipi ultraviyole fener tutuyor. Sakin ve titiz bir ifade."
+    },
+    "scene-salon": {
+      "kind": "scene",
+      "prompt": "Interior of an elegant small art gallery room in the early morning, dark except for the violet glow of a handheld ultraviolet lamp aimed at a large oil painting of a Bosphorus shoreline in a heavy gilded frame, a woman in a blazer holding the lamp, a pale middle-aged man in a blazer standing behind her, leftover catering glasses on a side table",
+      "alt": "Sabah, karanlık bir galeri salonu. Bir kadın, ağır yaldızlı çerçevedeki büyük bir Boğaz kıyısı resmine mor ışıklı bir lamba tutuyor. Arkasında ceketli, solgun yüzlü orta yaşlı bir adam duruyor. Yan masada açılıştan kalmış kadehler."
+    },
+    "scene-board": {
+      "kind": "scene",
+      "prompt": "Police detective office on a grey rainy morning, a cork evidence board covered with pinned photographs of a gallery interior, a floor plan sketch and red string, paper files and a cold glass of tea on a metal desk, a folded newspaper without legible text, rain on the window, no legible text",
+      "alt": "Yağmurlu, gri bir sabah, bir emniyet bürosu. Mantar panoya iğnelenmiş galeri fotoğrafları, bir kat planı ve kırmızı ipler. Metal masada dosyalar, katlanmış bir gazete ve soğumuş bir bardak çay; camda yağmur."
+    },
+    "scene-customs": {
+      "kind": "scene",
+      "prompt": "Customs bonded warehouse at dawn under cold fluorescent light, rows of shrink-wrapped pallets, a plain plywood shipping crate on a pallet with its lid being pried open by a customs officer, two plain-clothes police officers and a woman in a blazer waiting beside it, breath visible in the cold air",
+      "alt": "Şafak, floresan ışıklı soğuk bir gümrük antreposu. Streçlenmiş paletler arasında, bir palet üstünde kontrplak bir sandık; bir gümrük memuru kapağını levyeyle açıyor. Yanında iki sivil polis ve ceketli bir kadın bekliyor."
+    },
+    "obj-uv": {
+      "kind": "document-photo",
+      "prompt": "Close documentary photograph in a dark room of an oil painting of a Bosphorus shore at sunset under ultraviolet light, the whole paint surface glowing an even pale bluish-white without any dark patches, the gilded frame around it glowing yellowish green, a gloved hand holding a small UV torch at the edge of the frame",
+      "alt": "Karanlıkta, ultraviyole ışık altında bir Boğaz kıyısı resmi. Boyalı yüzeyin tamamı eşit, soluk mavimsi beyaz bir ışıkla parlıyor; hiçbir yerde koyu leke yok. Çevresindeki yaldızlı çerçeve sarımsı yeşil parlıyor. Kenarda eldivenli bir el küçük bir UV fener tutuyor."
+    },
+    "obj-switch": {
+      "kind": "object",
+      "prompt": "Forensic close-up of a small network switch inside an open wall cabinet, several blue ethernet cables plugged in, a forensic flashlight beam raking across one black plastic connector revealing tiny glittering gold flakes on it and on the metal around the port, a plain evidence scale bar without markings beside it",
+      "alt": "Açık bir duvar dolabında küçük bir ağ anahtarı ve takılı mavi kablolar. Yandan tutulan adli fener ışığında kablolardan birinin siyah konnektöründe ve portun çevresindeki metalde ışıldayan minik altın renkli pullar görülüyor. Yanında ölçek çubuğu."
+    },
+    "cam-service-day": {
+      "kind": "cctv",
+      "prompt": "High-angle security camera view of a narrow steep back street in daylight, low resolution, a white catering van with its rear doors open next to a metal service door, a worker in a black jacket and a black cap pulled low, face turned away from the camera, carrying a large thin flat black case through the door, another capped worker behind him carrying stacked plastic crates of glasses",
+      "alt": "Gündüz, dar ve dik bir arka sokak; yüksek açılı güvenlik kamerası görüntüsü. Arka kapıları açık beyaz bir ikram kamyoneti ve metal bir servis kapısı. Siyah ceketli, kasketini alnına indirmiş bir çalışan, yüzü kameraya dönük değil, kapıdan büyük, ince ve düz siyah bir kasa taşıyor. Arkasındaki kasketli çalışan üst üste bardak kasaları getiriyor."
+    },
+    "cam-service-night": {
+      "kind": "cctv",
+      "prompt": "High-angle security camera view of a narrow back street at night, grainy low resolution, exactly six figures (count them: six people, not five) in identical black jackets and black caps walking in single file toward a lit metal service door, all of similar build, faces hidden under the caps, cigarette smoke in the air, wet cobblestones",
+      "alt": "Gece, dar bir arka sokak; kumlu, düşük çözünürlüklü görüntü. Aynı siyah ceket ve siyah kasketi giymiş figürler tek sıra halinde ışıklı metal kapıya yürüyor: kapıdan sırayla giren altı kişi seçiliyor. Kasketler yüzleri gizliyor; boyları ve yapıları birbirine yakın. Havada sigara dumanı."
+    },
+    "cam-corridor": {
+      "kind": "cctv",
+      "prompt": "High-angle security camera view of a narrow ground-floor service corridor at night, low resolution, exactly five figures in black jackets and black caps loading stacked plastic crates and folding trolleys toward an open metal back door, the steel doors of a small freight elevator closed at the far end of the corridor",
+      "alt": "Gece, zemin kattaki dar servis koridoru; yüksek açılı, düşük çözünürlüklü görüntü. Siyah ceketli, kasketli beş kişi plastik kasaları ve katlanır servis arabalarını açık arka kapıya doğru taşıyor. Koridorun ucundaki küçük yük asansörünün çelik kapıları kapalı."
+    },
+    "cam-street": {
+      "kind": "cctv",
+      "prompt": "Grainy night security camera view from a shop awning on a sloping old street in Tophane, Istanbul, a white van stopped at the kerb with hazard lights blinking, a driver in a black jacket handing a wide flat black case to a man on foot who stands at a lowered metal workshop shutter, the man on foot holds a black cap in his hand and has long grey hair tied in a low ponytail",
+      "alt": "Gece, Tophane’de eğimli eski bir cadde; bir dükkân saçağından çekilmiş kumlu güvenlik görüntüsü. Dörtlüleri yanan beyaz bir kamyonet kaldırıma yanaşmış. Siyah ceketli sürücü, geniş ve düz siyah bir kasayı, indirilmiş bir atölye kepenginin önünde bekleyen yayaya uzatıyor. Yaya siyah kasketini elinde tutuyor; uzun kır saçları ensesinde at kuyruğu yapılmış."
+    },
+    "obj-dining": {
+      "kind": "object",
+      "prompt": "Interior of a grand wooden Bosphorus waterside mansion dining room, an oil painting of a shoreline at sunset with two rowing boats hanging between tall windows overlooking the water, a long polished dining table with silver candlesticks, police evidence officer in gloves measuring the painting with a tape measure",
+      "alt": "Boğaz kıyısında ahşap bir yalının yemek salonu. Denize bakan yüksek pencerelerin arasında, akşam güneşinde kıyı evleri ve iki kayık bulunan yağlıboya bir tablo asılı. Uzun cilalı masada gümüş şamdanlar. Eldivenli bir görevli tabloyu şeritmetreyle ölçüyor."
+    },
+    "obj-crate": {
+      "kind": "object",
+      "prompt": "Open plywood shipping crate in a customs warehouse under fluorescent light, inside it an unframed oil painting on a wooden stretcher showing a Bosphorus shore at sunset with two rowing boats, partly wrapped in glassine paper and grey foam, a customs officer and a woman in a blazer with a UV torch leaning over it",
+      "alt": "Gümrük antreposunda floresan ışık altında açılmış kontrplak bir sandık. İçinde, aydınger ve gri köpüğe kısmen sarılmış, çerçevesiz, telaraya gerili yağlıboya bir tablo: akşam güneşinde Boğaz kıyısı ve iki kayık. Üzerine bir gümrük memuru ve elinde UV fener tutan ceketli bir kadın eğilmiş."
+    }
+  },
+  "characters": [
+    {
+      "id": "ferit",
+      "name": "Ferit Ilgaz",
+      "age": 58,
+      "role": "Galeri Nirengi’nin sahibi",
+      "relation": "Sergiyi düzenledi, tabloyu ödünç aldı; ihbarı yapan kişi",
+      "summary": "Galeriyi on bir yıldır işletiyor. “Kıyıdan Işık”ı en iddialı işi olarak duyurdu. Açılış gecesi ev sahibiydi ve misafirlerden sonra ayrıldı.",
+      "portrait": "p-ferit",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "adult",
+        "style": "İstanbul ağzı, kibar ama gergin; cümlelerini yarım bırakan bir galerici"
+      }
+    },
+    {
+      "id": "cemil",
+      "name": "Cemil Tanyeli",
+      "age": 72,
+      "role": "Emekli armatör, koleksiyoncu",
+      "relation": "“Kandilli’de Akşamüstü” tablosunun sahibi; sergiye ödünç verdi",
+      "summary": "Kandilli’deki aile yalısında yaşıyor; tablo 1974’ten beri ailede. Açılışta Ferit Ilgaz’la birlikte konuşma yaptı ve gece yarısından önce ayrıldı.",
+      "portrait": "p-cemil",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "old",
+        "style": "Eski İstanbul Türkçesi, ağır, mağrur ve buyurgan"
+      }
+    },
+    {
+      "id": "defne",
+      "name": "Defne Ural",
+      "age": 36,
+      "role": "Galeri Nirengi’nin küratörü",
+      "relation": "Sergiyi kurguladı; montajı ve restorasyon sürecini yönetti",
+      "summary": "Dört yıldır galeride. Eser seçimi, katalog ve yerleşim planı onun işiydi. Açılış gecesi galeride geç saate kadar kaldığını söylüyor.",
+      "portrait": "p-defne",
+      "suspect": true,
+      "voice": {
+        "gender": "female",
+        "age": "adult",
+        "style": "İstanbul ağzı, hızlı, ölçülü, savunmaya hazır"
+      }
+    },
+    {
+      "id": "tuncay",
+      "name": "Tuncay Erdem",
+      "age": 51,
+      "role": "Galeri güvenlik şefi, emekli polis",
+      "relation": "Olay gecesi binanın güvenliğinden sorumluydu",
+      "summary": "Yirmi altı yıl emniyette çalıştı, üç yıldır bu görevde. Alarm sisteminin iki yönetici kullanıcısından biri. Gece alarmı o kurdu, sabah o açtı.",
+      "portrait": "p-tuncay",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "adult",
+        "style": "Kalın sesli, polis ağzı, kısa ve kestirip atan"
+      }
+    },
+    {
+      "id": "ilker",
+      "name": "İlker Varol",
+      "age": 45,
+      "role": "Restoratör, Tophane’de atölye sahibi",
+      "relation": "Tabloyu sergiden önce onardı; montajda bulundu, açılışa davetliydi",
+      "summary": "Osmanlı dönemi yağlıboya resimlerinde adı bilinen bir usta. Açılışta bir süre kalıp erken ayrıldığını söylüyor.",
+      "portrait": "p-ilker",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "adult",
+        "style": "Yumuşak, ağır, hafif alaycı; kendinden emin bir zanaatkâr"
+      }
+    },
+    {
+      "id": "baris",
+      "name": "Barış Koç",
+      "age": 26,
+      "role": "Şoför-garson, Has Sofra İkram",
+      "relation": "Açılışta ikram ekibindeydi; ekibin ikinci aracını kullandı",
+      "summary": "İki yıldır aynı firmada. Açılış günü öğleden sonra ekipmanla geldi, gece son toplananlardandı.",
+      "portrait": "p-baris",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "young",
+        "style": "Varoş İstanbul ağzı, hızlı konuşan, tedirgin, lafı geveleyen"
+      }
+    },
+    {
+      "id": "ramazan",
+      "name": "Ramazan Oral",
+      "age": 60,
+      "role": "Galerinin gece nöbetçisi",
+      "relation": "Olay gecesi 22:00–08:00 vardiyasındaydı",
+      "summary": "Beş yıldır burada. Kamera ekranlarını izler, nöbet defterini tutar; kurala göre monitör odasını boş bırakmaz.",
+      "portrait": "p-ramazan",
+      "voice": {
+        "gender": "male",
+        "age": "old",
+        "style": "Sivas ağzı hafif şive, yorgun, saygılı, çekingen"
+      }
+    },
+    {
+      "id": "gonul",
+      "name": "Gönül Taşçı",
+      "age": 42,
+      "role": "Sigorta eksperi (Pergel Ekspertiz)",
+      "relation": "Sahteliği fark eden kişi",
+      "summary": "Güzel sanat eserlerinde uzman. Karayel Sigorta adına tabloyu açılıştan önce inceledi, poliçe şartı gereği ertesi sabah yeniden kontrol etti.",
+      "portrait": "p-gonul",
+      "voice": {
+        "gender": "female",
+        "age": "adult",
+        "style": "Net, profesyonel, sakin bir uzman"
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "galeri",
+      "name": "Galeri Nirengi",
+      "description": "Serdar-ı Ekrem Sokağı’nda, 1890’lardan kalma dört katlı bir Levanten apartmanının alt üç katı. Ön kapı Serdar-ı Ekrem’e, metal servis kapısı arkadaki dik Kumbaracı Yokuşu’na açılır.\n\nZemin katta giriş, vestiyer, monitör odası ve Salon A; birinci katta Salon B ile ikram hazırlık odası; ikinci katta ofisler ve depo vardır. Yük asansörü yalnızca zemin kat ile birinci kat arasında çalışır. İkinci kata çıkmanın tek yolu, birinci kat sahanlığındaki kartlı kapıdır.",
+      "image": "loc-gallery",
+      "plan": {
+        "width": 40,
+        "height": 24,
+        "rooms": [
+          {
+            "id": "sokak-on",
+            "label": "Serdar-ı Ekrem Sokağı (ön)",
+            "x": 0,
+            "y": 0,
+            "w": 19,
+            "h": 2,
+            "outdoor": true
+          },
+          {
+            "id": "z-giris",
+            "label": "Zemin: giriş holü ve merdiven",
+            "x": 0,
+            "y": 2,
+            "w": 8,
+            "h": 6
+          },
+          {
+            "id": "z-vestiyer",
+            "label": "Zemin: resepsiyon, vestiyer",
+            "x": 8,
+            "y": 2,
+            "w": 5,
+            "h": 6
+          },
+          {
+            "id": "z-monitor",
+            "label": "Zemin: monitör odası",
+            "x": 13,
+            "y": 2,
+            "w": 6,
+            "h": 6
+          },
+          {
+            "id": "z-salona",
+            "label": "Zemin: Salon A",
+            "x": 0,
+            "y": 8,
+            "w": 13,
+            "h": 10
+          },
+          {
+            "id": "z-servis",
+            "label": "Zemin: servis koridoru, yük asansörü",
+            "x": 13,
+            "y": 8,
+            "w": 6,
+            "h": 10
+          },
+          {
+            "id": "sokak-arka",
+            "label": "Kumbaracı Yokuşu (arka)",
+            "x": 0,
+            "y": 18,
+            "w": 19,
+            "h": 3,
+            "outdoor": true
+          },
+          {
+            "id": "k1-salonb",
+            "label": "1. kat: Salon B",
+            "x": 21,
+            "y": 2,
+            "w": 12,
+            "h": 10
+          },
+          {
+            "id": "k1-hazirlik",
+            "label": "1. kat: ikram hazırlık odası",
+            "x": 33,
+            "y": 2,
+            "w": 6,
+            "h": 6
+          },
+          {
+            "id": "k1-asansor",
+            "label": "1. kat: yük asansörü",
+            "x": 33,
+            "y": 8,
+            "w": 6,
+            "h": 4
+          },
+          {
+            "id": "k1-sahanlik",
+            "label": "1. kat: merdiven sahanlığı",
+            "x": 21,
+            "y": 12,
+            "w": 7,
+            "h": 5
+          },
+          {
+            "id": "k2-ofis",
+            "label": "2. kat: ofisler",
+            "x": 21,
+            "y": 17,
+            "w": 10,
+            "h": 6
+          },
+          {
+            "id": "k2-depo",
+            "label": "2. kat: depo",
+            "x": 31,
+            "y": 17,
+            "w": 8,
+            "h": 6
+          }
+        ],
+        "doors": [
+          {
+            "x": 4,
+            "y": 2,
+            "label": "Ön kapı (kartlı)"
+          },
+          {
+            "x": 16,
+            "y": 18,
+            "label": "Servis kapısı (kartlı)"
+          },
+          {
+            "x": 13,
+            "y": 5,
+            "vertical": true,
+            "label": "Monitör odası kapısı"
+          },
+          {
+            "x": 13,
+            "y": 12,
+            "vertical": true,
+            "label": "Salon A – servis koridoru"
+          },
+          {
+            "x": 6,
+            "y": 8,
+            "label": "Hol – Salon A"
+          },
+          {
+            "x": 33,
+            "y": 5,
+            "vertical": true,
+            "label": "Salon B – hazırlık odası"
+          },
+          {
+            "x": 36,
+            "y": 8,
+            "label": "Hazırlık odası – yük asansörü"
+          },
+          {
+            "x": 24,
+            "y": 12,
+            "label": "Salon B – sahanlık"
+          },
+          {
+            "x": 24,
+            "y": 17,
+            "label": "2. kat kapısı (kartlı, iki yönlü)"
+          },
+          {
+            "x": 31,
+            "y": 20,
+            "vertical": true,
+            "label": "Ofis – depo"
+          }
+        ],
+        "windows": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 10,
+            "y": 2
+          },
+          {
+            "x": 24,
+            "y": 2
+          },
+          {
+            "x": 30,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 18
+          },
+          {
+            "x": 8,
+            "y": 18
+          }
+        ],
+        "markers": [
+          {
+            "x": 21.6,
+            "y": 7,
+            "label": "“Kandilli’de Akşamüstü” (sol duvar)",
+            "kind": "item"
+          },
+          {
+            "x": 32.3,
+            "y": 2.8,
+            "label": "Kamera 4 (Salon B)",
+            "kind": "camera"
+          },
+          {
+            "x": 32.4,
+            "y": 6.4,
+            "label": "Tuş takımı K2 (Z4 eser sensörü)",
+            "kind": "note"
+          },
+          {
+            "x": 38.2,
+            "y": 2.8,
+            "label": "Ağ dolabı, kamera PoE anahtarı",
+            "kind": "note"
+          },
+          {
+            "x": 1,
+            "y": 3,
+            "label": "Kamera 1 (ön kapı)",
+            "kind": "camera"
+          },
+          {
+            "x": 17.5,
+            "y": 19,
+            "label": "Kamera 3 (servis kapısı, dışarıda)",
+            "kind": "camera"
+          },
+          {
+            "x": 15,
+            "y": 3,
+            "label": "Tuş takımı K1 ve kayıt cihazı",
+            "kind": "note"
+          },
+          {
+            "x": 26,
+            "y": 18,
+            "label": "Kamera 6 (2. kat koridoru)",
+            "kind": "camera"
+          },
+          {
+            "x": 1,
+            "y": 9,
+            "label": "Kamera 2 (Salon A)",
+            "kind": "camera"
+          },
+          {
+            "x": 14,
+            "y": 9,
+            "label": "Kamera 5 (zemin servis koridoru)",
+            "kind": "camera"
+          },
+          {
+            "x": 28,
+            "y": 21,
+            "label": "Küratörün masası ve bilgisayarı",
+            "kind": "note"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yali",
+      "name": "Tanyeli yalısı, Kandilli",
+      "description": "Anadolu yakasında, Kandilli kıyısında 19. yüzyıldan kalma ahşap bir yalı. Cemil Tanyeli burada yaşıyor. Galata’dan arabayla, trafiğe göre 35–50 dakika."
+    },
+    {
+      "id": "beyoglu",
+      "name": "Beyoğlu ve çevresi",
+      "description": "Galeri ile çevre arasındaki yaklaşık mesafeler, gece trafiğinde: Kuledibi’ne 2 dakika, Nevizade’ye 8–10 dakika, Cihangir’e 15–20 dakika, Tophane’de Boğazkesen Caddesi’ne 10–12 dakika yürüme. Kumbaracı Yokuşu’ndan Boğazkesen Caddesi’ne araçla, tek yönlü sokaklar yüzünden Şişhane ve Tepebaşı üzerinden dolaşarak 8–12 dakika. Kurtuluş’a taksiyle 15 dakika. Tophane’den Kağıthane’ye gece araçla 20–25 dakika."
+    }
+  ],
+  "facts": [
+    {
+      "id": "f-original-1400",
+      "text": "Salon B’deki tablo 16 Ekim 14:00’te özgündü; değişim galeride, ondan sonra yapıldı."
+    },
+    {
+      "id": "f-swap-window",
+      "text": "Değişim 17 Ekim 00:37–00:59 arasında, Salon B kamerası kör ve eser sensörü devre dışıyken yapıldı."
+    },
+    {
+      "id": "f-code09",
+      "text": "Eser sensörü, silinmemiş geçici montaj kodu 09 ile K2 tuş takımından devre dışı bırakıldı."
+    },
+    {
+      "id": "f-code09-holders",
+      "text": "09 kodu SMS ile yalnızca Defne Ural ve İlker Varol’a gönderildi; ama montaj günlerinde tuş takımının yanında yazılı durduğu için o günlerde Salon B’ye giren herkes görebilirdi."
+    },
+    {
+      "id": "f-cam4-unplugged",
+      "text": "Salon B kamerasının kablosu hazırlık odasındaki ağ anahtarından elle çıkarıldı; kablonun ucunda çerçeve yaldızı vardı."
+    },
+    {
+      "id": "f-skilled",
+      "text": "Tuval, çerçeve işçiliğini bilen biri tarafından aceleye gelmeden değiştirildi."
+    },
+    {
+      "id": "f-sixth",
+      "text": "23:47’de servis kapısından beş garsonla birlikte altıncı bir kişi girdi; bu kişi ikram ekibinden değildi ve Barış onu “galeriden” diye tanıttı."
+    },
+    {
+      "id": "f-crew-down",
+      "text": "00:38–00:58 arasında beş ikram çalışanının beşi de, Barış dahil, zemin katta yükleme yapıyordu; Salon B’de yalnızca altıncı kişi vardı."
+    },
+    {
+      "id": "f-telara",
+      "text": "İlker 9 Eylül’de Şişhane’deki bir çerçeveciden 64 × 92 cm’lik yeni bir telara ve eskitilmiş keten sipariş etti; özgün telaraya dokunulmamıştı."
+    },
+    {
+      "id": "f-ilker-buffet",
+      "text": "İlker Varol’un kartıyla 16 Ekim 23:38’de, galerinin iki dakika ötesindeki bir büfede, siyah ceketli ve kasketli biri alışveriş yaptı; 01:21’de Boğazkesen’de kasayı teslim alırken kameraya girdi."
+    },
+    {
+      "id": "f-ilker-lie-home",
+      "text": "İlker’in “22:50’den sonra evdeydim, çıkmadım” beyanı yalandır."
+    },
+    {
+      "id": "f-same-hand",
+      "text": "Duvardaki sahte tuval ile Tanyeli yalısındaki 2023 kopyası aynı kişinin elinden çıktı."
+    },
+    {
+      "id": "f-ilker-2023",
+      "text": "Tanyeli yalısındaki 2023 kopyasını İlker Varol yaptı."
+    },
+    {
+      "id": "f-dolgu",
+      "text": "Sahte tuval Eylül 2025 restorasyonundaki dolguyu da taşıyor; kopyacı eseri restorasyondan sonra yakından görmüştü."
+    },
+    {
+      "id": "f-crate-in",
+      "text": "Barış Koç, kopyayı 16 Ekim 16:08’de içi köpüklü düz bir kasayla servis kapısından soktu."
+    },
+    {
+      "id": "f-van-stop",
+      "text": "Barış’ın kullandığı 34 HSF 127 plakalı araç 01:19–01:25 arasında İlker’in Tophane’deki atölyesinin önünde durdu."
+    },
+    {
+      "id": "f-baris-apprentice",
+      "text": "Barış Koç eskiden İlker Varol’un atölyesinde çalıştı; 10 Ekim’de İlker’le telefonda görüştü ve ondan 25.000 TL aldı."
+    },
+    {
+      "id": "f-ilker-money",
+      "text": "İlker’in atölyesi tahliye takibindeydi; 2 Ekim’de Gürcistan’daki bir numarayla görüştükten hemen sonra 8.550 avro nakit bozdurup (400.000 TL) kira borcunu kapattı."
+    },
+    {
+      "id": "f-defne-office",
+      "text": "Defne Ural 00:12–01:12 arasında ikinci kattan inmedi; ofis bilgisayarında çalışıyordu."
+    },
+    {
+      "id": "f-tuncay-kurtulus",
+      "text": "Tuncay Erdem 00:16–01:32 arasında binada değildi; 00:55’te Kurtuluş’ta bir kumar denetiminde kimlik tespiti yapıldı."
+    },
+    {
+      "id": "f-ferit-nevizade",
+      "text": "Ferit Ilgaz 23:52–01:34 arasında Nevizade’de tefecisiyle bir meyhanedeydi."
+    },
+    {
+      "id": "f-cemil-copy-diff",
+      "text": "Cemil Tanyeli’nin kopyası yalısında asılıydı ve 61 × 87 cm’dir; galerideki çerçeveye oturmaz."
+    },
+    {
+      "id": "f-cemil-left",
+      "text": "Cemil Tanyeli galeriden 21:58’de ayrıldı."
+    },
+    {
+      "id": "f-shipment",
+      "text": "İlker 18 Ekim’de özgün tuvali “reprodüksiyon” beyanıyla sandık içinde Tiflis’e göndermeye çalıştı."
+    },
+    {
+      "id": "f-insurance",
+      "text": "Sigorta bedelindeki artışı sigortacı istedi; tazminatın lehdarı galeri değil, eser sahibidir."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e-tutanak",
+      "title": "Olay yeri ilk tespit tutanağı",
+      "summary": "Hırsızlık Büro Amirliği’nin galeriye ilk geldiği sabah düzenlediği tutanak.",
+      "doc": {
+        "kind": "report",
+        "variant": "police",
+        "agency": "İstanbul Emniyet Müdürlüğü — Asayiş Şube Müdürlüğü, Hırsızlık Büro Amirliği",
+        "docNo": "Soruşturma No: 2025/214873 · Tutanak No: HBA-1186",
+        "datetime": "17.10.2025 10:40",
+        "heading": "Olay yeri ilk tespit tutanağı — Galeri Nirengi, Serdar-ı Ekrem Sk., Beyoğlu",
+        "sections": [
+          {
+            "title": "İhbar",
+            "text": "17.10.2025 günü saat 09:52’de 155 hattına, Galeri Nirengi sahibi Ferit Ilgaz tarafından, galeride sergilenen ve Cemil Tanyeli’ye ait “Kandilli’de Akşamüstü” (Kâzım Fevzi Bey, 1897, tuval üzerine yağlıboya) adlı eserin yerinde başka bir resmin bulunduğu bildirilmiştir. Ekibimiz 10:20’de adrese ulaşmıştır."
+          },
+          {
+            "title": "İlk tespit",
+            "text": "Eser, birinci kattaki Salon B’nin sol duvarında, özgün yaldızlı çerçevesi içinde asılı halde bulunmuştur. Sigorta eksperi Gönül Taşçı, 09:41’de yaptığı ultraviyole incelemede boya yüzeyinin 16.10.2025 tarihli kendi kondisyon raporundaki görüntülerle uyuşmadığını, tuvalin özgün olmadığı kanaatine vardığını beyan etmiştir.\n\nBinanın ön ve servis kapılarında ve pencerelerinde zorlama izine rastlanmamıştır. Çerçevede ve duvarda görünür hasar yoktur."
+          },
+          {
+            "title": "Alarm ve güvenlik",
+            "text": "Galeri yetkililerinin beyanına göre alarm sistemi gece 02:03’te tam kuruluma alınmış, sabah 08:44’te güvenlik şefi Tuncay Erdem tarafından kurulum iptal edilmiştir. Alarm izleme merkezi gece boyunca herhangi bir alarm bildirmemiştir. Binada kartlı geçiş sistemi ve altı kanallı kamera kayıt cihazı bulunmaktadır."
+          },
+          {
+            "title": "Olay gecesi",
+            "text": "Açılış 16.10.2025 günü 19:00–23:00 saatleri arasında yapılmış, son misafirler 23:30’a kadar ayrılmıştır. İkram hizmetini veren Has Sofra İkram ekibinin toplanıp 01:05 civarında ayrıldığı, gece nöbetçisi Ramazan Oral’ın sabaha kadar monitör odasında bulunduğu, küratör Defne Ural’ın bir süre ofiste çalıştığı öğrenilmiştir."
+          },
+          {
+            "title": "Sigorta",
+            "text": "Eser, Karayel Sigorta A.Ş. nezdinde “çividen çiviye” poliçeyle sigortalıdır. Ferit Ilgaz, sigorta bedelinin 1 Ekim 2025’te 45.000.000 TL’den 60.000.000 TL’ye yükseltildiğini beyan etmiştir."
+          },
+          {
+            "title": "Yapılacaklar",
+            "text": "Olay Yeri İnceleme ekibi çağrılmıştır. Eser ve çerçeve delil olarak muhafaza altına alınacaktır. Alarm, kart geçiş ve kamera kayıtları istenecek; ilgililerin ifadeleri alınacaktır."
+          }
+        ],
+        "signature": "Komiser Selma Akdoğan · Polis Memuru Erkan Dursun"
+      },
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2025-10-17T09:41",
+          "text": "Eksper Gönül Taşçı UV incelemede tuvalin özgün olmadığını fark etti."
+        },
+        {
+          "at": "2025-10-17T09:52",
+          "text": "Ferit Ilgaz 155’i aradı."
+        }
+      ],
+      "people": [
+        "ferit",
+        "cemil",
+        "gonul",
+        "tuncay",
+        "ramazan",
+        "defne"
+      ]
+    },
+    {
+      "id": "e-kondisyon",
+      "title": "Pergel Ekspertiz kondisyon raporu, 16 Ekim",
+      "summary": "Sigorta eksperinin açılıştan birkaç saat önce duvardaki eser için yazdığı rapor.",
+      "doc": {
+        "kind": "report",
+        "variant": "insurance",
+        "agency": "Pergel Ekspertiz Ltd. Şti. — Karayel Sigorta A.Ş. adına",
+        "docNo": "Dosya PRG-25-0412 · Poliçe KS-GS-2025-0081734",
+        "datetime": "16.10.2025 14:00",
+        "heading": "Sergi kondisyon raporu — duvara yerleştirme sonrası son kontrol",
+        "sections": [
+          {
+            "title": "Eser ve teminat",
+            "text": "Kâzım Fevzi Bey (1862–1919), “Kandilli’de Akşamüstü”, 1897. Tuval üzerine yağlıboya; tuval 64 × 92 cm, çerçeveyle 88 × 116 cm. Sahibi: Cemil Tanyeli (envanter CT-014). Ödünç alan: Galeri Nirengi, “Kıyıdan Işık” sergisi, 16.10–30.11.2025.\n\nTeminat: çividen çiviye. Sigorta bedeli 60.000.000 TL (sigortacının 22.09.2025 tarihli talebi üzerine 01.10.2025 zeyilnamesiyle; gerekçe: 2024–2025 müzayede sonuçlarına göre dönem resminde piyasa değerlerinin yükselmesi; önceki bedel 45.000.000 TL). Tazminat lehdarı: eser sahibi Cemil Tanyeli."
+          },
+          {
+            "title": "Yüzey ve ultraviyole inceleme",
+            "text": "Vernik, Eylül 2025 restorasyonunda inceltilmiştir. Ultraviyole ışıkta eski doğal vernik kalıntıları yer yer yeşilimsi parlar. Sol alt gökyüzündeki 2025 dolgusu ve rötuşu (yaklaşık 2 × 1,5 cm) ile sağ üst bulutlardaki iki eski rötuş adacığı UV’de belirgin koyu leke olarak görülür. Görüntüler dosyaya 14 fotoğrafla eklenmiştir. Çatlak ağı yüzeyin genelinde düzenlidir; yeni kayıp yoktur."
+          },
+          {
+            "title": "Arka yüz ve çerçeve",
+            "text": "Çerçeve özgün, yaldızlı alçı süslemelidir; köşelerde eski aşınmalar vardır. Tuval çerçeveye arka koruma panosu (8 vida) ve 8 döner mandalla sabitlenmiştir. Telara üzerinde 1931 tarihli gümrük damgası ve kurşun kalemle “CT-014” yazısı bulunur."
+          },
+          {
+            "title": "Askı ve güvenlik",
+            "text": "Eser, Z4 bölgesine bağlı askı sensörlü sistemle asılıdır. Sensör, güvenlik şefi Tuncay Erdem eşliğinde 14:05’te denenmiştir: eser kaldırıldığında panel alarm üretmektedir. Bölge 24 saat aktif çalışır; yalnızca yetkili bir kullanıcı koduyla geçici olarak devre dışı bırakılabilir (bypass)."
+          },
+          {
+            "title": "Kanaat ve özel şart",
+            "text": "Eser özgündür, kondisyonu iyidir, sergilemeye uygundur. Poliçenin 7. özel şartı (ikramlı etkinlik) gereği eser, açılış etkinliğinden sonraki ilk 24 saat içinde yeniden kontrol edilecektir. Kontrol 17.10.2025 sabahı yapılacaktır. Bu rapor sigortacıya ve ödünç alan galeriye gönderilmiştir."
+          }
+        ],
+        "signature": "Gönül Taşçı, Sigorta Eksperi — Pergel Ekspertiz"
+      },
+      "reveals": [
+        "f-original-1400",
+        "f-insurance"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T14:00",
+          "text": "Eksper, duvardaki eseri UV ile inceleyip özgün olduğunu raporladı."
+        },
+        {
+          "at": "2025-10-16T14:05",
+          "text": "Z4 askı sensörü Tuncay Erdem eşliğinde denendi, çalışıyor."
+        }
+      ],
+      "people": [
+        "gonul",
+        "cemil",
+        "tuncay"
+      ]
+    },
+    {
+      "id": "e-liste",
+      "title": "Açılış gecesi davetli ve personel listesi",
+      "summary": "Kapı defteri ve vestiyer fişlerinden derlenen giriş ve çıkış saatleri.",
+      "doc": {
+        "kind": "table",
+        "heading": "Galeri Nirengi — “Kıyıdan Işık” açılışı, 16.10.2025",
+        "note": "Kapı görevlilerinin sayımı: 64 misafir girişi, 64 çıkış; son misafir 23:25’te ayrıldı. Aşağıda vestiyer kullanan davetliler ve görevli personel yer alır. Saatler vestiyer fişlerinden ve kapı defterinden alınmıştır. İkram ekibi binaya servis kapısından girip çıkar.",
+        "columns": [
+          "Ad soyad",
+          "Sıfat",
+          "Giriş",
+          "Vestiyer iadesi / çıkış",
+          "Not"
+        ],
+        "rows": [
+          [
+            "Gönül Taşçı",
+            "Sigorta eksperi",
+            "18:55",
+            "20:40",
+            "Davetli"
+          ],
+          [
+            "Prof. Dr. Ayten Sargın",
+            "Sanat tarihçisi",
+            "19:05",
+            "22:44",
+            "Katalog yazarı"
+          ],
+          [
+            "Kemal Oktar",
+            "Gazeteci, Kent Postası",
+            "19:15",
+            "22:10",
+            "Basın"
+          ],
+          [
+            "Cemil Tanyeli",
+            "Koleksiyoncu, eser sahibi",
+            "19:28",
+            "21:58",
+            "Şoförü araçta bekledi"
+          ],
+          [
+            "Vedat Sönmez",
+            "Mimar",
+            "19:35",
+            "22:55",
+            "Davetli"
+          ],
+          [
+            "İlker Varol",
+            "Restoratör",
+            "19:42",
+            "22:29",
+            "Davetli"
+          ],
+          [
+            "Nesrin Bahadır",
+            "Koleksiyoncu",
+            "19:50",
+            "23:12",
+            "Davetli"
+          ],
+          [
+            "Orhan ve Selin Demirkıran",
+            "Davetli",
+            "20:05",
+            "23:20",
+            ""
+          ],
+          [
+            "Murat Gökalp",
+            "Koleksiyoncu",
+            "20:20",
+            "23:25",
+            "Son çıkan misafir"
+          ],
+          [
+            "Ferit Ilgaz",
+            "Galeri sahibi",
+            "—",
+            "23:41 (kartla)",
+            "Ev sahibi"
+          ],
+          [
+            "Defne Ural",
+            "Küratör",
+            "—",
+            "—",
+            "Personel"
+          ],
+          [
+            "Tuncay Erdem",
+            "Güvenlik şefi",
+            "14:00",
+            "—",
+            "Vardiya 14:00–02:30"
+          ],
+          [
+            "Ramazan Oral",
+            "Gece nöbetçisi",
+            "21:49",
+            "—",
+            "Vardiya 22:00–08:00"
+          ],
+          [
+            "Seda Kalkan, Burak Yener",
+            "Kapı görevlisi (Nöbet Güvenlik)",
+            "18:00",
+            "23:35",
+            "Etkinlik görevlisi"
+          ],
+          [
+            "Sinan Ateş",
+            "Şef, Has Sofra İkram",
+            "16:05",
+            "—",
+            "Servis kapısı"
+          ],
+          [
+            "Barış Koç",
+            "Şoför-garson, Has Sofra İkram",
+            "16:05",
+            "—",
+            "Servis kapısı"
+          ],
+          [
+            "Elif Durmaz",
+            "Garson, Has Sofra İkram",
+            "16:05",
+            "—",
+            "Servis kapısı"
+          ],
+          [
+            "Kader Uysal",
+            "Garson, Has Sofra İkram",
+            "16:05",
+            "—",
+            "Servis kapısı"
+          ],
+          [
+            "Onur Taş",
+            "Garson, Has Sofra İkram",
+            "16:05",
+            "—",
+            "Servis kapısı"
+          ],
+          [
+            "Mert Kaya",
+            "Garson, Has Sofra İkram",
+            "16:05",
+            "—",
+            "Servis kapısı"
+          ]
+        ]
+      },
+      "reveals": [
+        "f-cemil-left"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T16:05",
+          "text": "Has Sofra İkram ekibi (1 şef, 5 garson) servis kapısından geldi."
+        },
+        {
+          "at": "2025-10-16T19:42",
+          "text": "İlker Varol açılışa geldi."
+        },
+        {
+          "at": "2025-10-16T21:58",
+          "text": "Cemil Tanyeli vestiyerden paltosunu aldı."
+        },
+        {
+          "at": "2025-10-16T22:29",
+          "text": "İlker Varol vestiyerden ceketini aldı."
+        },
+        {
+          "at": "2025-10-16T23:25",
+          "text": "Son misafir ayrıldı."
+        }
+      ],
+      "people": [
+        "gonul",
+        "cemil",
+        "ilker",
+        "ferit",
+        "defne",
+        "tuncay",
+        "ramazan",
+        "baris"
+      ]
+    },
+    {
+      "id": "ph-uv",
+      "title": "Ultraviyole fotoğraf, 17 Ekim sabahı",
+      "summary": "Eksperin sahteliği fark ettiği anda çektiği fotoğraf ve karşılaştırma notu.",
+      "doc": {
+        "kind": "photo",
+        "image": "obj-uv",
+        "caption": "Pergel Ekspertiz, 17.10.2025 09:41, Salon B. Eksperin notu: “16 Ekim kondisyon fotoğraflarında aynı ışıkta yüzey yer yer yeşilimsi parlıyor, sol alt gökyüzündeki 2025 dolgusu ve sağ üstteki iki eski rötuş koyu leke olarak görünüyordu. Bu sabah dolgunun yeri gün ışığında dokusuyla seçiliyor, ama UV’de koyu leke vermiyor. Yüzeyin tamamı yeni bir vernik gibi eşit parlıyor.”",
+        "tag": "PRG-25-0412 · Fotoğraf 3/14"
+      },
+      "reveals": [
+        "f-original-1400"
+      ],
+      "timeline": [],
+      "people": [
+        "gonul"
+      ]
+    },
+    {
+      "id": "e-kroki",
+      "title": "Galeri Nirengi kat planı",
+      "summary": "Üç katın krokisi: kapılar, kameralar, tuş takımları ve eserin yeri.",
+      "doc": {
+        "kind": "floorplan",
+        "location": "galeri",
+        "caption": "Zemin, 1. ve 2. kat yan yana çizilmiştir. Yük asansörü yalnızca zemin kat servis koridoru ile 1. kattaki ikram hazırlık odası arasında çalışır. 2. kata tek yol, 1. kat sahanlığındaki iki yönlü kartlı kapıdır. Hazırlık odasında, merdivende ve yük asansöründe kamera yoktur."
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": []
+    },
+    {
+      "id": "e-alarm",
+      "title": "Alarm paneli olay kaydı",
+      "summary": "Nöbet Alarm Sistemleri’nin galeri paneli için çıkardığı 16–17 Ekim kaydı.",
+      "doc": {
+        "kind": "table",
+        "heading": "Nöbet Alarm Sistemleri — Galeri Nirengi panel olay kaydı, 16.10.2025 12:00 – 17.10.2025 12:00",
+        "note": "Z4: Salon B eser askı sensörleri (24 saat aktif bölge). K1: zemin kat, monitör odası tuş takımı. K2: 1. kat, Salon B’de hazırlık odası kapısının yanındaki tuş takımı. Panel saati internet üzerinden (NTP) eşitlenir.",
+        "columns": [
+          "Tarih ve saat",
+          "Olay",
+          "Bölge",
+          "Kullanıcı",
+          "Tuş takımı"
+        ],
+        "rows": [
+          [
+            "16.10 14:04",
+            "Bölge testi başladı",
+            "Z4",
+            "02 – T. Erdem",
+            "K1"
+          ],
+          [
+            "16.10 14:06",
+            "Test alarmı (eser kaldırıldı), test sonu",
+            "Z4",
+            "02 – T. Erdem",
+            "K1"
+          ],
+          [
+            "16.10 18:20",
+            "Etkinlik modu: bölgeler devre dışı (Z4 hariç)",
+            "Z1–Z3, Z5, Z6",
+            "02 – T. Erdem",
+            "K1"
+          ],
+          [
+            "16.10 21:47",
+            "Ön uyarı: dokunma (2 sn), alarm üretmedi",
+            "Z4",
+            "—",
+            "—"
+          ],
+          [
+            "16.10 23:30",
+            "Ön kapı kart moduna alındı",
+            "Kapı denetimi",
+            "02 – T. Erdem",
+            "K1"
+          ],
+          [
+            "17.10 00:37",
+            "Bölge bypass",
+            "Z4",
+            "09 – MONTAJ",
+            "K2"
+          ],
+          [
+            "17.10 00:59",
+            "Bypass sona erdi, bölge normal",
+            "Z4",
+            "09 – MONTAJ",
+            "K2"
+          ],
+          [
+            "17.10 02:03",
+            "Tam kurulum",
+            "Z1–Z6",
+            "02 – T. Erdem",
+            "K1"
+          ],
+          [
+            "17.10 08:44",
+            "Kurulum iptal",
+            "Z1–Z6",
+            "02 – T. Erdem",
+            "K1"
+          ],
+          [
+            "17.10 11:30",
+            "Kullanıcı 09 silindi (uzaktan)",
+            "—",
+            "Servis",
+            "—"
+          ]
+        ]
+      },
+      "reveals": [
+        "f-swap-window",
+        "f-code09"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:37",
+          "text": "Z4 eser sensörü 09 (MONTAJ) koduyla K2’den bypass edildi."
+        },
+        {
+          "at": "2025-10-17T00:59",
+          "text": "Z4 bypass sona erdi (09, K2)."
+        },
+        {
+          "at": "2025-10-17T02:03",
+          "text": "Tuncay Erdem alarmı tam kuruluma aldı."
+        }
+      ],
+      "people": [
+        "tuncay"
+      ]
+    },
+    {
+      "id": "e-kod-mail",
+      "title": "Güvenlik firmasının e-postası: panel kullanıcıları",
+      "summary": "Nöbet Alarm teknik servisinin kullanıcı kodları hakkındaki yazılı bilgisi.",
+      "doc": {
+        "kind": "email",
+        "from": "Okan Sezgin, Nöbet Alarm Sistemleri Teknik Servis <teknik@nobetalarm.com.tr>",
+        "to": "Komiser Selma Akdoğan, Hırsızlık Büro Amirliği",
+        "cc": "Ferit Ilgaz",
+        "date": "17.10.2025 17:20",
+        "subject": "Galeri Nirengi — panel kullanıcıları ve 09 kodu",
+        "body": "Sayın Komiserim,\n\nTalebiniz üzerine Galeri Nirengi panelinde tanımlı kullanıcıları ve 09 numaralı kodun geçmişini bilginize sunarız.\n\nTanımlı kullanıcılar: 01 Ferit Ilgaz (yönetici), 02 Tuncay Erdem (yönetici), 03 Defne Ural, 04 Ramazan Oral, 05 Serkan Aydın (gündüz görevlisi), 09 MONTAJ (geçici). Her kullanıcının kodu kendisine özeldir. Yönetici kullanıcılar dahil hiç kimse panelde başka bir kullanıcının kodunu göremez; yalnızca silebilir ya da sıfırlayabilir.\n\n09 kodu, Ferit Bey’in 13.10.2025 tarihli yazılı talebi üzerine, eser montajı süresince kapı ve Z4 bypass yetkisiyle tanımlanmıştır; kurulum ya da kurulum iptali yetkisi yoktur. Kod, talepte adı geçen iki kişiye, 13.10.2025 saat 09:12’de SMS ile iletilmiştir: Defne Ural (0532 455 63 08) ve İlker Varol (0535 772 19 06). Sanat nakliye ekibine kod verilmemiştir.\n\n14.10.2025 saat 17:48’de Ferit Bey kodun silinmesini e-postayla istemiştir. Sözleşmemiz gereği kullanıcı silme işlemi çift onaylıdır: talebi yapan yöneticinin dışında ikinci bir yönetici kullanıcının panelden onay vermesi gerekir. Talebi Ferit Bey yaptığı için onay isteği aynı gün 18:05’te diğer yönetici Tuncay Erdem’in paneline ve telefonuna iletilmiş, onay verilmemiştir. Kod bugün 11:30’da tarafımızca uzaktan silinmiştir.\n\nBilginize: 2023’te müşterinin isteğiyle yapılan ayar gereği bypass olayları izleme merkezimize alarm olarak iletilmez, yalnızca panel kaydına yazılır. Panel saati otomatik eşitlenmektedir; 16–17 Ekim’de sapma kaydı yoktur.\n\nSaygılarımızla,\nOkan Sezgin\nTeknik Servis Sorumlusu",
+        "attachments": [
+          "kullanici_listesi_nirengi.pdf"
+        ]
+      },
+      "reveals": [
+        "f-code09-holders"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-13T09:12",
+          "text": "09 montaj kodu SMS ile Defne Ural ve İlker Varol’a gönderildi."
+        },
+        {
+          "at": "2025-10-14T18:05",
+          "text": "09 kodunun silinmesi için Tuncay Erdem’den onay istendi; onay verilmedi."
+        }
+      ],
+      "people": [
+        "ferit",
+        "tuncay",
+        "defne",
+        "ilker",
+        "ramazan"
+      ]
+    },
+    {
+      "id": "e-kart",
+      "title": "Kartlı geçiş kayıtları",
+      "summary": "Ön kapı, servis kapısı, monitör odası ve 2. kat kapısının geçiş dökümü.",
+      "doc": {
+        "kind": "accessLog",
+        "system": "KartNet geçiş denetimi (Nöbet Alarm entegrasyonu)",
+        "site": "Galeri Nirengi, Serdar-ı Ekrem Sk., Beyoğlu",
+        "period": "16.10.2025 13:00 – 17.10.2025 09:40 · Etkinlik süresince (18:30–23:30) ön kapı serbest geçiş modundadır, kayıt yoktur. Ön kapı, servis kapısı ve 2. kat kapısı iki yönlü kartlıdır; bir kart okutulduğunda kapı 6 saniye açık kalır.",
+        "rows": [
+          {
+            "time": "16.10 13:52",
+            "card": "ZYR-01",
+            "holder": "Ziyaretçi kartı (G. Taşçı)",
+            "door": "Ön kapı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "16.10 14:00",
+            "card": "0102",
+            "holder": "Tuncay Erdem",
+            "door": "Ön kapı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "16.10 15:10",
+            "card": "ZYR-01",
+            "holder": "Ziyaretçi kartı (G. Taşçı)",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16.10 16:06",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "16.10 21:49",
+            "card": "0104",
+            "holder": "Ramazan Oral",
+            "door": "Monitör odası",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "16.10 23:14",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16.10 23:18",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "16.10 23:35",
+            "card": "ETK-01",
+            "holder": "Etkinlik kartı (S. Kalkan, kapı görevlisi)",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16.10 23:35",
+            "card": "ETK-02",
+            "holder": "Etkinlik kartı (B. Yener, kapı görevlisi)",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16.10 23:41",
+            "card": "0101",
+            "holder": "Ferit Ilgaz",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16.10 23:42",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16.10 23:47",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 00:12",
+            "card": "0103",
+            "holder": "Defne Ural",
+            "door": "2. kat kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 00:16",
+            "card": "0102",
+            "holder": "Tuncay Erdem",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 00:20",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 00:26",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 00:43",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 00:47",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 01:04",
+            "card": "T-02",
+            "holder": "TEDARİKÇİ-2 (Has Sofra)",
+            "door": "Servis kapısı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 01:12",
+            "card": "0103",
+            "holder": "Defne Ural",
+            "door": "2. kat kapısı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 01:14",
+            "card": "0103",
+            "holder": "Defne Ural",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 01:32",
+            "card": "0102",
+            "holder": "Tuncay Erdem",
+            "door": "Ön kapı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 01:33",
+            "card": "0102",
+            "holder": "Tuncay Erdem",
+            "door": "Monitör odası",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 02:06",
+            "card": "0102",
+            "holder": "Tuncay Erdem",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 08:43",
+            "card": "0102",
+            "holder": "Tuncay Erdem",
+            "door": "Ön kapı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17.10 08:51",
+            "card": "0104",
+            "holder": "Ramazan Oral",
+            "door": "Ön kapı",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17.10 09:31",
+            "card": "ZYR-01",
+            "holder": "Ziyaretçi kartı (G. Taşçı)",
+            "door": "Ön kapı",
+            "result": "GEÇİŞ"
+          }
+        ]
+      },
+      "reveals": [
+        "f-defne-office"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T23:41",
+          "text": "Ferit Ilgaz ön kapıdan kartla çıktı."
+        },
+        {
+          "at": "2025-10-16T23:47",
+          "text": "Servis kapısında TEDARİKÇİ-2 kartıyla tek giriş."
+        },
+        {
+          "at": "2025-10-17T00:12",
+          "text": "Defne Ural 2. kat kapısından geçti."
+        },
+        {
+          "at": "2025-10-17T00:16",
+          "text": "Tuncay Erdem ön kapıdan kartla çıktı."
+        },
+        {
+          "at": "2025-10-17T01:04",
+          "text": "Servis kapısından TEDARİKÇİ-2 kartıyla son çıkış."
+        },
+        {
+          "at": "2025-10-17T01:12",
+          "text": "Defne Ural 2. kat kapısından çıktı."
+        },
+        {
+          "at": "2025-10-17T01:14",
+          "text": "Defne Ural ön kapıdan çıktı."
+        },
+        {
+          "at": "2025-10-17T01:32",
+          "text": "Tuncay Erdem ön kapıdan geri girdi."
+        }
+      ],
+      "people": [
+        "gonul",
+        "tuncay",
+        "ramazan",
+        "ferit",
+        "defne"
+      ]
+    },
+    {
+      "id": "e-dvr",
+      "title": "Kamera kayıt cihazı olay dökümü",
+      "summary": "Altı kameranın hareket ve arıza olaylarının saatli listesi.",
+      "doc": {
+        "kind": "table",
+        "heading": "Kamera kayıt cihazı olay dökümü — 16.10.2025 16:00 – 17.10.2025 02:10",
+        "note": "Kayıt cihazı saati NTP ile eşitlidir. Aralarında 2 dakikadan kısa boşluk olan hareketler tek satırda birleştirilmiştir. Kamera 3 bina dışında, servis kapısını yukarıdan görür. Kamera 4 Salon B’yi, Kamera 6 2. kat koridorunu ve ofis kapılarını görür. Hazırlık odasında, merdivende ve yük asansöründe kamera yoktur.",
+        "columns": [
+          "Kanal",
+          "Kamera",
+          "Olay",
+          "Başlangıç",
+          "Bitiş"
+        ],
+        "rows": [
+          [
+            "CH3",
+            "Servis kapısı (dış)",
+            "Hareket",
+            "16:02",
+            "16:24"
+          ],
+          [
+            "CH5",
+            "Zemin servis koridoru",
+            "Hareket",
+            "16:03",
+            "16:25"
+          ],
+          [
+            "CH1",
+            "Ön kapı",
+            "Hareket (etkinlik, yoğun)",
+            "18:30",
+            "23:33"
+          ],
+          [
+            "CH2",
+            "Salon A",
+            "Hareket (etkinlik, yoğun)",
+            "18:30",
+            "00:11"
+          ],
+          [
+            "CH4",
+            "Salon B",
+            "Hareket (etkinlik, yoğun)",
+            "18:45",
+            "00:36"
+          ],
+          [
+            "CH3",
+            "Servis kapısı (dış)",
+            "Hareket",
+            "23:13",
+            "23:19"
+          ],
+          [
+            "CH5",
+            "Zemin servis koridoru",
+            "Hareket (aralıklı)",
+            "23:13",
+            "00:30"
+          ],
+          [
+            "CH5",
+            "Zemin servis koridoru",
+            "Hareket (sürekli)",
+            "00:37",
+            "01:05"
+          ],
+          [
+            "CH1",
+            "Ön kapı",
+            "Hareket",
+            "23:40",
+            "23:42"
+          ],
+          [
+            "CH3",
+            "Servis kapısı (dış)",
+            "Hareket",
+            "23:41",
+            "23:48"
+          ],
+          [
+            "CH6",
+            "2. kat koridoru",
+            "Hareket",
+            "00:11",
+            "00:14"
+          ],
+          [
+            "CH1",
+            "Ön kapı",
+            "Hareket",
+            "00:15",
+            "00:17"
+          ],
+          [
+            "CH3",
+            "Servis kapısı (dış)",
+            "Hareket",
+            "00:19",
+            "00:27"
+          ],
+          [
+            "CH4",
+            "Salon B",
+            "GÖRÜNTÜ KAYBI — PoE bağlantısı yok",
+            "00:36:12",
+            "01:01:05"
+          ],
+          [
+            "CH3",
+            "Servis kapısı (dış)",
+            "Hareket",
+            "00:42",
+            "00:48"
+          ],
+          [
+            "CH3",
+            "Servis kapısı (dış)",
+            "Hareket",
+            "01:03",
+            "01:09"
+          ],
+          [
+            "CH6",
+            "2. kat koridoru",
+            "Hareket",
+            "01:10",
+            "01:13"
+          ],
+          [
+            "CH1",
+            "Ön kapı",
+            "Hareket",
+            "01:13",
+            "01:15"
+          ],
+          [
+            "CH1",
+            "Ön kapı",
+            "Hareket",
+            "01:31",
+            "01:33"
+          ],
+          [
+            "CH1",
+            "Ön kapı",
+            "Hareket",
+            "02:05",
+            "02:07"
+          ]
+        ]
+      },
+      "reveals": [
+        "f-swap-window"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:36",
+          "text": "Salon B kamerasında görüntü kaybı başladı (01:01’e kadar)."
+        }
+      ],
+      "people": []
+    },
+    {
+      "id": "e-ramazan",
+      "title": "Ramazan Oral’la görüşme kaydı",
+      "summary": "Gece nöbetçisiyle monitör odasında yapılan görüşmenin ses kaydı.",
+      "doc": {
+        "kind": "audio",
+        "variant": "interview",
+        "source": "Hırsızlık Büro Amirliği, tanık görüşmesi ses kaydı (tanığın onayıyla)",
+        "datetime": "17.10.2025 13:10",
+        "ambience": "küçük bir odada kamera ekranlarının uğultusu; arada telsiz cızırtısı",
+        "lines": [
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Ramazan Bey, rahat olun. Dün geceyi baştan anlatır mısınız?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Ona on kala geldim komiserim. Etkinlik sürüyordu. Misafirler on bir buçuğa kadar çıktı, Tuncay Bey ön kapıyı kart moduna aldı. Catering arkada toparlanıyordu, saat biri beş geçe çıktılar. Defne Hanım üst kattaydı, o da biri çeyrek geçe çıktı.",
+            "delivery": "yavaş, hatırlamaya çalışarak"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Gece boyunca Tuncay Erdem neredeydi?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Binadaydı. Arada tur atıyordu… kâh üst kat, kâh depo.",
+            "pause": 1.5,
+            "delivery": "gözünü kaçırarak, alçak sesle"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Ekranlarda olağan dışı bir şey gördünüz mü?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Gece yarısını otuz sekiz geçe ekrana bir baktım, Kamera 4 kararmış. Salon B. “Görüntü yok” yazıyordu. Ne zamandan beri öyleydi, bilmiyorum. Catering arabalarını hazırlık odasından çekiyorlardı; kabloya takıldılar dedim. Saat biri bir geçe görüntü geri geldi, tablo yerindeydi."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Görüntü gidince ne yaptınız?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Telsizden Tuncay Bey’e seslendim, cevap gelmedi. Telefonla aradım, iki kere. Açmadı."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Binadaysa neden telefonla aradınız? Yanınızda değil miydi?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Turdaydı herhalde. Üst kattadır dedim.",
+            "pause": 2,
+            "delivery": "duraksayarak"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Neden gidip bakmadınız?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Kural öyle komiserim, monitör odası boş bırakılmaz. Tek başımaydım. Beş yılda bir kere bile boş bırakmadım.",
+            "delivery": "biraz gücenmiş"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Panel kodunuz nedir? Başka bir kod biliyor musunuz?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Benim kodum sıfır dört. Başkasınınkini bilmem, bilmem de gerekmez. Panelde ses çıkmadı; köşede küçük işaretler çıkar, onlara bakmadım açıkçası."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "İkram ekibi gece kaç kişiydi?"
+          },
+          {
+            "character": "ramazan",
+            "text": "Saymadım. Beş altı kişi. Hepsi siyahlar içinde, kasketli. Kameradan biri ötekinden ayırt edilmiyor ki."
+          },
+          {
+            "character": "ramazan",
+            "text": "Ben bu işte yokum komiserim. Defterimi de verdim, ne yazdıysam o.",
+            "pause": 1,
+            "delivery": "yorgun, neredeyse yalvarır gibi"
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:38",
+          "text": "Ramazan Oral, Kamera 4’ün karardığını gördü; Tuncay Erdem’e ulaşamadı."
+        }
+      ],
+      "people": [
+        "ramazan",
+        "tuncay",
+        "defne"
+      ]
+    },
+    {
+      "id": "e-defter",
+      "title": "Gece nöbet defteri",
+      "summary": "Ramazan Oral’ın 16–17 Ekim gecesi tuttuğu el yazısı kayıtlar.",
+      "doc": {
+        "kind": "letter",
+        "hand": "handwritten",
+        "date": "16–17.10.2025",
+        "salutation": "Gece vardiyası — R. Oral",
+        "body": "21:50 Vardiya teslim alındı. Etkinlik sürüyor. Kamera 1–6 normal.\n22:00 Kapı görevlileri 2 kişi ön kapıda.\n23:31 Misafirler çıktı. Ön kapı kart modu (T.E.).\n23:45 Catering arka kapıda sigara molası.\n00:15 [satırın üstü karalanmış] T.E. dışarı çıktı, “yarım saate dönerim” dedi.\n00:38 Kamera 4 görüntü yok (fark ettim). Telsiz cevap yok. Şefi tel. ile aradım, açmadı. Catering kabloya takılmış olabilir.\n00:47 Şef tekrar arandı, açmadı.\n01:01 Kamera 4 geri geldi. Tablo yerinde.\n01:04 Catering çıktı (arka kapı).\n01:08 Araç gitti.\n01:14 D.U. çıktı.\n01:32 T.E. geldi.\n02:03 Tam kurulum yapıldı (T.E.).\n04:00 Kamera turu, normal.\n06:00 Kamera turu, normal.\n08:44 Kurulum iptal (T.E.). Vardiya teslim.",
+        "signoff": "R. Oral",
+        "condition": "Çizgili nöbet defterinin iki sayfası. 00:15 satırının üstü mavi tükenmezle sık sık karalanmış; sayfa ışığa tutulunca alttaki yazı okunabiliyor."
+      },
+      "reveals": [
+        "f-swap-window"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:15",
+          "text": "Nöbet defteri (karalanmış satır): T.E. dışarı çıktı."
+        },
+        {
+          "at": "2025-10-17T01:01",
+          "text": "Kamera 4 geri geldi; nöbetçiye göre tablo yerinde."
+        }
+      ],
+      "people": [
+        "ramazan",
+        "tuncay",
+        "defne"
+      ]
+    },
+    {
+      "id": "e-ferit-1",
+      "title": "Ferit Ilgaz’ın ifadesi",
+      "summary": "Galeri sahibinin müşteki sıfatıyla verdiği ilk ifade.",
+      "doc": {
+        "kind": "statement",
+        "person": "ferit",
+        "capacity": "müşteki",
+        "takenBy": "Komiser Selma Akdoğan",
+        "place": "Galeri Nirengi, 2. kat ofis",
+        "datetime": "17.10.2025 12:00",
+        "qa": [
+          {
+            "q": "Galeriyi ve sergiyi anlatır mısınız?",
+            "a": "Galeri Nirengi’yi 2014’te açtım. “Kıyıdan Işık”ı on bir koleksiyondan otuz iki eserle kurduk. En önemli parçası “Kandilli’de Akşamüstü”ydü; Cemil Bey’i ödünç vermeye ikna etmek bir yılımı aldı."
+          },
+          {
+            "q": "Eser nasıl sigortalandı?",
+            "a": "Çividen çiviye, Karayel Sigorta. Bedel 1 Ekim’de güncellendi, 60 milyon oldu. Prosedür."
+          },
+          {
+            "q": "Bedeli kim, neden yükseltti?",
+            "a": "Değerleme yenilendi. Ayrıntısını Gönül Hanım bilir."
+          },
+          {
+            "q": "Kapanıştan sonra ne yaptınız?",
+            "a": "Son misafirleri uğurladım, 23:40 gibi çıktım. Doğruca eve, Moda’ya gittim, taksiyle. Yorgundum, hemen yattım."
+          },
+          {
+            "q": "Galerinin mali durumu nasıl?",
+            "a": "İyi. Piyasa dalgalı ama biz ayaktayız."
+          },
+          {
+            "q": "Sergide satılık eser var mı?",
+            "a": "Kandilli satılık değil, ödünç. Ama yedi eser satışta; en pahalısı Ahmed Dündar’ın “Moda’da Deniz”i. Açılışta ona ciddi bir alıcı çıktı."
+          },
+          {
+            "q": "Alarmdaki 09 kodundan haberiniz var mı?",
+            "a": "Montaj için ben istedim, Defne’yle İlker kapıları açabilsin diye. 14’ünde silinsin diye yazdım. Tuncay’ın onaylaması gerekiyormuş; anlaşılan yapmamış."
+          },
+          {
+            "q": "Restoratörü kim seçti?",
+            "a": "Defne önerdi. İlker iyi ustadır, Kâzım Fevzi’yi ondan iyi bilen yok."
+          },
+          {
+            "q": "Kimden şüpheleniyorsunuz?",
+            "a": "Bilmiyorum. İkram firmasını ben ayarladım, uygun fiyatlıydı; şimdi pişmanım, arkada bütün gece yabancılar dolaştı. Tuncay’dan da emin değilim, son zamanlarda dalgın."
+          },
+          {
+            "q": "Cemil Tanyeli hakkında ne düşünüyorsunuz?",
+            "a": "Cemil Bey’in şirketi zor günlerden geçiyor, herkes konuşuyor. Poliçe onun lehine. Ben bir şey ima etmiyorum."
+          },
+          {
+            "q": "Eklemek istediğiniz bir şey var mı?",
+            "a": "Bu sergi benim on bir yılım. Kimsenin bunu bana bilerek yapacağına inanmak istemiyorum."
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "ferit",
+        "defne",
+        "ilker",
+        "tuncay",
+        "cemil",
+        "gonul"
+      ]
+    },
+    {
+      "id": "e-cemil-1",
+      "title": "Cemil Tanyeli’nin ifadesi",
+      "summary": "Eserin sahibinin büroda verdiği ifade.",
+      "doc": {
+        "kind": "statement",
+        "person": "cemil",
+        "capacity": "müşteki",
+        "takenBy": "Komiser Selma Akdoğan",
+        "place": "Hırsızlık Büro Amirliği, Vatan Caddesi",
+        "datetime": "17.10.2025 16:30",
+        "qa": [
+          {
+            "q": "Eserle ilişkinizi anlatır mısınız?",
+            "a": "Babam 1974’te eski bir Rum aileden aldı. Elli yıldır bizde. Ben onun karşısında büyüdüm."
+          },
+          {
+            "q": "Eser sergiden önce neredeydi?",
+            "a": "Ayazağa’daki bir sanat deposunda, iklimli bir odada. Sigorta şirketinin şartı."
+          },
+          {
+            "q": "Ne zamandan beri depoda?",
+            "a": "Birkaç yıldır. Tarihini tam hatırlamıyorum."
+          },
+          {
+            "q": "Eserin bir kopyası var mı?",
+            "a": "Hayır. Böyle bir eserin kopyası yapılmaz; kopyası dolaşan eserin değeri düşer."
+          },
+          {
+            "q": "Sigorta bedeli neden yükseltildi?",
+            "a": "Karayel Sigorta yeni değerlemeden sonra istedi. Eylül sonunda yazı geldi, ben de onayladım. Poliçe zaten benim lehime düzenlenir, ödünç verenin hakkıdır."
+          },
+          {
+            "q": "Açılış gecesi ne yaptınız?",
+            "a": "19:30 gibi geldim, Ferit’le konuşma yaptık. Saat ona doğru çıktım; şoförüm Haydar bekliyordu. Yalıya döndük, on bire doğru evdeydim."
+          },
+          {
+            "q": "İlker Varol’u tanır mısınız?",
+            "a": "Restorasyonu o yaptı. Daha önce de ufak tefek işlerimi görmüştü. Ustadır."
+          },
+          {
+            "q": "Şirketinizin mali durumu nasıl?",
+            "a": "Denizcilik zor iş. Ayaktayız. Bunun tabloyla ne ilgisi var?"
+          },
+          {
+            "q": "Kimden şüpheleniyorsunuz?",
+            "a": "Ben eserimi bir galeriye emanet ettim. Galeri sahibinin borçlarını İstanbul’da bilmeyen yok. Gerisini siz bulursunuz. Şimdi izin verirseniz, yorgunum."
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "cemil",
+        "ferit",
+        "ilker"
+      ]
+    },
+    {
+      "id": "e-tuncay-1",
+      "title": "Tuncay Erdem’in ifadesi",
+      "summary": "Güvenlik şefinin gece görevini anlattığı ifade.",
+      "doc": {
+        "kind": "statement",
+        "person": "tuncay",
+        "capacity": "tanık",
+        "takenBy": "Komiser Selma Akdoğan",
+        "place": "Galeri Nirengi, monitör odası",
+        "datetime": "17.10.2025 14:00",
+        "qa": [
+          {
+            "q": "Kendinizi tanıtır mısınız?",
+            "a": "Tuncay Erdem. Yirmi altı yıl emniyette çalıştım, 2019’da emekli oldum. Üç yıldır buranın güvenlik şefiyim."
+          },
+          {
+            "q": "Olay gecesi neredeydiniz?",
+            "a": "14:00’te geldim. Etkinlik boyunca salonlardaydım. Misafirler çıkınca ön kapıyı kart moduna aldım, sonra bütün gece binadaydım: monitör odası, turlar. 02:03’te tam kurulum yaptım, çıktım."
+          },
+          {
+            "q": "Saat 00:40 ve 00:47’de Ramazan Oral’ın aramalarına neden cevap vermediniz?",
+            "a": "Telefon sessizdeydi. Üst katta, depoda kontrol yapıyordum. Telsizin de pili bitmişti."
+          },
+          {
+            "q": "Kamera 4’ün görüntüsü gittiğinde haberiniz oldu mu?",
+            "a": "Sonradan Ramazan söyledi. Catering kabloya takılmış, geri gelmiş, tablo yerindeymiş."
+          },
+          {
+            "q": "09 kodunun silinmesi için size onay isteği geldi mi?",
+            "a": "Geldi. Açılış telaşında kaldı, kabul ediyorum. Ama o kodu ben bilmem; panelde kimse başkasının kodunu göremez."
+          },
+          {
+            "q": "Z4 bypass edildiğinde panel uyarı verir mi?",
+            "a": "Monitördeki panel ekranında küçük bir simge yanar, ses çıkmaz. Merkeze de gitmez; Ferit Bey yanlış alarm faturası geliyor diye 2023’te kapattırdı."
+          },
+          {
+            "q": "Gece yarısından sonra binadan hiç çıktınız mı?",
+            "a": "Hayır. Bir ara kapının önüne sigara içmeye çıkmışımdır, o kadar. Kimseye borcum, kimseden alacağım yok; bunu da yazın."
+          },
+          {
+            "q": "Sizce eser nasıl değiştirildi?",
+            "a": "Bu işi bilen yapmış. Alarm ötmediyse kodu bilen biri. Ben olsam montaja girip çıkanlara bakarım."
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "tuncay",
+        "ramazan",
+        "ferit"
+      ]
+    },
+    {
+      "id": "e-defne-1",
+      "title": "Defne Ural’ın ifadesi",
+      "summary": "Küratörün sergi, restorasyon ve olay gecesi hakkındaki ifadesi.",
+      "doc": {
+        "kind": "statement",
+        "person": "defne",
+        "capacity": "tanık",
+        "takenBy": "Komiser Selma Akdoğan",
+        "place": "Galeri Nirengi, 2. kat ofis",
+        "datetime": "17.10.2025 15:00",
+        "qa": [
+          {
+            "q": "Görevinizi anlatır mısınız?",
+            "a": "Dört yıldır Galeri Nirengi’nin küratörüyüm. “Kıyıdan Işık”ın eser seçimini, kataloğunu ve yerleşim planını ben yaptım."
+          },
+          {
+            "q": "Eserin restorasyon süreci nasıl işledi?",
+            "a": "Ağustosta katalog fotoğraflarını çektirdik, eser 25 Ağustos’ta İlker Bey’in Tophane’deki atölyesine gitti. 26 Eylül’de rapor geldi. Eser 13 Ekim’e kadar atölyenin iklimli deposunda kaldı, 13’ünde nakliyeyle buraya geldi."
+          },
+          {
+            "q": "Restorasyon raporunu kimler aldı?",
+            "a": "Ben, Gönül Hanım ve Cemil Bey. Ultraviyole, kızılötesi görüntüler ve yüksek çözünürlüklü fotoğraflar raporun ekindeydi. Katalogdaki fotoğraf restorasyondan önce çekildi; sol alttaki kayıp katalogda boşluk olarak görünüyor."
+          },
+          {
+            "q": "Montaj sırasında 09 kodu kime verildi?",
+            "a": "Bana ve İlker Bey’e, SMS’le. Nakliye ekibi beklemesin diye kodu küçük bir kâğıda yazıp Salon B’deki tuş takımının üstüne bantladık. 14’ünde akşam ben söktüm; iki gün orada durdu. O günlerde salona Tuncay Bey de, Ferit Bey de, nakliyeciler de, Gönül Hanım da girip çıktı. Ben o kodu 14’ünden sonra hiç kullanmadım."
+          },
+          {
+            "q": "İlker Varol’u restoratör olarak kim önerdi?",
+            "a": "Ben. 2019’da galeri için başka bir Kâzım Fevzi’yi restore etmişti. Bu ressamın paletini ondan iyi bilen yok."
+          },
+          {
+            "q": "Saat 21:47’deki dokunma uyarısını hatırlıyor musunuz?",
+            "a": "Evet, bir misafir çerçeveye dokundu. Alarm ötmedi ama uyardım. Tablonun önü çok kalabalıktı."
+          },
+          {
+            "q": "Galeriden ne zaman ayrıldınız?",
+            "a": "Kapanıştan sonra salonları toparladım, 23:45 gibi çıktım. Eve gittim."
+          },
+          {
+            "q": "Galerinin mali durumu hakkında bilginiz var mı?",
+            "a": "Maaşlar iki aydır gecikiyor. Ferit Bey bir şeyler çeviriyor ama anlatmaz."
+          },
+          {
+            "q": "Eklemek istediğiniz bir şey var mı?",
+            "a": "Bu sergiyi iki yıl hazırladım. Tablonun yerinde başka bir şey asılı olduğuna Gönül Hanım gösterene kadar inanmadım. Hâlâ inanamıyorum."
+          }
+        ]
+      },
+      "reveals": [
+        "f-code09-holders"
+      ],
+      "timeline": [],
+      "people": [
+        "defne",
+        "ilker",
+        "gonul",
+        "cemil",
+        "ferit"
+      ]
+    },
+    {
+      "id": "e-ilker-1",
+      "title": "İlker Varol’un ifadesi",
+      "summary": "Restoratörün restorasyon, montaj ve açılış gecesi hakkındaki ifadesi.",
+      "doc": {
+        "kind": "statement",
+        "person": "ilker",
+        "capacity": "tanık",
+        "takenBy": "Komiser Selma Akdoğan",
+        "place": "Hırsızlık Büro Amirliği, Vatan Caddesi",
+        "datetime": "17.10.2025 17:30",
+        "qa": [
+          {
+            "q": "Kimliğiniz, adresleriniz ve mesleğiniz?",
+            "a": "İlker Varol, kırk beş yaşındayım, restoratörüm. Atölyem Tophane’de, Boğazkesen Caddesi No: 41. Evim Cihangir’de, Akarsu Yokuşu’nda."
+          },
+          {
+            "q": "Eserin restorasyonunu anlatır mısınız?",
+            "a": "25 Ağustos’ta geldi. Yüzey temizliği yaptım, sararmış verniği incelttim, sol alt gökyüzündeki iki santimlik kaybı doldurup rötuşladım. Telarası özgündü, ona dokunmadım, yalnızca kamalarını ayarladım. Gün ışığında, ultraviyole ve kızılötesinde belgeledim. 26 Eylül’de raporu verdim."
+          },
+          {
+            "q": "Montajda bulundunuz mu?",
+            "a": "13 ve 14 Ekim’de. Askı düzenini ve tablonun ışığını ben ayarladım."
+          },
+          {
+            "q": "Size bir alarm kodu verildi mi?",
+            "a": "Defne Hanım kapılar için bir şey göndermişti galiba. Hatırlamıyorum; montaj bitti, sildim gitti."
+          },
+          {
+            "q": "Açılış gecesi ne zaman geldiniz, ne zaman ayrıldınız?",
+            "a": "19:40 gibi geldim. 22:30’da vestiyerden ceketimi alıp çıktım. Cihangir’e yürüdüm, 22:50’de evdeydim. Yattım. Sabah haberi Defne Hanım’dan aldım."
+          },
+          {
+            "q": "Gece evden çıktınız mı?",
+            "a": "Hayır."
+          },
+          {
+            "q": "Bu eserin daha önce bir kopyasını yaptınız mı?",
+            "a": "Ben kopyacı değilim, restoratörüm. Kandilli’nin hiçbir kopyasını yapmadım."
+          },
+          {
+            "q": "İkram ekibinden tanıdığınız biri var mı?",
+            "a": "Garsonları mı? Tanımam."
+          },
+          {
+            "q": "Duvardaki resim hakkında ne düşünüyorsunuz?",
+            "a": "Gördüm. Kim yaptıysa eli iyi. Ama ultraviyolede belli olur; yüz yıllık vernik kalıntısının parıltısı taklit edilemez."
+          },
+          {
+            "q": "Sizi en son kim, nerede gördü?",
+            "a": "Vestiyerdeki kız. Yolda kimseyle konuşmadım. Atölyenin kirası bir ara dert olmuştu, hallettim; bunu da sorarsınız diye söylüyorum."
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "ilker",
+        "defne"
+      ]
+    },
+    {
+      "id": "e-oyi",
+      "title": "Olay Yeri İnceleme raporu",
+      "summary": "Salon B, hazırlık odası ve servis yolunun teknik incelemesi.",
+      "doc": {
+        "kind": "report",
+        "variant": "scene",
+        "agency": "İstanbul Emniyet Müdürlüğü — Olay Yeri İnceleme Şube Müdürlüğü",
+        "docNo": "OYİ-2025/31508 · Soruşturma No: 2025/214873",
+        "datetime": "18.10.2025 09:30",
+        "heading": "Olay yeri inceleme raporu — Galeri Nirengi",
+        "sections": [
+          {
+            "title": "İncelenen alanlar",
+            "text": "17.10.2025 günü 11:05–16:40 arasında Salon B, ikram hazırlık odası, yük asansörü, zemin kat servis koridoru, servis kapısı ve arka sokak incelenmiştir. Eser çerçevesiyle birlikte duvardan indirilerek muhafaza altına alınmıştır."
+          },
+          {
+            "title": "Çerçeve ve tuval",
+            "text": "Arka koruma panosunun 8 vidası sökülüp yeniden takılmıştır. Vidalar aynı deliklere, zorlanmadan oturtulmuştur; yivlerde taze ahşap talaşı yoktur. 8 döner mandalın konumu, altlarındaki eski boya izlerine göre 3–4 mm kaymıştır. Tuvalin telarası çerçeve yuvasına tam oturmaktadır (64 × 92 cm). Telara yeni çam ağacındandır, kamaları el işidir; arkasındaki damga ve yazılar eski görünmektedir.\n\nBulgular, işlemin çerçeve ve tuval işçiliğini bilen biri tarafından, uygun el aletleriyle ve aceleye getirilmeden yapıldığı yönünde değerlendirilmiştir. Çerçeve arkasında ve pano kenarlarında beyaz pamuklu eldiven lifleri bulunmuş, parmak izi elde edilememiştir."
+          },
+          {
+            "title": "Askı ve sensör",
+            "text": "Z4 askı sensörü ve kabloları sağlamdır; müdahale izi yoktur. Bypass yapılmadan eser kaldırıldığında sensör alarm üretmektedir (deneme yapılmıştır)."
+          },
+          {
+            "title": "Ağ dolabı",
+            "text": "Hazırlık odasındaki kilitsiz duvar dolabında kameraları besleyen 8 portlu PoE anahtarı bulunmaktadır. “K4” etiketli kablo 4 numaralı porta takılıdır. Kablonun kilit dili sağlamdır; kılıfta gerilme ya da ezilme izi yoktur. Kablo yerinden çekilerek değil, kilidine basılarak çıkarılıp yeniden takılmış olmalıdır.\n\nK4 konnektörü ve port çevresinde altın renkli metalik parçacıklar tespit edilmiştir. Parçacıklar, çerçevenin arka kenarlarındaki taze yaldız aşınmasından dökülen parçacıklarla aynı görünümdedir; karşılaştırma için örnek alınmıştır. Diğer konnektörlerde benzer parçacık yoktur."
+          },
+          {
+            "title": "Hazırlık odası ve servis yolu",
+            "text": "Hazırlık odası zemininde, yaklaşık 70 × 100 cm ölçüsünde dikdörtgen bir cismin konduğunu gösteren toz izi, beyaz pamuk lifleri ve kullanılmış kâğıt peçeteler bulunmuştur. Oda, yük asansörüyle doğrudan zemin kat servis koridoruna ve servis kapısına bağlanır. Salon B’deki K2 tuş takımının tuşlarında okunabilir iz yoktur."
+          },
+          {
+            "title": "Alınan örnekler",
+            "text": "Eser ve çerçeve (Delil 1), eldiven lifleri (Delil 3–5), peçeteler (Delil 6), K4 konnektörü ve port çevresinden metalik parçacık (Delil 7), çerçeveden yaldız örneği (Delil 8). Örnekler Kriminal Polis Laboratuvarına gönderilmiştir."
+          }
+        ],
+        "signature": "Komiser Yardımcısı Burcu Tekin, Olay Yeri İnceleme Şube Müdürlüğü"
+      },
+      "reveals": [
+        "f-cam4-unplugged",
+        "f-skilled"
+      ],
+      "timeline": [],
+      "people": []
+    },
+    {
+      "id": "ph-switch",
+      "title": "Hazırlık odası ağ dolabı",
+      "summary": "Salon B kamerasını besleyen anahtarın adli fener altında fotoğrafı.",
+      "doc": {
+        "kind": "photo",
+        "image": "obj-switch",
+        "caption": "Hazırlık odası ağ dolabı, PoE anahtarı. Yandan tutulan adli fener ışığında K4 konnektörü ve 4 numaralı port çevresinde altın renkli parçacıklar. Diğer portlarda benzer parçacık görülmedi.",
+        "tag": "OYİ-2025/31508 · Fotoğraf 22"
+      },
+      "reveals": [
+        "f-cam4-unplugged"
+      ],
+      "timeline": [],
+      "people": []
+    },
+    {
+      "id": "e-haber",
+      "title": "Kent Postası haberi, 18 Ekim",
+      "summary": "Olayın ertesi günü çıkan gazete haberi.",
+      "doc": {
+        "kind": "newspaper",
+        "paper": "Kent Postası",
+        "date": "18 Ekim 2025, Cumartesi",
+        "headline": "Galata’daki sergide “sahte tablo” şoku",
+        "subhead": "Galeri Nirengi’nin açılış gecesinin ardından, 60 milyon liralık Kâzım Fevzi tablosunun yerinde bir kopya bulundu",
+        "image": "loc-gallery",
+        "body": "Beyoğlu’ndaki Galeri Nirengi’de perşembe akşamı açılan “Kıyıdan Işık: Osmanlı Resminde Boğaz, 1880–1920” sergisinin yıldızı “Kandilli’de Akşamüstü”, cuma sabahı yapılan sigorta kontrolünde sahte çıktı. Emniyet Müdürlüğü Hırsızlık Büro Amirliği soruşturma başlattı; binada zorlama izine rastlanmadığı öğrenildi.\n\nGaleri sahibi Ferit Ilgaz gazetemize kısa bir açıklama yaptı: “Eser sigortalıdır, ama mesele para değil. Bu sergi on bir yılın emeği. Emniyete güveniyoruz.”\n\nTablonun sahibi, emekli armatör Cemil Tanyeli ise telefonlarımıza çıkmadı. Tanyeli Denizcilik’in geçen ay mahkemeden geçici konkordato mühleti aldığı biliniyor. Eserin sigorta bedelinin 1 Ekim’de 45 milyondan 60 milyon liraya yükseltilmesi de dikkat çekti.\n\nAçılışa katılan koleksiyoncu Nesrin Bahadır’ın sözleri ise kafaları daha da karıştırdı: “Ben o tabloyu geçen yaz Tanyelilerin yalısındaki bir yemekte, yemek salonunun duvarında gördüm. Cemil Bey eserin yıllardır depoda durduğunu söylüyor. Hangisi asıl, artık ben de bilmiyorum.”\n\nSanat çevrelerinden bir kaynak, bir eserin galeriden kopyasıyla değiştirilerek çalınmasının Türkiye’de çok nadir görüldüğünü, olayın sigorta dolandırıcılığı ihtimaliyle birlikte araştırıldığını söyledi."
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "ferit",
+        "cemil"
+      ]
+    },
+    {
+      "id": "ph-cam3-1608",
+      "title": "Servis kapısı kamerası, 16:08",
+      "summary": "Açılış günü öğleden sonra ikram malzemesinin indirilmesi.",
+      "doc": {
+        "kind": "photo",
+        "image": "cam-service-day",
+        "caption": "İkram ekibinin malzeme indirmesi, 16:02–16:24. Karelerde 26 kasa, 4 katlanır servis arabası ve 2 düz kasa taşınıyor. İki düz kasa ayrı ayrı içeri alınıyor.",
+        "cctv": {
+          "camera": "Servis kapısı (Kamera 3)",
+          "timestamp": "16.10.2025 16:08:31"
+        }
+      },
+      "reveals": [
+        "f-crate-in"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T16:08",
+          "text": "Kamera 3: ikram ekibinden biri servis kapısından düz bir kasa taşıdı."
+        }
+      ],
+      "people": []
+    },
+    {
+      "id": "ph-cam3-2347",
+      "title": "Servis kapısı kamerası, 23:47",
+      "summary": "İkram ekibinin sigara molasından dönüşü.",
+      "doc": {
+        "kind": "photo",
+        "image": "cam-service-night",
+        "caption": "Sigara molası dönüşü. Aynı dakikada servis kapısında TEDARİKÇİ-2 kartıyla tek bir geçiş kaydı var. 23:42’deki karelerde kapıdan dışarı beş kişi çıkıyor. Altıncı figür kadraja sokağın yukarısından, 23:44’te tek başına giriyor.",
+        "cctv": {
+          "camera": "Servis kapısı (Kamera 3)",
+          "timestamp": "16.10.2025 23:47:12"
+        }
+      },
+      "reveals": [
+        "f-sixth"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T23:44",
+          "text": "Kamera 3: sigara içen gruba dışarıdan biri katıldı."
+        },
+        {
+          "at": "2025-10-16T23:47",
+          "text": "Kamera 3: servis kapısından altı kişi girdi."
+        }
+      ],
+      "people": []
+    },
+    {
+      "id": "ph-cam5",
+      "title": "Zemin servis koridoru kamerası, 00:46",
+      "summary": "Gece yarısından sonra yükleme sırasında zemin kat koridoru.",
+      "doc": {
+        "kind": "photo",
+        "image": "cam-corridor",
+        "caption": "Kamera 5, zemin servis koridoru. 00:37–01:05 arasındaki karelerde koridorda ve kapı önünde aynı anda en çok beş siyah ceketli kişi görülüyor; 00:44–00:52 arasında beşi birden kadrajda. Yük asansörü 00:38’den 00:59’a kadar zeminde, kapısı kapalı bekliyor; 00:59’da yukarı çağrılıyor, 01:02’de bir kişi ve düz bir kasayla iniyor.",
+        "cctv": {
+          "camera": "Zemin servis koridoru (Kamera 5)",
+          "timestamp": "17.10.2025 00:46:20"
+        }
+      },
+      "reveals": [
+        "f-crew-down"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:46",
+          "text": "Kamera 5: beş ikram çalışanı aynı anda zemin koridorda."
+        },
+        {
+          "at": "2025-10-17T01:02",
+          "text": "Kamera 5: yük asansörü bir kişi ve düz bir kasayla zemine indi."
+        }
+      ],
+      "people": []
+    },
+    {
+      "id": "e-catering-mail",
+      "title": "Has Sofra İkram’ın e-postası",
+      "summary": "İkram firmasının sahibinin ekip, araç ve ekipman hakkındaki yazılı bilgisi.",
+      "doc": {
+        "kind": "email",
+        "from": "Nuri Has, Has Sofra İkram <nuri.has@hassofraikram.com.tr>",
+        "to": "Komiser Selma Akdoğan, Hırsızlık Büro Amirliği",
+        "date": "18.10.2025 12:15",
+        "subject": "16 Ekim Galeri Nirengi organizasyonu — istediğiniz bilgiler",
+        "body": "Selma Hanım merhaba,\n\nİstediğiniz bilgileri aşağıda gönderiyorum.\n\nİş nasıl geldi: Galeri Nirengi bize eylül sonunda ulaştı. Ferit Bey ilk telefonda, firmamızı restoratörlerinin önerdiğini söylemişti. Fiyatta anlaştık.\n\nEkip: Şef Sinan Ateş; garsonlar Barış Koç (aynı zamanda 2. aracın şoförü), Elif Durmaz, Kader Uysal, Onur Taş ve Mert Kaya. Toplam altı kişi, hepsi kadrolu. Barış o gün izinliydi; organizasyonu duyunca Onur’un yerine kendisi istedi, Onur da başka bir işe kaydı. Sonunda ikisi de geldi.\n\nAraçlar: 34 HSF 112 (1. araç, şef Sinan Ateş) ve 34 HSF 127 (2. araç, Barış Koç). Sinan Bey kirli bardakları ve yiyecekleri alıp 23:15’te 1. araçla depoya döndü, gece galeriye geri gelmedi. Kalan beş kişi toplanmayı bitirdi, 01:05 gibi çıktılar. Elif, Kader, Onur ve Mert oradan evlerine taksiyle dağıldı; Barış 2. aracı Kağıthane’deki depoya getirdi. Araç takip dökümü ekte.\n\nEkipman: İrsaliyeye göre 12 bardak kasası, 8 tabak kasası, 6 tepsi kasası, 4 katlanır servis arabası ve 2 adet düz kasa (siyah, içi köpüklü, yaklaşık 70 × 100 cm). Düz kasalar mermer servis tahtaları içindir; Barış bu organizasyon için özellikle istedi. Sinan Bey gerek olmadığını söylemiş, tahtaları da hiç kullanmamışlar. Dün depoda yalnızca bir düz kasa bulabildik; Barış ötekini araçta unuttuğunu, bakacağını söyledi.\n\nEkip kıyafetimiz siyah ceket ve siyah kaskettir; 2. araçta iki yedek takım bulunur. Dün sayım yaptık, yedek ceketlerden biri ve bir kasket eksik.\n\nGarsonlarımızla konuşmak isterseniz hepsi hazır. Elif Hanım özellikle sizinle görüşmek istiyor.\n\nSaygılarımla,\nNuri Has",
+        "attachments": [
+          "arac_takip_16-17.10.pdf",
+          "irsaliye_0417.pdf"
+        ]
+      },
+      "reveals": [
+        "f-crate-in"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T23:15",
+          "text": "Şef Sinan Ateş 1. araçla depoya döndü; galeride beş garson kaldı."
+        }
+      ],
+      "people": [
+        "baris",
+        "ferit"
+      ]
+    },
+    {
+      "id": "e-elif",
+      "title": "Elif Durmaz’la görüşme kaydı",
+      "summary": "İkram ekibinden bir garsonla büroda yapılan görüşmenin ses kaydı.",
+      "doc": {
+        "kind": "audio",
+        "variant": "interview",
+        "source": "Hırsızlık Büro Amirliği, tanık görüşmesi ses kaydı (tanığın onayıyla)",
+        "datetime": "18.10.2025 16:30",
+        "ambience": "büro odası; uzakta bir yazıcı, kapı açılıp kapanıyor",
+        "lines": [
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Elif Hanım, patronunuz sizin bir şey anlatmak istediğinizi söyledi."
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Evet. Belki önemsizdir ama… içime sinmedi.",
+            "delivery": "çekinerek"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Baştan alalım. Sigara molasından sonra ne oldu?"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "İçeri girdik, yukarı çıktık, hazırlık odasında kasaları dizmeye başladık. On iki buçuk gibi baktım, kasaların arkasında, köşede biri oturuyor. Bizim ceketten giymiş, kasketli. Ben bizimkilerden biri sandım önce, sonra saydım… bizimkilerin hepsi karşımdaydı."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Ne yaptınız?"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Barış’a sordum, “bu kim?” diye. “Galeriden, eserlere bakıyor, sen işine bak” dedi. Ben de… herkes yorgundu, kimse üstelemedi.",
+            "pause": 1
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Yüzünü gördünüz mü?"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Yok. Başını hiç kaldırmadı. Önünde ince uzun bir bez rulo vardı, açıp kapatıyordu. Eldiven takmıştı, beyaz."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Sonra?"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Gece yarısını otuz beş geçe falan Barış “hadi hepimiz aşağı, arabayı yükleyelim, yukarıyı ben sonra toplarım” dedi. Hepimiz indik, Barış da indi. Arabayı o yükler, şoför o. Yirmi dakika kadar hep beraber aşağıdaydık, hiç yukarı çıkan olmadı."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Emin misiniz? Barış dahil?"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Eminim. Kasaları ona ben uzattım. Biri olmasına birkaç dakika kala Barış asansörle yukarı çıktı, son kasayı getirdi, o büyük düz kasayı. Sonra çıktık.",
+            "delivery": "net"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Çıkarken kaç kişiydiniz?"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Bilmiyorum… kalabalıktık. O kasketli de bizimle çıktı galiba. Sokakta aşağı doğru yürüdü, biz taksiye bindik.",
+            "pause": 1.5,
+            "delivery": "düşünerek, yavaş"
+          },
+          {
+            "name": "Elif Durmaz",
+            "voice": {
+              "gender": "female",
+              "age": "young",
+              "style": "Ankara ağzı, çekingen başlayıp açılan, dürüst bir genç kadın"
+            },
+            "text": "Bir de… Barış o gün izinliydi aslında. Bu işe gelmek için Onur’la vardiya değişti. Şimdi düşünüyorum da… neden bu kadar istedi?",
+            "delivery": "alçak sesle"
+          }
+        ]
+      },
+      "reveals": [
+        "f-sixth",
+        "f-crew-down"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:30",
+          "text": "Elif Durmaz, hazırlık odasında ekipten olmayan kasketli birini gördü."
+        },
+        {
+          "at": "2025-10-17T00:35",
+          "text": "Barış, beş garsonu yüklemek için zemin kata indirdi."
+        }
+      ],
+      "people": [
+        "baris"
+      ]
+    },
+    {
+      "id": "e-gps",
+      "title": "İkram araçlarının takip dökümü",
+      "summary": "Has Sofra’nın iki aracının 16–17 Ekim konum kayıtları.",
+      "doc": {
+        "kind": "table",
+        "heading": "Has Sofra İkram — araç takip dökümü, 16.10.2025 15:00 – 17.10.2025 02:30",
+        "note": "Durma: 3 dakikadan uzun hareketsizlik (kontak açık ya da kapalı). Konumlar en yakın adrese yuvarlanmıştır.",
+        "columns": [
+          "Araç",
+          "Saat",
+          "Olay",
+          "Konum",
+          "Süre"
+        ],
+        "rows": [
+          [
+            "34 HSF 112",
+            "15:21",
+            "Hareket",
+            "Kağıthane depo, Çağlayan",
+            "—"
+          ],
+          [
+            "34 HSF 127",
+            "15:24",
+            "Hareket",
+            "Kağıthane depo, Çağlayan",
+            "—"
+          ],
+          [
+            "34 HSF 112",
+            "16:01",
+            "Durma, kontak kapalı",
+            "Kumbaracı Yokuşu, Galata",
+            "16:01–23:16"
+          ],
+          [
+            "34 HSF 127",
+            "16:03",
+            "Durma, kontak kapalı",
+            "Kumbaracı Yokuşu, Galata",
+            "16:03–01:08"
+          ],
+          [
+            "34 HSF 112",
+            "23:16",
+            "Hareket",
+            "Kumbaracı Yokuşu, Galata",
+            "—"
+          ],
+          [
+            "34 HSF 112",
+            "23:41",
+            "Durma, kontak kapalı",
+            "Kağıthane depo, Çağlayan",
+            "sabaha kadar"
+          ],
+          [
+            "34 HSF 127",
+            "01:08",
+            "Hareket",
+            "Kumbaracı Yokuşu, Galata",
+            "—"
+          ],
+          [
+            "34 HSF 127",
+            "01:12",
+            "Yavaş seyir",
+            "Şişhane – Tepebaşı (tek yön)",
+            "—"
+          ],
+          [
+            "34 HSF 127",
+            "01:19",
+            "Durma, kontak açık",
+            "Boğazkesen Caddesi No: 37–43 önü, Tophane",
+            "01:19–01:25"
+          ],
+          [
+            "34 HSF 127",
+            "01:25",
+            "Hareket",
+            "Boğazkesen Caddesi, Tophane",
+            "—"
+          ],
+          [
+            "34 HSF 127",
+            "01:48",
+            "Durma, kontak kapalı",
+            "Kağıthane depo, Çağlayan",
+            "sabaha kadar"
+          ]
+        ]
+      },
+      "reveals": [
+        "f-van-stop"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T23:16",
+          "text": "1. araç (şef) Kumbaracı Yokuşu’ndan ayrıldı."
+        },
+        {
+          "at": "2025-10-17T01:08",
+          "text": "2. araç (Barış Koç) Kumbaracı Yokuşu’ndan ayrıldı."
+        },
+        {
+          "at": "2025-10-17T01:19",
+          "text": "2. araç Boğazkesen Caddesi No: 37–43 önünde 6 dakika durdu."
+        },
+        {
+          "at": "2025-10-17T01:48",
+          "text": "2. araç Kağıthane deposuna vardı."
+        }
+      ],
+      "people": [
+        "baris"
+      ]
+    },
+    {
+      "id": "ph-tophane",
+      "title": "Boğazkesen Caddesi’nde bir dükkân kamerası, 01:21",
+      "summary": "Araç takibindeki durma noktasının karşısındaki bir çay ocağının dış kamerası.",
+      "doc": {
+        "kind": "photo",
+        "image": "cam-street",
+        "caption": "Boğazkesen Caddesi No: 38, çay ocağının dış kamerası. Kayıt saati, kayıt cihazı polis saatiyle karşılaştırılarak doğrulandı (fark 20 saniyeden az). 01:19’da beyaz bir kamyonet karşı kaldırıma, No: 41’in önüne yanaşıyor. 01:17’den beri kepengin önünde bekleyen yaya, 01:21’de sürücüden düz bir kasayı alıyor; 01:24’te kepengi yarıya kaldırıp içeri giriyor. Kamyonet 01:25’te ayrılıyor.",
+        "cctv": {
+          "camera": "Boğazkesen Cd. 38 (dükkân)",
+          "timestamp": "17.10.2025 01:21:40"
+        }
+      },
+      "reveals": [
+        "f-van-stop",
+        "f-ilker-buffet",
+        "f-ilker-lie-home"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T01:21",
+          "text": "Boğazkesen Caddesi No: 41 önünde, kamyonetin sürücüsü bir yayaya düz bir kasa verdi."
+        }
+      ],
+      "people": []
+    },
+    {
+      "id": "e-baris-1",
+      "title": "Barış Koç’la görüşme kaydı",
+      "summary": "İkram ekibinin şoför-garsonuyla büroda yapılan görüşmenin ses kaydı.",
+      "doc": {
+        "kind": "audio",
+        "variant": "interview",
+        "source": "Hırsızlık Büro Amirliği, tanık görüşmesi ses kaydı (tanığın onayıyla)",
+        "datetime": "18.10.2025 15:40",
+        "ambience": "büro odası; koridordan gelen telefon zilleri, çay kaşığı şıngırtısı",
+        "lines": [
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Barış Bey, on altı Ekim’de galeriye ne zaman geldiniz?"
+          },
+          {
+            "character": "baris",
+            "text": "Dört gibi abla. Malzemeyi arka kapıdan indirdik.",
+            "delivery": "hızlı, rahat görünmeye çalışarak"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "İki düz kasayı kim istedi?"
+          },
+          {
+            "character": "baris",
+            "text": "Ben. Mermer servis tahtaları için, kırılmasın diye. Kullanmadık, şef istemedi."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Gece kaç kişi kaldınız?"
+          },
+          {
+            "character": "baris",
+            "text": "Beş. Şef on bir buçuğa doğru gitti, biz toplandık."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Sigara molasından sonra kapıdan kaç kişi girdi?"
+          },
+          {
+            "character": "baris",
+            "text": "Beş. Kamerada altı görünüyorsa… biri iki kere girip çıkmıştır. Hep girip çıkıyorduk.",
+            "pause": 2,
+            "delivery": "bir an durup, sonra hızla"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Hazırlık odasında galeriden biri size yardım etti mi?"
+          },
+          {
+            "character": "baris",
+            "text": "Hatırlamıyorum. Galeriden birileri dolaşıyordu, güvenlikçiler falan."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Galeriden çıkınca nereye gittiniz?"
+          },
+          {
+            "character": "baris",
+            "text": "Doğruca Kağıthane’ye. Depoya. Yolda durmadım.",
+            "pause": 1.5,
+            "delivery": "kelimeleri tek tek, fazla vurgulu"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "İkinci düz kasa nerede?"
+          },
+          {
+            "character": "baris",
+            "text": "Arabada kalmıştır. Bakarım."
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "İlker Varol’u tanır mısınız?"
+          },
+          {
+            "character": "baris",
+            "text": "Restoratör mü? Eskiden… bir atölyede çalıştım. Ayrılalı iki yıl oldu. Görüşmüyoruz.",
+            "pause": 2.5,
+            "delivery": "yutkunarak, sesi alçalarak"
+          },
+          {
+            "name": "Komiser Selma Akdoğan",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "İstanbul ağzı, sakin, kısa ve net sorular soran bir komiser"
+            },
+            "text": "Galerideki tablodan haberiniz var mıydı?"
+          },
+          {
+            "character": "baris",
+            "text": "Hangi tablo? Ben garsonum abla, tabak taşırım.",
+            "delivery": "zoraki bir gülüşle"
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "baris",
+        "ilker"
+      ]
+    },
+    {
+      "id": "e-tuncay-hts",
+      "title": "Tuncay Erdem’in HTS kaydı",
+      "summary": "Güvenlik şefinin olay gecesi arama ve baz istasyonu kayıtları.",
+      "doc": {
+        "kind": "phoneLog",
+        "subscriber": "Tuncay Erdem",
+        "number": "0532 614 27 90",
+        "period": "16.10.2025 22:00 – 17.10.2025 03:00",
+        "rows": [
+          {
+            "datetime": "16.10 23:58",
+            "type": "gelen arama",
+            "other": "0542 380 15 66 (rehberde: Recep A.)",
+            "duration": "0:42",
+            "tower": "Beyoğlu – Şişhane"
+          },
+          {
+            "datetime": "17.10 00:13",
+            "type": "giden arama",
+            "other": "0212 249 •• •• (Tepebaşı taksi durağı)",
+            "duration": "0:28",
+            "tower": "Beyoğlu – Şişhane"
+          },
+          {
+            "datetime": "17.10 00:31",
+            "type": "veri",
+            "other": "—",
+            "tower": "Şişli – Kurtuluş Caddesi"
+          },
+          {
+            "datetime": "17.10 00:40",
+            "type": "cevapsız",
+            "other": "0533 208 41 17 (Ramazan Oral)",
+            "tower": "Şişli – Kurtuluş Caddesi"
+          },
+          {
+            "datetime": "17.10 00:47",
+            "type": "cevapsız",
+            "other": "0533 208 41 17 (Ramazan Oral)",
+            "tower": "Şişli – Kurtuluş Caddesi"
+          },
+          {
+            "datetime": "17.10 01:14",
+            "type": "giden arama",
+            "other": "0212 231 •• •• (Kurtuluş taksi durağı)",
+            "duration": "0:35",
+            "tower": "Şişli – Kurtuluş Caddesi"
+          },
+          {
+            "datetime": "17.10 01:19",
+            "type": "giden arama",
+            "other": "0533 208 41 17 (Ramazan Oral)",
+            "duration": "0:51",
+            "tower": "Şişli – Harbiye"
+          },
+          {
+            "datetime": "17.10 01:33",
+            "type": "veri",
+            "other": "—",
+            "tower": "Beyoğlu – Şişhane"
+          },
+          {
+            "datetime": "17.10 02:24",
+            "type": "veri",
+            "other": "—",
+            "tower": "Beyoğlu – Kasımpaşa"
+          }
+        ]
+      },
+      "reveals": [
+        "f-tuncay-kurtulus"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:31",
+          "text": "Tuncay Erdem’in telefonu Kurtuluş Caddesi baz istasyonunda."
+        },
+        {
+          "at": "2025-10-17T01:19",
+          "text": "Tuncay Erdem, Harbiye civarından Ramazan Oral’ı aradı."
+        }
+      ],
+      "people": [
+        "tuncay",
+        "ramazan"
+      ]
+    },
+    {
+      "id": "e-baskin",
+      "title": "Kurtuluş Polis Merkezi tutanağı",
+      "summary": "Aynı gece Kurtuluş’ta yapılan bir denetimin tutanağı.",
+      "doc": {
+        "kind": "report",
+        "variant": "police",
+        "agency": "İstanbul Emniyet Müdürlüğü — Şişli İlçe Emniyet Müdürlüğü, Kurtuluş Polis Merkezi Amirliği",
+        "docNo": "Olay No: 2025/8841",
+        "datetime": "17.10.2025 01:20 (olay saati 00:50)",
+        "heading": "Kumar oynanan yere yönelik denetim ve idari yaptırım tutanağı",
+        "sections": [
+          {
+            "title": "Olay",
+            "text": "Alınan ihbar üzerine 17.10.2025 günü saat 00:50’de Kurtuluş Caddesi üzerindeki bir dernek lokalinin arka salonunda denetim yapılmış, masalarda iskambil kâğıdı ve para ile oyun oynandığı tespit edilmiştir."
+          },
+          {
+            "title": "Tespit edilen kişiler",
+            "text": "Salonda bulunan 14 kişinin kimlik tespiti 00:52–01:08 arasında yapılmıştır. Listenin 9. sırasında: Tuncay Erdem (51), T.C. No 3•••••••••4; kimlik tespiti saat 00:55, masa başında, üzerinde 6.400 TL nakit."
+          },
+          {
+            "title": "İşlem",
+            "text": "Kişilere 5326 sayılı Kabahatler Kanunu’nun 34. maddesi uyarınca idari para cezası uygulanmış; kâğıtlar ve masadaki paralar muhafaza altına alınmıştır. Dernek yetkilisi hakkında adli işlem başlatılmıştır. Kişiler işlemlerinin ardından 01:10’da serbest bırakılmıştır."
+          },
+          {
+            "title": "Not",
+            "text": "Tuncay Erdem emekli emniyet mensubu olduğunu beyan etmiş, başka bir açıklama yapmamıştır."
+          }
+        ],
+        "signature": "Polis Memuru Hüseyin Kaplan · Polis Memuru Derya Sungur"
+      },
+      "reveals": [
+        "f-tuncay-kurtulus"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:55",
+          "text": "Tuncay Erdem’in Kurtuluş’taki bir kumar denetiminde kimlik tespiti yapıldı."
+        },
+        {
+          "at": "2025-10-17T01:10",
+          "text": "Kurtuluş’taki denetimde tespit edilenler serbest bırakıldı."
+        }
+      ],
+      "people": [
+        "tuncay"
+      ]
+    },
+    {
+      "id": "e-ferit-mesaj",
+      "title": "Ferit Ilgaz’ın yazışmaları: Kâmil Sezer",
+      "summary": "Galeri sahibinin telefonundan, rızasıyla incelenen bir yazışma.",
+      "doc": {
+        "kind": "messages",
+        "owner": "Ferit Ilgaz",
+        "with": "Kâmil Sezer",
+        "source": "Ferit Ilgaz’ın rızasıyla incelenen telefonu (silinmiş iletiler kurtarılmıştır)",
+        "messages": [
+          {
+            "from": "them",
+            "time": "08.10.2025 11:02",
+            "text": "Ferit Bey, vade 20 Ekim. Hatırlatayım dedim."
+          },
+          {
+            "from": "me",
+            "time": "08.10.2025 11:40",
+            "text": "Biliyorum Kâmil Bey. Sergiden sonra rahatlayacağım, bir tablo satışı yakın."
+          },
+          {
+            "from": "them",
+            "time": "08.10.2025 11:41",
+            "text": "Üç buçuğun üstüne faiziyle dört yüz bin daha bindi. Galerinin anahtarını bana teslim ettirme."
+          },
+          {
+            "from": "me",
+            "time": "08.10.2025 11:45",
+            "text": "Ettirmem. Söz."
+          },
+          {
+            "from": "them",
+            "time": "16.10.2025 21:31",
+            "text": "Açılış bitince konuşalım. Nevizade, her zamanki yer. 23:45."
+          },
+          {
+            "from": "me",
+            "time": "16.10.2025 21:33",
+            "text": "Tamam, gelirim."
+          },
+          {
+            "from": "me",
+            "time": "16.10.2025 22:10",
+            "text": "Dündar’ın deniz manzarasına alıcı çıktı, şu an konuşuyoruz. Haftaya kapora.",
+            "deleted": true
+          },
+          {
+            "from": "me",
+            "time": "16.10.2025 23:43",
+            "text": "Yoldayım."
+          },
+          {
+            "from": "them",
+            "time": "17.10.2025 01:39",
+            "text": "Ay sonu değil, kasım sonu. Son kez uzatıyorum."
+          },
+          {
+            "from": "me",
+            "time": "17.10.2025 01:40",
+            "text": "Sağ olun Kâmil Bey. Kasım sonu, söz."
+          },
+          {
+            "from": "them",
+            "time": "17.10.2025 10:58",
+            "text": "Haberleri duydum. Tablo meselesi neymiş? Sigortanız varmış, iyi bari."
+          },
+          {
+            "from": "me",
+            "time": "17.10.2025 11:20",
+            "text": "O para benim değil Kâmil Bey, lehdar eserin sahibi. Bana bu işten rezaletten başka bir şey kalmaz."
+          },
+          {
+            "from": "them",
+            "time": "17.10.2025 11:22",
+            "text": "Kasım sonuna kadar Ferit Bey."
+          }
+        ]
+      },
+      "reveals": [
+        "f-ferit-nevizade"
+      ],
+      "timeline": [],
+      "people": [
+        "ferit"
+      ]
+    },
+    {
+      "id": "e-meyhane",
+      "title": "Nevizade’deki bir meyhanenin adisyonu",
+      "summary": "Ferit Ilgaz’ın kredi kartıyla ödenmiş bir gece hesabı; siparişler saatli.",
+      "doc": {
+        "kind": "receipt",
+        "merchant": "Çınaraltı Meyhanesi",
+        "address": "Nevizade Sk. No: 14, Beyoğlu",
+        "datetime": "Masa 7 · açılış 16.10.2025 23:52 · kapanış 17.10.2025 01:34",
+        "items": [
+          {
+            "name": "23:53 Rakı 70 cl",
+            "qty": 1,
+            "price": 1950
+          },
+          {
+            "name": "23:53 Beyaz peynir, kavun",
+            "qty": 1,
+            "price": 420
+          },
+          {
+            "name": "00:21 Soğuk meze tabağı (6’lı)",
+            "qty": 1,
+            "price": 1380
+          },
+          {
+            "name": "00:49 Kalamar tava",
+            "qty": 1,
+            "price": 640
+          },
+          {
+            "name": "00:49 Su",
+            "qty": 2,
+            "price": 30
+          },
+          {
+            "name": "01:17 Türk kahvesi",
+            "qty": 2,
+            "price": 90
+          }
+        ],
+        "payment": "Kredi kartı · F. ILGAZ ****4417 · 2 kişi",
+        "footer": "Adisyon No 008913 · Garson: Selim. Siparişler garsonun el terminalinden masada girilir; kart masada, sahibine okutulmuştur."
+      },
+      "reveals": [
+        "f-ferit-nevizade"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T23:52",
+          "text": "Nevizade’de Ferit Ilgaz’ın kartıyla ödenen masa açıldı (2 kişi)."
+        },
+        {
+          "at": "2025-10-17T00:49",
+          "text": "Nevizade’deki masaya sipariş girildi."
+        },
+        {
+          "at": "2025-10-17T01:34",
+          "text": "Nevizade’deki masanın hesabı kartla, masada ödendi."
+        }
+      ],
+      "people": [
+        "ferit"
+      ]
+    },
+    {
+      "id": "ph-yali",
+      "title": "Tanyeli yalısı, yemek salonu",
+      "summary": "Kandilli’deki yalıda bulunan ve teslim alınan tablo.",
+      "doc": {
+        "kind": "photo",
+        "image": "obj-dining",
+        "caption": "Tanyeli yalısı, yemek salonu, 18.10.2025 14:20. Tablo Cemil Tanyeli’nin rızasıyla duvardan indirilip tutanakla teslim alındı. Tuval 61 × 87 cm; telaranın arkasında kurşun kalemle “kopya – İ.V. 2023” yazılı. Yerinde bakan bilirkişinin notu: imzadaki F harfinin üst çizgisi kıvrık atılmış; el tipi kızılötesi kamerada alt çizimde 4 cm aralıklı kare ızgara görülüyor.\n\nCemil Tanyeli tutanağa, kopyayı 2023’te İlker Varol’a yaptırdığını, “misafirler orijinal sansın diye” o günden beri burada astığını, orijinali Ayazağa’daki depoya kaldırdığını ve bunu kimseye söylemediğini beyan etti. Yalının bahçe kapısı kamerasına göre Tanyeli’nin aracı 16 Ekim 22:47’de girmiş, ertesi sabah 09:20’ye kadar çıkmamıştır (kayıt tutanağa eklendi).",
+        "tag": "Teslim tutanağı HBA-1203"
+      },
+      "reveals": [
+        "f-cemil-copy-diff",
+        "f-ilker-2023"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T22:47",
+          "text": "Cemil Tanyeli’nin aracı Kandilli’deki yalıya girdi."
+        }
+      ],
+      "people": [
+        "cemil",
+        "ilker"
+      ]
+    },
+    {
+      "id": "e-fatura",
+      "title": "İ.V. Restorasyon Atölyesi makbuzu, 2023",
+      "summary": "Cemil Tanyeli’nin dosyasından çıkan eski bir serbest meslek makbuzu.",
+      "doc": {
+        "kind": "receipt",
+        "merchant": "İ.V. Restorasyon Atölyesi — İlker Varol",
+        "address": "Boğazkesen Cad. No: 41, Tophane, Beyoğlu",
+        "datetime": "14.03.2023",
+        "items": [
+          {
+            "name": "“Kandilli’de Akşamüstü” sergileme kopyası, tuval üzerine yağlıboya, 61 × 87 cm",
+            "qty": 1,
+            "price": 85000
+          },
+          {
+            "name": "Kopya için ölçekli fotoğraf belgeleme",
+            "qty": 1,
+            "price": 6500
+          },
+          {
+            "name": "Çerçeve (yaldız taklidi)",
+            "qty": 1,
+            "price": 9500
+          }
+        ],
+        "payment": "Havale · Cemil Tanyeli",
+        "footer": "Serbest meslek makbuzu No 0047. Not: Kopya, orijinalle karıştırılmaması için %5 küçük yapılmış ve arkası işaretlenmiştir."
+      },
+      "reveals": [
+        "f-ilker-2023",
+        "f-cemil-copy-diff"
+      ],
+      "timeline": [],
+      "people": [
+        "ilker",
+        "cemil"
+      ]
+    },
+    {
+      "id": "e-bilirkisi",
+      "title": "Bilirkişi ön raporu",
+      "summary": "Galerideki tuval ile yalıdaki tablonun karşılaştırmalı ön incelemesi.",
+      "doc": {
+        "kind": "report",
+        "variant": "expert",
+        "agency": "İstanbul Cumhuriyet Başsavcılığı — Bilirkişi heyeti (konservasyon ve resim tarihi)",
+        "docNo": "Soruşturma No: 2025/214873 · Bilirkişi ön raporu (kesin rapor laboratuvar sonuçlarından sonra verilecektir)",
+        "datetime": "20.10.2025",
+        "heading": "Galeri Nirengi’den alınan tuval (A) ile Tanyeli yalısından alınan tuvalin (B) karşılaştırmalı ön incelemesi",
+        "sections": [
+          {
+            "title": "İncelenen malzeme",
+            "text": "(A) Galeri Nirengi Salon B’de özgün çerçevesi içinde bulunan tuval, 64 × 92 cm. (B) Tanyeli yalısından teslim alınan tuval, 61 × 87 cm, arkasında “kopya – İ.V. 2023” yazılı. Karşılaştırma belgeleri: Pergel Ekspertiz’in 16 Ekim 2025 kondisyon fotoğrafları, İ.V. Restorasyon Atölyesi’nin 26.09.2025 tarihli restorasyon raporu ve görüntüleri, 12.08.2025 tarihli katalog fotoğrafları. İnceleme 19–20 Ekim’de, tahribatsız yöntemlerle yapılmıştır."
+          },
+          {
+            "title": "(A)’nın yaşı ve yapımı",
+            "text": "(A)’nın tuvali modern üretim ketendir; kimyasal olarak eskitilmiş ve lekelendirilmiştir. Taşınabilir XRF cihazıyla beyaz alanlarda yapılan yerinde ölçümde (gökyüzü ve kıyı evleri, altı nokta) titanyum saptanmıştır; titanyum beyazı 1920’lerden önce sanatçı boyalarında kullanılmaz. Çatlak ağı ısıtma ve bükme yoluyla yapay olarak oluşturulmuştur. Ultraviyole ışıkta, özgün eserde belgelenen eski doğal vernik kalıntılarının yeşilimsi floresans deseni yoktur; yüzey tek tip parlar. Telara yeni çam ağacındandır, kamalar el işidir; üzerindeki 1931 gümrük damgası ve “CT-014” yazısı taklittir.\n\nSonuç: (A), 1897 tarihli özgün eser değildir; yakın zamanda yapılmış bir kopyadır."
+          },
+          {
+            "title": "Restorasyon ayrıntısı",
+            "text": "(A)’da sol alt gökyüzünde, Eylül 2025 restorasyonunda yapılan dolgu ve rötuşun biçimi, sınırları ve yüzey dokusu birebir taklit edilmiştir. 12.08.2025 tarihli katalog fotoğraflarında aynı yerde dolgu yoktur, boyası dökülmüş bir boşluk görülür. Kopyayı yapan kişi eseri ya da restorasyon sonrası yakın çekim belgelerini görmüş olmalıdır. Restorasyon raporu ve görüntüleri, rapor ekindeki dağıtım listesine göre Defne Ural, Gönül Taşçı ve Cemil Tanyeli’ye gönderilmiştir; ham arşiv atölyededir."
+          },
+          {
+            "title": "(A) ile (B)’nin karşılaştırılması",
+            "text": "Kızılötesi reflektografide (A) ile (B)’nin alt çiziminde aynı yöntem görülmüştür: kompozisyon, sol alt köşeden başlatılmış 4 cm aralıklı bir kare ızgarayla aktarılmış, çizgiler aynı sertlikte kalemle çekilmiştir. Kayıkların küreklerinde ve kıyı evlerinin pencerelerinde aynı fırça kısaltmaları vardır. Özgün imzada “Fevzi” sözcüğünün F harfinin üst çizgisi düzdür; (A)’da ve (B)’de aynı biçimde kıvrık atılmıştır. (B) ölçüsü farklı olduğundan (A) ile aynı tuval değildir ve galerideki çerçeveye oturmaz."
+          },
+          {
+            "title": "Ön kanaat",
+            "text": "(A), özgün eserin yerine konmak üzere tam ölçüde yapılmış bir kopyadır. (A) ile (B)’nin aynı kişinin elinden çıkmış olması kuvvetle muhtemeldir. (A)’yı yapan kişinin, Eylül 2025 restorasyonundan sonra esere ya da belgelerine erişimi olmuştur."
+          }
+        ],
+        "signature": "Doç. Dr. Leman Okyay (konservasyon) · Dr. Hande Akçalı (resim tarihi)"
+      },
+      "reveals": [
+        "f-same-hand",
+        "f-dolgu",
+        "f-cemil-copy-diff"
+      ],
+      "timeline": [],
+      "people": [
+        "defne",
+        "gonul",
+        "cemil"
+      ]
+    },
+    {
+      "id": "e-bt-rapor",
+      "title": "Adli bilişim raporu: ofis bilgisayarı",
+      "summary": "İkinci kat ofisindeki bilgisayarın olay gecesi kullanım kaydı.",
+      "doc": {
+        "kind": "report",
+        "variant": "lab",
+        "agency": "İstanbul Emniyet Müdürlüğü — Siber Suçlarla Mücadele Şube Müdürlüğü, Adli Bilişim Büro Amirliği",
+        "docNo": "ADB-2025/5520 · Soruşturma No: 2025/214873",
+        "datetime": "19.10.2025 11:00",
+        "heading": "Galeri Nirengi 2. kat ofis bilgisayarı (kullanıcı: D. Ural) inceleme raporu",
+        "sections": [
+          {
+            "title": "İncelenen",
+            "text": "Galeri Nirengi 2. kat ofisindeki masaüstü bilgisayarın imajı, Defne Ural’ın rızası ve Ferit Ilgaz’ın muvafakatiyle 18.10.2025’te alınmıştır. Bilgisayar saati internet saatiyle eşittir."
+          },
+          {
+            "title": "Oturum ve etkinlik",
+            "text": "D. Ural kullanıcı oturumu 17.10.2025 00:14’te açılmış, 01:10’da kilitlenmiştir. Bu aralıkta klavye ve fare etkinliği süreklidir; en uzun boşluk 00:39:20–00:42:30 arasıdır (3 dk 10 sn). 00:36:40–00:38:05 arasında e-posta istemcisinde kesintisiz klavye girişi vardır."
+          },
+          {
+            "title": "Harici bellek",
+            "text": "00:34:10’da bir USB bellek takılmış, 00:58:47’de çıkarılmıştır. Bu sürede galeri sunucusundaki “Müşteriler”, “Satışlar 2019–2025” ve “Koleksiyoner iletişim” klasörlerinden 4.212 dosya belleğe kopyalanmıştır."
+          },
+          {
+            "title": "E-posta",
+            "text": "00:51:02’de D. Ural’ın kişisel adresinden a.halden@haldenprice.co.uk adresine “Görüşmemiz hakkında” konulu bir ileti gönderilmiştir. Ekler: “portfolyo_DU.pdf” ve “musteri_ozet.xlsx” (312 satır; ad, telefon, son alım). İleti metni: “Konuştuğumuz listeyi ekte gönderiyorum. Kasım başında başlayabilirim. Lütfen şimdilik Ferit Bey’e bir şey söylemeyin.”"
+          },
+          {
+            "title": "Diğer bulgular",
+            "text": "Bilgisayarda alarm sistemine, kamera kayıtlarına ya da sergideki eserlerin görüntülerine ilişkin olay gecesi açılmış bir dosyaya veya iletişime rastlanmamıştır."
+          }
+        ],
+        "signature": "Komiser Yardımcısı Tolga Erçetin, Adli Bilişim Büro Amirliği"
+      },
+      "reveals": [
+        "f-defne-office"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-17T00:14",
+          "text": "Defne Ural ofis bilgisayarında oturum açtı."
+        },
+        {
+          "at": "2025-10-17T00:34",
+          "text": "Ofis bilgisayarına USB bellek takıldı; müşteri dosyaları kopyalanmaya başladı."
+        },
+        {
+          "at": "2025-10-17T00:51",
+          "text": "Ofis bilgisayarından Londra’daki bir adrese müşteri listesi gönderildi."
+        }
+      ],
+      "people": [
+        "defne",
+        "ferit"
+      ]
+    },
+    {
+      "id": "e-ilker-banka",
+      "title": "İlker Varol’un hesap dökümü",
+      "summary": "Lale Bank’tan gelen eylül–ekim 2025 hesap hareketleri.",
+      "doc": {
+        "kind": "bank",
+        "bank": "Lale Bank A.Ş. — Tophane Şubesi",
+        "holder": "İlker Varol",
+        "iban": "TR41 0019 7000 0000 4128 7713 09",
+        "period": "01.09.2025 – 17.10.2025 (POS işlemleri provizyon tarihiyle gösterilir)",
+        "rows": [
+          {
+            "date": "02.09.2025",
+            "desc": "POS — Karaköy Sanat Malzemeleri",
+            "amount": -6840,
+            "balance": 11580.55
+          },
+          {
+            "date": "05.09.2025",
+            "desc": "Gelen EFT — Galeri Nirengi — restorasyon avansı",
+            "amount": 60000,
+            "balance": 71580.55
+          },
+          {
+            "date": "09.09.2025",
+            "desc": "POS — Şişhane Çerçeve ve Telara Atölyesi",
+            "amount": -14300,
+            "balance": 57280.55
+          },
+          {
+            "date": "12.09.2025",
+            "desc": "Fatura — elektrik (atölye)",
+            "amount": -3910,
+            "balance": 53370.55
+          },
+          {
+            "date": "19.09.2025",
+            "desc": "Kredi kartı borç ödemesi",
+            "amount": -21600,
+            "balance": 31770.55
+          },
+          {
+            "date": "26.09.2025",
+            "desc": "Gelen EFT — Galeri Nirengi — restorasyon kalan",
+            "amount": 90000,
+            "balance": 121770.55
+          },
+          {
+            "date": "29.09.2025",
+            "desc": "Giden EFT — Sabri Özkan — atölye kirası (mart–nisan)",
+            "amount": -120000,
+            "balance": 1770.55
+          },
+          {
+            "date": "02.10.2025 11:40",
+            "desc": "Döviz satışı: 8.550 EUR nakit bozdurma, TL karşılığı hesaba — gişe, Osmanbey Şubesi",
+            "amount": 400000,
+            "balance": 401770.55
+          },
+          {
+            "date": "03.10.2025",
+            "desc": "Giden EFT — Sabri Özkan — kira borcu kapama (tahliye takibi dosyası)",
+            "amount": -360000,
+            "balance": 41770.55
+          },
+          {
+            "date": "06.10.2025",
+            "desc": "POS — Karaköy Sanat Malzemeleri",
+            "amount": -2350,
+            "balance": 39420.55
+          },
+          {
+            "date": "10.10.2025",
+            "desc": "Giden FAST — B. Koç — “borç”",
+            "amount": -25000,
+            "balance": 14420.55
+          },
+          {
+            "date": "14.10.2025",
+            "desc": "POS — Karaköy esnaf lokantası",
+            "amount": -640,
+            "balance": 13780.55
+          },
+          {
+            "date": "16.10.2025",
+            "desc": "POS — Cihangir çiçekçi",
+            "amount": -450,
+            "balance": 13330.55
+          },
+          {
+            "date": "17.10.2025",
+            "desc": "POS — KDB TEKEL — Beyoğlu",
+            "amount": -185,
+            "balance": 13145.55
+          },
+          {
+            "date": "17.10.2025",
+            "desc": "POS — Eczane, Cihangir",
+            "amount": -310,
+            "balance": 12835.55
+          }
+        ]
+      },
+      "reveals": [
+        "f-ilker-money",
+        "f-baris-apprentice",
+        "f-telara"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-02T11:40",
+          "text": "İlker Varol, Osmanbey şubesinde 8.550 avro nakit bozdurup hesabına yatırdı."
+        },
+        {
+          "at": "2025-10-10T12:00",
+          "text": "İlker Varol, B. Koç’a 25.000 TL gönderdi."
+        }
+      ],
+      "people": [
+        "ilker",
+        "baris"
+      ]
+    },
+    {
+      "id": "e-bufe",
+      "title": "Kuledibi’ndeki büfenin POS fişi",
+      "summary": "Hesap dökümündeki “KDB TEKEL” harcamasının büfeden alınan kopyası.",
+      "doc": {
+        "kind": "receipt",
+        "merchant": "Kuledibi Tekel Büfe",
+        "address": "Galata Kulesi Sk., Kuledibi, Beyoğlu",
+        "datetime": "16.10.2025 23:38",
+        "items": [
+          {
+            "name": "Su 0,5 lt",
+            "qty": 2,
+            "price": 15
+          },
+          {
+            "name": "Sigara (1 paket)",
+            "qty": 1,
+            "price": 105
+          },
+          {
+            "name": "Çakmak",
+            "qty": 1,
+            "price": 50
+          }
+        ],
+        "payment": "Temassız banka kartı ****2291 · Lale Bank · Kart sahibi: İ. VAROL",
+        "footer": "POS kopyası (gün sonu rulosu). Büfe sahibinin polise beyanı: “Kartla ödeyen siyah ceketli, kasketliydi; yüzüne bakmadım. Kulenin oradan, aşağı doğru yürüdü.”"
+      },
+      "reveals": [
+        "f-ilker-buffet",
+        "f-ilker-lie-home"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-16T23:38",
+          "text": "İlker Varol’un kartıyla Kuledibi’ndeki büfede ödeme yapıldı (siyah ceketli, kasketli biri)."
+        }
+      ],
+      "people": [
+        "ilker"
+      ]
+    },
+    {
+      "id": "e-telara",
+      "title": "Şişhane Çerçeve ve Telara Atölyesi sipariş fişi",
+      "summary": "Hesap dökümündeki 9 Eylül harcamasının çerçeveciden alınan sipariş kaydı.",
+      "doc": {
+        "kind": "receipt",
+        "merchant": "Şişhane Çerçeve ve Telara Atölyesi",
+        "address": "Meşrutiyet Cad., Şişhane, Beyoğlu",
+        "datetime": "09.09.2025",
+        "items": [
+          {
+            "name": "Telara, çam, 64 × 92 cm, el yapımı kama, “eski usul, makine izi olmasın”",
+            "qty": 1,
+            "price": 4800
+          },
+          {
+            "name": "Keten tuval, sıkı dokulu, 1,2 m",
+            "qty": 1,
+            "price": 3900
+          },
+          {
+            "name": "Tavşan tutkalı ve astar",
+            "qty": 1,
+            "price": 1650
+          },
+          {
+            "name": "Acil teslim farkı",
+            "qty": 1,
+            "price": 3950
+          }
+        ],
+        "payment": "Banka kartı · İlker Varol",
+        "footer": "Sipariş defterinden kopya. Ustanın notu: “İlker Bey ölçüyü kendi getirdi; telarayı 12 Eylül’de atölyesine biz bıraktık.”"
+      },
+      "reveals": [
+        "f-telara"
+      ],
+      "timeline": [
+        {
+          "at": "2025-09-09T12:00",
+          "text": "İlker Varol, 64 × 92 cm’lik yeni bir telara ve keten tuval sipariş etti."
+        }
+      ],
+      "people": [
+        "ilker"
+      ]
+    },
+    {
+      "id": "e-ilker-hts",
+      "title": "İlker Varol’un HTS kaydı",
+      "summary": "Restoratörün 1 Eylül–17 Ekim arama kayıtlarından seçilmiş satırlar.",
+      "doc": {
+        "kind": "phoneLog",
+        "subscriber": "İlker Varol",
+        "number": "0535 772 19 06",
+        "period": "01.09.2025 – 17.10.2025 (yurt dışı görüşmeler, soruşturmadaki kişiler ve 16–17 Ekim gecesi)",
+        "rows": [
+          {
+            "datetime": "18.09 22:10",
+            "type": "gelen arama",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "duration": "3:40",
+            "tower": "Beyoğlu – Tophane"
+          },
+          {
+            "datetime": "26.09 11:02",
+            "type": "giden arama",
+            "other": "0532 ••• •• •• (Cemil Tanyeli)",
+            "duration": "2:10",
+            "tower": "Beyoğlu – Tophane"
+          },
+          {
+            "datetime": "01.10 10:05",
+            "type": "gelen SMS",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "tower": "Beyoğlu – Tophane"
+          },
+          {
+            "datetime": "02.10 10:48",
+            "type": "giden arama",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "duration": "0:40",
+            "tower": "Şişli – Osmanbey"
+          },
+          {
+            "datetime": "10.10 14:20",
+            "type": "giden arama",
+            "other": "0555 ••• •• •• (Barış Koç)",
+            "duration": "6:15",
+            "tower": "Beyoğlu – Tophane"
+          },
+          {
+            "datetime": "13.10 09:12",
+            "type": "gelen SMS",
+            "other": "NOBETALARM (kurumsal)",
+            "tower": "Beyoğlu – Galata"
+          },
+          {
+            "datetime": "16.10 19:38",
+            "type": "veri",
+            "other": "—",
+            "tower": "Beyoğlu – Galata"
+          },
+          {
+            "datetime": "16.10 22:41",
+            "type": "giden SMS",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "16.10 23:30",
+            "type": "veri",
+            "other": "— (arka plan)",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "17.10 00:30",
+            "type": "veri",
+            "other": "— (arka plan)",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "17.10 01:30",
+            "type": "veri",
+            "other": "— (arka plan)",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "17.10 02:20",
+            "type": "giden SMS",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "17.10 08:55",
+            "type": "gelen arama",
+            "other": "0532 455 63 08 (Defne Ural)",
+            "duration": "1:50",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "17.10 19:02",
+            "type": "gelen SMS",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "tower": "Beyoğlu – Cihangir"
+          },
+          {
+            "datetime": "17.10 19:30",
+            "type": "giden SMS",
+            "other": "+995 32 2•• •• •• (yurt dışı, Gürcistan)",
+            "tower": "Beyoğlu – Cihangir"
+          }
+        ]
+      },
+      "reveals": [
+        "f-ilker-money",
+        "f-baris-apprentice"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-02T10:48",
+          "text": "İlker Varol, Osmanbey’den Gürcistan’daki bir numarayı aradı."
+        },
+        {
+          "at": "2025-10-16T22:41",
+          "text": "İlker Varol’un telefonundan Gürcistan’daki numaraya SMS."
+        },
+        {
+          "at": "2025-10-17T02:20",
+          "text": "İlker Varol’un telefonundan Gürcistan’daki numaraya SMS."
+        }
+      ],
+      "people": [
+        "ilker",
+        "cemil",
+        "baris",
+        "defne"
+      ]
+    },
+    {
+      "id": "e-arama",
+      "title": "Atölye arama ve el koyma tutanağı",
+      "summary": "Tophane’deki restorasyon atölyesinde yapılan aramanın tutanağı.",
+      "doc": {
+        "kind": "report",
+        "variant": "scene",
+        "agency": "İstanbul Emniyet Müdürlüğü — Hırsızlık Büro Amirliği ve Olay Yeri İnceleme Şube Müdürlüğü",
+        "docNo": "İstanbul 4. Sulh Ceza Hâkimliği 2025/4471 D. İş · OYİ-2025/31790",
+        "datetime": "21.10.2025 14:30",
+        "heading": "Arama ve el koyma tutanağı — İ.V. Restorasyon Atölyesi, Boğazkesen Cad. No: 41",
+        "sections": [
+          {
+            "title": "Arama",
+            "text": "Arama, İlker Varol’un ve avukatının huzurunda 14:30–17:45 arasında yapılmıştır. İlker Varol’a hakları hatırlatılmıştır."
+          },
+          {
+            "title": "El konulanlar",
+            "text": "1) İçi köpük kaplı, siyah, boş düz kasa (70 × 100 × 12 cm); köpükte 64 × 92 cm ölçüsünde bir telara izi ve altın renkli metalik parçacıklar. 2) Siyah ceket ve siyah kasket; ceketin göğsünde işlemeli Has Sofra amblemi, cebinde beyaz pamuklu iş eldiveni. 3) Bez bir alet rulosu: tornavidalar, mandal anahtarı, ince pense. 4) Kandilli kıyısı kompozisyonunun tam ölçekli, 4 cm kare ızgaralı üç aydınger çizimi. 5) Keten tuval artıkları; bir bölümü kahverengiye boyanmış. 6) Potasyum permanganat ve eskitme malzemeleri, küçük bir tezgâh fırını. 7) Restorasyon fotoğraf arşivinin bulunduğu harici disk. 8) İlker Varol’un cep telefonu."
+          },
+          {
+            "title": "Aranan eser",
+            "text": "Atölyede herhangi bir özgün eser bulunmamıştır."
+          },
+          {
+            "title": "Şüphelinin beyanı",
+            "text": "İlker Varol, avukatının tavsiyesiyle beyanda bulunmayacağını söylemiştir."
+          }
+        ],
+        "signature": "Komiser Selma Akdoğan · Komiser Yardımcısı Burcu Tekin"
+      },
+      "reveals": [
+        "f-sixth",
+        "f-crate-in"
+      ],
+      "timeline": [],
+      "people": [
+        "ilker"
+      ]
+    },
+    {
+      "id": "e-kargo",
+      "title": "Yelken Uluslararası Taşımacılık gönderi kaydı",
+      "summary": "Nakliye firmasının sistem çıktısı: gönderici ve alıcı bilgisi.",
+      "doc": {
+        "kind": "ticket",
+        "variant": "other",
+        "title": "Yelken Uluslararası Taşımacılık — Gönderi kaydı (sistem çıktısı, 21.10.2025 12:40)",
+        "serial": "YLK-IST-25-118406",
+        "fields": [
+          {
+            "label": "Kabul",
+            "value": "18.10.2025 10:40, adresten teslim alma"
+          },
+          {
+            "label": "Gönderici",
+            "value": "İ.V. Restorasyon Atölyesi — İlker Varol, Boğazkesen Cad. No: 41, Tophane"
+          },
+          {
+            "label": "Alıcı",
+            "value": "Mtkvari Dekor Ltd., Tiflis, Gürcistan"
+          },
+          {
+            "label": "İçerik beyanı",
+            "value": "Dekoratif reprodüksiyon tablo, tuval üzerine yağlıboya, çerçevesiz, 1 adet"
+          },
+          {
+            "label": "Ambalaj",
+            "value": "Ahşap sandık, 82 × 110 × 18 cm, 21 kg"
+          },
+          {
+            "label": "Beyan edilen değer",
+            "value": "4.500 TL"
+          },
+          {
+            "label": "Güzergâh",
+            "value": "İstanbul (Halkalı antreposu) – Sarp – Tiflis, karayolu"
+          },
+          {
+            "label": "Son durum",
+            "value": "21.10.2025: Halkalı antreposunda, gümrük kontrolünde bekletiliyor"
+          },
+          {
+            "label": "Ödeme",
+            "value": "EFT, 6.200 TL, 18.10.2025"
+          },
+          {
+            "label": "Teslim eden",
+            "value": "İ. Varol (imza)"
+          }
+        ]
+      },
+      "reveals": [
+        "f-shipment"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-18T10:40",
+          "text": "İ.V. Restorasyon Atölyesi’nden Tiflis’e gönderilmek üzere ahşap bir sandık teslim alındı."
+        }
+      ],
+      "people": [
+        "ilker"
+      ]
+    },
+    {
+      "id": "ph-sandik",
+      "title": "Halkalı antreposunda açılan sandık",
+      "summary": "Gönderi belgesindeki sandığın gümrükte açılması.",
+      "doc": {
+        "kind": "photo",
+        "image": "obj-crate",
+        "caption": "Halkalı Gümrük Müdürlüğü antreposu, 21.10.2025 11:30. YLK-IST-25-118406 numaralı sandık savcılık kararıyla açıldı. Gönül Taşçı’nın yerinde incelemesi: tuval UV’de yer yer yeşilimsi parlıyor; sol alt gökyüzündeki dolgu ve sağ üstteki iki eski rötuş koyu leke veriyor; telarada 1931 gümrük damgası ve “CT-014” yazısı var. Ölçü 64 × 92 cm.",
+        "tag": "Delil 21"
+      },
+      "reveals": [
+        "f-shipment"
+      ],
+      "timeline": [
+        {
+          "at": "2025-10-21T11:30",
+          "text": "Halkalı antreposunda sandık açıldı; içinden özgün tuval çıktı."
+        }
+      ],
+      "people": [
+        "gonul"
+      ]
+    },
+    {
+      "id": "e-ilker-mesaj",
+      "title": "İlker Varol’un telefonundan yazışma: “K.”",
+      "summary": "El konulan telefonun adli bilişim incelemesinden çıkan bir yazışma.",
+      "doc": {
+        "kind": "messages",
+        "owner": "İlker Varol",
+        "with": "K. (+995 ile başlayan numara)",
+        "source": "İlker Varol’un telefonu — adli bilişim imajı (silinmiş iletiler kurtarılmıştır)",
+        "messages": [
+          {
+            "from": "them",
+            "time": "18.09.2025 22:14",
+            "text": "Müşterim fotoğrafları gördü. Teklif aynı: 180 bin avro. Kapora hemen."
+          },
+          {
+            "from": "me",
+            "time": "18.09.2025 22:30",
+            "text": "Kapora nakit olsun. Hesaba senden bir şey girmesin."
+          },
+          {
+            "from": "them",
+            "time": "01.10.2025 10:05",
+            "text": "Yarın Şişli’de. 400."
+          },
+          {
+            "from": "me",
+            "time": "14.10.2025 23:10",
+            "text": "Kod bende. Duvarı ve kabloyu gördüm. Çocuk kasayı 16’sında öğleden sonra içeri alacak.",
+            "deleted": true
+          },
+          {
+            "from": "them",
+            "time": "14.10.2025 23:12",
+            "text": "Ya sigortacı?"
+          },
+          {
+            "from": "me",
+            "time": "14.10.2025 23:20",
+            "text": "Sigortacı açılıştan önce bakıyor, sonra yok. Sergi bitince Cemil yine depoya kaldırtır, kimse dönüp bakmaz. Yıllarca da bakmaz."
+          },
+          {
+            "from": "me",
+            "time": "16.10.2025 22:41",
+            "text": "Bu gece.",
+            "deleted": true
+          },
+          {
+            "from": "me",
+            "time": "17.10.2025 02:20",
+            "text": "Tamam. Atölyede.",
+            "deleted": true
+          },
+          {
+            "from": "them",
+            "time": "17.10.2025 19:02",
+            "text": "Haberlere çıkmış!! Sigortacı nasıl anladı?"
+          },
+          {
+            "from": "me",
+            "time": "17.10.2025 19:30",
+            "text": "Poliçede şart varmış, ertesi sabah kontrol. Sakin ol. Kopyayı kimin yaptığını bilemezler."
+          },
+          {
+            "from": "me",
+            "time": "18.10.2025 11:05",
+            "text": "Yelken’e verdim. Reprodüksiyon yazdım. Sarp’tan geçince haber ver, kalanı o zaman."
+          },
+          {
+            "from": "them",
+            "time": "20.10.2025 07:02",
+            "text": "?"
+          }
+        ]
+      },
+      "reveals": [
+        "f-ilker-money",
+        "f-shipment",
+        "f-code09"
+      ],
+      "timeline": [],
+      "people": [
+        "ilker",
+        "cemil"
+      ]
+    },
+    {
+      "id": "e-gumruk",
+      "title": "Halkalı Gümrük Müdürlüğü yazısı",
+      "summary": "Gümrükten soruşturma ekibine gelen bilgi yazısı.",
+      "doc": {
+        "kind": "email",
+        "from": "Halkalı Gümrük Müdürlüğü — Muhafaza Kaçakçılık İstihbarat",
+        "to": "Komiser Selma Akdoğan, Hırsızlık Büro Amirliği",
+        "date": "21.10.2025 07:50",
+        "subject": "Aranan eser bülteni — şüpheli sandık",
+        "body": "Sayın Komiserim,\n\n18.10.2025 tarihli aranan eser bülteniniz üzerine, son beş gün içinde yurt dışına çıkış için antrepomuza giren “tablo” ve “reprodüksiyon” beyanlı gönderiler taranmıştır.\n\nYLK-IST-25-118406 referanslı ahşap sandığın röntgen görüntüsünde çerçevesiz, telaraya gerili ve yaklaşık 64 × 92 cm ölçüsünde bir tuval görülmüştür. Beyan “dekoratif reprodüksiyon”, beyan değeri 4.500 TL, varış Tiflis’tir. Gönderici ve alıcı bilgileri nakliye firmasının sistemindedir; firmaya resmî yazı gönderilmiştir.\n\nSandık, savcılık kararıyla bugün 11:00’de, eksper eşliğinde açılacaktır.\n\nBilgilerinize arz ederim.\nGümrük Muhafaza Memuru Kenan Ilıcak",
+        "attachments": [
+          "rontgen_118406.jpg"
+        ]
+      },
+      "reveals": [
+        "f-shipment"
+      ],
+      "timeline": [],
+      "people": []
+    },
+    {
+      "id": "e-lab",
+      "title": "Kriminal Polis Laboratuvarı raporu",
+      "summary": "Olay yerinden alınan örneklerin karşılaştırma sonuçları.",
+      "doc": {
+        "kind": "report",
+        "variant": "lab",
+        "agency": "Emniyet Genel Müdürlüğü — İstanbul Kriminal Polis Laboratuvarı Müdürlüğü",
+        "docNo": "Rapor No: 2025/İST-FZK-11872 · Soruşturma No: 2025/214873",
+        "datetime": "21.10.2025 09:00",
+        "heading": "Galeri Nirengi örnekleri — fiziksel ve kimyasal karşılaştırma",
+        "sections": [
+          {
+            "title": "İncelenen örnekler",
+            "text": "Delil 3–5 (çerçeve arkasından ve hazırlık odasından pamuk lifleri), Delil 6 (kâğıt peçeteler), Delil 7 (K4 konnektöründen metalik parçacık), Delil 8 (çerçeveden yaldız örneği)."
+          },
+          {
+            "title": "Metalik parçacıklar",
+            "text": "Delil 7 ve Delil 8’in ikisi de altın varak ile kırmızımsı bolus tabakasından oluşmaktadır; katman yapısı ve element oranları uyumludur. Delil 7’deki parçacıkların Galeri Nirengi’deki eserin çerçevesinden kaynaklanmış olması kuvvetle muhtemeldir."
+          },
+          {
+            "title": "Lifler",
+            "text": "Çerçeve arkasındaki ve hazırlık odasındaki lifler, ağartılmış pamuktan örülmüş iş eldivenlerine özgü aynı tiptedir. Bu tip eldiven yaygın olarak satılmaktadır."
+          },
+          {
+            "title": "Peçeteler",
+            "text": "Peçetelerde biyolojik iz elde edilememiştir; peçeteler Has Sofra İkram’ın kullandığı türdendir."
+          }
+        ],
+        "signature": "Kimya Mühendisi Aysel Durukan, Fizik Şubesi"
+      },
+      "reveals": [
+        "f-cam4-unplugged"
+      ],
+      "timeline": [],
+      "people": []
+    }
+  ],
+  "leads": [
+    {
+      "id": "l-alarm",
+      "title": "Alarm panelinin olay kaydını indir",
+      "description": "Eser bir askı sensörüne bağlı. Tablo duvardan indirildiyse panelin bunu bir biçimde kaydetmiş olması gerekir.",
+      "hours": 2,
+      "unlocks": [
+        "e-alarm"
+      ],
+      "leadsTo": [
+        "l-kodlar"
+      ],
+      "outcome": "Nöbet Alarm, panelin 16–17 Ekim olay kaydını gönderdi."
+    },
+    {
+      "id": "l-kart",
+      "title": "Kartlı geçiş kayıtlarını indir",
+      "description": "Etkinlikten sonra kapılar kartla açılıyor. Gece kimin ne zaman girip çıktığı sistemde olmalı.",
+      "hours": 2,
+      "unlocks": [
+        "e-kart"
+      ],
+      "outcome": "Geçiş denetim sisteminden 16 Ekim öğleden 17 Ekim sabahına kadar kayıtlar alındı."
+    },
+    {
+      "id": "l-dvr",
+      "title": "Kamera kayıt cihazının olay dökümünü çıkar",
+      "description": "Binada altı kamera var. Kayıt cihazı hareketleri ve arızaları saatiyle tutar.",
+      "hours": 3,
+      "unlocks": [
+        "e-dvr"
+      ],
+      "leadsTo": [
+        "l-servis-kamera"
+      ],
+      "outcome": "Kayıt cihazının olay dökümü çıkarıldı. Kareleri tek tek izlemek ayrı bir iş; görüntüler yedekleniyor."
+    },
+    {
+      "id": "l-ramazan",
+      "title": "Gece nöbetçisi Ramazan Oral’la görüş",
+      "description": "Bütün gece monitör odasındaydı. Ekranlarda ne gördüğünü bir tek o anlatabilir.",
+      "hours": 1,
+      "unlocks": [
+        "e-ramazan",
+        "e-defter"
+      ],
+      "outcome": "Ramazan Oral görüşmenin kayda alınmasına razı oldu ve nöbet defterini teslim etti."
+    },
+    {
+      "id": "l-ferit",
+      "title": "Galeri sahibi Ferit Ilgaz’ın ifadesini al",
+      "description": "İhbarı yapan, sergiyi düzenleyen ve galerinin her köşesini bilen kişi.",
+      "hours": 1,
+      "unlocks": [
+        "e-ferit-1"
+      ],
+      "leadsTo": [
+        "l-ferit-mali"
+      ],
+      "outcome": "Ferit Ilgaz müşteki sıfatıyla ifade verdi."
+    },
+    {
+      "id": "l-cemil",
+      "title": "Eserin sahibi Cemil Tanyeli’yi büroya çağır",
+      "description": "Tablo onun. Eserin geçmişini, sigortasını ve açılış gecesini ondan dinlemek gerek.",
+      "hours": 2,
+      "unlocks": [
+        "e-cemil-1"
+      ],
+      "outcome": "Cemil Tanyeli büroya gelip ifade verdi."
+    },
+    {
+      "id": "l-tuncay",
+      "title": "Güvenlik şefi Tuncay Erdem’in ifadesini al",
+      "description": "Alarmı o kurdu, sabah o açtı. Gece güvenliğinden sorumluydu.",
+      "hours": 1,
+      "unlocks": [
+        "e-tuncay-1"
+      ],
+      "leadsTo": [
+        "l-tuncay-iz"
+      ],
+      "outcome": "Tuncay Erdem ifade verdi."
+    },
+    {
+      "id": "l-defne",
+      "title": "Küratör Defne Ural’ın ifadesini al",
+      "description": "Sergiyi o kurguladı; restorasyon ve montaj sürecini o yönetti. Gece de galerideydi.",
+      "hours": 1,
+      "unlocks": [
+        "e-defne-1"
+      ],
+      "leadsTo": [
+        "l-defne-pc"
+      ],
+      "outcome": "Defne Ural ifade verdi."
+    },
+    {
+      "id": "l-ilker",
+      "title": "Restoratör İlker Varol’un ifadesini al",
+      "description": "Tabloyu eylülde atölyesinde onardı ve montajda bulundu. Eseri yakından tanıyan biri.",
+      "hours": 1,
+      "unlocks": [
+        "e-ilker-1"
+      ],
+      "leadsTo": [
+        "l-ilker-banka",
+        "l-ilker-hts"
+      ],
+      "outcome": "İlker Varol tanık olarak ifade verdi."
+    },
+    {
+      "id": "l-kodlar",
+      "title": "Güvenlik firmasından kullanıcı kodlarının listesini iste",
+      "description": "Panel kaydında kullanıcı numaraları geçiyor. Hangi numaranın kime ait olduğunu firma söyleyebilir.",
+      "hours": 1,
+      "unlocks": [
+        "e-kod-mail"
+      ],
+      "outcome": "Güvenlik firması kullanıcı listesini ve geçici bir kodun geçmişini yazılı olarak bildirdi."
+    },
+    {
+      "id": "l-ferit-mali",
+      "title": "Ferit Ilgaz’ın mali durumunu araştır",
+      "description": "Galeri sahibinin borcu varsa, sigortalı ve değerli bir eser ilgi çekebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-ferit-mesaj",
+        "e-meyhane"
+      ],
+      "outcome": "Ferit Ilgaz telefonundaki yazışmaları rızasıyla gösterdi; olay gecesine ait bir adisyon bulundu."
+    },
+    {
+      "id": "l-tuncay-iz",
+      "title": "Tuncay Erdem’in telefon kayıtlarını (HTS) iste",
+      "description": "Nöbetçinin aramalarına cevap vermemiş. Telefonunun gece bağlandığı baz istasyonları nerede olduğunu gösterir.",
+      "hours": 2,
+      "unlocks": [
+        "e-tuncay-hts",
+        "e-baskin"
+      ],
+      "outcome": "HTS kaydı geldi; baz istasyonunun bulunduğu bölgede aynı gece düzenlenmiş bir polis tutanağı da bulundu."
+    },
+    {
+      "id": "l-defne-pc",
+      "title": "Defne Ural’ın ofis bilgisayarını adli bilişime incelet",
+      "description": "Gece ofiste çalıştığını söylüyor. Bilgisayar, o saatlerde gerçekten ne yapıldığını gösterir.",
+      "hours": 2,
+      "unlocks": [
+        "e-bt-rapor"
+      ],
+      "outcome": "Adli Bilişim Büro Amirliği raporunu gönderdi."
+    },
+    {
+      "id": "l-servis-kamera",
+      "title": "Arka kapı ve servis koridoru kameralarını kare kare izle",
+      "description": "İkram ekibi gün boyu ve gece arka kapıyı kullandı. Döküm yalnızca hareketi gösteriyor; kimin girip çıktığını kareler söyler.",
+      "hours": 3,
+      "minAct": 2,
+      "unlocks": [
+        "ph-cam3-1608",
+        "ph-cam3-2347",
+        "ph-cam5"
+      ],
+      "outcome": "Kamera 3 ve Kamera 5 kayıtları izlendi; malzeme girişinden, sigara molasından ve gece yükleme turundan kareler ayrıldı."
+    },
+    {
+      "id": "l-ilker-banka",
+      "title": "İlker Varol’un banka hareketlerini iste",
+      "description": "Atölye kirasından söz etti. Son iki ayın hesap hareketleri mali durumunu ve harcamalarını gösterir.",
+      "hours": 2,
+      "minAct": 2,
+      "unlocks": [
+        "e-ilker-banka"
+      ],
+      "leadsTo": [
+        "l-bufe",
+        "l-telara"
+      ],
+      "outcome": "Lale Bank, eylül–ekim hesap dökümünü gönderdi."
+    },
+    {
+      "id": "l-ilker-hts",
+      "title": "İlker Varol’un telefon kayıtlarını (HTS) iste",
+      "description": "Gece evde olduğunu söylüyor. Telefonunun hangi baz istasyonlarına bağlandığı ve kimlerle görüştüğü bunu sınar.",
+      "hours": 2,
+      "minAct": 2,
+      "unlocks": [
+        "e-ilker-hts"
+      ],
+      "outcome": "HTS kaydı geldi; ilgili satırlar ayıklandı."
+    },
+    {
+      "id": "l-catering",
+      "title": "Has Sofra İkram’dan ekip, araç ve ekipman bilgisi iste",
+      "description": "Olay Yeri İnceleme hazırlık odasında bir kasanın izini buldu. İkram ekibinin kimlerden oluştuğunu, ne getirip ne götürdüğünü firma söyleyebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-catering-mail"
+      ],
+      "leadsTo": [
+        "l-gps",
+        "l-baris",
+        "l-elif"
+      ],
+      "outcome": "Has Sofra İkram’ın sahibi yazılı bilgi verdi."
+    },
+    {
+      "id": "l-elif",
+      "title": "Garson Elif Durmaz’la görüş",
+      "description": "Firma sahibi, Elif Hanım’ın anlatmak istediği bir şey olduğunu yazmış.",
+      "hours": 1,
+      "unlocks": [
+        "e-elif"
+      ],
+      "outcome": "Elif Durmaz görüşmenin kayda alınmasını kabul etti."
+    },
+    {
+      "id": "l-gps",
+      "title": "İkram araçlarının takip dökümünü incele",
+      "description": "Firmanın iki aracında konum takibi var. Gece galeriden çıkan aracın nereye gittiği görülebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-gps"
+      ],
+      "leadsTo": [
+        "l-esnaf"
+      ],
+      "outcome": "Has Sofra’nın araç takip dökümü incelendi."
+    },
+    {
+      "id": "l-esnaf",
+      "title": "Boğazkesen Caddesi’ndeki dükkân kameralarını topla",
+      "description": "İkinci araç gece Tophane’de altı dakika durmuş. Caddedeki dükkânların dış kameraları o dakikaları görmüş olabilir.",
+      "hours": 2,
+      "unlocks": [
+        "ph-tophane"
+      ],
+      "outcome": "Karşı kaldırımdaki bir çay ocağının dış kamerasında ilgili dakikalar bulundu."
+    },
+    {
+      "id": "l-baris",
+      "title": "Şoför-garson Barış Koç’la görüş",
+      "description": "Düz kasaları o istemiş ve ikinci aracı o kullanmış.",
+      "hours": 1,
+      "unlocks": [
+        "e-baris-1"
+      ],
+      "outcome": "Barış Koç görüşmenin kayda alınmasını kabul etti."
+    },
+    {
+      "id": "l-bufe",
+      "title": "Hesap dökümündeki “KDB TEKEL” harcamasını araştır",
+      "description": "Provizyon tarihi 17 Ekim, ama saati yok. Büfenin gün sonu rulosu ödemenin dakikasını gösterir.",
+      "hours": 1,
+      "unlocks": [
+        "e-bufe"
+      ],
+      "outcome": "Kuledibi’ndeki büfeden POS fişinin kopyası alındı; büfe sahibi kısa bir beyan verdi."
+    },
+    {
+      "id": "l-telara",
+      "title": "Şişhane’deki çerçeve ve telara atölyesine sor",
+      "description": "Restoratör eylülde orada bir harcama yapmış. Ne aldığını sipariş defteri gösterir.",
+      "hours": 1,
+      "unlocks": [
+        "e-telara"
+      ],
+      "outcome": "Çerçeveci sipariş defterinin ilgili sayfasını verdi."
+    },
+    {
+      "id": "l-yali",
+      "title": "Kandilli’deki yalıya git, gazetedeki tabloyu bul",
+      "description": "Bir koleksiyoncu tabloyu yalının yemek salonunda gördüğünü söylüyor. Cemil Tanyeli ise eserin yıllardır depoda olduğunu ve kopyası bulunmadığını söylemişti.",
+      "hours": 3,
+      "unlocks": [
+        "ph-yali",
+        "e-fatura"
+      ],
+      "leadsTo": [
+        "l-bilirkisi"
+      ],
+      "outcome": "Yalının yemek salonunda aynı kompozisyonda bir tablo bulundu ve teslim alındı; Cemil Tanyeli’nin dosyasından eski bir makbuz çıktı."
+    },
+    {
+      "id": "l-bilirkisi",
+      "title": "Galerideki tuvali ve yalıdaki tabloyu bilirkişiye karşılaştırmalı incelet",
+      "description": "Elde aynı kompozisyonda iki tuval var. Teknik inceleme ne zaman ve nasıl yapıldıklarını söyleyebilir.",
+      "hours": 3,
+      "unlocks": [
+        "e-bilirkisi"
+      ],
+      "outcome": "Bilirkişi heyeti ön raporunu verdi."
+    },
+    {
+      "id": "l-kargo",
+      "title": "Nakliye firmasından gönderi kaydını iste",
+      "description": "Sandığın kim tarafından, nereden ve kime gönderildiği nakliyecinin sisteminde.",
+      "hours": 1,
+      "unlocks": [
+        "e-kargo"
+      ],
+      "leadsTo": [
+        "l-arama"
+      ],
+      "outcome": "Yelken Uluslararası Taşımacılık gönderi kaydını gönderdi."
+    },
+    {
+      "id": "l-arama",
+      "title": "Gönderi adresinde arama kararıyla arama yap",
+      "description": "Sandığın teslim alındığı adres belli. Hâkimlikten arama kararı alınabilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-arama"
+      ],
+      "leadsTo": [
+        "l-ilker-telefon"
+      ],
+      "outcome": "Arama yapıldı; tutanak düzenlendi."
+    },
+    {
+      "id": "l-ilker-telefon",
+      "title": "Aramada el konulan telefonu adli bilişime incelet",
+      "description": "Telefonun yazışmaları, gönderinin kime ve neden yapıldığını gösterebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-ilker-mesaj"
+      ],
+      "outcome": "Telefonun imajı alındı; silinmiş iletiler kurtarıldı."
+    }
+  ],
+  "acts": [
+    {
+      "title": "Ultraviyole",
+      "scene": "Cuma sabahı. Saat dokuzu kırk bir geçiyor. Galeri Nirengi’nin birinci katında, Salon B’de perdeler kapalı. Açılıştan kalan kadehler hâlâ yan masada.\n\nSigorta eksperi Gönül Taşçı, küçük mor fenerini tablonun sol alt köşesine tutuyor. Bir gün önce aynı ışıkta yer yer yeşil parlayan yüzey, bu sabah dümdüz. Soluk, mavimsi, yeni.\n\n“Bu o tablo değil,” diyor. Sesini yükseltmiyor.\n\nKomiser Selma Akdoğan yarım saat sonra geliyor. Galeri sahibi Ferit Ilgaz merdivenin başında. Telefonu elinde, kimi arayacağını bilmiyor.\n\nKapılarda zorlama yok. Çerçeve aynı çerçeve, askı aynı askı. Alarm gece kurulmuş, sabah açılmış. İzleme merkezine tek bir sinyal gitmemiş. Gece binada bir nöbetçi, bir güvenlik şefi, ofiste çalışan bir küratör ve toparlanan bir ikram ekibi varmış.\n\nSelma tablonun önünde duruyor. Kıyıdaki evlere, iki kayığa bakıyor. Kopya iyi. Bu kadar iyi bir kopya bir gecede yapılmaz. Biri bunu haftalar önceden hazırlamış.\n\nAsıl soru şu: Altmış milyon liralık bir tuval, kimse kapı kırmadan, hangi saatte ve kimin elinde bu binadan çıktı?",
+      "sceneImage": "scene-salon",
+      "evidence": [
+        "e-tutanak",
+        "e-kondisyon",
+        "e-liste",
+        "ph-uv",
+        "e-kroki"
+      ],
+      "leads": [
+        "l-alarm",
+        "l-kart",
+        "l-dvr",
+        "l-ramazan",
+        "l-ferit",
+        "l-cemil",
+        "l-tuncay",
+        "l-defne",
+        "l-ilker"
+      ],
+      "hints": [
+        "Tablonun en son ne zaman sağlam görüldüğünü belgeyle sabitleyin. Sonra o andan sabaha kadar eser sensörünün başına ne geldiğine bakın.",
+        "Alarm kaydında hangi kullanıcı kodu kullanıldı? O kodu kimlerin bilebileceğini ve o saatte kimin binanın neresinde olduğunu eşleştirin."
+      ],
+      "advance": {
+        "leads": [
+          "l-alarm",
+          "l-dvr"
+        ],
+        "hours": 14
+      }
+    },
+    {
+      "title": "Kod 09",
+      "scene": "Cumartesi sabahı. Olay Yeri İnceleme’nin raporu Selma’nın masasına düştüğünde, Kent Postası manşeti çoktan atmış. Sahte tablo şoku. Haberin içinde bir konkordato var. Bir koleksiyoncunun tuhaf bir hatırası da.\n\nRapor daha sessiz. Ama daha çok şey söylüyor.\n\nÇerçevenin sekiz vidası sökülmüş. Sonra aynı deliklere, sabırla geri takılmış. Bunu yapan acele etmemiş. Ne yaptığını biliyormuş.\n\nHazırlık odasındaki ağ dolabında, Salon B kamerasının kablosunun ucunda altın renkli pullar parlıyor. Çerçevenin yaldızından dökülmüş gibi. Kablo kendiliğinden çıkmamış.\n\nSelma panoya iki saat yazıyor. Gece yarısını otuz yedi geçe. Gece yarısını elli dokuz geçe. Arada yirmi iki dakika ve kör bir kamera.\n\nGece o binada kimler vardı? Ve kopya, oraya hangi yoldan girmişti?",
+      "sceneImage": "scene-board",
+      "evidence": [
+        "e-oyi",
+        "ph-switch",
+        "e-haber"
+      ],
+      "leads": [
+        "l-catering",
+        "l-yali"
+      ],
+      "hints": [
+        "O gece binaya hangi kapılardan, kaç kişi girdi? Kamera karelerini, o saatte binada olması gereken kişi sayısıyla karşılaştırın.",
+        "Sahte tuvali kim yapabilirdi? Kim eseri restorasyondan sonra yakından gördü, kim bu ölçüde bir telaraya ihtiyaç duydu, kim bu kompozisyonu daha önce boyadı?"
+      ],
+      "advance": {
+        "leads": [
+          "l-esnaf",
+          "l-bilirkisi"
+        ],
+        "hours": 16
+      }
+    },
+    {
+      "title": "Halkalı",
+      "scene": "Salı sabahı. Halkalı’daki gümrük antreposunda floresan ışıklar soğuk. Paletler streçlenmiş, forkliftler susmuş.\n\nAranan eser bülteni üç gün önce gümrüğe düşmüş. Bu sabah bir röntgen görüntüsü gelmiş. Ahşap bir sandık. İçinde çerçevesiz bir tuval. Beyanı: dekoratif reprodüksiyon. Varış: Tiflis.\n\nGümrük memuru levyeyi kapağın altına sokuyor. Çiviler gıcırdıyor. Köpükler, aydınger kâğıdı, sonra boya.\n\nGönül Taşçı eğiliyor. Mor feneri yakıyor. Bu kez yüzey yer yer yeşil kıpırdıyor. Sol alt gökyüzünde küçük, koyu bir leke beliriyor. Tam olması gereken yerde.\n\n“Bu o,” diyor. Bu sefer sesi titriyor.\n\nSelma sandığın etiketine bakıyor. Bir referans numarası, bir nakliye firması. Gönderen yazmıyor.\n\nTablo bulundu. Ama tablo kendi kendine bu sandığa girmedi.",
+      "sceneImage": "scene-customs",
+      "evidence": [
+        "e-gumruk",
+        "ph-sandik",
+        "e-lab"
+      ],
+      "leads": [
+        "l-kargo"
+      ],
+      "hints": [
+        "Sandığı kimin gönderdiğini öğrenin; sonra gönderi adresinde bulunanları galerideki iz ve ölçülerle karşılaştırın.",
+        "Fail; kodu bilebilen, eseri restorasyondan sonra yakından görmüş ve yalıdaki kopyayı yapmış kişidir. Aracı kullanan da bir zamanlar onun yanında çalışmış biri."
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "who",
+      "prompt": "Tabloyu kim çaldı? (Planlayan ana fail)",
+      "kind": "suspect",
+      "points": 30
+    },
+    {
+      "id": "accomplice",
+      "prompt": "Kopyayı galeriye sokan ve orijinali galeriden taşıyan suç ortağı kim?",
+      "kind": "suspect",
+      "points": 12
+    },
+    {
+      "id": "how",
+      "prompt": "Değişim nasıl yapıldı?",
+      "kind": "choice",
+      "points": 12,
+      "options": [
+        {
+          "id": "h-atolye",
+          "text": "Tablo Eylül’deki restorasyon sırasında atölyede kopyasıyla değiştirildi; galeriye baştan sahtesi geldi."
+        },
+        {
+          "id": "h-yali",
+          "text": "Tanyeli yalısındaki kopya, sigorta tazminatı için gece galeriye getirilip orijinalin yerine asıldı."
+        },
+        {
+          "id": "h-catering",
+          "text": "Kopya öğleden sonra bir ikram kasasıyla içeri sokuldu; gece montaj koduyla eser sensörü devre dışı bırakılıp tuval çerçevesinde değiştirildi; orijinal aynı kasayla ikram aracında çıktı."
+        },
+        {
+          "id": "h-onkapi",
+          "text": "Güvenlik şefi alarmı kapattı; tablo çerçevesiyle birlikte ön kapıdan çıkarıldı, yerine benzer çerçeveli bir kopya asıldı."
+        },
+        {
+          "id": "h-depo",
+          "text": "Tablo gece ikinci kattaki depoya kaldırıldı; sabah nakliye ekibiyle çıkarılacaktı."
+        }
+      ]
+    },
+    {
+      "id": "when",
+      "prompt": "Tablo hangi zaman aralığında değiştirildi?",
+      "kind": "choice",
+      "points": 10,
+      "options": [
+        {
+          "id": "w-montaj",
+          "text": "13–14 Ekim montaj günlerinde, açılıştan önce"
+        },
+        {
+          "id": "w-2147",
+          "text": "16 Ekim 21:40–21:50, açılış kalabalığında (dokunma uyarısı sırasında)"
+        },
+        {
+          "id": "w-2315",
+          "text": "16 Ekim 23:15–23:45, misafirler ve şef çıkarken"
+        },
+        {
+          "id": "w-0037",
+          "text": "17 Ekim 00:37–00:59 arasında"
+        },
+        {
+          "id": "w-gece",
+          "text": "17 Ekim 02:03–08:44, alarm kuruluyken"
+        }
+      ]
+    },
+    {
+      "id": "why",
+      "prompt": "Failin asıl amacı neydi?",
+      "kind": "choice",
+      "points": 10,
+      "options": [
+        {
+          "id": "y-sigorta",
+          "text": "Sigorta tazminatını almak"
+        },
+        {
+          "id": "y-satis",
+          "text": "Eseri yurt dışındaki bir alıcıya satmak"
+        },
+        {
+          "id": "y-galeri",
+          "text": "Galeriyi batırıp tefeci borcundan kurtulmak"
+        },
+        {
+          "id": "y-intikam",
+          "text": "Koleksiyoncunun sakladığı kopyayı ortaya çıkarıp onu küçük düşürmek"
+        },
+        {
+          "id": "y-is",
+          "text": "Galeriden ayrılırken müşteri listesiyle birlikte değerli bir eseri de götürmek"
+        }
+      ]
+    },
+    {
+      "id": "where",
+      "prompt": "Orijinal tablo galeriden çıktıktan sonra ilk nereye götürüldü?",
+      "kind": "choice",
+      "points": 11,
+      "options": [
+        {
+          "id": "p-yali",
+          "text": "Kandilli’deki Tanyeli yalısına"
+        },
+        {
+          "id": "p-kagithane",
+          "text": "Kağıthane’deki ikram firmasının deposuna"
+        },
+        {
+          "id": "p-tophane",
+          "text": "Tophane’de, Boğazkesen Caddesi’ndeki restorasyon atölyesine"
+        },
+        {
+          "id": "p-kurtulus",
+          "text": "Kurtuluş’taki bir dernek lokaline"
+        },
+        {
+          "id": "p-ayazaga",
+          "text": "Ayazağa’daki sanat deposuna"
+        }
+      ]
+    },
+    {
+      "id": "proof",
+      "prompt": "Ana failin olay gecesine ilişkin beyanını en açık hangi belge çürütür?",
+      "kind": "evidence",
+      "points": 15
+    }
+  ],
+  "solution": {
+    "who": [
+      "ilker"
+    ],
+    "accomplice": [
+      "baris"
+    ],
+    "how": [
+      "h-catering"
+    ],
+    "when": [
+      "w-0037"
+    ],
+    "why": [
+      "y-satis"
+    ],
+    "where": [
+      "p-tophane"
+    ],
+    "proof": [
+      "e-bufe",
+      "ph-tophane",
+      "ph-cam3-2347"
+    ]
+  },
+  "truth": {
+    "culprits": [
+      "ilker"
+    ],
+    "story": "İlker Varol, Kâzım Fevzi Bey’in resimlerini en iyi tanıyan restoratörlerden biriydi; aynı zamanda sekiz aylık kira borcu yüzünden atölyesinden çıkarılmak üzere olan bir adamdı. 2023’te Cemil Tanyeli’nin siparişiyle “Kandilli’de Akşamüstü”nün yüzde beş küçük bir sergileme kopyasını yapmıştı. Tanyeli o kopyayı yalısının yemek salonuna asıp misafirlerine orijinal diye gösteriyor, asıl eseri Ayazağa’daki depoda saklıyordu.\n\nEser ağustos 2025’te restorasyon için İlker’in Tophane’deki atölyesine geldiğinde, Tiflis’te aracılık yapan “K.” adlı bir antikacı 180 bin avroluk bir teklif getirdi. İlker, eser atölyedeyken ikinci bir kopya yaptı: bu kez tam ölçüde, eylülde kendi yaptığı dolguyu bile taklit ederek. 2 Ekim’de 400 bin lira kaporayı nakit aldı ve kira borcunu kapattı.\n\nMontaj için kendisine verilen 09 kodu, Tuncay Erdem onay vermediği için silinmemişti. Eskiden yanında çalışan Barış Koç artık ikram firmasında şoför-garsondu; İlker 10 Ekim’de ona 25 bin lira gönderdi. İkram firmasını galeriye öneren de İlker’di; Barış o gün izinli olduğu hâlde vardiya değiştirip işe geldi. Açılış günü 16:08’de Barış kopyayı içi köpüklü düz bir kasayla servis kapısından soktu.\n\nİlker açılışa davetli olarak geldi, 22:29’da herkesin gözü önünde çıktı. Cihangir’deki evine yürüyüp telefonunu bıraktı, siyah giyinip alet rulosunu aldı. Dönüşte 23:38’de Kuledibi’ndeki büfeden alışkanlıkla kendi kartıyla su ve sigara aldı. Barış ona araçtaki yedek ceketi ve kasketi arka sokakta verdi. 23:44’te arka sokakta sigara molasındaki ekibe karıştı ve 23:47’de beş garsonla birlikte altıncı kişi olarak içeri girdi. Hazırlık odasında kasaların arkasında bekledi; onu fark eden garson Elif’e Barış “galeriden” dedi. 00:35’te Barış bütün ekibi yükleme için zemin kata indirdi ve yirmi dakika orada tuttu.\n\n00:36’da ağ dolabından Salon B kamerasının kablosunu çıkardı, 00:37’de K2 tuş takımından 09 koduyla eser sensörünü devre dışı bıraktı. Yirmi dakikada tabloyu indirdi, tuvali çerçevesinden çıkardı, kopyayı aynı mandallara oturtup duvara geri astı. 00:59’da sensörü, 01:01’de kamerayı geri açtı. Orijinal tuval düz kasaya girdi; Barış 00:59’da asansörle yukarı çıkıp kasayı indirdi ve 01:04’te ekiple birlikte servis kapısından çıktılar. Barış depoya dönmeden önce 01:19’da Boğazkesen Caddesi’nde, atölyenin önünde altı dakika durdu; yürüyerek gelen İlker kasayı teslim aldı.\n\nO gece herkesin kendi sırrı vardı. Tuncay Erdem nöbet yerini bırakıp Kurtuluş’ta kumar masasındaydı. Ferit Ilgaz Nevizade’de tefecisinden süre istiyordu. Defne Ural ofiste galerinin müşteri listesini kopyalayıp Londra’daki yeni işverenine gönderiyordu. Cemil Tanyeli ise yalısındaki kopyayı herkesten saklıyordu.\n\nİlker’in hesaba katmadığı tek şey, poliçedeki “ikramlı etkinlikten sonra kontrol” şartıydı. Gönül Taşçı’nın feneri yüz yıllık verniği aradı ve bulamadı. İlker 18 Ekim’de orijinali “reprodüksiyon” beyanıyla Tiflis’e yola çıkardı; sandık, aranan eser bülteni üzerine Halkalı antreposunda yakalandı.",
+    "timeline": [
+      {
+        "at": "2023-03-14T12:00",
+        "text": "İlker Varol, Cemil Tanyeli için tablonun %5 küçük sergileme kopyasını teslim etti; kopya yalıya asıldı, orijinal depoya kaldırıldı."
+      },
+      {
+        "at": "2025-08-12T12:00",
+        "text": "Katalog fotoğrafları çekildi (restorasyon öncesi)."
+      },
+      {
+        "at": "2025-08-25T10:00",
+        "text": "Eser restorasyon için İlker’in Tophane atölyesine geldi; İlker restorasyonla birlikte tam ölçülü ikinci kopyayı yapmaya başladı."
+      },
+      {
+        "at": "2025-09-18T22:14",
+        "text": "“K.” 180 bin avroluk teklifi yineledi."
+      },
+      {
+        "at": "2025-09-09T12:00",
+        "text": "İlker, Şişhane’de 64 × 92 cm’lik yeni bir telara ve keten sipariş etti."
+      },
+      {
+        "at": "2025-09-26T12:00",
+        "text": "Restorasyon raporu Defne Ural, Gönül Taşçı ve Cemil Tanyeli’ye gönderildi."
+      },
+      {
+        "at": "2025-09-29T12:00",
+        "text": "Galeri, İlker’in önerisiyle Has Sofra İkram’la görüştü."
+      },
+      {
+        "at": "2025-10-01T12:00",
+        "text": "Sigortacının talebiyle sigorta bedeli 60 milyon TL’ye yükseltildi."
+      },
+      {
+        "at": "2025-10-02T12:00",
+        "text": "İlker, Şişli’de aldığı 400.000 TL kaporayı Osmanbey şubesinde hesabına yatırdı."
+      },
+      {
+        "at": "2025-10-03T12:00",
+        "text": "İlker atölyenin kira borcunu kapattı; tahliye takibi durdu."
+      },
+      {
+        "at": "2025-10-10T12:00",
+        "text": "İlker, Barış Koç’a 25.000 TL gönderdi."
+      },
+      {
+        "at": "2025-10-13T09:12",
+        "text": "09 montaj kodu Defne Ural ve İlker Varol’a SMS ile gönderildi; eser galeriye geldi. Kod iki gün tuş takımının üstünde kâğıtta durdu."
+      },
+      {
+        "at": "2025-10-14T18:05",
+        "text": "09 kodunun silinmesi için Tuncay Erdem’e onay isteği gitti; onaylanmadı."
+      },
+      {
+        "at": "2025-10-16T14:00",
+        "text": "Gönül Taşçı duvardaki eseri UV ile inceledi; eser özgün."
+      },
+      {
+        "at": "2025-10-16T16:08",
+        "text": "Barış, kopyanın bulunduğu düz kasayı servis kapısından içeri taşıdı."
+      },
+      {
+        "at": "2025-10-16T19:42",
+        "text": "İlker açılışa geldi."
+      },
+      {
+        "at": "2025-10-16T21:58",
+        "text": "Cemil Tanyeli ayrıldı; şoförüyle yalıya döndü."
+      },
+      {
+        "at": "2025-10-16T22:29",
+        "text": "İlker vestiyerden ceketini alıp ön kapıdan çıktı."
+      },
+      {
+        "at": "2025-10-16T22:50",
+        "text": "İlker Cihangir’deki evinde telefonunu bırakıp ikram ekibinin yedek ceketini ve kasketini giydi."
+      },
+      {
+        "at": "2025-10-16T23:16",
+        "text": "Şef Sinan Ateş 1. araçla depoya döndü; galeride beş garson kaldı."
+      },
+      {
+        "at": "2025-10-16T23:38",
+        "text": "İlker Kuledibi’ndeki büfeden kendi kartıyla alışveriş yaptı."
+      },
+      {
+        "at": "2025-10-16T23:41",
+        "text": "Ferit Ilgaz çıktı; Nevizade’ye yürüdü."
+      },
+      {
+        "at": "2025-10-16T23:43",
+        "text": "Barış, araçtaki yedek ceketi ve kasketi arka sokakta İlker’e verdi."
+      },
+      {
+        "at": "2025-10-16T23:44",
+        "text": "İlker arka sokakta sigara içen ikram ekibine katıldı."
+      },
+      {
+        "at": "2025-10-16T23:47",
+        "text": "İlker beş garsonla birlikte servis kapısından girdi, hazırlık odasında saklandı."
+      },
+      {
+        "at": "2025-10-16T23:52",
+        "text": "Ferit Ilgaz, Kâmil Sezer’le Nevizade’de masaya oturdu."
+      },
+      {
+        "at": "2025-10-17T00:12",
+        "text": "Defne Ural ikinci kata çıktı."
+      },
+      {
+        "at": "2025-10-17T00:16",
+        "text": "Tuncay Erdem binadan çıkıp taksiyle Kurtuluş’a gitti."
+      },
+      {
+        "at": "2025-10-17T00:34",
+        "text": "Defne Ural müşteri dosyalarını USB belleğe kopyalamaya başladı."
+      },
+      {
+        "at": "2025-10-17T00:30",
+        "text": "Elif Durmaz hazırlık odasında İlker’i fark etti; Barış onu “galeriden” diye geçiştirdi."
+      },
+      {
+        "at": "2025-10-17T00:35",
+        "text": "Barış beş garsonu yükleme için zemin kata indirdi; 00:58’e kadar hepsi aşağıdaydı."
+      },
+      {
+        "at": "2025-10-17T00:36",
+        "text": "İlker, Salon B kamerasının kablosunu ağ anahtarından çıkardı."
+      },
+      {
+        "at": "2025-10-17T00:37",
+        "text": "İlker, K2 tuş takımından 09 koduyla Z4 eser sensörünü devre dışı bıraktı."
+      },
+      {
+        "at": "2025-10-17T00:38",
+        "text": "Ramazan Oral kameranın karardığını gördü, Tuncay’ı aradı; ulaşamadı."
+      },
+      {
+        "at": "2025-10-17T00:40",
+        "text": "İlker tabloyu duvardan indirip tuvali çerçeveden çıkarmaya başladı."
+      },
+      {
+        "at": "2025-10-17T00:51",
+        "text": "Defne Ural müşteri listesini Londra’ya e-postayla gönderdi."
+      },
+      {
+        "at": "2025-10-17T00:55",
+        "text": "Kurtuluş’taki kumar denetiminde Tuncay Erdem’in kimlik tespiti yapıldı."
+      },
+      {
+        "at": "2025-10-17T00:58",
+        "text": "İlker kopyayı çerçeveye oturtup duvara astı; orijinal düz kasaya kondu."
+      },
+      {
+        "at": "2025-10-17T00:59",
+        "text": "Z4 bypass sona erdi."
+      },
+      {
+        "at": "2025-10-17T01:01",
+        "text": "İlker kamera kablosunu geri taktı."
+      },
+      {
+        "at": "2025-10-17T00:59",
+        "text": "Barış yük asansörüyle yukarı çıktı, düz kasayı alıp 01:02’de indi."
+      },
+      {
+        "at": "2025-10-17T01:04",
+        "text": "İkram ekibi ve İlker servis kapısından çıktı; kasa Barış’ın aracına yüklendi."
+      },
+      {
+        "at": "2025-10-17T01:08",
+        "text": "Barış aracı hareket ettirdi; İlker Tophane’ye yürüdü."
+      },
+      {
+        "at": "2025-10-17T01:14",
+        "text": "Defne Ural binadan çıktı."
+      },
+      {
+        "at": "2025-10-17T01:17",
+        "text": "İlker yürüyerek atölyesinin önüne vardı."
+      },
+      {
+        "at": "2025-10-17T01:19",
+        "text": "Barış atölyenin önünde durdu; 01:21’de kasayı İlker’e verdi (dükkân kamerası). Araç 01:25’te ayrıldı."
+      },
+      {
+        "at": "2025-10-17T01:32",
+        "text": "Tuncay Erdem galeriye döndü."
+      },
+      {
+        "at": "2025-10-17T01:34",
+        "text": "Ferit Ilgaz Nevizade’de hesabı ödedi."
+      },
+      {
+        "at": "2025-10-17T01:48",
+        "text": "Barış aracı Kağıthane deposuna bıraktı."
+      },
+      {
+        "at": "2025-10-17T02:03",
+        "text": "Tuncay alarmı tam kuruluma aldı."
+      },
+      {
+        "at": "2025-10-17T02:20",
+        "text": "İlker evine döndü, “K.”ya haber verdi."
+      },
+      {
+        "at": "2025-10-17T09:41",
+        "text": "Gönül Taşçı UV ile sahteliği fark etti."
+      },
+      {
+        "at": "2025-10-18T10:40",
+        "text": "İlker orijinali “reprodüksiyon” beyanıyla Tiflis’e gönderilmek üzere nakliyeciye teslim etti."
+      },
+      {
+        "at": "2025-10-18T12:00",
+        "text": "Aranan eser bülteni gümrüğe ve sınır kapılarına gönderildi."
+      },
+      {
+        "at": "2025-10-21T11:30",
+        "text": "Sandık Halkalı antreposunda açıldı, orijinal bulundu."
+      },
+      {
+        "at": "2025-10-21T14:30",
+        "text": "Nakliye kaydı üzerine İlker’in atölyesinde arama yapıldı."
+      }
+    ],
+    "characters": [
+      {
+        "id": "ilker",
+        "secret": "Tiflis’teki bir aracıyla anlaşıp eseri çaldı; tam ölçülü kopyayı restorasyon sırasında atölyesinde yaptı. 2023’te Cemil Tanyeli için de bir kopya yapmıştı.",
+        "whereabouts": "22:29’da galeriden çıktı, evine telefonunu bıraktı; 23:47’de ikram ekibine karışıp geri girdi, 00:36–01:01 arasında Salon B’de tuvali değiştirdi, 01:19’da atölyesinin önünde kasayı teslim aldı.",
+        "lies": [
+          "“22:50’de evdeydim, gece hiç çıkmadım.”",
+          "“Kandilli’nin hiçbir kopyasını yapmadım.”",
+          "“Garsonları tanımam.”",
+          "“Alarm kodunu hatırlamıyorum, sildim gitti.”",
+          "“Defne Hanım kapılar için bir şey göndermişti galiba.” (Kod ona güvenlik firmasından SMS ile geldi.)"
+        ]
+      },
+      {
+        "id": "baris",
+        "secret": "2021–2023 arasında İlker’in atölyesinde çalıştı; 25.000 TL karşılığında kopyayı içeri soktu, İlker’i ekibin arasına aldı ve orijinali aracıyla atölyeye götürdü.",
+        "whereabouts": "16:05’ten 01:04’e kadar galeride ikram ekibiyle; değişim sırasında (00:35–00:59) ekiple birlikte zemin katta yükleme yapıyordu. 01:19–01:25 Boğazkesen Caddesi’nde; 01:48’de Kağıthane deposunda.",
+        "lies": [
+          "“Gece beş kişiydik, altıncı kimse yoktu.”",
+          "“Hazırlık odasında galeriden birinin yardım ettiğini hatırlamıyorum.”",
+          "“Doğruca depoya gittim, yolda durmadım.”",
+          "“İlker’le görüşmüyoruz.”"
+        ]
+      },
+      {
+        "id": "ferit",
+        "secret": "Galeri batmak üzere; bir tefeciye 4 milyon liraya yakın borcu var. Olay gecesi süre istemek için tefeciyle buluştu.",
+        "whereabouts": "23:41’de galeriden çıktı; 23:52–01:34 Nevizade’de Kâmil Sezer’le meyhanedeydi.",
+        "lies": [
+          "“Doğruca eve, Moda’ya gittim.”",
+          "“Galerinin mali durumu iyi.”"
+        ]
+      },
+      {
+        "id": "cemil",
+        "secret": "Şirketi konkordatoda. 2023’ten beri yalısında İlker’in yaptığı kopyayı asıyor, misafirlerine orijinal diye gösteriyor.",
+        "whereabouts": "21:58’de galeriden ayrıldı, şoförüyle Kandilli’deki yalısına döndü ve sabaha kadar oradaydı.",
+        "lies": [
+          "“Eserin hiçbir kopyası yok.”",
+          "“Depoya ne zaman kaldırdığımı hatırlamıyorum.”"
+        ]
+      },
+      {
+        "id": "defne",
+        "secret": "Londra’daki bir galeriyle iş görüşmesi yapıyor; olay gecesi galerinin müşteri listesini kopyalayıp onlara gönderdi.",
+        "whereabouts": "00:12–01:12 arasında ikinci kattaki ofiste bilgisayar başındaydı; 01:14’te binadan çıktı.",
+        "lies": [
+          "“23:45 gibi çıktım, eve gittim.”"
+        ]
+      },
+      {
+        "id": "tuncay",
+        "secret": "Kumar borcu var. Olay gecesi nöbet yerini bırakıp Kurtuluş’ta bir dernek lokalindeki kumar masasına gitti; 09 kodunun silinme onayını da ihmal etti.",
+        "whereabouts": "00:16–01:32 arasında binada değildi; 00:31’den 01:14’e kadar Kurtuluş’taydı, 00:55’te denetimde kimliği tespit edildi.",
+        "lies": [
+          "“Bütün gece binadaydım.”",
+          "“Telefon sessizdeydi, depodaydım.”",
+          "“Kimseye borcum yok.”"
+        ]
+      },
+      {
+        "id": "ramazan",
+        "secret": "Şefinin dışarı çıktığını biliyordu; deftere yazdığı satırı karaladı ve ifadesinde onu korudu.",
+        "whereabouts": "Bütün gece monitör odasındaydı.",
+        "lies": [
+          "“Tuncay Bey binadaydı, tur atıyordu.”"
+        ]
+      },
+      {
+        "id": "gonul",
+        "secret": "Yok.",
+        "whereabouts": "20:40’ta açılıştan ayrıldı; sabah 09:31’de kontrol için geldi.",
+        "lies": []
+      }
+    ],
+    "chain": [
+      {
+        "step": "Duvardaki eser 16 Ekim 14:00’te özgündü; değişim atölyede değil, açılış gecesi galeride yapıldı.",
+        "evidence": [
+          "e-kondisyon",
+          "ph-uv",
+          "e-tutanak"
+        ],
+        "facts": [
+          "f-original-1400"
+        ]
+      },
+      {
+        "step": "Eser sensörü 00:37–00:59 arasında montaj koduyla devre dışıydı; aynı aralıkta Salon B kamerasının kablosu, çerçeveye dokunmuş biri tarafından elle çıkarılmıştı.",
+        "evidence": [
+          "e-alarm",
+          "e-dvr",
+          "e-defter",
+          "e-oyi",
+          "ph-switch"
+        ],
+        "facts": [
+          "f-swap-window",
+          "f-code09",
+          "f-cam4-unplugged",
+          "f-skilled"
+        ]
+      },
+      {
+        "step": "Kodu bilebilenlerden Defne ikinci kattan inmedi; Tuncay Kurtuluş’ta, Ferit Nevizade’de, Cemil yalısındaydı; nöbetçi monitör odasındaydı.",
+        "evidence": [
+          "e-kod-mail",
+          "e-defne-1",
+          "e-kart",
+          "e-bt-rapor",
+          "e-tuncay-hts",
+          "e-baskin",
+          "e-meyhane",
+          "ph-yali",
+          "e-liste"
+        ],
+        "facts": [
+          "f-code09-holders",
+          "f-defne-office",
+          "f-tuncay-kurtulus",
+          "f-ferit-nevizade",
+          "f-cemil-left"
+        ]
+      },
+      {
+        "step": "Değişimi ikram ekibinden olmayan altıncı kişi yaptı: 23:47’de ekibe karışıp girdi; 00:38–00:58 arasında beş garsonun beşi de zemin kattaydı.",
+        "evidence": [
+          "ph-cam3-2347",
+          "ph-cam5",
+          "e-elif",
+          "e-catering-mail",
+          "e-gps",
+          "e-liste"
+        ],
+        "facts": [
+          "f-sixth",
+          "f-crew-down"
+        ]
+      },
+      {
+        "step": "Altıncı kişi İlker’di: kartı 23:38’de galerinin iki dakika ötesinde, siyah ceketli ve kasketli biri tarafından kullanıldı; 01:21’de atölyesinin önünde kasayı alırken kameraya girdi. “Evdeydim” beyanı yalan; telefonu evde bırakılmıştı.",
+        "evidence": [
+          "e-bufe",
+          "ph-tophane",
+          "e-ilker-banka",
+          "e-ilker-hts",
+          "e-ilker-1"
+        ],
+        "facts": [
+          "f-ilker-buffet",
+          "f-ilker-lie-home"
+        ]
+      },
+      {
+        "step": "Sahte tuvali İlker yaptı: restorasyon sırasında 64 × 92’lik yeni bir telara ısmarladı; sahte tuval restorasyon sonrası dolguyu taşıyor ve İlker’in 2023 kopyasıyla aynı elden çıkmış.",
+        "evidence": [
+          "e-telara",
+          "e-oyi",
+          "e-ilker-1",
+          "e-bilirkisi",
+          "e-fatura",
+          "ph-yali"
+        ],
+        "facts": [
+          "f-telara",
+          "f-same-hand",
+          "f-ilker-2023",
+          "f-dolgu"
+        ]
+      },
+      {
+        "step": "Suç ortağı Barış: kasaları o istedi ve soktu, altıncı kişiyi “galeriden” diye örttü, ekibi aşağıda tuttu, orijinali aracıyla atölyeye götürdü. İlker’in eski yardımcısı; ondan para ve telefon aldı.",
+        "evidence": [
+          "ph-cam3-1608",
+          "e-catering-mail",
+          "e-elif",
+          "e-gps",
+          "ph-tophane",
+          "e-ilker-banka",
+          "e-ilker-hts",
+          "e-baris-1"
+        ],
+        "facts": [
+          "f-crate-in",
+          "f-van-stop",
+          "f-baris-apprentice"
+        ]
+      },
+      {
+        "step": "Motif satış, sigorta değil: Gürcistan’daki bir numarayla görüşmenin hemen ardından nakit avro bozdurup tahliye borcunu kapattı; eser Tiflis’e gönderildi.",
+        "evidence": [
+          "e-ilker-hts",
+          "e-ilker-banka",
+          "e-kargo",
+          "e-ilker-mesaj"
+        ],
+        "facts": [
+          "f-ilker-money",
+          "f-shipment"
+        ]
+      }
+    ],
+    "redHerrings": [
+      {
+        "evidence": "e-ferit-mesaj",
+        "explanation": "Ferit’in tefeci borcu ve “bir tablo satışı yakın” sözü onu şüpheli yapar. Silinen ileti, kastettiği satışın sergideki başka bir eser olduğunu gösterir. Adisyon onu olay saatinde Nevizade’ye koyar. Kondisyon raporuna göre tazminat galeriye değil eser sahibine ödenir."
+      },
+      {
+        "evidence": "e-haber",
+        "explanation": "Konkordato, sigorta artışı ve yalıdaki tablo Cemil’i sigorta dolandırıcılığı şüphelisi yapar. Oysa bedel artışını sigortacı istemiştir. Yalıdaki tablo 61 × 87 cm’lik eski bir kopyadır ve hâlâ yerindedir. Cemil 21:58’de ayrılmış, aracı 22:47’de yalıya girip sabaha kadar çıkmamıştır. Ayrıca sessiz bir değişim, hiç fark edilmemek üzere kurulur; tazminat isteyen biri için anlamsızdır. Para da Gürcistan’daki bir numaradan, avroyla gelmiştir."
+      },
+      {
+        "evidence": "e-defter",
+        "explanation": "Karalanmış satır, cevapsız aramalar ve onaylanmayan kod silme talebi Tuncay’ı şüpheli yapar. HTS ve Kurtuluş tutanağı, değişim sırasında onun kumar masasında olduğunu gösterir."
+      },
+      {
+        "evidence": "e-defne-1",
+        "explanation": "Defne çıkış saati konusunda yalan söyler, 09 kodunu bilir ve gece binadadır. Ama kart kaydı ikinci kattan inmediğini, adli bilişim raporu da tam o dakikalarda klavye başında olduğunu gösterir. Sakladığı şey müşteri listesidir."
+      },
+      {
+        "evidence": "e-ramazan",
+        "explanation": "Nöbetçi kamera kaybını ikram arabalarının kabloya takılmasına bağlar. Olay Yeri İnceleme, kablonun kilidine basılarak çıkarıldığını ve ucunda çerçeve yaldızı olduğunu tespit eder."
+      }
+    ]
+  }
+}

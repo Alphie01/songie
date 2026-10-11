@@ -1,0 +1,4513 @@
+{
+  "meta": {
+    "slug": "yalida-son-aksam",
+    "title": "Yalıda Son Akşam",
+    "subtitle": "Kandilli, İstanbul — Şubat 2026",
+    "genre": "cinayet",
+    "difficulty": "zor",
+    "minutes": 75,
+    "teaser": "Vardarlı Holding’in kurucusu Nevzat Vardarlı, yetmişinci doğum günü yemeğinin gecesi Kandilli’deki yalısının çalışma odasında ölü bulunur. Aile kalbine yorar; lodos yüzünden kesilen elektrik, karanlıkta geçen yirmi dakikayı da açıklar gibidir.\n\nAma ambulans doktoru gözlerdeki minik kanamaları not eder ve dosya Cinayet Büro’ya düşer. O gece sofrada yedi kişi vardı. Kurban dışında her birinin saklayacak bir şeyi var.",
+    "cover": "cover",
+    "hoursBudget": 34,
+    "targetHours": 20,
+    "narrator": {
+      "gender": "female",
+      "age": "adult",
+      "style": "Alçak ve sakin, İstanbul Türkçesi; ağır, ölçülü bir polisiye anlatıcı"
+    }
+  },
+  "images": {
+    "cover": {
+      "kind": "cover",
+      "aspect": "portrait",
+      "prompt": "A grand old wooden Ottoman waterside mansion on the Bosphorus at night during a winter storm, all windows dark except a faint glow in one upper window, rain-slick wooden pier in the foreground, choppy black water, distant lights of the opposite shore, moody cinematic atmosphere",
+      "alt": "Fırtınalı bir kış gecesinde Boğaz kıyısında eski, ahşap bir yalı. Pencerelerin hepsi karanlık, yalnızca üst kattaki bir pencerede soluk bir ışık var. Önde ıslak ahşap bir iskele."
+    },
+    "loc-yali": {
+      "kind": "location",
+      "aspect": "landscape",
+      "prompt": "Daytime photograph of a restored nineteenth-century wooden Ottoman yali on the Asian shore of the Bosphorus, pale ochre painted clapboard facade, two floors with tall shuttered windows, a stone sea terrace at water level, a small boathouse with a wooden pier, overcast winter sky, wet stones",
+      "alt": "Gündüz, Boğaz’ın Anadolu yakasında restore edilmiş, açık hardal rengi, iki katlı ahşap bir yalı. Deniz seviyesinde taş bir teras, sağda küçük bir kayıkhane ve ahşap iskele."
+    },
+    "p-nevzat": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a seventy-year-old Turkish man, silver hair combed back, deep lines around the eyes, navy cashmere jacket over a white shirt, reading glasses folded in the breast pocket, stern but tired expression, neutral grey backdrop, soft studio light",
+      "alt": "Yetmiş yaşlarında, gümüş rengi saçlarını geriye taramış bir adam. Lacivert ceket, beyaz gömlek; göğüs cebinde katlanmış okuma gözlüğü. Sert ama yorgun bakıyor."
+    },
+    "p-mujgan": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of an elegant Turkish woman in her early sixties, short ash-blonde hair, pearl stud earrings, charcoal wool cardigan, composed face with red-rimmed eyes, slender musician hands visible at the collar, neutral grey backdrop",
+      "alt": "Altmışlı yaşlarının başında, kısa küllü sarı saçlı, şık bir kadın. İnci küpeler, koyu gri hırka. Yüzü toparlanmış ama gözleri kızarık."
+    },
+    "p-leyla": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a Turkish businesswoman around forty, dark hair pulled into a low bun, tailored black blazer, thin gold necklace, sharp controlled expression, slight dark circles under the eyes, neutral grey backdrop",
+      "alt": "Kırk yaşlarında, koyu saçlarını ensede toplamış bir kadın. Siyah, dar kesim ceket, ince altın kolye. Kontrollü, keskin bakışlı; göz altları yorgun."
+    },
+    "p-kerem": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a Turkish man in his mid-thirties, unshaven stubble, messy dark curly hair, grey hooded sweatshirt under an olive parka, restless evasive eyes, neutral grey backdrop",
+      "alt": "Otuzlu yaşlarının ortasında, sakalı uzamış, kıvırcık koyu saçlı bir adam. Gri kapüşonlu sweatshirt üstüne haki parka. Gözlerini kaçırıyor."
+    },
+    "p-tarik": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a calm Turkish architect in his mid-forties, neatly trimmed salt-and-pepper beard, round tortoiseshell glasses, dark green knit sweater over a collared shirt, polite attentive expression, neutral grey backdrop",
+      "alt": "Kırklı yaşlarının ortasında, kırlaşmış sakalı düzgün kesilmiş bir adam. Kaplumbağa kabuğu desenli yuvarlak gözlük, koyu yeşil kazak. Sakin ve nazik görünüyor."
+    },
+    "p-orhan": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a heavy-set Turkish businessman in his early seventies, bald with white sideburns, thick white moustache, dark three-piece suit with a silk tie, bulldog jaw, defensive expression, neutral grey backdrop",
+      "alt": "Yetmişli yaşlarının başında, iri yapılı, kel, beyaz bıyıklı bir adam. Koyu renk yelekli takım, ipek kravat. Savunmacı bir yüz ifadesi."
+    },
+    "p-deniz": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a Turkish woman in her early thirties, shoulder-length chestnut hair, minimal makeup, oversized beige turtleneck sweater, a pencil tucked behind one ear, watchful intelligent eyes, neutral grey backdrop",
+      "alt": "Otuzlu yaşlarının başında, omuz hizasında kestane rengi saçlı bir kadın. Bol bej balıkçı yaka kazak; kulağının arkasında bir kurşun kalem. Dikkatli bakışlı."
+    },
+    "p-hatice": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a Turkish woman in her late fifties, headscarf tied loosely at the nape, round face, plain navy cardigan over a white apron, warm but worried expression, neutral grey backdrop",
+      "alt": "Ellili yaşlarının sonunda, başörtüsünü ensede bağlamış, yuvarlak yüzlü bir kadın. Beyaz önlük üstüne lacivert hırka. Sıcak ama endişeli."
+    },
+    "p-riza": {
+      "kind": "portrait",
+      "aspect": "portrait",
+      "prompt": "Shoulder-up portrait of a weathered Turkish boatman in his early sixties, short grey hair, sun-darkened skin, heavy navy wool peacoat, calloused hands, quiet solemn expression, neutral grey backdrop",
+      "alt": "Altmışlı yaşlarının başında, güneşten yanmış tenli, kısa gri saçlı bir adam. Kalın lacivert denizci paltosu, nasırlı eller. Sessiz ve ağırbaşlı."
+    },
+    "scene-night": {
+      "kind": "scene",
+      "aspect": "landscape",
+      "prompt": "Night photograph of the garden gate of a wooden waterside mansion in heavy wind and rain, blue police lights reflecting on wet cobblestones, an ambulance parked in a narrow seaside street, forensic officers in white overalls carrying cases, warm light now in every window",
+      "alt": "Gece, yağmur ve rüzgâr altında bir yalının bahçe kapısı. Islak parke taşlarında mavi polis ışıkları, dar sokakta bir ambulans; beyaz tulumlu olay yeri ekibi çantalarla içeri giriyor."
+    },
+    "scene-morgue": {
+      "kind": "scene",
+      "aspect": "landscape",
+      "prompt": "A clinical forensic medicine institute corridor, cold fluorescent light, a female police detective in a dark coat standing beside a pathologist in green scrubs who holds a closed folder, stainless steel doors in the background, sober atmosphere",
+      "alt": "Soğuk floresan ışıklı bir adli tıp koridoru. Koyu paltolu bir kadın komiser, elinde kapalı bir dosya tutan yeşil önlüklü bir patologla konuşuyor."
+    },
+    "scene-alarm": {
+      "kind": "scene",
+      "aspect": "landscape",
+      "prompt": "Morning in a detective office, a desk covered with folders, a folded newspaper with a large black-and-white archive photo of a burned workshop, a laptop showing an abstract security system interface without readable text, grey Istanbul light through blinds",
+      "alt": "Sabah, dosyalarla dolu bir büro masası. Katlanmış bir gazetede yanmış bir atölyenin siyah beyaz arşiv fotoğrafı; yanında açık bir dizüstü bilgisayar."
+    },
+    "scene-interview": {
+      "kind": "scene",
+      "aspect": "landscape",
+      "prompt": "A bare police interview room seen over the shoulder of a female detective, a metal table, on the far side a lawyer in a grey suit opening a notebook and a man whose face is hidden in shadow and out of focus, only his clasped hands visible on the table, cold overhead light, closed folder in the foreground",
+      "alt": "Çıplak bir sorgu odası, komiserin omzunun üstünden. Masanın karşı yanında not defterini açan gri takımlı bir avukat ve yüzü gölgede kalan bir adam; yalnızca masadaki kenetli elleri görünüyor."
+    },
+    "scene-study": {
+      "kind": "document-photo",
+      "aspect": "landscape",
+      "prompt": "Crime-scene flash photograph of an old-fashioned study in a wooden mansion at night, an elderly man slumped sideways in a leather armchair at a mahogany desk, a porcelain tea glass with a little amber liquid and a saucer near his hand, reading glasses and a closed phone on the desk, a dark green velvet sofa against the wall with three burgundy velvet cushions, the middle cushion turned so its zip faces upward, evidence markers on the floor, a small gold cufflink under the desk",
+      "alt": "Flaşlı olay yeri fotoğrafı: Maun masanın başındaki deri koltukta yana doğru çökmüş yaşlı bir adam. Elinin yanında dibinde biraz kehribar renkli sıvı kalmış bir çay bardağı ve tabağı; masada okuma gözlüğü ve telefon. Duvar dibindeki yeşil kadife kanepede üç bordo kırlent var; ortadakinin fermuarı diğerlerinin aksine üste dönük. Masanın altında küçük, altın bir kol düğmesi ve delil numaraları."
+    },
+    "obj-pills": {
+      "kind": "object",
+      "aspect": "landscape",
+      "prompt": "Close-up photograph of an open white pharmacy medicine box on a marble bathroom shelf, three foil blister strips laid beside it, two strips completely full of small white tablets, the third strip with two empty pockets, the box has room for five strips, a toothbrush glass and a hand towel in soft focus, no readable text",
+      "alt": "Mermer banyo rafında açık bir ilaç kutusu ve yanında üç blister. İkisi küçük beyaz tabletlerle tam dolu, üçüncüsünde iki cep boş. Kutuda beş blisterlik yer var."
+    },
+    "cam-van": {
+      "kind": "cctv",
+      "aspect": "landscape",
+      "prompt": "Low-resolution dashboard camera view through a wet windshield at night in a very narrow cobbled seaside street, headlights illuminating a man in a dark peacoat holding a flashlight and gesturing at the driver, to the left a garden wall and gate with a large wooden house behind it completely dark, further down the street several street lamps are lit and the windows of a neighbouring mansion glow yellow",
+      "alt": "Gece, ıslak ön camdan araç kamerası görüntüsü. Dar, parke taşlı sokakta farların aydınlattığı, koyu paltolu, elinde fener olan bir adam sürücüye işaret ediyor. Soldaki bahçe kapısının ardındaki büyük ahşap ev tamamen karanlık. Sokağın ilerisinde sokak lambaları yanıyor, komşu yalının pencereleri sarı sarı ışıyor."
+    },
+    "cam-pier-a": {
+      "kind": "cctv",
+      "aspect": "landscape",
+      "prompt": "High-angle grainy night security camera frame from the end of a wet wooden pier looking back at a dark two-storey wooden waterside mansion, a young man in an olive parka with the hood up stands on the pier holding a large flat rectangular package wrapped in a blanket, in the middle of the upper floor one window shows a faint small white light spot, on the ground-floor sea terrace to the left a seated figure is lit bluish from below by a laptop screen, rain streaks",
+      "alt": "Yüksek açılı, grenli gece kamerası karesi. Islak iskelede, kapüşonu başında haki parkalı genç bir adam battaniyeye sarılı, büyük, yassı, dikdörtgen bir paket tutuyor. Arkadaki yalı karanlık; üst katın ortasındaki bir pencerede küçük, soluk beyaz bir ışık lekesi var. Soldaki zemin kat terasında oturan birinin yüzü, aşağıdan bir dizüstü bilgisayar ekranının mavimsi ışığıyla aydınlanmış."
+    },
+    "cam-pier-b": {
+      "kind": "cctv",
+      "aspect": "landscape",
+      "prompt": "High-angle grainy night security camera frame of a small open motorboat alongside a wooden pier in choppy water, a stocky man in a knitted cap leans from the boat taking a large flat wrapped package from a young man in a hooded olive parka on the pier, a second man at the outboard engine, dark mansion facade in the background",
+      "alt": "Grenli gece kamerası karesi. Dalgalı suda iskeleye yanaşmış küçük, açık bir motorbot. Bereli, tıknaz bir adam tekneden uzanıp kapüşonlu genç adamın elindeki büyük, sarılı paketi alıyor; motorun başında ikinci bir adam var."
+    },
+    "cam-corridor": {
+      "kind": "cctv",
+      "aspect": "landscape",
+      "prompt": "High-angle wide security camera frame of a narrow service corridor in an old wooden house at night lit only by a dim night light, a figure in a dark hooded sweatshirt with the hood up and face turned away walks toward a small door under a staircase, the right sleeve slightly pulled back revealing a light-coloured bandage around the wrist, the figure wears soft house slippers",
+      "alt": "Gece, yalnızca bir gece lambasıyla aydınlanan dar bir servis koridoru, yüksek açıdan. Kapüşonu başında, yüzü görünmeyen, koyu renk sweatshirtlü biri merdiven altındaki küçük bir kapıya yürüyor. Sağ kolu hafifçe sıyrılmış; bileğinde açık renk bir sargı görülüyor. Ayağında ev terliği var."
+    },
+    "obj-strip": {
+      "kind": "object",
+      "aspect": "landscape",
+      "prompt": "Evidence photograph on a grey forensic mat of a crumpled foil blister strip with six empty pockets and four small white tablets remaining, partly wrapped in a white cloth dinner napkin with a small embroidered plane tree motif, a car door pocket visible at the edge, evidence ruler beside it, no readable text",
+      "alt": "Gri delil zemininde buruşmuş bir blister: altı cep boş, dört küçük beyaz tablet duruyor. Yarısı, köşesinde işlemeli küçük bir çınar ağacı motifi olan beyaz kumaş bir yemek peçetesine sarılı. Kenarda bir araç kapı cebi ve cetvel."
+    },
+    "arch-fire": {
+      "kind": "document-photo",
+      "aspect": "landscape",
+      "prompt": "Black-and-white 1990s press archive photograph of a burned-out textile workshop in an Istanbul industrial district, charred knitting machines, collapsed ceiling, firefighters in old helmets, a narrow metal back door hanging open with a broken padlock chain, grainy newspaper print texture",
+      "alt": "Siyah beyaz, doksanlardan bir basın arşivi fotoğrafı: Yanmış bir örme atölyesi, kömürleşmiş makineler, çökmüş tavan, eski kasklı itfaiyeciler. Arkada açık duran dar bir demir kapı ve kırık asma kilit zinciri."
+    }
+  },
+  "characters": [
+    {
+      "id": "nevzat",
+      "name": "Nevzat Vardarlı",
+      "age": 70,
+      "role": "Vardarlı Holding kurucusu ve Yönetim Kurulu Başkanı",
+      "relation": "Yalının sahibi; doğum günü yemeğinin ev sahibi",
+      "summary": "Bayrampaşa’da küçük bir örme atölyesiyle başlayıp tekstil, denizcilik ve gayrimenkulde faaliyet gösteren bir holding kurdu. Kalp hastasıydı; düzenli ilaç kullanıyordu. 7 Şubat 2026 akşamı, yetmişinci doğum günü yemeğinden sonra çalışma odasında ölü bulundu.",
+      "portrait": "p-nevzat",
+      "victim": true,
+      "suspect": false
+    },
+    {
+      "id": "mujgan",
+      "name": "Müjgân Vardarlı",
+      "age": 63,
+      "role": "Emekli viyolonsel sanatçısı",
+      "relation": "Kurbanın eşi (2011’den beri, ikinci evlilik)",
+      "summary": "Nevzat Bey’le on beş yıl önce evlendi; yalıda yaşıyor. Uykusuzluk için reçeteli ilaç kullanıyor. Cesedi bulan kişi.",
+      "portrait": "p-mujgan",
+      "suspect": true,
+      "voice": {
+        "gender": "female",
+        "age": "old",
+        "style": "Kibar, eski İstanbul hanımefendisi; şimdi ağlamaklı"
+      }
+    },
+    {
+      "id": "leyla",
+      "name": "Leyla Vardarlı Sezgin",
+      "age": 41,
+      "role": "Vardarlı Holding İcra Kurulu Başkanı",
+      "relation": "Kurbanın ilk evliliğinden kızı",
+      "summary": "Holdingin günlük yönetimini beş yıldır yürütüyor; şirketin varisi olarak görülüyor. Hafta sonu için eşiyle birlikte yalıda kalıyordu.",
+      "portrait": "p-leyla",
+      "suspect": true,
+      "voice": {
+        "gender": "female",
+        "age": "adult",
+        "style": "Kurumsal, hızlı ve net; araya İngilizce terimler serpiştiriyor"
+      }
+    },
+    {
+      "id": "kerem",
+      "name": "Kerem Vardarlı",
+      "age": 36,
+      "role": "İşsiz; eski restoran işletmecisi",
+      "relation": "Kurbanın ilk evliliğinden oğlu",
+      "summary": "Bebek’teki restoranı iki yıl önce kapandı; o günden beri yalının zemin katında oturuyor. Babasıyla ilişkisinin gergin olduğu biliniyor.",
+      "portrait": "p-kerem",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "adult",
+        "style": "Yayvan, gergin, argoya kaçan genç İstanbul ağzı"
+      }
+    },
+    {
+      "id": "tarik",
+      "name": "Tarık Sezgin",
+      "age": 45,
+      "role": "Restorasyon mimarı, Sezgin Mimarlık ve Restorasyon Ltd. Şti. kurucusu",
+      "relation": "Kurbanın damadı, Leyla’nın eşi",
+      "summary": "Yalının 2021–2023 yıllarındaki kapsamlı restorasyonunu yürüttü. Ailenin sakin, yardımsever yüzü olarak bilinir. Gece 112’yi arayan kişi.",
+      "portrait": "p-tarik",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "adult",
+        "style": "İstanbul Türkçesi, yumuşak ve ölçülü; gerildikçe cümleleri kısalıyor"
+      }
+    },
+    {
+      "id": "orhan",
+      "name": "Orhan Tekinalp",
+      "age": 72,
+      "role": "Vardarlı Holding kurucu ortağı ve Yönetim Kurulu üyesi",
+      "relation": "Kurbanın kırk yıllık ortağı ve arkadaşı",
+      "summary": "Holdingin yüzde yirmi iki hissesine sahip. Atölye yıllarından beri Nevzat Bey’in yanında. Yemekten sonra kurbanla çalışma odasında baş başa görüştü.",
+      "portrait": "p-orhan",
+      "suspect": true
+    },
+    {
+      "id": "deniz",
+      "name": "Deniz Ural",
+      "age": 33,
+      "role": "Editör ve yazar",
+      "relation": "Kurbanın anı kitabını yazan misafir",
+      "summary": "Kasım 2025’ten beri Nevzat Bey’le haftalık görüşmeler yaparak onun anılarını yazıyor. Doğum günü yemeğine aile dışından davet edilen tek kişi.",
+      "portrait": "p-deniz",
+      "suspect": true
+    },
+    {
+      "id": "hatice",
+      "name": "Hatice Yener",
+      "age": 58,
+      "role": "Yalının aşçısı",
+      "relation": "Yirmi yedi yıldır ailenin yanında çalışıyor",
+      "summary": "Evin mutfağını ve gündelik düzenini yönetiyor. Nevzat Bey’in gece alışkanlıklarını en iyi bilenlerden.",
+      "portrait": "p-hatice",
+      "suspect": false
+    },
+    {
+      "id": "riza",
+      "name": "Rıza Kılıç",
+      "age": 61,
+      "role": "Yalının bekçisi ve kayıkçısı",
+      "relation": "On dokuz yıldır yalıda; kayıkhanenin üstündeki lojmanda yaşıyor",
+      "summary": "Kapıdan, bahçeden, tekneden ve teknik işlerden o sorumlu. Gece catering aracını uğurlamak için ana kapıdaydı.",
+      "portrait": "p-riza",
+      "suspect": false
+    },
+    {
+      "id": "zeynep",
+      "name": "Zeynep Arıkan",
+      "age": 24,
+      "role": "Garson",
+      "relation": "Yemek için tutulan Çınaraltı Catering ekibinden",
+      "summary": "Servisten sonra gece yarısına kadar kalıp aşçıya mutfakta yardım etti. Olay gecesi ifadesi alınmadan evine gönderildi.",
+      "suspect": false
+    },
+    {
+      "id": "bora",
+      "name": "Bora Kaynak",
+      "age": 47,
+      "role": "Antikacı",
+      "relation": "Yalının tam karşısında, Arnavutköy’de dükkânı var",
+      "summary": "Eski eşya ve yağlıboya tablo alıp satıyor. Boğaz’ın iki yakasında da müşterisi var.",
+      "suspect": false,
+      "voice": {
+        "gender": "male",
+        "age": "adult",
+        "style": "Boğaz esnafı ağzı, rahat ve kurnaz, kelimeleri yutuyor"
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "yali",
+      "name": "Vardarlı Yalısı, Kandilli",
+      "description": "Kandilli sahilinde, on dokuzuncu yüzyıldan kalma iki katlı ahşap yalı. 2021–2023 arasında Sezgin Mimarlık tarafından restore edildi. Kara tarafında bahçe ve ana kapı, deniz tarafında taş teras, kayıkhane ve iskele var.\n\nZemin katta mutfak, sofa, yemek salonu ve Kerem’in odası; birinci katta çalışma odası, Nevzat ve Müjgân Vardarlı’nın ayrı yatak odaları, misafir odası ve ortak banyo bulunur. Ana merdivenin yanı sıra dar bir servis merdiveni vardır. Merdivenin dibindeki sahanlık mutfağa, arka koridora, sofaya giden servis geçidine ve teknik odaya açılır.",
+      "image": "loc-yali",
+      "plan": {
+        "width": 40,
+        "height": 22,
+        "rooms": [
+          {
+            "id": "bahce",
+            "label": "Bahçe ve ana kapı",
+            "x": 0,
+            "y": 0,
+            "w": 18,
+            "h": 4,
+            "outdoor": true
+          },
+          {
+            "id": "mutfak",
+            "label": "Mutfak",
+            "x": 0,
+            "y": 4,
+            "w": 6,
+            "h": 6
+          },
+          {
+            "id": "servis-z",
+            "label": "Servis merdiveni ve dip sahanlığı",
+            "x": 6,
+            "y": 4,
+            "w": 3,
+            "h": 8
+          },
+          {
+            "id": "gecit",
+            "label": "Servis geçidi",
+            "x": 9,
+            "y": 4,
+            "w": 2,
+            "h": 4
+          },
+          {
+            "id": "teknik",
+            "label": "Teknik oda (sahanlıkta)",
+            "x": 9,
+            "y": 8,
+            "w": 2,
+            "h": 3
+          },
+          {
+            "id": "sofa",
+            "label": "Sofa ve ana merdiven",
+            "x": 11,
+            "y": 4,
+            "w": 7,
+            "h": 7
+          },
+          {
+            "id": "kerem-oda",
+            "label": "Kerem’in odası",
+            "x": 0,
+            "y": 10,
+            "w": 6,
+            "h": 6
+          },
+          {
+            "id": "arka-koridor",
+            "label": "Arka koridor",
+            "x": 6,
+            "y": 12,
+            "w": 3,
+            "h": 4
+          },
+          {
+            "id": "salon",
+            "label": "Yemek salonu ve büyük salon",
+            "x": 9,
+            "y": 11,
+            "w": 9,
+            "h": 5
+          },
+          {
+            "id": "teras",
+            "label": "Deniz terası",
+            "x": 0,
+            "y": 16,
+            "w": 12,
+            "h": 3,
+            "outdoor": true
+          },
+          {
+            "id": "iskele",
+            "label": "Kayıkhane ve iskele",
+            "x": 12,
+            "y": 16,
+            "w": 6,
+            "h": 6,
+            "outdoor": true
+          },
+          {
+            "id": "misafir",
+            "label": "1. kat — Misafir odası (Leyla ve Tarık)",
+            "x": 21,
+            "y": 4,
+            "w": 6,
+            "h": 5
+          },
+          {
+            "id": "banyo",
+            "label": "1. kat — Ortak banyo",
+            "x": 21,
+            "y": 9,
+            "w": 6,
+            "h": 2
+          },
+          {
+            "id": "mujgan-oda",
+            "label": "1. kat — Müjgân Hanım’ın odası",
+            "x": 21,
+            "y": 11,
+            "w": 6,
+            "h": 5
+          },
+          {
+            "id": "servis-1",
+            "label": "1. kat — Servis merdiveni ve arka koridor",
+            "x": 27,
+            "y": 4,
+            "w": 3,
+            "h": 12
+          },
+          {
+            "id": "ust-sofa",
+            "label": "1. kat — Üst sofa",
+            "x": 30,
+            "y": 4,
+            "w": 9,
+            "h": 6
+          },
+          {
+            "id": "calisma",
+            "label": "1. kat — Çalışma odası",
+            "x": 30,
+            "y": 10,
+            "w": 5,
+            "h": 6
+          },
+          {
+            "id": "nevzat-oda",
+            "label": "1. kat — Nevzat Bey’in odası",
+            "x": 35,
+            "y": 10,
+            "w": 4,
+            "h": 6
+          }
+        ],
+        "doors": [
+          {
+            "x": 14.5,
+            "y": 4,
+            "label": "Ana kapı"
+          },
+          {
+            "x": 3,
+            "y": 4,
+            "label": "Mutfak bahçe kapısı"
+          },
+          {
+            "x": 6,
+            "y": 6,
+            "vertical": true,
+            "label": "Mutfak–sahanlık (yaylı, camlı kapı)"
+          },
+          {
+            "x": 9,
+            "y": 6,
+            "vertical": true,
+            "label": "Sahanlık–servis geçidi"
+          },
+          {
+            "x": 11,
+            "y": 6,
+            "vertical": true,
+            "label": "Servis geçidi–sofa"
+          },
+          {
+            "x": 9,
+            "y": 9.5,
+            "vertical": true,
+            "label": "Teknik oda kapısı (şifreli)"
+          },
+          {
+            "x": 7.5,
+            "y": 12,
+            "label": "Sahanlık–arka koridor"
+          },
+          {
+            "x": 3,
+            "y": 16,
+            "label": "Kerem’in odası–teras"
+          },
+          {
+            "x": 6,
+            "y": 14,
+            "vertical": true,
+            "label": "Kerem’in odası"
+          },
+          {
+            "x": 9,
+            "y": 14,
+            "vertical": true,
+            "label": "Salon–arka koridor"
+          },
+          {
+            "x": 7.5,
+            "y": 16,
+            "label": "Arka koridor–teras"
+          },
+          {
+            "x": 10.5,
+            "y": 16,
+            "label": "Salon–teras"
+          },
+          {
+            "x": 15,
+            "y": 16,
+            "label": "İskele kapısı"
+          },
+          {
+            "x": 14.5,
+            "y": 11,
+            "label": "Sofa–salon"
+          },
+          {
+            "x": 27,
+            "y": 6,
+            "vertical": true,
+            "label": "Misafir odası"
+          },
+          {
+            "x": 27,
+            "y": 10,
+            "vertical": true,
+            "label": "Banyo"
+          },
+          {
+            "x": 27,
+            "y": 13,
+            "vertical": true,
+            "label": "Müjgân Hanım’ın odası"
+          },
+          {
+            "x": 30,
+            "y": 6,
+            "vertical": true,
+            "label": "Servis–üst sofa"
+          },
+          {
+            "x": 30,
+            "y": 13,
+            "vertical": true,
+            "label": "Çalışma odası servis kapısı"
+          },
+          {
+            "x": 32.5,
+            "y": 10,
+            "label": "Çalışma odası ana kapı"
+          },
+          {
+            "x": 37,
+            "y": 10,
+            "label": "Nevzat Bey’in odası"
+          },
+          {
+            "x": 35,
+            "y": 13,
+            "vertical": true,
+            "label": "Çalışma–yatak odası"
+          }
+        ],
+        "windows": [
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 24,
+            "y": 4
+          },
+          {
+            "x": 24,
+            "y": 16
+          },
+          {
+            "x": 32.5,
+            "y": 16
+          },
+          {
+            "x": 37,
+            "y": 16
+          },
+          {
+            "x": 3,
+            "y": 16
+          }
+        ],
+        "markers": [
+          {
+            "x": 9,
+            "y": 1.2,
+            "label": "ZEMİN KAT",
+            "kind": "note"
+          },
+          {
+            "x": 33,
+            "y": 1.5,
+            "label": "BİRİNCİ KAT (zemin katın üstü; aynı yön)",
+            "kind": "note"
+          },
+          {
+            "x": 32,
+            "y": 12,
+            "label": "Ceset (masa başında)",
+            "kind": "body"
+          },
+          {
+            "x": 31,
+            "y": 15,
+            "label": "Kanepe ve üç kırlent",
+            "kind": "item"
+          },
+          {
+            "x": 10,
+            "y": 9.5,
+            "label": "Ana şalter panosu ve PoE anahtarı",
+            "kind": "item"
+          },
+          {
+            "x": 2,
+            "y": 5,
+            "label": "Eski sigorta kutusu (kullanım dışı)",
+            "kind": "item"
+          },
+          {
+            "x": 24,
+            "y": 10,
+            "label": "İlaç dolabı",
+            "kind": "item"
+          },
+          {
+            "x": 14.5,
+            "y": 0.5,
+            "label": "K1 Ana kapı",
+            "kind": "camera"
+          },
+          {
+            "x": 4,
+            "y": 2,
+            "label": "K2 Bahçe",
+            "kind": "camera"
+          },
+          {
+            "x": 16,
+            "y": 5,
+            "label": "K3 Sofa (ana merdiven ve servis geçidi kapısı)",
+            "kind": "camera"
+          },
+          {
+            "x": 7.5,
+            "y": 15,
+            "label": "K4 Arka koridor (sahanlığa ve teknik oda kapısına bakar)",
+            "kind": "camera"
+          },
+          {
+            "x": 2,
+            "y": 18,
+            "label": "K5 Teras",
+            "kind": "camera"
+          },
+          {
+            "x": 15,
+            "y": 21,
+            "label": "İskele kamerası (bataryalı, hafıza kartlı)",
+            "kind": "camera"
+          }
+        ]
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "f-cinayet",
+      "text": "Nevzat Vardarlı kalp krizinden değil, ağzı ve burnu çalışma odasındaki bordo kadife kırlentle kapatılarak öldürüldü."
+    },
+    {
+      "id": "f-ilac",
+      "text": "Nevzat Bey öldürülmeden önce alprazolamla uyuşturulmuştu; ilaç ıhlamur bardağındaydı, demlikte ve balda yoktu."
+    },
+    {
+      "id": "f-ilac-eksik",
+      "text": "Müjgân Hanım’ın ortak banyodaki alprazolam kutusundan tam bir blister (10 tablet) eksikti."
+    },
+    {
+      "id": "f-tepsi",
+      "text": "Ihlamur tepsisini 23:04’te çalışma odasına Tarık Sezgin götürdü."
+    },
+    {
+      "id": "f-sms",
+      "text": "Nevzat Bey 22:44’te Tarık Sezgin’e SMS attı; Tarık bunu ilk ifadesinde inkâr etti."
+    },
+    {
+      "id": "f-kesinti-ic",
+      "text": "Kesinti mahallede değil, yalının kendi tesisatındaydı; Kandilli’de sokak lambaları ve komşu yalılar aydınlıktı."
+    },
+    {
+      "id": "f-salter",
+      "text": "Ana şalter 23:37:12’de, teknik odaya girilerek elle indirildi."
+    },
+    {
+      "id": "f-kod00",
+      "text": "Teknik odanın kapısı 17:41’de, 23:36’da ve 23:57’de aynı kurulum koduyla (00) açıldı."
+    },
+    {
+      "id": "f-kod-sahibi",
+      "text": "Kurulum kodu (00) 2023’ten beri yalnızca Tarık Sezgin’deydi."
+    },
+    {
+      "id": "f-kamera4",
+      "text": "Arka koridor kamerası (K4), teknik odaya kod 00 ile girildiği dakikada, 17:42’de kablosu çıkarılarak devre dışı bırakıldı."
+    },
+    {
+      "id": "f-olum-saati",
+      "text": "Ölüm 23:41 ile 23:45 arasında, karartmanın ortasında gerçekleşti."
+    },
+    {
+      "id": "f-rehin",
+      "text": "Leyla’nın %8 holding payı, Sezgin Mimarlık’ın 18,5 milyon TL’lik kredisine rehin gösterilmişti."
+    },
+    {
+      "id": "f-imza-sahte",
+      "text": "Rehin sözleşmesindeki Leyla imzası sahteydi; parafların Tarık’ın eli ürünü olması kuvvetle muhtemeldi."
+    },
+    {
+      "id": "f-sezgin-borc",
+      "text": "Sezgin Mimarlık krediyi 30 Ocak’ta ödeyemedi; Payidar rehinli payları paraya çevirmekle tehdit ediyordu."
+    },
+    {
+      "id": "f-silme",
+      "text": "10 Şubat 02:09’da alarm hafızası panel başında kod 00 ile silindi; arka koridordaki kişinin sağ bileği sargılıydı."
+    },
+    {
+      "id": "f-bilek",
+      "text": "Tarık’ın sağ bileği gece yarısı sarıldı; “kestiğini” söylediği banyo cam kırıklarında kan yoktu."
+    },
+    {
+      "id": "f-dna",
+      "text": "Nevzat Bey’in tırnak altındaki doku ve kırlent fermuarındaki dokunma izi Tarık Sezgin’e aitti."
+    },
+    {
+      "id": "f-leyla-teras",
+      "text": "Leyla 23:17–00:02 arasında terasta Londra ile görüntülü görüşmedeydi."
+    },
+    {
+      "id": "f-kerem-iskele",
+      "text": "Kerem 23:39–23:55 arasında iskeledeydi ve salondan aldığı tabloyu tekneyle gelen bir antikacıya verdi."
+    },
+    {
+      "id": "f-mujgan-mutfak",
+      "text": "Müjgân Hanım 23:40’tan ışıklar gelene kadar Hatice ve Zeynep’le mutfaktaydı."
+    },
+    {
+      "id": "f-orhan-yol",
+      "text": "Orhan Tekinalp 23:27’de FSM Köprüsü’nden Avrupa yakasına geçmişti."
+    },
+    {
+      "id": "f-deniz-taksi",
+      "text": "Deniz Ural 23:27’de taksiye bindi ve durmadan Cihangir’e gitti."
+    },
+    {
+      "id": "f-riza-kapi",
+      "text": "Rıza Kılıç karartma boyunca ana kapıda catering aracının başındaydı."
+    },
+    {
+      "id": "f-whatsapp",
+      "text": "Nevzat Bey, 5 Şubat’ta Tarık’ı sahte imza konusunda uyarmış ve pazartesi Leyla’ya ve savcılığa söyleyeceğini yazmıştı."
+    },
+    {
+      "id": "f-blister",
+      "text": "Müjgân Hanım’ın kutusundan eksik blister, altı tableti kullanılmış hâlde Tarık’ın arabasında bulundu."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e-oyi-rapor",
+      "title": "Olay yeri inceleme raporu",
+      "summary": "Olay Yeri İnceleme Şube Müdürlüğü’nün yalıdaki ilk incelemesi.",
+      "people": [
+        "nevzat",
+        "orhan",
+        "tarik",
+        "riza"
+      ],
+      "reveals": [
+        "f-cinayet"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-08T02:05",
+          "text": "Olay yeri inceleme ekibi yalıya ulaştı."
+        }
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "scene",
+        "agency": "İstanbul Emniyet Müdürlüğü Olay Yeri İnceleme Şube Müdürlüğü",
+        "docNo": "OYİ-2026/0208-112 · Soruşturma No: 2026/4127 (İstanbul Anadolu C. Başsavcılığı)",
+        "datetime": "08.02.2026 02:05–05:40",
+        "heading": "Kandilli, Vardarlı Yalısı — şüpheli ölüm olay yeri incelemesi",
+        "sections": [
+          {
+            "title": "İntikal ve genel durum",
+            "text": "Ekip 02:05’te yalıya ulaştı. Hava lodoslu ve yağışlı. Yalıda elektrik vardı; ailenin beyanına göre 23:37–23:58 arasında elektrik kesintisi yaşanmış. Aile bireyleri ve personel zemin kattaki büyük salonda bir arada tutuldu. 112 ekibi 00:39’da ulaşmış, 00:44’te ölümü tespit etmiş; göz akındaki kanamalar ve ağız çevresindeki bulgular nedeniyle olguyu 00:51’de adli olarak bildirmişti. Aile, telefonla tarif edilen kalp masajını, kişiyi koltuktan indiremedikleri için yapamadıklarını beyan etti. Ceset yerinden oynatılmamıştı."
+          },
+          {
+            "title": "Çalışma odası (birinci kat, deniz cephesi)",
+            "text": "Maktul Nevzat Vardarlı, maun çalışma masasının başındaki deri koltukta, gövdesi sola eğik, başı sol omzuna düşmüş hâlde bulundu. Üzerinde lacivert ceket ve beyaz gömlek vardı; sol bileğinde akıllı saat takılıydı.\n\nMasada: dibinde iki üç yudum ıhlamur kalmış ince belli bir çay bardağı ve tabağı, okuma gözlüğü, ekranı kilitli cep telefonu, açık bir dosya (Vardarlı Denizcilik faaliyet raporu) ve masa üstü ajandası. Yan sehpada boş bir servis tepsisi ve bal kâsesi.\n\nDuvar dibindeki yeşil kadife kanepede üç bordo kadife kırlent var. Ortadaki kırlentin fermuarlı kenarı diğer ikisinin aksine üste dönük; ön yüzünde kurumuş, açık renkli bir leke görüldü. Masanın altında “O.T.” harfleri işlenmiş altın bir kol düğmesi bulundu.\n\nPencereler kapalı ve kilitli. Odanın üst sofaya açılan ana kapısı da servis koridoruna açılan ikinci kapısı da kilitsiz. Zorlama izi yok."
+          },
+          {
+            "title": "Cesedin ilk dış görünümü",
+            "text": "Her iki göz kapağı iç yüzünde ve göz aklarında iğne başı büyüklüğünde kanamalar, burun kanatları çevresinde ve üst dudakta hafif kızarıklık görüldü. Sağ elin işaret ve orta parmak tırnakları altında koyu renkli kalıntı fark edildi; her iki elden tırnak altı sürüntü örneği alındı ve eller torbalandı."
+          },
+          {
+            "title": "Diğer mahaller",
+            "text": "Büyük salonda, şömine üstündeki duvarda yaklaşık 60x80 cm’lik bir tablonun yeri boş; askı çivisi yerinde. Aile, buradaki “Kandilli Sabahı” adlı yağlıboya tablonun akşam yemeğinde yerinde olduğunu, şimdi bulunamadığını beyan etti.\n\nBirinci kattaki ortak banyonun çöp kovasında kırık bir su bardağının parçaları bulundu.\n\nServis merdiveninin dibindeki sahanlığa açılan teknik odada ana şalter devrede, panoda hasar yok. Kapıda şifreli tuş takımı var. Kamera sisteminin besleme anahtarına (PoE) bağlı kablolardan K4 (arka koridor) kablosunun yuvasından çıkarılmış hâlde olduğu görüldü. Mutfaktaki eski sigorta kutusunun restorasyonda devre dışı bırakıldığı, içinin boş olduğu tespit edildi."
+          },
+          {
+            "title": "Alınan deliller",
+            "text": "1) Çay bardağı ve tabağı (içerik dâhil). 2) Mutfaktaki demlik ve bal kavanozu. 3) Ortadaki bordo kırlent. 4) “O.T.” monogramlı kol düğmesi. 5) Ortak banyodaki cam kırıkları. 6) Tırnak altı sürüntü örnekleri. 7) Maktulün cep telefonu ve akıllı saati. 8) Kamera kayıt cihazı (DVR) imajı alındı. Çalışma odası ve teknik oda inceleme sonunda mühürlendi; mühürler, incelemeler tamamlandığı için 9 Şubat 10:30’da savcılık talimatıyla kaldırıldı."
+          },
+          {
+            "title": "Yalıda bulunanlar",
+            "text": "Olay gecesi yalıda bulunanlar (aile ve personel beyanı): Nevzat Vardarlı, eşi Müjgân Vardarlı, oğlu Kerem Vardarlı (zemin kat), kızı Leyla Vardarlı Sezgin ve eşi Tarık Sezgin (16:00 sularında gelmişler, birinci kattaki misafir odasında kalıyorlar), aşçı Hatice Yener, bekçi Rıza Kılıç ve catering garsonu Zeynep Arıkan. Yemeğe ayrıca kurucu ortak Orhan Tekinalp (19:30’da şoförüyle geldi, 23:15 sularında ayrıldı), anı kitabının yazarı Deniz Ural (17:30’da geldi, 23:25 sularında taksiyle ayrıldı) ve catering şefiyle şoförü (23:50 sularında servis aracıyla ayrıldı) katıldı. Zeynep Arıkan’ın olay yerinde yalnızca kimlik tespiti yapıldı; ifadesi sonradan alınacaktır."
+          },
+          {
+            "title": "Değerlendirme",
+            "text": "Ölüm şüpheli kabul edilmiş; Cumhuriyet Savcısı Ozan Keskin’in talimatıyla ceset otopsi için Adli Tıp Kurumu Morg İhtisas Dairesi’ne gönderilmiştir. Kesin ölüm nedeni otopsi raporuyla belirlenecektir."
+          }
+        ],
+        "signature": "Komiser Yardımcısı Serkan Ateş, OYİ Şube Müdürlüğü"
+      }
+    },
+    {
+      "id": "e-112-kayit",
+      "title": "112 acil çağrı kaydı",
+      "summary": "Gece yarısından sonra yalıdan yapılan acil çağrının ses kaydı ve dökümü.",
+      "people": [
+        "tarik",
+        "nevzat",
+        "mujgan",
+        "leyla"
+      ],
+      "reveals": [
+        "f-bilek"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-08T00:23",
+          "text": "Tarık Sezgin 112’yi aradı."
+        }
+      ],
+      "doc": {
+        "kind": "audio",
+        "variant": "emergency-call",
+        "source": "112 Acil Çağrı Merkezi ses kaydı, İstanbul — Vaka No: 112-ÜSK-2026-0208-0047",
+        "datetime": "08.02.2026 00:23:40",
+        "ambience": "Kapalı bir oda; arkada bir kadının hıçkırıkları, uzakta rüzgârın uğultusu.",
+        "lines": [
+          {
+            "name": "Çağrı karşılayıcı",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Profesyonel, sakin, tane tane"
+            },
+            "text": "112 Acil, dinliyorum."
+          },
+          {
+            "character": "tarik",
+            "text": "İyi akşamlar. Kayınpederim… nefes almıyor. Nabzını alamıyorum.",
+            "delivery": "nefes nefese ama kendini toplamaya çalışarak"
+          },
+          {
+            "name": "Çağrı karşılayıcı",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Profesyonel, sakin, tane tane"
+            },
+            "text": "Adresinizi söyler misiniz?"
+          },
+          {
+            "character": "tarik",
+            "text": "Kandilli. Vardarlı Yalısı, sahil yolu. Sokak çok dar, ambulans girmekte zorlanır, kapıya birini çıkarırım."
+          },
+          {
+            "name": "Çağrı karşılayıcı",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Profesyonel, sakin, tane tane"
+            },
+            "text": "Hasta kaç yaşında, şu an nerede?"
+          },
+          {
+            "character": "tarik",
+            "text": "Yetmiş. Bugün yetmiş oldu. Çalışma odasında, koltukta oturuyor. Kalp hastası, ilaç kullanıyor."
+          },
+          {
+            "name": "Çağrı karşılayıcı",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Profesyonel, sakin, tane tane"
+            },
+            "text": "Ne zamandır bu durumda?"
+          },
+          {
+            "character": "tarik",
+            "text": "Bilmiyorum. Şimdi bulduk. Eşi buldu, birkaç dakika önce.",
+            "delivery": "duraksayarak",
+            "pause": 1.5
+          },
+          {
+            "name": "Çağrı karşılayıcı",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Profesyonel, sakin, tane tane"
+            },
+            "text": "Onu koltuktan sert bir zemine, yere indirebilir misiniz? Kalp masajını tarif edeceğim."
+          },
+          {
+            "character": "tarik",
+            "text": "Deniyoruz… Ağır. Elim de… Bir saniye.",
+            "delivery": "zorlanarak"
+          },
+          {
+            "character": "leyla",
+            "text": "Tarık, bileğindeki sargı kan olmuş, bırak ben tutayım.",
+            "delivery": "uzaktan, titreyen bir sesle",
+            "pause": 1
+          },
+          {
+            "character": "mujgan",
+            "text": "Nevzat… Nevzat, aç gözünü…",
+            "delivery": "arka planda, ağlayarak"
+          },
+          {
+            "character": "tarik",
+            "text": "Akşam elektrikler gitmişti. Fırtına. Bütün mahalle karanlıktı, belki ondan… telefonu duyamadı, bilmiyorum, ne diyorum.",
+            "delivery": "kendi kendine konuşur gibi"
+          },
+          {
+            "name": "Çağrı karşılayıcı",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Profesyonel, sakin, tane tane"
+            },
+            "text": "Beyefendi, ekibimiz yola çıktı. İndiremiyorsanız zorlamayın. Başını hafifçe geriye eğin, ağzında bir şey var mı bakın, telefonu kapatmayın."
+          },
+          {
+            "character": "tarik",
+            "text": "Tamam. Ağzı boş. Bekliyoruz… Biri kapıya insin!",
+            "pause": 0.5,
+            "delivery": "sesini yükselterek, odadakilere"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-kroki",
+      "title": "Yalı krokisi",
+      "summary": "Vardarlı Yalısı’nın zemin ve birinci katı, kameralar ve önemli noktalar.",
+      "people": [],
+      "reveals": [],
+      "doc": {
+        "kind": "floorplan",
+        "location": "yali",
+        "caption": "OYİ tarafından restorasyon projesi üzerinden çizilmiştir. Solda zemin kat, sağda birinci kat; birinci kat zemin katın tam üstündedir. Üst kenar kara (sokak) tarafı, alt kenar deniz tarafıdır. Servis merdiveni birinci kattaki arka koridordan zemin kattaki dip sahanlığına iner. Sahanlık; mutfağa (yaylı, camlı kapı), arka koridora, servis geçidi üzerinden sofaya ve şifreli kapısıyla teknik odaya açılır. K4 arka koridordan sahanlığa ve teknik oda kapısına bakar. Birinci katta kamera yoktur."
+      }
+    },
+    {
+      "id": "e-foto-calisma",
+      "title": "Çalışma odası, genel görünüm",
+      "summary": "Olay yeri fotoğrafı: ceset ve masa.",
+      "people": [
+        "nevzat"
+      ],
+      "reveals": [],
+      "doc": {
+        "kind": "photo",
+        "image": "scene-study",
+        "caption": "Fotoğraf 3/41. Maktul masa başındaki koltukta. Delil 1: çay bardağı. Delil 3: kanepedeki ortadaki kırlent. Delil 4: masa altındaki kol düğmesi.",
+        "tag": "OYİ-2026/0208-112 · F-03"
+      }
+    },
+    {
+      "id": "e-ifade-tarik-1",
+      "title": "Tarık Sezgin’in ilk ifadesi",
+      "summary": "Damadın olay gecesi alınan tanık ifadesi.",
+      "people": [
+        "tarik",
+        "nevzat",
+        "leyla",
+        "kerem",
+        "mujgan",
+        "hatice"
+      ],
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2026-02-07T22:45",
+          "text": "Tarık Sezgin’e göre: Odasına çıktı."
+        },
+        {
+          "at": "2026-02-07T23:57",
+          "text": "Tarık Sezgin’e göre: Teknik odada ana şalteri kaldırdı."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "tarik",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "Vardarlı Yalısı, Kandilli (yemek salonu)",
+        "datetime": "08.02.2026 03:10",
+        "qa": [
+          {
+            "q": "Akşamki yemeği ve sonrasını anlatır mısınız?",
+            "a": "Leyla’yla öğleden sonra dört gibi geldik, hafta sonu kalacaktık. Yemek sekizde başladı, pasta ona doğru geldi. Babam, yani kayınpederim, kısa bir konuşma yaptı. Sonra Orhan Bey’le çalışma odasına çıktılar. Ben bir süre salonda Kerem’le oturdum, on bire çeyrek kala odamıza çıktım, kitap okuyordum."
+          },
+          {
+            "q": "Nevzat Bey’i en son ne zaman gördünüz?",
+            "a": "Pastadan sonra, onu tebrik edip sarıldığımda. Saat ona on vardı herhalde. Ondan sonra görmedim; Orhan Bey’le yukarıdaydı, sonra da rahatsız etmek istemedik."
+          },
+          {
+            "q": "O akşam kendisiyle telefonla ya da mesajla görüştünüz mü?",
+            "a": "Hayır. Aynı evdeydik, ne gerek var."
+          },
+          {
+            "q": "Eşiniz o sırada neredeydi?",
+            "a": "Leyla bir iş görüşmesi yapacağını söyleyip aşağı indi, terasa çıktı sanırım. Şirket işleri, hafta sonu da bitmez."
+          },
+          {
+            "q": "Elektrik kesildiğinde neredeydiniz, ne yaptınız?",
+            "a": "Odadaydım. Işıklar bir anda gitti. Pencereden baktım; Kandilli’nin tamamı karanlıktı, lodos yüzünden hat düştü diye düşündüm. Bir süre bekledim, gelir diye. Gelmeyince telefonun ışığıyla aşağı indim, saat on ikiye beş vardı herhalde."
+          },
+          {
+            "q": "Aşağıda ne oldu?",
+            "a": "Servis merdiveninden indim. Mutfak kapısının camından baktım, Kerem eski sigorta kutusunu kurcalıyordu; o kutu restorasyondan beri boş. Ben sahanlıktaki teknik odaya gittim. Kapıda şifreli kilit var, restorasyondan kalma kodumla açtım. Ana şalter inikti, kaldırdım, ışıklar geldi."
+          },
+          {
+            "q": "Şalterin neden indiğini düşünüyorsunuz?",
+            "a": "Hat düşünce, şebeke gelip gittiğinde bazen atar. Yaşlı bir bina, tesisat yeni ama yük fazla."
+          },
+          {
+            "q": "Elinizdeki sargı nedir?",
+            "a": "Karanlıkta ortak banyoda elimi yüzümü yıkarken bir bardak düştü, kırıldı; toplarken bileğimi kestim. Hatice Hanım sardı."
+          },
+          {
+            "q": "Cesedi nasıl öğrendiniz?",
+            "a": "On ikiyi çeyrek geçe gibi Müjgân Hanım’ın çığlığını duydum. Koştum. Babam koltukta, başı yana düşmüştü. Nabzına baktım, yoktu. 112’yi ben aradım."
+          },
+          {
+            "q": "Kayınpederinizle ilişkiniz nasıldı?",
+            "a": "Çok iyiydi. Bana oğlu gibi davranırdı. Yalıyı bana emanet etti, üç yıl birlikte çalıştık."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği, CMK m. 45 uyarınca yakınlık nedeniyle tanıklıktan çekinme hakkı bulunduğu hatırlatıldı; çekinmeyeceğini beyan etti. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-mujgan-1",
+      "title": "Müjgân Vardarlı’nın ilk ifadesi",
+      "summary": "Cesedi bulan eşin olay gecesi alınan ifadesi.",
+      "people": [
+        "mujgan",
+        "nevzat",
+        "tarik"
+      ],
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2026-02-08T00:18",
+          "text": "Müjgân Vardarlı, Nevzat Bey’i çalışma odasında hareketsiz buldu."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "mujgan",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "Vardarlı Yalısı, Kandilli (yemek salonu)",
+        "datetime": "08.02.2026 03:55",
+        "qa": [
+          {
+            "q": "Yemekten sonra ne yaptınız?",
+            "a": "Yoruldum. Pastadan sonra bir süre misafirlerle oturdum, sonra odama çıktım. İlacımı aldım, on buçuk gibi uyudum."
+          },
+          {
+            "q": "Hangi ilaç?",
+            "a": "Uyku için. Yıllardır kullanıyorum, doktorum yazıyor."
+          },
+          {
+            "q": "Elektrik kesintisini fark ettiniz mi?",
+            "a": "Hayır. İlaçla uyuyunca top patlasa duymam."
+          },
+          {
+            "q": "Ne zaman uyandınız?",
+            "a": "On ikiyi çeyrek geçe gibi. Nevzat hâlâ yatmamıştı, yatak odasının ışığı yanmıyordu. Çalışma odasına gittim, iyi geceler diyecektim."
+          },
+          {
+            "q": "Ne gördünüz?",
+            "a": "Koltukta uyuyor sandım. Elini tuttum, serindi. Başını kaldırmak istedim, düştü. Bağırmışım, hatırlamıyorum. Sonra Tarık geldi."
+          },
+          {
+            "q": "Eşinizin o akşam bir sıkıntısı var mıydı?",
+            "a": "Konuşmasında “Pazartesi bazı yanlışları düzelteceğim” dedi. Herkes birbirine baktı. Ne demek istediğini bilmiyorum."
+          },
+          {
+            "q": "Eşinizle ilişkiniz nasıldı?",
+            "a": "On beş yıllık evliyiz. Her evlilik gibi. Ayrı odalarda yatıyoruz ama o onun horlamasından."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği, CMK m. 45 uyarınca yakınlık nedeniyle tanıklıktan çekinme hakkı bulunduğu hatırlatıldı; çekinmeyeceğini beyan etti. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-hatice-1",
+      "title": "Aşçı Hatice Yener’in ifadesi",
+      "summary": "Yirmi yedi yıllık aşçının gecenin akışına dair anlatımı.",
+      "people": [
+        "hatice",
+        "nevzat",
+        "mujgan",
+        "kerem",
+        "tarik",
+        "riza",
+        "zeynep"
+      ],
+      "reveals": [
+        "f-mujgan-mutfak",
+        "f-bilek"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T22:58",
+          "text": "Hatice Hanım ıhlamur tepsisini mutfak tezgâhına bıraktı."
+        },
+        {
+          "at": "2026-02-07T23:10",
+          "text": "Hatice Hanım mutfağa döndüğünde tepsi yerinde değildi."
+        },
+        {
+          "at": "2026-02-07T23:40",
+          "text": "Müjgân Hanım karanlıkta mutfağa geldi (Hatice Hanım’a göre)."
+        },
+        {
+          "at": "2026-02-08T00:05",
+          "text": "Hatice Hanım, Tarık Bey’in sağ bileğini sardı."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "hatice",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "Vardarlı Yalısı, Kandilli (mutfak)",
+        "datetime": "08.02.2026 04:20",
+        "qa": [
+          {
+            "q": "Nevzat Bey’in gece alışkanlıkları nelerdi?",
+            "a": "Her gece saat on birde çalışma odasına ıhlamur götürülür. İnce belli bardakta, yanında bal. Yirmi yıldır böyle. Doktor konyağı yasakladı, ıhlamura döndü."
+          },
+          {
+            "q": "Dün gece ıhlamuru siz mi götürdünüz?",
+            "a": "Hazırladım ama ben götürmedim. Bey on bire on kala gibi bana mesaj attı, “Hatice, ıhlamur” diye. On bire iki kala demledim, bardağa koydum, tabağını kapattım, tepsiye bal kâsesiyle koydum, tezgâha bıraktım. Tepsiyle tabağı dolaptan yeni çıkarmıştım, akşam hiç kullanılmamıştı. Sonra yemek salonuna örtüleri toplamaya gittim."
+          },
+          {
+            "q": "Döndüğünüzde?",
+            "a": "On biri on geçe döndüm, tepsi yoktu. Zeynep kızımız götürdü sandım, servisten yardım ediyordu. Sormadım, işim çoktu."
+          },
+          {
+            "q": "Elektrik kesildiğinde neredeydiniz?",
+            "a": "Mutfakta, Zeynep’le bulaşıktaydık. Bir anda zifiri karanlık. Mum aradık. Birkaç dakika sonra Müjgân Hanım telefonunun ışığıyla geldi, “Ne oldu Hatice?” dedi. Saat on ikiye yirmi vardı diye hatırlıyorum, fırının saatine son baktığımda otuz beşti. Işıklar gelene kadar üçümüz mutfaktaydık, mumla oturduk."
+          },
+          {
+            "q": "Müjgân Hanım uyuyor değil miydi?",
+            "a": "Bilmem. Giyinikti, hırkası üstündeydi. Telefonu elindeydi."
+          },
+          {
+            "q": "Sigorta kutusu nerede?",
+            "a": "Eskiden mutfaktaydı, şuradaki gri kutu. Restorasyondan beri boş, süs gibi duruyor. Yenisi merdiven dibindeki sahanlıkta, kapısı kodlu odada. Rıza Efendi girer çıkar. Kimin kodu var bilmem, ben girmem. Mutfağın sahanlığa açılan kapısı yaylıdır, hep kapalı durur; bulaşık makinesi çalışırken dışarıda olanı duymayız."
+          },
+          {
+            "q": "Karanlıkta mutfağa başka kim geldi?",
+            "a": "Işıklar gelmeden hemen önce Kerem Bey geldi, telefonun ışığıyla o eski kutuyu açtı, “Boşmuş bu” dedi. Arkasından kapının camında bir telefon ışığı geçti, sahanlıktaki odaya doğru gitti. Bir iki dakika sonra ışıklar geldi. Sonradan öğrendim, Tarık Bey’miş, şalteri o kaldırmış."
+          },
+          {
+            "q": "Işıklar geldikten sonra?",
+            "a": "Beş dakika sonra Tarık Bey mutfağa geldi, sağ bileği kanıyordu. “Banyoda bardak kırdım” dedi. Ecza dolabından gazlı bezle sardım. Bileğin iç tarafında ince çizikler vardı, derin değildi. Elleri titriyordu, karanlıkta düşmüş, kalkmış gibiydi."
+          },
+          {
+            "q": "Cesedin bulunması?",
+            "a": "On ikiyi çeyrek geçe Müjgân Hanım yukarı çıktı. Üç dört dakika sonra çığlığı duyduk."
+          },
+          {
+            "q": "Salondaki tablo?",
+            "a": "Yemekte yerindeydi, pasta servisinde baktım. Sabah gördüm ki yok. Kim alır, bilmiyorum."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği hatırlatıldı. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-kerem-1",
+      "title": "Kerem Vardarlı’nın ifadesi",
+      "summary": "Zemin katta oturan oğulun olay gecesi ifadesi.",
+      "people": [
+        "kerem",
+        "nevzat",
+        "tarik"
+      ],
+      "reveals": [],
+      "doc": {
+        "kind": "statement",
+        "person": "kerem",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "Vardarlı Yalısı, Kandilli (yemek salonu)",
+        "datetime": "08.02.2026 04:45",
+        "qa": [
+          {
+            "q": "Yemekten sonra ne yaptınız?",
+            "a": "Bir süre salonda Tarık Abi’yle oturdum, sonra odama geçtim. Kulaklıkla oyun oynuyordum."
+          },
+          {
+            "q": "Elektrik kesildiğinde?",
+            "a": "Ekran kapandı tabii. Hemen telefonun ışığını açıp mutfağa gittim, eski sigorta kutusuna baktım. Boşmuş. Sonra Tarık Abi geldi, o yeni panonun yerini biliyor, gitti açtı."
+          },
+          {
+            "q": "“Hemen” dediğiniz kaç dakika?",
+            "a": "Bilmiyorum, bir iki dakika. Karanlıkta önümü göremedim, odadan çıkana kadar."
+          },
+          {
+            "q": "Yeni panonun yerini bilmiyor muydunuz?",
+            "a": "Hayır. Restorasyonda her şeyin yeri değişti. Ben o işlere karışmam."
+          },
+          {
+            "q": "Babanızla ilişkiniz nasıldı?",
+            "a": "İyiydi. Bazen tartışırdık, her baba oğul gibi."
+          },
+          {
+            "q": "Babanızın konuşmasındaki “düzelteceğim yanlışlar” neydi sizce?",
+            "a": "Bilmem. Belki benim harcadığım paralardan bahsediyordu. Belki şirket. Babam lafı dolandırırdı."
+          },
+          {
+            "q": "Salondaki tablo kayıp. Bir bilginiz var mı?",
+            "a": "Hayır. Ben de sabah duydum. Ev kalabalıktı, catering’ciler girdi çıktı."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği, CMK m. 45 uyarınca yakınlık nedeniyle tanıklıktan çekinme hakkı bulunduğu hatırlatıldı; çekinmeyeceğini beyan etti. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-leyla-1",
+      "title": "Leyla Vardarlı Sezgin’in ilk ifadesi",
+      "summary": "Kızın olay gecesi alınan ifadesi.",
+      "people": [
+        "leyla",
+        "nevzat",
+        "tarik",
+        "kerem"
+      ],
+      "reveals": [],
+      "doc": {
+        "kind": "statement",
+        "person": "leyla",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "Vardarlı Yalısı, Kandilli (yemek salonu)",
+        "datetime": "08.02.2026 05:05",
+        "qa": [
+          {
+            "q": "Babanızı en son ne zaman gördünüz?",
+            "a": "Pastadan sonra. Konuşmasını yaptı, herkesi tek tek öptü. Sonra Orhan Amca’yla yukarı çıktılar."
+          },
+          {
+            "q": "Siz ne yaptınız?",
+            "a": "Biraz misafirlerle oturdum. On bir gibi odamıza çıktım. Tarık’la odamızdaydık."
+          },
+          {
+            "q": "Elektrik kesildiğinde de mi?",
+            "a": "Evet. Bir süre bekledik, gelmeyince Tarık aşağı indi, şalteri kaldırdı."
+          },
+          {
+            "q": "Eşiniz, sizin terasta bir iş görüşmesi yaptığınızı söylüyor.",
+            "a": "Kısa bir telefon görüşmesi yaptım, sonra yukarı çıktım. Tarık karıştırıyor olmalı. Gecenin bir yarısı, kimse saatlere bakmıyordu."
+          },
+          {
+            "q": "Babanızın konuşmasında söylediği “Pazartesi düzelteceğim yanlışlar” neydi?",
+            "a": "Babam yetmiş yaşına girdi, geçmişle hesaplaşıyordu. Bir anı kitabı yazdırıyordu. Sanırım onu kastetti."
+          },
+          {
+            "q": "Şirkette bir anlaşmazlık var mıydı?",
+            "a": "Her büyük şirkette olduğu kadar. Babam kurucuydu, ben yöneticiyim. Bazı konularda farklı düşünüyorduk."
+          },
+          {
+            "q": "Babanızın düşmanı var mıydı?",
+            "a": "Kırk yıl iş yapmış biri. Ama bu evde, bu gece, kimse… Doktorlar kalp demedi mi?"
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği, CMK m. 45 uyarınca yakınlık nedeniyle tanıklıktan çekinme hakkı bulunduğu hatırlatıldı; çekinmeyeceğini beyan etti. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-orhan-1",
+      "title": "Orhan Tekinalp’in ilk ifadesi",
+      "summary": "Kurucu ortağın, kurbanla çalışma odasındaki görüşmeye dair ifadesi.",
+      "people": [
+        "orhan",
+        "nevzat"
+      ],
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2026-02-07T22:12",
+          "text": "Nevzat Vardarlı ve Orhan Tekinalp çalışma odasına çıktı."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "orhan",
+        "capacity": "tanık",
+        "takenBy": "Komiser Yardımcısı Mert Kaya, Cinayet Büro Amirliği",
+        "place": "Etiler, Orhan Tekinalp’in konutu",
+        "datetime": "08.02.2026 10:30",
+        "qa": [
+          {
+            "q": "Dün akşam Nevzat Bey’le çalışma odasında ne konuştunuz?",
+            "a": "Eski günleri. Atölyeyi, ilk ihracatı. Kitap meselesi. Kırk yıllık arkadaşız, yetmiş yaşına girmiş, duygusaldı."
+          },
+          {
+            "q": "Ne kadar kaldınız?",
+            "a": "Yarım saat kadar. On biri çeyrek geçe şoförüm Sabri’yle çıktım, eve geldim. On ikiye çeyrek kala evdeydim."
+          },
+          {
+            "q": "Odadan çıktığınızda Nevzat Bey nasıldı?",
+            "a": "İyiydi. Yorgundu ama iyiydi. Masasında bir dosyaya bakıyordu."
+          },
+          {
+            "q": "Odadan çıktıktan sonra hemen gitmediniz. Ne yaptınız?",
+            "a": "Aşağıda salonda bir kahve içtim. Kerem’le, Tarık’la iki laf ettim. Sonra kalktım."
+          },
+          {
+            "q": "Masanın altında “O.T.” işlemeli bir kol düğmesi bulundu.",
+            "a": "Benimdir. Eve gelince birinin eksik olduğunu gördüm. Odada düşmüş demek. Ne olacak bunda?"
+          },
+          {
+            "q": "Çalışma odasında bir tartışma oldu mu?",
+            "a": "Hayır. Ne tartışması? Yetmiş yaşındaki adama doğum gününde kim bağırır?"
+          },
+          {
+            "q": "Nevzat Bey’in yazdırdığı anı kitabı hakkında ne biliyorsunuz?",
+            "a": "Gençlik hatıraları. Deniz Hanım diye bir kız yazıyor. Ben pek ilgilenmedim."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği hatırlatıldı. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-deniz-1",
+      "title": "Deniz Ural’ın ifadesi",
+      "summary": "Anı kitabını yazan misafirin ifadesi.",
+      "people": [
+        "deniz",
+        "nevzat",
+        "orhan"
+      ],
+      "reveals": [],
+      "doc": {
+        "kind": "statement",
+        "person": "deniz",
+        "capacity": "tanık",
+        "takenBy": "Komiser Yardımcısı Mert Kaya, Cinayet Büro Amirliği",
+        "place": "Cihangir, Deniz Ural’ın konutu",
+        "datetime": "08.02.2026 12:15",
+        "qa": [
+          {
+            "q": "Nevzat Bey’le nasıl tanıştınız?",
+            "a": "Bir yayınevinin önerisiyle. Kasım’da başladık, haftada bir görüşüyorduk. On iki oturum yaptık, hepsini kaydettim."
+          },
+          {
+            "q": "Kitap neyi anlatıyor?",
+            "a": "Hayatını. Bayrampaşa’daki atölyeden bugüne. Ama son haftalarda kitabın yönü değişti; eski bir olayı, açıkça anlatmak istiyordu."
+          },
+          {
+            "q": "Hangi olayı?",
+            "a": "Bunu ailesine ve avukatına kendisi söyleyecekti. Kitap yayımlanmadan önce benim söylemem doğru olmaz."
+          },
+          {
+            "q": "Dün akşam ne zaman ayrıldınız?",
+            "a": "On biri yirmi beş geçe çıktım, kapıda taksi bekliyordu, uygulamadan çağırmıştım. On ikiyi biraz geçe evdeydim."
+          },
+          {
+            "q": "Ayrılmadan önce Nevzat Bey’i gördünüz mü?",
+            "a": "Hayır, Orhan Bey’le yukarıdaydı. Yukarıdan yüksek sesler geliyordu, çıkmadım."
+          },
+          {
+            "q": "Yüksek sesler?",
+            "a": "Erkek sesleri, tartışma gibi. On buçuk sularında. Kelimeleri duymadım."
+          },
+          {
+            "q": "Neden bu iş için sizi seçti?",
+            "a": "Yayınevi önerdi, örnek yazılarımı beğenmiş. Ailemin bu işle hiçbir ilgisi yok, sorunuz buysa."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği hatırlatıldı. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-riza-1",
+      "title": "Bekçi Rıza Kılıç’ın ifadesi",
+      "summary": "Yalının bekçisinin kapı, kameralar ve teknik oda hakkındaki anlatımı.",
+      "people": [
+        "riza",
+        "tarik",
+        "kerem",
+        "nevzat"
+      ],
+      "reveals": [
+        "f-riza-kapi"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:31",
+          "text": "Rıza Kılıç catering aracını uğurlamak için ana kapıya çıktı."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "riza",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "Vardarlı Yalısı, Kandilli (kayıkhane lojmanı)",
+        "datetime": "08.02.2026 05:30",
+        "qa": [
+          {
+            "q": "Elektrik kesildiğinde neredeydiniz?",
+            "a": "Ana kapıdaydım. Catering minibüsü çıkacaktı, sokak dar, karşıya biri araba park etmiş, minibüs dönemedi. Fenerle şoföre yol gösteriyordum. Bir anda arkamda yalı karardı."
+          },
+          {
+            "q": "Neden hemen içeri koşmadınız?",
+            "a": "Minibüs yarı sokakta, yarı kapıdaydı; bırakırsam duvara vuracaktı. Komşunun kapısını çaldım, arabasını çeksin diye, açan olmadı. Minibüs on ikiye on kala gibi ancak çıktı. Ben içeri girdiğimde ışıklar birkaç dakika sonra geldi."
+          },
+          {
+            "q": "Teknik odaya kim girebilir?",
+            "a": "Kapısında şifre var. 2024’te teknik odayı su bastı, ben istedim, Nevzat Bey alarmcılarla anlaştı, kilit taktılar. Benim kodum var, Nevzat Bey’in var. Başka kimde var, alarmcı bilir. Restorasyonda yüz usta girdi çıktı, yerini bilen çok."
+          },
+          {
+            "q": "Kamera sistemi?",
+            "a": "Beş sabit kamera var, kayıt cihazı teknik odada. Arka koridordaki merdiven dibini, teknik odanın kapısını görür. Bir de iskelede ayrı bir kamera var, ben taktım geçen yaz; motor çalınmasın diye. Pilli, hafıza kartına kaydeder, telefonumdan bakarım. Evdekilerin çoğu bilmez."
+          },
+          {
+            "q": "Kameralarda dün bir arıza var mıydı?",
+            "a": "Arka koridordaki kamera öğleden sonra gitti. Beşte kombiye baktım, o zaman çalışıyordu; altıda monitöre baktığımda siyahtı. Pazartesi bakacaktım, misafir var diye uğraşmadım."
+          },
+          {
+            "q": "Gece iskelede bir hareket gördünüz mü?",
+            "a": "Ben kapıdaydım, iskeleyi görmem. Ama telefonuma bildirim düştü, karartmada. Lodosta dalga vurur, bildirim gelir, bakmadım. Kart duruyor, isterseniz alalım."
+          },
+          {
+            "q": "Catering aracı kimdi?",
+            "a": "Çınaraltı Catering. Şef Necati Usta, şoför genç bir çocuk. Garson kız Zeynep içeride kaldı, Hatice Hanım’a yardım etti."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği hatırlatıldı. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ariza",
+      "title": "Elektrik dağıtım şirketinin kesinti kayıtları",
+      "summary": "Üsküdar işletmesinin 7–8 Şubat gecesine ait arıza ve kesinti dökümü.",
+      "people": [],
+      "reveals": [
+        "f-kesinti-ic"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:37",
+          "text": "Yalının sayacında iç tesisat tarafında enerji kesildi; şebeke normal."
+        },
+        {
+          "at": "2026-02-07T23:57",
+          "text": "Yalının iç tesisatına enerji geri geldi."
+        }
+      ],
+      "doc": {
+        "kind": "table",
+        "heading": "Kıyı Elektrik Dağıtım A.Ş. — Üsküdar İşletme Müdürlüğü, arıza ve kesinti kayıtları, 07.02.2026 20:00 – 08.02.2026 02:00",
+        "note": "Savcılık yazısına cevaben verilmiştir. Vardarlı Yalısı abone noktasında uzaktan okunabilen akıllı sayaç bulunmaktadır. Sayaç “yük tarafı enerji yok” kaydını şebeke gerilimi normalken verdiğinde kesinti abonenin kendi iç tesisatındadır.",
+        "columns": [
+          "Saat",
+          "Bölge / hat",
+          "Olay",
+          "Etkilenen abone",
+          "Not"
+        ],
+        "rows": [
+          [
+            "21:12–21:19",
+            "Çengelköy, Kuleli fideri",
+            "Orta gerilim arızası (rüzgâr, ağaç dalı)",
+            "412",
+            "Otomatik tekrar kapama"
+          ],
+          [
+            "22:30–22:41",
+            "Beylerbeyi, Abdullahağa fideri",
+            "Alçak gerilim sigorta atması",
+            "38",
+            "Ekip müdahalesi"
+          ],
+          [
+            "20:00–02:00",
+            "Kandilli Sahil TM-3 fideri",
+            "Kesinti kaydı yok",
+            "0",
+            "Gerilim kesintisiz"
+          ],
+          [
+            "23:37:12",
+            "Vardarlı Yalısı abone noktası (akıllı sayaç)",
+            "“Yük tarafı enerji yok” — şebeke gerilimi normal",
+            "1",
+            "İç tesisat kaynaklı"
+          ],
+          [
+            "23:57:48",
+            "Vardarlı Yalısı abone noktası (akıllı sayaç)",
+            "“Yük tarafı enerji geri geldi”",
+            "1",
+            "—"
+          ],
+          [
+            "20:00–02:00",
+            "Çağrı merkezi, Kandilli mahallesi",
+            "Kesinti ihbarı yok",
+            "—",
+            "—"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "e-dvr-tablo",
+      "title": "Yalı kameraları, kayıt cihazı dökümü",
+      "summary": "Kayıt cihazındaki görüntülerin saat saat özeti, 7 Şubat 16:00 – 8 Şubat 01:00.",
+      "people": [
+        "leyla",
+        "tarik",
+        "deniz",
+        "orhan",
+        "nevzat",
+        "mujgan",
+        "riza",
+        "kerem"
+      ],
+      "reveals": [
+        "f-kamera4",
+        "f-leyla-teras",
+        "f-deniz-taksi",
+        "f-riza-kapi"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T17:42",
+          "text": "K4 (arka koridor) kamerasında görüntü kaybı."
+        },
+        {
+          "at": "2026-02-07T22:45",
+          "text": "K3: Tarık Sezgin ana merdivenden yukarı çıktı."
+        },
+        {
+          "at": "2026-02-07T23:14",
+          "text": "K1: Orhan Tekinalp’in aracı çıktı."
+        },
+        {
+          "at": "2026-02-07T23:17",
+          "text": "K5: Leyla Sezgin dizüstü bilgisayarla terasta."
+        },
+        {
+          "at": "2026-02-07T23:22",
+          "text": "K3: Müjgân Vardarlı ana merdivenden yukarı çıktı."
+        },
+        {
+          "at": "2026-02-07T23:26",
+          "text": "K1: Deniz Ural kapıdan çıkıp taksiye bindi."
+        },
+        {
+          "at": "2026-02-07T23:37",
+          "text": "Tüm kameralarda görüntü kaybı."
+        },
+        {
+          "at": "2026-02-08T00:04",
+          "text": "K3: Tarık Sezgin sağ bileğini tutarak mutfak yönüne geçti."
+        }
+      ],
+      "doc": {
+        "kind": "table",
+        "heading": "Vardarlı Yalısı kamera kayıt cihazı (DVR) — olay özeti",
+        "note": "Adli bilişim incelemesi. Kayıt cihazı kesintisiz güç kaynağına bağlıdır; saati internet üzerinden eşitlenir, doğrudur. Kameralar teknik odadaki PoE anahtarından beslenir; bu anahtar güç kaynağına bağlı değildir. K3 sofayı, ana merdiveni ve servis geçidinin sofaya açılan kapısını; K4 arka koridordan servis merdiveninin dip sahanlığını ve teknik oda kapısını görür. Birinci katta kamera yoktur. K4 kablosu PoE anahtarından çıkarılmış hâlde bulunmuştur (OYİ).",
+        "columns": [
+          "Saat",
+          "Kamera",
+          "Görülen"
+        ],
+        "rows": [
+          [
+            "16:05",
+            "K1 Ana kapı",
+            "Gri bir binek araç bahçeye giriyor; L. Sezgin ve T. Sezgin iniyor."
+          ],
+          [
+            "16:57",
+            "K4 Arka koridor",
+            "R. Kılıç arka koridordan sahanlığa geliyor, tuş takımına kod girip teknik odaya giriyor."
+          ],
+          [
+            "17:06",
+            "K4 Arka koridor",
+            "R. Kılıç teknik odadan çıkıp arka koridordan terasa doğru gidiyor."
+          ],
+          [
+            "17:31",
+            "K1 Ana kapı",
+            "D. Ural yaya olarak giriyor."
+          ],
+          [
+            "17:40:58",
+            "K4 Arka koridor",
+            "Biri servis merdiveninden sahanlığa iniyor. Sahanlık lambası kapalı; mutfak kapısının camından vuran ışıkta yalnızca koyu renk giysili bir silüet görülüyor, yüzü merdiven korkuluğunun gölgesinde. Boy ve cinsiyet güvenle seçilemiyor. 17:41’de tuş takımına kod girip teknik odaya giriyor."
+          ],
+          [
+            "17:42:08",
+            "K4 Arka koridor",
+            "Görüntü kaybı (“bağlantı yok”). Bu kameradan sonraki kayıt yok."
+          ],
+          [
+            "18:30",
+            "K1 Ana kapı",
+            "Catering minibüsü giriyor."
+          ],
+          [
+            "19:28",
+            "K1 Ana kapı",
+            "Siyah sedan giriyor; O. Tekinalp iniyor, şoför araçta kalıyor."
+          ],
+          [
+            "22:12",
+            "K3 Sofa",
+            "N. Vardarlı ve O. Tekinalp ana merdivenden yukarı çıkıyor."
+          ],
+          [
+            "22:38",
+            "K3 Sofa",
+            "O. Tekinalp ana merdivenden iniyor, salona geçiyor; yüzü kızarık, hızlı yürüyor."
+          ],
+          [
+            "22:45",
+            "K3 Sofa",
+            "T. Sezgin ana merdivenden yukarı çıkıyor; elinde telefon."
+          ],
+          [
+            "23:12–23:14",
+            "K1 Ana kapı",
+            "O. Tekinalp araca biniyor; siyah sedan çıkıyor."
+          ],
+          [
+            "23:17",
+            "K5 Teras",
+            "L. Sezgin terastaki masaya oturuyor, dizüstü bilgisayarını açıyor, kulaklık takıyor."
+          ],
+          [
+            "23:17–23:37",
+            "K5 Teras",
+            "L. Sezgin masada, bilgisayar başında konuşuyor; yerinden kalkmıyor."
+          ],
+          [
+            "23:22",
+            "K3 Sofa",
+            "M. Vardarlı ana merdivenden yukarı çıkıyor."
+          ],
+          [
+            "23:26",
+            "K1 Ana kapı",
+            "D. Ural kapıdan çıkıyor, sokakta bekleyen sarı taksiye biniyor."
+          ],
+          [
+            "23:31",
+            "K1 Ana kapı",
+            "Catering minibüsü kapıda duruyor; R. Kılıç elinde fenerle aracın önünde, sokağa çıkıyor."
+          ],
+          [
+            "23:37:14",
+            "K1, K2, K3, K5",
+            "Tüm kameralarda görüntü kaybı."
+          ],
+          [
+            "23:57:52",
+            "K1, K2, K3, K5",
+            "Görüntü geri geldi."
+          ],
+          [
+            "23:59",
+            "K3 Sofa",
+            "T. Sezgin servis geçidinden sofaya giriyor, ana merdivenden yukarı çıkıyor."
+          ],
+          [
+            "00:04",
+            "K3 Sofa",
+            "T. Sezgin ana merdivenden iniyor, sol eliyle sağ bileğini tutarak servis geçidine (mutfak tarafı) geçiyor."
+          ],
+          [
+            "00:15",
+            "K3 Sofa",
+            "M. Vardarlı servis geçidinden gelip ana merdivenden yukarı çıkıyor."
+          ],
+          [
+            "00:39",
+            "K1 Ana kapı",
+            "112 ambulansı sokakta duruyor; ekip içeri giriyor."
+          ]
+        ]
+      }
+    },
+    {
+      "id": "e-otopsi",
+      "title": "Adli Tıp ön otopsi raporu",
+      "summary": "Morg İhtisas Dairesi’nin ön raporu.",
+      "people": [
+        "nevzat"
+      ],
+      "reveals": [
+        "f-cinayet",
+        "f-ilac"
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "autopsy",
+        "agency": "Adli Tıp Kurumu Morg İhtisas Dairesi",
+        "docNo": "Otopsi No: 2026/1188 · Soruşturma No: 2026/4127",
+        "datetime": "Otopsi: 08.02.2026 10:30 · Ön rapor: 09.02.2026",
+        "heading": "Nevzat Vardarlı (70) — ön otopsi raporu",
+        "sections": [
+          {
+            "title": "Dış muayene",
+            "text": "Her iki göz kapağı iç yüzünde ve göz aklarında yaygın peteşiyal kanamalar. Burun kanatlarının iki yanında ve çene ucunda 1–2 cm’lik, hafif basıyla oluşmuş silik ekimozlar. Üst ve alt dudak iç yüzlerinde, dişlere karşılık gelen bölgelerde taze mukoza sıyrıkları. Burun deliklerinde bordo renkli ince tekstil lifleri (örneklendi). Sağ el işaret ve orta parmak tırnaklarının altından doku materyali örneklendi. Boyun bölgesinde bası izi yok. Kafa ve gövdede düşmeyle uyumlu yara yok."
+          },
+          {
+            "title": "İç muayene",
+            "text": "Koroner arterlerde %60–70 oranında yaygın darlık (kronik). Taze miyokard enfarktüsünü gösteren makroskobik bulgu yok. Akciğerlerde ödem ve plevra altında peteşiyal kanamalar. Midede yaklaşık 150 ml, akşam yemeğiyle uyumlu yarı sindirilmiş içerik ve açık renkli sıvı."
+          },
+          {
+            "title": "Toksikoloji (ön sonuç)",
+            "text": "Kan ön taramasında benzodiazepin (alprazolam) pozitif bulunmuştur. Ön ölçümde yaklaşık 0,05 mg/L; bu düzey, alkolle birlikte yaşlı bir kişide belirgin sedasyon, uyuklama ve kas gücünde azalma yaratabilir. Kesin sayısal değer Kimya İhtisas Dairesi’nden beklenmektedir. Kişinin kullandığı ilaçlar arasında alprazolam bulunmamaktadır. Etil alkol 0,31 g/L. Digoksin 1,1 ng/mL (tedavi aralığında)."
+          },
+          {
+            "title": "Ölüm zamanı",
+            "text": "Rektal ısı, ölü katılığı ve ölü lekelerine göre ölüm, 7 Şubat 23:00 ile 8 Şubat 00:30 arasında gerçekleşmiştir."
+          },
+          {
+            "title": "Sonuç",
+            "text": "Kişinin ölümü, sedatif ilaç etkisi altındayken ağız ve burnun yumuşak bir cisimle kapatılması sonucu gelişen mekanik asfiksi ile uyumludur. Mevcut kalp hastalığı ölümü kolaylaştırıcı etken olarak değerlendirilmiştir. Kesin rapor, toksikoloji ve DNA incelemeleri tamamlandığında verilecektir."
+          }
+        ],
+        "signature": "Uzm. Dr. Kemal Sayın, Adli Tıp Uzmanı"
+      }
+    },
+    {
+      "id": "e-lab-1",
+      "title": "Kriminal laboratuvar raporu: bardak, demlik, kırlent ve cam kırıkları",
+      "summary": "Olay yerinden alınan nesnelerin ilk inceleme sonuçları.",
+      "people": [
+        "nevzat"
+      ],
+      "reveals": [
+        "f-ilac",
+        "f-cinayet",
+        "f-bilek"
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "lab",
+        "agency": "İstanbul Kriminal Polis Laboratuvarı Müdürlüğü",
+        "docNo": "İKPL-2026/4127-B",
+        "datetime": "09.02.2026 16:20",
+        "heading": "Olay yeri delillerinin biyolojik ve kimyasal incelemesi",
+        "sections": [
+          {
+            "title": "İnceleme konusu",
+            "text": "1) Çalışma odasındaki çay bardağı ve içindeki sıvı kalıntısı. 2) Mutfaktaki demlik ve içindeki ıhlamur. 3) Mutfaktaki bal kavanozu ile tepsideki bal kâsesi. 4) Kanepedeki ortadaki bordo kırlent. 5) Maktulün burun deliklerinden alınan lifler (ATK’dan). 6) Birinci kat ortak banyo çöp kovasındaki cam kırıkları."
+          },
+          {
+            "title": "Bardak, demlik ve bal",
+            "text": "Bardaktaki sıvı kalıntısında ıhlamur bileşenleri ve yüksek miktarda alprazolam saptanmıştır; bardağın dibinde çözünmemiş beyaz toz tanecikleri vardır. Demlikteki ıhlamurda, bal kavanozunda ve bal kâsesinde alprazolam saptanmamıştır."
+          },
+          {
+            "title": "Kırlent",
+            "text": "Kırlent kılıfı bordo, pamuk-viskon karışımı kadifedir. Burun deliklerinden alınan lifler bu kumaşla renk, yapı ve bileşim bakımından aynıdır. Kılıfın ön yüzündeki kurumuş lekede tükürük saptanmış, elde edilen DNA profili maktule aittir. Diğer iki kırlentte benzer bulgu yoktur."
+          },
+          {
+            "title": "Parmak izleri",
+            "text": "Bardağın üzerinde maktul ve Hatice Yener’in (eleme örneği) izleri vardır. Tepsi kulplarında ve bardak tabağının alt yüzünde H. Yener’in izlerinin yanında, kimliği henüz belirlenmemiş ikinci bir kişiye ait net parmak ve avuç içi izleri saptanmıştır. Karşılaştırma için ev halkından eleme izi alınması istenmiştir."
+          },
+          {
+            "title": "Cam kırıkları",
+            "text": "Banyo çöpündeki parçalar tek bir su bardağına aittir. Parçaların hiçbirinde, kırık kenarlar dâhil, kan ya da doku kalıntısı saptanmamıştır."
+          },
+          {
+            "title": "Not",
+            "text": "Tırnak altı sürüntü örneklerinde maktul dışında bir kişiye ait olabilecek doku bulunmaktadır. Karşılaştırma için referans örnekler beklenmektedir."
+          }
+        ],
+        "signature": "Kimya Mühendisi Aslı Doğru · Biyolog Onur Kemer"
+      }
+    },
+    {
+      "id": "e-ajanda",
+      "title": "Nevzat Vardarlı’nın masa ajandası",
+      "summary": "Çalışma masasındaki ajandanın 2–8 Şubat haftasına ait sayfası.",
+      "people": [
+        "nevzat",
+        "orhan",
+        "deniz"
+      ],
+      "reveals": [],
+      "doc": {
+        "kind": "letter",
+        "hand": "handwritten",
+        "date": "2–8 Şubat 2026 haftası",
+        "body": "Pzt 2 — Kurul hazırlığı. Denizcilik raporunu iste.\n\nSal 3 — Nilgün Hn.’ın yazısı!! Rehin şerhi — L. imzası??\n\nÇar 4 — Deniz Hn. 15:00 (12. oturum). 3 Mart’ı konuş.\n\nPer 5 — Kardiyoloji 11:00. Akşam ara, konuş. Pazartesiye kadar süre.\n\nCum 6 — Noter randevusunu teyit et (Pzt 10:00). Orhan’ı ara.\n\nCmt 7 — 70!! Yemekten sonra: 1) Orhan — anılar. 2) Rehin — yüz yüze.\n\nPaz 8 — —\n\n(Sayfa altına, ayrı kalemle:) Pzt 9 — Noter 10:00 · YK 15:00 — L. ve Aldbury meselesi.",
+        "condition": "Mürekkep kalemle, eğik ve sıkışık bir el yazısı. “Rehin” ve “L. imzası??” sözcüklerinin altı iki kez çizilmiş."
+      }
+    },
+    {
+      "id": "e-hts-nevzat",
+      "title": "Nevzat Vardarlı’nın HTS kaydı",
+      "summary": "Kurbanın cep hattının 5–8 Şubat arası arama ve mesaj dökümü.",
+      "people": [
+        "nevzat",
+        "tarik",
+        "leyla",
+        "orhan",
+        "deniz",
+        "hatice"
+      ],
+      "reveals": [
+        "f-sms"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-05T21:10",
+          "text": "Nevzat Vardarlı, Tarık Sezgin’i aradı (4 dk 12 sn)."
+        },
+        {
+          "at": "2026-02-07T22:44",
+          "text": "Nevzat Vardarlı’nın hattından Tarık Sezgin’e SMS."
+        },
+        {
+          "at": "2026-02-07T22:52",
+          "text": "Nevzat Vardarlı’nın hattından Hatice Yener’e SMS."
+        }
+      ],
+      "doc": {
+        "kind": "phoneLog",
+        "subscriber": "Nevzat Vardarlı",
+        "number": "0532 410 70 70",
+        "period": "05.02.2026 00:00 – 08.02.2026 01:00",
+        "rows": [
+          {
+            "datetime": "05.02.2026 11:48",
+            "type": "gelen arama",
+            "other": "Kardiyoloji polikliniği (0216 …)",
+            "duration": "1 dk 05 sn",
+            "tower": "Altunizade"
+          },
+          {
+            "datetime": "05.02.2026 20:55",
+            "type": "veri",
+            "other": "Mobil veri oturumu",
+            "duration": "52 dk",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "05.02.2026 21:10",
+            "type": "giden arama",
+            "other": "Tarık Sezgin — 0533 218 45 09",
+            "duration": "4 dk 12 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "06.02.2026 10:02",
+            "type": "gelen arama",
+            "other": "Vardarlı Holding Hukuk (0216 …)",
+            "duration": "6 dk 40 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "06.02.2026 11:40",
+            "type": "giden arama",
+            "other": "Noterlik (0216 …)",
+            "duration": "2 dk 51 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "06.02.2026 16:22",
+            "type": "giden arama",
+            "other": "Orhan Tekinalp — 0532 300 19 52",
+            "duration": "2 dk 03 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 09:15",
+            "type": "gelen arama",
+            "other": "Leyla Vardarlı Sezgin — 0532 677 12 30",
+            "duration": "1 dk 20 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 12:30",
+            "type": "giden arama",
+            "other": "Deniz Ural — 0536 811 27 94",
+            "duration": "3 dk 02 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 18:05",
+            "type": "gelen arama",
+            "other": "Orhan Tekinalp — 0532 300 19 52",
+            "duration": "0 dk 48 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 18:18",
+            "type": "veri",
+            "other": "Mobil veri oturumu",
+            "duration": "16 dk",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 20:41",
+            "type": "gelen SMS",
+            "other": "Banka bilgilendirme",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 22:44",
+            "type": "giden SMS",
+            "other": "Tarık Sezgin — 0533 218 45 09",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 22:44",
+            "type": "veri",
+            "other": "Mobil veri oturumu",
+            "duration": "3 dk",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 22:52",
+            "type": "giden SMS",
+            "other": "Hatice Yener — 0544 712 05 63",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 23:09",
+            "type": "veri",
+            "other": "Mobil veri oturumu",
+            "duration": "2 dk",
+            "tower": "Kandilli Sahil"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-saat-veri",
+      "title": "Akıllı saat verisi, 7 Şubat 22:40–23:50",
+      "summary": "Kurbanın bileğindeki saatin telefona eşitlediği nabız ve adım kayıtları.",
+      "people": [
+        "nevzat",
+        "leyla"
+      ],
+      "reveals": [
+        "f-olum-saati"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:41",
+          "text": "Akıllı saat: nabızda ani yükselme."
+        },
+        {
+          "at": "2026-02-07T23:45",
+          "text": "Akıllı saat: nabız algılanamadı."
+        }
+      ],
+      "doc": {
+        "kind": "table",
+        "heading": "Nevzat Vardarlı — akıllı saat sağlık verisi (adli bilişim çıktısı)",
+        "note": "Kurbanın telefonu kilitli olduğundan veri, saatin kendi hafızasından ve eşitlendiği bulut hesabından alınmıştır. Saati Aralık 2025’te hediye eden ve hesabı kuran Leyla Vardarlı Sezgin, hesap bilgilerini 9 Şubat’ta muvafakatiyle vermiştir. Saat dakikada bir nabız ölçer; tabloda özetlenmiştir. Saatin bilekten çıkarıldığına dair kayıt yoktur. Saatin zamanı uydu sinyaliyle eşitlenir.",
+        "columns": [
+          "Saat",
+          "Nabız (atım/dk)",
+          "Adım (son 5 dk)",
+          "Uygulama notu"
+        ],
+        "rows": [
+          [
+            "22:40",
+            "96",
+            "34",
+            "—"
+          ],
+          [
+            "22:50",
+            "104",
+            "12",
+            "—"
+          ],
+          [
+            "23:00",
+            "99",
+            "0",
+            "—"
+          ],
+          [
+            "23:05",
+            "88",
+            "9",
+            "—"
+          ],
+          [
+            "23:10",
+            "82",
+            "0",
+            "—"
+          ],
+          [
+            "23:20",
+            "70",
+            "0",
+            "—"
+          ],
+          [
+            "23:30",
+            "57",
+            "0",
+            "Hareketsizlik"
+          ],
+          [
+            "23:36",
+            "54",
+            "0",
+            "Hareketsizlik"
+          ],
+          [
+            "23:40",
+            "55",
+            "0",
+            "—"
+          ],
+          [
+            "23:41",
+            "104",
+            "0",
+            "Ani yükselme"
+          ],
+          [
+            "23:42",
+            "131",
+            "0",
+            "Yüksek nabız uyarısı"
+          ],
+          [
+            "23:43",
+            "118",
+            "0",
+            "—"
+          ],
+          [
+            "23:44",
+            "38",
+            "0",
+            "Düzensiz ritim uyarısı"
+          ],
+          [
+            "23:45",
+            "—",
+            "0",
+            "Nabız algılanamadı"
+          ],
+          [
+            "23:50",
+            "—",
+            "0",
+            "Nabız algılanamadı"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "e-foto-ilac",
+      "title": "Ortak banyodaki ilaç kutusu",
+      "summary": "Birinci kat ortak banyo dolabında bulunan reçeteli ilaç.",
+      "people": [
+        "mujgan"
+      ],
+      "reveals": [
+        "f-ilac-eksik"
+      ],
+      "doc": {
+        "kind": "photo",
+        "image": "obj-pills",
+        "caption": "Birinci kat ortak banyo dolabı. Kutu: alprazolam 0,5 mg, 50 tablet (5 blister x 10), hasta: Müjgân Vardarlı. Eczane etiketi: 26.01.2026; kullanım: günde 1 tablet, yatmadan önce. Ortak banyo, Müjgân Hanım’ın odası ile misafir odası arasındadır ve arka koridora açılır.",
+        "tag": "OYİ-2026/0209-ek · F-07"
+      }
+    },
+    {
+      "id": "e-ifade-mujgan-2",
+      "title": "Müjgân Vardarlı’nın ikinci ifadesi",
+      "summary": "Eşin, ilk ifadesindeki boşluklar üzerine yeniden dinlenmesi.",
+      "people": [
+        "mujgan",
+        "nevzat",
+        "hatice",
+        "zeynep",
+        "tarik",
+        "leyla"
+      ],
+      "reveals": [
+        "f-mujgan-mutfak",
+        "f-ilac-eksik"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:24",
+          "text": "Müjgân Vardarlı, avukatı Sevim Oral’ı aradı (Müjgân Hanım’a göre 23:39’a kadar)."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "mujgan",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "İstanbul Emniyet Müdürlüğü, Cinayet Büro Amirliği",
+        "datetime": "10.02.2026 11:00",
+        "qa": [
+          {
+            "q": "İlk ifadenizde ilacınızı alıp on buçukta uyuduğunuzu söylediniz. Kamera sizi 23:22’de merdivenden çıkarken, aşçı ve garson ise 23:40’ta mutfakta gösteriyor.",
+            "a": "Evet. Doğru söylemedim, özür dilerim. O gece ilacımı almadım. Uyumadım."
+          },
+          {
+            "q": "Neden?",
+            "a": "Odama çıkınca avukatım Sevim Oral’ı aradım. On biri yirmi dört geçe, kayıtlarda vardır. Boşanma dilekçem hazırdı. Doğum gününden sonra Nevzat’a söyleyecektim. Moda’da bir daire kiraladım. Bunu ailenin önünde, polisin önünde söylemek istemedim."
+          },
+          {
+            "q": "Görüşme ne zaman bitti?",
+            "a": "Işıklar gittikten hemen sonra kapattım. Sevim’e “Elektrik gitti, sonra konuşuruz” dedim. Telefonun ışığıyla ana merdivenden indim, mutfağa gittim. Hatice’yle Zeynep oradaydı. Işıklar gelene kadar onlarla oturdum."
+          },
+          {
+            "q": "Işıklar gelince?",
+            "a": "Mutfakta biraz daha kaldım. Hatice çay koydu. Tarık bileği kanayarak geldi, Hatice sardı. On ikiyi çeyrek geçe yukarı çıktım, Nevzat’a iyi geceler diyecektim. Gerisini anlattım."
+          },
+          {
+            "q": "Kullandığınız ilaç alprazolam. Kurbanın kanında bu ilaç bulundu.",
+            "a": "Bunu bana dün söylediler. Ben Nevzat’a hiçbir şey vermedim. O gece onu yemekten sonra hiç görmedim bile."
+          },
+          {
+            "q": "İlacınızı nerede saklıyorsunuz?",
+            "a": "Ortak banyodaki dolapta. Kendi odamda banyo yok. O banyoyu misafir odasında kalanlar da kullanır; bu hafta sonu Leyla’yla Tarık."
+          },
+          {
+            "q": "Kutudan eksilen var mıydı?",
+            "a": "Saymam. Her gece bir tane alırım, o kadar. 26 Ocak akşamı yeni kutuya başladım; o geceye kadar her gece aldım."
+          },
+          {
+            "q": "Boşanma kararınızın sebebi?",
+            "a": "Yalnızlık. Bu evde on beş yıl misafir gibi yaşadım. Mal ayrılığı sözleşmemiz var, bir şey istemiyordum. Nevzat ölünce bana kalacak olanı da istemiyorum, avukatıma sorun."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği, CMK m. 45 uyarınca yakınlık nedeniyle tanıklıktan çekinme hakkı bulunduğu hatırlatıldı; çekinmeyeceğini beyan etti. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-hts-mujgan",
+      "title": "Müjgân Vardarlı’nın HTS kaydı",
+      "summary": "Eşin cep hattının 7–8 Şubat gecesine ait arama dökümü.",
+      "people": [
+        "mujgan"
+      ],
+      "reveals": [
+        "f-mujgan-mutfak"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:24",
+          "text": "Müjgân Vardarlı, Av. Sevim Oral’ı aradı (15 dk 02 sn)."
+        }
+      ],
+      "doc": {
+        "kind": "phoneLog",
+        "subscriber": "Müjgân Vardarlı",
+        "number": "0535 264 81 47",
+        "period": "07.02.2026 09:00 – 08.02.2026 02:00",
+        "rows": [
+          {
+            "datetime": "07.02.2026 09:40",
+            "type": "gelen arama",
+            "other": "Av. Sevim Oral — 0532 556 40 11",
+            "duration": "3 dk 15 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 14:12",
+            "type": "giden arama",
+            "other": "Moda Emlak (0216 …)",
+            "duration": "1 dk 40 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "07.02.2026 23:24",
+            "type": "giden arama",
+            "other": "Av. Sevim Oral — 0532 556 40 11",
+            "duration": "15 dk 02 sn",
+            "tower": "Kandilli Sahil"
+          },
+          {
+            "datetime": "08.02.2026 00:31",
+            "type": "giden arama",
+            "other": "Av. Sevim Oral — 0532 556 40 11",
+            "duration": "2 dk 10 sn",
+            "tower": "Kandilli Sahil"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-eposta-rehin",
+      "title": "Holding hukuk müşavirinden Nevzat Vardarlı’ya e-posta",
+      "summary": "Vardarlı Holding hukuk müşavirinin 3 Şubat tarihli gizli yazısı.",
+      "people": [
+        "nevzat",
+        "leyla",
+        "tarik"
+      ],
+      "reveals": [
+        "f-rehin",
+        "f-sezgin-borc"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-03T10:14",
+          "text": "Hukuk müşaviri, pay rehni bildirimini Nevzat Vardarlı’ya iletti."
+        }
+      ],
+      "doc": {
+        "kind": "email",
+        "from": "Av. Nilgün Saraç <nilgun.sarac@vardarliholding.com.tr>",
+        "to": "Nevzat Vardarlı <nevzat@vardarliholding.com.tr>",
+        "date": "03.02.2026 10:14",
+        "subject": "GİZLİ — Pay rehni bildirimi (Payidar Finansman A.Ş.)",
+        "body": "Nevzat Bey,\n\nDün şirketimize Payidar Finansman A.Ş.’den, 02.02.2026 tarihli bir “pay rehni bildirimi ve pay defterine şerh talebi” ulaştı. Konunun hassasiyeti nedeniyle yalnızca size iletiyorum; Yönetim Kurulu’na ve Leyla Hanım’a bilgi vermedim.\n\nBildirime göre:\n— Rehin veren: Leyla Vardarlı Sezgin\n— Rehnedilen: Vardarlı Holding A.Ş.’nin Leyla Hanım adına kayıtlı 8.000.000 adet nama yazılı payı (%8)\n— Teminat konusu borç: Payidar Finansman’ın Sezgin Mimarlık ve Restorasyon Ltd. Şti.’ye 14.11.2025’te kullandırdığı 18.500.000 TL kredi\n— Vade: 30.01.2026\n\nPayidar, kredinin vadesinde ödenmediğini, borçluya ihtar çektiğini ve ödeme yapılmazsa rehinli payları paraya çevirme yoluna gideceğini bildiriyor.\n\nEkteki rehin sözleşmesindeki rehin veren imzası noter onaylı değil; sözleşme Payidar’a kredi müşterisi tarafından teslim edilmiş görünüyor. Leyla Hanım’ın bu işlemden haberi olup olmadığını bilmiyorum. Ana sözleşmemize göre pay devirleri Yönetim Kurulu onayına bağlı olduğundan rehnin şirkete karşı ileri sürülebilmesi tartışmalı; yine de size danışmadan pay defterine şerh düşmedik.\n\nNasıl ilerlememi istersiniz? İmza incelemesi ve suç duyurusu seçeneklerini yüz yüze konuşmayı öneririm.\n\nSaygılarımla,\nAv. Nilgün Saraç\nHukuk Müşaviri, Vardarlı Holding A.Ş.",
+        "attachments": [
+          "Payidar_rehin_bildirimi_02022026.pdf",
+          "Rehin_sozlesmesi_s1-3.pdf"
+        ]
+      }
+    },
+    {
+      "id": "e-ifade-zeynep",
+      "title": "Catering garsonu Zeynep Arıkan’ın ifadesi",
+      "summary": "Gece yarısına kadar mutfakta kalan garsonun anlatımı.",
+      "people": [
+        "zeynep",
+        "tarik",
+        "mujgan",
+        "kerem",
+        "hatice"
+      ],
+      "reveals": [
+        "f-mujgan-mutfak",
+        "f-bilek"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:04",
+          "text": "Zeynep Arıkan, servis merdiveninden ıhlamur tepsisiyle çıkan bir erkek gördü."
+        },
+        {
+          "at": "2026-02-07T23:40",
+          "text": "Zeynep Arıkan’a göre: Müjgân Vardarlı mutfağa geldi (mesaj saati 23:40)."
+        }
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "zeynep",
+        "capacity": "tanık",
+        "takenBy": "Komiser Yardımcısı Mert Kaya, Cinayet Büro Amirliği",
+        "place": "Çınaraltı Catering, Ataşehir",
+        "datetime": "09.02.2026 14:30",
+        "qa": [
+          {
+            "q": "O gece yalıda göreviniz neydi?",
+            "a": "Servis garsonuydum. Yemek bitince şefimiz ve şoförümüz eşyaları topladı, ben Hatice Teyze’ye yardım etmek için kaldım. Polis gelince sabaha kadar bekledik. Sabah kimliğimi yazdılar, ifadeni sonra alırız dediler, eve gönderdiler."
+          },
+          {
+            "q": "Saat on bir civarında ne yapıyordunuz?",
+            "a": "Yemek salonundan mutfağa kadeh taşıyordum. Sahanlıktan geçerken biri servis merdiveninden yukarı çıkıyordu, elinde ıhlamur tepsisi vardı. Bardağın üstü tabakla kapalıydı, yanında bal kâsesi."
+          },
+          {
+            "q": "Kimdi?",
+            "a": "Yüzünü görmedim. Sahanlığın lambası yanmıyordu, mutfak kapısının camından vuran ışıkta yalnızca sırtını gördüm. Bir erkekti; koyu renk üstü, koyu pantolonu vardı. Dönmeden, alçak sesle “Babam bekliyor, ben götürürüm” dedi."
+          },
+          {
+            "q": "Kim olduğunu düşündünüz?",
+            "a": "O an evin oğlu sandım, Kerem Bey. Sonra düşündüm; damadı da Nevzat Bey’e “baba” diyormuş. İkisiyle de ses tanıyacak kadar konuşmadım. Emin değilim."
+          },
+          {
+            "q": "Saatten emin misiniz?",
+            "a": "On biri dört geçiyordu. Kadehleri bırakınca arkadaşıma mesaj attım, mesaj saati 23:05."
+          },
+          {
+            "q": "Ihlamuru siz götürmediniz mi?",
+            "a": "Hayır. Ben yukarı hiç çıkmadım. Bize üst kata çıkmamamız söylenmişti."
+          },
+          {
+            "q": "Elektrik kesildiğinde?",
+            "a": "Mutfaktaydık, Hatice Teyze’yle. Birkaç dakika sonra Müjgân Hanım telefon ışığıyla geldi. Hırka üstündeydi; “Avukatla konuşuyordum, kapattım” gibi bir şey söyledi, sonra sustu. Ben o an arkadaşıma “Işıklar gitti, ev sahibesi de geldi, mum arıyoruz” diye yazdım; mesaj saati 23:40. Işıklar gelene kadar üçümüz mutfaktaydık, Müjgân Hanım hiç ayrılmadı."
+          },
+          {
+            "q": "Başka gelen oldu mu?",
+            "a": "Işıklar gelmeden bir iki dakika önce Kerem Bey geldi. Parkasının omuzları ıslaktı, saçından su damlıyordu. Eski sigorta kutusunu açtı. Sonra kapının camından bir telefon ışığı geçti, sahanlıktaki odaya gitti, ışıklar geldi. Az sonra Tarık Bey kapıyı aralayıp “Tamam, geldi” dedi. Sağ elini cebinde tutuyordu."
+          },
+          {
+            "q": "Sonra?",
+            "a": "Beş on dakika sonra Tarık Bey yine geldi, bileği kanıyordu, Hatice Teyze sardı. “Banyoda bardak kırdım” dedi. Ama kapıdan baktığında da elini cebinden çıkarmamıştı."
+          },
+          {
+            "q": "Servis aracınızın kamerası?",
+            "a": "Minibüsün kamerası var ama saati hep bir saat geridir, şoförümüz Emre hiç ayarlamadı. Fotoğraflarda hep gülüyoruz buna."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği hatırlatıldı. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-dashcam",
+      "title": "Catering servis aracının kamera kaydı",
+      "summary": "Çınaraltı Catering minibüsünün ön cam kamerasından bir kare.",
+      "people": [
+        "riza"
+      ],
+      "reveals": [
+        "f-kesinti-ic",
+        "f-riza-kapi"
+      ],
+      "doc": {
+        "kind": "photo",
+        "image": "cam-van",
+        "caption": "Çınaraltı Catering, 34 CNR 418 plakalı minibüsün araç kamerası. Firmanın 9 Şubat tarihli yazılı beyanına göre cihazın saati hiç güncellenmemiştir ve gerçek saatin tam bir saat gerisindedir (garson Zeynep Arıkan da ifadesinde bunu söylemiştir). Karşılaştırma: aracın kapıda durduğu an, yalının ana kapı kamerasında (doğru saatli) 23:31, araç kamerasında 22:31 görünmektedir. Kayıtta 22:31–22:52 (gerçek saatle 23:31–23:52) arasında fenerli adam aracın önünde ya da kapıda görülmektedir.",
+        "cctv": {
+          "camera": "34 CNR 418 — ÖN",
+          "timestamp": "07.02.2026 22:41:06"
+        }
+      }
+    },
+    {
+      "id": "e-iskele-a",
+      "title": "İskele kamerası, kare 1",
+      "summary": "Bekçinin iskeleye taktığı bataryalı kameranın hafıza kartından bir kare.",
+      "people": [
+        "kerem",
+        "leyla"
+      ],
+      "reveals": [
+        "f-kerem-iskele",
+        "f-olum-saati"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:39",
+          "text": "İskele kamerası: iskelede bir kişi; kayıt 23:55’e kadar kesintisiz."
+        }
+      ],
+      "doc": {
+        "kind": "photo",
+        "image": "cam-pier-a",
+        "caption": "Kamera hareketle kayda başlar; saati Rıza Kılıç’ın telefonundaki uygulamadan eşitlenir, OYİ kontrolünde gerçek saatle farkı 4 saniyedir. Kartta 23:39:05 ile 23:55:40 arasında kesintisiz kayıt var; bu süre boyunca iskelede aynı kişi görülmektedir. OYİ notu: Üst kattaki ışık lekesi, kroki ile karşılaştırıldığında çalışma odasının deniz penceresine denk gelmektedir; 23:44:40–23:45:10 arasında görülür, sonra söner. Teras kameranın sol kenarında kalır; teras masasındaki, ekran ışığıyla aydınlanan oturur figür kayıt boyunca (23:39–23:55) yerinden kalkmamaktadır.",
+        "cctv": {
+          "camera": "İSKELE (SD)",
+          "timestamp": "07.02.2026 23:44:52"
+        }
+      }
+    },
+    {
+      "id": "e-iskele-b",
+      "title": "İskele kamerası, kare 2",
+      "summary": "Aynı kameradan, iskeleye yanaşan bir tekne.",
+      "people": [
+        "kerem"
+      ],
+      "reveals": [
+        "f-kerem-iskele"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:48",
+          "text": "İskele kamerası: küçük bir motorbot iskeleye yanaştı (23:53’te ayrıldı)."
+        }
+      ],
+      "doc": {
+        "kind": "photo",
+        "image": "cam-pier-b",
+        "caption": "Motorbot 23:48’de karşı kıyı yönünden gelip yanaşıyor, 23:53’te aynı yöne ayrılıyor. Teknede iki kişi var; tekneden kimse iskeleye çıkmıyor. Paket tekneye veriliyor. İskeledeki kişi 23:55’te teras kapısından içeri giriyor.",
+        "cctv": {
+          "camera": "İSKELE (SD)",
+          "timestamp": "07.02.2026 23:49:30"
+        }
+      }
+    },
+    {
+      "id": "e-taksi",
+      "title": "Deniz Ural’ın taksi yolculuk özeti",
+      "summary": "Taksi uygulamasından alınan yolculuk kaydı.",
+      "people": [
+        "deniz"
+      ],
+      "reveals": [
+        "f-deniz-taksi"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:27",
+          "text": "Deniz Ural, Kandilli’de taksiye bindi."
+        },
+        {
+          "at": "2026-02-08T00:01",
+          "text": "Deniz Ural, Cihangir’de taksiden indi."
+        }
+      ],
+      "doc": {
+        "kind": "ticket",
+        "variant": "other",
+        "title": "Yolcum Taksi — yolculuk özeti",
+        "serial": "Yolculuk No: YLC-260207-884213",
+        "fields": [
+          {
+            "label": "Yolcu",
+            "value": "Deniz Ural"
+          },
+          {
+            "label": "Biniş",
+            "value": "07.02.2026 23:27 — Kandilli, Vardarlı Yalısı önü"
+          },
+          {
+            "label": "İniş",
+            "value": "08.02.2026 00:01 — Cihangir"
+          },
+          {
+            "label": "Güzergâh (GPS)",
+            "value": "Kandilli – Kavacık – FSM Köprüsü – Levent – Beşiktaş – Cihangir; yolculuk boyunca durak yok"
+          },
+          {
+            "label": "Mesafe / süre",
+            "value": "21,4 km / 34 dk"
+          },
+          {
+            "label": "Araç / sürücü",
+            "value": "34 T 8812 — Ferhat D."
+          },
+          {
+            "label": "Ücret",
+            "value": "1.140,00 TL (kayıtlı kart)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-pts",
+      "title": "Orhan Tekinalp’in aracının plaka tanıma kayıtları",
+      "summary": "Emniyetin plaka tanıma sisteminden alınan geçişler.",
+      "people": [
+        "orhan"
+      ],
+      "reveals": [
+        "f-orhan-yol"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:27",
+          "text": "Orhan Tekinalp’in aracı FSM Köprüsü’nden Avrupa yönüne geçti."
+        }
+      ],
+      "doc": {
+        "kind": "accessLog",
+        "system": "Emniyet Genel Müdürlüğü Plaka Tanıma Sistemi (PTS)",
+        "site": "İstanbul — Üsküdar, Beykoz, Sarıyer ve Beşiktaş ilçeleri",
+        "period": "07.02.2026 23:00 – 08.02.2026 09:00",
+        "rows": [
+          {
+            "time": "23:17",
+            "card": "34 TKL 062",
+            "holder": "Tekinalp Yatırım A.Ş.",
+            "door": "Kandilli Cd. — Kandilli Kavşağı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:23",
+            "card": "34 TKL 062",
+            "holder": "Tekinalp Yatırım A.Ş.",
+            "door": "Kavacık Kavşağı — O-1 bağlantısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:27",
+            "card": "34 TKL 062",
+            "holder": "Tekinalp Yatırım A.Ş.",
+            "door": "FSM Köprüsü — Avrupa yönü",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:33",
+            "card": "34 TKL 062",
+            "holder": "Tekinalp Yatırım A.Ş.",
+            "door": "Levent — Büyükdere Cd.",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:39",
+            "card": "34 TKL 062",
+            "holder": "Tekinalp Yatırım A.Ş.",
+            "door": "Etiler — Nispetiye Cd.",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "08:52",
+            "card": "34 TKL 062",
+            "holder": "Tekinalp Yatırım A.Ş.",
+            "door": "Etiler — Nispetiye Cd.",
+            "result": "GEÇİŞ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-gazete",
+      "title": "Kent Postası, 11 Şubat 2026",
+      "summary": "Nevzat Vardarlı’nın ölümünden dört gün sonra çıkan haber.",
+      "people": [
+        "nevzat",
+        "orhan",
+        "deniz"
+      ],
+      "reveals": [],
+      "doc": {
+        "kind": "newspaper",
+        "paper": "Kent Postası",
+        "date": "11 Şubat 2026, çarşamba",
+        "headline": "Vardarlı’nın 32 yıllık sırrı: Yangında kapı kilitliydi",
+        "subhead": "Geçen hafta Kandilli’deki yalısında ölü bulunan iş insanının, 1994’teki atölye yangınını anı kitabında itiraf etmeye hazırlandığı ortaya çıktı.",
+        "image": "arch-fire",
+        "body": "Vardarlı Holding’in kurucusu Nevzat Vardarlı’nın, 3 Mart 1994’te Bayrampaşa’daki Vardarlı Örme atölyesinde dört işçinin hayatını kaybettiği yangınla ilgili yıllardır saklanan bir gerçeği kamuoyuyla paylaşmaya hazırlandığı öğrenildi. Gazetemizin ulaştığı ses kayıtlarında Vardarlı, yangın gecesi atölyenin arka çıkış kapısının hırsızlık gerekçesiyle asma kilitle kapatıldığını, bunun ortağı Orhan Tekinalp’in talimatıyla yapıldığını ve kendisinin de bildiğini anlatıyor.\n\nYangının ardından açılan davada atölyenin elektrik tesisatını yapan usta Cemal Tok “taksirle ölüme neden olmak” suçundan iki yıl hapis yatmış, bilirkişi raporunda kilitli kapıdan söz edilmemişti. Vardarlı kayıtlarda “O raporun nasıl yazıldığını biliyorum, Orhan da biliyor” diyor. Kayıtları gazetemize ulaştıran kaynak, kendisinin yangında hayatını kaybeden işçilerden birinin torunu olduğunu ve kayıtların Vardarlı’nın ölümüyle gömülmesini istemediğini söyledi.\n\nYangında Hasan Ural (52), Gülizar Er (19), Kadir Soylu (34) ve Ayten Kaya (27) hayatını kaybetmişti. Vardarlı’nın, yangının yıl dönümü olan 3 Mart’ta bir basın toplantısıyla kamuoyundan özür dilemeyi ve ailelere destek için bir vakıf kurmayı planladığı belirtiliyor.\n\nOrhan Tekinalp’in avukatı, haberle ilgili “yorum yapılmayacağını” bildirdi. Vardarlı ailesinden açıklama gelmedi. Ölüm soruşturmasını yürüten İstanbul Anadolu Cumhuriyet Başsavcılığı soruşturmanın gizli olduğunu hatırlattı."
+      }
+    },
+    {
+      "id": "e-alarm-rapor",
+      "title": "Alarm firmasının bildirim raporu",
+      "summary": "Kalkan Güvenlik izleme merkezinin yalıdaki alarm paneline dair yazısı.",
+      "people": [],
+      "reveals": [
+        "f-silme"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-10T02:10",
+          "text": "Yalıdaki alarm panelinin olay hafızası, panel başında kurulum koduyla silindi."
+        }
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "expert",
+        "agency": "Kalkan Güvenlik Sistemleri A.Ş. — Alarm İzleme Merkezi",
+        "docNo": "KGS-İM-2026/0211-07",
+        "datetime": "11.02.2026 09:40",
+        "heading": "Vardarlı Yalısı paneli: olay hafızası silme bildirimi",
+        "sections": [
+          {
+            "title": "Olay",
+            "text": "9 Şubat’ı 10 Şubat’a bağlayan gece yalıdaki alarm panelinden merkezimize şu sinyaller ulaşmıştır: 02:09:10 teknik oda kapısı kod 00 ile açıldı; 02:09:33 panelde kurulum menüsüne kod 00 ile girildi; 02:10:05 “olay hafızası temizlendi”; 02:11:40 teknik oda kapısı kapandı. Rutin denetimde 11.02.2026 sabahı fark edilmiş, soruşturma bilgisi nedeniyle savcılığa bildirilmiştir."
+          },
+          {
+            "title": "Yedek kayıtlar",
+            "text": "Yalı için izleme sözleşmesi 14.06.2024’te, teknik odadaki su baskını sonrasında R. Kılıç’ın talebiyle N. Vardarlı adına yapılmıştır. Panel o tarihten beri her olayı anında merkezimize iletir; bu nedenle silinen kayıtların tamamı merkez sunucusunda durmaktadır. Panelin ekranında izleme bağlantısına dair bir işaret yoktur. 7 Şubat 2026’ya ait kayıtlar ayrıca ekte sunulmuştur."
+          },
+          {
+            "title": "Teknik değerlendirme",
+            "text": "Olay hafızası uzaktan silinemez; bu işlem yalnızca panel başında, kurulum (00) koduyla yapılabilir. Kullanıcı kodları kurulum menüsüne erişemez. Teknik oda kapısındaki tuş takımı, 14.06.2024 tarihli servisle kapı kilidi olarak takılmış, giriş ve çıkışları panele kaydedecek şekilde bağlanmıştır."
+          },
+          {
+            "title": "Kod bilgisi",
+            "text": "Kullanıcı kodu çizelgesi, kişisel veri niteliğinde olduğundan savcılığın ayrıca yazılı talebi üzerine verilecektir."
+          }
+        ],
+        "signature": "Mühendis Volkan Er, İzleme Merkezi Sorumlusu"
+      }
+    },
+    {
+      "id": "e-alarm-log",
+      "title": "Alarm paneli olay kaydı, 7 Şubat 2026",
+      "summary": "İzleme merkezindeki yedekten alınan teknik oda kapısı ve enerji olayları.",
+      "people": [
+        "riza"
+      ],
+      "reveals": [
+        "f-salter",
+        "f-kod00",
+        "f-kamera4"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T17:41",
+          "text": "Teknik oda kapısı kod 00 ile açıldı (17:44’te kapandı)."
+        },
+        {
+          "at": "2026-02-07T23:36",
+          "text": "Teknik oda kapısı kod 00 ile açıldı."
+        },
+        {
+          "at": "2026-02-07T23:57",
+          "text": "Teknik oda kapısı yeniden kod 00 ile açıldı."
+        }
+      ],
+      "doc": {
+        "kind": "accessLog",
+        "system": "Kalkan Güvenlik — merkezî izleme yedeği (Vardarlı Yalısı paneli)",
+        "site": "Vardarlı Yalısı, Kandilli — teknik oda kapısı ve panel olayları",
+        "period": "Seçili kayıtlar: 14.09.2025 ve 07.02.2026 16:00 – 08.02.2026 01:00",
+        "rows": [
+          {
+            "time": "14.09.2025 10:12",
+            "card": "Kod 00",
+            "holder": "Kurulum",
+            "door": "Teknik oda kapısı (yıllık garanti bakımı)",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "14.09.2025 10:48",
+            "card": "—",
+            "holder": "—",
+            "door": "Teknik oda kapısı (kapandı)",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "16:58:12",
+            "card": "Kod 02",
+            "holder": "Kullanıcı 02",
+            "door": "Teknik oda kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17:06:40",
+            "card": "—",
+            "holder": "—",
+            "door": "Teknik oda kapısı (kapandı)",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "17:41:10",
+            "card": "Kod 00",
+            "holder": "Kurulum",
+            "door": "Teknik oda kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "17:44:02",
+            "card": "—",
+            "holder": "—",
+            "door": "Teknik oda kapısı (kapandı)",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "21:15:30",
+            "card": "Kod 05",
+            "holder": "Kullanıcı 05",
+            "door": "Teknik oda kapısı",
+            "result": "RET"
+          },
+          {
+            "time": "23:36:41",
+            "card": "Kod 00",
+            "holder": "Kurulum",
+            "door": "Teknik oda kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:37:12",
+            "card": "—",
+            "holder": "Panel",
+            "door": "Şebeke enerjisi kesildi — akü devrede",
+            "result": "ALARM"
+          },
+          {
+            "time": "23:38:20",
+            "card": "—",
+            "holder": "—",
+            "door": "Teknik oda kapısı (kapandı)",
+            "result": "ÇIKIŞ"
+          },
+          {
+            "time": "23:57:05",
+            "card": "Kod 00",
+            "holder": "Kurulum",
+            "door": "Teknik oda kapısı",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:57:48",
+            "card": "—",
+            "holder": "Panel",
+            "door": "Şebeke enerjisi geri geldi",
+            "result": "ALARM"
+          },
+          {
+            "time": "23:58:30",
+            "card": "—",
+            "holder": "—",
+            "door": "Teknik oda kapısı (kapandı)",
+            "result": "ÇIKIŞ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-cam-koridor",
+      "title": "Arka koridor kamerası, 10 Şubat 02:08",
+      "summary": "Onarılan K4 kamerasından bir kare.",
+      "people": [],
+      "reveals": [
+        "f-silme"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-10T02:08",
+          "text": "K4: Kapüşonlu biri arka koridordan teknik odaya yürüyor."
+        }
+      ],
+      "doc": {
+        "kind": "photo",
+        "image": "cam-corridor",
+        "caption": "K4 kablosu, teknik odanın mührü savcılık talimatıyla kaldırıldıktan sonra, savcılığın izniyle Rıza Kılıç tarafından 9 Şubat Pazartesi 11:00’de yeniden takılmıştır. Kare, 9 Şubat’ı 10 Şubat’a bağlayan gece 02:08:51. Kişi servis merdiveninden sahanlığa iniyor, 02:09’da teknik odaya giriyor, 02:11’de çıkıp yine servis merdiveninden yukarı çıkıyor; yüzü kayıt boyunca görünmüyor. K3 (sofa) bu saatlerde hareket kaydetmedi. 9–10 Şubat gecesi yalıda Müjgân Vardarlı, Kerem Vardarlı, Leyla ve Tarık Sezgin, Hatice Yener ve Rıza Kılıç kalmıştır.",
+        "cctv": {
+          "camera": "K4 ARKA KORİDOR",
+          "timestamp": "10.02.2026 02:08:51"
+        }
+      }
+    },
+    {
+      "id": "e-dinleme-bora",
+      "title": "Hat dinleme kaydı, 7 Şubat 23:44",
+      "summary": "Başka bir soruşturma kapsamında dinlenen bir hattan, olay gecesine ait bir görüşme.",
+      "people": [
+        "bora",
+        "kerem",
+        "nevzat"
+      ],
+      "reveals": [
+        "f-kerem-iskele",
+        "f-kesinti-ic"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:44",
+          "text": "Kerem Vardarlı, iskeleden Bora Kaynak’ı aradı."
+        }
+      ],
+      "doc": {
+        "kind": "audio",
+        "variant": "phone-call",
+        "source": "Hat dinleme kaydı — Bora Kaynak’a ait 0533 640 18 22 hattı. Tarihi eser kaçakçılığı soruşturması (2025/30211) kapsamında İstanbul 6. Sulh Ceza Hâkimliği kararıyla. Arayan hat: 0541 903 22 18 (Kerem Vardarlı).",
+        "datetime": "07.02.2026 23:44:10 — süre 1 dk 12 sn",
+        "ambience": "Arayan tarafta sert rüzgâr ve tahtaya vuran dalgalar; aranan tarafta yüksek devirde bir dıştan takma motor.",
+        "lines": [
+          {
+            "character": "bora",
+            "text": "Söyle Kerem.",
+            "delivery": "motor sesine karşı bağırarak"
+          },
+          {
+            "character": "kerem",
+            "text": "Neredesiniz abi? Ben iskeledeyim, dondum. Paket sırılsıklam olacak.",
+            "delivery": "dişleri birbirine vurarak, hızlı"
+          },
+          {
+            "character": "bora",
+            "text": "Karşıdan çıktık, lodos var, yavaş geliyoruz. Beş dakika. Senin yalı hangisi, şu kapkaranlık olan mı? Yanındakilerin hepsi yanıyor."
+          },
+          {
+            "character": "kerem",
+            "text": "O. Şalter attı herhalde. Şans işte, kimse görmez.",
+            "delivery": "gülerek"
+          },
+          {
+            "character": "bora",
+            "text": "Akşam kameraları kapatacaktın hani?"
+          },
+          {
+            "character": "kerem",
+            "text": "Merdiven dibindeki odanın kapısı benim şifreyi yemedi abi. Boş ver, iskelede kamera yok zaten."
+          },
+          {
+            "character": "kerem",
+            "text": "Dur… Yukarıda, babamın çalışma odasında bir ışık oynadı. Söndü.",
+            "delivery": "sesini alçaltarak",
+            "pause": 2
+          },
+          {
+            "character": "bora",
+            "text": "Biri mi bakıyor?"
+          },
+          {
+            "character": "kerem",
+            "text": "Yok. Babamdır, karanlıkta mum arıyordur. Yatmamış daha. Hadi abi, gelin artık.",
+            "delivery": "aceleyle"
+          },
+          {
+            "character": "bora",
+            "text": "Paket iyi sarılı olsun. Bir iki yüzü getirdim, kalanı satınca. Kapatıyorum."
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-kod-formu",
+      "title": "Alarm kullanıcı kodu çizelgesi",
+      "summary": "Kalkan Güvenlik’in savcılık talebi üzerine verdiği kod listesi.",
+      "people": [
+        "tarik",
+        "nevzat",
+        "riza",
+        "hatice",
+        "mujgan",
+        "kerem"
+      ],
+      "reveals": [
+        "f-kod-sahibi"
+      ],
+      "doc": {
+        "kind": "table",
+        "heading": "Kalkan Güvenlik — Vardarlı Yalısı kullanıcı kodu çizelgesi (rev. 14.06.2024)",
+        "note": "Kurulum kodu (00) 2023’teki teslimde fabrika ayarından değiştirilmiş ve garanti süresince (2026 sonuna kadar) yalnızca yüklenici firmanın şantiye şefine verilmiştir; o tarihten beri değiştirilmemiştir. 14.06.2024 servisinde, su baskını sonrası R. Kılıç’ın talebiyle ve N. Vardarlı’nın imzasıyla teknik oda kapısına tuş takımı eklenmiş, aynı gün merkezî izleme sözleşmesi yapılmıştır. Kapı yetkisi yalnızca 00, 01 ve 02 numaralı kodlara tanımlıdır; kapı girişleri panele ve izleme merkezine kaydedilir. Bu değişiklik ve izleme sözleşmesi hakkında yüklenici firmaya bilgi verilmemiştir. Kayıtlara göre kurulum kodu en son 14.09.2025’teki yıllık garanti bakımında kullanılmıştır.",
+        "columns": [
+          "Kod",
+          "Kullanıcı",
+          "Yetki",
+          "Teknik oda kapısı"
+        ],
+        "rows": [
+          [
+            "00",
+            "Kurulum — Sezgin Mimarlık ve Restorasyon Ltd. Şti., şantiye şefi Tarık Sezgin",
+            "Tam yetki, kurulum menüsü, hafıza işlemleri",
+            "Evet"
+          ],
+          [
+            "01",
+            "Nevzat Vardarlı",
+            "Ana kullanıcı (kurma / çözme)",
+            "Evet"
+          ],
+          [
+            "02",
+            "Rıza Kılıç",
+            "Kullanıcı",
+            "Evet (14.06.2024’ten itibaren)"
+          ],
+          [
+            "03",
+            "Hatice Yener",
+            "Kullanıcı",
+            "Hayır"
+          ],
+          [
+            "04",
+            "Müjgân Vardarlı",
+            "Kullanıcı",
+            "Hayır"
+          ],
+          [
+            "05",
+            "Kerem Vardarlı",
+            "Kullanıcı",
+            "Hayır"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "e-lab-iz",
+      "title": "Kriminal laboratuvar raporu: tepsi ve tabaktaki izler",
+      "summary": "Tepsideki ikinci kişiye ait izlerin ev halkının eleme izleriyle karşılaştırılması.",
+      "people": [
+        "tarik",
+        "hatice",
+        "kerem",
+        "mujgan",
+        "leyla",
+        "riza",
+        "zeynep",
+        "nevzat"
+      ],
+      "reveals": [
+        "f-tepsi"
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "lab",
+        "agency": "İstanbul Kriminal Polis Laboratuvarı Müdürlüğü — Parmak İzi Şubesi",
+        "docNo": "İKPL-2026/4127-E",
+        "datetime": "11.02.2026 17:10",
+        "heading": "Servis tepsisi, bardak tabağı ve bardaktaki izlerin eleme izleriyle karşılaştırılması",
+        "sections": [
+          {
+            "title": "İnceleme konusu",
+            "text": "Çalışma odasındaki yan sehpada bulunan servis tepsisi, bardak tabağı ve ince belli çay bardağı (İKPL-2026/4127-B raporunda “kimliği belirlenmemiş ikinci kişi” olarak not edilen izler)."
+          },
+          {
+            "title": "Eleme izleri",
+            "text": "10 Şubat 2026’da yalıda Müjgân Vardarlı, Leyla Vardarlı Sezgin, Kerem Vardarlı, Tarık Sezgin, Hatice Yener ve Rıza Kılıç’tan; aynı gün Çınaraltı Catering’de Zeynep Arıkan’dan parmak ve avuç içi izi alınmıştır. Maktulün izleri ATK’dan temin edilmiştir."
+          },
+          {
+            "title": "Bulgular",
+            "text": "Bardak: maktul ve Hatice Yener.\n\nBardak tabağının alt yüzü: Hatice Yener’in sol el izleri ile Tarık Sezgin’in sağ el başparmak ve işaret parmağı izleri (sırasıyla 14 ve 12 özdeş nokta).\n\nTepsi: sol kulpta Hatice Yener; sağ kulpta ve tepsi tabanının sağ kenarında Tarık Sezgin’in sağ avuç içi ve parmak izleri.\n\nKerem Vardarlı, Müjgân Vardarlı, Leyla Vardarlı Sezgin, Rıza Kılıç ve Zeynep Arıkan’ın izlerine tepside, tabakta ve bardakta rastlanmamıştır."
+          },
+          {
+            "title": "Değerlendirme",
+            "text": "İzlerin yerleşimi, tepsinin sağ elle kulpundan ve tabağın altından tutularak taşınmasıyla uyumludur. Parmak izinin bırakıldığı saat laboratuvar yöntemiyle belirlenemez."
+          }
+        ],
+        "signature": "Parmak İzi Uzmanı Kom. Yrd. Burak Sevim"
+      }
+    },
+    {
+      "id": "e-imza-rapor",
+      "title": "Rehin sözleşmesindeki imzanın incelemesi",
+      "summary": "Kriminal laboratuvarın belge inceleme raporu.",
+      "people": [
+        "leyla",
+        "tarik"
+      ],
+      "reveals": [
+        "f-imza-sahte"
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "expert",
+        "agency": "İstanbul Kriminal Polis Laboratuvarı Müdürlüğü — Belge İnceleme Şubesi",
+        "docNo": "İKPL-2026/4127-D",
+        "datetime": "12.02.2026 15:00",
+        "heading": "Payidar Finansman rehin sözleşmesindeki “Leyla Vardarlı Sezgin” imzası ve paraflarının incelenmesi",
+        "sections": [
+          {
+            "title": "İnceleme konusu",
+            "text": "Payidar Finansman A.Ş.’den aslı celp edilen 12.11.2025 tarihli üç sayfalık pay rehni sözleşmesindeki rehin veren imzası, sayfa başı parafları (“L.V.S.”) ve el yazısıyla yazılmış “Okudum, anladım, kabul ediyorum” ibaresi."
+          },
+          {
+            "title": "Mukayese materyali",
+            "text": "Leyla Vardarlı Sezgin’in 2019–2025 arasına ait banka, noter ve şirket belgelerindeki 14 imzası ile huzurda alınmış yazı ve imza örnekleri. Soruşturma kapsamında huzurda alınan Tarık Sezgin, Kerem Vardarlı ve Müjgân Vardarlı yazı örnekleri."
+          },
+          {
+            "title": "Bulgular",
+            "text": "Sözleşmedeki imza, mukayese imzalarının genel görünümüne benzetilmeye çalışılmış; ancak yavaş ve kontrollü çizim, kalem kaldırma noktaları, çizgi kenarlarında titreme ve başlangıç–bitişlerde küt uçlar görülmektedir. Bu özellikler taklit yoluyla atılmış imzalara özgüdür. Leyla Vardarlı Sezgin’in doğal imzasındaki hızlı sola eğik bitiş darbesi incelenen imzada yoktur.\n\nEl yazısı ibare ve paraflardaki “k”, “y” ve “S” harflerinin yapısı, bağlantı biçimleri ve satır eğimi Tarık Sezgin’in mukayese yazılarıyla belirgin benzerlik göstermektedir. Kerem Vardarlı ve Müjgân Vardarlı yazılarıyla anlamlı benzerlik yoktur."
+          },
+          {
+            "title": "Payidar Finansman’ın yazılı beyanı",
+            "text": "Payidar’ın 11.02.2026 tarihli cevabına göre sözleşme, kredi başvurusu sırasında Sezgin Mimarlık yetkilisi Tarık Sezgin tarafından imzalı olarak şirket merkezine teslim edilmiştir. Rehin veren Leyla Vardarlı Sezgin işlem sırasında hazır bulunmamış, kimliği ayrıca doğrulanmamıştır."
+          },
+          {
+            "title": "Sonuç",
+            "text": "İncelenen imza Leyla Vardarlı Sezgin’in eli ürünü değildir; taklit yoluyla oluşturulmuştur. El yazısı ibare ve parafların Tarık Sezgin’in eli ürünü olması kuvvetle muhtemeldir; kesin kanaat için ilave mukayese yazısı gereklidir."
+          }
+        ],
+        "signature": "Belge İnceleme Uzmanı Kom. Yrd. Gizem Taşçı"
+      }
+    },
+    {
+      "id": "e-banka-sezgin",
+      "title": "Sezgin Mimarlık’ın banka hesap dökümü",
+      "summary": "Şirketin ticari hesabının Kasım 2025 – Şubat 2026 hareketleri.",
+      "people": [
+        "tarik"
+      ],
+      "reveals": [
+        "f-sezgin-borc"
+      ],
+      "doc": {
+        "kind": "bank",
+        "bank": "Ekin Ticaret Bankası A.Ş. — Cihangir Şubesi",
+        "holder": "Sezgin Mimarlık ve Restorasyon Ltd. Şti. (yetkili: Tarık Sezgin)",
+        "iban": "TR41 0021 7000 0000 4418 2290 01",
+        "period": "01.11.2025 – 09.02.2026",
+        "rows": [
+          {
+            "date": "01.11.2025",
+            "desc": "Devreden bakiye",
+            "amount": 0,
+            "balance": 212450
+          },
+          {
+            "date": "05.11.2025",
+            "desc": "SGK prim ödemesi",
+            "amount": -184300,
+            "balance": 28150
+          },
+          {
+            "date": "10.11.2025",
+            "desc": "Kira — Cihangir ofis",
+            "amount": -95000,
+            "balance": -66850
+          },
+          {
+            "date": "14.11.2025",
+            "desc": "Gelen EFT — Payidar Finansman A.Ş. — kredi kullandırım",
+            "amount": 18500000,
+            "balance": 18433150
+          },
+          {
+            "date": "14.11.2025",
+            "desc": "Ticari kredi kapama — Ekin Ticaret Bankası",
+            "amount": -7940000,
+            "balance": 10493150
+          },
+          {
+            "date": "17.11.2025",
+            "desc": "Giden EFT — Karma Ahşap San. — eski borç",
+            "amount": -2150000,
+            "balance": 8343150
+          },
+          {
+            "date": "20.11.2025",
+            "desc": "Vergi dairesi — KDV (gecikmeli)",
+            "amount": -1120000,
+            "balance": 7223150
+          },
+          {
+            "date": "28.11.2025",
+            "desc": "Maaş ödemeleri",
+            "amount": -1640000,
+            "balance": 5583150
+          },
+          {
+            "date": "05.12.2025",
+            "desc": "Gelen EFT — Üsküdar Belediyesi — hakediş",
+            "amount": 960000,
+            "balance": 6543150
+          },
+          {
+            "date": "29.12.2025",
+            "desc": "Giden EFT — Yılmaz İnşaat — taşeron",
+            "amount": -3400000,
+            "balance": 3143150
+          },
+          {
+            "date": "15.01.2026",
+            "desc": "Maaş ödemeleri",
+            "amount": -1610000,
+            "balance": 1533150
+          },
+          {
+            "date": "22.01.2026",
+            "desc": "Giden EFT — Kalıp Yapı — taşeron",
+            "amount": -1390000,
+            "balance": 143150
+          },
+          {
+            "date": "26.01.2026",
+            "desc": "Gelen EFT — Beykoz Belediyesi — hakediş",
+            "amount": 420000,
+            "balance": 563150
+          },
+          {
+            "date": "30.01.2026",
+            "desc": "Talimatlı ödeme — Payidar Finansman — 19.887.500,00 TL — YETERSİZ BAKİYE, GERÇEKLEŞMEDİ",
+            "amount": 0,
+            "balance": 563150
+          },
+          {
+            "date": "02.02.2026",
+            "desc": "Maaş avansı",
+            "amount": -410000,
+            "balance": 153150
+          },
+          {
+            "date": "06.02.2026",
+            "desc": "Gelen havale — Tarık Sezgin (şahsi) — “Payidar kısmi”",
+            "amount": 450000,
+            "balance": 603150
+          },
+          {
+            "date": "06.02.2026",
+            "desc": "Giden EFT — Payidar Finansman — kısmi ödeme",
+            "amount": -450000,
+            "balance": 153150
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-ifade-leyla-2",
+      "title": "Leyla Vardarlı Sezgin’in ikinci ifadesi",
+      "summary": "Kızın, Londra yazışması ve rehin konusu üzerine yeniden dinlenmesi.",
+      "people": [
+        "leyla",
+        "tarik",
+        "nevzat"
+      ],
+      "reveals": [
+        "f-leyla-teras",
+        "f-imza-sahte"
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "leyla",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "İstanbul Emniyet Müdürlüğü, Cinayet Büro Amirliği",
+        "datetime": "12.02.2026 10:00",
+        "qa": [
+          {
+            "q": "İlk ifadenizde 23:00’ten itibaren eşinizle odanızda olduğunuzu söylediniz. Aldbury & Finch’in ekran kaydı ve teras kamerası başka bir şey gösteriyor.",
+            "a": "Evet. Yalan söyledim. Terastaydım, on biri on yedi geçeden on ikiyi iki geçeye kadar Londra’yla görüntülü görüşmedeydim. Satış görüşmesi gizliydi; ailenin önünde, polisin tutanağında yer almasını istemedim."
+          },
+          {
+            "q": "Babanız bu satıştan haberdar mıydı?",
+            "a": "Haberi olmuş. Ajandasındaki “Aldbury meselesi” o. Pazartesi beni kurulda görevden almayı önerecekti. Bunu biliyordum. Ama babamı bunun için… Hayır. Ben o saatte terastaydım; Londra’da iki kişi beni ekranda gördü, kamera da gördü."
+          },
+          {
+            "q": "Bu süre içinde eşiniz Tarık Sezgin neredeydi?",
+            "a": "Bilmiyorum. Yanımda değildi. Odada olduğunu düşünüyordum. Işıklar gelince, on ikiye doğru içeri girdiğimde sofada değildi; birkaç dakika sonra yukarıdan indi, sol eliyle sağ bileğini tutuyordu. Mutfağa geçti, Hatice Hanım sarmış."
+          },
+          {
+            "q": "O hâlde ilk ifadenizde neden “Tarık’la odamızdaydık” dediniz?",
+            "a": "Kendi yalanımı saklamak için. Onun da bir şey sakladığını düşünmedim."
+          },
+          {
+            "q": "Payidar Finansman’a, adınıza kayıtlı yüzde sekiz payınızı Sezgin Mimarlık’ın kredisi için rehin verdiniz mi?",
+            "a": "Hayır. Ne öyle bir sözleşme imzaladım ne de bir rehinden haberim var. Bunu bugün sizden duyuyorum."
+          },
+          {
+            "q": "Eşinizin şirketinin mali durumunu biliyor muydunuz?",
+            "a": "Geçen yaz zor durumdaydı. Benden kefil olmamı istedi, babama danışmadan olmaz dedim. Kasım’da “Hallettim, bir finans şirketinden kredi buldum” dedi. Ben de sormadım."
+          },
+          {
+            "q": "Eşinizin elinizdeki imza örneklerine erişimi var mıydı?",
+            "a": "Evimizde, çalışma odamda imzalı her şey var. Yıllardır aynı evdeyiz."
+          },
+          {
+            "q": "Babanız, 5 Şubat akşamı Tarık Bey’i aramış. Bundan haberiniz var mı?",
+            "a": "Hayır. O akşam Tarık geç geldi, çok sessizdi. İş diye düşündüm."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği, CMK m. 45 uyarınca yakınlık nedeniyle tanıklıktan çekinme hakkı bulunduğu hatırlatıldı; çekinmeyeceğini beyan etti. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-ifade-orhan-2",
+      "title": "Orhan Tekinalp’in ikinci ifadesi",
+      "summary": "Kurucu ortağın, gazete haberi sonrasında avukatı huzurunda verdiği ifade.",
+      "people": [
+        "orhan",
+        "nevzat",
+        "deniz"
+      ],
+      "reveals": [
+        "f-orhan-yol"
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "orhan",
+        "capacity": "tanık",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "İstanbul Emniyet Müdürlüğü, Cinayet Büro Amirliği",
+        "datetime": "11.02.2026 16:00",
+        "qa": [
+          {
+            "q": "İlk ifadenizde çalışma odasında eski günleri konuştuğunuzu, tartışma olmadığını söylediniz.",
+            "a": "Doğru değildi. Tartıştık. Nevzat 1994’ü, kapıyı, raporu kitapta anlatacağını ve 3 Mart’ta basının karşısına çıkacağını söyledi. Benim adımı da yazacaktı."
+          },
+          {
+            "q": "Haberde yazanlar doğru mu?",
+            "a": "Avukatım bu konuda konuşmamamı öneriyor. Şu kadarını söyleyeyim: o kilidi ben taktırdım. Hırsızlık oluyordu. Bir gece yangın çıkacağını kim bilebilirdi? Otuz iki yıldır her 3 Mart’ta uyuyamam."
+          },
+          {
+            "q": "Odadan nasıl ayrıldınız?",
+            "a": "Kızgın. Ona “Bunu yaparsan seni mahkemeye veririm” dedim. Masaya vurdum, kol düğmem o zaman düşmüştür. O sakindi. Kapıdan çıkarken bana “Sana kızamam Orhan. Asıl zor konuşma bu gece, evin içinden birine hesap soracağım” dedi."
+          },
+          {
+            "q": "Kimi kastettiğini söyledi mi?",
+            "a": "Hayır. Ben de sormadım, kendi derdime düşmüştüm."
+          },
+          {
+            "q": "Saat kaçta çıktınız?",
+            "a": "On bire yirmi kala odadan çıktım. Aşağıda bir kahve içtim, sinirim geçsin diye. On biri çeyrek geçe arabaya bindim. Sabri doğru eve sürdü, köprüden geçtik. Bütün gece evdeydim, eşim de şoförüm de söyler."
+          },
+          {
+            "q": "Nevzat Bey’in ölümü 1994 itirafını engelledi. Bundan en çok kim kazanır?",
+            "a": "Ben, biliyorum. Ama ses kayıtları zaten ortadaymış, gazete yazdı işte. Nevzat ölünce sır gömülmedi, aksine patladı. Ben onu öldürmedim; on bir buçukta köprünün öbür yanındaydım."
+          },
+          {
+            "q": "Deniz Ural’ı tanıyor musunuz?",
+            "a": "Yemekte gördüm. Kayıtları gazeteye o vermiştir. Ama gazetedeki isimlerden birini görünce anladım: Hasan Ural. Atölyede yanan ustabaşımız. Kız onun torunu olmalı."
+          }
+        ],
+        "body": "İfade sahibine tanık sıfatıyla dinlendiği hatırlatıldı. Tutanak okundu, imza altına alındı."
+      }
+    },
+    {
+      "id": "e-londra-kayit",
+      "title": "Londra ile görüntülü görüşmenin kaydı (kesit)",
+      "summary": "Bir danışmanlık firmasının sakladığı ekran kaydından alınan iki ses kesiti.",
+      "people": [
+        "leyla",
+        "nevzat"
+      ],
+      "reveals": [
+        "f-leyla-teras"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-07T23:17",
+          "text": "Leyla Sezgin’in Londra ile görüntülü görüşmesi başladı (00:02’ye kadar)."
+        }
+      ],
+      "doc": {
+        "kind": "audio",
+        "variant": "recording",
+        "source": "Aldbury & Finch Danışmanlık (Londra) ekran kaydı; savcılık talebi üzerine gönderildi. Görüşme 7 Şubat 2026, İstanbul saatiyle 23:17–00:02; kayıt kesintisizdir ve Leyla Sezgin görüşme boyunca kadrajdan çıkmamıştır (firmanın üst yazısı). Kesit 1: kaydın 19.–21. dakikaları (23:36–23:38). Kesit 2: 30.–31. dakikalar (23:47–23:48). Kesit 3: son dakika (00:01–00:02).",
+        "datetime": "07.02.2026 23:36 / 23:47 / 00:01",
+        "ambience": "Açık havada, sert rüzgâr ve kıyıya vuran dalgalar. Kesit 2’de uzaktan yaklaşan bir tekne motorunun sesi duyuluyor.",
+        "lines": [
+          {
+            "name": "Selin Aksoy (Aldbury & Finch)",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Londra’da yaşayan, düzgün İstanbul Türkçesi; nazik, resmî"
+            },
+            "text": "(Kesit 1) Yani münhasırlık yirmi sekiz Şubat’ta bitiyor. Fon, babanızın onayı olmadan imzaya gitmez, bunu bilin."
+          },
+          {
+            "character": "leyla",
+            "text": "Biliyorum. Pazartesi kurul var. Babam beni icra başkanlığından almayı önerecek, eminim. O deal’i ben kurtarırım, siz zamanı uzatın yeter.",
+            "delivery": "alçak sesle, hızlı"
+          },
+          {
+            "character": "leyla",
+            "text": "Bir saniye… Olamaz. Bütün ışıklar gitti.",
+            "delivery": "şaşkın",
+            "pause": 2
+          },
+          {
+            "name": "Selin Aksoy (Aldbury & Finch)",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Londra’da yaşayan, düzgün İstanbul Türkçesi; nazik, resmî"
+            },
+            "text": "Sizi hâlâ görüyoruz, yalnızca yüzünüz ekranın ışığında. Arkanızda karşı kıyı ışıl ışıl ama. Tam yirminci dakikadayız, not düşüyorum."
+          },
+          {
+            "character": "leyla",
+            "text": "Yalı karardı, sadece bizim ev. Neyse, pilim var, terastayım, kimse beni aramaz. Devam edelim.",
+            "delivery": "kendini toparlayarak"
+          },
+          {
+            "name": "Selin Aksoy (Aldbury & Finch)",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Londra’da yaşayan, düzgün İstanbul Türkçesi; nazik, resmî"
+            },
+            "text": "(Kesit 2) Hukuki inceleme odası on altı Şubat’ta açılıyor. Bir şey daha… arkanızda bir motor sesi var, duyuyor musunuz?",
+            "pause": 3
+          },
+          {
+            "character": "leyla",
+            "text": "Boğaz burası, gece de tekne geçer. Devam.",
+            "delivery": "sabırsız"
+          },
+          {
+            "character": "leyla",
+            "text": "(Kesit 3) Işıklar geldi. Yirmi dakika sürdü. İçeri gireyim, donmak üzereyim. Pazartesi akşamı sizi ararım.",
+            "delivery": "yorgun, rahatlamış",
+            "pause": 4
+          },
+          {
+            "name": "Selin Aksoy (Aldbury & Finch)",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "Londra’da yaşayan, düzgün İstanbul Türkçesi; nazik, resmî"
+            },
+            "text": "İyi geceler Leyla Hanım. Babanıza da “iyi ki doğdunuz” deyin."
+          },
+          {
+            "character": "leyla",
+            "text": "Söylerim. İyi geceler.",
+            "delivery": "kısa bir duraksamadan sonra"
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-dna",
+      "title": "Kriminal laboratuvar DNA raporu",
+      "summary": "Tırnak altı ve kırlent örneklerinin referans örneklerle karşılaştırılması.",
+      "people": [
+        "nevzat",
+        "tarik",
+        "kerem",
+        "orhan",
+        "riza"
+      ],
+      "reveals": [
+        "f-dna"
+      ],
+      "doc": {
+        "kind": "report",
+        "variant": "lab",
+        "agency": "İstanbul Kriminal Polis Laboratuvarı Müdürlüğü — Biyoloji Şubesi",
+        "docNo": "İKPL-2026/4127-C",
+        "datetime": "13.02.2026 11:30",
+        "heading": "Tırnak altı ve kırlent kılıfı örneklerinin DNA karşılaştırması",
+        "sections": [
+          {
+            "title": "İnceleme konusu",
+            "text": "Maktulün sağ el tırnak altı sürüntüleri; ortadaki bordo kırlentin fermuar ağzı ve köşelerinden alınan dokunma örnekleri. Referans: maktul ile soruşturma kapsamında alınan Tarık Sezgin, Kerem Vardarlı, Orhan Tekinalp ve Rıza Kılıç ağız içi sürüntüleri."
+          },
+          {
+            "title": "Tırnak altı",
+            "text": "Sağ el işaret ve orta parmak tırnak altlarından iki kişilik karışım profil elde edilmiştir. Baskın olmayan profil maktule aittir. Baskın erkek profil, Tarık Sezgin’in referans profiliyle incelenen tüm lokuslarda uyumludur. Kerem Vardarlı, Orhan Tekinalp ve Rıza Kılıç bu profilin kaynağı olarak dışlanmıştır."
+          },
+          {
+            "title": "Kırlent kılıfı",
+            "text": "Fermuar ağzı ve iki köşeden alınan dokunma örneklerinde maktul ile Tarık Sezgin’in profillerini içeren karışım saptanmıştır."
+          },
+          {
+            "title": "Değerlendirme",
+            "text": "Tırnak altındaki dokunun miktarı ve tazeliği, ölümden kısa süre önce gerçekleşmiş bir temasla uyumludur."
+          },
+          {
+            "title": "Ek: adli muayene özeti (ATK, 12.02.2026)",
+            "text": "Tarık Sezgin’in sağ önkol iç yüzünde, bilek kıvrımının 2–5 cm üstünde, birbirine paralel, 2–4 cm uzunluğunda üç yüzeysel sıyrık; kenarları düzensiz, kabuklanmış. Bulgular cam gibi keskin bir cisimle oluşmuş kesiyle değil, tırnakla oluşmuş sıyrıkla uyumludur; yaşı 4–6 gün olarak değerlendirilmiştir."
+          }
+        ],
+        "signature": "Biyolog Onur Kemer · Biyolog Seda Aytaç"
+      }
+    },
+    {
+      "id": "e-whatsapp",
+      "title": "Nevzat Vardarlı’nın telefonundaki yazışma",
+      "summary": "Adli bilişimin kilidini açtığı telefondan, damatla yazışma.",
+      "people": [
+        "nevzat",
+        "tarik",
+        "leyla"
+      ],
+      "reveals": [
+        "f-whatsapp",
+        "f-rehin"
+      ],
+      "timeline": [
+        {
+          "at": "2026-02-05T20:58",
+          "text": "Nevzat Vardarlı, Tarık Sezgin’e rehin konusunda yazdı."
+        }
+      ],
+      "doc": {
+        "kind": "messages",
+        "owner": "Nevzat Vardarlı",
+        "with": "Tarık",
+        "source": "Adli bilişim imajı, maktulün telefonu (aynı yazışma Tarık Sezgin’in telefonunda silinmiş durumda)",
+        "messages": [
+          {
+            "from": "me",
+            "time": "05.02.2026 20:58",
+            "text": "Payidar Finansman diye bir şirketten holdinge yazı geldi. Leyla’nın hisseleri senin şirketinin kredisine rehin. Sözleşmedeki imza Leyla’nın değil. O imzayı kırk yıldır tanırım."
+          },
+          {
+            "from": "them",
+            "time": "05.02.2026 21:02",
+            "text": "Baba, telefonda olmaz. Açıklayabilirim."
+          },
+          {
+            "from": "me",
+            "time": "05.02.2026 21:03",
+            "text": "Seni hattan arıyorum."
+          },
+          {
+            "from": "them",
+            "time": "05.02.2026 21:31",
+            "text": "Bir ay süre verin, kapatacağım. Leyla’nın haberi olmasın, yıkılır."
+          },
+          {
+            "from": "me",
+            "time": "05.02.2026 21:40",
+            "text": "Bir ay yok. Cumartesi yemekten sonra çalışma odasında konuşacağız. Pazartesiye kadar ya o rehin kalkar ya Leyla’ya ben söylerim. Sonra da savcılığa."
+          },
+          {
+            "from": "them",
+            "time": "05.02.2026 22:05",
+            "text": "Anlaşıldı."
+          },
+          {
+            "from": "them",
+            "time": "07.02.2026 18:20",
+            "text": "Yemekten önce bir dakika konuşabilir miyiz?"
+          },
+          {
+            "from": "me",
+            "time": "07.02.2026 18:32",
+            "text": "Yemekten sonra dedim. Bugün benim doğum günüm."
+          },
+          {
+            "from": "them",
+            "time": "07.02.2026 22:45",
+            "text": "Geliyorum baba."
+          }
+        ]
+      }
+    },
+    {
+      "id": "e-foto-blister",
+      "title": "Araç aramasında bulunan blister",
+      "summary": "Tarık Sezgin’in aracında yapılan aramada el konulan nesne.",
+      "people": [
+        "tarik",
+        "mujgan"
+      ],
+      "reveals": [
+        "f-blister"
+      ],
+      "doc": {
+        "kind": "photo",
+        "image": "obj-strip",
+        "caption": "Arama kararıyla 13.02.2026’da yalının bahçesinde park hâlindeki 34 TSZ 451 plakalı araçta (ruhsat sahibi Tarık Sezgin) yapılan aramada, sürücü kapısı cebinde, katlanmış bir kumaş peçeteye sarılı bulundu. Blister alprazolam 0,5 mg’dır; folyodaki parti numarası, ortak banyodaki Müjgân Vardarlı adına reçeteli kutunun parti numarasıyla aynıdır. Peçete, Çınaraltı Catering’in o akşam masada kullandığı peçetelerle aynı tiptir. Araç 7 Şubat öğleden sonradan beri bahçededir. Bahçe kamerası (K2) kaydında, 8 Şubat sabahı 07:48’de, olay yeri ekibi ayrıldıktan sonra, T. Sezgin’in aracın sürücü kapısını açıp birkaç saniye eğildiği, sonra kapıyı kapatıp içeri döndüğü görülmektedir. Araç o tarihten aramaya kadar hareket etmemiştir.",
+        "tag": "Delil No: 2026/4127-38"
+      }
+    },
+    {
+      "id": "e-ifade-tarik-2",
+      "title": "Tarık Sezgin’in şüpheli ifadesi",
+      "summary": "Damadın, avukatı huzurunda şüpheli sıfatıyla verdiği ifade.",
+      "people": [
+        "tarik",
+        "nevzat",
+        "leyla",
+        "mujgan"
+      ],
+      "reveals": [
+        "f-tepsi",
+        "f-sms"
+      ],
+      "doc": {
+        "kind": "statement",
+        "person": "tarik",
+        "capacity": "şüpheli",
+        "takenBy": "Komiser Ayla Tunç, İstanbul Emniyet Müdürlüğü Cinayet Büro Amirliği",
+        "place": "İstanbul Emniyet Müdürlüğü, Cinayet Büro Amirliği",
+        "datetime": "13.02.2026 15:30",
+        "qa": [
+          {
+            "q": "İlk ifadenizde Nevzat Bey’i pastadan sonra görmediğinizi ve o akşam mesajlaşmadığınızı söylediniz. Saat 22:44’te size SMS gönderilmiş.",
+            "a": "Evet, “Gel” yazdı. Çalışma odasına gittim, konuştuk. Söylemedim çünkü konu özeldi, aile meselesiydi."
+          },
+          {
+            "q": "Ne konuştunuz?",
+            "a": "Şirketimin borcunu. Rehin Leyla’nın bilgisi dâhilindeydi; şimdi babasının ölümünden sonra bunu kabul edemiyor, anlıyorum. Babamla anlaştık, bir hafta süre verdi. Sakin ayrıldık."
+          },
+          {
+            "q": "Ihlamur tepsisini siz mi götürdünüz?",
+            "a": "Evet. Aşağı inmiştim, tepsi tezgâhtaydı, götürdüm. Barışma jesti. Bunda ne var?"
+          },
+          {
+            "q": "Bardakta alprazolam bulundu. Kayınvalidenizin ortak banyodaki kutusundan bir blister eksik. Aracınızda o kutunun parti numarasını taşıyan bir blister bulundu.",
+            "a": "Avukatım bu konuda konuşmamamı öneriyor."
+          },
+          {
+            "q": "Teknik odanın kapısı 23:36’da sizin kurulum kodunuzla açılmış, bir dakika sonra şalter inmiş.",
+            "a": "Ben o saatte odamdaydım. Kod restorasyonda bir sürü ustanın elinden geçti. Birisi öğrenmiş olabilir."
+          },
+          {
+            "q": "Kurulum kodu 2023’teki teslimde değiştirilmiş ve yalnızca size verilmiş. Aynı kod 17:41’de de kullanılmış; arka koridor kamerası o dakikada devre dışı kalmış.",
+            "a": "Öğleden sonra panoya baktım, Rıza Efendi kombiyle uğraşıyordu, yardım edeyim dedim. Kamerayı bilmiyorum."
+          },
+          {
+            "q": "Kandilli’nin tamamının karanlık olduğunu söylediniz. Dağıtım şirketine göre mahallede kesinti yok, sokak lambaları yanıyordu.",
+            "a": "Pencereden öyle gördüm. Yağmur vardı, cam buğuluydu."
+          },
+          {
+            "q": "Nevzat Bey’in tırnaklarının altındaki doku sizin DNA’nızla uyumlu.",
+            "a": "Akşam ona sarıldım, elimi tuttu… Avukatım konuşacak."
+          },
+          {
+            "q": "9 Şubat’ı 10 Şubat’a bağlayan gece, saat 02:08’de, kapüşonlu ve sağ bileği sargılı biri servis merdiveninden inip teknik odaya girmiş ve alarm hafızasını kurulum kodunuzla silmiş.",
+            "a": "Uyuyamadım, mutfağa su içmeye indim. Teknik odaya girmedim. Hem o panel bir yere kayıt göndermez ki… Avukatım konuşacak."
+          }
+        ],
+        "body": "İfade sahibine şüpheli sıfatıyla dinlendiği, CMK m. 147 uyarınca susma, müdafi yardımından yararlanma ve lehine delil toplanmasını isteme hakları hatırlatıldı. Müdafii Av. Kerim Aydemir hazır bulundu. Tutanak okundu, imza altına alındı."
+      }
+    }
+  ],
+  "leads": [
+    {
+      "id": "l-hatice",
+      "title": "Aşçı Hatice Yener’in ifadesini al",
+      "description": "Yirmi yedi yıldır bu evde. Gecenin mutfaktan görünen akışını ve Nevzat Bey’in alışkanlıklarını en iyi o bilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-hatice-1"
+      ],
+      "leadsTo": [
+        "l-zeynep"
+      ],
+      "outcome": "Hatice Hanım gecenin mutfaktan görünen akışını anlattı ve servisten kalan bir garsonun adını verdi."
+    },
+    {
+      "id": "l-kerem",
+      "title": "Kerem Vardarlı’yla konuş",
+      "description": "Zemin katta oturan oğul gece evdeydi; babasıyla arasının iyi olmadığı biliniyor.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-kerem-1"
+      ],
+      "leadsTo": [],
+      "outcome": "Kerem karartma başladığında odasında oyun oynadığını, hemen mutfağa gittiğini söyledi."
+    },
+    {
+      "id": "l-leyla",
+      "title": "Leyla Vardarlı Sezgin’in ifadesini al",
+      "description": "Holdingi yöneten kız, eşiyle birlikte hafta sonunu yalıda geçiriyordu.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-leyla-1"
+      ],
+      "leadsTo": [],
+      "outcome": "Leyla, gece boyunca eşiyle odalarında olduğunu söyledi."
+    },
+    {
+      "id": "l-orhan",
+      "title": "Kurucu ortak Orhan Tekinalp’i dinle",
+      "description": "Yemekten sonra Nevzat Bey’le çalışma odasında baş başa görüştü; kol düğmesi masanın altından çıktı.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-orhan-1"
+      ],
+      "leadsTo": [
+        "l-pts"
+      ],
+      "outcome": "Orhan Bey dostça bir sohbet olduğunu, 23:15’te yalıdan ayrıldığını söyledi."
+    },
+    {
+      "id": "l-deniz",
+      "title": "Anı kitabının yazarı Deniz Ural’ı bul",
+      "description": "Aile dışından tek davetli. Nevzat Bey’le aylardır baş başa görüşüyordu.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-deniz-1"
+      ],
+      "leadsTo": [
+        "l-taksi"
+      ],
+      "outcome": "Deniz Ural kitabın “eski bir olaya” döndüğünü söyledi, ayrıntı vermedi; yalıdan taksiyle ayrıldığını anlattı."
+    },
+    {
+      "id": "l-riza",
+      "title": "Bekçi Rıza Kılıç’la konuş",
+      "description": "Kapıdan, kameralardan ve teknik odadan o sorumlu.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-riza-1"
+      ],
+      "leadsTo": [
+        "l-iskele",
+        "l-catering"
+      ],
+      "outcome": "Rıza Efendi karartmayı kapıda karşıladığını anlattı; iskelede kimsenin bilmediği bir kamera olduğunu ve catering aracının adını verdi."
+    },
+    {
+      "id": "l-ariza",
+      "title": "Elektrik dağıtım şirketinden kesinti kayıtlarını iste",
+      "description": "Aile, ışıkların lodos yüzünden gittiğini düşünüyor. Şebeke ne diyor? Savcılık yazısının cevabı birkaç gün sürer.",
+      "hours": 1,
+      "unlocks": [
+        "e-ariza"
+      ],
+      "leadsTo": [],
+      "minAct": 2,
+      "outcome": "Dağıtım şirketi savcılık yazısına cevaben o geceye ait arıza ve sayaç kayıtlarını gönderdi."
+    },
+    {
+      "id": "l-dvr",
+      "title": "Yalının kamera kayıt cihazını incelet",
+      "description": "Yalıda beş sabit kamera var. Kayıt cihazının imajı alındı; saatlerce görüntüyü izleyip özetlemek gerekiyor.",
+      "hours": 4,
+      "unlocks": [
+        "e-dvr-tablo"
+      ],
+      "leadsTo": [],
+      "outcome": "Adli bilişim, kayıt cihazındaki görüntülerin saat saat özetini çıkardı."
+    },
+    {
+      "id": "l-zeynep",
+      "title": "Catering garsonu Zeynep Arıkan’ın ifadesini al",
+      "description": "Gece yarısına kadar mutfakta kaldı; aile dışından bir göz. Olay gecesi ifadesi alınmadan gönderilmişti, catering firması üzerinden bulunması gerekiyor.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-zeynep"
+      ],
+      "leadsTo": [],
+      "minAct": 2,
+      "outcome": "Zeynep Arıkan, o akşam mutfakta ve çevresinde gördüklerini anlattı."
+    },
+    {
+      "id": "l-iskele",
+      "title": "İskeledeki bataryalı kameranın hafıza kartını al",
+      "description": "Elektriğe bağlı olmayan tek kamera; karartmada kayıt yapmış olabilir. Kart adli bilişime gönderildi, çözümlemesi zaman alacak.",
+      "hours": 3,
+      "unlocks": [
+        "e-iskele-a",
+        "e-iskele-b"
+      ],
+      "leadsTo": [
+        "l-bora"
+      ],
+      "minAct": 2,
+      "outcome": "Hafıza kartında karartma sırasına ait on altı dakikalık kesintisiz kayıt çıktı."
+    },
+    {
+      "id": "l-catering",
+      "title": "Catering firmasının servis aracını bul",
+      "description": "Karartma başladığında araç tam kapıdaydı; ön cam kamerası olabilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-dashcam"
+      ],
+      "leadsTo": [],
+      "minAct": 2,
+      "outcome": "Çınaraltı Catering, minibüsün araç kamerası kaydını ve cihaz saatine dair yazılı beyanını verdi."
+    },
+    {
+      "id": "l-taksi",
+      "title": "Deniz Ural’ın taksi yolculuğunu doğrula",
+      "description": "Ayrılış saati ve gittiği yer uygulama kayıtlarından kontrol edilebilir.",
+      "hours": 1,
+      "unlocks": [
+        "e-taksi"
+      ],
+      "leadsTo": [],
+      "outcome": "Taksi uygulaması yolculuk kaydını gönderdi."
+    },
+    {
+      "id": "l-pts",
+      "title": "Orhan Tekinalp’in aracının plaka tanıma kayıtlarını iste",
+      "description": "Şoförlü siyah sedanın gece nereden geçtiği emniyet kayıtlarında olmalı.",
+      "hours": 2,
+      "unlocks": [
+        "e-pts"
+      ],
+      "leadsTo": [],
+      "outcome": "Plaka tanıma sistemi aracın gece güzergâhını verdi."
+    },
+    {
+      "id": "l-hts",
+      "title": "Nevzat Bey’in hattının HTS kaydını iste",
+      "description": "Ölümünden önceki günlerde ve o akşam kiminle haberleşti?",
+      "hours": 2,
+      "unlocks": [
+        "e-hts-nevzat"
+      ],
+      "leadsTo": [],
+      "outcome": "Operatör, 5–8 Şubat arasına ait arama ve mesaj dökümünü gönderdi."
+    },
+    {
+      "id": "l-saat",
+      "title": "Akıllı saatin verisini adli bilişime çıkart",
+      "description": "Saat bileğindeydi ve dakikada bir nabız ölçüyordu. Otopsinin verdiği iki saatlik aralık daraltılabilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-saat-veri"
+      ],
+      "leadsTo": [],
+      "outcome": "Telefondaki sağlık uygulamasından o geceye ait nabız ve adım verisi çıkarıldı."
+    },
+    {
+      "id": "l-ilac",
+      "title": "Evdeki reçeteli ilaçları say",
+      "description": "Kurban alprazolam kullanmıyordu. Yalıda bu ilacı kim kullanıyor, kutuda ne kadar var?",
+      "hours": 1,
+      "unlocks": [
+        "e-foto-ilac"
+      ],
+      "leadsTo": [
+        "l-mujgan-2"
+      ],
+      "outcome": "Birinci kattaki ortak banyoda Müjgân Hanım adına reçeteli bir alprazolam kutusu bulundu ve fotoğraflandı."
+    },
+    {
+      "id": "l-mujgan-2",
+      "title": "Müjgân Vardarlı’yı yeniden dinle",
+      "description": "İlaç onun. O geceyi ve ilacını bir kez daha, ayrıntısıyla sormak gerekiyor; hattının kayıtları da istenebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-mujgan-2",
+        "e-hts-mujgan"
+      ],
+      "leadsTo": [],
+      "outcome": "Müjgân Hanım yeniden dinlendi; hattının o geceki arama kayıtları da dosyaya girdi."
+    },
+    {
+      "id": "l-hukuk",
+      "title": "Holdingin hukuk müşaviriyle görüş",
+      "description": "Ajandada “Nilgün Hn.’ın yazısı” ve “rehin şerhi” notları var; bu bir şirket işi.",
+      "hours": 2,
+      "unlocks": [
+        "e-eposta-rehin"
+      ],
+      "leadsTo": [],
+      "outcome": "Av. Nilgün Saraç, Nevzat Bey’e 3 Şubat’ta yalnızca kendisine gönderdiği gizli e-postayı verdi."
+    },
+    {
+      "id": "l-bora",
+      "title": "İskeleye yanaşan teknenin sahibini bul",
+      "description": "Gece yarısına doğru karşı kıyıdan gelen tekne kimin? Yalıdakilerin o saatlerdeki telefon trafiği bir yol gösterebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-dinleme-bora"
+      ],
+      "leadsTo": [],
+      "outcome": "Yalıdan 23:44’te aranan bir numara, başka bir soruşturmada hattı dinlenen Arnavutköylü bir antikacıya çıktı. Kayıp “Kandilli Sabahı” tablosu onun dükkânında bulundu."
+    },
+    {
+      "id": "l-kod",
+      "title": "Alarm firmasından kullanıcı kodu çizelgesini iste",
+      "description": "Teknik oda kapısı o gece numaralı kodlarla açılmış. Hangi numara kime ait?",
+      "hours": 2,
+      "unlocks": [
+        "e-kod-formu"
+      ],
+      "leadsTo": [],
+      "outcome": "Kalkan Güvenlik, savcılık yazısı üzerine kod çizelgesini gönderdi."
+    },
+    {
+      "id": "l-imza",
+      "title": "Rehin sözleşmesindeki imzayı incelet",
+      "description": "Sözleşmenin aslını Payidar’dan celp edip imzayı mukayese örnekleriyle karşılaştırmak gerekiyor.",
+      "hours": 3,
+      "unlocks": [
+        "e-imza-rapor"
+      ],
+      "leadsTo": [],
+      "outcome": "Belge İnceleme Şubesi raporunu verdi; Payidar’ın yazılı beyanı da rapora eklendi."
+    },
+    {
+      "id": "l-sezgin",
+      "title": "Sezgin Mimarlık’ın banka hareketlerini iste",
+      "description": "Kredi kullandırıldıktan sonra para nereye gitti, vade gününde ne oldu?",
+      "hours": 2,
+      "unlocks": [
+        "e-banka-sezgin"
+      ],
+      "leadsTo": [],
+      "outcome": "Banka, şirketin ticari hesabının dökümünü gönderdi."
+    },
+    {
+      "id": "l-londra",
+      "title": "Leyla Hanım’ın o geceki görüşmesinin izini sür",
+      "description": "Leyla “odamızdaydık” diyor, eşi “terasta iş görüşmesi yapıyordu” diyor. Kişisel e-posta kutusu, o saatte kiminle konuştuğunu gösterebilir.",
+      "hours": 2,
+      "unlocks": [
+        "e-londra-kayit"
+      ],
+      "leadsTo": [
+        "l-leyla-2"
+      ],
+      "outcome": "Leyla’nın kişisel e-postasında Londra’daki bir danışmanlık firmasıyla yazışma çıktı; firma, görüşmenin ekran kaydını savcılığa gönderdi."
+    },
+    {
+      "id": "l-leyla-2",
+      "title": "Leyla Hanım’ı yeni bulgularla yeniden dinle",
+      "description": "Londra yazışması ve rehin bildirimi karşısında ne diyecek?",
+      "hours": 1,
+      "unlocks": [
+        "e-ifade-leyla-2"
+      ],
+      "leadsTo": [],
+      "outcome": "Leyla ilk ifadesinde yalan söylediğini kabul etti; rehin konusunda kesin bir cevap verdi."
+    },
+    {
+      "id": "l-orhan-2",
+      "title": "Orhan Tekinalp’i haberle yüzleştir",
+      "description": "Gazeteye göre 1994’teki kilitli kapı onun talimatıymış. Çalışma odasında gerçekten ne konuşuldu?",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-orhan-2"
+      ],
+      "leadsTo": [],
+      "outcome": "Orhan Bey avukatıyla geldi; tartışmayı ve Nevzat Bey’in kapıdan çıkarken söylediklerini anlattı."
+    },
+    {
+      "id": "l-iz",
+      "title": "Tepsideki ikinci kişinin izlerini eleme izleriyle karşılaştırt",
+      "description": "Laboratuvar tepside ve bardak tabağında Hatice Hanım dışında birinin izlerini buldu. Ev halkından ve servis ekibinden eleme izi alınması gerekiyor.",
+      "hours": 2,
+      "unlocks": [
+        "e-lab-iz"
+      ],
+      "leadsTo": [],
+      "outcome": "Eleme izleri alındı; Parmak İzi Şubesi karşılaştırma raporunu verdi."
+    },
+    {
+      "id": "l-arac",
+      "title": "Tarık Sezgin’in aracını arama kararıyla ara",
+      "description": "Hafta sonu yalının bahçesinde park hâlinde duran araç, olay gecesinden beri yerinden oynamadı.",
+      "hours": 2,
+      "unlocks": [
+        "e-foto-blister"
+      ],
+      "leadsTo": [],
+      "outcome": "Araçta, sürücü kapısının cebinde bir peçeteye sarılı bir nesne bulundu."
+    },
+    {
+      "id": "l-tarik-2",
+      "title": "Tarık Sezgin’i avukatı huzurunda yeniden dinle",
+      "description": "Biriken kayıtlar, ilk geceki ifadesiyle karşılaştırılmalı.",
+      "hours": 2,
+      "unlocks": [
+        "e-ifade-tarik-2"
+      ],
+      "leadsTo": [],
+      "outcome": "Tarık Sezgin bazı noktaları kabul etti, bazılarında susma hakkını kullandı."
+    }
+  ],
+  "acts": [
+    {
+      "title": "Yetmişinci yaş",
+      "sceneImage": "scene-night",
+      "scene": "Pazar sabahına karşı, saat ikiyi beş geçiyordu. Komiser Ayla Tunç Kandilli’deki yalının bahçe kapısından girdiğinde lodos hâlâ Boğaz’ı dövüyordu. Sofada, ayaküstü kurulmuş bir masada yarısı yenmiş bir doğum günü pastası duruyordu. Yetmiş mumun çoğu devrilmişti.\n\nAmbulans doktoru kapıda bekliyordu. “Ailesi kalp diyor, öyküsü de uyuyor,” dedi, “ama gözlerine bakın. O kanamalar kalpten olmaz.”\n\nBirinci kattaki çalışma odasında Nevzat Vardarlı, masasının başındaki deri koltukta, başı omzuna düşmüş, uyuyakalmış bir adam gibi oturuyordu. Masada dibinde biraz ıhlamur kalmış ince belli bir bardak. Kanepede üç bordo kırlent.\n\nAşağıda, büyük salonda aile toplanmıştı. Eşi Müjgân Hanım bir köşede, battaniyeye sarılı. Kızı Leyla telefonuyla, oğlu Kerem ıslak parkasını hâlâ çıkarmamış. Damat Tarık Sezgin herkese çay dağıtıyor, polise kapıları gösteriyordu; ambulansı o çağırmış, ışıkları da o geri getirmişti.\n\n“Elektrik yirmi dakika gitti,” dedi Tarık. “Fırtınadan. Sonra Müjgân Hanım çığlık attı.”\n\nTunç not defterine yalnızca iki kelime yazdı: yirmi dakika.",
+      "evidence": [
+        "e-oyi-rapor",
+        "e-112-kayit",
+        "e-kroki",
+        "e-foto-calisma",
+        "e-ifade-tarik-1",
+        "e-ifade-mujgan-1"
+      ],
+      "leads": [
+        "l-hatice",
+        "l-kerem",
+        "l-leyla",
+        "l-orhan",
+        "l-deniz",
+        "l-riza",
+        "l-ariza",
+        "l-dvr"
+      ],
+      "hints": [
+        "Herkes karanlıkta nerede olduğunu söylüyor. Kimin sözünü bir belge ya da tarafsız bir tanık doğruluyor, kiminki yalnızca kendi sözü?",
+        "Işıklar karardığında kimin nerede olduğunu yazın; sonra o odaya ve o kapıya kimin girebildiğini sorun. Kod sahiplerinin listesi henüz elinizde değil."
+      ],
+      "advance": {
+        "leads": [
+          "l-dvr",
+          "l-riza"
+        ],
+        "hours": 13
+      }
+    },
+    {
+      "title": "Kalp değil",
+      "sceneImage": "scene-morgue",
+      "scene": "Pazartesi öğleden sonra. Adli Tıp Kurumu’nun bodrum koridoru. Adli tıp uzmanı Kemal Sayın, dosyayı Tunç’a uzatmadan önce bir süre elinde tuttu.\n\n“Koroner damarları kötü, evet. Ama kalbinde taze bir şey yok. Dudaklarının içi dişlerine bastırılmış, burnunda kadife lifi var. Biri yüzüne yumuşak bir şey bastırmış.” Durdu. “Direnememiş. Kanında atı uyutacak kadar sakinleştirici var. Kendi ilaçlarında yok o.”\n\nTunç merdivenlerden çıkarken savcıyı aradı. Ozan Keskin tek bir soru sordu: “Karanlıkta mı oldu?”\n\n“Henüz bilmiyorum,” dedi Tunç. “Ama biri o adamı önce uyuttu, sonra boğdu. Uyutmak için de ona bir şey içirdi. O evde her gece saat on birde çalışma odasına giden tek bir şey var.”\n\nYalıda cenaze hazırlığı vardı. Kapıda taziye çelenkleri, mutfakta helva kokusu. Müjgân Hanım siyahlar içinde bahçede yürüyor, Kerem iskeleye bakan bankta sigara içiyor, Leyla telefonda holdingin avukatlarıyla konuşuyordu. Tarık Sezgin, çelenkleri kapıdan içeri taşıyan çocuklara yer gösteriyordu.\n\nTunç arabada karartmayı düşündü. Adam zaten uyuşmuştu, üst katta kamera yoktu. Peki karanlık kime ne kazandırmıştı? Karanlıkta herkes mum arar, kimse kimsenin nerede olduğuna bakmaz. Üst koridordan bir gölge geçse kimse görmez. Sabah da herkes aynı şeyi söyler: fırtına, yaşlı bir kalp, duyulmayan bir telefon.\n\nMasadaki ajanda hâlâ açıktı. Cumartesi gününün altına iki madde yazılmıştı.",
+      "evidence": [
+        "e-otopsi",
+        "e-lab-1",
+        "e-ajanda"
+      ],
+      "leads": [
+        "l-hts",
+        "l-saat",
+        "l-ilac",
+        "l-hukuk"
+      ],
+      "hints": [
+        "Ihlamur demlikten bardağa, bardaktan çalışma odasına giderken kimlerin elinden geçti? Demlik temizse, ilaç ne zaman katılmış olabilir?",
+        "Nevzat Bey’in telefon kayıtlarını ifadelerle yan yana koyun: O akşam onunla hiç haberleşmediğini söyleyen biri var mı?"
+      ],
+      "advance": {
+        "leads": [
+          "l-hukuk"
+        ],
+        "hours": 13
+      }
+    },
+    {
+      "title": "Silinen hafıza",
+      "sceneImage": "scene-alarm",
+      "scene": "Çarşamba sabahı Kent Postası’nın birinci sayfası Tunç’un masasındaydı: otuz iki yıl önce yanmış bir atölye, asma kilidi kırık bir demir kapı ve dört isim. Orhan Tekinalp’in avukatı daha saat dokuzda iki kez aramıştı.\n\nAma Tunç’u asıl düşündüren, onu izleyen telefondu. Kalkan Güvenlik’ten bir mühendis, sakin bir sesle anlattı. Pazartesiyi salıya bağlayan gece, saat ikiyi dokuz geçe, yalıdaki alarm panelinin hafızası silinmişti. Bunun için birinin teknik odaya girmesi, panelin başına geçmesi gerekiyordu.\n\n“Merak etmeyin,” dedi mühendis. “Panel her şeyi anında bize gönderir. Cumartesi gecesi dâhil, hiçbir şey kaybolmadı.”\n\nÖğlene doğru bir dosya daha geldi. Pazartesi onarılan arka koridor kamerasından tek bir kare. Kapüşonlu biri, yüzü dönük, ev terlikleriyle teknik odaya yürüyordu.\n\nTunç kareye uzun uzun baktı.\n\n“Biri o gece neler kaydedildiğini yeni öğrendi,” dedi yardımcısına. “Ve bizden önce silmek istedi.”",
+      "evidence": [
+        "e-gazete",
+        "e-alarm-rapor",
+        "e-alarm-log",
+        "e-cam-koridor"
+      ],
+      "leads": [
+        "l-kod",
+        "l-imza",
+        "l-sezgin",
+        "l-londra",
+        "l-orhan-2",
+        "l-iz"
+      ],
+      "hints": [
+        "Alarm kaydındaki kod numaralarını tek tek kişilere bağlamaya çalışın. Hangi numaranın sahibi belli, hangisinin sahibini başka bir belgeden öğrenmeniz gerekiyor?",
+        "Rehin bildirimini ve ajandayı yeniden okuyun: Nevzat Bey o akşam “yüz yüze” kiminle hesaplaşacaktı?"
+      ],
+      "advance": {
+        "leads": [
+          "l-imza"
+        ],
+        "hours": 10
+      }
+    },
+    {
+      "title": "Son düğüm",
+      "sceneImage": "scene-interview",
+      "scene": "Cuma günü iki zarf aynı saatte geldi. Biyoloji Şubesi’nin raporu ince, adli bilişiminki kalındı: Nevzat Vardarlı’nın telefonunun kilidi nihayet açılmıştı.\n\nTunç önce ince zarfı okudu, sonra kalınını. Yazışmanın son satırına geldiğinde bir süre pencereden dışarı baktı. Vatan Caddesi’nde öğle trafiği, uzakta Haliç’in gri suyu.\n\nSorgu odasında masanın bir yanına iki sandalye konmuştu. Avukat erken gelmişti; müvekkiline su istedi, not defterini açtı, kalemini ucuna kadar çıkardı.\n\nSavcı Ozan Keskin koridorda Tunç’u durdurdu. “Elindekiler yeterli mi?”\n\n“Yeterli olması için,” dedi Tunç, “o gecenin her dakikasının yerli yerine oturması gerekiyor. Oturuyor.” Dosyayı koltuğunun altına sıkıştırdı. “Bir tek arabaya bakmadık. Hafta sonundan beri bahçede, yerinden oynamadı.”",
+      "evidence": [
+        "e-dna",
+        "e-whatsapp"
+      ],
+      "leads": [
+        "l-arac",
+        "l-tarik-2"
+      ],
+      "hints": [
+        "Tırnak altındaki dokuyu, gece yarısı sarılan bileği ve kanı olmayan cam kırıklarını aynı satıra yazın.",
+        "Eksik blister hangi banyodaydı, o banyoyu o hafta sonu kimler kullandı ve blister kimin arabasından çıktı?"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "who",
+      "prompt": "Nevzat Vardarlı’yı kim öldürdü?",
+      "kind": "suspect",
+      "options": [],
+      "points": 30
+    },
+    {
+      "id": "how",
+      "prompt": "Nevzat Vardarlı nasıl öldürüldü?",
+      "kind": "choice",
+      "options": [
+        {
+          "id": "h-digoksin",
+          "text": "Kalp ilacının (digoksin) dozu artırılarak kalp ritmi bozuldu."
+        },
+        {
+          "id": "h-konyak",
+          "text": "Müjgân Hanım’ın sakinleştiricisi içkisine katıldı; aşırı dozdan öldü."
+        },
+        {
+          "id": "h-kirlent",
+          "text": "Ihlamuruna sakinleştirici katılıp uyuşturuldu, karanlıkta yüzüne kırlent bastırılarak boğuldu."
+        },
+        {
+          "id": "h-darbe",
+          "text": "Karanlıkta tökezletilip başını masaya çarpması sağlandı."
+        }
+      ],
+      "points": 12
+    },
+    {
+      "id": "why",
+      "prompt": "Failin asıl motifi neydi?",
+      "kind": "choice",
+      "options": [
+        {
+          "id": "w-yangin",
+          "text": "1994 yangınındaki kilitli kapının kamuoyu önünde itiraf edilmesini önlemek."
+        },
+        {
+          "id": "w-borc",
+          "text": "Borçlarını ve salondan aldığı tabloyu babasından saklamak."
+        },
+        {
+          "id": "w-rehin",
+          "text": "Leyla’nın imzası taklit edilerek paylarının bir krediye rehin verildiğinin ortaya çıkmasını önlemek."
+        },
+        {
+          "id": "w-satis",
+          "text": "Vardarlı Denizcilik’in gizli satış görüşmesinin Yönetim Kurulu’nda ortaya çıkmasını önlemek."
+        },
+        {
+          "id": "w-intikam",
+          "text": "1994 yangınında ölen bir işçinin intikamını almak."
+        }
+      ],
+      "points": 12
+    },
+    {
+      "id": "power",
+      "prompt": "Yalıdaki elektrik kesintisi nasıl oldu?",
+      "kind": "choice",
+      "options": [
+        {
+          "id": "p-lodos",
+          "text": "Lodos Kandilli’deki şebekeyi düşürdü; dönüşte ana şalter attı."
+        },
+        {
+          "id": "p-mutfak",
+          "text": "Biri mutfaktaki eski sigorta kutusundaki şalteri indirdi."
+        },
+        {
+          "id": "p-salter",
+          "text": "Biri teknik odaya kurulum koduyla girip ana şalteri elle indirdi."
+        },
+        {
+          "id": "p-yuk",
+          "text": "Doğum günü yemeğinin elektrik yükü ana şalteri attırdı."
+        }
+      ],
+      "points": 10
+    },
+    {
+      "id": "time",
+      "prompt": "Nevzat Vardarlı hangi zaman aralığında öldürüldü?",
+      "kind": "choice",
+      "options": [
+        {
+          "id": "t-gorusme",
+          "text": "22:47–23:00, çalışma odasındaki görüşme sırasında."
+        },
+        {
+          "id": "t-ihlamur",
+          "text": "23:05–23:15, ıhlamur götürüldükten hemen sonra."
+        },
+        {
+          "id": "t-karartma",
+          "text": "23:41–23:45, karartmanın ortasında."
+        },
+        {
+          "id": "t-isik",
+          "text": "23:58–00:10, ışıklar geldikten sonra."
+        },
+        {
+          "id": "t-bulunma",
+          "text": "00:10–00:18, ceset bulunmadan hemen önce."
+        }
+      ],
+      "points": 8
+    },
+    {
+      "id": "tray",
+      "prompt": "Uyuşturucu katılmış ıhlamuru çalışma odasına kim götürdü?",
+      "kind": "suspect",
+      "options": [],
+      "points": 13
+    },
+    {
+      "id": "proof",
+      "prompt": "Failin, o akşam pastadan sonra kurbanı görmediği ve onunla hiç haberleşmediği iddiasını en açık hangi belge çürütüyor?",
+      "kind": "evidence",
+      "options": [],
+      "points": 15
+    }
+  ],
+  "solution": {
+    "who": [
+      "tarik"
+    ],
+    "how": [
+      "h-kirlent"
+    ],
+    "why": [
+      "w-rehin"
+    ],
+    "power": [
+      "p-salter"
+    ],
+    "time": [
+      "t-karartma"
+    ],
+    "tray": [
+      "tarik"
+    ],
+    "proof": [
+      "e-hts-nevzat",
+      "e-lab-iz"
+    ]
+  },
+  "truth": {
+    "culprits": [
+      "tarik"
+    ],
+    "story": "Tarık Sezgin’in restorasyon şirketi 2025 yazında batmak üzereydi. Kasım’da eşi Leyla’nın imzasını taklit etti. Onun holdingdeki yüzde sekiz payını Payidar Finansman’a rehin verip 18,5 milyon liralık krediyle eski borçlarını kapattı. Kredi 30 Ocak’ta ödenemedi; Payidar 2 Şubat’ta holdinge rehin bildirimi gönderdi. Hukuk müşaviri yazıyı yalnızca Nevzat Vardarlı’ya iletti.\n\nNevzat Bey imzanın kızına ait olmadığını hemen anladı. 5 Şubat akşamı damadına yazdı, onu aradı ve süre verdi: cumartesi yemekten sonra konuşacaklar, pazartesiye kadar rehin kalkmazsa Leyla’ya ve savcılığa gidecekti.\n\nCumartesi öğleden sonra Tarık 17:41’de, garanti bakımlarında kullandığı kurulum koduyla teknik odaya girdi ve sahanlığı gören arka koridor kamerasının kablosunu çıkardı. Ortak banyodaki dolaptan kayınvalidesinin alprazolam kutusundan bir blister aldı. Bilmediği bir şey vardı: 2024’teki su baskınından sonra Nevzat Bey, Rıza’nın isteğiyle kapıya kayıtlı bir tuş takımı taktırmış ve paneli izleme merkezine bağlatmıştı. Tarık panelin her şeyi yalnızca kendi içinde tuttuğunu sanıyordu.\n\nYemekten sonra Nevzat Bey önce Orhan Tekinalp’le 1994 yangınını konuştu, ardından 22:44’te Tarık’a “Gel” yazdı. Görüşme sert geçti. Tarık 23:01’de servis merdiveninden sahanlığa indi, Hatice Hanım’ın tezgâha bıraktığı ıhlamur bardağına ezdiği altı tableti kattı ve tepsiyi çalışma odasına götürdü. Merdivende garson Zeynep onu yalnızca arkadan gördü.\n\n23:36’da teknik odaya yine kendi koduyla girdi, 23:37’de ana şalteri indirdi. Karanlık ona gereken örtüydü: evdekiler mum peşinde dağılacak, üst koridordan geçeni kimse görmeyecek, ölüm de fırtınalı bir gecede yaşlı bir kalbin durması gibi görünecekti. Leyla terasta Londra’yla görüşüyor, Müjgân Hanım avukatıyla konuşmasını bitirip mutfağa iniyor, Kerem iskelede çaldığı tabloyu teslim etmeyi bekliyordu. Tarık servis merdiveninden çalışma odasına çıktı ve 23:41’de uyuşmuş kayınpederinin yüzüne kanepedeki kırlenti bastırdı. Nevzat Bey bileğini tırmalayabildi; dört dakika sonra saatindeki nabız sustu. Telefonunun ışığı bir an pencereye vurdu; iskeledeki kamera da Kerem de bunu gördü.\n\nTarık kırlenti yerine koydu ama bardağı karanlıkta alamadı. Ortak banyoda bir su bardağını kırıp tırnak izlerine kılıf hazırladı. 23:57’de yine kendi koduyla girip şalteri kaldırdı, gece yarısı 112’yi de o aradı. Sabah, olay yeri ekibi gidince peçeteye sardığı blisteri arabasının kapı cebine sakladı; araç olay yeri şeridinin içinde kaldığı için onu bir daha çıkaramadı.\n\nOtopsi kalp krizi hikâyesini yıkınca, pazartesiyi salıya bağlayan gece servis merdiveninden inip panelin hafızasını sildi. Kayıtların izleme merkezine çoktan gittiğini bilmiyordu. Onarılan arka koridor kamerası sargılı bileğini kaydetti.",
+    "timeline": [
+      {
+        "at": "2025-11-12T11:00",
+        "text": "Tarık Sezgin, Leyla’nın imzası taklit edilmiş rehin sözleşmesini Payidar Finansman’a teslim etti."
+      },
+      {
+        "at": "2025-11-14T10:00",
+        "text": "Payidar, Sezgin Mimarlık’a 18,5 milyon TL kredi kullandırdı."
+      },
+      {
+        "at": "2026-01-30T17:00",
+        "text": "Kredi vadesi doldu; ödeme yapılamadı."
+      },
+      {
+        "at": "2026-02-03T10:14",
+        "text": "Hukuk müşaviri rehin bildirimini yalnızca Nevzat Vardarlı’ya iletti."
+      },
+      {
+        "at": "2026-02-05T20:58",
+        "text": "Nevzat Bey, Tarık’a sahte imzayı bildiği yazdı; 21:10’da onu aradı, 21:40’ta pazartesi süresini verdi."
+      },
+      {
+        "at": "2026-02-07T16:05",
+        "text": "Leyla ve Tarık yalıya geldi."
+      },
+      {
+        "at": "2026-02-07T16:57",
+        "text": "Rıza kombiyi kontrol etmek için kendi koduyla teknik odaya girdi (17:06’da çıktı)."
+      },
+      {
+        "at": "2026-02-07T17:41",
+        "text": "Tarık, kod 00 ile teknik odaya girip K4 kamerasının kablosunu çıkardı (17:42); ortak banyodan alprazolam blisterini aldı."
+      },
+      {
+        "at": "2026-02-07T21:15",
+        "text": "Kerem, kameraları kapatmak için kendi koduyla teknik odaya girmeyi denedi; kapı açılmadı."
+      },
+      {
+        "at": "2026-02-07T21:50",
+        "text": "Nevzat Bey, “Pazartesi bazı yanlışları düzelteceğim” dedi."
+      },
+      {
+        "at": "2026-02-07T22:12",
+        "text": "Nevzat Bey ve Orhan Tekinalp çalışma odasında 1994 yangını üzerine tartıştı (22:38’e kadar)."
+      },
+      {
+        "at": "2026-02-07T22:44",
+        "text": "Nevzat Bey, Tarık’a “Gel” diye SMS attı; Tarık 22:45’te ana merdivenden çıktı."
+      },
+      {
+        "at": "2026-02-07T22:47",
+        "text": "Tarık ile Nevzat Bey çalışma odasında rehni konuştu (23:00’e kadar)."
+      },
+      {
+        "at": "2026-02-07T22:58",
+        "text": "Hatice Hanım ıhlamuru tezgâha bırakıp yemek salonuna gitti."
+      },
+      {
+        "at": "2026-02-07T23:01",
+        "text": "Tarık mutfakta bardağa ezilmiş altı tablet alprazolam kattı."
+      },
+      {
+        "at": "2026-02-07T23:04",
+        "text": "Zeynep, Tarık’ı servis merdiveninde tepsiyle gördü."
+      },
+      {
+        "at": "2026-02-07T23:05",
+        "text": "Tarık ıhlamuru çalışma odasına bıraktı; Nevzat Bey içti."
+      },
+      {
+        "at": "2026-02-07T23:14",
+        "text": "Orhan Tekinalp’in aracı yalıdan çıktı."
+      },
+      {
+        "at": "2026-02-07T23:17",
+        "text": "Leyla terasta Londra ile görüntülü görüşmeye başladı."
+      },
+      {
+        "at": "2026-02-07T23:24",
+        "text": "Müjgân Hanım odasından avukatını aradı (23:39’a kadar)."
+      },
+      {
+        "at": "2026-02-07T23:26",
+        "text": "Deniz Ural taksiyle yalıdan ayrıldı."
+      },
+      {
+        "at": "2026-02-07T23:31",
+        "text": "Rıza, catering aracıyla ana kapıya çıktı."
+      },
+      {
+        "at": "2026-02-07T23:36",
+        "text": "Tarık, kod 00 ile teknik odaya girdi."
+      },
+      {
+        "at": "2026-02-07T23:37",
+        "text": "Tarık ana şalteri indirdi; kameralar karardı."
+      },
+      {
+        "at": "2026-02-07T23:39",
+        "text": "Kerem tabloyla iskeleye çıktı."
+      },
+      {
+        "at": "2026-02-07T23:40",
+        "text": "Müjgân Hanım mutfağa indi; Hatice ve Zeynep’le birlikteydi."
+      },
+      {
+        "at": "2026-02-07T23:41",
+        "text": "Tarık servis kapısından çalışma odasına girdi ve Nevzat Bey’i kırlentle boğmaya başladı."
+      },
+      {
+        "at": "2026-02-07T23:44",
+        "text": "Kerem iskeleden Bora’yı aradı; çalışma odasındaki ışığı gördü."
+      },
+      {
+        "at": "2026-02-07T23:45",
+        "text": "Nevzat Bey’in nabzı durdu; Tarık telefon ışığını bir an yakıp kırlenti yerine koydu (iskele kamerası 23:44:40–23:45:10)."
+      },
+      {
+        "at": "2026-02-07T23:47",
+        "text": "Tarık ortak banyoda bir bardak kırdı, bileğini havluyla sardı, odasına döndü."
+      },
+      {
+        "at": "2026-02-07T23:48",
+        "text": "Bora’nın teknesi iskeleye yanaştı, tabloyu aldı (23:53’te ayrıldı)."
+      },
+      {
+        "at": "2026-02-07T23:52",
+        "text": "Catering aracı sokaktan çıktı."
+      },
+      {
+        "at": "2026-02-07T23:56",
+        "text": "Kerem mutfaktaki eski sigorta kutusunu açtı."
+      },
+      {
+        "at": "2026-02-07T23:57",
+        "text": "Tarık kod 00 ile teknik odaya girip şalteri kaldırdı."
+      },
+      {
+        "at": "2026-02-08T00:02",
+        "text": "Leyla görüşmeyi bitirdi."
+      },
+      {
+        "at": "2026-02-08T00:05",
+        "text": "Hatice Hanım Tarık’ın bileğini sardı."
+      },
+      {
+        "at": "2026-02-08T00:18",
+        "text": "Müjgân Hanım cesedi buldu."
+      },
+      {
+        "at": "2026-02-08T00:23",
+        "text": "Tarık 112’yi aradı."
+      },
+      {
+        "at": "2026-02-08T07:48",
+        "text": "Tarık, peçeteye sardığı blisteri arabasının kapı cebine sakladı."
+      },
+      {
+        "at": "2026-02-10T02:09",
+        "text": "Tarık teknik odada alarm panelinin hafızasını sildi; K4 onu kaydetti."
+      }
+    ],
+    "characters": [
+      {
+        "id": "tarik",
+        "secret": "Şirketini kurtarmak için eşinin imzasını taklit edip onun paylarını rehin verdi; kredi ödenemedi ve kayınpederi bunu öğrendi.",
+        "whereabouts": "23:36–23:38 teknik odada şalteri indirdi; 23:41–23:46 çalışma odasında Nevzat Bey’i boğdu; 23:47’de banyoda bardak kırdı; 23:57’de şalteri kaldırdı.",
+        "lies": [
+          "Nevzat Bey’i pastadan sonra görmediğini söyledi; 22:47–23:00 arasında çalışma odasındaydı ve 23:05’te ıhlamuru götürdü.",
+          "O akşam mesajlaşmadıklarını söyledi; 22:44’te SMS aldı, 22:45’te “Geliyorum baba” yazdı.",
+          "Kandilli’nin tamamının karanlık olduğunu söyledi; kesinti yalnızca yalıdaydı.",
+          "Teknik odaya yalnızca 23:57’de girdiğini ima etti; aynı kodla 17:41’de ve 23:36’da da girdi.",
+          "Bileğini banyoda kırılan bardakla kestiğini söyledi; cam kırıklarında kan yok, tırnak altında onun dokusu var.",
+          "Şüpheli ifadesinde rehnin Leyla’nın bilgisi dâhilinde olduğunu söyledi; imza sahte."
+        ]
+      },
+      {
+        "id": "leyla",
+        "secret": "Babasından gizli olarak Vardarlı Denizcilik’i yabancı bir fona satmak için görüşüyordu; babası pazartesi onu görevden almayı önerecekti.",
+        "whereabouts": "23:17–00:02 terasta, dizüstü bilgisayarla Londra ile görüntülü görüşmede (teras kamerası, iskele kamerası, ekran kaydı).",
+        "lies": [
+          "23:00’ten itibaren Tarık’la odalarında olduğunu söyledi; terastaydı ve Tarık yanında değildi."
+        ]
+      },
+      {
+        "id": "kerem",
+        "secret": "Borçlarını ödemek için salondaki “Kandilli Sabahı” tablosunu çalıp bir antikacıya iskeleden teslim etti; önceden kameraları kapatmak için teknik odaya girmeyi denemiş, kodu kapıyı açmamıştı.",
+        "whereabouts": "23:39–23:55 iskelede (iskele kamerası, hat dinleme kaydı); 23:56’da mutfakta.",
+        "lies": [
+          "Karartmada odasında oyun oynadığını ve hemen mutfağa gittiğini söyledi; iskeledeydi.",
+          "Yeni panonun yerini bilmediğini söyledi; 21:15’te teknik odaya girmeyi denemişti.",
+          "Tablodan haberi olmadığını söyledi."
+        ]
+      },
+      {
+        "id": "mujgan",
+        "secret": "Doğum gününden sonra Nevzat Bey’den boşanmaya hazırlanıyordu; dilekçesi hazırdı, Moda’da daire kiralamıştı.",
+        "whereabouts": "23:24–23:39 odasında avukatıyla telefonda; 23:40’tan ışıklar gelene kadar Hatice ve Zeynep’le mutfakta.",
+        "lies": [
+          "İlacını alıp 22:30’da uyuduğunu ve kesintiyi fark etmediğini söyledi; uyanıktı, ilacını almamıştı."
+        ]
+      },
+      {
+        "id": "orhan",
+        "secret": "1994’te Bayrampaşa atölyesinin arka kapısına asma kilidi o taktırmıştı; dört işçinin öldüğü yangından sonra bilirkişi raporunun yazılışını örtbas ettiler.",
+        "whereabouts": "23:14’te yalıdan çıktı; 23:27’de FSM Köprüsü’nden geçti, 23:39’da Etiler’deydi (PTS).",
+        "lies": [
+          "Çalışma odasında dostça eski günleri konuştuklarını, tartışma olmadığını söyledi; sert bir tartışma oldu."
+        ]
+      },
+      {
+        "id": "deniz",
+        "secret": "1994 yangınında ölen ustabaşı Hasan Ural’ın torunu. Anı kitabı işini gerçeği öğrenmek için kabul etti; Nevzat Bey’in ölümünden sonra ses kayıtlarını gazeteye verdi.",
+        "whereabouts": "23:26’da yalıdan çıktı, 23:27–00:01 arasında taksiyle Cihangir’e gitti.",
+        "lies": [
+          "Ailesinin bu işle hiçbir ilgisi olmadığını söyledi."
+        ]
+      },
+      {
+        "id": "hatice",
+        "secret": "Saklayacak bir şeyi yok.",
+        "whereabouts": "Karartma boyunca mutfakta, Zeynep ve Müjgân Hanım’la.",
+        "lies": []
+      },
+      {
+        "id": "riza",
+        "secret": "İskeleye taktığı kamerayı aileye haber vermemişti.",
+        "whereabouts": "23:31–23:52 ana kapıda catering aracının başında; 23:55’te içeri girdi.",
+        "lies": []
+      }
+    ],
+    "chain": [
+      {
+        "step": "Ölüm doğal değil: Nevzat Bey önce alprazolamla uyuşturulmuş, sonra kanepedeki kırlentle boğulmuştur.",
+        "evidence": [
+          "e-otopsi",
+          "e-lab-1",
+          "e-oyi-rapor"
+        ],
+        "facts": [
+          "f-cinayet",
+          "f-ilac"
+        ]
+      },
+      {
+        "step": "İlaç ıhlamura demlikten bardağa konduktan sonra katıldı; tepsiyi çalışma odasına bir erkek götürdü (Zeynep), tepsi ve tabakta Hatice Hanım dışında yalnızca Tarık’ın izleri var ve ilk ifadesinde Nevzat Bey’i pastadan sonra görmediğini, onunla haberleşmediğini söyleyerek yalan söyledi.",
+        "evidence": [
+          "e-lab-1",
+          "e-ifade-hatice-1",
+          "e-ifade-zeynep",
+          "e-lab-iz",
+          "e-hts-nevzat",
+          "e-ifade-tarik-1"
+        ],
+        "facts": [
+          "f-tepsi",
+          "f-sms"
+        ]
+      },
+      {
+        "step": "Kesinti fırtınadan değil, yalının içinden; ana şalter teknik odada elle indirildi. Tarık’ın “bütün mahalle karanlıktı” sözü yalan.",
+        "evidence": [
+          "e-ariza",
+          "e-dashcam",
+          "e-dinleme-bora",
+          "e-112-kayit",
+          "e-alarm-log"
+        ],
+        "facts": [
+          "f-kesinti-ic",
+          "f-salter"
+        ]
+      },
+      {
+        "step": "Ölüm 23:41–23:45 arasında, karartmanın ortasında oldu; o sırada çalışma odasında ışık tutan biri vardı.",
+        "evidence": [
+          "e-saat-veri",
+          "e-iskele-a",
+          "e-dinleme-bora",
+          "e-dvr-tablo"
+        ],
+        "facts": [
+          "f-olum-saati"
+        ]
+      },
+      {
+        "step": "Teknik odaya şalter inmeden önce ve kalkmadan önce aynı kurulum koduyla girildi; bu kod yalnızca Tarık’taydı ve Tarık ikinci girişi kendisi üstlendi. Aynı kod öğleden sonra K4 kamerasının devre dışı kaldığı dakikada da kullanılmıştı.",
+        "evidence": [
+          "e-alarm-log",
+          "e-kod-formu",
+          "e-ifade-tarik-1",
+          "e-dvr-tablo",
+          "e-ifade-hatice-1"
+        ],
+        "facts": [
+          "f-kod00",
+          "f-kod-sahibi",
+          "f-kamera4"
+        ]
+      },
+      {
+        "step": "Karartmada diğer herkesin yeri belgeyle sabit: Leyla terasta, Kerem iskelede, Müjgân mutfakta, Rıza kapıda, Orhan ve Deniz yalının çok uzağında. Tarık’ın odada olduğunu doğrulayan kimse yok; Leyla’nın “birlikteydik” sözü kendi görüşmesini saklamak içindi.",
+        "evidence": [
+          "e-londra-kayit",
+          "e-ifade-leyla-2",
+          "e-iskele-a",
+          "e-dvr-tablo",
+          "e-ifade-zeynep",
+          "e-ifade-hatice-1",
+          "e-hts-mujgan",
+          "e-dashcam",
+          "e-pts",
+          "e-taksi"
+        ],
+        "facts": [
+          "f-leyla-teras",
+          "f-kerem-iskele",
+          "f-mujgan-mutfak",
+          "f-riza-kapi",
+          "f-orhan-yol",
+          "f-deniz-taksi"
+        ]
+      },
+      {
+        "step": "Motif: Leyla’nın payları, sahte imzayla Sezgin Mimarlık’ın ödenmeyen kredisine rehin verilmişti; Nevzat Bey bunu öğrenmiş ve pazartesiye kadar süre vermişti.",
+        "evidence": [
+          "e-eposta-rehin",
+          "e-ajanda",
+          "e-hts-nevzat",
+          "e-banka-sezgin",
+          "e-imza-rapor",
+          "e-ifade-leyla-2"
+        ],
+        "facts": [
+          "f-rehin",
+          "f-sezgin-borc",
+          "f-imza-sahte"
+        ]
+      },
+      {
+        "step": "Örtbas: Tarık’ın sağ bileği gece yarısı sarıldı, banyodaki cam kırıklarında kan yoktu; pazartesiyi salıya bağlayan gece alarm hafızasını kurulum koduyla silen kişinin sağ bileği sargılıydı.",
+        "evidence": [
+          "e-ifade-hatice-1",
+          "e-lab-1",
+          "e-cam-koridor",
+          "e-alarm-rapor",
+          "e-112-kayit"
+        ],
+        "facts": [
+          "f-bilek",
+          "f-silme"
+        ]
+      },
+      {
+        "step": "Doğrulama: Tırnak altındaki doku Tarık’a ait; Nevzat Bey’in telefonundaki yazışma tehdidi gösteriyor; eksik blister Tarık’ın arabasında.",
+        "evidence": [
+          "e-dna",
+          "e-whatsapp",
+          "e-foto-blister",
+          "e-otopsi",
+          "e-foto-ilac"
+        ],
+        "facts": [
+          "f-dna",
+          "f-whatsapp",
+          "f-blister",
+          "f-ilac-eksik"
+        ]
+      }
+    ],
+    "redHerrings": [
+      {
+        "evidence": "e-iskele-b",
+        "explanation": "Gece yarısı iskeleye yanaşan tekne bir kaçış ya da dışarıdan gelen bir fail değil: Kerem çaldığı tabloyu antikacı Bora Kaynak’a teslim ediyordu. Hat dinleme kaydı ve iskele kamerası tekneden kimsenin karaya çıkmadığını, Kerem’in 23:39–23:55 arasında iskeleden ayrılmadığını gösterir."
+      },
+      {
+        "evidence": "e-foto-ilac",
+        "explanation": "Alprazolam Müjgân Hanım’ın ama kutu, misafir odasındakilerin de kullandığı ortak banyodaydı. Müjgân Hanım’ın avukatla görüşmesi 23:39’da bitti (HTS) ve 23:40’tan ışıklar gelene kadar mutfakta iki tanığın yanındaydı; eksik blister Tarık’ın arabasından çıktı."
+      },
+      {
+        "evidence": "e-oyi-rapor",
+        "explanation": "Masanın altındaki “O.T.” kol düğmesi Orhan Tekinalp’in 22:12–22:38 arasındaki tartışmada düştü. Orhan Bey 23:27’de köprüden geçmişti; ölüm 23:41’de başladı."
+      },
+      {
+        "evidence": "e-gazete",
+        "explanation": "Deniz Ural’ın dedesi 1994 yangınında ölmüştü; güçlü bir motif gibi görünür. Ama 23:26’da yalıdan çıktı ve taksiyle durmadan Cihangir’e gitti. Ayrıca Nevzat Bey’in yaşayıp 3 Mart’ta itiraf etmesini isteyen kişiydi."
+      }
+    ]
+  }
+}

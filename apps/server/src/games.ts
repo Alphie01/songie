@@ -2,6 +2,7 @@ import type { AnyServerGame } from '@songie/game-kit/server';
 import { songGuessServer } from '@songie/song-guess/server';
 import { tabooServer } from '@songie/taboo/server';
 import { werewolfServer } from '@songie/werewolf/server';
+import { detectiveServer } from '@songie/detective/server';
 import { intrigueServer } from '@songie/intrigue/server';
 import { colorCardsServer } from '@songie/color-cards/server';
 import { agentsServer } from '@songie/agents/server';
@@ -35,6 +36,7 @@ export function loadGames(deps: GameDeps): Map<string, AnyServerGame> {
     songGuessServer({ ...deps, ...deps.overrides?.['song-guess'] }),
     tabooServer({ db: deps.db, ...deps.overrides?.['taboo'] }),
     werewolfServer({ db: deps.db, ...deps.overrides?.['werewolf'] }),
+    detectiveServer({ db: deps.db, ...deps.overrides?.['detective'] }),
     intrigueServer({ db: deps.db, ...deps.overrides?.['intrigue'] }),
     colorCardsServer({ db: deps.db, ...deps.overrides?.['color-cards'] }),
     kittenServer({ db: deps.db, ...deps.overrides?.['kitten'] }),

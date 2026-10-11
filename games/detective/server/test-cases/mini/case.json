@@ -1,0 +1,1027 @@
+{
+  "meta": {
+    "slug": "mini",
+    "title": "Moda'da Kapanan Kapı",
+    "subtitle": "Moda, İstanbul — Şubat 2025",
+    "genre": "cinayet",
+    "difficulty": "orta",
+    "minutes": 30,
+    "teaser": "Emekli bir saatçi dükkânının arka odasında ölü bulunur. Kapı içeriden kilitlidir.\n\nTest vakası: motorun ve şablonların denenmesi için.",
+    "cover": "cover",
+    "hoursBudget": 12,
+    "targetHours": 7,
+    "narrator": {
+      "gender": "male",
+      "age": "old",
+      "style": "tok, ağır, belgesel anlatıcısı"
+    }
+  },
+  "images": {
+    "cover": {
+      "kind": "cover",
+      "prompt": "Rainy night street in an old Istanbul neighborhood, a small watchmaker shop with shutters half down, warm interior light",
+      "aspect": "landscape",
+      "alt": "Yağmurlu gecede kepengi yarı inik küçük bir saatçi dükkânı."
+    },
+    "p-nuri": {
+      "kind": "portrait",
+      "prompt": "Portrait of a seventy year old man with white moustache, wool cardigan, reading glasses on a chain",
+      "aspect": "portrait",
+      "alt": "Beyaz bıyıklı, hırkalı, yaşlı bir adam."
+    },
+    "p-leyla": {
+      "kind": "portrait",
+      "prompt": "Portrait of a woman in her forties, short dark hair, raincoat, tired eyes",
+      "aspect": "portrait",
+      "alt": "Kısa koyu saçlı, yağmurluklu, kırklarında bir kadın."
+    },
+    "p-kerem": {
+      "kind": "portrait",
+      "prompt": "Portrait of a man in his thirties, beard, leather jacket, nervous expression",
+      "aspect": "portrait",
+      "alt": "Sakallı, deri ceketli, otuzlarında gergin bir adam."
+    },
+    "scene-shop": {
+      "kind": "scene",
+      "prompt": "Interior of a cramped watchmaker workshop at night, many clocks on the walls, a workbench with tools, police flash lighting",
+      "aspect": "landscape",
+      "alt": "Duvarlarda saatler, tezgâhta aletler; dar bir atölye."
+    },
+    "cam-street": {
+      "kind": "cctv",
+      "prompt": "High angle grainy security camera view of a narrow wet street at night, a figure in a hooded raincoat walking",
+      "aspect": "landscape",
+      "alt": "Islak dar sokakta kapüşonlu yağmurluk giymiş bir kişi yürüyor; yüzü görünmüyor, elinde bir şemsiye var."
+    },
+    "obj-key": {
+      "kind": "object",
+      "prompt": "Close up evidence photograph of an old brass key on a white evidence sheet with a ruler",
+      "aspect": "square",
+      "alt": "Beyaz zemin üzerinde eski pirinç bir anahtar; dişlerinde yeni törpü izleri."
+    }
+  },
+  "characters": [
+    {
+      "id": "nuri",
+      "name": "Nuri Aksoy",
+      "age": 71,
+      "role": "Emekli saatçi",
+      "relation": "Kurban",
+      "summary": "Moda'da kırk yıldır saatçi dükkânı işletiyordu. Yalnız yaşıyordu.",
+      "portrait": "p-nuri",
+      "victim": true
+    },
+    {
+      "id": "leyla",
+      "name": "Leyla Aksoy",
+      "age": 44,
+      "role": "Kurbanın kızı",
+      "relation": "Tek mirasçı",
+      "summary": "Kadıköy'de eczacı. Babasıyla araları son yıllarda soğuktu.",
+      "portrait": "p-leyla",
+      "suspect": true
+    },
+    {
+      "id": "kerem",
+      "name": "Kerem Yalçın",
+      "age": 33,
+      "role": "Çırak",
+      "relation": "Dükkânda beş yıldır çalışıyor",
+      "summary": "Dükkânın anahtarlarından birini taşıyor. Borçları olduğu konuşuluyor.",
+      "portrait": "p-kerem",
+      "suspect": true,
+      "voice": {
+        "gender": "male",
+        "age": "young",
+        "style": "gergin, alçak sesle, hızlı"
+      }
+    },
+    {
+      "id": "sevim",
+      "name": "Sevim Er",
+      "age": 60,
+      "role": "Komşu, kuru temizlemeci",
+      "relation": "Cesedi bulan kişi",
+      "summary": "Karşı dükkânın sahibi. Her sabah Nuri Bey'le çay içerdi.",
+      "suspect": true,
+      "voice": {
+        "gender": "female",
+        "age": "old",
+        "style": "İstanbul ağzı, telaşlı, nefes nefese"
+      }
+    }
+  ],
+  "locations": [
+    {
+      "id": "shop",
+      "name": "Aksoy Saat Atölyesi",
+      "description": "Ön tarafta satış tezgâhı, arkada çalışma odası. Arka odanın tek kapısı ve avluya bakan küçük bir penceresi var.",
+      "image": "scene-shop",
+      "plan": {
+        "width": 12,
+        "height": 8,
+        "rooms": [
+          {
+            "id": "front",
+            "label": "Satış",
+            "x": 0,
+            "y": 0,
+            "w": 7,
+            "h": 8
+          },
+          {
+            "id": "back",
+            "label": "Arka oda",
+            "x": 7,
+            "y": 0,
+            "w": 5,
+            "h": 5
+          },
+          {
+            "id": "yard",
+            "label": "Avlu",
+            "x": 7,
+            "y": 5,
+            "w": 5,
+            "h": 3,
+            "outdoor": true
+          }
+        ],
+        "doors": [
+          {
+            "x": 3,
+            "y": 8,
+            "label": "Sokak kapısı"
+          },
+          {
+            "x": 7,
+            "y": 2.5,
+            "vertical": true,
+            "label": "Arka oda kapısı"
+          }
+        ],
+        "windows": [
+          {
+            "x": 9.5,
+            "y": 5
+          }
+        ],
+        "markers": [
+          {
+            "x": 9,
+            "y": 2,
+            "label": "Ceset",
+            "kind": "body"
+          },
+          {
+            "x": 10.5,
+            "y": 4.5,
+            "label": "Ayak izi",
+            "kind": "stain"
+          }
+        ]
+      }
+    }
+  ],
+  "facts": [
+    {
+      "id": "f-poison",
+      "text": "Nuri Bey siyanürle zehirlendi."
+    },
+    {
+      "id": "f-key",
+      "text": "Arka oda anahtarının kopyası yeni yapılmıştı."
+    },
+    {
+      "id": "f-kerem-late",
+      "text": "Kerem saat 21:10'da dükkândaydı."
+    },
+    {
+      "id": "f-leyla-alibi",
+      "text": "Leyla 20:00–23:00 arası eczanede nöbetteydi."
+    },
+    {
+      "id": "f-debt",
+      "text": "Kerem'in 400.000 TL borcu vardı."
+    },
+    {
+      "id": "f-will",
+      "text": "Nuri Bey vasiyetini Kerem lehine değiştirecekti."
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e-scene",
+      "title": "Olay yeri inceleme raporu",
+      "summary": "Olay Yeri İnceleme Şube Müdürlüğü'nün ilk raporu.",
+      "doc": {
+        "kind": "report",
+        "variant": "scene",
+        "agency": "İstanbul Emniyet Müdürlüğü · Olay Yeri İnceleme Şube Müdürlüğü",
+        "docNo": "OYİ-2025/0412",
+        "datetime": "15.02.2025 08:40",
+        "heading": "Olay yeri inceleme tutanağı",
+        "sections": [
+          {
+            "title": "Olay yeri",
+            "text": "Arka oda kapısı içeriden kilitli bulunmuştur. Anahtar kilidin üzerindedir."
+          },
+          {
+            "title": "Bulgular",
+            "text": "Tezgâhta yarım bardak çay. Avlu penceresi aralık. Pencere altında çamurlu ayak izi."
+          }
+        ],
+        "signature": "Komiser Yrd. Ece Tan"
+      },
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2025-02-15T07:55",
+          "text": "Sevim Er cesedi buluyor."
+        }
+      ],
+      "people": [
+        "nuri",
+        "sevim"
+      ]
+    },
+    {
+      "id": "e-sevim",
+      "title": "Sevim Er'in ifadesi",
+      "summary": "Cesedi bulan komşunun ifadesi.",
+      "doc": {
+        "kind": "statement",
+        "person": "sevim",
+        "capacity": "tanık",
+        "takenBy": "Komiser Yrd. Ece Tan",
+        "place": "Kadıköy İlçe Emniyet Müdürlüğü",
+        "datetime": "15.02.2025 10:15",
+        "qa": [
+          {
+            "q": "Cesedi nasıl buldunuz?",
+            "a": "Çay saatinde kapı açılmadı. Yedek anahtarla girdim."
+          },
+          {
+            "q": "Dün akşam bir şey gördünüz mü?",
+            "a": "Dokuz gibi Kerem'i dükkândan çıkarken gördüm galiba."
+          }
+        ]
+      },
+      "reveals": [
+        "f-kerem-late"
+      ],
+      "timeline": [],
+      "people": [
+        "sevim",
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-kerem",
+      "title": "Kerem Yalçın'ın ifadesi",
+      "summary": "Çırağın ilk ifadesi.",
+      "doc": {
+        "kind": "statement",
+        "person": "kerem",
+        "capacity": "şüpheli",
+        "takenBy": "Komiser Yrd. Ece Tan",
+        "place": "Kadıköy İlçe Emniyet Müdürlüğü",
+        "datetime": "15.02.2025 11:30",
+        "qa": [
+          {
+            "q": "Dün dükkândan ne zaman ayrıldınız?",
+            "a": "Yedide çıktım, eve gittim."
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-plan",
+      "title": "Dükkân krokisi",
+      "summary": "Olay yeri ekibinin çizdiği kroki.",
+      "doc": {
+        "kind": "floorplan",
+        "location": "shop",
+        "caption": "Arka odaya yalnızca satış bölümünden ve avlu penceresinden girilebilir."
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": []
+    },
+    {
+      "id": "e-autopsy",
+      "title": "Otopsi raporu",
+      "summary": "Adli Tıp Kurumu ön raporu.",
+      "doc": {
+        "kind": "report",
+        "variant": "autopsy",
+        "agency": "Adli Tıp Kurumu İstanbul Grup Başkanlığı",
+        "docNo": "2025/1187",
+        "datetime": "16.02.2025",
+        "heading": "Ön otopsi raporu",
+        "sections": [
+          {
+            "title": "Ölüm nedeni",
+            "text": "Siyanür zehirlenmesi. Tahmini ölüm saati 21:00–22:00."
+          }
+        ],
+        "signature": "Dr. Murat Kaya"
+      },
+      "reveals": [
+        "f-poison"
+      ],
+      "timeline": [
+        {
+          "at": "2025-02-14T21:00",
+          "text": "Tahmini ölüm aralığı başlıyor."
+        }
+      ],
+      "people": [
+        "nuri"
+      ]
+    },
+    {
+      "id": "e-hts",
+      "title": "Kerem Yalçın HTS kaydı",
+      "summary": "14 Şubat akşamı arama kayıtları.",
+      "doc": {
+        "kind": "phoneLog",
+        "subscriber": "Kerem Yalçın",
+        "number": "0532 *** 41 18",
+        "period": "14.02.2025 18:00–24:00",
+        "rows": [
+          {
+            "datetime": "14.02.2025 21:12",
+            "type": "giden arama",
+            "other": "0544 *** 09 77",
+            "duration": "00:01:40",
+            "tower": "Moda Cd. / Kadıköy"
+          },
+          {
+            "datetime": "14.02.2025 22:30",
+            "type": "gelen SMS",
+            "other": "BANKA",
+            "tower": "Göztepe"
+          }
+        ]
+      },
+      "reveals": [
+        "f-kerem-late"
+      ],
+      "timeline": [],
+      "people": [
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-msg",
+      "title": "Kerem'in telefonundaki mesajlar",
+      "summary": "Bir tefeciyle yazışma.",
+      "doc": {
+        "kind": "messages",
+        "owner": "Kerem",
+        "with": "Tahsin",
+        "source": "Mesajlaşma uygulaması dökümü",
+        "messages": [
+          {
+            "from": "them",
+            "time": "14.02 18:02",
+            "text": "Cuma son gün."
+          },
+          {
+            "from": "me",
+            "time": "14.02 18:05",
+            "text": "Ayarlayacağım abi, bu gece hallediyorum."
+          },
+          {
+            "from": "me",
+            "time": "14.02 21:40",
+            "text": "Silindi",
+            "deleted": true
+          }
+        ]
+      },
+      "reveals": [
+        "f-debt"
+      ],
+      "timeline": [],
+      "people": [
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-email",
+      "title": "Noterle yazışma",
+      "summary": "Kurbanın e-posta kutusundan.",
+      "doc": {
+        "kind": "email",
+        "from": "nuri.aksoy@ornekposta.com",
+        "to": "kati@ornek-noter.com",
+        "date": "10.02.2025 09:12",
+        "subject": "Vasiyet randevusu",
+        "body": "Merhaba,\n\nGeçen hafta konuştuğumuz değişiklik için 17 Şubat'taki randevuyu teyit ederim.",
+        "attachments": [
+          "taslak.pdf"
+        ]
+      },
+      "reveals": [
+        "f-will"
+      ],
+      "timeline": [],
+      "people": [
+        "nuri"
+      ]
+    },
+    {
+      "id": "e-receipt",
+      "title": "Anahtarcı fişi",
+      "summary": "Kerem'in cüzdanından çıkan fiş.",
+      "doc": {
+        "kind": "receipt",
+        "merchant": "Usta Çilingir",
+        "address": "Bahariye Cd. No:12 Kadıköy",
+        "datetime": "12.02.2025 17:48",
+        "items": [
+          {
+            "name": "Anahtar kopyalama (pirinç)",
+            "qty": 1,
+            "price": 150
+          }
+        ],
+        "payment": "Nakit"
+      },
+      "reveals": [
+        "f-key"
+      ],
+      "timeline": [],
+      "people": [
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-bank",
+      "title": "Kerem'in banka dökümü",
+      "summary": "Şubat hareketleri.",
+      "doc": {
+        "kind": "bank",
+        "bank": "Örnek Katılım Bankası",
+        "holder": "Kerem Yalçın",
+        "iban": "TR00 0000 0000 0000 0000 0000 00",
+        "period": "01.02.2025–15.02.2025",
+        "rows": [
+          {
+            "date": "03.02",
+            "desc": "Maaş",
+            "amount": 32000,
+            "balance": 33210
+          },
+          {
+            "date": "14.02",
+            "desc": "ATM çekim",
+            "amount": -30000,
+            "balance": 3210
+          }
+        ]
+      },
+      "reveals": [
+        "f-debt"
+      ],
+      "timeline": [],
+      "people": [
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-note",
+      "title": "Tezgâh altındaki not",
+      "summary": "El yazısıyla katlanmış bir kâğıt.",
+      "doc": {
+        "kind": "letter",
+        "hand": "handwritten",
+        "date": "13 Şubat",
+        "body": "Kerem'e söyle: pazartesi noterdeyim. Dükkân onun.",
+        "signoff": "N.",
+        "condition": "Kahve lekeli"
+      },
+      "reveals": [
+        "f-will"
+      ],
+      "timeline": [],
+      "people": [
+        "nuri",
+        "kerem"
+      ]
+    },
+    {
+      "id": "e-news",
+      "title": "Gazete haberi",
+      "summary": "Yerel gazetede çıkan haber.",
+      "doc": {
+        "kind": "newspaper",
+        "paper": "Kadıköy Postası",
+        "date": "16 Şubat 2025",
+        "headline": "Moda'nın saatçisi dükkânında ölü bulundu",
+        "subhead": "Polis şüpheli ölüm üzerinde duruyor",
+        "body": "Kırk yıldır Moda'da saat tamir eden Nuri Aksoy dün sabah dükkânında ölü bulundu.",
+        "image": "cover"
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "nuri"
+      ]
+    },
+    {
+      "id": "e-cam",
+      "title": "Sokak kamerası, 21:08",
+      "summary": "Moda Caddesi'ne bakan esnaf kamerası.",
+      "doc": {
+        "kind": "photo",
+        "image": "cam-street",
+        "caption": "Kapüşonlu bir kişi dükkâna doğru yürüyor.",
+        "cctv": {
+          "camera": "KAM-03 MODA CD",
+          "timestamp": "14.02.2025 21:08:41"
+        }
+      },
+      "reveals": [
+        "f-kerem-late"
+      ],
+      "timeline": [
+        {
+          "at": "2025-02-14T21:08",
+          "text": "Kapüşonlu biri dükkâna yürüyor (KAM-03)."
+        }
+      ],
+      "people": []
+    },
+    {
+      "id": "e-keyphoto",
+      "title": "Kilitteki anahtar",
+      "summary": "Delil fotoğrafı D-4.",
+      "doc": {
+        "kind": "photo",
+        "image": "obj-key",
+        "caption": "Arka oda kilidinde bulunan anahtar.",
+        "tag": "D-4"
+      },
+      "reveals": [
+        "f-key"
+      ],
+      "timeline": [],
+      "people": []
+    },
+    {
+      "id": "e-pharmacy",
+      "title": "Eczane nöbet listesi",
+      "summary": "Kadıköy Eczacı Odası nöbet çizelgesi.",
+      "doc": {
+        "kind": "table",
+        "heading": "14 Şubat 2025 nöbetçi eczaneler",
+        "columns": [
+          "Eczane",
+          "Eczacı",
+          "Saat"
+        ],
+        "rows": [
+          [
+            "Bahariye Eczanesi",
+            "Leyla Aksoy",
+            "19:00–09:00"
+          ]
+        ]
+      },
+      "reveals": [
+        "f-leyla-alibi"
+      ],
+      "timeline": [],
+      "people": [
+        "leyla"
+      ]
+    },
+    {
+      "id": "e-access",
+      "title": "Eczane kapı kaydı",
+      "summary": "Eczanenin kartlı giriş sistemi.",
+      "doc": {
+        "kind": "accessLog",
+        "system": "Kartlı geçiş",
+        "site": "Bahariye Eczanesi",
+        "period": "14.02.2025",
+        "rows": [
+          {
+            "time": "19:02",
+            "card": "0007",
+            "holder": "Leyla Aksoy",
+            "door": "Personel",
+            "result": "GEÇİŞ"
+          },
+          {
+            "time": "23:41",
+            "card": "0007",
+            "holder": "Leyla Aksoy",
+            "door": "Personel",
+            "result": "ÇIKIŞ"
+          }
+        ]
+      },
+      "reveals": [
+        "f-leyla-alibi"
+      ],
+      "timeline": [],
+      "people": [
+        "leyla"
+      ]
+    },
+    {
+      "id": "e-ticket",
+      "title": "Otopark fişi",
+      "summary": "Sevim Er'in arabasından.",
+      "doc": {
+        "kind": "ticket",
+        "variant": "parking",
+        "title": "Moda Sahil Otoparkı",
+        "fields": [
+          {
+            "label": "Giriş",
+            "value": "14.02.2025 20:15"
+          },
+          {
+            "label": "Çıkış",
+            "value": "14.02.2025 23:05"
+          }
+        ],
+        "serial": "No 004412"
+      },
+      "reveals": [],
+      "timeline": [],
+      "people": [
+        "sevim"
+      ]
+    },
+    {
+      "id": "e-call",
+      "title": "155 ihbar kaydı, 07:58",
+      "summary": "Polis İmdat hattına gelen arama.",
+      "doc": {
+        "kind": "audio",
+        "variant": "emergency-call",
+        "source": "155 Polis İmdat Çağrı Merkezi kaydı",
+        "datetime": "15.02.2025 07:58",
+        "ambience": "sokak gürültüsü, uzakta martılar",
+        "lines": [
+          {
+            "name": "Operatör",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "sakin, profesyonel"
+            },
+            "text": "Polis imdat, dinliyorum."
+          },
+          {
+            "character": "sevim",
+            "text": "Kızım, Moda Caddesi'ndeki saatçi... Nuri Bey... yerde yatıyor, kıpırdamıyor!",
+            "delivery": "nefes nefese, panik içinde"
+          },
+          {
+            "name": "Operatör",
+            "voice": {
+              "gender": "female",
+              "age": "adult",
+              "style": "sakin, profesyonel"
+            },
+            "text": "Sakin olun hanımefendi. İçeri nasıl girdiniz?"
+          },
+          {
+            "character": "sevim",
+            "text": "Yedek anahtarım var, her sabah çay içeriz. Arka odanın kapısı kilitliydi, camdan gördüm.",
+            "delivery": "titreyen sesle",
+            "pause": 1
+          }
+        ]
+      },
+      "reveals": [],
+      "timeline": [
+        {
+          "at": "2025-02-15T07:58",
+          "text": "Sevim Er 155'i arıyor."
+        }
+      ],
+      "people": [
+        "sevim",
+        "nuri"
+      ]
+    }
+  ],
+  "leads": [
+    {
+      "id": "l-kerem-phone",
+      "title": "Kerem'in HTS kaydını iste",
+      "description": "Çırak akşam yedide eve gittiğini söylüyor.",
+      "hours": 2,
+      "unlocks": [
+        "e-hts"
+      ],
+      "leadsTo": [
+        "l-kerem-msg"
+      ],
+      "outcome": "Savcılık HTS kaydını gönderdi."
+    },
+    {
+      "id": "l-kerem-msg",
+      "title": "Kerem'in telefonunu incelet",
+      "description": "Arama saati açıklama gerektiriyor.",
+      "hours": 3,
+      "unlocks": [
+        "e-msg",
+        "e-bank"
+      ],
+      "leadsTo": [],
+      "outcome": "Telefon dökümü ve banka kaydı geldi."
+    },
+    {
+      "id": "l-camera",
+      "title": "Cadde kameralarını topla",
+      "description": "Moda Caddesi'nde esnaf kameraları var.",
+      "hours": 2,
+      "unlocks": [
+        "e-cam"
+      ],
+      "leadsTo": [
+        "l-wallet"
+      ],
+      "outcome": "Bir kamera kaydı bulundu."
+    },
+    {
+      "id": "l-wallet",
+      "title": "Kerem'in üstünü aratın",
+      "description": "Kamera kaydındaki kişi kim?",
+      "hours": 1,
+      "unlocks": [
+        "e-receipt",
+        "e-keyphoto"
+      ],
+      "leadsTo": [],
+      "outcome": "Cüzdanda bir fiş çıktı."
+    },
+    {
+      "id": "l-leyla",
+      "title": "Leyla'nın akşamını doğrula",
+      "description": "Tek mirasçı o.",
+      "hours": 2,
+      "unlocks": [
+        "e-pharmacy",
+        "e-access"
+      ],
+      "leadsTo": [],
+      "outcome": "Eczane kayıtları geldi."
+    },
+    {
+      "id": "l-email",
+      "title": "Kurbanın e-postalarını incele",
+      "description": "Son haftalarda kiminle yazıştı?",
+      "hours": 2,
+      "unlocks": [
+        "e-email"
+      ],
+      "leadsTo": [],
+      "outcome": "Noterle bir yazışma bulundu."
+    },
+    {
+      "id": "l-sevim",
+      "title": "Sevim Er'in akşamını sor",
+      "description": "Kerem'i gördüğünü söylüyor; kendisi neredeydi?",
+      "hours": 1,
+      "unlocks": [
+        "e-ticket",
+        "e-call"
+      ],
+      "leadsTo": [],
+      "outcome": "Otopark fişi verildi."
+    }
+  ],
+  "acts": [
+    {
+      "title": "Kilitli oda",
+      "scene": "Sabah yedi elli beş. Sevim Er yedek anahtarla saatçi dükkânının kapısını açıyor.\n\nArka oda içeriden kilitli.",
+      "sceneImage": "scene-shop",
+      "evidence": [
+        "e-scene",
+        "e-sevim",
+        "e-kerem",
+        "e-plan"
+      ],
+      "leads": [
+        "l-camera",
+        "l-leyla",
+        "l-sevim"
+      ],
+      "hints": [
+        "Kerem'in ifadesindeki saati başka bir belgeyle karşılaştırın.",
+        "Kamera kaydına bakın."
+      ],
+      "advance": {
+        "leads": [
+          "l-camera"
+        ],
+        "hours": 4
+      }
+    },
+    {
+      "title": "Zehir",
+      "scene": "Otopsi sonucu geldi.",
+      "evidence": [
+        "e-autopsy",
+        "e-news"
+      ],
+      "leads": [
+        "l-kerem-phone",
+        "l-email"
+      ],
+      "hints": [
+        "Kerem'in parası neden lazımdı?",
+        "Anahtar kopyası kimde?"
+      ],
+      "advance": {
+        "leads": [
+          "l-kerem-phone"
+        ],
+        "hours": 4
+      }
+    },
+    {
+      "title": "Vasiyet",
+      "scene": "Tezgâhın altında bir not bulundu.",
+      "evidence": [
+        "e-note"
+      ],
+      "leads": [],
+      "hints": []
+    }
+  ],
+  "questions": [
+    {
+      "id": "who",
+      "prompt": "Nuri Aksoy'u kim öldürdü?",
+      "kind": "suspect",
+      "points": 40
+    },
+    {
+      "id": "how",
+      "prompt": "Nasıl öldürüldü?",
+      "kind": "choice",
+      "options": [
+        {
+          "id": "poison",
+          "text": "Çayına siyanür kondu"
+        },
+        {
+          "id": "heart",
+          "text": "Kalp krizi"
+        },
+        {
+          "id": "blow",
+          "text": "Başına darbe"
+        }
+      ],
+      "points": 20
+    },
+    {
+      "id": "why",
+      "prompt": "Neden?",
+      "kind": "choice",
+      "options": [
+        {
+          "id": "debt",
+          "text": "Borcunu ödemek için dükkânı hemen istiyordu"
+        },
+        {
+          "id": "inherit",
+          "text": "Miras"
+        },
+        {
+          "id": "fight",
+          "text": "Ani kavga"
+        }
+      ],
+      "points": 20
+    },
+    {
+      "id": "proof",
+      "prompt": "Failin yalanını hangi belge çürütüyor?",
+      "kind": "evidence",
+      "points": 20
+    }
+  ],
+  "solution": {
+    "who": [
+      "kerem"
+    ],
+    "how": [
+      "poison"
+    ],
+    "why": [
+      "debt"
+    ],
+    "proof": [
+      "e-hts",
+      "e-cam",
+      "e-sevim"
+    ]
+  },
+  "truth": {
+    "culprits": [
+      "kerem"
+    ],
+    "story": "Kerem borcunu kapatmak için dükkânın kendisine kalacağını öğrenince beklemedi.\n\nKopya anahtarla döndü, çaya siyanür koydu, kapıyı kilitleyip pencereden çıktı.",
+    "timeline": [
+      {
+        "at": "2025-02-12T17:48",
+        "text": "Kerem anahtar kopyalatıyor."
+      },
+      {
+        "at": "2025-02-14T19:00",
+        "text": "Kerem dükkândan çıkıyor."
+      },
+      {
+        "at": "2025-02-14T21:08",
+        "text": "Kerem dükkâna geri dönüyor."
+      },
+      {
+        "at": "2025-02-14T21:12",
+        "text": "Kerem dükkândan tefeciyi arıyor."
+      },
+      {
+        "at": "2025-02-14T21:30",
+        "text": "Kerem pencereden çıkıyor."
+      }
+    ],
+    "characters": [
+      {
+        "id": "kerem",
+        "secret": "Tefeciye borçlu.",
+        "whereabouts": "21:08–21:30 dükkânda.",
+        "lies": [
+          "Yedide eve gittiğini söyledi."
+        ]
+      },
+      {
+        "id": "leyla",
+        "secret": "Babasıyla konuşmuyordu.",
+        "whereabouts": "Eczanede nöbetteydi.",
+        "lies": []
+      },
+      {
+        "id": "sevim",
+        "secret": "Yok.",
+        "whereabouts": "Sahilde arkadaşlarıyla.",
+        "lies": []
+      }
+    ],
+    "chain": [
+      {
+        "step": "Kerem 21:00 sonrası dükkândaydı.",
+        "evidence": [
+          "e-hts",
+          "e-cam",
+          "e-sevim"
+        ],
+        "facts": [
+          "f-kerem-late"
+        ]
+      },
+      {
+        "step": "Kopya anahtarı vardı.",
+        "evidence": [
+          "e-receipt",
+          "e-keyphoto"
+        ],
+        "facts": [
+          "f-key"
+        ]
+      },
+      {
+        "step": "Paraya acil ihtiyacı vardı.",
+        "evidence": [
+          "e-msg",
+          "e-bank"
+        ],
+        "facts": [
+          "f-debt"
+        ]
+      }
+    ],
+    "redHerrings": [
+      {
+        "evidence": "e-pharmacy",
+        "explanation": "Leyla mirasçıydı ama nöbetteydi."
+      }
+    ]
+  }
+}

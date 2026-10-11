@@ -30,6 +30,7 @@
     "@songie/song-guess": "workspace:*",
     "@songie/taboo": "workspace:*",
     "@songie/werewolf": "workspace:*",
+    "@songie/detective": "workspace:*",
     "@songie/who-am-i": "workspace:*",
     "motion": "^11.13.1",
     "react": "^19.0.0",
