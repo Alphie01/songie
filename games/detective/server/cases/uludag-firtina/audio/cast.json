@@ -1,0 +1,81 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "nihat": {
+      "voice_id": "QAABwpMjK3YR9pYW5FDO",
+      "name": "Recep Sağlık - Mature, Deep and Clear"
+    },
+    "#Kd.Çvş. Hüseyin Tan": {
+      "voice_id": "Q2IX97JeHBY3vNGzgM5s",
+      "name": "Cavit - TV Presenter"
+    },
+    "#Yzb. Serdar Ilgaz": {
+      "voice_id": "5nr6ATQepuidiLb6OT3B",
+      "name": "Ozan Karaca - Rich, Warm and Calm"
+    },
+    "recep": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "ozan": {
+      "voice_id": "rSuyucEH95GpZEfLV0AM",
+      "name": "Can Seçkin - Breathy and Deep"
+    },
+    "#Av. Nermin Koç": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "sevgi": {
+      "voice_id": "uKVeTbj0O6ca7CnOrZXx",
+      "name": "Zeynep - Inspiring, sincere"
+    },
+    "cem": {
+      "voice_id": "D1xRw7f8ZHedI7xJgfvz",
+      "name": "Cem - Heroic, Intense and Crisp"
+    },
+    "kaan": {
+      "voice_id": "Vv1QW9Yx3WB2mLKFmyZG",
+      "name": "Kaya – Friendly and Powerful"
+    },
+    "gizem": {
+      "voice_id": "KAGDtM2gzDrjWlUp2KNe",
+      "name": "Deniz - Soft, Friendly Narrator"
+    },
+    "elif": {
+      "voice_id": "4XsbOSxQHw4NUVaEeo2o",
+      "name": "Elif - Calm & Natural"
+    },
+    "bulent": {
+      "voice_id": "2olWvHmrPO1obgZX9ivZ",
+      "name": "Emin - Storyteller"
+    }
+  },
+  "tags": {
+    "aceleyle, nefesi kesik": "breathless, hurried",
+    "sesi düşerek": "lowered voice",
+    "tane tane, emir verir gibi": "clear, commanding",
+    "mahcup, başı önünde": "embarrassed, downcast",
+    "yavaş, hatırlamaya çalışarak": "slow, thoughtful",
+    "sakin, ölçülü": "calm, measured",
+    "biraz hızlanarak": "slightly faster",
+    "kısa, gözünü kaçırarak": "brief, avoiding eye contact",
+    "soğuk, kısa, gözünü kırpmadan": "cold, short, unblinking",
+    "bir an duraksayıp, hızla": "pausing briefly, quick",
+    "yutkunarak, gururunu toplayarak": "swallowing, composed",
+    "sinirli, kısa kesip": "angry, curt",
+    "alçak sesle, utanarak": "quiet, ashamed",
+    "pes ederek, derin bir nefesle": "resigned, deep breath",
+    "yorgun, başını eğerek": "tired, head down",
+    "sesi yükselerek, çaresiz": "raising voice, helpless",
+    "pes ederek, alçak sesle": "resigned, quiet",
+    "fısıltıyla": "whispering",
+    "titreyerek, sonunda rahatlayarak": "trembling, relieved",
+    "yavaşça, fark ederek": "slow, realizing",
+    "sesi titreyerek": "voice trembling",
+    "ağır ağır, pes ederek": "slow, resigned",
+    "kısa, düşünceli": "brief, pensive"
+  }
+}
