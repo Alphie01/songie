@@ -952,7 +952,8 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
         },
         canClose: st.phase === 'investigate' && canClose(st),
         sceneReady: st.sceneReady,
-        questions: c.questions.map((q) => ({ id: q.id, prompt: q.prompt, kind: q.kind, options: q.options, points: q.points })),
+        // Form yalnızca suçlama aşamasından itibaren gider (soru metinleri ipucu taşıyabilir).
+        questions: st.phase === 'investigate' || st.phase === 'scene' ? [] : c.questions.map((q) => ({ id: q.id, prompt: q.prompt, kind: q.kind, options: q.options, points: q.points })),
         accuse:
           st.phase === 'accuse' || st.phase === 'reconcile'
             ? { submitted: Object.keys(st.answers), mine: st.answers[pid] ?? null }

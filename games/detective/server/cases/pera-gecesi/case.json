@@ -4180,15 +4180,15 @@
         },
         {
           "id": "h-catering",
-          "text": "Kopya öğleden sonra bir ikram kasasıyla içeri sokuldu; gece montaj koduyla eser sensörü devre dışı bırakılıp tuval çerçevesinde değiştirildi; orijinal aynı kasayla ikram aracında çıktı."
+          "text": "Kopya bir ikram kasasıyla içeri sokuldu; gece sensör devre dışı bırakılıp tuval değiştirildi, orijinal aynı kasayla çıktı."
         },
         {
           "id": "h-onkapi",
-          "text": "Güvenlik şefi alarmı kapattı; tablo çerçevesiyle birlikte ön kapıdan çıkarıldı, yerine benzer çerçeveli bir kopya asıldı."
+          "text": "Güvenlik şefi alarmı kapattı; tablo çerçevesiyle ön kapıdan çıkarıldı, yerine benzer çerçeveli bir kopya asıldı."
         },
         {
           "id": "h-depo",
-          "text": "Tablo gece ikinci kattaki depoya kaldırıldı; sabah nakliye ekibiyle çıkarılacaktı."
+          "text": "Tablo gece ikinci kattaki depoya kaldırıldı, yerine kopya asıldı; orijinal sabah nakliye ekibiyle çıkarılacaktı."
         }
       ]
     },
@@ -4256,23 +4256,23 @@
       "options": [
         {
           "id": "p-yali",
-          "text": "Kandilli’deki Tanyeli yalısına"
+          "text": "Kandilli’de, Boğaz kıyısındaki Tanyeli yalısına"
         },
         {
           "id": "p-kagithane",
-          "text": "Kağıthane’deki ikram firmasının deposuna"
+          "text": "Kağıthane’de, ikram firmasının soğuk deposuna"
         },
         {
           "id": "p-tophane",
-          "text": "Tophane’de, Boğazkesen Caddesi’ndeki restorasyon atölyesine"
+          "text": "Tophane’de, bir restorasyon atölyesine"
         },
         {
           "id": "p-kurtulus",
-          "text": "Kurtuluş’taki bir dernek lokaline"
+          "text": "Kurtuluş’ta, ara sokaktaki bir dernek lokaline"
         },
         {
           "id": "p-ayazaga",
-          "text": "Ayazağa’daki sanat deposuna"
+          "text": "Ayazağa’da, sanayi bölgesindeki sanat deposuna"
         }
       ]
     },

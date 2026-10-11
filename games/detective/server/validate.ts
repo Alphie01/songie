@@ -245,12 +245,29 @@ export function checkCase(c: CaseFile, imageExists?: (key: string) => boolean): 
   const who = c.questions.find((q) => q.id === 'who');
   if (!who || who.kind !== 'suspect') err('"who" kimlikli, kind: "suspect" soru zorunlu.');
   let total = 0;
+  // Form "Kim?" sorusuyla aynı ekranda: suçlu adları başka sorularda geçmesin, doğru seçenek göze batmasın.
+  const guilty = new Set(c.questions.filter((q) => q.kind === 'suspect').flatMap((q) => c.solution[q.id] ?? []));
+  const guiltyNames = c.characters
+    .filter((x) => guilty.has(x.id))
+    .flatMap((x) => x.name.split(/\s+/))
+    .filter((n) => n.length > 2);
+  const named = (t: string) => guiltyNames.filter((n) => new RegExp(`(^|[^\\p{L}])${n}`, 'u').test(t));
   for (const q of c.questions) {
     total += q.points;
     const ans = c.solution[q.id];
     if (!ans) {
       err(`Soru ${q.id} için çözüm (solution) yok.`);
       continue;
+    }
+    if (q.kind !== 'suspect') {
+      const hits = [...named(q.prompt), ...q.options.flatMap((o) => named(o.text))];
+      if (hits.length) warn(`Soru ${q.id}: metinde suçlu adı geçiyor (${[...new Set(hits)].join(', ')}); form kimseyi adıyla anmasın.`);
+    }
+    if (q.kind === 'choice' && q.options.length > 2) {
+      const len = (o: { text: string }) => o.text.length;
+      const right = q.options.filter((o) => ans.includes(o.id));
+      const longestWrong = Math.max(...q.options.filter((o) => !ans.includes(o.id)).map(len));
+      if (right.some((o) => len(o) > longestWrong * 1.2)) warn(`Soru ${q.id}: doğru seçenek diğerlerinden belirgin uzun; uzunlukları eşitle.`);
     }
     for (const a of ans) {
       if (q.kind === 'suspect' && !suspects.has(a)) err(`Soru ${q.id}: cevap "${a}" bir şüpheli değil.`);
