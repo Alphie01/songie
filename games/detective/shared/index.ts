@@ -58,6 +58,10 @@ export const actionSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('deleteNote'), noteId: ref }),
   z.object({ type: z.literal('pin'), evidenceId: ref, pinned: z.boolean() }),
   z.object({ type: z.literal('hint') }),
+  /** Sorguda listeden soru sor. */
+  z.object({ type: z.literal('ask'), interviewId: ref, questionId: ref }),
+  /** Sorguda dosyadaki bir belgeyi göster. */
+  z.object({ type: z.literal('confront'), interviewId: ref, evidenceId: ref }),
   /** Suçlama formu (soru kimliği → cevap kimliği). */
   z.object({ type: z.literal('answer'), answers: z.record(ref, ref) }),
   /** Oda sahibi: formları topla, karşılaştırmaya geç. */
@@ -173,6 +177,33 @@ export interface OpenedLeadView extends LeadView {
   evidence: string[];
 }
 
+export interface TranscriptEntry {
+  kind: 'ask' | 'confront' | 'deflect';
+  /** Sorulan soru ya da gösterilen belgenin başlığı. */
+  prompt: string;
+  evidenceId: string | null;
+  answer: string;
+  by: string;
+  at: number;
+  /** Kilit anın seslendirmesi. */
+  audioUrl: string | null;
+  /** Bu cevapla dosyaya giren belgeler. */
+  unlocked: string[];
+}
+
+export interface InterviewView {
+  id: string;
+  characterId: string;
+  title: string;
+  place: string;
+  intro: string;
+  /** Açıldığı bölüm (0'dan). */
+  act: number;
+  transcript: TranscriptEntry[];
+  /** Şu an sorulabilecek sorular. */
+  questions: { id: string; ask: string }[];
+}
+
 export interface ProposalView {
   kind: 'lead' | 'close';
   leadId: string | null;
@@ -245,6 +276,7 @@ export interface DetectiveView {
   timeline: (TimelineEntry & { evidenceId: string })[];
   leads: LeadView[];
   opened: OpenedLeadView[];
+  interviews: InterviewView[];
   proposal: ProposalView | null;
   notebook: { text: string; version: number; by: string | null; at: number };
   hints: { enabled: boolean; used: { act: number; text: string }[]; left: number };

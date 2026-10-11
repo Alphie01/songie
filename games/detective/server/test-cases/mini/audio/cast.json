@@ -1,0 +1,21 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Operatör": {
+      "voice_id": "gyxPK6bLXQAkBSCeAKvk",
+      "name": "Sultan - Theatrical, Narrator"
+    },
+    "sevim": {
+      "voice_id": "xyqF3vGMQlPk3e7yA4DI",
+      "name": "Ahu - Cheerful, Encouraging and Inviting"
+    }
+  },
+  "tags": {
+    "nefes nefese, panik içinde": "out of breath, panicked",
+    "titreyen sesle": "trembling voice",
+    "duraksayarak": "hesitant, slow"
+  }
+}

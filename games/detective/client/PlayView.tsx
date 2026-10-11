@@ -3,15 +3,14 @@ import type { PlayViewProps } from '@songie/game-kit/client';
 import type { DetectiveAction, DetectiveSettings, DetectiveView } from '../shared/index.js';
 import { Board } from './Board';
 import { Cabinet } from './Cabinet';
+import { Interviews } from './Interviews';
 import { Accuse, Reconcile, Result } from './Final';
 import { Leads } from './Leads';
 import { Log, Notebook } from './Notebook';
 import { NarrationPill, stopNarration } from './Bits';
 import { Scene } from './Scene';
 import { s } from './strings';
-import { DeskProvider, useDocStore, useMedia, useSeen, type Desk, type Send, type Tab } from './util';
-
-const TABS: Tab[] = ['board', 'cabinet', 'leads', 'notes'];
+import { DeskProvider, useDocStore, useIvSeen, useMedia, useSeen, type Desk, type Send, type Tab } from './util';
 
 export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView, DetectiveSettings>) {
   const isHost = room.hostId === meId;
@@ -24,6 +23,8 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
   const [error, setError] = useState<string | null>(null);
   const errTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [seen, markSeen] = useSeen(view.sessionId, meId);
+  const [ivSeen, markIvSeen] = useIvSeen(view.sessionId, meId);
+  const [interview, setInterview] = useState<string | null>(null);
   const offset = useMemo(() => view.serverNow - Date.now(), [view.serverNow]);
 
   const rawAct = useCallback((a: DetectiveAction) => act(a), [act]);
@@ -94,6 +95,49 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
     [final],
   );
 
+  const openInterview = useCallback(
+    (id: string) => {
+      setInterview(id);
+      if (final) setBrowse(true);
+      setTabState('interviews');
+      requestAnimationFrame(() => {
+        const el = document.getElementById('dt-iv-anchor');
+        if (!el) return;
+        if (wide) el.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        else window.scrollTo({ top: 0 });
+      });
+    },
+    [final, wide],
+  );
+
+  // Açık sorgu yoksa ya da düştüyse ilkini seç (en son açılan en üstte durur).
+  const ivIds = view.interviews.map((i) => i.id).join('|');
+  useEffect(() => {
+    if (interview && view.interviews.some((i) => i.id === interview)) return;
+    setInterview(view.interviews.length ? view.interviews[view.interviews.length - 1]!.id : null);
+  }, [ivIds]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (!view.interviews.length && tab === 'interviews') setTabState('cabinet');
+  }, [view.interviews.length, tab]);
+
+  const ivUnread = useMemo(() => {
+    const m = new Map<string, { count: number; fresh: boolean }>();
+    for (const iv of view.interviews) {
+      const read = ivSeen[iv.id];
+      const count = iv.transcript.slice(read ?? 0).filter((e) => e.by !== meId).length;
+      m.set(iv.id, { count, fresh: read === undefined });
+    }
+    return m;
+  }, [view.interviews, ivSeen, meId]);
+
+  // Sorgu odası ekrandayken açık sorgunun tutanağı okunmuş sayılır.
+  const ivVisible = tab === 'interviews' && (!final || browse);
+  const curIvLen = view.interviews.find((i) => i.id === interview)?.transcript.length;
+  useEffect(() => {
+    if (ivVisible && interview && curIvLen !== undefined) markIvSeen(interview, curIvLen);
+  }, [ivVisible, interview, curIvLen, markIvSeen]);
+
   // Seçili kanıt görünümden düşerse (başka oturum) temizle
   useEffect(() => {
     if (selected && !view.evidence.some((e) => e.id === selected)) setSelected(null);
@@ -122,11 +166,23 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
     seen,
     docs,
     setTab,
+    interview,
+    openInterview,
+    ivUnread,
     replayAct: setReplay,
     readOnly: view.phase === 'result',
   };
 
   const newCount = view.evidence.filter((e) => !seen.has(e.id)).length;
+  const hasIv = view.interviews.length > 0;
+  const tabs: Tab[] = hasIv ? ['board', 'cabinet', 'interviews', 'leads', 'notes'] : ['board', 'cabinet', 'leads', 'notes'];
+  let ivCount = 0;
+  let ivFresh = false;
+  for (const [id, u] of ivUnread) {
+    if (id === interview && ivVisible) continue;
+    ivCount += u.count;
+    if (u.fresh) ivFresh = true;
+  }
 
   let body: React.ReactNode;
   if (final && !browse) {
@@ -153,9 +209,36 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
           <aside className="dt-col dt-col-left" data-pane="board" aria-label={s.tabs.board}>
             <Board />
           </aside>
-          <main className="dt-col dt-col-center" data-pane="cabinet" aria-label={s.tabs.cabinet}>
-            <span id="dt-viewer-anchor" />
-            <Cabinet onClose={() => setSelected(null)} />
+          <main className="dt-col dt-col-center">
+            {hasIv && (
+              <div className="dt-center-tabs" role="group" aria-label={s.name}>
+                <button type="button" className="dt-center-tab" aria-pressed={tab !== 'interviews'} onClick={() => setTab('cabinet')}>
+                  {s.cabinet.title}
+                  {newCount > 0 ? <span className="dt-tab-badge">{newCount}</span> : <span className="dt-count">{view.evidence.length}</span>}
+                </button>
+                <button type="button" className="dt-center-tab" aria-pressed={tab === 'interviews'} onClick={() => setTab('interviews')}>
+                  {s.interview.title}
+                  {ivCount > 0 ? (
+                    <span className="dt-tab-badge" data-tone="iv">{ivCount}</span>
+                  ) : (
+                    <>
+                      <span className="dt-count">{view.interviews.length}</span>
+                      {ivFresh && <span className="dt-tab-dot" aria-hidden="true" />}
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+            <div className="dt-pane" data-pane="cabinet" aria-label={s.tabs.cabinet}>
+              <span id="dt-viewer-anchor" />
+              <Cabinet onClose={() => setSelected(null)} />
+            </div>
+            {hasIv && (
+              <div className="dt-pane" data-pane="interviews" aria-label={s.tabs.interviews}>
+                <span id="dt-iv-anchor" />
+                <Interviews />
+              </div>
+            )}
           </main>
           <aside className="dt-col dt-col-right">
             <div className="dt-pane" data-pane="leads" aria-label={s.tabs.leads}>
@@ -167,11 +250,12 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
             </div>
           </aside>
         </div>
-        <nav className="dt-tabs" aria-label={s.name}>
-          {TABS.map((t) => (
+        <nav className="dt-tabs" aria-label={s.name} data-count={tabs.length}>
+          {tabs.map((t) => (
             <button key={t} type="button" className="dt-tab" aria-current={tab === t ? 'page' : undefined} onClick={() => setTab(t)}>
               {s.tabs[t]}
               {t === 'cabinet' && newCount > 0 && <span className="dt-tab-badge">{newCount}</span>}
+              {t === 'interviews' && (ivCount > 0 ? <span className="dt-tab-badge" data-tone="iv">{ivCount}</span> : ivFresh && <span className="dt-tab-dot" data-tone="iv" aria-hidden="true" />)}
               {t === 'leads' && view.proposal && <span className="dt-tab-dot" aria-hidden="true" />}
             </button>
           ))}

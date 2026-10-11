@@ -17,7 +17,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { CaseFile, Voice } from '../shared/case-schema.js';
-import { DEFAULT_CASES_DIR, readCaseFile } from '../server/library.js';
+import { DEFAULT_CASES_DIR, interviewAudioKey, readCaseFile } from '../server/library.js';
 
 const TOOLS = path.dirname(fileURLToPath(import.meta.url));
 for (const line of fs.existsSync(path.join(TOOLS, '.env.local')) ? fs.readFileSync(path.join(TOOLS, '.env.local'), 'utf8').split('\n') : []) {
@@ -91,6 +91,13 @@ function speakers(c: CaseFile): Speaker[] {
       map.set(key, { key, label: ch ? `${ch.name} (${ch.role}${ch.age ? `, ${ch.age} yaş` : ''})` : (l.name ?? key), voice, sample: l.text.slice(0, 160) });
     }
   }
+  // Sorgularda sesli kilit cevabı olan karakterler
+  for (const iv of c.interviews) {
+    const voiced = [...iv.questions, ...iv.confront].find((o) => o.voiced);
+    const ch = c.characters.find((x) => x.id === iv.character);
+    if (!voiced || !ch?.voice || map.has(ch.id)) continue;
+    map.set(ch.id, { key: ch.id, label: `${ch.name} (${ch.role}${ch.age ? `, ${ch.age} yaş` : ''})`, voice: ch.voice, sample: voiced.answer.slice(0, 160) });
+  }
   return [...map.values()];
 }
 
@@ -127,7 +134,12 @@ async function castVoices(c: CaseFile, prev: Cast | null): Promise<Cast> {
     }
   }
   // Söyleyiş yönergeleri → İngilizce v3 etiketleri
-  const deliveries = [...new Set(c.evidence.flatMap((e) => (e.doc.kind === 'audio' ? e.doc.lines.map((l) => l.delivery).filter((d): d is string => !!d) : [])))].filter((d) => !cast.tags[d]);
+  const deliveries = [
+    ...new Set([
+      ...c.evidence.flatMap((e) => (e.doc.kind === 'audio' ? e.doc.lines.map((l) => l.delivery) : [])),
+      ...c.interviews.flatMap((iv) => [...iv.questions, ...iv.confront].filter((o) => o.voiced).map((o) => o.delivery)),
+    ]),
+  ].filter((d): d is string => !!d && !cast.tags[d]);
   if (deliveries.length) {
     const res = await chatJson<{ tags: Record<string, string> }>(
       'Translate Turkish acting directions into short English audio tags for ElevenLabs v3 (2-5 lowercase words, comma separated, e.g. "whispering, nervous", "out of breath, panicked", "angry, fast"). ' +
@@ -264,6 +276,32 @@ async function main() {
         return joined;
       },
     });
+  }
+
+  // Sorgulardaki kilit anlar: karakterin sesiyle tek parça
+  for (const iv of c.interviews) {
+    const voice = cast.voices[iv.character]?.voice_id;
+    const items = [
+      ...iv.questions.filter((q) => q.voiced).map((q) => ({ key: interviewAudioKey(iv.id, q.id), text: q.answer, delivery: q.delivery })),
+      ...iv.confront.filter((x) => x.voiced).map((x) => ({ key: interviewAudioKey(iv.id, `c-${x.evidence}`), text: x.answer, delivery: x.delivery })),
+    ];
+    for (const it of items) {
+      if (!voice) {
+        console.log(`  ${it.key}: atlandı (karakterin sesi yok)`);
+        continue;
+      }
+      const tag = it.delivery ? cast.tags[it.delivery] : '';
+      jobs.push({
+        key: it.key,
+        phone: false,
+        chars: it.text.length,
+        run: async (tmp) => {
+          const f = path.join(tmp, 'iv.mp3');
+          await speech(`${tag ? `[${tag}] ` : ''}${it.text}`, voice, f);
+          return f;
+        },
+      });
+    }
   }
 
   const only = args.find((a) => a.startsWith('--only='))?.slice(7).split(',');

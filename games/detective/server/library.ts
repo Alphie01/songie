@@ -29,6 +29,11 @@ export function imageToken(slug: string, key: string): string {
   return createHash('sha256').update(`${SALT}:${slug}:${key}`).digest('hex').slice(0, 20);
 }
 
+/** Sorgudaki kilit anın ses dosyası adı (`audio/<anahtar>.mp3`). */
+export function interviewAudioKey(interviewId: string, item: string): string {
+  return `iv-${interviewId}-${item}`;
+}
+
 export function readCaseFile(dir: string): CaseFile {
   const raw = JSON.parse(fs.readFileSync(path.join(dir, 'case.json'), 'utf8')) as unknown;
   return caseSchema.parse(raw);
@@ -47,7 +52,14 @@ export function loadCase(dir: string): LoadedCase {
   }
   const audio = new Map<string, string>();
   const audioFiles = new Map<string, string>();
-  const audioKeys = [...data.evidence.filter((e) => e.doc.kind === 'audio').map((e) => e.id), ...data.acts.map((_, i) => `act-${i + 1}`)];
+  const audioKeys = [
+    ...data.evidence.filter((e) => e.doc.kind === 'audio').map((e) => e.id),
+    ...data.acts.map((_, i) => `act-${i + 1}`),
+    ...data.interviews.flatMap((iv) => [
+      ...iv.questions.filter((q) => q.voiced).map((q) => interviewAudioKey(iv.id, q.id)),
+      ...iv.confront.filter((x) => x.voiced).map((x) => interviewAudioKey(iv.id, `c-${x.evidence}`)),
+    ]),
+  ];
   for (const key of audioKeys) {
     const file = path.join(dir, 'audio', `${key}.mp3`);
     if (!fs.existsSync(file)) continue;

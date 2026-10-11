@@ -90,6 +90,152 @@ Hedef: 3–6 arkadaşın 45–90 dakikada, birlikte, gerçekten düşünerek ç�
 - `alt` görselde gerçekten görülebilenin Türkçe tarifi olsun. Görsel üretilmemişse oyuncu bu tarifi okur, yani **ipucu görselde ise `alt`'ta da yazmalı** (ör. "Sol kolunda saat yok, bileğinde açık renk bir iz var").
 - Vaka başına toplam 18–26 görsel olsun: 1 kapak, şüpheli ve önemli karakterlerin portreleri, her bölüm için 1 sahne, geri kalanı kanıt fotoğrafı ve kamera karesi.
 
+## Pilot vakalardan dersler (zorunlu okuma)
+İki pilot vaka ("Yalıda Son Akşam", "Pera Gecesi") bağımsız kör testlerden geçti. İlk taslakların ikisinde de aynı hatalar vardı:
+
+- **Fazla erken çözülme.** Kör oyuncu faili 1. bölüm sonunda %80 güvenle buldu.
+  - Hedef: 1. bölüm sonunda 3–4 makul aday ve en güçlü adaya en fazla %50–60 güven. Kesinleşme 2. bölümde, doğrulama 3.–4. bölümde.
+  - Kilit izleri `minAct` ile sonraki bölüme itin (iz daha erken keşfedilse de o bölümden önce açılamaz).
+- **Kamera notu ve görsel tarifi portreyi tekrarlamasın.** "Kafası kazınmış genç adam", "at kuyruklu kır saçlı" gibi tarifler kimliği bedavaya verir. Kamera notları yorumsuz olsun: saat, yön, sayı, giysi.
+- **Tek belgeye birden çok kilit ipucu yüklemeyin.** Bir banka dökümü suç ortağını, çürütücü saati ve motifi birden vermesin; ipuçlarını farklı izlere dağıtın.
+- **Son bölümün sahnesi ve bölüm başı kanıtları çözümü vermesin.** Son bölüm saatle de açılabildiği için sahne nötr kalmalı. Ör. failin atölyesinin araması değil, gönderici adı olmayan bir sandık. Kesin kanıt bir izle gelsin.
+- **Alternatif okumayı kapatın.** "Planlayan başkası, uygulayan fail" gibi bir okuma son bölümden önce bir belgeyle çürütülebilmeli. Her şüphelinin cinayet/olay penceresindeki alibisi saatli, bağımsız bir kanıta dayanmalı; yaklaşık bir hatırlamaya ("on ikiye yirmi vardı galiba") dayanmamalı.
+- **Kanıt sorusunu belirli bir yalana bağlayın.** "Failin X iddiasını en açık hangi belge çürütüyor?" diye sorun. Kabul listesine o yalanı çürüten bütün son bölüm öncesi belgeleri koyun.
+- **Soru metinleri cevabı daraltmasın.** Failin ifadesinden birebir alıntı yapmayın; "içeriden yardım eden" gibi ifadeler birden çok kişiye uyabilir.
+- **Krokiyi anlatımla karşılaştırın.** Kapılar, merdivenler, kameraların gördüğü yerler ve kişilerin yolları birbirini tutmalı. Pilotta kroki, yanlış kişiyi tek olası fail yapıyordu. Kameranın gördüğü bir kapıdan geçen herkes kayıtta görünmeli ya da kör nokta bir belgeyle açıklanmalı.
+- **Bilimsel ve hukuki gerçeklik.** Toksikoloji değerleri doza ve süreye uysun. Laboratuvar sonuçları gerçekçi sürede çıksın (ön rapor / kesin rapor). Arama saatleri CMK'ya uysun (gece araması). Mahkeme adları doğru olsun ("İstanbul 4. Sulh Ceza Hâkimliği").
+- **Tarih ve saat tutarlılığı.** Bir bildirim, vadesinden önce "ödenmedi" diyemez. Kilidi açılmamış telefondan veri alınamaz. Belgenin dönemi, açıldığı bölümün kurgusal tarihinden ileri olamaz.
+- **Karakter alanları tekrar etmesin.** `role`, `relation` ve `summary` arayüzde yan yana görünür; her biri farklı bilgi versin. Kurbanın `relation` alanı "Kurban" değil, olaydaki yeri olsun.
+- **Bölüm saati kuralı.** `advance.hours` yalnızca o bölümde keşfedilen izlere harcanan saati sayar. Değer, o bölümde keşfedilebilen izlerin toplam saatinin ~%70'i olsun.
+- **Türkçe (TDK).**
+  - Belirli tarih bildirmeyen gün ve ay adları küçük harfle yazılır ve kesme işareti almaz ("pazartesi", "eylülde"). Belirli tarihte büyük harf kullanılır ("9 Şubat Pazartesi").
+  - "dâhil", "hâkim" yazılır.
+  - Nokta ve soru işaretinden sonra büyük harfle başlanır.
+- **Ses kayıtları.** ElevenLabs v3 ile tek parça seslendiriliyor.
+  - `delivery` kısa ve oyunculuğa dair olsun ("fısıldayarak", "yutkunarak, sesi alçalarak"); eylem ya da ses efekti yazılmaz.
+  - Kayıt başına 2–4 konuşmacı olsun.
+  - Konuşan her karakterin `voice` alanı dolu olsun. `style` Türkçe tarif içersin (yaş, tavır, ağız), oyuncu seçimi buna göre yapılıyor.
+- **Görseller.** Kişi sayısı, sargı ya da saç gibi görsel ipuçları `prompt`'ta açıkça ve sayıyla yazılsın ("exactly six figures"). Görsel üretildikten sonra gözle kontrol edilir.
+
+## Sorgular (`interviews`): etkileşimli sorgu
+Oyuncular karakterleri kendileri sorgular. Listeden soru seçerler ve dosyadaki herhangi bir belgeyi karaktere gösterebilirler. Cevaplar yazarın hazırladığı metinlerdir. Sorulan her şey ortak bir sorgu tutanağında herkese görünür; soru sormak saat harcatmaz, sorguyu açan iz harcatır.
+
+**Açılış.** Sorgu bir izle (`leads[].interviews`, ör. "Kâhyayla yeniden görüş") ya da bölüm başında (`acts[].interviews`) açılır.
+
+**Ölçüler**
+- Her vakada 6–9 sorgu olsun. Her şüpheli en az bir kez sorgulanır; kilit şüpheliler iki kez. İkinci sorgu `minAct` ile sonraki bir bölümde açılır ve karakterin tavrı değişmiştir.
+- Her sorguda 12–22 soru, 2–5 belge gösterme tepkisi (`confront`) ve en az 3 kaçamak cevap (`deflect`) olsun.
+
+**Dallanma**
+- `after`: Bir soru, başka bir soru sorulmadan görünmez. Örneğin "Kiminle buluştunuz?" sorusu "Akşam nereye gittiniz?" sorusundan sonra görünür.
+- `needs`: Bir soru, ilgili belge dosyaya girmeden görünmez. Örneğin HTS kaydı gelince "22:05'te kimi aradınız?" sorusu açılır.
+- İyi bir sorgu katman katman açılır. İlk 6–8 soru geneldir, gerisi önceki cevapların ve yeni belgelerin açtığı sorulardır.
+
+**Belge gösterme (`confront`)**
+- Karakterin yalanını çürüten belge gösterilince savunma çöker: itiraf ya da yeni bir sürüm ("Tamam… saat dokuzda oradaydım ama…"). Bunlar oyunun en tatmin edici anlarıdır.
+- Her şüphelinin en az bir yalanı belge göstermeyle kırılabilmeli.
+- Fail için alibi hilesini tek başına çözen bir itiraf yazma. Fail kırıldığında bile kısmen kabul eder ya da yeni bir yalana geçer. Gerçek, belgelerin birlikte okunmasıyla çıkmalı.
+
+**Cevaplar**
+- Karakterin sesiyle yaz: kaçamak, sinirli, yorgun, bir şey saklayan. Masumlar da kendi sırlarını korumak için yalan söyler.
+- Cevaplar `truth` ile ve resmî belgelerle tutarlı olmalı. Yalanlar `truth.characters[].lies` listesinde yer almalı.
+
+**Sonuçlar**
+- Cevaplar belge (`unlocks`) ve iz (`leadsTo`) açabilir. Örnek: tanık fişi verir, kişi bir adı ağzından kaçırır.
+- **Kilit çözüm zinciri yine belgelere dayanmalı.** `truth.chain` yalnızca kanıt kimliği gösterir. Sorgudan çıkan kritik bilgi, açtığı bir belgeyle (`unlocks`) kalıcılaşsın.
+
+**Ses (`voiced`)**
+- Yalnızca kilit anlar seslendirilir: itiraf, çöküş, kritik bir ad ya da saat. Sorgu başına en fazla 2–3, vaka başına toplam 12–18 cevap.
+- Sesli cevapta `delivery` doldurulabilir.
+- Karakterin `voice` alanı dolu olmalı.
+
+**Resmî ifadelerle ilişki.** İlk resmî ifadeler (`statement` belgeleri) kalabilir. Sorgular onların devamı ve derinleşmesidir. Aynı soruyu iki yerde tekrarlama.
+
+## Zor mod (yeni vakalar için standart)
+
+Kullanıcı isteği (Ekim 2026): pilotlar "zor olan bile basit" bulundu. Yeni vakalar bu ölçülerle yazılır; bu bölüm yukarıdaki "Yapı ve ölçüler" ile "Görseller" bölümlerinin önüne geçer.
+Kullanıcı mevcut vakaları "zor olan bile basit" buldu ve daha zor, daha karmaşık, daha ayrıntılı vakalar istedi. Bu ek yukarıdaki ölçülerin önüne geçer.
+
+### Yeni ölçüler
+| | |
+|---|---|
+| Bölüm | 4–5 |
+| Süre (`meta.minutes`) | 90–150 dk |
+| Zorluk | "zor" ya da "çok zor" |
+| Kanıt | 55–75 |
+| İz | 32–45; toplam iz saati ≈ bütçe × 1,8 (ekip izlerin ancak ~%55'ini açabilir) |
+| Şüpheli | 5–7 |
+| Yanıltıcı ipucu | 5–7 |
+| Ses kaydı | 3–4 |
+| Görsel | 20–26; en az 8 fotoğraf ya da kamera karesi |
+| Soru | 8–10, toplam 100 puan |
+
+Sorular şunları kapsamalı:
+- `who`;
+- suç ortağı ya da asıl planlayan;
+- yöntem;
+- motif;
+- **alibi hilesi**: fail alibisini nasıl kurdu;
+- **gizli ikinci suç** ya da gizli motif;
+- dakikası belli bir zaman sorusu;
+- belirli bir yalana bağlı kanıt sorusu;
+- 1–2 ayrıntı sorusu.
+
+### Karmaşıklık katmanları (hepsi zorunlu)
+1. **İç içe iki suç.** Görünen suç başka bir suçu gizler ya da başka bir suçun sonucudur. Örnekler: hırsızlık cinayeti örter; cinayet bir dolandırıcılığı örtmek için işlenmiştir; kaza süsü verilmiş cinayetin altında bir şantaj vardır. Oyuncu ikinci suçu 2.–3. bölümde fark etmeli.
+2. **Çok rollü suçluluk.** En az iki suçlu rolü olsun: fail ile suç ortağı, ya da planlayan, uygulayan ve örtbas eden. Ayrıca masum ama suçu örten biri olabilir.
+3. **Sağlam görünen sahte alibi.** Failin 1. bölümde neredeyse kusursuz bir alibisi olsun: tanık, kamera, fiş ya da telefon kaydı. Alibi ancak en az 3 belgenin birlikte okunmasıyla çöker. Yöntem örnekleri:
+   - kameranın saat kayması;
+   - önceden kaydedilmiş ses ya da arama;
+   - telefonu başkasına taşıtma;
+   - benzer giyimli bir suç ortağı;
+   - zamanlanmış mesaj;
+   - ölüm saatinin yanlış tahmin ettirilmesi (oda sıcaklığı, klima, sahte son görülme);
+   - feribot ya da uçuş saatleri;
+   - baz istasyonu çakışması.
+
+   Hile gerçek dünyada fiziksel olarak mümkün olmalı ve dosyadaki belgelerle kanıtlanmalı.
+4. **Kurban seçilmiş masumlar.** En az iki "tuzak şüpheli" olsun. Bunları gösteren güçlü dolaylı kanıtlar 2.–3. bölüme kadar ayakta kalsın. Birine fail kasıtlı olarak kanıt yerleştirmiş olsun. Bu tuzak, gözden kaçması kolay ama dürüst bir ayrıntıyla fark edilebilmeli: yanlış el, yanlış saat, yanlış marka, ters giyilmiş eldiven gibi.
+5. **Yanılan dürüst tanıklar.** En az 2 tanık dürüstçe yanılsın: saati yanlış hatırlasın, kişiyi giysiden yanlış tanısın. Yanılgı başka bir belgeyle açıklanabilsin.
+6. **Gömülü ipuçları.**
+   - HTS kayıtları 30–60 satır, banka dökümleri 25–40 satır, geçiş kayıtları 25–50 satır olsun; kilit satır sıradan satırların arasında dursun.
+   - İfadeler 12–20 soru-cevap olsun; kilit bilgi yan bir cümlede geçsin.
+   - Tek bir belge asla tek başına faili göstermesin.
+7. **Mini çıkarım bulmacaları.** En az 3 tane; hepsi dosyadaki verilerle çözülebilsin, dış bilgi gerekmesin. Örnekler:
+   - yolculuk süresi ile mesafe ve trafik;
+   - baz istasyonu dizisinden güzergâh;
+   - kamera saat farkı hesabı;
+   - gram, ayar ve fiyat hesabı;
+   - gün batımı ya da gelgit saati (bir belgede verilmiş olarak);
+   - yakıt ya da kilometre tutarsızlığı;
+   - anahtarı dosyada olan basit bir şifreli not.
+8. **Yan hikâyeler ve çıkmaz izler.** Şüphelilerin kendi küçük suçları (vergi kaçırma, ilişki, uyuşturucu, eski bir dava) gerçekçi yan izler oluştursun. Her biri bir belgeyle kapanabilsin. Çıkmaz izler de atmosfer ya da aklama bilgisi taşısın; boş iz olmasın.
+
+### Zorluk eğrisi (kör testte ölçülecek)
+| Bölüm sonu | Gerçek fail |
+|---|---|
+| 1 | En güçlü aday değil; ≤%30 güven; en az 3 rakip teori |
+| 2 | ≤%55 (ikinci suç fark edilmiş) |
+| 3 | ~%80 (alibi hilesi çözülmüş) |
+| Son | Kesinlik ve ayrıntılar |
+
+Vaka yine son bölüm açılmadan çözülebilmeli, ama bu ancak bütün kilit çıkarımlar yapılırsa mümkün olmalı.
+
+### Esinlenme
+Klasik polisiye yapılarından yararlan:
+- Christie, Simenon, Conan Doyle'un alibi ve zaman hileleri;
+- Japon honkaku'nun adil oyun bulmacaları;
+- "Unsolved Case Files", "Sherlock Holmes Consulting Detective" ve "Detective: A Modern Crime Board Game" vakalarının katman yapısı;
+- gerçek soruşturma usulleri: HTS analizi, baz istasyonu, MASAK, adli tıp.
+
+Gerçek bir olayı, gerçek kişileri ya da yayınlanmış bir eserin olay örgüsünü kopyalama. Yapıyı ödünç al, hikâyeyi özgün kur. Çözüm şüpheye değil kanıta dayansın; mantık sıçraması olmasın.
+
+### Teknik
+- Şemada bölüm üst sınırı 5.
+- Puanlar toplamı 100 olsun.
+- `case:check` uyarılarını sıfırla; "görsel dosyası henüz üretilmedi" uyarısı hariç.
+- Dosya 250–450 KB olabilir; parça parça yaz ve node ile birleştir.
+
 ## Teslim ve denetim
 1. `pnpm --filter @songie/detective case:check <slug>` hatasız geçmeli; uyarıları oku ve gerekçesiz bırakma.
 2. `pnpm --filter @songie/detective case:export <slug>` oyuncunun göreceği metni üretir (`cases/<slug>/.export/`). Kör çözüm ve şeytanın avukatı testleri bununla yapılır.

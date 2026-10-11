@@ -23,7 +23,7 @@ import {
   type Phase,
   type ResultView,
 } from '../shared/index.js';
-import type { CaseLibrary, LoadedCase } from './library.js';
+import { interviewAudioKey, type CaseLibrary, type LoadedCase } from './library.js';
 import type { SessionStore } from './sessions.js';
 
 export class GameError extends UserFacingError {}
@@ -51,6 +51,10 @@ export interface Saved {
   noteSeq: number;
   pins: string[];
   hintsUsed: { act: number; index: number }[];
+  /** Açılmış sorgular ve açıldıkları bölüm. */
+  interviewsOpen: { id: string; act: number }[];
+  /** Sorgu tutanağı: q:<soru> | c:<belge> (tepki) | d:<belge> (kaçamak). */
+  asked: { iv: string; key: string; by: string; at: number }[];
   sceneReady: string[];
   answers: Record<string, Record<string, string>>;
   final: Record<string, string | null>;
@@ -103,6 +107,8 @@ function fresh(slug: string): Saved {
     noteSeq: 0,
     pins: [],
     hintsUsed: [],
+    interviewsOpen: [],
+    asked: [],
     sceneReady: [],
     answers: {},
     final: {},
@@ -125,6 +131,9 @@ function restore(raw: unknown, c: CaseFile): Saved {
   s.opened = s.opened.filter((o) => leads.has(o.id));
   s.discovered = s.discovered.filter((l) => leads.has(l));
   s.pins = s.pins.filter((p) => evs.has(p));
+  const ivs = new Set(c.interviews.map((i) => i.id));
+  s.interviewsOpen = s.interviewsOpen.filter((i) => ivs.has(i.id));
+  s.asked = s.asked.filter((a) => ivs.has(a.iv));
   if (s.phase === 'result') s.phase = 'investigate';
   s.result = null;
   return s;
@@ -198,6 +207,27 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
     }
   }
 
+  function openInterviews(st: DetectiveState, ids: string[]) {
+    for (const id of ids) if (!st.interviewsOpen.some((i) => i.id === id)) st.interviewsOpen.push({ id, act: st.actIndex });
+  }
+
+  const interviewOf = (st: DetectiveState, id: string) => {
+    const iv = caseOf(st).interviews.find((x) => x.id === id);
+    if (!iv || !st.interviewsOpen.some((x) => x.id === id)) throw new GameError('Bu sorgu henüz açılmadı.');
+    return iv;
+  };
+  const askedKey = (st: DetectiveState, iv: string, key: string) => st.asked.some((a) => a.iv === iv && a.key === key);
+
+  /** Sorgudaki bir sorunun şu an sorulabilir olup olmadığı. */
+  function askable(st: DetectiveState, ivId: string, q: { id: string; after: string[]; needs: string[] }): boolean {
+    return !askedKey(st, ivId, `q:${q.id}`) && q.after.every((a) => askedKey(st, ivId, `q:${a}`)) && q.needs.every((e) => isUnlocked(st, e));
+  }
+
+  function applyOutcome(st: DetectiveState, ivId: string, o: { unlocks: string[]; leadsTo: string[] }) {
+    unlock(st, o.unlocks, `iv:${ivId}`);
+    discover(st, o.leadsTo);
+  }
+
   function enterAct(ctx: GameContext, st: DetectiveState, index: number) {
     const act = caseOf(st).acts[index]!;
     st.actIndex = index;
@@ -207,6 +237,7 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
     st.proposal = null;
     unlock(st, act.evidence, null);
     discover(st, act.leads);
+    openInterviews(st, act.interviews);
     log(ctx, st, `Bölüm ${index + 1}: ${act.title}`);
   }
 
@@ -237,6 +268,7 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
     st.opened.push({ id: lead.id, act: st.actIndex, by, at: ctx.now() });
     unlock(st, lead.unlocks, lead.id);
     discover(st, lead.leadsTo);
+    openInterviews(st, lead.interviews);
     st.proposal = null;
     log(ctx, st, `İz açıldı: ${lead.title} (${lead.hours} sa)`);
     checkAdvance(ctx, st);
@@ -624,6 +656,38 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
           return {};
         }
 
+        case 'ask': {
+          requirePhase(st, 'investigate');
+          const iv = interviewOf(st, action.interviewId);
+          const q = iv.questions.find((x) => x.id === action.questionId);
+          if (!q) throw new GameError('Böyle bir soru yok.');
+          if (askedKey(st, iv.id, `q:${q.id}`)) return { stale: true };
+          if (!askable(st, iv.id, q)) throw new GameError('Bu soruyu sormak için önce başka bir şey öğrenmeniz gerekiyor.');
+          st.asked.push({ iv: iv.id, key: `q:${q.id}`, by: pid, at: ctx.now() });
+          applyOutcome(st, iv.id, q);
+          commit(ctx, st);
+          return {};
+        }
+
+        case 'confront': {
+          requirePhase(st, 'investigate');
+          const iv = interviewOf(st, action.interviewId);
+          if (!isUnlocked(st, action.evidenceId)) throw new GameError('Bu belge henüz dosyada değil.');
+          const hit = iv.confront.find((x) => x.evidence === action.evidenceId);
+          if (hit) {
+            if (askedKey(st, iv.id, `c:${hit.evidence}`)) return { stale: true };
+            st.asked.push({ iv: iv.id, key: `c:${hit.evidence}`, by: pid, at: ctx.now() });
+            applyOutcome(st, iv.id, hit);
+            const ch = c.characters.find((x) => x.id === iv.character);
+            log(ctx, st, `${nick(ctx, pid)}, ${ch?.name ?? 'şüpheliye'} bir belge gösterdi.`);
+          } else {
+            if (askedKey(st, iv.id, `d:${action.evidenceId}`)) return { stale: true };
+            st.asked.push({ iv: iv.id, key: `d:${action.evidenceId}`, by: pid, at: ctx.now() });
+          }
+          commit(ctx, st);
+          return { hit: !!hit };
+        }
+
         case 'answer': {
           requirePhase(st, 'accuse');
           const answers: Record<string, string> = {};
@@ -730,7 +794,11 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
       const usedHints = st.hintsUsed.map((h) => ({ act: h.act, text: c.acts[h.act]?.hints[h.index] ?? '' }));
       const usedHere = st.hintsUsed.filter((h) => h.act === st.actIndex).length;
       const proposal = st.proposal;
-      const leadTitle = (id: string | null) => (id ? (c.leads.find((l) => l.id === id)?.title ?? null) : null);
+      const leadTitle = (id: string | null) => {
+        if (!id) return null;
+        if (id.startsWith('iv:')) return c.interviews.find((i) => i.id === id.slice(3))?.title ?? null;
+        return c.leads.find((l) => l.id === id)?.title ?? null;
+      };
 
       return {
         phase: st.phase,
@@ -822,6 +890,36 @@ export function createDetectiveGame(deps: DetectiveDeps): ServerGame<DetectiveSe
         opened: st.opened.map((o) => {
           const l = c.leads.find((x) => x.id === o.id)!;
           return { id: l.id, title: l.title, description: l.description, hours: l.hours, outcome: l.outcome, act: o.act, by: o.by, evidence: l.unlocks };
+        }),
+        interviews: st.interviewsOpen.map(({ id, act: openedAct }) => {
+          const iv = c.interviews.find((x) => x.id === id)!;
+          let deflects = 0;
+          const transcript = st.asked
+            .filter((a) => a.iv === id)
+            .map((a) => {
+              const [kind, ref] = [a.key.slice(0, 1), a.key.slice(2)];
+              if (kind === 'q') {
+                const q = iv.questions.find((x) => x.id === ref)!;
+                return { kind: 'ask' as const, prompt: q.ask, evidenceId: null, answer: q.answer, by: a.by, at: a.at, audioUrl: q.voiced ? (st.loaded.audio.get(interviewAudioKey(id, q.id)) ?? null) : null, unlocked: q.unlocks };
+              }
+              const title = evById.get(ref)?.title ?? ref;
+              if (kind === 'c') {
+                const x = iv.confront.find((y) => y.evidence === ref)!;
+                return { kind: 'confront' as const, prompt: title, evidenceId: ref, answer: x.answer, by: a.by, at: a.at, audioUrl: x.voiced ? (st.loaded.audio.get(interviewAudioKey(id, `c-${ref}`)) ?? null) : null, unlocked: x.unlocks };
+              }
+              const answer = iv.deflect[deflects++ % iv.deflect.length]!;
+              return { kind: 'deflect' as const, prompt: title, evidenceId: ref, answer, by: a.by, at: a.at, audioUrl: null, unlocked: [] };
+            });
+          return {
+            id,
+            characterId: iv.character,
+            title: iv.title,
+            place: iv.place,
+            intro: iv.intro,
+            act: openedAct,
+            transcript,
+            questions: iv.questions.filter((q) => askable(st, id, q)).map((q) => ({ id: q.id, ask: q.ask })),
+          };
         }),
         proposal: proposal
           ? { kind: proposal.kind, leadId: proposal.leadId, by: proposal.by, votes: proposal.votes, needed: proposal.needed }

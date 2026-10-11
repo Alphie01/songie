@@ -340,6 +340,57 @@ export const leadSchema = z.object({
   outcome: text,
   /** Daha erken keşfedilse de en erken bu bölümde (1'den) açılabilir; o zamana kadar listede görünmez. */
   minAct: z.number().int().min(1).max(5).optional(),
+  /** Bu iz açılınca başlayan sorgular (interviews). */
+  interviews: z.array(id).default([]),
+});
+
+/** Sorguda bir cevabın sonuçları (soru ya da belge gösterme). */
+const outcomeFields = {
+  /** Cevap üzerine dosyaya giren belgeler (tanığın verdiği fiş, gösterdiği mesaj…). */
+  unlocks: z.array(id).default([]),
+  /** Cevap üzerine keşfedilen izler. */
+  leadsTo: z.array(id).default([]),
+  /** Cevabın ortaya koyduğu gerçekler (denetim için; oyuncuya gitmez). */
+  reveals: z.array(id).default([]),
+  /** Kilit an: karakterin sesiyle seslendirilir (yalnızca itiraf, kırılma, kritik bilgi). */
+  voiced: z.boolean().default(false),
+  /** Seslendirmede söyleyiş yönergesi ("yutkunarak", "öfkeyle"). */
+  delivery: z.string().optional(),
+};
+
+/**
+ * Sorgu: oyuncular listeden soru seçer ya da dosyadaki bir belgeyi gösterir; cevaplar yazarın
+ * hazırladığı metinlerdir. Sorulanlar ortak bir sorgu tutanağında herkese görünür.
+ */
+export const interviewSchema = z.object({
+  id,
+  /** Sorgulanan karakter. */
+  character: id,
+  /** "Kâhya Rıza Yalçın, ikinci görüşme". */
+  title: text,
+  place: text,
+  /** Görüşme açılırken okunan kısa sahne: oda, kişinin tavrı (2–4 cümle). */
+  intro: prose,
+  questions: z
+    .array(
+      z.object({
+        id,
+        /** Oyuncunun sorusu: kısa, doğal, komiserin ağzından ("O gece saat kaçta çıktınız?"). */
+        ask: text,
+        /** Karakterin cevabı (yalan da olabilir; yalanlar truth.characters[].lies ile tutarlı). */
+        answer: prose,
+        /** Bu soru ancak şu sorular sorulduktan sonra listede görünür. */
+        after: z.array(id).default([]),
+        /** Bu soru ancak şu belgeler dosyadayken görünür. */
+        needs: z.array(id).default([]),
+        ...outcomeFields,
+      }),
+    )
+    .min(4),
+  /** Belge gösterme: belirli bir belge gösterilince verilen tepki (genelde savunmanın çöktüğü an). */
+  confront: z.array(z.object({ evidence: id, answer: prose, ...outcomeFields })).default([]),
+  /** Tepkisi yazılmamış bir belge gösterilince sırayla kullanılan kaçamak cevaplar. */
+  deflect: z.array(text).min(2),
 });
 
 export const actSchema = z.object({
@@ -351,6 +402,8 @@ export const actSchema = z.object({
   evidence: z.array(id).default([]),
   /** Bölüm başında keşfedilen izler. */
   leads: z.array(id).default([]),
+  /** Bölüm başında açılan sorgular. */
+  interviews: z.array(id).default([]),
   /** Amirden ipucu (bölüm başına en fazla 2), en hafiften en yöne vericiye. */
   hints: z.array(text).max(3).default([]),
   /**
@@ -420,6 +473,7 @@ export const caseSchema = z.object({
   facts: z.array(factSchema).min(5),
   evidence: z.array(evidenceSchema).min(10),
   leads: z.array(leadSchema).min(5),
+  interviews: z.array(interviewSchema).default([]),
   acts: z.array(actSchema).min(2).max(5),
   questions: z.array(questionSchema).min(3),
   /** Soru kimliği → kabul edilen cevap kimlikleri. */
@@ -439,3 +493,4 @@ export type Question = z.infer<typeof questionSchema>;
 export type TimelineEntry = z.infer<typeof timelineEntrySchema>;
 export type CaseImage = z.infer<typeof imageSchema>;
 export type Voice = z.infer<typeof voiceSchema>;
+export type Interview = z.infer<typeof interviewSchema>;

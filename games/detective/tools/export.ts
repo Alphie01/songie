@@ -82,6 +82,7 @@ for (const l of c.locations) out.push(`- **${l.name}** — ${l.description}${l.i
 const leadById = new Map(c.leads.map((l) => [l.id, l]));
 const parts: string[][] = [];
 let prevLeads = new Set<string>();
+let prevIv = new Set<string>();
 c.acts.forEach((a, i) => {
   const part: string[] = [];
   part.push(`\n\n# BÖLÜM ${i + 1}: ${a.title}\n\n${a.scene}\n${a.sceneImage ? `[Sahne görseli: ${imgAlt(a.sceneImage)}]\n` : ''}`);
@@ -102,6 +103,24 @@ c.acts.forEach((a, i) => {
   for (const l of fresh) {
     part.push(`\n#### İz [${l.id}] ${l.title} (${l.hours} sa)\n${l.description}\nSonuç: ${l.outcome}\nYeni izler: ${l.leadsTo.join(', ') || '—'}\n`);
     for (const id of l.unlocks) part.push(evText(evById.get(id)!));
+  }
+  // Bu bölümde açılabilen sorgular
+  const ivNow = reachable(c, i).interviews;
+  const freshIv = c.interviews.filter((iv) => ivNow.has(iv.id) && !prevIv.has(iv.id));
+  prevIv = ivNow;
+  if (freshIv.length) part.push(`\n### Bu bölümde açılabilen sorgular`);
+  for (const iv of freshIv) {
+    part.push(`\n#### Sorgu [${iv.id}] ${iv.title} — ${name(iv.character)} · ${iv.place}\n_${iv.intro}_\n`);
+    for (const q of iv.questions) {
+      const cond = [q.after.length ? `önce: ${q.after.join(', ')}` : '', q.needs.length ? `belge gerekir: ${q.needs.join(', ')}` : ''].filter(Boolean).join('; ');
+      const out = [q.unlocks.length ? `belge açar: ${q.unlocks.join(', ')}` : '', q.leadsTo.length ? `iz açar: ${q.leadsTo.join(', ')}` : ''].filter(Boolean).join('; ');
+      part.push(`- [${q.id}]${cond ? ` (${cond})` : ''} SORU: ${q.ask}\n  CEVAP: ${q.answer}${out ? `\n  → ${out}` : ''}`);
+    }
+    for (const x of iv.confront) {
+      const out = [x.unlocks.length ? `belge açar: ${x.unlocks.join(', ')}` : '', x.leadsTo.length ? `iz açar: ${x.leadsTo.join(', ')}` : ''].filter(Boolean).join('; ');
+      part.push(`- BELGE GÖSTERİLİRSE [${x.evidence}]: ${x.answer}${out ? `\n  → ${out}` : ''}`);
+    }
+    part.push(`- Başka bir belge gösterilirse: ${iv.deflect.join(' / ')}`);
   }
   parts.push(part);
 });

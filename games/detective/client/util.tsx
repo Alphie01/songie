@@ -4,7 +4,7 @@ import type { CharacterView, DetectiveAction, DetectiveView, DocResponse, Eviden
 import { s } from './strings';
 
 export type Send = (action: DetectiveAction) => Promise<Ack<Record<string, unknown>>>;
-export type Tab = 'board' | 'cabinet' | 'leads' | 'notes';
+export type Tab = 'board' | 'cabinet' | 'interviews' | 'leads' | 'notes';
 
 export interface Desk {
   view: DetectiveView;
@@ -27,6 +27,11 @@ export interface Desk {
   seen: Set<string>;
   docs: DocStore;
   setTab(tab: Tab): void;
+  /** Sorgu odasında açık olan sorgu. */
+  interview: string | null;
+  openInterview(id: string): void;
+  /** Sorgu başına okunmamış durum (başkasının sorduğu, henüz görmediğim girdiler). */
+  ivUnread: Map<string, { count: number; fresh: boolean }>;
   replayAct(index: number): void;
   readOnly: boolean;
 }
@@ -116,6 +121,70 @@ export function useSeen(sessionId: string, meId: string): [Set<string>, (id: str
     [key],
   );
   return [seen, mark];
+}
+
+// ---------- Sorgu tutanağı: okunan girdi sayısı (yerel) ----------
+
+export function useIvSeen(sessionId: string, meId: string): [Record<string, number>, (id: string, n: number) => void] {
+  const key = `dt-ivseen:${sessionId}:${meId}`;
+  const read = (): Record<string, number> => {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? (JSON.parse(raw) as Record<string, number>) : {};
+    } catch {
+      return {};
+    }
+  };
+  const [seen, setSeen] = useState<Record<string, number>>(read);
+  useEffect(() => setSeen(read()), [key]); // eslint-disable-line react-hooks/exhaustive-deps
+  const mark = useCallback(
+    (id: string, n: number) => {
+      setSeen((prev) => {
+        if (prev[id] === n) return prev;
+        const next = { ...prev, [id]: n };
+        try {
+          localStorage.setItem(key, JSON.stringify(next));
+        } catch {
+          /* depolama kapalıysa yalnızca bu oturumda tutulur */
+        }
+        return next;
+      });
+    },
+    [key],
+  );
+  return [seen, mark];
+}
+
+/** Daha önce gördüğüm soru kimlikleri; yeni gelenler bu oturum boyunca "yeni" kalır. */
+export function useFreshQuestions(sessionId: string, meId: string, ivId: string | null, ids: string[]): Set<string> {
+  const key = `dt-ivq:${sessionId}:${meId}`;
+  const [fresh, setFresh] = useState<Set<string>>(new Set());
+  const sig = ids.join('|');
+  useEffect(() => setFresh(new Set()), [ivId]);
+  useEffect(() => {
+    if (!ivId) return;
+    let known: Record<string, string[]> = {};
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw) known = JSON.parse(raw) as Record<string, string[]>;
+    } catch {
+      /* yok say */
+    }
+    const prev = known[ivId];
+    const cur = sig ? sig.split('|') : [];
+    // Sorguyu ilk kez açıyorsam baştaki sorular "yeni" sayılmaz.
+    if (prev) {
+      const added = cur.filter((q) => !prev.includes(q));
+      if (added.length) setFresh((f) => new Set([...f, ...added]));
+    }
+    known[ivId] = [...new Set([...(prev ?? []), ...cur])];
+    try {
+      localStorage.setItem(key, JSON.stringify(known));
+    } catch {
+      /* yok say */
+    }
+  }, [key, ivId, sig]);
+  return fresh;
 }
 
 // ---------- Biçimlendirme ----------

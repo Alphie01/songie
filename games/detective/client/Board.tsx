@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { CharacterView, Mark } from '../shared/index.js';
-import { KindGlyph, NoteList, Picture } from './Bits';
+import { IvGlyph, KindGlyph, NoteList, Picture } from './Bits';
 import { FloorPlan } from './FloorPlan';
 import { s } from './strings';
 import { initials, Paras, splitAt, useDesk } from './util';
@@ -57,7 +57,8 @@ export function Board() {
 }
 
 function PersonCard({ c, variant }: { c: CharacterView; variant: 'victim' | 'suspect' | 'other' }) {
-  const { send, nick, view, setPersonFilter, setTab, readOnly } = useDesk();
+  const { send, nick, view, setPersonFilter, setTab, readOnly, openInterview, ivUnread } = useDesk();
+  const ivs = view.interviews.filter((i) => i.characterId === c.id);
   const [open, setOpen] = useState(false);
   const mentions = view.evidence.filter((e) => e.people.includes(c.id)).length;
   const setMark = (mark: Mark) => void send({ type: 'mark', characterId: c.id, mark: c.mark?.mark === mark ? null : mark });
@@ -105,6 +106,20 @@ function PersonCard({ c, variant }: { c: CharacterView; variant: 'victim' | 'sus
           {c.mark && <p className="dt-mark-by">{s.board.markedBy(c.mark.mark === 'suspect' ? s.board.markSuspect : s.board.markClear, nick(c.mark.by))}</p>}
         </div>
       )}
+
+      {ivs.map((iv) => {
+        const u = ivUnread.get(iv.id);
+        return (
+          <button key={iv.id} type="button" className="dt-person-iv" onClick={() => openInterview(iv.id)}>
+            <IvGlyph />
+            <span className="dt-person-iv-text">
+              {s.interview.open}
+              {ivs.length > 1 && <span className="dim">, {iv.place}</span>}
+            </span>
+            {u && u.count > 0 ? <span className="dt-tab-badge" data-tone="iv">{u.count}</span> : u?.fresh && <span className="dt-new">{s.interview.newQ}</span>}
+          </button>
+        );
+      })}
 
       <button
         type="button"

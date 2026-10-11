@@ -102,6 +102,16 @@ export function KindGlyph({ kind, size = 16 }: { kind: DocKind; size?: number })
   );
 }
 
+/** Sorgu odası simgesi: masa lambası. */
+export function IvGlyph({ size = 14 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M12 3v3M7.5 11.5L9 6h6l1.5 5.5z" />
+      <path d="M10 15h4M4 20.5h16" />
+    </svg>
+  );
+}
+
 // ---------- Fotoğraf / yer tutucu ----------
 
 /** Görsel varsa basar; yoksa çerçeve içinde dosyadaki tarifi gösterir (oyuncu ipucunu okuyabilsin). */

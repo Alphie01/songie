@@ -831,7 +831,10 @@
           "l-camera"
         ],
         "hours": 4
-      }
+      },
+      "interviews": [
+        "iv-sevim"
+      ]
     },
     {
       "title": "Zehir",
@@ -1023,5 +1026,62 @@
         "explanation": "Leyla mirasçıydı ama nöbetteydi."
       }
     ]
-  }
+  },
+  "interviews": [
+    {
+      "id": "iv-sevim",
+      "character": "sevim",
+      "title": "Sevim Er ile görüşme",
+      "place": "Kuru temizleme dükkânı",
+      "intro": "Sevim Hanım ütü masasının başında, elleri titriyor.",
+      "questions": [
+        {
+          "id": "q1",
+          "ask": "Dün akşam dükkânınızı kaçta kapattınız?",
+          "answer": "Sekiz gibi kapattım, sonra sahile indim."
+        },
+        {
+          "id": "q2",
+          "ask": "Nuri Bey'in düşmanı var mıydı?",
+          "answer": "Düşmanı olmaz onun. Ama Kerem'le son zamanlarda bağırışıyorlardı."
+        },
+        {
+          "id": "q3",
+          "ask": "Kerem'i tam olarak saat kaçta gördünüz?",
+          "answer": "Dokuzu geçiyordu. Yüzünü görmedim ama yürüyüşü onundu.",
+          "after": [
+            "q2"
+          ],
+          "unlocks": [
+            "e-ticket"
+          ]
+        },
+        {
+          "id": "q4",
+          "ask": "Kerem dokuzu on iki geçe telefondaymış, siz onu nereden gördünüz?",
+          "answer": "Arabadan, otoparka girerken.",
+          "needs": [
+            "e-hts"
+          ],
+          "voiced": true,
+          "delivery": "duraksayarak"
+        }
+      ],
+      "confront": [
+        {
+          "evidence": "e-ticket",
+          "answer": "Evet, otoparktaydım. Saatleri karıştırmış olabilirim.",
+          "leadsTo": [
+            "l-kerem-phone"
+          ],
+          "voiced": true
+        }
+      ],
+      "deflect": [
+        "Bunu bilmem ben.",
+        "Ne alakası var bunun?",
+        "Komiserim, ben temizlikçiyim."
+      ]
+    }
+  ]
 }

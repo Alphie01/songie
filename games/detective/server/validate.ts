@@ -6,27 +6,50 @@ export interface CheckReport {
   stats: Record<string, number | string>;
 }
 
-/** İzlerin tamamı açılırsa `uptoAct` bölümüne kadar (dahil) erişilebilen kanıt ve izler. */
-export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>; leads: Set<string> } {
+/**
+ * İzlerin ve sorguların tamamı açılırsa `uptoAct` bölümüne kadar (dahil) erişilebilen kanıt, iz ve
+ * sorgular. Sorgu cevapları (`needs`/`confront` koşulları sağlandıkça) belge ve iz açabilir.
+ */
+export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>; leads: Set<string>; interviews: Set<string> } {
   const leadById = new Map(c.leads.map((l) => [l.id, l]));
+  const ivById = new Map(c.interviews.map((i) => [i.id, i]));
   const evidence = new Set<string>();
   const leads = new Set<string>();
+  const interviews = new Set<string>();
   const queue: string[] = [];
   for (const act of c.acts.slice(0, uptoAct + 1)) {
     act.evidence.forEach((e) => evidence.add(e));
+    act.interviews.forEach((i) => interviews.add(i));
     queue.push(...act.leads);
   }
-  while (queue.length) {
-    const id = queue.shift()!;
-    if (leads.has(id)) continue;
-    const lead = leadById.get(id);
-    if (!lead) continue;
-    if (lead.minAct && lead.minAct - 1 > uptoAct) continue;
-    leads.add(id);
-    lead.unlocks.forEach((e) => evidence.add(e));
-    queue.push(...lead.leadsTo);
+  for (let changed = true; changed; ) {
+    changed = false;
+    while (queue.length) {
+      const id = queue.shift()!;
+      if (leads.has(id)) continue;
+      const lead = leadById.get(id);
+      if (!lead) continue;
+      if (lead.minAct && lead.minAct - 1 > uptoAct) continue;
+      leads.add(id);
+      changed = true;
+      lead.unlocks.forEach((e) => evidence.add(e));
+      lead.interviews.forEach((i) => interviews.add(i));
+      queue.push(...lead.leadsTo);
+    }
+    for (const ivId of interviews) {
+      const iv = ivById.get(ivId);
+      if (!iv) continue;
+      const outcomes = [
+        ...iv.questions.filter((q) => q.needs.every((e) => evidence.has(e))),
+        ...iv.confront.filter((x) => evidence.has(x.evidence)),
+      ];
+      for (const o of outcomes) {
+        for (const e of o.unlocks) if (!evidence.has(e)) (evidence.add(e), (changed = true));
+        for (const l of o.leadsTo) if (!leads.has(l)) (queue.push(l), (changed = true));
+      }
+    }
   }
-  return { evidence, leads };
+  return { evidence, leads, interviews };
 }
 
 /** Vaka dosyasının şema dışındaki tutarlılık denetimi. `imageExists` verilmezse görsel dosyaları denetlenmez. */
@@ -121,21 +144,60 @@ export function checkCase(c: CaseFile, imageExists?: (key: string) => boolean): 
     }
     if (c.acts.length > 1 && a.hints.length < 2) warn(`Bölüm ${i + 1}: ipucu sayısı ${a.hints.length} (2 önerilir).`);
   });
+  // --- Sorgular ---
+  const ivs = dupes('Sorgu', c.interviews.map((x) => x.id));
+  c.acts.forEach((a, i) => a.interviews.forEach((x) => need(ivs, x, 'sorgu', `bölüm ${i + 1} interviews`)));
+  c.leads.forEach((l) => l.interviews.forEach((x) => need(ivs, x, 'sorgu', `iz ${l.id} interviews`)));
+  let voicedTotal = 0;
+  for (const iv of c.interviews) {
+    const where = `sorgu ${iv.id}`;
+    need(chars, iv.character, 'karakter', where);
+    const ch = c.characters.find((x) => x.id === iv.character);
+    const qids = dupes(`${where} soru`, iv.questions.map((q) => q.id));
+    const outs = [...iv.questions.map((q) => ({ o: q, w: `${where} soru ${q.id}` })), ...iv.confront.map((x) => ({ o: x, w: `${where} gösterme ${x.evidence}` }))];
+    for (const q of iv.questions) {
+      q.after.forEach((a) => need(qids, a, 'soru', `${where} soru ${q.id} after`));
+      q.needs.forEach((e) => need(evs, e, 'kanıt', `${where} soru ${q.id} needs`));
+    }
+    iv.confront.forEach((x) => need(evs, x.evidence, 'kanıt', `${where} confront`));
+    for (const { o, w } of outs) {
+      o.unlocks.forEach((e) => need(evs, e, 'kanıt', `${w} unlocks`));
+      o.leadsTo.forEach((l) => need(leads, l, 'iz', `${w} leadsTo`));
+      o.reveals.forEach((f) => need(facts, f, 'gerçek', `${w} reveals`));
+      if (o.voiced) voicedTotal++;
+    }
+    if (outs.some((x) => x.o.voiced) && ch && !ch.voice) err(`${where}: sesli cevap var ama "${ch.id}" karakterinin sesi (voice) yok.`);
+    if (iv.questions.length < 10) warn(`${where}: ${iv.questions.length} soru (12–22 önerilir).`);
+    if (iv.confront.length < 2) warn(`${where}: belge gösterme tepkisi ${iv.confront.length} (2–5 önerilir).`);
+    // Döngüsel/ulaşılamaz "after" zinciri
+    const known = new Set<string>();
+    for (let grew = true; grew; ) {
+      grew = false;
+      for (const q of iv.questions) if (!known.has(q.id) && q.after.every((a) => known.has(a))) (known.add(q.id), (grew = true));
+    }
+    for (const q of iv.questions) if (!known.has(q.id)) err(`${where}: soru ${q.id} hiçbir zaman görünmüyor (after zinciri döngüsel).`);
+  }
+  if (voicedTotal > 20) warn(`Sesli sorgu cevabı ${voicedTotal} (vaka başına 12–18 önerilir).`);
+
   for (const l of c.leads) {
     l.unlocks.forEach((e) => need(evs, e, 'kanıt', `iz ${l.id} unlocks`));
     l.leadsTo.forEach((x) => need(leads, x, 'iz', `iz ${l.id} leadsTo`));
-    if (l.unlocks.length === 0) warn(`İz ${l.id} hiçbir belge açmıyor.`);
+    if (l.unlocks.length === 0 && l.interviews.length === 0) warn(`İz ${l.id} hiçbir belge ya da sorgu açmıyor.`);
   }
 
   // Her kanıt tek bir yerden gelsin.
   const sources = new Map<string, string[]>();
   c.acts.forEach((a, i) => a.evidence.forEach((e) => sources.set(e, [...(sources.get(e) ?? []), `bölüm ${i + 1}`])));
   c.leads.forEach((l) => l.unlocks.forEach((e) => sources.set(e, [...(sources.get(e) ?? []), `iz ${l.id}`])));
+  c.interviews.forEach((iv) =>
+    [...iv.questions, ...iv.confront].forEach((o) => o.unlocks.forEach((e) => sources.set(e, [...(sources.get(e) ?? []), `sorgu ${iv.id}`]))),
+  );
   for (const [e, s] of sources) if (s.length > 1) warn(`Kanıt ${e} birden çok yerden açılıyor: ${s.join(', ')}`);
 
   const all = reachable(c, c.acts.length - 1);
   for (const e of evs) if (!all.evidence.has(e)) err(`Kanıt ${e} hiçbir bölüm ya da izle açılmıyor.`);
   for (const l of leads) if (!all.leads.has(l)) err(`İz ${l} hiçbir bölüm ya da izle keşfedilmiyor.`);
+  for (const i of ivs) if (!all.interviews.has(i)) err(`Sorgu ${i} hiçbir bölüm ya da izle açılmıyor.`);
 
   // --- Gerçek ve çözüm ---
   const truth = c.truth;
@@ -231,6 +293,8 @@ export function checkCase(c: CaseFile, imageExists?: (key: string) => boolean): 
       görsel: images.size,
       'belge türü': kinds.size,
       'son bölüm öncesi kanıt': `${early.evidence.size}/${c.evidence.length}`,
+      sorgu: c.interviews.length,
+      'sorgu sorusu': c.interviews.reduce((n, i) => n + i.questions.length, 0),
     },
   };
 }

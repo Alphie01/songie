@@ -165,6 +165,64 @@ describe('dedektif: sahne ve izler', () => {
   });
 });
 
+describe('dedektif: sorgular', () => {
+  it('sorular katman katman açılır; sorulmamış cevaplar görünüme girmez', async () => {
+    const { h } = await investigating();
+    const iv = () => h.view('cem').interviews.find((i) => i.id === 'iv-sevim')!;
+    expect(iv().questions.map((q) => q.id)).toEqual(['q1', 'q2']);
+    expect(h.seen('cem')).not.toContain('yürüyüşü onundu');
+    expect(h.seen('cem')).not.toContain('Arabadan, otoparka');
+    expect(await h.act('ali', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q3' })).toMatchObject({ ok: false });
+    await h.act('ayse', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q2' });
+    expect(iv().questions.map((q) => q.id)).toEqual(['q1', 'q3']);
+    await h.act('ali', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q3' });
+    const v = h.view('cem');
+    expect(v.evidence.find((e) => e.id === 'e-ticket')).toMatchObject({ source: 'Sevim Er ile görüşme' });
+    expect(iv().transcript.map((t) => [t.kind, t.by])).toEqual([['ask', 'ayse'], ['ask', 'ali']]);
+    expect(iv().transcript[1]!.unlocked).toEqual(['e-ticket']);
+    expect(await h.act('ali', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q3' })).toMatchObject({ ok: true, stale: true });
+  });
+
+  it('belge gerektiren soru belge gelince açılır', async () => {
+    const { h } = await investigating(['ali']);
+    expect(h.view('ali').interviews[0]!.questions.map((q) => q.id)).not.toContain('q4');
+    await h.act('ali', { type: 'open', leadId: 'l-camera' });
+    await h.act('ali', { type: 'continue' });
+    await h.act('ali', { type: 'open', leadId: 'l-kerem-phone' });
+    await h.act('ali', { type: 'continue' });
+    expect(h.view('ali').interviews[0]!.questions.map((q) => q.id)).toContain('q4');
+  });
+
+  it('doğru belge tepki ve iz açar; başka belge kaçamak cevap alır', async () => {
+    const { h } = await investigating();
+    await h.act('ali', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q2' });
+    await h.act('ali', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q3' });
+    expect(await h.act('cem', { type: 'confront', interviewId: 'iv-sevim', evidenceId: 'e-scene' })).toMatchObject({ ok: true, hit: false });
+    expect(await h.act('cem', { type: 'confront', interviewId: 'iv-sevim', evidenceId: 'e-ticket' })).toMatchObject({ ok: true, hit: true });
+    const iv = h.view('ali').interviews[0]!;
+    expect(iv.transcript.slice(-2).map((t) => [t.kind, t.answer])).toEqual([
+      ['deflect', 'Bunu bilmem ben.'],
+      ['confront', 'Evet, otoparktaydım. Saatleri karıştırmış olabilirim.'],
+    ]);
+    expect(h.view('ali').leads.map((l) => l.id)).toContain('l-kerem-phone');
+    expect(await h.act('cem', { type: 'confront', interviewId: 'iv-sevim', evidenceId: 'e-autopsy' })).toMatchObject({ ok: false });
+    expect(await h.act('cem', { type: 'ask', interviewId: 'iv-yok', questionId: 'q1' })).toMatchObject({ ok: false });
+  });
+
+  it('sorgu tutanağı kaydedilip devam edilince geri gelir', async () => {
+    const db = new Database(':memory:');
+    const first = setup(['ali'], {}, db);
+    await first.h.start();
+    await first.h.act('ali', { type: 'continue' });
+    await first.h.act('ali', { type: 'ask', interviewId: 'iv-sevim', questionId: 'q1' });
+    first.h.end();
+    const id = first.h.view('ali').sessionId;
+    const second = setup(['ali'], { caseSlug: null, resume: id }, db);
+    await second.h.start();
+    expect(second.h.view('ali').interviews[0]!.transcript).toHaveLength(1);
+  });
+});
+
 describe('dedektif: ortak dosya', () => {
   it('not defteri sürüm çakışmasını reddeder', async () => {
     const { h } = await investigating();
