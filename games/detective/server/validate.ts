@@ -24,7 +24,13 @@ export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>
   }
   // Sabit noktaya kadar: bir turda küme büyümediyse dur (minAct yüzünden açılamayan izler döngü yaratmasın).
   const size = () => evidence.size + leads.size + interviews.size;
-  for (let before = -1; before !== size(); ) {
+  // minAct yüzünden bu bölümde açılamayan iz kuyruğa girmesin (yoksa döngü hiç bitmez).
+  const open = (id: string) => {
+    const l = leadById.get(id);
+    return !!l && !(l.minAct && l.minAct - 1 > uptoAct);
+  };
+  // Kuyrukta bekleyen iz varsa da devam et (belgeden doğan iz, küme büyümeyen bir turun sonunda eklenebilir).
+  for (let before = -1; before !== size() || queue.length; ) {
     before = size();
     while (queue.length) {
       const id = queue.shift()!;
@@ -39,7 +45,7 @@ export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>
     }
     // Belgeden doğan izler
     for (const l of c.leads) {
-      if (!leads.has(l.id) && l.from.some((e) => evidence.has(e))) queue.push(l.id);
+      if (!leads.has(l.id) && open(l.id) && l.from.some((e) => evidence.has(e))) queue.push(l.id);
     }
     for (const ivId of interviews) {
       const iv = ivById.get(ivId);
@@ -50,7 +56,7 @@ export function reachable(c: CaseFile, uptoAct: number): { evidence: Set<string>
       ];
       for (const o of outcomes) {
         for (const e of o.unlocks) evidence.add(e);
-        for (const l of o.leadsTo) if (!leads.has(l)) queue.push(l);
+        for (const l of o.leadsTo) if (!leads.has(l) && open(l)) queue.push(l);
       }
     }
   }
