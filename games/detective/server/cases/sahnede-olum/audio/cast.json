@@ -1,0 +1,94 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#Çağrı karşılayıcı": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "gulsen": {
+      "voice_id": "oPC5I9GKjMReiaM29gjY",
+      "name": "Gökçe Deniz - Joyful, Friendly and Warm"
+    },
+    "#Dr. Levent Akar": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "baris": {
+      "voice_id": "GLHtjkeLJ9Rxcv9JhLmh",
+      "name": "Muhammer Arabacı - Enthusiastic, Direct"
+    },
+    "haluk": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "ece": {
+      "voice_id": "5MSp7yE6sGgawegWrMgt",
+      "name": "Ece"
+    },
+    "nur": {
+      "voice_id": "gyxPK6bLXQAkBSCeAKvk",
+      "name": "Sultan - Theatrical, Narrator"
+    },
+    "#Av. Selim Arca": {
+      "voice_id": "z2ObNnp0E5ZGeTlSXkX0",
+      "name": "Mert Aksoy"
+    },
+    "#Kendini Haluk Erenler olarak tanıtan ses": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "suat": {
+      "voice_id": "QAABwpMjK3YR9pYW5FDO",
+      "name": "Recep Sağlık - Mature, Deep and Clear"
+    },
+    "rustem": {
+      "voice_id": "IuRRIAcbQK5AQk1XevPj",
+      "name": "Doga - Upbeat and Rich"
+    },
+    "sinan": {
+      "voice_id": "Rn6ATQ4HFbyhBC6mze4Z",
+      "name": "Sinan - Deep & Clear Turkish Narrator"
+    }
+  },
+  "tags": {
+    "hızlı ama net": "fast, clear",
+    "kesik kesik, nefes nefese": "choppy, breathless",
+    "yutkunarak": "swallowing, hesitant",
+    "telefondan uzaklaşıp bağırarak": "shouting, angry",
+    "yorgun, yalvarır gibi": "tired, pleading",
+    "alçak, ağır": "low, heavy",
+    "birden sesini yükselterek, salona dönerek": "sudden loud, turning",
+    "ürkek, oyunun içinden": "timid, in character",
+    "yumuşak, yorgun": "soft, tired",
+    "önce oyunun içinden, sonra gerçekten korkarak": "in character, scared",
+    "mikrofondan, sert ve hızlı": "harsh, fast",
+    "alçak sesle, hızlı, kendi kendine": "low, fast, muttering",
+    "duraksayarak, huzursuz": "hesitant, uneasy",
+    "kulaklıktan, metalik, kısa": "metallic, short",
+    "telaşla, mikrofona eğilerek": "hurried, anxious",
+    "kulaklıktan, sakin": "calm, headset",
+    "nefesini bırakarak, yarı gülerek": "breathy, half laughing",
+    "sesini kalınlaştırarak, neşeyle": "deepened, cheerful",
+    "tane tane, biraz abartılı": "deliberate, exaggerated",
+    "aceleyle, bağırır gibi": "hurried, shouting",
+    "gülerek": "laughing",
+    "sakin, ölçülü, gözlerini kaçırmadan": "calm, measured",
+    "bir an duraksayıp, sesini toparlayarak": "hesitant, composed",
+    "kısa bir sessizlikten sonra, soğuk": "pause, cold",
+    "duraksayarak, sesi alçalarak": "hesitant, quieting",
+    "yavaşça, her kelimeyi tartarak": "slow, deliberate",
+    "öfkeyle, sesini yükselterek": "angry, loud",
+    "nefes nefese, masaya eğilerek": "breathless, intense",
+    "fazla hızlı, sesi incelerek": "too fast, thin voice",
+    "omuzları düşerek, yorgun": "slumped, tired",
+    "sesi çatlayarak, sonunda bir nefeste": "cracking voice, breathy end",
+    "ağlamaklı, alçak sesle": "tearful, low",
+    "derin bir nefes alıp, sert": "deep breath, harsh",
+    "yorgun, alaycı": "tired, sarcastic",
+    "titreyerek ama dik": "trembling, firm",
+    "alçak sesle, kendinden utanarak": "low, ashamed"
+  }
+}
