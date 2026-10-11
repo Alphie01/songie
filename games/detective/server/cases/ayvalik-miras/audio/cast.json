@@ -1,0 +1,93 @@
+{
+  "voices": {
+    "@narrator": {
+      "voice_id": "J17lijyP1BHYcM7ld0Rg",
+      "name": "Adam - Deep, Professional and Serious"
+    },
+    "#112 operatörü": {
+      "voice_id": "uvU9jrgGLWNPeNA4NgNT",
+      "name": "İrem - Authoritarian Female Voice"
+    },
+    "ismail": {
+      "voice_id": "rSuyucEH95GpZEfLV0AM",
+      "name": "Can Seçkin - Breathy and Deep"
+    },
+    "riza": {
+      "voice_id": "mF7tIc9VLrznhGooGjaT",
+      "name": "Seyfullah Kartal - Deep and Muffled"
+    },
+    "#Komiser Levent Arı": {
+      "voice_id": "DpEiQMnL9WxMsymCsjPY",
+      "name": "Emrullah Uzun - Storyteller"
+    },
+    "mehmet": {
+      "voice_id": "LCHGt3rsPMP50Vs28amI",
+      "name": "Mehmet Derindağ - Steady and Clear"
+    },
+    "#Burhan Kaya": {
+      "voice_id": "lxZLq5dcyw12UangGJgN",
+      "name": "Cavit - Energetic and Fast-Paced"
+    },
+    "omer": {
+      "voice_id": "Y2T2O1csKPgWgyuKcU0a",
+      "name": "Cavit Pancar - Epic Powerful Historical"
+    },
+    "yasar": {
+      "voice_id": "j9K9HnBcmgA6xNWqjlX0",
+      "name": "Emin - Epic Historical Narrative"
+    },
+    "selim": {
+      "voice_id": "fZEjvS1BvpajAoOmWcEO",
+      "name": "Fatih - Steady, Confident and Young"
+    },
+    "nevin": {
+      "voice_id": "uKVeTbj0O6ca7CnOrZXx",
+      "name": "Zeynep - Inspiring, sincere"
+    },
+    "kerem": {
+      "voice_id": "D1U9fDt671vz7Bpo0FQM",
+      "name": "Kerem - Young and Deep"
+    },
+    "engin": {
+      "voice_id": "tOqnHSMt5y3uRBgH7e8J",
+      "name": "Yusuf Suratlı - Storyteller"
+    }
+  },
+  "tags": {
+    "nefes nefese, kekeleyerek": "breathless, stammering",
+    "sesi titreyerek": "voice trembling",
+    "hızla, yarım cümlelerle": "fast, fragmented",
+    "yutkunarak": "swallowing, hesitant",
+    "yorgun, sitemli": "tired, reproachful",
+    "alçak sesle, tane tane": "soft, clear",
+    "kararlı, biraz buruk": "determined, slightly sad",
+    "kısa, telefonu kapatır gibi": "short, dismissive",
+    "düşünerek, yavaş": "thoughtful, slow",
+    "şaşırarak, kendi sözüne inanamaz gibi": "surprised, disbelieving",
+    "alçak sesle": "soft spoken",
+    "emin, ama tedirgin": "confident, nervous",
+    "mahcup, yutkunarak": "embarrassed, swallowing",
+    "telaşla, alçak sesle": "anxious, quiet",
+    "soğuk, kısa": "cold, brief",
+    "sakin, ama hızlanarak": "calm, accelerating",
+    "alçak sesle, dişlerinin arasından": "soft, through teeth",
+    "uzun bir sessizlikten sonra, düz bir sesle": "flat, after silence",
+    "rahat görünmeye çalışarak, hızlı": "trying relaxed, fast",
+    "uzun bir sessizlikten sonra, sesi kısılarak": "quiet, after silence",
+    "kendinden emin görünmeye çalışarak": "trying confident",
+    "gülümseyerek, ama bir an duraksayarak": "smiling, hesitant",
+    "boğuk, utançla, gözlerini kaçırarak": "choked, ashamed",
+    "yalvarır gibi, sesi titreyerek": "pleading, trembling",
+    "ağlamaklı, kesik kesik": "tearful, broken",
+    "sessizce ağlayarak": "quietly crying",
+    "öfkeyle başlayıp sesi düşerek": "angry start, fading",
+    "yorgun, alçak sesle": "tired, soft",
+    "gözleri dolarak, ama sesini toplayarak": "teary, composed",
+    "gülümsemesi silinerek, kısa kısa": "smile fading, brief",
+    "öfkeyle, sesini alçaltmaya çalışarak": "angry, lowering voice",
+    "sinirli sinirli gülerek": "angry laughing",
+    "birden çökerek, sesi çatallanarak": "sudden collapse, shaky",
+    "fısıldar gibi, gözlerini masadan kaldırmadan": "whispering, avoiding eyes",
+    "yutkunarak, hızlı hızlı": "swallowing, fast"
+  }
+}
