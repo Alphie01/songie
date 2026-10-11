@@ -34,6 +34,9 @@ const ff = createRequire(path.join(TOOLS, '../../../apps/server/package.json'))(
 const NARRATOR_PREF: Record<Voice['gender'], string> = { male: 'Adam - Deep, Professional and Serious', female: 'Gamze Özdemir - Turkish Female Narrator' };
 const NARRATOR_TAG = '[serious, slow, low voice, tense]';
 const PHONE = new Set(['phone-call', 'emergency-call', 'voicemail']);
+
+/** Parantez içindeki sahne notlarını ("(Ekrana uzun süre bakıyor.)") seslendirmeden önce at. */
+const spoken = (t: string) => t.replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s{2,}/g, ' ').trim();
 const MAX_CHUNK = 1800;
 
 /** Karakter yaşı → kabul edilen ses yaşları. */
@@ -258,7 +261,7 @@ async function main() {
       const key = l.character ?? `#${l.name}`;
       const tag = l.delivery ? cast.tags[l.delivery] : '';
       const pause = l.pause && l.pause >= 1 ? '... ' : '';
-      return { text: `${tag ? `[${tag}] ` : ''}${pause}${l.text}`, voice_id: cast.voices[key]?.voice_id ?? cast.voices['@narrator']!.voice_id };
+      return { text: `${tag ? `[${tag}] ` : ''}${pause}${spoken(l.text)}`, voice_id: cast.voices[key]?.voice_id ?? cast.voices['@narrator']!.voice_id };
     });
     jobs.push({
       key: e.id,
@@ -297,7 +300,7 @@ async function main() {
         chars: it.text.length,
         run: async (tmp) => {
           const f = path.join(tmp, 'iv.mp3');
-          await speech(`${tag ? `[${tag}] ` : ''}${it.text}`, voice, f);
+          await speech(`${tag ? `[${tag}] ` : ''}${spoken(it.text)}`, voice, f);
           return f;
         },
       });
