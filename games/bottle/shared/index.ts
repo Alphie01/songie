@@ -96,6 +96,8 @@ export interface PlayerScore {
 
 export interface LastResult {
   targetId: string;
+  /** O turda şişeyi çeviren. */
+  spinnerId: string;
   kind: PromptKind;
   text: string;
   outcome: Outcome;

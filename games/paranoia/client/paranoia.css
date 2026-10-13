@@ -1,91 +1,143 @@
-/* Gizlilik Esas — ortak düzen game-kit/ui/game-layout.css'te, token'lar apps/web/src/styles/tokens.css.
-   Tek cesur öğe: soruyu alan kişinin yeşil gizli kartı ve açıklamadaki sahne. Gerisi sakin. */
+/* Gizlilik Esas — "Songie Arayüz" tasarımı (GizlilikEsas.dc.html, Sonuclar.dc.html, Lobi.dc.html).
+   Ortak düzen game-kit/ui/game-layout.css'te, token'lar apps/web/src/styles/tokens.css. */
 
-.pr-small {
-  font-size: 12.5px;
-  line-height: 1.45;
+/* ---------- Yerleşim ---------- */
+.pr.sg {
+  padding-top: 72px;
 }
 
-.pr-center,
-.pr-error {
+.pr .sg-center {
+  display: flex;
+  flex-direction: column;
+  max-width: 440px;
+  min-height: calc(100dvh - 72px - 24px);
+  gap: 12px;
+}
+
+.pr-center {
   text-align: center;
 }
 
+.pr-spacer {
+  flex: 1;
+}
+
+.pr-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
 .pr-h {
-  font-size: 13px;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.pr-hint {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+
+.pr-big {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.pr-sub {
+  max-width: 290px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-2);
 }
 
-.pr-roster {
-  display: grid;
+@media (min-width: 1100px) {
+  .pr.sg {
+    padding-top: 72px;
+  }
+}
+
+/* ---------- Üst şerit ---------- */
+.pr-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 10px;
 }
 
-.pr-tag {
-  margin-left: auto;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--accent-hi);
+.pr-pill {
+  padding: 7px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--mint);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
-/* ---------- İlerleme: her soru bir parça ---------- */
+.pr-code {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-3);
+}
+
+/* İlerleme: her soru bir parça */
 .pr-progress {
-  display: flex;
+  display: grid;
   gap: 4px;
 }
 
 .pr-progress span {
-  flex: 1;
-  height: 6px;
+  height: 8px;
   border-radius: var(--r-pill);
-  background: var(--panel-2);
-  transition: background 300ms;
+  background: var(--panel);
 }
 
 .pr-progress span[data-done] {
-  background: var(--accent);
+  background: var(--mint);
 }
 
 .pr-progress span[data-now] {
-  background: color-mix(in srgb, var(--accent) 35%, var(--panel-2));
-  animation: pr-breathe 1.6s ease-in-out infinite;
-}
-
-@keyframes pr-breathe {
-  50% {
-    opacity: 0.45;
-  }
+  background: var(--yellow);
 }
 
 /* ---------- Süre ---------- */
 .pr-timer {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  width: 100%;
 }
 
 .pr-timer-bar {
   flex: 1;
-  height: 4px;
+  height: 8px;
   overflow: hidden;
   border-radius: var(--r-pill);
-  background: var(--panel-2);
+  background: var(--bg);
 }
 
 .pr-timer-bar span {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: var(--yellow);
   transition: width 250ms linear;
 }
 
 .pr-timer-num {
-  min-width: 44px;
   font-size: 13px;
-  font-weight: 700;
-  text-align: right;
-  color: var(--accent-hi);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
 }
 
 .pr-timer[data-low] .pr-timer-bar span {
@@ -96,216 +148,113 @@
   color: var(--red);
 }
 
-/* ---------- Gizli soru kartı ---------- */
-.pr-turn {
-  display: grid;
-  gap: 16px;
-}
-
-.pr-secret {
-  position: relative;
-  display: grid;
-  gap: 18px;
-  padding: 18px 20px 20px;
-  border-radius: var(--r-lg);
-  background: var(--accent);
-  color: var(--accent-ink);
-  box-shadow: var(--accent-glow), 0 24px 60px rgb(0 0 0 / 0.55);
-  animation: pr-unseal 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-/* Kartın kenarındaki zımba izi: kapalı not hissi */
-.pr-secret::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  border: 1.5px dashed rgb(4 22 11 / 0.22);
-  border-radius: calc(var(--r-lg) - 6px);
-  pointer-events: none;
-}
-
-@keyframes pr-unseal {
-  from {
-    transform: rotateX(70deg) translateY(-10px);
-    transform-origin: top center;
-    opacity: 0;
-  }
-}
-
-.pr-secret-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  font-size: 12.5px;
-  font-weight: 700;
-}
-
-.pr-secret-n {
-  font-size: 11.5px;
-  opacity: 0.7;
-}
-
-.pr-secret-q {
-  font-size: clamp(25px, 7.4vw, 32px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.15;
-  overflow-wrap: anywhere;
-  text-wrap: balance;
-}
-
-.pr-secret-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.75;
-}
-
-/* ---------- Oyuncu seçici ---------- */
-.pr-pick-head {
-  display: grid;
-  gap: 4px;
-}
-
-.pr-pick-title {
-  font-size: 18px;
-  font-weight: 800;
-}
-
-.pr-picker {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pr-pick {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  min-height: 48px;
-  padding: 0 12px 0 8px;
-  border: 1px solid transparent;
-  border-radius: var(--r-md);
-  background: var(--panel);
-  color: var(--text);
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: background 150ms, border-color 150ms;
-}
-
-.pr-pick:hover:not(:disabled) {
-  background: var(--panel-2);
-}
-
-.pr-pick:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-.pr-pick[aria-checked='true'] {
-  border-color: var(--accent);
-  background: var(--accent-soft-2);
-}
-
-.pr-pick:disabled {
-  opacity: 0.35;
-  cursor: not-allowed;
-}
-
-.pr-pick-name {
-  min-width: 0;
-  overflow: hidden;
-  font-size: 13.5px;
-  font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.pr-pick-dot {
-  flex: none;
-  width: 14px;
-  height: 14px;
-  margin-left: auto;
-  border: 1.5px solid var(--line-2);
-  border-radius: 50%;
-}
-
-.pr-pick[aria-checked='true'] .pr-pick-dot {
-  border: 4px solid var(--accent);
-  background: var(--accent-ink);
-}
-
-/* ---------- Bekleme ---------- */
+/* ---------- Zarf ---------- */
+.pr-closed,
 .pr-wait {
-  display: grid;
-  gap: 16px;
-}
-
-.pr-wait-card {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-  padding: 32px 20px 26px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: 22px;
+  padding: 12px 0;
   text-align: center;
 }
 
-.pr-wait-title {
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.3;
-  text-wrap: balance;
+.pr-wait {
+  gap: 18px;
 }
 
-/* Küçük zarf: kapalı soru, yavaşça nefes alır */
-.pr-envelope {
+.pr-wait-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.pr-env {
   position: relative;
-  width: 56px;
-  height: 38px;
-  margin-bottom: 10px;
-  border: 1.5px solid var(--accent);
-  border-radius: 6px;
+  flex: none;
+  width: 300px;
+  max-width: 100%;
+  height: 200px;
+  padding: 0;
   overflow: hidden;
-  box-shadow: 0 0 24px rgb(25 223 112 / 0.18);
-  animation: pr-float 3s ease-in-out infinite;
+  border: 4px solid var(--ink);
+  border-radius: 18px;
+  background: var(--paper);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: rotate(-4deg);
+  cursor: pointer;
 }
 
-.pr-envelope span {
+.pr-env-sm {
+  width: 260px;
+  height: 172px;
+  border-radius: 16px;
+  cursor: default;
+}
+
+.pr-env-svg {
   position: absolute;
-  top: -22px;
-  left: 50%;
-  width: 38px;
-  height: 38px;
-  border-right: 1.5px solid var(--accent);
-  border-bottom: 1.5px solid var(--accent);
-  transform: translateX(-50%) rotate(45deg);
+  top: -4px;
+  left: -4px;
 }
 
-@keyframes pr-float {
-  50% {
-    transform: translateY(-4px);
+.pr-env-seal {
+  position: absolute;
+  top: 92px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.pr-env-sm .pr-env-seal {
+  top: 78px;
+  width: 48px;
+  height: 48px;
+  margin-left: -24px;
+}
+
+.pr-env:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 4px;
+}
+
+button.pr-env {
+  animation: pr-wiggle 2.4s ease-in-out infinite;
+}
+
+@keyframes pr-wiggle {
+  0%,
+  80%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  86% {
+    transform: rotate(-1deg);
+  }
+  92% {
+    transform: rotate(-6deg);
   }
 }
 
 .pr-pulse {
-  margin-top: 4px;
-  padding: 4px 10px;
-  border-radius: var(--r-pill);
-  background: var(--accent-soft-2);
-  color: var(--accent-hi);
-  font-size: 12px;
-  font-weight: 700;
-  animation: pr-fade-out 2.4s ease-out forwards;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--mint);
+  animation: pr-fade-out 2.6s ease forwards;
 }
 
 @keyframes pr-fade-out {
@@ -318,19 +267,222 @@
   }
 }
 
+/* ---------- Sıra sende ---------- */
+.pr-turn {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  gap: 12px;
+}
+
+.pr-secret {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 26px;
+  background: var(--ink-2);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-1deg);
+}
+
+.pr-secret-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.pr-secret-who {
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.pr-secret-n {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.pr-secret-q {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+.pr-secret-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--mint);
+}
+
+.pr-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.pr-pick {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 10px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pr-pick[aria-checked='true'] {
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: 0 3px 0 var(--ink);
+  transform: rotate(-1.5deg);
+}
+
+.pr-pick:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pr-pick:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.pr-pick-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.pr-pick-name {
+  max-width: 100%;
+  overflow: hidden;
+  line-height: 1.15;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-pick-note {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.pr-confirm {
+  min-height: 62px;
+  padding: 0 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel);
+  color: var(--text-3);
+  box-shadow: var(--shadow-btn);
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pr-confirm[data-on] {
+  background: var(--yellow);
+  color: var(--ink-2);
+}
+
+.pr-confirm:disabled {
+  cursor: default;
+}
+
+.pr-confirm[data-on]:disabled {
+  opacity: 0.6;
+}
+
+.pr-confirm:active:not(:disabled) {
+  transform: translateY(5px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.pr-votes {
+  font-size: 16px;
+}
+
+/* Senin gizli cevapların */
+.pr-mine {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel-2);
+  text-align: left;
+}
+
+.pr-mine ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pr-mine li {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.pr-mine strong {
+  color: var(--yellow);
+}
+
+.pr-mine-hint {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+/* Oda sahibi: takılan oyuncu */
 .pr-stuck {
   display: grid;
   gap: 8px;
-  padding: 14px;
-  border: 1px solid rgb(255 210 52 / 0.35);
-  border-radius: var(--r-md);
-  background: rgb(255 210 52 / 0.06);
+  width: 100%;
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--coral);
+  color: var(--ink-2);
+  text-align: left;
 }
 
 .pr-stuck-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--yellow);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.pr-stuck .pr-hint {
+  color: var(--ink-2);
 }
 
 .pr-stuck-actions {
@@ -339,151 +491,98 @@
   gap: 8px;
 }
 
-.pr-mine {
-  display: grid;
-  gap: 8px;
+.pr-stuck .btn-ghost {
+  border-color: var(--ink);
+  color: var(--ink-2);
 }
 
-.pr-mine ul {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.pr-mine li {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: var(--r-md);
-  background: var(--panel);
-  font-size: 13px;
-}
-
-.pr-mine-q {
-  color: var(--text-2);
-}
-
-.pr-mine-a {
-  flex: none;
-  font-weight: 700;
-  color: var(--accent-hi);
-}
-
-/* ---------- Açıklama sahnesi ---------- */
-.pr-reveal,
-.pr-summary {
-  display: grid;
-  gap: 18px;
-}
-
+/* ---------- Açıklama ---------- */
 .pr-stage {
-  display: grid;
-  gap: 18px;
-  padding: 24px 20px 26px;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-lg);
-  background: radial-gradient(120% 70% at 50% 0%, rgb(25 223 112 / 0.08), transparent 70%), var(--panel);
-  text-align: center;
-}
-
-.pr-stage-n {
-  font-size: 12px;
-  color: var(--text-3);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .pr-stage-q {
-  font-size: clamp(23px, 6.6vw, 30px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.18;
-  text-wrap: balance;
-  overflow-wrap: anywhere;
-  animation: pr-rise 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: pr-rise 500ms ease both;
 }
 
 .pr-stage-to {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 800;
   color: var(--text-2);
-  animation: pr-rise 500ms 1100ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: pr-rise 400ms ease 900ms both;
 }
 
 .pr-stage-ans {
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  animation: pr-drop 700ms 2200ms cubic-bezier(0.2, 1.4, 0.4, 1) both;
+  padding: 16px 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 24px;
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(1.5deg);
+  animation: pr-drop 500ms cubic-bezier(0.2, 1.4, 0.4, 1) 1900ms both;
+}
+
+.pr-stage-ans[data-none] {
+  background: var(--paper-2);
 }
 
 .pr-stage-ans-label {
-  font-size: 12.5px;
-  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .pr-stage-ans-name {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 12px;
-  font-size: clamp(30px, 9vw, 42px);
+  font-family: var(--display);
+  font-size: 34px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--accent-hi);
-  text-shadow: 0 0 28px rgb(25 223 112 / 0.35);
+  line-height: 1;
   overflow-wrap: anywhere;
 }
 
-.pr-stage-ans[data-none] .pr-stage-ans-name {
-  color: var(--text-3);
-  text-shadow: none;
-  font-size: 22px;
+.pr-stage-you {
+  font-size: 18px;
 }
 
-.pr-stage-you {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  color: var(--text-2);
+.pr-stage-note {
+  font-size: 13px;
+  font-weight: 700;
 }
 
 @keyframes pr-rise {
   from {
-    transform: translateY(10px);
     opacity: 0;
+    transform: translateY(10px) rotate(-1deg);
   }
 }
 
 @keyframes pr-drop {
   from {
-    transform: scale(0.6);
     opacity: 0;
+    transform: translateY(-16px) rotate(-4deg) scale(0.9);
   }
-}
-
-.pr-votes {
-  font-size: 12px;
-  opacity: 0.75;
 }
 
 .pr-history {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   margin-top: 6px;
 }
 
 .pr-entries {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -491,55 +590,57 @@
 
 .pr-entries li {
   display: flex;
-  gap: 12px;
-  padding: 12px;
-  border-radius: var(--r-md);
-  background: var(--panel);
+  gap: 10px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel-2);
 }
 
 .pr-entry-n {
+  display: inline-flex;
   flex: none;
-  width: 18px;
-  padding-top: 1px;
-  font-size: 12px;
-  color: var(--accent-hi);
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .pr-entry-q {
-  font-size: 13.5px;
-  font-weight: 600;
-  line-height: 1.35;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
 }
 
 .pr-entry-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  margin-top: 4px;
-  font-size: 12.5px;
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
 }
 
-.pr-entry-meta b {
-  color: var(--accent-hi);
+.pr-entry-meta strong {
+  color: var(--yellow);
 }
 
-/* ---------- Özet ---------- */
-.pr-summary-title {
-  padding-top: 8px;
-  font-size: clamp(30px, 8.5vw, 40px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  text-align: center;
-  color: var(--accent-hi);
-}
-
-.pr-stats {
+/* ---------- Oyuncular ---------- */
+.pr-roster {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
-.pr-stats ul {
+.pr-mobile-roster {
+  margin-top: 16px;
+}
+
+.pr-roster ul {
   display: grid;
   gap: 6px;
   margin: 0;
@@ -547,68 +648,440 @@
   list-style: none;
 }
 
-.pr-stats li {
-  display: grid;
-  grid-template-columns: auto minmax(0, 7em) 1fr auto;
+.pr-roster li {
+  display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-height: 44px;
-  padding: 0 12px;
-  border-radius: var(--r-md);
+  padding: 0 10px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
   background: var(--panel);
+  font-size: 14px;
+  font-weight: 800;
 }
 
-.pr-stats li[data-top] {
-  background: var(--accent-soft);
+.pr-roster li[data-thinking] {
+  background: var(--yellow);
+  color: var(--ink-2);
 }
 
-.pr-stat-name {
+.pr-roster-name {
+  min-width: 0;
   overflow: hidden;
-  font-size: 13px;
-  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.pr-stat-bar {
-  height: 6px;
+.pr-roster-you {
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.pr-roster-tag,
+.pr-roster-n {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.pr-roster-n {
+  font-size: 14px;
+  color: var(--yellow);
+}
+
+.pr-side-settings {
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
+}
+
+/* ---------- Oyun sonu (Sonuclar.dc.html) ---------- */
+.pr-end {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-bottom: 24px;
+}
+
+.pr-end > * {
+  position: relative;
+}
+
+.pr-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pr-confetti i {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.pr-confetti i:nth-child(1) {
+  top: 50px;
+  left: 30px;
+  width: 16px;
+  height: 7px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.pr-confetti i:nth-child(2) {
+  top: 90px;
+  right: 40px;
+  width: 16px;
+  height: 7px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.pr-confetti i:nth-child(3) {
+  top: 150px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.pr-confetti i:nth-child(4) {
+  top: 40px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.pr-confetti i:nth-child(5) {
+  top: 190px;
+  right: 60px;
+  width: 16px;
+  height: 7px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.pr-end-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.pr-end-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.pr-sticker {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.pr-end-title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+.pr-end-scores {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.pr-end-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+.pr-end-first {
+  background: var(--mint);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.pr-end-second {
+  align-self: flex-end;
+  background: var(--lilac);
+  transform: rotate(2deg);
+}
+
+.pr-end-score {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.pr-end-second .pr-end-score {
+  margin-top: 10px;
+  font-size: 52px;
+}
+
+.pr-end-name {
+  max-width: 100%;
   overflow: hidden;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-end-dash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.pr-end-rosters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.pr-end-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+  list-style: none;
+}
+
+.pr-end-roster li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.pr-end-roster-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pr-end-roster-n {
+  flex: none;
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--yellow);
+}
+
+.pr-end-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.pr-end-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
   border-radius: var(--r-pill);
   background: var(--panel-2);
 }
 
-.pr-stat-bar span {
-  display: block;
+.pr-end-bar div {
   height: 100%;
-  border-radius: inherit;
-  background: var(--accent);
+  background: var(--yellow);
+  transition: width 250ms linear;
 }
 
-.pr-stat-n {
-  font-size: 12px;
+.pr-end-note {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+  text-align: center;
+}
+
+.pr-end-finish {
+  min-height: 62px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-btn);
+  font-size: 22px;
+}
+
+/* ---------- Ayarlar (lobideki "Oyun ayarları" kartı) ---------- */
+.pr-settings.sgs {
+  gap: 10px;
+}
+
+.pr-set {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.pr-set-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 8px;
+}
+
+.pr-set[data-stack] .pr-set-row {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.pr-set-label {
+  font-size: 14px;
   font-weight: 700;
+  color: var(--text-2);
 }
 
-/* ---------- Lobi: soru ekle ---------- */
+.pr-set .chips {
+  gap: 4px;
+}
+
+.pr-set:not([data-stack]) .chips {
+  justify-content: flex-end;
+}
+
+.pr-set-hint {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+
+.pr-toggle.toggle {
+  width: auto;
+  min-width: 112px;
+}
+
+.pr-add-open {
+  align-self: flex-start;
+}
+
 .pr-add {
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .pr-add-text {
-  min-height: 72px;
-  padding-top: 10px;
-  font-size: 13px;
+  min-height: 84px;
   resize: vertical;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .pr-secret,
+  button.pr-env,
   .pr-stage-q,
   .pr-stage-to,
   .pr-stage-ans,
-  .pr-envelope,
-  .pr-progress span[data-now] {
+  .pr-pulse {
     animation: none;
   }
+
+  .pr-timer-bar span,
+  .pr-end-bar div {
+    transition: none;
+  }
+}
+
+/* Zarfın açılışı: kapak yukarı katlanır, mühür kopar, zarf aşağı kayar; sonra gizli kart gelir. */
+.pr-env-flap {
+  transform-box: fill-box;
+  transform-origin: top;
+  transition: transform 350ms ease;
+}
+
+.pr-env-seal {
+  transition:
+    transform 250ms ease,
+    opacity 250ms ease;
+}
+
+.pr-env[data-opening] {
+  animation: pr-env-out 650ms ease forwards;
+}
+
+.pr-env[data-opening] .pr-env-flap {
+  transform: scaleY(-0.15);
+}
+
+.pr-env[data-opening] .pr-env-seal {
+  opacity: 0;
+  transform: scale(1.6) rotate(25deg);
+}
+
+@keyframes pr-env-out {
+  0%,
+  45% {
+    transform: rotate(-4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) translateY(40px) scale(0.92);
+    opacity: 0;
+  }
+}
+
+.pr-secret-in {
+  animation: pr-rise 400ms ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-env[data-opening],
+  .pr-secret-in {
+    animation: none;
+  }
+}
+
+/* Masaüstü yan sütunu dar: ayar satırlarını alt alta diz. */
+.pr-side-settings .pr-set-row {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.pr-side-settings .pr-set .chips {
+  justify-content: flex-start;
+}
+
+.pr-side-settings .pr-toggle.toggle {
+  width: 100%;
 }

@@ -130,6 +130,23 @@ describe('çekme ve bomba', () => {
     expect(h.view('a').myBomb).toBe(1);
   });
 
+  it('destedeki bomba sayısı herkese açık; yerleri gizli', async () => {
+    const h = await started();
+    // Başlangıçta oyuncu − 1 bomba.
+    expect(h.view('b').deckBombs).toBe(2);
+    expect(h.view('a').deckBombs).toBe(st(h).deck.filter((x) => x.kind === 'bomb').length);
+    arrange(h, { current: 'a', deck: ['bomb', 'skip', 'bomb', 'future'], hands: { a: ['defuse'] } });
+    expect(h.view('c')).toMatchObject({ deckBombs: 2, deckCount: 4 });
+    await draw(h, 'a');
+    // Çekilen bomba elde bekliyor: destede 1.
+    expect(h.view('c')).toMatchObject({ phase: 'bomb', deckBombs: 1, deckCount: 3 });
+    await h.act('a', { type: 'defuse' });
+    await h.act('a', { type: 'place', index: 1 });
+    expect(h.view('b')).toMatchObject({ deckBombs: 2, deckCount: 4 });
+    // Görünümde destedeki kartların türü ya da kimliği yok.
+    for (const card of st(h).deck) expect(h.seen('b')).not.toContain(`"id":"${card.id}"`);
+  });
+
   it('bomba aşaması süre dolunca otomatik etkisiz kılar ve rastgele koyar', async () => {
     const h = await started();
     arrange(h, { current: 'a', deck: ['bomb', 'skip', 'skip'], hands: { a: ['defuse'] } });

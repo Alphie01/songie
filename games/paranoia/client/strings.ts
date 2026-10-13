@@ -67,12 +67,27 @@ export const s = {
     pickFirstHint: 'Seçtiğin kişi ilk gizli soruyu alır. Kimse kimi seçtiğini görmez.',
     pickFirstConfirm: 'İlk soruyu ver',
     pickFirstWait: 'Oda sahibi ilk soruyu kime vereceğini seçiyor.',
+    // Zarf
+    envelopeTitle: 'Sana gizli bir soru geldi!',
+    envelopeFrom: (nick: string) => `${nick} sana gönderdi. Kimse görmesin, sonra zarfa dokun.`,
+    envelopeHint: 'Kimse görmesin, sonra zarfa dokun.',
+    openEnvelope: 'Zarfı aç',
+    sentYou: 'sana gönderdi',
     // Sıra sende
     yourTurn: 'Sıra sende',
     secretNote: 'Bu soruyu yalnızca sen görüyorsun.',
     pickTitle: 'Cevabın kim?',
     pickHint: (allowSelf: boolean, noReturn: boolean) =>
-      [allowSelf ? null : 'Kendini seçemezsin.', noReturn ? 'Soruyu sana gönderen kişiyi seçemezsin.' : null, 'Seçtiğin kişi sıradaki soruyu alır.']
+      [
+        !allowSelf && noReturn
+          ? 'Kendini ve soruyu sana gönderen kişiyi seçemezsin.'
+          : !allowSelf
+            ? 'Kendini seçemezsin.'
+            : noReturn
+              ? 'Soruyu sana gönderen kişiyi seçemezsin.'
+              : null,
+        'Seçtiğin kişi sıradaki soruyu alır.',
+      ]
         .filter(Boolean)
         .join(' '),
     confirm: 'Seçimi onayla',
@@ -112,7 +127,11 @@ export const s = {
     hostWillOpen: 'Sıradaki soruyu oda sahibi açacak.',
     history: 'Açılan sorular',
     // Özet
+    gameOver: 'Oyun bitti',
     summaryTitle: 'Bütün sorular açıldı',
+    mostPicked: (nick: string) => `${nick} en çok seçilen oldu!`,
+    tie: 'En çok seçilenler berabere',
+    backToLobby: 'Lobiye dönülüyor…',
     statsTitle: 'Kim kaç kez seçildi',
     times: (n: number) => (n === 0 ? 'hiç' : `${n} kez`),
     allTitle: 'Bütün sorular',

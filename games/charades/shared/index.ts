@@ -30,6 +30,11 @@ export const CATEGORY_KIND: Record<string, Kind> = {
 
 export const CUSTOM_CATEGORY = 'arkadas';
 
+/** Klasik işaretler: anlatıcı dokununca takımına (ve rakibe) kısa süre gösterilir.
+ *  "Tür" ve "Kelime sayısı" kartın türünü ve kelime sayısını açar; anlatıcı bunları zaten hareketle gösterir. */
+export const SIGNS = ['tur', 'kelime', 'hece', 'benzer', 'bildin'] as const;
+export type SignId = (typeof SIGNS)[number];
+
 export const settingsSchema = z.object({
   /** Oyuncu kimlikleri. Takımı seçilmemiş oyuncular başlarken dengeli dağıtılır. */
   teams: z.object({ a: z.array(z.string()).max(12), b: z.array(z.string()).max(12) }),
@@ -62,6 +67,8 @@ export const actionSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('foul'), cardId: z.string() }),
   /** Anlatıcı son işaretlemeyi geri alır. */
   z.object({ type: z.literal('undo') }),
+  /** Anlatıcı: klasik işaret gösterir. */
+  z.object({ type: z.literal('sign'), sign: z.enum(SIGNS) }),
   /** Oda sahibi: sıradaki anlatıcıyı atla (ör. bağlantısı koptu). */
   z.object({ type: z.literal('skipNarrator') }),
 ]);
@@ -113,6 +120,17 @@ export interface CharadesView {
   flash: { id: number; kind: CardResult; title: string | null } | null;
   lastTurn: TurnSummary | null;
   foulPenalty: boolean;
+  /** Anlatıcının son gösterdiği işaret (yalnızca tur sırasında, aynı kart için). */
+  sign: SignShown | null;
+}
+
+export interface SignShown {
+  id: number;
+  sign: SignId;
+  /** Yalnızca "tur" işaretinde dolu. */
+  kind: Kind | null;
+  /** Yalnızca "kelime" işaretinde dolu. */
+  words: number | null;
 }
 
 export interface CategoryInfo {

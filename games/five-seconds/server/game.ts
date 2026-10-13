@@ -466,6 +466,12 @@ export function createFiveSecondsGame(deps: {
         voted: state.phase === 'vote' ? Object.keys(a.votes).filter((id) => present.has(id)) : [],
         voters: state.phase === 'vote' ? voters(state.ctx, state) : [],
         myVote: state.phase === 'vote' ? (a.votes[playerId] ?? null) : null,
+        tally:
+          state.phase === 'vote'
+            ? Object.entries(a.votes)
+                .filter(([id]) => present.has(id))
+                .reduce((t, [, yes]) => (yes ? { ...t, yes: t.yes + 1 } : { ...t, no: t.no + 1 }), { yes: 0, no: 0 })
+            : null,
         lastResult: state.lastResult,
         steal: state.settings.steal,
       };

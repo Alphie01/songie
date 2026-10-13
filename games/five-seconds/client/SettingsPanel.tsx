@@ -1,8 +1,22 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { GameApi, SettingsPanelProps } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import { ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type FiveSecondsSettings, type TeamId } from '../shared/index.js';
 import { s } from './strings';
+
+/** Lobi tasarımındaki satır: solda ad, sağda seçenekler. */
+function Row({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+  const id = useId();
+  return (
+    <div className="fs-set-row" role="group" aria-labelledby={id}>
+      <span id={id} className="fs-set-label">
+        {title}
+      </span>
+      <div className="fs-set-opts">{children}</div>
+      {hint && <p className="sgs-hint fs-set-hint">{hint}</p>}
+    </div>
+  );
+}
 
 function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
   return (
@@ -14,7 +28,7 @@ function Group({ title, hint, children }: { title: string; hint?: string; childr
   );
 }
 
-export function SettingsPanel({ settings, editable, onChange, api, section, players }: SettingsPanelProps<FiveSecondsSettings>) {
+export function SettingsPanel({ settings, editable, onChange, api, section, players, meId }: SettingsPanelProps<FiveSecondsSettings>) {
   const showPrimary = section !== 'secondary';
   const showSecondary = section !== 'primary';
   const [categories, setCategories] = useState<CategoryInfo[] | null>(null);
@@ -37,6 +51,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
   const teamB = settings.teams.b.filter((id) => present.has(id) && !teamA.includes(id));
   const unassigned = players.filter((p) => !teamA.includes(p.id) && !teamB.includes(p.id)).map((p) => p.id);
   const byId = new Map(players.map((p) => [p.id, p]));
+  const teamsId = useId();
 
   /** Takımsız, yeşil, mor, takımsız döngüsü. */
   function cycle(id: string) {
@@ -58,25 +73,23 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
   function TeamBox({ team, ids }: { team: TeamId | null; ids: string[] }) {
     return (
       <div className="fs-teambox" data-team={team ?? 'none'}>
-        <div className="fs-teambox-head">
-          <span className="fs-team-name">{team ? s.team[team] : s.settings.unassigned}</span>
-          <span className="mono dim">{ids.length}</span>
-        </div>
+        <span className="fs-teambox-name">
+          {team ? s.team[team] : s.settings.unassigned} <span className="fs-teambox-n">{ids.length}</span>
+        </span>
         {ids.length === 0 ? (
-          <p className="sgs-hint">{s.settings.empty}</p>
+          <p className="fs-teambox-empty">{s.settings.empty}</p>
         ) : (
-          <div className="fs-chips">
-            {ids.map((id) => {
-              const p = byId.get(id);
-              if (!p) return null;
-              return (
-                <button key={id} type="button" className="fs-player" disabled={!editable} onClick={() => cycle(id)}>
-                  <Avatar avatar={p.avatar} nick={p.nick} size={22} />
-                  {p.nick}
-                </button>
-              );
-            })}
-          </div>
+          ids.map((id) => {
+            const p = byId.get(id);
+            if (!p) return null;
+            return (
+              <button key={id} type="button" className="fs-player" data-off={!p.connected || undefined} disabled={!editable} onClick={() => cycle(id)}>
+                <Avatar avatar={p.avatar} nick={p.nick} size={26} />
+                <span className="fs-player-name">{p.id === meId ? `${p.nick} (sen)` : p.nick}</span>
+                {!p.connected && <span className="fs-player-tag">{s.play.offline}</span>}
+              </button>
+            );
+          })
         )}
       </div>
     );
@@ -99,20 +112,24 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
           </Group>
 
           {settings.teamMode && (
-            <Group
-              title={s.settings.teamsTitle}
-              hint={teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}
-            >
-              <TeamBox team="a" ids={teamA} />
-              <TeamBox team="b" ids={teamB} />
+            <div className="sgs-group fs-teams-set" role="group" aria-labelledby={teamsId}>
+              <div className="fs-teams-head">
+                <span id={teamsId} className="sgs-legend fs-legend">
+                  {s.settings.teamsTitle}
+                </span>
+                {editable && (
+                  <button type="button" className="fs-shuffle" aria-label={s.settings.shuffleLabel} onClick={shuffleTeams}>
+                    {s.settings.shuffle}
+                  </button>
+                )}
+              </div>
+              <div className="fs-teamgrid">
+                <TeamBox team="a" ids={teamA} />
+                <TeamBox team="b" ids={teamB} />
+              </div>
               {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
-              {editable && (
-                <button type="button" className="btn btn-ghost sgs-browse" onClick={shuffleTeams}>
-                  <Icon name="shuffle" size={14} />
-                  {s.settings.shuffle}
-                </button>
-              )}
-            </Group>
+              <p className="sgs-hint">{teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}</p>
+            </div>
           )}
 
           <Group title={s.settings.categories} hint={s.settings.categoriesHint}>
@@ -142,7 +159,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
 
       {showSecondary && (
         <>
-          <Group title={s.settings.seconds}>
+          <Row title={s.settings.seconds}>
             <div className="chips">
               {SECONDS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.seconds === n} disabled={!editable} onClick={() => set({ seconds: n })}>
@@ -150,9 +167,9 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
+          <Row title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
             <div className="chips">
               {ROUND_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.rounds === n} disabled={!editable} onClick={() => set({ rounds: n })}>
@@ -160,9 +177,9 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.steal} hint={s.settings.stealHint}>
+          <Row title={s.settings.steal} hint={s.settings.stealHint}>
             <button
               type="button"
               className="toggle"
@@ -174,7 +191,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
               {settings.steal ? s.settings.on : s.settings.off}
               <span className="toggle-knob" aria-hidden="true" />
             </button>
-          </Group>
+          </Row>
 
           <AddPrompt api={api} />
         </>

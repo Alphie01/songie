@@ -1,9 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import type { PlayViewProps } from '@songie/game-kit/client';
 import { Avatar } from '@songie/game-kit/ui';
 import type { RoomPlayer } from '@songie/shared';
 import {
-  ACTIONS,
   ACTION_COST,
   ACTION_ROLE,
   MUST_COUP_AT,
@@ -15,11 +14,14 @@ import {
 } from '../shared/index.js';
 import { CardBack, Coin, Glyph, RoleCard } from './RoleArt';
 import { SettingsPanel } from './SettingsPanel';
-import { ACTION_EFFECT, ACTION_NAME, LOSE_REASON, ROLE_ABILITY, ROLE_ACTION, ROLE_BLOCKS, ROLE_NAME, s } from './strings';
+import { ACTION_EFFECT, ACTION_FX, ACTION_NAME, LOSE_REASON, ROLE_ABILITY, ROLE_ACTION, ROLE_BLOCKS, ROLE_NAME, s } from './strings';
 
 type Send = (a: unknown) => Promise<boolean>;
 type Nick = (id: string | undefined | null) => string;
 type Members = Map<string, RoomPlayer>;
+
+/** Tasarımdaki sıra: herkesin yapabildikleri, rol eylemleri, en sonda Darbe. */
+const ACTION_ORDER: ActionKind[] = ['income', 'aid', 'tax', 'assassinate', 'steal', 'exchange', 'coup'];
 
 function useRemaining(view: IntrigueView): number {
   const offset = useMemo(() => view.serverNow - Date.now(), [view.serverNow]);
@@ -50,7 +52,7 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     }
   }
 
-  if (view.phase === 'over') return <Podium view={view} members={members} meId={meId} />;
+  if (view.phase === 'over') return <Podium view={view} members={members} meId={meId} room={room} remaining={remaining} />;
 
   const status = !view.me.inGame
     ? s.play.spectator
@@ -66,23 +68,30 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
         <Log view={view} nick={nick} />
       </aside>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round">{status}</span>
-          <span className="dim">{s.play.deck(view.deckCount)}</span>
-          <span className="sg-code mono">{room.code}</span>
-        </header>
+      <main className="sg-center ig-main">
+        <div className="ig-screen">
+          <header className="ig-top">
+            <span className="ig-pill">{status}</span>
+            <span className="ig-top-info">{s.play.deck(view.deckCount)}</span>
+          </header>
 
-        <Rivals view={view} members={members} meId={meId} />
-        <Stage key={`${view.phase}-${view.turn}-${view.window?.id ?? 0}`} view={view} meId={meId} nick={nick} remaining={remaining} send={send} />
-        {isHost && <HostDefault view={view} members={members} nick={nick} send={send} />}
-        {view.me.inGame && <MyHand view={view} meId={meId} />}
+          <Rivals view={view} members={members} meId={meId} />
+          <Stage key={`${view.phase}-${view.turn}-${view.window?.id ?? 0}`} view={view} meId={meId} nick={nick} remaining={remaining} send={send} />
+          {isHost && <HostDefault view={view} members={members} nick={nick} send={send} />}
 
-        {error && (
-          <p className="error-text ig-center" role="alert">
-            {error}
-          </p>
-        )}
+          {error && (
+            <p className="error-text ig-center" role="alert">
+              {error}
+            </p>
+          )}
+
+          {view.me.inGame && (
+            <>
+              <div className="ig-fill" />
+              <MyHand view={view} meId={meId} />
+            </>
+          )}
+        </div>
 
         <div className="sg-mobile-only">
           <Log view={view} nick={nick} />
@@ -107,19 +116,24 @@ function Rivals({ view, members, meId }: { view: IntrigueView; members: Members;
   const list = view.players.filter((p) => p.id !== meId);
   const w = view.window;
   return (
-    <ol className="ig-rivals" aria-label="Rakipler">
+    <ol className="ig-rivals" aria-label={s.play.rivals}>
       {list.map((p) => {
         const m = members.get(p.id);
         const current = view.current === p.id && p.alive;
         const targeted = view.pending?.target === p.id && view.phase !== 'action';
         const say = w && w.eligible.includes(p.id) ? (w.passed.includes(p.id) ? 'passed' : 'deciding') : undefined;
         return (
-          <li key={p.id} className="ig-rival" data-current={current || undefined} data-out={!p.alive || undefined} data-target={targeted || undefined}>
-            <span className="ig-rival-head">
-              {m ? <Avatar avatar={m.avatar} nick={m.nick} size={30} dim={!m.connected || !p.alive} /> : null}
-              <span className="ig-rival-name">{m?.nick ?? '?'}</span>
-              {say && <span className="ig-say" data-say={say} aria-label={say === 'passed' ? 'geçti' : 'karar veriyor'} />}
-            </span>
+          <li
+            key={p.id}
+            className="ig-rival"
+            data-current={current || undefined}
+            data-out={!p.alive || undefined}
+            data-target={targeted || undefined}
+            data-off={m?.connected === false || undefined}
+          >
+            {say && <span className="ig-say" data-say={say} title={say === 'passed' ? s.play.passedMark : s.play.decidingMark} />}
+            {say && <span className="sr-only">{say === 'passed' ? s.play.passedMark : s.play.decidingMark}</span>}
+            <span className="ig-rival-name">{m?.nick ?? '?'}</span>
             <span className="ig-rival-cards">
               {Array.from({ length: p.hidden }, (_, i) => (
                 <CardBack key={`h${i}`} size="mini" />
@@ -128,16 +142,7 @@ function Rivals({ view, members, meId }: { view: IntrigueView; members: Members;
                 <RoleCard key={`r${i}`} role={r} size="mini" dead />
               ))}
             </span>
-            <span className="ig-rival-coins mono">
-              {p.alive ? (
-                <>
-                  <Coin size={12} />
-                  {p.coins}
-                </>
-              ) : (
-                s.play.out
-              )}
-            </span>
+            <span className="ig-rival-coins">{p.alive ? s.play.coins(p.coins) : s.play.out}</span>
           </li>
         );
       })}
@@ -195,6 +200,7 @@ function ActionPanel({ view, meId, nick, remaining, send }: { view: IntrigueView
   const coins = view.me.coins;
   const mustCoup = coins >= MUST_COUP_AT;
   const targets = view.players.filter((p) => p.alive && p.id !== meId);
+  const secs = Math.ceil(remaining / 1000);
 
   function reason(a: ActionKind): string | null {
     if (mustCoup && a !== 'coup') return s.play.mustCoupReason;
@@ -204,28 +210,30 @@ function ActionPanel({ view, meId, nick, remaining, send }: { view: IntrigueView
 
   function pick(a: ActionKind) {
     if (TARGETED[a]) {
+      if (chosen === a) {
+        setChosen(null);
+        return;
+      }
       setChosen(a);
       setTarget(targets.length === 1 ? targets[0]!.id : null);
       return;
     }
+    setChosen(null);
     void send({ type: 'act', turn: view.turn, action: a });
   }
 
   return (
-    <section className="ig-panel" aria-labelledby="ig-actions-title">
-      <div className="ig-panel-head">
-        <h2 id="ig-actions-title" className="ig-panel-title">
+    <section className="ig-sheet" aria-labelledby="ig-actions-title">
+      <div className="ig-sheet-head">
+        <h2 id="ig-actions-title" className="ig-sheet-title">
           {s.play.chooseAction}
         </h2>
-        <span className="ig-purse mono">
-          <Coin size={16} />
-          {coins}
-        </span>
+        <span className="ig-sheet-meta">{view.durationMs ? s.play.yourTurnLeft(secs) : s.play.yourTurn}</span>
       </div>
-      {mustCoup && <p className="ig-warn ig-small">{s.play.mustCoup}</p>}
       <Bar remaining={remaining} total={view.durationMs} />
+      {mustCoup && <p className="ig-warn">{s.play.mustCoup}</p>}
       <ul className="ig-actions">
-        {ACTIONS.map((a) => {
+        {ACTION_ORDER.map((a) => {
           const why = reason(a);
           const role = ACTION_ROLE[a];
           return (
@@ -236,19 +244,15 @@ function ActionPanel({ view, meId, nick, remaining, send }: { view: IntrigueView
                 data-action={a}
                 data-role={role ?? undefined}
                 aria-pressed={chosen === a}
+                aria-describedby={`ig-fx-${a}`}
+                title={ACTION_EFFECT[a]}
                 disabled={!!why}
                 onClick={() => pick(a)}
               >
-                <span className="ig-action-top">
-                  <span className="ig-action-name">{ACTION_NAME[a]}</span>
-                  {role && (
-                    <span className="ig-claim" data-role={role}>
-                      <Glyph role={role} size={14} />
-                      {ROLE_NAME[role]}
-                    </span>
-                  )}
+                <span className="ig-action-name">{ACTION_NAME[a]}</span>
+                <span className="ig-action-fx" id={`ig-fx-${a}`}>
+                  {why ?? ACTION_FX[a]}
                 </span>
-                <span className="ig-action-effect">{why ?? ACTION_EFFECT[a]}</span>
               </button>
             </li>
           );
@@ -258,25 +262,24 @@ function ActionPanel({ view, meId, nick, remaining, send }: { view: IntrigueView
       {chosen && (
         <div className="ig-target">
           <span className="ig-target-label">{s.play.chooseTarget}</span>
-          <div className="chips">
+          <div className="ig-target-list">
             {targets.map((p) => (
-              <button key={p.id} type="button" className="chip" aria-pressed={target === p.id} onClick={() => setTarget(p.id)}>
-                {nick(p.id)}
-                <span className="chip-count">{p.coins}</span>
+              <button key={p.id} type="button" className="ig-target-btn" aria-pressed={target === p.id} onClick={() => setTarget(p.id)}>
+                {nick(p.id)} · {p.coins}
               </button>
             ))}
           </div>
-          <div className="ig-row">
-            <button type="button" className="btn btn-ghost" onClick={() => setChosen(null)}>
-              {s.play.cancel}
-            </button>
+          <div className="ig-confirm-row">
             <button
               type="button"
-              className="btn btn-primary btn-lg ig-grow"
+              className="ig-confirm"
               disabled={!target}
               onClick={() => void send({ type: 'act', turn: view.turn, action: chosen, target })}
             >
-              {s.play.confirm(ACTION_NAME[chosen], target ? nick(target) : null)}
+              {target ? s.play.confirm(ACTION_NAME[chosen], nick(target)) : s.play.chooseTarget}
+            </button>
+            <button type="button" className="ig-cancel" onClick={() => setChosen(null)}>
+              {s.play.cancel}
             </button>
           </div>
         </div>
@@ -311,42 +314,61 @@ function ChallengeWindow({ view, meId, nick, remaining, send }: { view: Intrigue
     hint = p.claim ? s.play.windowClaimRole(ROLE_NAME[p.claim]) : '';
   }
 
+  const status = !eligible ? (w.claimant === meId ? s.play.waiting : s.play.noSay) : passed ? s.play.passed : s.play.waiting;
+  const total = view.durationMs || 1;
+
   return (
-    <section className="ig-window" data-kind={w.kind} aria-live="polite">
+    <section className="ig-sheet ig-window" data-kind={w.kind} aria-live="polite">
       <div className="ig-window-head">
-        <span className="ig-count mono" data-low={secs <= 3 || undefined} aria-label={`${secs} saniye`}>
+        <span className="ig-count" data-low={secs <= 3 || undefined} aria-label={`${secs} saniye`}>
           {secs}
         </span>
-        <div className="ig-window-text">
-          <p className="ig-window-title">{title}</p>
-          <p className="ig-window-hint">{hint}</p>
-        </div>
-        {w.claimRole && <RoleCard role={w.claimRole} tag="?" />}
+        <span className="ig-window-text">
+          <span className="ig-window-title">{title}</span>
+          {hint && <span className="ig-window-hint">{hint}</span>}
+        </span>
       </div>
-      <Bar remaining={remaining} total={view.durationMs} />
-      <p className="ig-small dim ig-passed">{s.play.passedList(w.passed.length, w.eligible.length)}</p>
+      <div className="ig-window-mid">
+        {w.claimRole && (
+          <span className="ig-claimcard" data-role={w.claimRole}>
+            <Glyph role={w.claimRole} size={28} />
+            <span className="ig-claimcard-name">{ROLE_NAME[w.claimRole]}</span>
+            <span className="ig-claimcard-q" aria-hidden="true">
+              ?
+            </span>
+          </span>
+        )}
+        <div className="ig-window-progress">
+          <span className="ig-bar ig-bar-red" aria-hidden="true">
+            <span style={{ width: `${Math.min(100, (remaining / total) * 100)}%` }} />
+          </span>
+          <span className="ig-window-passed">{s.play.passedList(w.passed.length, w.eligible.length)}</span>
+          <span className="ig-window-status">{status}</span>
+        </div>
+      </div>
 
       {eligible && !passed && (
         <div className="ig-responses">
-          {canLie && (
-            <button type="button" className="btn btn-lg btn-block ig-lie" onClick={() => void send({ type: 'challenge', windowId: w.id })}>
-              {s.play.lie}
-            </button>
+          {(canLie || canBlock) && (
+            <div className="ig-responses-grid">
+              {canLie && (
+                <button type="button" className="ig-resp ig-lie" onClick={() => void send({ type: 'challenge', windowId: w.id })}>
+                  {s.play.lie}
+                </button>
+              )}
+              {canBlock &&
+                w.blockRoles.map((r) => (
+                  <button key={r} type="button" className="ig-resp ig-block" data-role={r} onClick={() => void send({ type: 'block', windowId: w.id, role: r })}>
+                    {s.play.blockAs(ROLE_NAME[r])}
+                  </button>
+                ))}
+            </div>
           )}
-          {canBlock &&
-            w.blockRoles.map((r) => (
-              <button key={r} type="button" className="btn btn-outline btn-lg btn-block ig-block" data-role={r} onClick={() => void send({ type: 'block', windowId: w.id, role: r })}>
-                <Glyph role={r} size={20} />
-                {s.play.blockAs(ROLE_NAME[r])}
-              </button>
-            ))}
-          <button type="button" className="btn btn-ghost btn-lg btn-block" onClick={() => void send({ type: 'pass', windowId: w.id })}>
+          <button type="button" className="ig-pass" onClick={() => void send({ type: 'pass', windowId: w.id })}>
             {s.play.pass}
           </button>
         </div>
       )}
-      {eligible && passed && <p className="ig-small dim ig-center">{s.play.passed}</p>}
-      {!eligible && <p className="ig-small dim ig-center">{w.claimant === meId ? s.play.waiting : s.play.noSay}</p>}
     </section>
   );
 }
@@ -355,11 +377,11 @@ function LosePicker({ view, remaining, send }: { view: IntrigueView; remaining: 
   const [pick, setPick] = useState<string | null>(null);
   const card = view.me.hand.find((c) => c.id === pick);
   return (
-    <section className="ig-panel ig-panel-alert" aria-labelledby="ig-lose-title">
-      <h2 id="ig-lose-title" className="ig-panel-title">
+    <section className="ig-sheet" data-alert aria-labelledby="ig-lose-title">
+      <h2 id="ig-lose-title" className="ig-sheet-title">
         {LOSE_REASON[view.lose!.reason]}
       </h2>
-      <p className="ig-small dim">{s.play.loseMeHint}</p>
+      <p className="ig-sheet-hint">{s.play.loseMeHint}</p>
       <Bar remaining={remaining} total={view.durationMs} />
       <div className="ig-pick">
         {view.me.hand.map((c) => (
@@ -383,11 +405,11 @@ function ExchangePicker({ view, remaining, send }: { view: IntrigueView; remaini
     setKeep((cur) => (cur.includes(id) ? cur.filter((x) => x !== id) : cur.length >= ex.keep ? [...cur.slice(1), id] : [...cur, id]));
   }
   return (
-    <section className="ig-panel" aria-labelledby="ig-ex-title">
-      <h2 id="ig-ex-title" className="ig-panel-title">
+    <section className="ig-sheet" aria-labelledby="ig-ex-title">
+      <h2 id="ig-ex-title" className="ig-sheet-title">
         {s.play.exMeTitle}
       </h2>
-      <p className="ig-small dim">{s.play.exMeHint(ex.keep)}</p>
+      <p className="ig-sheet-hint">{s.play.exMeHint(ex.keep)}</p>
       <Bar remaining={remaining} total={view.durationMs} />
       <div className="ig-pick">
         {ex.options.map((c) => (
@@ -413,7 +435,7 @@ function HostDefault({ view, members, nick, send }: { view: IntrigueView; member
   if (!who) return null;
   return (
     <div className="ig-host">
-      <p className="ig-small dim">
+      <p className="ig-host-hint">
         {s.play.hostDefaultHint} ({nick(who)})
       </p>
       <button type="button" className="btn btn-outline" onClick={() => void send({ type: 'hostDefault' })}>
@@ -429,29 +451,28 @@ function MyHand({ view, meId }: { view: IntrigueView; meId: string }) {
   const revealed = view.players.find((p) => p.id === meId)?.revealed ?? [];
   return (
     <section className="ig-hand" aria-labelledby="ig-hand-title" data-out={!view.me.alive || undefined}>
-      <div className="ig-panel-head">
-        <h2 id="ig-hand-title" className="ig-panel-title">
+      <div className="ig-hand-head">
+        <h2 id="ig-hand-title" className="ig-hand-title">
           {s.play.hand}
         </h2>
-        <span className="ig-purse mono" aria-label={s.play.coins(view.me.coins)}>
-          <Coin size={16} />
-          {view.me.coins}
-        </span>
+        <span className="ig-purse">{s.play.coins(view.me.coins)}</span>
       </div>
       {view.me.hand.length === 0 && revealed.length === 0 ? (
-        <p className="ig-small dim">{s.play.noHand}</p>
+        <p className="ig-sheet-hint">{s.play.noHand}</p>
       ) : (
         <ul className="ig-hand-cards">
           {view.me.hand.map((c) => (
-            <li key={c.id}>
-              <RoleCard role={c.role} />
-              <span className="ig-hand-ability">{ROLE_ABILITY[c.role]}</span>
+            <li key={c.id} className="ig-handcard" data-role={c.role}>
+              <Glyph role={c.role} size={38} />
+              <span className="ig-handcard-name">{ROLE_NAME[c.role]}</span>
+              <span className="ig-handcard-fx">{ROLE_ABILITY[c.role]}</span>
             </li>
           ))}
           {revealed.map((r, i) => (
-            <li key={`r${i}`}>
-              <RoleCard role={r} dead />
-              <span className="ig-hand-ability dim">{s.play.out}</span>
+            <li key={`r${i}`} className="ig-handcard" data-role={r} data-dead>
+              <Glyph role={r} size={38} />
+              <span className="ig-handcard-name">{ROLE_NAME[r]}</span>
+              <span className="ig-handcard-fx">{s.play.out}</span>
             </li>
           ))}
         </ul>
@@ -470,20 +491,22 @@ function Flash({ view, nick }: { view: IntrigueView; nick: Nick }) {
     if (!f || f.seq <= seen.current) return;
     seen.current = f.seq;
     setShow(f);
-    const t = setTimeout(() => setShow(null), 2800);
+    const t = setTimeout(() => setShow(null), 4000);
     return () => clearTimeout(t);
   }, [view.flash]);
   if (!show) return null;
   const role = ROLE_NAME[show.role];
   return (
-    <div className="ig-overlay" role="alert" onClick={() => setShow(null)}>
-      <div className="ig-overlay-body" data-had={show.had || undefined}>
-        <span className="ig-flip">
-          <RoleCard role={show.role} size="big" dead={!show.had} />
-        </span>
-        <p className="ig-overlay-title">{show.had ? s.play.flashTrue(nick(show.claimant), role) : s.play.flashFalse(nick(show.claimant), role)}</p>
-        <p className="muted ig-small">{show.had ? s.play.flashTrueHint(nick(show.challenger)) : s.play.flashFalseHint}</p>
-      </div>
+    <div className="ig-overlay" role="alert">
+      <span className="ig-flashcard" data-role={show.role} data-had={show.had || undefined}>
+        <Glyph role={show.role} size={60} />
+        <span className="ig-flashcard-name">{role}</span>
+      </span>
+      <p className="ig-overlay-title">{show.had ? s.play.flashTrue(nick(show.claimant), role) : s.play.flashFalse(nick(show.claimant), role)}</p>
+      <p className="ig-overlay-hint">{show.had ? s.play.flashTrueHint(nick(show.challenger)) : s.play.flashFalseHint}</p>
+      <button type="button" className="ig-overlay-ok" onClick={() => setShow(null)}>
+        {s.play.ok}
+      </button>
     </div>
   );
 }
@@ -573,39 +596,97 @@ function HowTo() {
   );
 }
 
-function Podium({ view, members, meId }: { view: IntrigueView; members: Members; meId: string }) {
+function Podium({
+  view,
+  members,
+  meId,
+  room,
+  remaining,
+}: {
+  view: IntrigueView;
+  members: Members;
+  meId: string;
+  room: { code: string };
+  remaining: number;
+}) {
   const winner = view.winner ? members.get(view.winner) : null;
+  // Önce ayakta kalan, sonra en geç elenen.
   const ranked = [...view.players].sort((a, b) => (b.out ?? 99) - (a.out ?? 99));
+  // Kazanan yoksa (oyun yarıda bitti) sıralama anlamsız: herkes listede, numarasız.
+  const first = view.winner ? ranked[0] : undefined;
+  const second = view.winner ? ranked[1] : undefined;
+  const rest = view.winner ? ranked.slice(2) : ranked;
+  const half = Math.ceil(rest.length / 2);
+  const total = view.durationMs || 1;
+  const name = (id: string) => members.get(id)?.nick ?? '?';
   return (
-    <main className="col podium ig-podium">
-      <span className="wordmark" aria-hidden="true">
-        songie
+    <main className="col ig-over">
+      <span className="ig-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
       </span>
-      <div className="podium-winner">
-        <h1 className="podium-name">{winner ? s.podium.winner(winner.nick) : s.podium.none}</h1>
-        <p className="dim">{s.podium.title}</p>
+      <div className="ig-over-top">
+        <span>{s.name}</span>
+        <span className="ig-over-code">{room.code}</span>
       </div>
-      <section className="ig-podium-list">
-        <h2 className="ig-side-title">{s.podium.order}</h2>
-        <ol className="sg-score-list">
-          {ranked.map((p) => {
-            const m = members.get(p.id);
-            return (
-              <li key={p.id} className="sg-score" data-me={p.id === meId || undefined} data-first={p.id === view.winner || undefined}>
-                {m && <Avatar avatar={m.avatar} nick={m.nick} size={26} />}
-                <span className="sg-score-name">{m?.nick ?? '?'}</span>
-                <span className="ig-podium-cards">
-                  {p.revealed.map((r, i) => (
-                    <RoleCard key={i} role={r} size="mini" dead />
-                  ))}
-                </span>
-                <span className="sg-score-pts mono">{p.out === null ? s.podium.alive : `${p.out}.`}</span>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-      <p className="dim podium-back">{s.podium.back}</p>
+      <div className="ig-over-head">
+        <span className="ig-sticker">{s.podium.gameOver}</span>
+        <h1 className="ig-over-title">{winner ? s.podium.winnerTitle(winner.nick) : s.podium.none}</h1>
+        <p className="ig-over-sub">{s.podium.title}</p>
+      </div>
+      {first && (
+        <div className="ig-over-cards">
+          <div className="ig-over-card" data-first data-me={first.id === meId || undefined}>
+            <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+              <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="#FFD23F" stroke="#0D0828" strokeWidth="3" strokeLinejoin="round" />
+            </svg>
+            <span className="ig-over-n">{s.podium.place(1)}</span>
+            <span className="ig-over-name">{name(first.id)}</span>
+          </div>
+          {second && (
+            <Fragment>
+              <span className="ig-over-dash" aria-hidden="true">
+                –
+              </span>
+              <div className="ig-over-card" data-me={second.id === meId || undefined}>
+                <span className="ig-over-n">{s.podium.place(2)}</span>
+                <span className="ig-over-name">{name(second.id)}</span>
+              </div>
+            </Fragment>
+          )}
+        </div>
+      )}
+      {rest.length > 0 && (
+        <div className="ig-over-rosters">
+          {[rest.slice(0, half), rest.slice(half)].map(
+            (col, i) =>
+              col.length > 0 && (
+                <ol key={i} className="ig-over-roster">
+                  {col.map((p, j) => {
+                    const m = members.get(p.id);
+                    return (
+                      <li key={p.id} data-me={p.id === meId || undefined}>
+                        {view.winner && <span className="ig-over-place">{s.podium.place(3 + i * half + j)}</span>}
+                        {m && <Avatar avatar={m.avatar} nick={m.nick} size={28} />}
+                        <span className="ig-over-rname">{name(p.id)}</span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ),
+          )}
+        </div>
+      )}
+      <div className="ig-fill" />
+      <div className="ig-over-foot">
+        <div className="ig-over-bar" aria-hidden="true">
+          <div style={{ width: `${Math.max(0, 100 - (remaining / total) * 100)}%` }} />
+        </div>
+        <p className="ig-over-note">{s.podium.back}</p>
+      </div>
     </main>
   );
 }

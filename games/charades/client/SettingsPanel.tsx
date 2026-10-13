@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import {
@@ -16,13 +16,19 @@ import {
 import { KindIcon } from './KindIcon';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Group({ title, hint, children, row, action }: { title: string; hint?: string; children: ReactNode; row?: boolean; action?: ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div className="ch-set" role="group" aria-labelledby={id} data-row={row || undefined}>
+      <div className="ch-set-head">
+        <span id={id} className="ch-set-label">
+          {title}
+        </span>
+        {action}
+      </div>
+      <div className="ch-set-body">{children}</div>
+      {hint && <p className="ch-set-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -72,46 +78,47 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
       <div className="ch-teambox" data-team={team ?? 'none'}>
         <div className="ch-teambox-head">
           <span className="ch-team-name">{team ? s.team[team] : s.settings.unassigned}</span>
-          <span className="mono dim">{ids.length}</span>
+          <span className="ch-team-n">{ids.length}</span>
         </div>
         {ids.length === 0 ? (
-          <p className="sgs-hint">{s.settings.empty}</p>
+          <p className="ch-team-empty">{s.settings.empty}</p>
         ) : (
-          <div className="ch-chips">
-            {ids.map((id) => {
-              const p = byId.get(id);
-              if (!p) return null;
-              return (
-                <button key={id} type="button" className="ch-player" disabled={!editable} onClick={() => cycle(id)}>
-                  <Avatar avatar={p.avatar} nick={p.nick} size={22} />
-                  {p.nick}
-                </button>
-              );
-            })}
-          </div>
+          ids.map((id) => {
+            const p = byId.get(id);
+            if (!p) return null;
+            return (
+              <button key={id} type="button" className="ch-player" disabled={!editable} onClick={() => cycle(id)}>
+                <Avatar avatar={p.avatar} nick={p.nick} size={26} />
+                <span className="ch-player-name">{p.nick}</span>
+              </button>
+            );
+          })
         )}
       </div>
     );
   }
 
   return (
-    <div className="sgs">
+    <div className="ch-settings">
       {showPrimary && (
         <>
-          {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
+          {!editable && <p className="ch-readonly">{s.settings.readOnly}</p>}
           <Group
+            action={
+              editable ? (
+                <button type="button" className="ch-shuffle" onClick={shuffleTeams}>
+                  {s.settings.shuffle}
+                </button>
+              ) : undefined
+            }
             title={s.settings.teams}
             hint={teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}
           >
-            <TeamBox team="a" ids={teamA} />
-            <TeamBox team="b" ids={teamB} />
+            <div className="ch-teams">
+              <TeamBox team="a" ids={teamA} />
+              <TeamBox team="b" ids={teamB} />
+            </div>
             {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
-            {editable && (
-              <button type="button" className="btn btn-ghost sgs-browse" onClick={shuffleTeams}>
-                <Icon name="shuffle" size={14} />
-                {s.settings.shuffle}
-              </button>
-            )}
           </Group>
 
           <Group title={s.settings.categories}>
@@ -140,7 +147,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           </Group>
 
-          <Group title={s.settings.difficulty} hint={s.settings.difficultyHint[settings.difficulty]}>
+          <Group row title={s.settings.difficulty} hint={s.settings.difficultyHint[settings.difficulty]}>
             <div className="chips">
               {DIFFICULTIES.map((d) => (
                 <button
@@ -162,17 +169,17 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
 
       {showSecondary && (
         <>
-          <Group title={s.settings.seconds}>
+          <Group row title={s.settings.seconds}>
             <div className="chips">
-              {SECONDS_OPTIONS.map((n) => (
+              {SECONDS_OPTIONS.map((n, i) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.seconds === n} disabled={!editable} onClick={() => set({ seconds: n })}>
-                  {s.settings.sec(n)}
+                  {i === SECONDS_OPTIONS.length - 1 ? s.settings.sec(n) : n}
                 </button>
               ))}
             </div>
           </Group>
 
-          <Group title={s.settings.passes}>
+          <Group row title={s.settings.passes}>
             <div className="chips">
               {PASS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.passes === n} disabled={!editable} onClick={() => set({ passes: n })}>
@@ -182,7 +189,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           </Group>
 
-          <Group title={s.settings.turns} hint={s.settings.turnsHint(settings.turns)}>
+          <Group row title={s.settings.turns} hint={s.settings.turnsHint(settings.turns)}>
             <div className="chips">
               {TURN_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.turns === n} disabled={!editable} onClick={() => set({ turns: n })}>
@@ -192,7 +199,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           </Group>
 
-          <Group title={s.settings.penalty} hint={s.settings.penaltyHint}>
+          <Group row title={s.settings.penalty} hint={s.settings.penaltyHint}>
             <button
               type="button"
               className="toggle"
@@ -238,7 +245,7 @@ function AddTitle({ api }: { api: SettingsPanelProps<CharadesSettings>['api'] })
 
   return (
     <Group title={s.settings.addTitle} hint={s.settings.addTitleHint}>
-      <button type="button" className="btn btn-ghost sgs-browse" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+      <button type="button" className="ch-shuffle ch-add-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         <Icon name="chevron" size={14} style={{ transform: open ? 'rotate(180deg)' : undefined }} />
         {s.settings.addTitle}
       </button>
@@ -260,11 +267,11 @@ function AddTitle({ api }: { api: SettingsPanelProps<CharadesSettings>['api'] })
               </button>
             ))}
           </div>
-          <button className="btn btn-outline" disabled={busy || title.trim().length < 2}>
+          <button className="btn btn-primary" disabled={busy || title.trim().length < 2}>
             {busy ? s.settings.saving : s.settings.save}
           </button>
           {msg && (
-            <p className={msg.error ? 'error-text' : 'sgs-hint'} role="status">
+            <p className={msg.error ? 'error-text' : 'ch-set-hint'} role="status">
               {msg.text}
             </p>
           )}

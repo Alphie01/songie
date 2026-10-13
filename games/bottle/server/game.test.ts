@@ -184,7 +184,7 @@ describe('pas hakkı', () => {
     // İki kişide hedef hep diğeri; klasik sırada çeviren değişir.
     const t1 = await playTurn(h, 'pass');
     expect(h.view('a').scores[t1]).toMatchObject({ points: -1, passes: 1 });
-    expect(h.view('a').lastResult).toMatchObject({ targetId: t1, outcome: 'pass' });
+    expect(h.view('a').lastResult).toMatchObject({ targetId: t1, spinnerId: t1 === 'a' ? 'b' : 'a', outcome: 'pass' });
     await playTurn(h, 'done'); // diğeri
     const t3 = await spinToReveal(h);
     expect(t3).toBe(t1);

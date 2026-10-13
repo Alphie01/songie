@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import {
   DISCUSS_SECONDS_OPTIONS,
@@ -15,12 +16,31 @@ import { RoleGlyph } from './Glyphs';
 import { s } from './strings';
 
 function Group({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="sgs-legend ww-legend">{title}</legend>
+    <div className="ww-set" role="group" aria-labelledby={id}>
+      <div className="ww-set-row">
+        <span id={id} className="ww-set-label">
+          {title}
+        </span>
+        {children}
+      </div>
+      {hint && <p className="ww-set-hint">{hint}</p>}
+    </div>
+  );
+}
+
+/** Roller gibi geniş içerik: başlık üstte, içerik altta. */
+function Stack({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
+  const id = useId();
+  return (
+    <div className="ww-set" role="group" aria-labelledby={id}>
+      <span id={id} className="ww-set-label">
+        {title}
+      </span>
       {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+      {hint && <p className="ww-set-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -71,11 +91,11 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
   const isRec = JSON.stringify(rec) === JSON.stringify(settings.roles);
 
   return (
-    <div className="sgs ww-settings">
+    <div className="ww-settings">
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
-          <Group title={s.settings.roles} hint={s.settings.rolesHint}>
+          <Stack title={s.settings.roles} hint={s.settings.rolesHint}>
             <div className="ww-rolepick">
               <div className="ww-rolerow" data-role="wolf">
                 <span className="ww-rolerow-icon">
@@ -92,7 +112,7 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
                   >
                     −
                   </button>
-                  <span className="mono ww-stepper-n">{settings.roles.wolf}</span>
+                  <span className="ww-stepper-n">{settings.roles.wolf}</span>
                   <button
                     type="button"
                     className="ww-stepper-btn"
@@ -131,11 +151,11 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
             </div>
             {problem && n > 0 && <p className="error-text ww-settings-problem">{problem}</p>}
             {editable && (
-              <button type="button" className="btn btn-outline btn-block" disabled={isRec} onClick={() => set({ roles: rec })}>
+              <button type="button" className="btn btn-outline btn-block ww-rec" disabled={isRec} onClick={() => set({ roles: rec })}>
                 {n >= 5 ? s.settings.recommend(n) : s.settings.recommendShort}
               </button>
             )}
-          </Group>
+          </Stack>
         </>
       )}
 
@@ -174,14 +194,14 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
               onPick={(v) => set({ wolfTie: v })}
             />
           </Group>
-          <Group title={s.settings.rules}>
+          <Stack title={s.settings.rules}>
             <div className="sgs-stack">
               <Toggle label={s.settings.revealRoles} on={settings.revealRoles} editable={editable} onChange={(v) => set({ revealRoles: v })} />
               <Toggle label={s.settings.openVotes} on={settings.openVotes} editable={editable} onChange={(v) => set({ openVotes: v })} />
               <Toggle label={s.settings.doctorNoRepeat} on={settings.doctorNoRepeat} editable={editable} onChange={(v) => set({ doctorNoRepeat: v })} />
               <Toggle label={s.settings.ghostsSeeRoles} on={settings.ghostsSeeRoles} editable={editable} onChange={(v) => set({ ghostsSeeRoles: v })} />
             </div>
-          </Group>
+          </Stack>
         </>
       )}
     </div>

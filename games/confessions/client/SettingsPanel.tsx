@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { GameApi, SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
 import {
@@ -14,11 +14,25 @@ import { s } from './strings';
 
 function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
   return (
-    <fieldset className="sgs-group">
+    <fieldset className="sgs-group cf-set-group">
       <legend className="sgs-legend cf-legend">{title}</legend>
       {children}
       {hint && <p className="sgs-hint">{hint}</p>}
     </fieldset>
+  );
+}
+
+/** Lobi tasarımındaki satır: solda ad, sağda küçük seçenekler. */
+function Row({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+  const id = useId();
+  return (
+    <div className="cf-set-row" role="group" aria-labelledby={id}>
+      <span id={id} className="cf-set-label">
+        {title}
+      </span>
+      <div className="cf-set-opts">{children}</div>
+      {hint && <p className="sgs-hint cf-set-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -86,7 +100,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
 
       {showSecondary && (
         <>
-          <Group title={s.settings.write}>
+          <Row title={s.settings.write}>
             <div className="chips">
               {WRITE_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.writeSeconds === n} disabled={!editable} onClick={() => set({ writeSeconds: n })}>
@@ -94,9 +108,9 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.guess}>
+          <Row title={s.settings.guess}>
             <div className="chips">
               {GUESS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.guessSeconds === n} disabled={!editable} onClick={() => set({ guessSeconds: n })}>
@@ -104,9 +118,9 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
+          <Row title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
             <div className="chips">
               {ROUND_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.rounds === n} disabled={!editable} onClick={() => set({ rounds: n })}>
@@ -114,9 +128,9 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.hidden} hint={s.settings.hiddenHint}>
+          <Row title={s.settings.hidden} hint={s.settings.hiddenHint}>
             <button
               type="button"
               className="toggle"
@@ -128,7 +142,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
               {settings.hiddenAuthor ? s.settings.on : s.settings.off}
               <span className="toggle-knob" aria-hidden="true" />
             </button>
-          </Group>
+          </Row>
         </>
       )}
     </div>

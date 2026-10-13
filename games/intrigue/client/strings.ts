@@ -10,11 +10,11 @@ export const ROLE_NAME: Record<Role, string> = {
 
 /** Rolün tek satırlık özeti (kartın altında ve rol tablosunda). */
 export const ROLE_ABILITY: Record<Role, string> = {
-  treasurer: 'Vergi: hazineden 3 altın al. Yardım isteyeni engeller.',
-  assassin: 'Suikast: 3 altın öde, bir oyuncu kart kaybetsin.',
-  guard: 'Suikastı engeller.',
-  pirate: 'Çal: bir oyuncudan 2 altın al. Çalmayı engeller.',
-  spy: 'Değiş tokuş: desteden 2 kart çek, istediğin 2’yi sakla. Çalmayı engeller.',
+  treasurer: 'Vergi: +3 altın · Yardım isteği engeller',
+  assassin: 'Suikast: 3 altın öde, hedef kart kaybeder',
+  guard: 'Suikastı engeller',
+  pirate: 'Çal: 2 altın al · Çalmayı engeller',
+  spy: 'Değiş tokuş: 2 kart çek · Çalmayı engeller',
 };
 
 /** Rol tablosu: rolün eylemi ve engellediği eylem. */
@@ -54,6 +54,17 @@ export const ACTION_EFFECT: Record<ActionKind, string> = {
   exchange: 'Desteden 2 kart çek, istediğin kartları sakla.',
 };
 
+/** Eylem düğmesindeki kısa açıklama (tasarımdaki gibi). */
+export const ACTION_FX: Record<ActionKind, string> = {
+  income: '+1 altın · engellenemez',
+  aid: '+2 altın',
+  coup: '7 altın öde · engellenemez',
+  tax: 'Hazinedar · +3 altın',
+  assassinate: 'Fedai · 3 altın öde',
+  steal: 'Korsan · 2 altın al',
+  exchange: 'Casus · 2 kart çek',
+};
+
 export const LOSE_REASON: Record<LoseReason, string> = {
   challenge: 'İtiraz sonucu bir kartını kaybediyorsun',
   coup: 'Darbeye uğradın: bir kartını kaybediyorsun',
@@ -86,6 +97,11 @@ export const s = {
   play: {
     you: 'sen',
     yourTurn: 'Sıra sende',
+    yourTurnLeft: (sec: number) => `Sıra sende · ${sec} sn`,
+    ok: 'Tamam',
+    rivals: 'Rakipler',
+    passedMark: 'geçti',
+    decidingMark: 'karar veriyor',
     turnOf: (nick: string) => `Sıra: ${nick}`,
     spectator: 'İzliyorsun',
     eliminated: 'Elendin, izlemeye devam edebilirsin',
@@ -208,6 +224,9 @@ export const s = {
     title: 'Sarayda son ayakta kalan',
     order: 'Sıralama',
     alive: 'ayakta',
-    back: 'Birazdan lobiye dönülecek.',
+    back: 'Lobiye dönülüyor…',
+    gameOver: 'Oyun bitti',
+    winnerTitle: (nick: string) => `${nick} kazandı!`,
+    place: (n: number) => `${n}.`,
   },
 };

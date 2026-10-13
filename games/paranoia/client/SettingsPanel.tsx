@@ -1,22 +1,28 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
 import { QUESTION_COUNT_OPTIONS, THINK_OPTIONS, type CategoryInfo, type ParanoiaSettings } from '../shared/index.js';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+/** Lobi tasarımındaki satır: solda etiket, sağda seçenekler; `stack` uzun seçenekleri alta indirir. */
+function Group({ title, hint, stack, children }: { title: string; hint?: string; stack?: boolean; children: ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div className="pr-set" data-stack={stack || undefined} role="group" aria-labelledby={id}>
+      <div className="pr-set-row">
+        <span id={id} className="pr-set-label">
+          {title}
+        </span>
+        {children}
+      </div>
+      {hint && <p className="pr-set-hint">{hint}</p>}
+    </div>
   );
 }
 
 function Toggle({ on, disabled, onClick }: { on: boolean; disabled: boolean; onClick: () => void }) {
   return (
-    <button type="button" className="toggle" role="switch" aria-checked={on} disabled={disabled} onClick={onClick}>
+    <button type="button" className="toggle pr-toggle" role="switch" aria-checked={on} disabled={disabled} onClick={onClick}>
       {on ? s.settings.on : s.settings.off}
       <span className="toggle-knob" aria-hidden="true" />
     </button>
@@ -67,7 +73,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
   }, [api, showPrimary]);
 
   return (
-    <div className="sgs">
+    <div className="sgs pr-settings">
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
@@ -75,7 +81,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             <Choice options={QUESTION_COUNT_OPTIONS} value={settings.questionCount as (typeof QUESTION_COUNT_OPTIONS)[number]} label={String} disabled={off} onPick={(n) => set({ questionCount: n })} />
           </Group>
 
-          <Group title={s.settings.categories} hint={s.settings.categoriesHint}>
+          <Group title={s.settings.categories} hint={s.settings.categoriesHint} stack>
             <div className="chips">
               {(categories ?? []).map((c) => (
                 <button
@@ -185,8 +191,8 @@ function AddQuestion({ api }: { api: SettingsPanelProps<ParanoiaSettings>['api']
   }
 
   return (
-    <Group title={s.settings.add} hint={s.settings.addHint}>
-      <button type="button" className="btn btn-ghost sgs-browse" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+    <Group title={s.settings.add} hint={s.settings.addHint} stack>
+      <button type="button" className="btn btn-ghost pr-add-open" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         <Icon name="chevron" size={14} style={{ transform: open ? 'rotate(180deg)' : undefined }} />
         {s.settings.add}
       </button>
@@ -201,7 +207,7 @@ function AddQuestion({ api }: { api: SettingsPanelProps<ParanoiaSettings>['api']
             aria-label={s.settings.addLabel}
             onChange={(e) => setText(e.target.value)}
           />
-          <button className="btn btn-outline" disabled={busy || text.trim().length < 8}>
+          <button className="btn btn-yellow" disabled={busy || text.trim().length < 8}>
             {busy ? s.settings.saving : s.settings.save}
           </button>
           {msg && (

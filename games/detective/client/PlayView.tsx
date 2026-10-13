@@ -117,10 +117,6 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
     setInterview(view.interviews.length ? view.interviews[view.interviews.length - 1]!.id : null);
   }, [ivIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  useEffect(() => {
-    if (!view.interviews.length && tab === 'interviews') setTabState('cabinet');
-  }, [view.interviews.length, tab]);
-
   const ivUnread = useMemo(() => {
     const m = new Map<string, { count: number; fresh: boolean }>();
     for (const iv of view.interviews) {
@@ -174,8 +170,11 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
   };
 
   const newCount = view.evidence.filter((e) => !seen.has(e.id)).length;
-  const hasIv = view.interviews.length > 0;
-  const tabs: Tab[] = hasIv ? ['board', 'cabinet', 'interviews', 'leads', 'notes'] : ['board', 'cabinet', 'leads', 'notes'];
+  const tabs: Tab[] = ['board', 'cabinet', 'interviews', 'leads', 'notes'];
+  const online = room.players.filter((p) => p.connected).length;
+  const genre = view.case.genre ? view.case.genre.charAt(0).toLocaleUpperCase('tr') + view.case.genre.slice(1) : '';
+  // Yer: alt başlığın tarihten önceki kısmı ("Uludağ, Bursa — Aralık 2025")
+  const place = view.case.subtitle.split(/\s+[—–-]\s+/)[0]?.trim() ?? '';
   let ivCount = 0;
   let ivFresh = false;
   for (const [id, u] of ivUnread) {
@@ -210,7 +209,6 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
             <Board />
           </aside>
           <main className="dt-col dt-col-center">
-            {hasIv && (
               <div className="dt-center-tabs" role="group" aria-label={s.name}>
                 <button type="button" className="dt-center-tab" aria-pressed={tab !== 'interviews'} onClick={() => setTab('cabinet')}>
                   {s.cabinet.title}
@@ -228,17 +226,14 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
                   )}
                 </button>
               </div>
-            )}
             <div className="dt-pane" data-pane="cabinet" aria-label={s.tabs.cabinet}>
               <span id="dt-viewer-anchor" />
               <Cabinet onClose={() => setSelected(null)} />
             </div>
-            {hasIv && (
-              <div className="dt-pane" data-pane="interviews" aria-label={s.tabs.interviews}>
-                <span id="dt-iv-anchor" />
-                <Interviews />
-              </div>
-            )}
+            <div className="dt-pane" data-pane="interviews" aria-label={s.tabs.interviews}>
+              <span id="dt-iv-anchor" />
+              <Interviews />
+            </div>
           </main>
           <aside className="dt-col dt-col-right">
             <div className="dt-pane" data-pane="leads" aria-label={s.tabs.leads}>
@@ -250,13 +245,15 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
             </div>
           </aside>
         </div>
-        <nav className="dt-tabs" aria-label={s.name} data-count={tabs.length}>
+        <nav className="dt-tabs" aria-label={s.name}>
           {tabs.map((t) => (
             <button key={t} type="button" className="dt-tab" aria-current={tab === t ? 'page' : undefined} onClick={() => setTab(t)}>
-              {s.tabs[t]}
-              {t === 'cabinet' && newCount > 0 && <span className="dt-tab-badge">{newCount}</span>}
-              {t === 'interviews' && (ivCount > 0 ? <span className="dt-tab-badge" data-tone="iv">{ivCount}</span> : ivFresh && <span className="dt-tab-dot" data-tone="iv" aria-hidden="true" />)}
-              {t === 'leads' && view.proposal && <span className="dt-tab-dot" aria-hidden="true" />}
+              <span className="dt-tab-label">{s.tabs[t]}</span>
+              {tab !== t && t === 'cabinet' && newCount > 0 && <span className="dt-tab-badge">{newCount}</span>}
+              {tab !== t &&
+                t === 'interviews' &&
+                (ivCount > 0 ? <span className="dt-tab-badge">{ivCount}</span> : ivFresh && <span className="dt-tab-dot" aria-hidden="true" />)}
+              {tab !== t && t === 'leads' && view.proposal && <span className="dt-tab-badge">1</span>}
             </button>
           ))}
         </nav>
@@ -268,21 +265,31 @@ export function PlayView({ view, meId, room, act }: PlayViewProps<DetectiveView,
     <DeskProvider value={desk}>
       <div className="dt" data-phase={view.phase}>
         <header className="dt-top">
-          <div className="dt-top-case">
+          <div className="dt-top-row">
             <p className="dt-top-title">{view.case.title}</p>
+            <span className="dt-top-code" aria-label={`${s.top.code}: ${room.code}`}>
+              {room.code}
+            </span>
+            <span className="dt-top-stamp" aria-hidden="true">
+              {s.top.secret}
+            </span>
+          </div>
+          <div className="dt-top-row">
             <p className="dt-top-sub">
               {view.phase === 'investigate' || view.phase === 'scene'
                 ? `${s.top.act(view.act.index, view.act.total)}: ${view.act.title}`
                 : s.top.phase[view.phase]}
             </p>
+            <span className="dt-top-hours">{s.leads.hoursOf(view.hours.spent, view.hours.budget)}</span>
           </div>
-          {!wide && !final && (
-            <p className="dt-top-hours">
-              {view.hours.spent}
-              <span>/{view.hours.budget} sa</span>
-            </p>
-          )}
-          <span className="dt-top-code">{room.code}</span>
+          <div className="dt-top-chips">
+            <span className="dt-top-chip" data-tone="online">
+              <i aria-hidden="true" />
+              {s.top.online(online)}
+            </span>
+            {genre && <span className="dt-top-chip">{genre}</span>}
+            {place && <span className="dt-top-chip">{place}</span>}
+          </div>
         </header>
         {body}
         {view.phase === 'scene' && <Scene />}

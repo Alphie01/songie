@@ -158,6 +158,8 @@ export interface KittenView {
   turn: number;
   me: { inGame: boolean; alive: boolean; hand: Card[] };
   deckCount: number;
+  /** Destedeki bomba sayısı (herkese açık; yerleri gizli). Patlama riski = deckBombs / deckCount. */
+  deckBombs: number;
   discardTop: CardKind | null;
   discardCount: number;
   pending: PendingView | null;

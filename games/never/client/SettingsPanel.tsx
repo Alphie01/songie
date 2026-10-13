@@ -33,7 +33,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
   }, [api, showPrimary]);
 
   return (
-    <div className="sgs">
+    <div className="sgs nv-set">
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
@@ -162,7 +162,7 @@ function AddStatement({ api }: { api: GameApi }) {
               onChange={(e) => setText(e.target.value)}
             />
           </label>
-          <button className="btn btn-outline" disabled={busy || text.trim().length < 5}>
+          <button className="btn btn-yellow" disabled={busy || text.trim().length < 5}>
             {busy ? s.settings.saving : s.settings.save}
           </button>
           {msg && (

@@ -243,6 +243,7 @@ export function createBottleGame(deps: {
     }
     state.lastResult = {
       targetId,
+      spinnerId: state.spinnerId,
       kind: state.kind ?? 'truth',
       text: state.prompt?.text ?? '',
       outcome,

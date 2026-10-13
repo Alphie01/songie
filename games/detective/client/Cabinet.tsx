@@ -28,7 +28,7 @@ export function Cabinet({ onClose }: { onClose: () => void }) {
     <div className="dt-cabinet" data-viewing={selected ? true : undefined}>
       <div className="dt-drawer">
         <div className="dt-drawer-head">
-          <h2 className="dt-sec-title">
+          <h2 className="dt-label dt-drawer-title">
             {s.cabinet.title}
             <span className="dt-count">{view.evidence.length}</span>
           </h2>
@@ -74,27 +74,22 @@ export function Cabinet({ onClose }: { onClose: () => void }) {
 function FileTab({ e, active, isNew, onOpen }: { e: EvidenceView; active: boolean; isNew: boolean; onOpen: () => void }) {
   return (
     <button type="button" className="dt-file" aria-current={active || undefined} data-new={isNew || undefined} onClick={onOpen}>
-      {e.thumbUrl ? (
-        <img className="dt-file-thumb" src={e.thumbUrl} alt="" loading="lazy" />
-      ) : (
+      <span className="dt-file-title">{e.title}</span>
+      <span className="dt-file-meta">
         <span className="dt-file-glyph" data-kind={e.kind}>
-          <KindGlyph kind={e.kind} size={18} />
+          <KindGlyph kind={e.kind} size={12} />
         </span>
-      )}
-      <span className="dt-file-main">
-        <span className="dt-file-title">{e.title}</span>
-        <span className="dt-file-sum">{e.summary}</span>
-        <span className="dt-file-meta">
-          {s.kind[e.kind]}
-          {isNew && <span className="dt-new">{s.cabinet.new}</span>}
-          {e.pinned && (
-            <span className="dt-pin-dot" title={s.cabinet.pinned}>
-              <PinIcon />
-            </span>
-          )}
-          {e.notes.length > 0 && <span className="dt-file-notes">{s.notes.count(e.notes.length)}</span>}
+        <span className="dt-file-src">
+          {s.kind[e.kind]} · {e.source ? s.cabinet.source(e.source) : s.cabinet.sourceStart}
         </span>
+        {e.pinned && (
+          <span className="dt-pin-dot" title={s.cabinet.pinned}>
+            <PinIcon />
+          </span>
+        )}
+        {e.notes.length > 0 && <span className="dt-file-notes">{s.notes.count(e.notes.length)}</span>}
       </span>
+      {isNew && <span className="dt-new">{s.cabinet.new}</span>}
     </button>
   );
 }

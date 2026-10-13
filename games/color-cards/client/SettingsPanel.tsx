@@ -3,13 +3,16 @@ import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { TURN_OPTIONS, type ColorCardsSettings } from '../shared/index.js';
 import { s } from './strings';
 
+/** Lobi tasarımındaki ayar satırı: solda ad, sağda seçenekler; altında kısa açıklama. */
 function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div className="cc-set" role="group" aria-label={title}>
+      <div className="cc-set-row">
+        <span className="cc-set-label">{title}</span>
+        {children}
+      </div>
+      {hint && <p className="cc-set-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -20,7 +23,7 @@ function Toggle({ label, hint, on, disabled, onClick }: { label: string; hint: s
         {label}
         <span className="toggle-knob" aria-hidden="true" />
       </button>
-      <p className="sgs-hint">{hint}</p>
+      <p className="cc-set-hint">{hint}</p>
     </div>
   );
 }
@@ -31,12 +34,12 @@ export function SettingsPanel({ settings, editable, onChange, section }: Setting
   const set = (patch: Partial<ColorCardsSettings>) => editable && onChange({ ...settings, ...patch });
 
   return (
-    <div className="sgs">
+    <div className="cc-settings">
       {showPrimary && (
         <>
-          {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
+          {!editable && <p className="cc-set-readonly">{s.settings.readOnly}</p>}
           <Group title={s.settings.mode} hint={s.settings.modeHint(settings.mode === 'single')}>
-            <div className="chips">
+            <div className="cc-set-chips">
               {(['single', 'points'] as const).map((m) => (
                 <button key={m} type="button" className="chip" aria-pressed={settings.mode === m} disabled={!editable} onClick={() => set({ mode: m })}>
                   {m === 'single' ? s.settings.single : s.settings.points}
@@ -45,7 +48,7 @@ export function SettingsPanel({ settings, editable, onChange, section }: Setting
             </div>
           </Group>
           <Group title={s.settings.turn} hint={s.settings.turnHint}>
-            <div className="chips">
+            <div className="cc-set-chips">
               {TURN_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.turnSeconds === n} disabled={!editable} onClick={() => set({ turnSeconds: n })}>
                   {n === 0 ? s.settings.unlimited : s.settings.sec(n)}
@@ -57,8 +60,10 @@ export function SettingsPanel({ settings, editable, onChange, section }: Setting
       )}
 
       {showSecondary && (
-        <Group title={s.settings.house} hint={s.settings.houseHint}>
-          <div className="sgs-stack cc-rules">
+        <div className="cc-set">
+          <span className="cc-set-label">{s.settings.house}</span>
+          <p className="cc-set-hint">{s.settings.houseHint}</p>
+          <div className="cc-rules">
             <Toggle
               label={s.settings.stacking}
               hint={s.settings.stackingHint}
@@ -81,7 +86,7 @@ export function SettingsPanel({ settings, editable, onChange, section }: Setting
               onClick={() => set({ drawUntilPlayable: !settings.drawUntilPlayable })}
             />
           </div>
-        </Group>
+        </div>
       )}
     </div>
   );

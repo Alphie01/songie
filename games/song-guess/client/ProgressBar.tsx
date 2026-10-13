@@ -55,9 +55,10 @@ export function ProgressBar({
           })}
         </div>
       )}
-      <div className="pb-marker" style={{ left: `${at}%` }}>
-        <span className="pb-caret" />
-        <span className="pb-label mono">{clipShort(clips[Math.max(0, current)] ?? 0)}</span>
+      <div className="pb-labels">
+        <span className="pb-label" style={{ left: `clamp(0px, calc(${at}% - 22px), calc(100% - 52px))` }}>
+          {clipShort(clips[Math.max(0, current)] ?? 0)}
+        </span>
       </div>
     </div>
   );

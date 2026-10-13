@@ -96,6 +96,8 @@ export interface FiveSecondsView {
   /** Oy vermesi beklenen bağlı oyuncular. */
   voters: string[];
   myVote: boolean | null;
+  /** Oylamada anlık toplam (kimin ne verdiği gitmez); oylama dışında null. */
+  tally: { yes: number; no: number } | null;
   lastResult: AttemptResult | null;
   steal: boolean;
 }

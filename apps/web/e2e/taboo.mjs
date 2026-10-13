@@ -90,7 +90,11 @@ check(true, 'tabu: anlatıcıda uyarı göründü, puan 1 düştü');
 await A.getByRole('button', { name: 'Oyunu bitir' }).click();
 await A.locator('.podium').waitFor({ timeout: 10000 });
 await shot(A, 't08-podium-mobile', true);
-await A.getByRole('button', { name: 'Oyunu başlat' }).waitFor({ timeout: 15000 });
+// Oyun sonu ekranı: rövanş ve başka oyun seç; "Başka oyun seç" penceresini kapatıp lobiye dönülmesini bekle.
+await A.getByRole('button', { name: 'Rövanş!' }).waitFor({ timeout: 15000 });
+await shot(A, 't09-results-mobile', true);
+check(true, 'oyun sonu ekranı açıldı');
+await A.getByRole('button', { name: 'Oyunu başlat' }).waitFor({ timeout: 20000 });
 check(true, 'oyun bitti, lobiye dönüldü');
 console.log('ok');
 await browser.close();

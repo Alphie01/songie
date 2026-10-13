@@ -66,6 +66,9 @@ export const s = {
   tabs: { board: 'Pano', cabinet: 'Kanıtlar', interviews: 'Sorgular', leads: 'İzler', notes: 'Notlar' },
 
   top: {
+    secret: 'GİZLİ',
+    online: (n: number) => `${n} dedektif çevrim içi`,
+    code: 'Oda kodu',
     act: (i: number, total: number) => `Bölüm ${i + 1}/${total}`,
     phase: {
       scene: 'Bölüm açılışı',
@@ -106,6 +109,7 @@ export const s = {
     timelineEmpty: 'Belgelerden saatler çıktıkça burada sıralanır.',
     more: 'Devamını oku',
     less: 'Kısalt',
+    details: (name: string) => `${name}: ayrıntılar`,
   },
 
   notes: {
@@ -166,13 +170,15 @@ export const s = {
   proposal: {
     lead: (nick: string) => `${nick} bu izi öneriyor`,
     close: (nick: string) => `${nick} dosyayı kapatmayı öneriyor`,
+    leadMine: 'Bu izi sen öneriyorsun',
+    closeMine: 'Dosyayı kapatmayı sen öneriyorsun',
     tally: (yes: number, needed: number) => `${yes} / ${needed} evet`,
     yes: 'Evet',
     no: 'Hayır',
     cancel: 'Öneriyi geri çek',
     reject: 'Öneriyi geri çevir',
     hostOpen: 'İzi aç',
-    hostClose: 'Dosyayı kapat',
+    hostClose: 'Davayı çöz',
     busy: 'Önce bekleyen öneri sonuçlansın.',
     waitHost: 'Oda sahibinin kararı bekleniyor.',
   },
@@ -191,8 +197,9 @@ export const s = {
   close: {
     title: 'Dosyayı kapat',
     hint: 'Kapatınca herkes suçlama formunu doldurur. Oda sahibi isterse soruşturmaya dönebilir.',
-    propose: 'Dosyayı kapatmayı öner',
-    direct: 'Dosyayı kapat',
+    propose: 'Davayı çözmeyi öner',
+    direct: 'Davayı çöz',
+    tag: 'Kim · Nasıl · Neden',
     confirm: 'Dosya kapanıp suçlama aşamasına geçilecek. Emin misin?',
     confirmYes: 'Evet, kapat',
     hostOnly: 'Dosyayı oda sahibi kapatır.',

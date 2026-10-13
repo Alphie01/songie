@@ -470,6 +470,9 @@ describe('kart kaybetme ve eleme', () => {
     const v = h.view('a');
     expect(v.phase).toBe('over');
     expect(v.winner).toBe('a');
+    // Oyun sonu ekranının geri sayımı için podyum süresi görünümde.
+    expect(v.durationMs).toBe(PODIUM);
+    expect(v.endsAt).toBeGreaterThan(0);
     expect(h.finished).toBeNull();
     h.advance(PODIUM);
     const res = h.finished!;

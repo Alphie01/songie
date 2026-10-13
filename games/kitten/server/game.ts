@@ -771,6 +771,8 @@ export function createKittenGame(deps: { random?: Rng; timing?: Partial<KittenTi
         turn: state.turn,
         me: { inGame, alive: state.alive.includes(playerId), hand: state.hands[playerId] ?? [] },
         deckCount: state.deck.length,
+        // Herkesin kuraldan bildiği sayı (konumlar gizli kalır).
+        deckBombs: state.deck.filter((c) => c.kind === 'bomb').length,
         discardTop: state.discard.at(-1)?.kind ?? null,
         discardCount: state.discard.length,
         pending: p

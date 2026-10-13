@@ -1,3 +1,4 @@
+import './documents.css';
 import './detective.css';
 import type { ClientGameModule } from '@songie/game-kit/client';
 import type { DetectiveSettings, DetectiveView } from '../shared/index.js';

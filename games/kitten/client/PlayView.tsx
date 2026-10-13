@@ -3,9 +3,9 @@ import type { PlayViewProps } from '@songie/game-kit/client';
 import { Avatar } from '@songie/game-kit/ui';
 import type { RoomPlayer } from '@songie/shared';
 import { CARD_KINDS, CAT_KINDS, isCat, type Card, type CardKind, type KittenSettings, type KittenView, type PendingKind } from '../shared/index.js';
-import { CardBack, CardFace, Glyph } from './CardArt';
+import { BombIcon, CardBack, CardFace, Glyph } from './CardArt';
 import { SettingsPanel } from './SettingsPanel';
-import { ACTION_NAME, CARD_NAME, CARD_TEXT, s } from './strings';
+import { ACTION_NAME, CARD_FX, CARD_NAME, CARD_TEXT, s } from './strings';
 
 type Send = (a: unknown) => Promise<boolean>;
 type Nick = (id: string | undefined) => string;
@@ -55,9 +55,12 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     }
   }
 
-  if (view.phase === 'over') return <Podium view={view} members={members} meId={meId} />;
+  if (view.phase === 'over') return <Podium view={view} members={members} room={room} />;
 
   const panelProps = { settings, editable: isHost, api, players: room.players, meId, onChange: (n: KittenSettings) => void setSettings(n) };
+
+  const mine = view.current === meId;
+  const headline = view.me.inGame ? (view.me.alive ? (mine ? s.play.yourTurn : s.play.turnOf(nick(view.current))) : s.play.left) : s.play.spectator;
 
   return (
     <div className="kt sg">
@@ -65,14 +68,17 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
         <Log view={view} nick={nick} />
       </aside>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round">{view.me.inGame ? (view.me.alive ? (view.current === meId ? s.play.yourTurn : s.play.turnOf(nick(view.current))) : s.play.left) : s.play.spectator}</span>
-          <span className="sg-code mono">{room.code}</span>
+      <main className="sg-center kt-center-col">
+        <header className="kt-top">
+          <span className="kt-pill" data-mine={(mine && view.me.alive) || undefined}>
+            {headline}
+          </span>
+          <span className="kt-code">{room.code}</span>
         </header>
 
         <Seats view={view} members={members} meId={meId} />
         <Table view={view} />
+        <Risk view={view} />
         <Stage view={view} meId={meId} isHost={isHost} nick={nick} remaining={remaining} send={send} members={members} />
         {view.me.inGame && view.me.alive && <HandArea key={view.turn} view={view} meId={meId} nick={nick} send={send} />}
 
@@ -90,7 +96,9 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
       </main>
 
       <aside className="sg-side sg-right">
-        <SettingsPanel {...panelProps} section="secondary" />
+        <section className="kt-sidecard">
+          <SettingsPanel {...panelProps} section="secondary" />
+        </section>
       </aside>
 
       <BombOverlay view={view} meId={meId} nick={nick} remaining={remaining} send={send} />
@@ -104,21 +112,25 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
 
 function Seats({ view, members, meId }: { view: KittenView; members: Map<string, RoomPlayer>; meId: string }) {
   return (
-    <ol className="kt-seats" aria-label="Oyuncular">
+    <ol className="kt-seats" aria-label={s.play.seats}>
       {view.players.map((p) => {
         const m = members.get(p.id);
         const current = view.current === p.id && p.alive;
+        const name = p.id === meId ? s.play.me : (m?.nick ?? '?');
         return (
-          <li key={p.id} className="kt-seat" data-current={current || undefined} data-out={!p.alive || undefined} data-me={p.id === meId || undefined}>
-            <span className="kt-seat-avatar">
-              {m ? <Avatar avatar={m.avatar} nick={m.nick} size={34} dim={!m.connected || !p.alive} /> : null}
-              {current && view.turnsLeft > 1 && <span className="kt-seat-turns mono">×{view.turnsLeft}</span>}
-            </span>
+          <li
+            key={p.id}
+            className="kt-seat"
+            data-current={current || undefined}
+            data-out={!p.alive || undefined}
+            data-off={(m && !m.connected) || undefined}
+            aria-current={current || undefined}
+          >
             <span className="kt-seat-name">
-              {m?.nick ?? '?'}
-              {p.id === meId && <span className="dim"> ({s.play.you})</span>}
+              {name}
+              {current && ` ×${view.turnsLeft}`}
             </span>
-            <span className="kt-seat-cards mono">{p.alive ? <><span className="kt-pip" aria-hidden="true" />{p.cards}</> : s.play.out}</span>
+            <span className="kt-seat-cards">{p.alive ? s.play.cards(p.cards) : s.play.out}</span>
           </li>
         );
       })}
@@ -135,17 +147,31 @@ function Table({ view }: { view: KittenView }) {
         <div className="kt-stack" data-count={Math.min(view.deckCount, 3)}>
           <CardBack />
         </div>
-        <span className="kt-pile-label">
-          {s.play.deckLabel} <b className="mono">{view.deckCount}</b>
-        </span>
+        <span className="kt-pile-label">{s.play.deckN(view.deckCount)}</span>
       </div>
       <div className="kt-pile">
-        {view.discardTop ? <CardFace kind={view.discardTop} /> : <span className="kt-slot">{s.play.emptyDiscard}</span>}
-        <span className="kt-pile-label">
-          {s.play.discardLabel} <b className="mono">{view.discardCount}</b>
-        </span>
+        <span className="kt-discard">{view.discardTop ? <CardFace kind={view.discardTop} size="pile" /> : <span className="kt-slot">{s.play.emptyDiscard}</span>}</span>
+        <span className="kt-pile-label">{s.play.discardN(view.discardCount)}</span>
       </div>
     </section>
+  );
+}
+
+/** Patlama riski: destedeki bomba / destedeki kart (ikisi de herkese açık). */
+function Risk({ view }: { view: KittenView }) {
+  // Eski sunucu sürümü alanı göndermezse kuraldan türet (hayatta − 1).
+  const bombs = view.deckBombs ?? Math.max(0, view.players.filter((p) => p.alive).length - 1 - (view.phase === 'bomb' || view.phase === 'place' ? 1 : 0));
+  const pct = view.deckCount > 0 ? Math.min(100, Math.round((bombs / view.deckCount) * 100)) : 0;
+  return (
+    <div className="kt-risk">
+      <div className="kt-risk-head">
+        <span>{s.play.risk(bombs)}</span>
+        <span className="kt-risk-pct">%{pct}</span>
+      </div>
+      <div className="kt-bar" role="meter" aria-label={s.play.riskLabel} aria-valuemin={0} aria-valuemax={100} aria-valuenow={pct}>
+        <span style={{ width: `${pct}%` }} />
+      </div>
+    </div>
   );
 }
 
@@ -154,7 +180,7 @@ function Table({ view }: { view: KittenView }) {
 function Timer({ remaining, total }: { remaining: number; total: number }) {
   if (!total) return null;
   return (
-    <span className="kt-timer" aria-hidden="true">
+    <span className="kt-bar kt-timer" aria-hidden="true">
       <span style={{ width: `${Math.min(100, (remaining / total) * 100)}%` }} />
     </span>
   );
@@ -184,15 +210,15 @@ function Stage({
     return (
       <section className="kt-window" data-cancel={!p.willHappen || undefined} aria-live="polite">
         <div className="kt-window-head">
-          <span className="kt-count mono" data-low={secs <= 2 || undefined}>
+          <span className="kt-count" data-low={secs <= 2 || undefined}>
             {secs}
           </span>
           <div className="kt-window-text">
             <p className="kt-window-title">{s.play.pendingTitle(nick(p.by), ACTION_NAME[p.kind], p.target ? nick(p.target) : null)}</p>
-            {p.named && <p className="dim kt-small">{s.play.pendingNamed(CARD_NAME[p.named])}</p>}
+            {p.named && <p className="kt-small">{s.play.pendingNamed(CARD_NAME[p.named])}</p>}
             <p className="kt-window-state">
               {p.willHappen ? s.play.willHappen : s.play.willCancel}
-              {p.nopes.length > 0 && <span className="kt-nopes mono">{s.play.nopeCount(p.nopes.length)}</span>}
+              {p.nopes.length > 0 && <span className="kt-nopes">{s.play.nopeCount(p.nopes.length)}</span>}
             </p>
           </div>
           <span className="kt-window-cards">
@@ -204,12 +230,12 @@ function Stage({
         <Timer remaining={remaining} total={view.durationMs} />
         {view.me.alive &&
           (nope ? (
-            <button type="button" className="btn btn-lg btn-block kt-nope-btn" onClick={() => void send({ type: 'nope', pendingId: p.id, cardId: nope.id })}>
-              <Glyph kind="nope" size={22} />
+            <button type="button" className="btn btn-block kt-nope-btn" onClick={() => void send({ type: 'nope', pendingId: p.id, cardId: nope.id })}>
+              <Glyph kind="nope" size={24} />
               {s.play.nopeBtn}
             </button>
           ) : (
-            <p className="dim kt-small kt-center">{s.play.noNope}</p>
+            <p className="kt-small kt-center">{s.play.noNope}</p>
           ))}
       </section>
     );
@@ -217,7 +243,7 @@ function Stage({
 
   if (view.phase === 'favor' && view.favor && view.favor.to !== meId) {
     return (
-      <section className="kt-status">
+      <section className="kt-box">
         <p>{s.play.favorOther(nick(view.favor.from), nick(view.favor.to))}</p>
         <Timer remaining={remaining} total={view.durationMs} />
       </section>
@@ -227,9 +253,9 @@ function Stage({
   if (view.phase === 'pick') {
     if (view.discardPick) {
       return (
-        <section className="kt-status">
-          <p className="kt-status-title">{s.play.pickMe}</p>
-          <p className="dim kt-small">{s.play.pickHint}</p>
+        <section className="kt-box">
+          <p className="kt-box-title">{s.play.pickMe}</p>
+          <p className="kt-small">{s.play.pickHint}</p>
           <Timer remaining={remaining} total={view.durationMs} />
           <div className="kt-pickgrid">
             {view.discardPick.map((c) => (
@@ -242,7 +268,7 @@ function Stage({
       );
     }
     return (
-      <section className="kt-status">
+      <section className="kt-box">
         <p>{s.play.pickOther(nick(view.current))}</p>
         <Timer remaining={remaining} total={view.durationMs} />
       </section>
@@ -253,25 +279,27 @@ function Stage({
     const mine = view.current === meId;
     const disconnected = members.get(view.current)?.connected === false;
     return (
-      <section className="kt-status" data-mine={mine || undefined}>
-        {mine ? <p className="kt-status-title">{s.play.myTurnsLeft(view.turnsLeft)}</p> : <p>{[s.play.turnOf(nick(view.current)), s.play.turnsLeft(view.turnsLeft)].filter(Boolean).join(', ')}</p>}
-        {view.myBomb !== null && <p className="kt-secret kt-small">{s.play.myBomb(view.myBomb)}</p>}
-        <Timer remaining={remaining} total={view.durationMs} />
-        {isHost && !mine && disconnected && (
-          <div className="kt-hostskip">
-            <p className="dim kt-small">{s.play.hostSkipHint}</p>
-            <button type="button" className="btn btn-outline" onClick={() => void send({ type: 'skipTurn' })}>
-              {s.play.hostSkip(nick(view.current))}
-            </button>
-          </div>
-        )}
-      </section>
+      <>
+        <section className="kt-status" data-mine={mine || undefined}>
+          <p>{mine ? s.play.myTurnsLeft(view.turnsLeft) : [s.play.turnOf(nick(view.current)), s.play.turnsLeft(view.turnsLeft)].filter(Boolean).join(', ')}</p>
+          {view.myBomb !== null && <p className="kt-secret">{s.play.myBomb(view.myBomb)}</p>}
+          <Timer remaining={remaining} total={view.durationMs} />
+          {isHost && !mine && disconnected && (
+            <div className="kt-hostskip">
+              <p className="kt-small">{s.play.hostSkipHint}</p>
+              <button type="button" className="btn btn-dark" onClick={() => void send({ type: 'skipTurn' })}>
+                {s.play.hostSkip(nick(view.current))}
+              </button>
+            </div>
+          )}
+        </section>
+      </>
     );
   }
 
   // bomb / place: tam ekran katman gösteriyor; burada kısa bir durum.
   return (
-    <section className="kt-status">
+    <section className="kt-box">
       <p>{view.phase === 'place' ? s.play.placeOther(nick(view.current)) : s.play.bombOther(nick(view.current))}</p>
     </section>
   );
@@ -315,38 +343,41 @@ function HandArea({ view, meId, nick, send }: { view: KittenView; meId: string; 
   return (
     <section className="kt-handarea" data-active={playing || giving || undefined}>
       {giving && (
-        <div className="kt-ask">
-          <p className="kt-status-title">{s.play.favorMe(nick(view.favor!.from))}</p>
-          <p className="dim kt-small">{s.play.favorMeHint}</p>
+        <div className="kt-box kt-ask">
+          <p className="kt-box-title">{s.play.favorMe(nick(view.favor!.from))}</p>
+          <p className="kt-small">{s.play.favorMeHint}</p>
         </div>
       )}
 
       <div className="kt-hand-head">
         <h2 className="kt-hand-title">
-          {s.play.hand} <span className="mono dim">{hand.length}</span>
+          {s.play.hand} {hand.length}
         </h2>
-        {live.length > 0 && !giving && (
-          <button type="button" className="btn btn-ghost kt-clear" onClick={() => setSelected([])}>
+        {live.length > 0 && !giving ? (
+          <button type="button" className="kt-clear" onClick={() => setSelected([])}>
             {s.play.clear}
           </button>
+        ) : (
+          playing && <span className="kt-hand-hint">{s.play.selectHint}</span>
         )}
       </div>
 
       {hand.length === 0 ? (
-        <p className="dim kt-small">{s.play.handEmpty}</p>
+        <p className="kt-small">{s.play.handEmpty}</p>
       ) : (
         <ul className="kt-hand">
           {hand.map((c) => (
             <li key={c.id}>
               <button
                 type="button"
-                className="kt-cardbtn"
+                className="kt-hcard"
+                data-kind={c.kind}
                 aria-pressed={live.includes(c.id)}
-                aria-label={CARD_NAME[c.kind]}
                 disabled={!playing && !giving}
                 onClick={() => toggle(c)}
               >
-                <CardFace kind={c.kind} />
+                {CARD_NAME[c.kind]}
+                <span className="kt-hcard-fx">{CARD_FX[c.kind]}</span>
               </button>
             </li>
           ))}
@@ -354,50 +385,48 @@ function HandArea({ view, meId, nick, send }: { view: KittenView; meId: string; 
       )}
 
       {giving && live[0] && (
-        <button type="button" className="btn btn-primary btn-lg btn-block" onClick={() => void send({ type: 'give', cardId: live[0] })}>
+        <button type="button" className="btn btn-primary btn-block kt-bigbtn" onClick={() => void send({ type: 'give', cardId: live[0] })}>
           {s.play.giveBtn(CARD_NAME[cards[0]!.kind])}
         </button>
       )}
 
       {playing && (
         <div className="kt-actions">
-          {live.length === 0 ? (
-            <p className="dim kt-small">{s.play.selectHint}</p>
-          ) : !combo ? (
-            <p className="kt-small kt-warn">{s.play.invalid}</p>
-          ) : (
-            <>
-              {needsTarget && (
-                <div className="kt-choose">
-                  <span className="kt-choose-label">{s.play.chooseTarget}</span>
-                  <div className="chips">
-                    {targets.map((p) => (
-                      <button key={p.id} type="button" className="chip" aria-pressed={target === p.id} onClick={() => setTarget(p.id)}>
-                        {nick(p.id)}
-                        <span className="chip-count">{p.cards}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-              {combo === 'triple' && (
-                <div className="kt-choose">
-                  <span className="kt-choose-label">{s.play.chooseNamed}</span>
-                  <div className="chips">
-                    {CARD_KINDS.filter((k) => k !== 'bomb').map((k) => (
-                      <button key={k} type="button" className="chip" aria-pressed={named === k} onClick={() => setNamed(k)}>
-                        {CARD_NAME[k]}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-              <button type="button" className="btn btn-outline btn-lg btn-block" disabled={!ready} onClick={() => void play()}>
-                {s.play.playAs(ACTION_NAME[combo])}
-              </button>
-            </>
+          {combo && needsTarget && (
+            <div className="kt-choose" role="group" aria-labelledby="kt-choose-target">
+              <span id="kt-choose-target" className="kt-choose-label">
+                {s.play.chooseTarget}
+              </span>
+              <div className="chips">
+                {targets.map((p) => (
+                  <button key={p.id} type="button" className="chip" aria-pressed={target === p.id} onClick={() => setTarget(p.id)}>
+                    {nick(p.id)}
+                    <span className="chip-count">{p.cards}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
           )}
-          <button type="button" className="btn btn-primary btn-lg btn-block kt-draw" onClick={() => void send({ type: 'draw', turn: view.turn })}>
+          {combo === 'triple' && (
+            <div className="kt-choose" role="group" aria-labelledby="kt-choose-named">
+              <span id="kt-choose-named" className="kt-choose-label">
+                {s.play.chooseNamed}
+              </span>
+              <div className="chips">
+                {CARD_KINDS.filter((k) => k !== 'bomb').map((k) => (
+                  <button key={k} type="button" className="chip" aria-pressed={named === k} onClick={() => setNamed(k)}>
+                    {CARD_NAME[k]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+          {live.length > 0 && (
+            <button type="button" className="kt-playsel" disabled={!ready} onClick={() => void play()}>
+              {combo ? s.play.playAs(ACTION_NAME[combo]) : s.play.invalid}
+            </button>
+          )}
+          <button type="button" className="btn btn-yellow btn-block kt-draw" onClick={() => void send({ type: 'draw', turn: view.turn })}>
             {s.play.draw}
           </button>
         </div>
@@ -408,7 +437,10 @@ function HandArea({ view, meId, nick, send }: { view: KittenView; meId: string; 
 
 // ---------- Bomba ve geri koyma ----------
 
+type Spot = 'top' | 'second' | 'bottom' | 'random';
+
 function BombOverlay({ view, meId, nick, remaining, send }: { view: KittenView; meId: string; nick: Nick; remaining: number; send: Send }) {
+  const [spot, setSpot] = useState<Spot | null>('random');
   const [index, setIndex] = useState(0);
   const mine = view.current === meId;
   if (view.phase !== 'bomb' && view.phase !== 'place') return null;
@@ -416,14 +448,15 @@ function BombOverlay({ view, meId, nick, remaining, send }: { view: KittenView; 
   const max = view.deckCount;
 
   if (!mine) {
+    const placing = view.phase === 'place';
     return (
-      <div className="kt-overlay kt-overlay-soft" role="status">
-        <div className="kt-overlay-body">
-          <span className="kt-bombglyph" data-calm={view.phase === 'place' || undefined}>
-            <Glyph kind={view.phase === 'place' ? 'defuse' : 'bomb'} size={84} />
+      <div className="kt-overlay" data-tone={placing ? 'night' : 'bomb'} role="status">
+        <div className="kt-overlay-body kt-overlay-center">
+          <span className="kt-bombcard kt-bombcard-sm" data-calm={placing || undefined}>
+            {placing ? <Glyph kind="defuse" size={64} /> : <BombIcon size={64} sparks />}
           </span>
-          <p className="kt-overlay-title">{view.phase === 'place' ? s.play.placeOther(nick(view.current)) : s.play.bombOther(nick(view.current))}</p>
-          {view.phase === 'bomb' && <p className="muted">{s.play.bombOtherHint}</p>}
+          <p className="kt-overlay-title">{placing ? s.play.placeOther(nick(view.current)) : s.play.bombOther(nick(view.current))}</p>
+          {!placing && <p className="kt-overlay-hint">{s.play.bombOtherHint}</p>}
         </div>
       </div>
     );
@@ -431,69 +464,72 @@ function BombOverlay({ view, meId, nick, remaining, send }: { view: KittenView; 
 
   if (view.phase === 'bomb') {
     return (
-      <div className="kt-overlay kt-overlay-bomb" role="alertdialog" aria-labelledby="kt-bomb-title">
-        <div className="kt-overlay-body">
-          <span className="kt-bombglyph">
-            <Glyph kind="bomb" size={120} />
+      <div className="kt-overlay" data-tone="bomb" role="alertdialog" aria-labelledby="kt-bomb-title" aria-describedby="kt-bomb-hint">
+        <div className="kt-overlay-body kt-overlay-center">
+          <span className="kt-bombcard">
+            <BombIcon size={90} sparks />
           </span>
           <h2 id="kt-bomb-title" className="kt-overlay-title kt-big">
             {s.play.bombMe}
           </h2>
-          <p className="muted">{s.play.bombMeHint}</p>
-          <button type="button" className="btn btn-primary btn-lg kt-defuse-btn" autoFocus onClick={() => void send({ type: 'defuse' })}>
-            <Glyph kind="defuse" size={22} />
-            {s.play.defuseBtn}
-            <span className="mono kt-btn-secs">{secs}</span>
+          <p id="kt-bomb-hint" className="kt-overlay-hint kt-bomb-hint">
+            {s.play.bombMeHint}
+          </p>
+          <button type="button" className="btn btn-primary btn-block kt-bigbtn" autoFocus onClick={() => void send({ type: 'defuse' })}>
+            {s.play.defuseBtn} · {secs}
           </button>
         </div>
       </div>
     );
   }
 
-  const at = Math.min(index, max);
-  const label = at === 0 ? s.play.placeTop : at === max ? s.play.placeBottom : s.play.placeAt(at + 1);
+  const fixed: Record<Exclude<Spot, 'random'>, number> = { top: 0, second: Math.min(1, max), bottom: max };
+  const at = spot && spot !== 'random' ? fixed[spot] : Math.min(index, max);
+  const labelAt = (i: number) => (i === 0 ? s.play.placeTop : i === max ? s.play.placeBottom : s.play.placeAt(i + 1));
+  const label = spot === 'random' ? s.play.placeRandom : labelAt(at);
+  const spots: [Spot, string][] = [
+    ['top', s.play.placeTop],
+    ...(max >= 2 ? ([['second', s.play.placeAt(2)]] as [Spot, string][]) : []),
+    ['bottom', s.play.placeBottom],
+    ['random', s.play.placeRandom],
+  ];
+  function place() {
+    const index = spot === 'random' ? Math.floor(Math.random() * (max + 1)) : at;
+    void send({ type: 'place', index });
+  }
   return (
-    <div className="kt-overlay kt-overlay-place" role="dialog" aria-labelledby="kt-place-title">
-      <div className="kt-overlay-body kt-place">
-        <h2 id="kt-place-title" className="kt-overlay-title">
+    <div className="kt-overlay" data-tone="night" role="dialog" aria-labelledby="kt-place-title">
+      <div className="kt-overlay-body">
+        <h2 id="kt-place-title" className="kt-overlay-title kt-mid">
           {s.play.placeMe}
         </h2>
-        <p className="muted kt-small">{s.play.placeHint}</p>
-        <div className="kt-place-deck" aria-hidden="true">
-          {Array.from({ length: Math.min(max + 1, 12) }, (_, i) => {
-            const pos = max <= 11 ? i : Math.round((i / 11) * max);
-            return <span key={i} className="kt-place-slot" data-on={pos === at || (max > 11 && Math.abs(pos - at) < max / 22) || undefined} />;
-          })}
-        </div>
-        <input
-          className="kt-range"
-          type="range"
-          min={0}
-          max={max}
-          value={at}
-          aria-label={s.play.placeMe}
-          aria-valuetext={label}
-          onChange={(e) => setIndex(Number(e.target.value))}
-        />
-        <div className="chips kt-place-quick">
-          <button type="button" className="chip" aria-pressed={at === 0} onClick={() => setIndex(0)}>
-            {s.play.placeTop}
-          </button>
-          {max >= 2 && (
-            <button type="button" className="chip" aria-pressed={at === 1} onClick={() => setIndex(1)}>
-              {s.play.placeAt(2)}
+        <p className="kt-overlay-hint">{s.play.placeHint}</p>
+        <div className="kt-spots">
+          {spots.map(([k, l]) => (
+            <button key={k} type="button" className="kt-spot" aria-pressed={spot === k} onClick={() => setSpot(k)}>
+              {l}
             </button>
-          )}
-          <button type="button" className="chip" aria-pressed={at === max} onClick={() => setIndex(max)}>
-            {s.play.placeBottom}
-          </button>
-          <button type="button" className="chip" onClick={() => setIndex(Math.floor(Math.random() * (max + 1)))}>
-            {s.play.placeRandom}
-          </button>
+          ))}
         </div>
-        <button type="button" className="btn btn-primary btn-lg btn-block" onClick={() => void send({ type: 'place', index: at })}>
-          {s.play.placeBtn(label)}
-          <span className="mono kt-btn-secs">{secs}</span>
+        {max > 2 && (
+          <label className="kt-exact">
+            <span className="kt-choose-label">{s.play.placeExact}</span>
+            <input
+              className="kt-range"
+              type="range"
+              min={0}
+              max={max}
+              value={at}
+              aria-valuetext={labelAt(at)}
+              onChange={(e) => {
+                setSpot(null);
+                setIndex(Number(e.target.value));
+              }}
+            />
+          </label>
+        )}
+        <button type="button" className="btn btn-yellow btn-block kt-bigbtn" onClick={place}>
+          {s.play.placeBtn(label)} · {secs}
         </button>
       </div>
     </div>
@@ -522,12 +558,13 @@ function Flash({ view, meId, nick }: { view: KittenView; meId: string; nick: Nic
     );
   }
   return (
-    <div className="kt-overlay kt-boom" role="alert" onClick={() => setShow(null)}>
-      <div className="kt-overlay-body">
-        <span className="kt-boom-ring" aria-hidden="true" />
-        <Glyph kind="bomb" size={110} />
+    <div className="kt-overlay kt-boom" data-tone="bomb" role="alert" onClick={() => setShow(null)}>
+      <div className="kt-overlay-body kt-overlay-center">
+        <span className="kt-bombcard">
+          <BombIcon size={90} sparks />
+        </span>
         <p className="kt-overlay-title kt-big">{show.by === meId ? s.play.boomMe : s.play.boom(nick(show.by))}</p>
-        <p className="muted">{s.play.boomHint}</p>
+        <p className="kt-overlay-hint kt-bomb-hint">{s.play.boomHint}</p>
       </div>
     </div>
   );
@@ -542,7 +579,7 @@ function Future({ view }: { view: KittenView }) {
   if (!open) {
     return (
       <button type="button" className="kt-peekchip" onClick={() => setReopen(true)}>
-        <Glyph kind="future" size={18} />
+        <Glyph kind="future" size={20} />
         {s.play.futureAgain}
       </button>
     );
@@ -552,21 +589,23 @@ function Future({ view }: { view: KittenView }) {
     setReopen(false);
   };
   return (
-    <div className="kt-overlay kt-overlay-soft" role="dialog" aria-labelledby="kt-future-title" onClick={close}>
-      <div className="kt-overlay-body kt-future" onClick={(e) => e.stopPropagation()}>
-        <h2 id="kt-future-title" className="kt-overlay-title">
+    <div className="kt-overlay" data-tone="night" role="dialog" aria-labelledby="kt-future-title" onClick={close}>
+      <div className="kt-overlay-body" onClick={(e) => e.stopPropagation()}>
+        <h2 id="kt-future-title" className="kt-overlay-title kt-mid">
           {s.play.futureTitle}
         </h2>
-        <p className="muted kt-small">{s.play.futureHint}</p>
+        <p className="kt-overlay-hint">{s.play.futureHint}</p>
         <ol className="kt-future-row">
           {peek.cards.map((k, i) => (
             <li key={i}>
-              <CardFace kind={k} size="big" />
-              <span className="kt-small dim">{s.play.futureSlot(i)}</span>
+              <span className="kt-peek" data-kind={k}>
+                {CARD_NAME[k]}
+              </span>
+              <span className="kt-peek-slot">{s.play.futureSlot(i)}</span>
             </li>
           ))}
         </ol>
-        <button type="button" className="btn btn-primary btn-lg btn-block" autoFocus onClick={close}>
+        <button type="button" className="btn btn-yellow btn-block kt-okbtn" autoFocus onClick={close}>
           {s.play.futureClose}
         </button>
       </div>
@@ -604,7 +643,7 @@ function HowTo({ fiveCats }: { fiveCats: boolean }) {
       <ol className="howto-list">
         {s.howto.steps.map(([title, body], i) => (
           <li key={title}>
-            <span className="howto-n mono">{i + 1}</span>
+            <span className="howto-n">{i + 1}</span>
             <div>
               <h3>{title}</h3>
               <p>{body}</p>
@@ -634,7 +673,7 @@ function HowTo({ fiveCats }: { fiveCats: boolean }) {
           </dt>
           <dd>
             {s.howto.catsText} {fiveCats && s.howto.five}
-            <span className="kt-catnames dim">{CAT_KINDS.map((k) => CARD_NAME[k]).join(', ')}</span>
+            <span className="kt-catnames">{CAT_KINDS.map((k) => CARD_NAME[k]).join(', ')}</span>
           </dd>
         </div>
       </dl>
@@ -642,35 +681,89 @@ function HowTo({ fiveCats }: { fiveCats: boolean }) {
   );
 }
 
-function Podium({ view, members, meId }: { view: KittenView; members: Map<string, RoomPlayer>; meId: string }) {
+/** Sunucudaki oyun sonu süresi (PODIUM_MS); çubuk bu sürede dolar. */
+const PODIUM_MS = 10_000;
+
+function Podium({ view, members, room }: { view: KittenView; members: Map<string, RoomPlayer>; room: { code: string } }) {
   const winner = view.winner ? members.get(view.winner) : null;
+  // Son patlayan ikinci olur; hayatta kalan birinci.
   const ranked = [...view.players].sort((a, b) => (b.out ?? 99) - (a.out ?? 99));
+  const [first, second, ...rest] = ranked;
+  const half = Math.ceil(rest.length / 2);
+  const nick = (id: string) => members.get(id)?.nick ?? '?';
+  // Hayatta kalanlar (erken bitişte birden çok) ortak birinci; patlayanlar sonra patlayanların ardından.
+  const place = (p: (typeof ranked)[number]) => (p.out === null ? 1 : 1 + ranked.filter((q) => q.out === null || q.out > p.out!).length);
   return (
-    <main className="col podium kt-podium">
-      <span className="wordmark" aria-hidden="true">
-        songie
+    <main className="col kt-end">
+      <span className="kt-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
       </span>
-      <div className="podium-winner">
-        {view.winner && <Glyph kind="defuse" size={56} />}
-        <h1 className="podium-name">{winner ? s.podium.winner(winner.nick) : s.podium.none}</h1>
-        <p className="dim">{s.podium.title}</p>
+      <div className="kt-end-top">
+        <span>{s.name}</span>
+        <span className="kt-code">{room.code}</span>
       </div>
-      <section className="kt-podium-list">
-        <h2 className="kt-side-title">{s.podium.order}</h2>
-        <ol className="sg-score-list">
-          {ranked.map((p) => {
-            const m = members.get(p.id);
-            return (
-              <li key={p.id} className="sg-score" data-me={p.id === meId || undefined} data-first={p.id === view.winner || undefined}>
-                {m && <Avatar avatar={m.avatar} nick={m.nick} size={26} />}
-                <span className="sg-score-name">{m?.nick ?? '?'}</span>
-                <span className="sg-score-pts mono">{p.out === null ? s.podium.alive : `${p.out}.`}</span>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-      <p className="dim podium-back">{s.podium.back}</p>
+      <div className="kt-end-head">
+        <span className="kt-end-sticker">{s.podium.gameOver}</span>
+        <h1 className="display kt-end-title">{winner ? s.podium.winnerTitle(winner.nick) : s.podium.none}</h1>
+      </div>
+      {first && (
+        <div className="kt-end-scores">
+          <div className="kt-end-card kt-end-first">
+            <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+              <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="var(--yellow)" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
+            </svg>
+            <span className="kt-end-num">{place(first)}</span>
+            <span className="kt-end-name">{nick(first.id)}</span>
+            <span className="kt-end-sub">{first.out === null ? s.podium.survivor : s.podium.outAt(first.out)}</span>
+          </div>
+          {second && (
+            <>
+              <span className="kt-end-dash" aria-hidden="true">
+                –
+              </span>
+              <div className="kt-end-card kt-end-second">
+                <span className="kt-end-num">{place(second)}</span>
+                <span className="kt-end-name">{nick(second.id)}</span>
+                <span className="kt-end-sub">{second.out === null ? s.podium.survivor : s.podium.outAt(second.out)}</span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+      {rest.length > 0 && (
+        <div className="kt-end-rosters">
+          {[rest.slice(0, half), rest.slice(half)].map(
+            (col, i) =>
+              col.length > 0 && (
+                <ol key={i} className="kt-end-roster">
+                  {col.map((p) => {
+                    const m = members.get(p.id);
+                    return (
+                      <li key={p.id}>
+                        {m && <Avatar avatar={m.avatar} nick={m.nick} size={28} />}
+                        <span className="kt-end-roster-name">{m?.nick ?? '?'}</span>
+                        <span className="kt-end-roster-rank">{place(p)}.</span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ),
+          )}
+        </div>
+      )}
+      <div className="kt-end-spacer" />
+      <div className="kt-end-foot">
+        <div className="kt-end-bar" aria-hidden="true">
+          <div style={{ animationDuration: `${PODIUM_MS}ms` }} />
+        </div>
+        <p className="kt-end-note" role="status">
+          {s.podium.back}
+        </p>
+      </div>
     </main>
   );
 }

@@ -170,6 +170,8 @@ export interface FrequencyView {
   serverNow: number;
   endsAt: number;
   durationMs: number;
+  /** Sonuç ekranının süresi (lobiye dönüş çubuğu için). */
+  podiumMs: number;
 }
 
 export const customCardSchema = z.object({

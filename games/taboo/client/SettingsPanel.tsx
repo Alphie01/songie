@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useId, useState, type FormEvent } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import {
@@ -11,13 +11,16 @@ import {
 } from '../shared/index.js';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: React.ReactNode }) {
+function Group({ title, hint, row = false, children }: { title: string; hint?: string; row?: boolean; children: React.ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div role="group" aria-labelledby={id} className="tbs-group" data-row={row || undefined}>
+      <span id={id} className="tbs-legend">
+        {title}
+      </span>
+      <div className="tbs-body">{children}</div>
+      {hint && <p className="tbs-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -64,50 +67,49 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
 
   function TeamBox({ team, ids }: { team: TeamId | null; ids: string[] }) {
     return (
-      <div className="tb-teambox" data-team={team ?? 'none'}>
-        <div className="tb-teambox-head">
-          <span className="tb-team-name">{team ? s.team[team] : s.settings.unassigned}</span>
-          <span className="mono dim">{ids.length}</span>
-        </div>
+      <div className="tbs-team tb-teambox" data-team={team ?? 'none'}>
+        <span className="tbs-team-name">
+          {team ? s.team[team] : s.settings.unassigned}
+          <span className="tbs-team-count">{ids.length}</span>
+        </span>
         {ids.length === 0 ? (
-          <p className="sgs-hint">{s.settings.empty}</p>
+          <span className="tbs-team-empty">{s.settings.empty}</span>
         ) : (
-          <div className="tb-chips">
-            {ids.map((id) => {
-              const p = byId.get(id);
-              if (!p) return null;
-              return (
-                <button key={id} type="button" className="tb-player" disabled={!editable} onClick={() => cycle(id)}>
-                  <Avatar avatar={p.avatar} nick={p.nick} size={22} />
-                  {p.nick}
-                </button>
-              );
-            })}
-          </div>
+          ids.map((id) => {
+            const p = byId.get(id);
+            if (!p) return null;
+            return (
+              <button key={id} type="button" className="tbs-player tb-player" data-off={!p.connected || undefined} disabled={!editable} onClick={() => cycle(id)}>
+                <Avatar avatar={p.avatar} nick={p.nick} size={26} />
+                <span className="tbs-player-nick">{p.nick}</span>
+              </button>
+            );
+          })
         )}
       </div>
     );
   }
 
   return (
-    <div className="sgs">
+    <div className="sgs tbs">
       {showPrimary && (
         <>
-          {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
-          <Group
-            title={s.settings.teams}
-            hint={teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}
-          >
-            <TeamBox team="a" ids={teamA} />
-            <TeamBox team="b" ids={teamB} />
-            {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
+          {!editable && <p className="tbs-readonly">{s.settings.readOnly}</p>}
+          <div className="tbs-teams-head">
+            <span className="tbs-legend">{s.settings.teams}</span>
             {editable && (
-              <button type="button" className="btn btn-ghost sgs-browse" onClick={shuffleTeams}>
+              <button type="button" className="tbs-shuffle" onClick={shuffleTeams}>
                 <Icon name="shuffle" size={14} />
                 {s.settings.shuffle}
               </button>
             )}
-          </Group>
+          </div>
+          <div className="tbs-teams">
+            <TeamBox team="a" ids={teamA} />
+            <TeamBox team="b" ids={teamB} />
+            {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
+          </div>
+          <p className="tbs-hint">{teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}</p>
 
           <Group title={s.settings.categories}>
             <div className="chips">
@@ -135,7 +137,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
 
       {showSecondary && (
         <>
-          <Group title={s.settings.seconds}>
+          <Group row title={s.settings.seconds}>
             <div className="chips">
               {SECONDS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.seconds === n} disabled={!editable} onClick={() => set({ seconds: n })}>
@@ -145,7 +147,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           </Group>
 
-          <Group title={s.settings.passes}>
+          <Group row title={s.settings.passes}>
             <div className="chips">
               {PASS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.passes === n} disabled={!editable} onClick={() => set({ passes: n })}>
@@ -155,7 +157,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           </Group>
 
-          <Group title={s.settings.turns} hint={s.settings.turnsHint(settings.turns)}>
+          <Group row title={s.settings.turns} hint={s.settings.turnsHint(settings.turns)}>
             <div className="chips">
               {TURN_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.turns === n} disabled={!editable} onClick={() => set({ turns: n })}>
@@ -165,7 +167,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           </Group>
 
-          <Group title={s.settings.penalty} hint={s.settings.penaltyHint}>
+          <Group row title={s.settings.penalty} hint={s.settings.penaltyHint}>
             <button
               type="button"
               className="toggle"
@@ -212,7 +214,7 @@ function AddCard({ api }: { api: SettingsPanelProps<TabooSettings>['api'] }) {
 
   return (
     <Group title={s.settings.addCard} hint={s.settings.addCardHint}>
-      <button type="button" className="btn btn-ghost sgs-browse" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+      <button type="button" className="tbs-shuffle tbs-addcard-toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         <Icon name="chevron" size={14} style={{ transform: open ? 'rotate(180deg)' : undefined }} />
         {s.settings.addCard}
       </button>
@@ -230,11 +232,11 @@ function AddCard({ api }: { api: SettingsPanelProps<TabooSettings>['api'] }) {
               onChange={(e) => setTaboo((arr) => arr.map((x, j) => (j === i ? e.target.value : x)))}
             />
           ))}
-          <button className="btn btn-outline" disabled={busy || !word.trim() || taboo.some((t) => !t.trim())}>
+          <button className="btn btn-yellow" disabled={busy || !word.trim() || taboo.some((t) => !t.trim())}>
             {busy ? s.settings.saving : s.settings.save}
           </button>
           {msg && (
-            <p className={msg.error ? 'error-text' : 'sgs-hint'} role="status">
+            <p className={msg.error ? 'error-text' : 'tbs-hint'} role="status">
               {msg.text}
             </p>
           )}

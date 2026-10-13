@@ -1,25 +1,35 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { GameApi, SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
 import { ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type MostLikelySettings } from '../shared/index.js';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Group({ title, hint, row, children }: { title: string; hint?: string; row?: boolean; children: ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div className="ml-set" role="group" aria-labelledby={id}>
+      <div className="ml-set-line" data-row={row || undefined}>
+        <span id={id} className="ml-set-label">
+          {title}
+        </span>
+        {children}
+      </div>
+      {hint && <p className="ml-set-hint">{hint}</p>}
+    </div>
   );
 }
 
-function Toggle({ on, label, disabled, onClick }: { on: boolean; label: string; disabled: boolean; onClick(): void }) {
+/** Ayar adı solda, anahtar sağda; tüm satır tek düğme. */
+function Toggle({ on, label, disabled, onClick, hint }: { on: boolean; label: string; disabled: boolean; onClick(): void; hint: string }) {
   return (
-    <button type="button" className="toggle" role="switch" aria-checked={on} disabled={disabled} onClick={onClick}>
-      {label}
-      <span className="toggle-knob" aria-hidden="true" />
-    </button>
+    <div className="ml-set">
+      <button type="button" className="toggle ml-toggle" role="switch" aria-checked={on} disabled={disabled} onClick={onClick}>
+        <span className="ml-set-label">{label}</span>
+        <span className="ml-toggle-state">{on ? s.settings.on : s.settings.off}</span>
+        <span className="toggle-knob" aria-hidden="true" />
+      </button>
+      <p className="ml-set-hint">{hint}</p>
+    </div>
   );
 }
 
@@ -43,10 +53,10 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
   }, [api, showPrimary, reload]);
 
   return (
-    <div className="sgs">
+    <div className="ml-sets">
       {showPrimary && (
         <>
-          {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
+          {!editable && <p className="ml-set-hint">{s.settings.readOnly}</p>}
           <Group title={s.settings.categories} hint={s.settings.categoriesHint}>
             <div className="chips">
               {(categories ?? []).map((c) => (
@@ -69,7 +79,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             </div>
           </Group>
 
-          <Group title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
+          <Group row title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
             <div className="chips">
               {ROUND_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.rounds === n} disabled={!editable} onClick={() => set({ rounds: n })}>
@@ -85,7 +95,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
 
       {showSecondary && (
         <>
-          <Group title={s.settings.seconds} hint={s.settings.secondsHint(settings.seconds)}>
+          <Group row title={s.settings.seconds} hint={s.settings.secondsHint(settings.seconds)}>
             <div className="chips">
               {SECONDS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.seconds === n} disabled={!editable} onClick={() => set({ seconds: n })}>
@@ -95,32 +105,27 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             </div>
           </Group>
 
-          <Group title={s.settings.anonymous} hint={s.settings.anonymousHint(settings.anonymous)}>
-            <Toggle
-              on={settings.anonymous}
-              label={settings.anonymous ? s.settings.on : s.settings.off}
-              disabled={!editable}
-              onClick={() => set({ anonymous: !settings.anonymous })}
-            />
-          </Group>
-
-          <Group title={s.settings.selfVote} hint={s.settings.selfVoteHint}>
-            <Toggle
-              on={settings.selfVote}
-              label={settings.selfVote ? s.settings.allowed : s.settings.notAllowed}
-              disabled={!editable}
-              onClick={() => set({ selfVote: !settings.selfVote })}
-            />
-          </Group>
-
-          <Group title={s.settings.predict} hint={s.settings.predictHint}>
-            <Toggle
-              on={settings.predict}
-              label={settings.predict ? s.settings.on : s.settings.off}
-              disabled={!editable}
-              onClick={() => set({ predict: !settings.predict })}
-            />
-          </Group>
+          <Toggle
+            on={settings.anonymous}
+            label={s.settings.anonymous}
+            hint={s.settings.anonymousHint(settings.anonymous)}
+            disabled={!editable}
+            onClick={() => set({ anonymous: !settings.anonymous })}
+          />
+          <Toggle
+            on={settings.selfVote}
+            label={s.settings.selfVote}
+            hint={s.settings.selfVoteHint}
+            disabled={!editable}
+            onClick={() => set({ selfVote: !settings.selfVote })}
+          />
+          <Toggle
+            on={settings.predict}
+            label={s.settings.predict}
+            hint={s.settings.predictHint}
+            disabled={!editable}
+            onClick={() => set({ predict: !settings.predict })}
+          />
         </>
       )}
     </div>
@@ -152,14 +157,14 @@ function AddPrompt({ api, onAdded }: { api: GameApi; onAdded(): void }) {
 
   return (
     <Group title={s.settings.addPrompt} hint={s.settings.addPromptHint}>
-      <button type="button" className="btn btn-ghost sgs-browse" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+      <button type="button" className="ml-set-open" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         <Icon name="chevron" size={14} style={{ transform: open ? 'rotate(180deg)' : undefined }} />
         {s.settings.addPrompt}
       </button>
       {open && (
         <form className="ml-add" onSubmit={submit}>
           <label className="ml-add-frame">
-            <span className="dim">{s.prefix}</span>
+            <span>{s.prefix}</span>
             <input
               className="input"
               value={text}
@@ -168,13 +173,13 @@ function AddPrompt({ api, onAdded }: { api: GameApi; onAdded(): void }) {
               aria-label={s.settings.promptLabel}
               onChange={(e) => setText(e.target.value)}
             />
-            <span className="dim">{s.suffix}</span>
+            <span>{s.suffix}</span>
           </label>
-          <button className="btn btn-outline" disabled={busy || text.trim().length < 3}>
+          <button className="btn btn-yellow" disabled={busy || text.trim().length < 3}>
             {busy ? s.settings.saving : s.settings.save}
           </button>
           {msg && (
-            <p className={msg.error ? 'error-text' : 'sgs-hint'} role="status">
+            <p className={msg.error ? 'error-text' : 'ml-set-hint'} role="status">
               {msg.text}
             </p>
           )}

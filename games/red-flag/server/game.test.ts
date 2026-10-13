@@ -250,6 +250,51 @@ describe('red-flag: süre ve akış', () => {
     expect(h.view('ali')).toMatchObject({ phase: 'vote', round: 2 });
   });
 
+  it('moves on by itself when the discussion time runs out', async () => {
+    const { h, item } = setup({ discuss: 15 });
+    await h.start();
+    const id = item();
+    for (const p of ['ali', 'ayse', 'cem']) await h.act(p, { type: 'vote', itemId: id, vote: 'green' });
+    const v = h.view('ayse');
+    expect(v.phase).toBe('reveal');
+    expect(v.discussMs).toBe(15_000);
+    expect(v.discussEndsAt - v.serverNow).toBe(15_000);
+    // Bir kişinin hazır olması yetmez; süre işler.
+    await h.act('ayse', { type: 'ready', round: 1 });
+    h.advance(14_000);
+    expect(h.view('ali').phase).toBe('reveal');
+    h.advance(1_000);
+    expect(h.view('ali')).toMatchObject({ phase: 'vote', round: 1, discussEndsAt: 0 });
+    expect(item()).not.toBe(id);
+  });
+
+  it('keeps the discussion open when it is untimed', async () => {
+    const { h, item } = setup({ discuss: 0 });
+    await h.start();
+    const id = item();
+    for (const p of ['ali', 'ayse', 'cem']) await h.act(p, { type: 'vote', itemId: id, vote: 'red' });
+    expect(h.view('ali')).toMatchObject({ phase: 'reveal', discussEndsAt: 0, discussMs: 0 });
+    h.advance(120_000);
+    expect(h.view('ali').phase).toBe('reveal');
+    // Herkes hazır olunca geçilir; süreli tartışmada da hazır olan oda erken geçer.
+    for (const p of ['ali', 'ayse', 'cem']) await h.act(p, { type: 'ready', round: 1 });
+    expect(h.view('ali')).toMatchObject({ phase: 'vote', round: 1 });
+  });
+
+  it('an all-ready room ends a timed discussion early', async () => {
+    const { h, item } = setup({ discuss: 30 });
+    await h.start();
+    const id = item();
+    for (const p of ['ali', 'ayse', 'cem']) await h.act(p, { type: 'vote', itemId: id, vote: 'red' });
+    for (const p of ['ali', 'ayse', 'cem']) await h.act(p, { type: 'ready', round: 1 });
+    h.advance(DEFAULT_TIMING.revealLockMs);
+    expect(h.view('ali')).toMatchObject({ phase: 'vote', round: 1 });
+    // Eski tartışma zamanlayıcısı yeni turu atlatmaz.
+    const next = item();
+    h.advance(30_000);
+    expect(item()).toBe(next);
+  });
+
   it('ends after the configured number of rounds', async () => {
     const { h, item } = setup({ rounds: 10 });
     await h.start();

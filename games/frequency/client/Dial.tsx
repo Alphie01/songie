@@ -1,13 +1,20 @@
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent, type PointerEvent } from 'react';
+import { useCallback, useEffect, useRef, useState, type PointerEvent } from 'react';
 import { BANDS, DIAL_MAX, DIAL_MIN, type Card } from '../shared/index.js';
-import { s } from './strings';
 
-/* Yarım daire kadran. 0 = sol uç, 100 = sağ uç. */
-const W = 240;
-const CX = 120;
-const CY = 124;
-const R = 110;
-const H = 136;
+/* Yarım daire kadran (tasarım: 340×182 görünüm, merkez 170/170, yarıçap 160). 0 = sol uç, 100 = sağ uç. */
+const W = 340;
+const H = 182;
+const CX = 170;
+const CY = 170;
+const R = 160;
+/* Tasarımda ibre ve göbek HTML öğesi (354×190 kutuda); aynı ölçüler görünüm birimine çevrildi. */
+const K = 182 / 190;
+const NEEDLE_W = 8 * K;
+const NEEDLE_H = 150 * K;
+const NEEDLE_B = 2 * K;
+const HUB_D = 32 * K;
+const HUB_B = 4 * K;
+const HUB_CY = (190 + 3 - 16) * K;
 
 function point(v: number, r: number): [number, number] {
   const a = Math.PI * (1 - v / 100);
@@ -22,31 +29,16 @@ function wedge(v1: number, v2: number, r: number): string {
 }
 
 const HALF = `M${CX - R} ${CY} A${R} ${R} 0 0 1 ${CX + R} ${CY} Z`;
+const ARC = `M${CX - R} ${CY} A${R} ${R} 0 0 1 ${CX + R} ${CY}`;
 const clamp = (v: number) => Math.min(DIAL_MAX, Math.max(DIAL_MIN, v));
 
 /** Hedef bölgesi: 2-3-4-3-2 bantları, kadran uçlarında kırpılır. */
 function TargetZone({ target }: { target: number }) {
-  const outer = [...BANDS].reverse();
   return (
     <g className="fq-zone">
-      {outer.map((b) => (
-        <path key={b.points} d={wedge(clamp(target - b.maxDistance), clamp(target + b.maxDistance), R - 2)} data-points={b.points} />
+      {[...BANDS].reverse().map((b) => (
+        <path key={b.points} d={wedge(clamp(target - b.maxDistance), clamp(target + b.maxDistance), R)} data-points={b.points} />
       ))}
-      {[...BANDS]
-        .flatMap((b, i) => {
-          const inner = i === 0 ? 0 : BANDS[i - 1]!.maxDistance;
-          const mid = (inner + b.maxDistance) / 2;
-          return i === 0 ? [{ v: target, p: b.points }] : [{ v: target - mid, p: b.points }, { v: target + mid, p: b.points }];
-        })
-        .filter((l) => l.v >= DIAL_MIN + 1 && l.v <= DIAL_MAX - 1)
-        .map((l, i) => {
-          const [x, y] = point(l.v, R - 14);
-          return (
-            <text key={i} x={x} y={y} className="fq-zone-num" textAnchor="middle" dominantBaseline="central">
-              {l.p}
-            </text>
-          );
-        })}
     </g>
   );
 }
@@ -63,21 +55,25 @@ export interface DialProps {
   onChange?(v: number, final: boolean): void;
 }
 
+/** Kadran yüzü ve uç etiketleri. Klavye ve ekran okuyucu için ayrıca `DialRange` kullanılır. */
 export function Dial({ value, card, target, curtain, curtainKey, editable, onChange }: DialProps) {
   const svgRef = useRef<SVGSVGElement>(null);
   const dragging = useRef(false);
   const [active, setActive] = useState(false);
 
-  const valueAt = useCallback((clientX: number, clientY: number): number => {
-    const svg = svgRef.current;
-    if (!svg) return value;
-    const box = svg.getBoundingClientRect();
-    const x = ((clientX - box.left) / box.width) * W - CX;
-    const y = CY - ((clientY - box.top) / box.height) * H;
-    let a = Math.atan2(Math.max(y, 0), x);
-    if (y < 0) a = x < 0 ? Math.PI : 0;
-    return Math.round(clamp(100 * (1 - a / Math.PI)) * 10) / 10;
-  }, [value]);
+  const valueAt = useCallback(
+    (clientX: number, clientY: number): number => {
+      const svg = svgRef.current;
+      if (!svg) return value;
+      const box = svg.getBoundingClientRect();
+      const x = ((clientX - box.left) / box.width) * W - CX;
+      const y = CY - ((clientY - box.top) / box.height) * H;
+      let a = Math.atan2(Math.max(y, 0), x);
+      if (y < 0) a = x < 0 ? Math.PI : 0;
+      return Math.round(clamp(100 * (1 - a / Math.PI)) * 10) / 10;
+    },
+    [value],
+  );
 
   function down(e: PointerEvent<SVGSVGElement>) {
     if (!editable) return;
@@ -100,21 +96,6 @@ export function Dial({ value, card, target, curtain, curtainKey, editable, onCha
     onChange?.(valueAt(e.clientX, e.clientY), true);
   }
 
-  function key(e: KeyboardEvent<SVGSVGElement>) {
-    if (!editable) return;
-    const step = e.shiftKey ? 5 : 1;
-    let next: number | null = null;
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') next = value - step;
-    else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') next = value + step;
-    else if (e.key === 'PageDown') next = value - 10;
-    else if (e.key === 'PageUp') next = value + 10;
-    else if (e.key === 'Home') next = DIAL_MIN;
-    else if (e.key === 'End') next = DIAL_MAX;
-    if (next === null) return;
-    e.preventDefault();
-    onChange?.(Math.round(clamp(next)), true);
-  }
-
   // Sürükleme sırasında sayfa kaymasın (iOS).
   useEffect(() => {
     const svg = svgRef.current;
@@ -127,9 +108,6 @@ export function Dial({ value, card, target, curtain, curtainKey, editable, onCha
   }, [editable]);
 
   const angle = -90 + (value / 100) * 180;
-  const ticks = Array.from({ length: 21 }, (_, i) => i * 5);
-  const left = card?.left ?? '';
-  const right = card?.right ?? '';
 
   return (
     <div className="fq-dial" data-editable={editable || undefined} data-active={active || undefined}>
@@ -137,26 +115,19 @@ export function Dial({ value, card, target, curtain, curtainKey, editable, onCha
         ref={svgRef}
         viewBox={`0 0 ${W} ${H}`}
         className="fq-dial-svg"
-        role={editable ? 'slider' : 'img'}
-        tabIndex={editable ? 0 : undefined}
-        aria-label={s.play.dialLabel}
-        aria-valuemin={editable ? DIAL_MIN : undefined}
-        aria-valuemax={editable ? DIAL_MAX : undefined}
-        aria-valuenow={editable ? Math.round(value) : undefined}
-        aria-valuetext={card ? s.play.dialValue(left, right, value) : undefined}
+        aria-hidden="true"
         onPointerDown={down}
         onPointerMove={move}
         onPointerUp={up}
         onPointerCancel={up}
-        onKeyDown={key}
       >
         <defs>
           <clipPath id="fq-face">
             <path d={HALF} />
           </clipPath>
-          <pattern id="fq-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
-            <rect width="6" height="6" className="fq-hatch-bg" />
-            <line x1="0" y1="0" x2="0" y2="6" className="fq-hatch-line" />
+          <pattern id="fq-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="10" height="10" className="fq-hatch-bg" />
+            <rect width="4" height="10" className="fq-hatch-line" />
           </pattern>
         </defs>
 
@@ -166,27 +137,32 @@ export function Dial({ value, card, target, curtain, curtainKey, editable, onCha
           {curtain !== 'none' && (
             <g key={curtainKey} className="fq-curtain" data-state={curtain}>
               <path d={HALF} fill="url(#fq-hatch)" />
-              <path d={`M${CX - R} ${CY} H${CX + R}`} className="fq-curtain-edge" />
             </g>
           )}
         </g>
-
-        {ticks.map((t) => {
-          const [x1, y1] = point(t, R + 2);
-          const [x2, y2] = point(t, t % 25 === 0 ? R + 9 : R + 5);
-          return <line key={t} x1={x1} y1={y1} x2={x2} y2={y2} className="fq-tick" data-major={t % 25 === 0 || undefined} />;
-        })}
+        <path d={ARC} className="fq-rim" />
 
         <g className="fq-needle" style={{ transform: `rotate(${angle}deg)` }}>
-          <line x1={CX} y1={CY} x2={CX} y2={CY - R + 6} className="fq-needle-line" />
-          <circle cx={CX} cy={CY - R + 6} r={editable ? 5.5 : 3.5} className="fq-needle-tip" />
+          <rect
+            x={CX - NEEDLE_W / 2 + NEEDLE_B / 2}
+            y={CY - NEEDLE_H + NEEDLE_B / 2}
+            width={NEEDLE_W - NEEDLE_B}
+            height={NEEDLE_H - NEEDLE_B}
+            rx={6 * K - NEEDLE_B / 2}
+            className="fq-needle-body"
+            style={{ strokeWidth: NEEDLE_B }}
+          />
         </g>
-        <circle cx={CX} cy={CY} r={9} className="fq-hub" />
+        <circle cx={CX} cy={HUB_CY} r={(HUB_D - HUB_B) / 2} className="fq-hub" style={{ strokeWidth: HUB_B }} />
       </svg>
 
       <div className="fq-ends" aria-hidden={!card || undefined}>
-        <span className="fq-end fq-end-left">{left}</span>
-        <span className="fq-end fq-end-right">{right}</span>
+        {card && (
+          <>
+            <span className="fq-end fq-end-left">← {card.left}</span>
+            <span className="fq-end fq-end-right">{card.right} →</span>
+          </>
+        )}
       </div>
     </div>
   );

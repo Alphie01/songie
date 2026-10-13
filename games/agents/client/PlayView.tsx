@@ -1,13 +1,16 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import type { PlayViewProps } from '@songie/game-kit/client';
-import { Avatar } from '@songie/game-kit/ui';
+import { Avatar, Icon } from '@songie/game-kit/ui';
 import type { RoomPlayer } from '@songie/shared';
-import { TEAM_IDS, UNLIMITED, clueProblem, type AgentsCard, type AgentsSettings, type AgentsView, type CardColor, type TeamId } from '../shared/index.js';
+import { TEAM_IDS, UNLIMITED, clueProblem, type AgentsCard, type AgentsSettings, type AgentsView, type TeamId } from '../shared/index.js';
 import { SettingsPanel } from './SettingsPanel';
 import { s } from './strings';
 
 type Send = (action: unknown) => Promise<boolean>;
 type Members = Map<string, RoomPlayer>;
+
+const upper = (w: string) => w.toLocaleUpperCase('tr');
+const num = (n: number) => (n === UNLIMITED ? '∞' : String(n));
 
 function useRemaining(view: AgentsView): number {
   const offset = useMemo(() => view.serverNow - Date.now(), [view.serverNow]);
@@ -35,48 +38,63 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
 
   const panelProps = { settings, editable: isHost, api, players: room.players, meId, onChange: (n: AgentsSettings) => void setSettings(n) };
   const teamsPanel = <Teams view={view} members={members} meId={meId} isHost={isHost} send={send} />;
-  const history = <History view={view} nick={nick} />;
+  const history = <History view={view} />;
+  const over = view.phase === 'over';
 
   return (
     <div className="ag sg">
       <aside className="sg-side sg-left">{teamsPanel}</aside>
 
       <main className="sg-center ag-center">
-        <header className="sg-top">
-          <span className="sg-round mono">{s.play.board(view.board)}</span>
+        <header className="ag-top">
+          <span className="ag-pill">{s.play.pill(view.board)}</span>
           {(view.wins.a > 0 || view.wins.b > 0) && (
-            <span className="ag-wins" title={s.play.wins}>
-              <b data-team="a">{view.wins.a}</b>
-              <span className="dim">–</span>
-              <b data-team="b">{view.wins.b}</b>
+            <span className="ag-wins" title={s.play.wins} aria-label={`${s.play.wins}: ${view.wins.a}–${view.wins.b}`}>
+              <b data-team="a">{view.wins.a}</b>–<b data-team="b">{view.wins.b}</b>
             </span>
           )}
-          <span className="sg-code mono">{room.code}</span>
+          <span className="ag-code">{room.code}</span>
         </header>
 
-        <Counters view={view} />
-        <Status view={view} isHost={isHost} nick={nick} members={members} send={send} />
+        {over ? (
+          <>
+            <OverHead view={view} />
+            <div className="sg-mobile-only">{teamsPanel}</div>
+          </>
+        ) : (
+          <>
+            <Counters view={view} />
+            <Status view={view} nick={nick} members={members} send={send} />
+          </>
+        )}
+
         {error && (
           <p className="error-text ag-error" role="alert">
             {error}
           </p>
         )}
         <Board view={view} meId={meId} members={members} send={send} />
-        <GuessBar view={view} send={send} />
+        <Legend />
 
-        <div className="sg-mobile-only">
-          {history}
-          {teamsPanel}
-        </div>
+        {over ? (
+          <OverActions view={view} isHost={isHost} send={send} />
+        ) : (
+          <>
+            <div className="sg-mobile-only">{history}</div>
+            <GuessBar view={view} send={send} />
+            <div className="sg-mobile-only">{teamsPanel}</div>
+          </>
+        )}
+        {over && <div className="sg-mobile-only">{history}</div>}
 
-        <section className="howto" aria-labelledby="ag-howto">
-          <h2 id="ag-howto" className="howto-title">
+        <section className="ag-howto" aria-labelledby="ag-howto">
+          <h2 id="ag-howto" className="ag-howto-title">
             {s.howto.title}
           </h2>
-          <ol className="howto-list">
+          <ol className="ag-howto-list">
             {s.howto.steps.map(([title, body], i) => (
               <li key={title}>
-                <span className="howto-n mono">{String(i + 1).padStart(2, '0')}</span>
+                <span className="ag-howto-n">{i + 1}</span>
                 <div>
                   <h3>{title}</h3>
                   <p>{body}</p>
@@ -89,8 +107,10 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
 
       <aside className="sg-side sg-right">
         {history}
-        <SettingsPanel {...panelProps} section="secondary" />
-        {isHost && <p className="sgs-hint">{s.settings.liveHint}</p>}
+        <div className="ag-side-settings">
+          <SettingsPanel {...panelProps} section="secondary" />
+          {isHost && <p className="sgs-hint">{s.settings.liveHint}</p>}
+        </div>
       </aside>
     </div>
   );
@@ -102,105 +122,92 @@ function Counters({ view }: { view: AgentsView }) {
   return (
     <div className="ag-counters">
       {TEAM_IDS.map((t) => (
-        <div
-          key={t}
-          className="ag-counter"
-          data-team={t}
-          data-active={(view.phase !== 'over' && view.team === t) || undefined}
-          data-won={view.winner === t || undefined}
-        >
+        <div key={t} className="ag-counter" data-team={t} data-active={view.team === t || undefined} aria-label={`${s.team[t]}: ${s.play.left(view.remaining[t])}`}>
           <span className="ag-counter-name">
-            {s.team[t]}
-            {view.myTeam === t && <span className="dim"> ({s.play.you})</span>}
+            {s.teamShort[t]}
+            {view.myTeam === t && ` (${s.play.you})`}
           </span>
-          <span className="ag-counter-num mono">{view.remaining[t]}</span>
-          <span className="ag-pips" aria-label={s.play.left(view.remaining[t])}>
-            {Array.from({ length: view.total[t] }, (_, i) => (
-              <span key={i} data-on={i < view.total[t] - view.remaining[t] || undefined} />
-            ))}
-          </span>
+          <span className="ag-counter-num">{s.play.agents(view.remaining[t])}</span>
         </div>
       ))}
     </div>
   );
 }
 
-/* ---------- Durum: ipucu formu, ipucu, tablo sonu ---------- */
+/* ---------- Durum: ipucu kartı, ipucu formu ---------- */
 
-function Status({
-  view,
-  isHost,
-  nick,
-  members,
-  send,
-}: {
-  view: AgentsView;
-  isHost: boolean;
-  nick: (id: string) => string;
-  members: Members;
-  send: Send;
-}) {
+function Status({ view, nick, members, send }: { view: AgentsView; nick: (id: string) => string; members: Members; send: Send }) {
   const remaining = useRemaining(view);
   const leaderId = view.leaders[view.team];
   const leaderOnline = members.get(leaderId)?.connected ?? false;
-  const timer = view.endsAt > 0 && view.phase !== 'over' && <Timer remaining={remaining} duration={view.durationMs} />;
-
-  if (view.phase === 'over') return <Over view={view} isHost={isHost} send={send} />;
+  const myLeader = view.role === 'leader' && view.myTeam === view.team;
+  const label = myLeader ? s.play.myClue : s.play.clueOf(nick(leaderId));
+  const timer = view.endsAt > 0 && <Timer remaining={remaining} duration={view.durationMs} />;
 
   if (view.phase === 'clue') {
-    const mine = view.role === 'leader' && view.myTeam === view.team;
-    return (
-      <section className="ag-status" data-team={view.team}>
-        <p className="ag-turn">{s.play.turnOf(s.team[view.team])}</p>
-        {timer}
-        {mine ? (
+    if (myLeader) {
+      return (
+        <>
           <ClueForm view={view} send={send} />
-        ) : (
-          <>
-            <p className="ag-wait">{view.myTeam === view.team ? s.play.waitClueMine : s.play.waitClue(nick(leaderId))}</p>
-            {!leaderOnline && <p className="dim ag-small">{s.play.leaderOffline(nick(leaderId))}</p>}
-          </>
-        )}
-        {view.role === 'leader' && !mine && <KeyMap view={view} />}
-      </section>
+          {timer}
+        </>
+      );
+    }
+    return (
+      <>
+        <section className="ag-clue" data-team={view.team} aria-live="polite">
+          <span className="ag-clue-text">
+            <span className="ag-clue-label">{label}</span>
+            <span className="ag-clue-word" data-wait>
+              {s.play.thinking}
+            </span>
+          </span>
+          <span className="ag-clue-turn">{s.play.turnShort(s.team[view.team])}</span>
+        </section>
+        {timer}
+        <p className="ag-hint">{view.myTeam === view.team ? s.play.waitClueMine : s.play.waitClue(nick(leaderId))}</p>
+        {!leaderOnline && <p className="ag-hint ag-hint-dim">{s.play.leaderOffline(nick(leaderId))}</p>}
+      </>
     );
   }
 
-  // Tahmin
   const clue = view.clue!;
+  const hint =
+    view.myTeam === view.team && view.role === 'guesser'
+      ? s.play.tapHint[view.revealMode]
+      : myLeader
+        ? s.play.leaderGuessing
+        : view.role === 'spectator'
+          ? s.play.spectator
+          : s.play.opponentGuessing(s.team[view.team]);
   return (
-    <section className="ag-status" data-team={view.team}>
-      <p className="ag-turn">{s.play.turnOf(s.team[view.team])}</p>
+    <>
+      <section className="ag-clue" data-team={view.team} aria-live="polite">
+        <span className="ag-clue-text">
+          <span className="ag-clue-label">{label}</span>
+          <span className="ag-clue-word">{upper(clue.word)}</span>
+        </span>
+        <span className="ag-clue-right">
+          <span className="ag-clue-left">{s.play.guessesLeft(view.guessesLeft)}</span>
+          <span className="ag-clue-num" aria-label={`${s.play.count}: ${clue.number === UNLIMITED ? s.play.unlimited : clue.number}`}>
+            {num(clue.number)}
+          </span>
+        </span>
+      </section>
       {timer}
-      <div className="ag-clue" aria-live="polite">
-        <span className="ag-clue-word">{clue.word}</span>
-        <span className="ag-clue-num mono">{clue.number === UNLIMITED ? '∞' : clue.number}</span>
-      </div>
-      <p className="ag-small ag-clue-meta">
-        <span>{s.play.guessesLeft(view.guessesLeft)}</span>
-        {view.myTeam === view.team && view.role === 'guesser' ? (
-          <span className="dim">{s.play.tapHint[view.revealMode]}</span>
-        ) : view.role === 'leader' && view.myTeam === view.team ? (
-          <span className="dim">{s.play.leaderGuessing}</span>
-        ) : view.role === 'spectator' ? (
-          <span className="dim">{s.play.spectator}</span>
-        ) : (
-          <span className="dim">{s.play.opponentGuessing(s.team[view.team])}</span>
-        )}
-      </p>
-      {view.role === 'leader' && <KeyMap view={view} />}
-    </section>
+      <p className="ag-hint">{hint}</p>
+    </>
   );
 }
 
 function Timer({ remaining, duration }: { remaining: number; duration: number }) {
   const secs = Math.ceil(remaining / 1000);
   return (
-    <div className="ag-timer">
-      <span className="ag-timer-bar" aria-hidden="true">
+    <div className="ag-timer" data-low={remaining < 10_000 || undefined}>
+      <span className="ag-bar" aria-hidden="true">
         <span style={{ width: `${duration ? (remaining / duration) * 100 : 0}%` }} />
       </span>
-      <span className="ag-timer-num mono" data-low={remaining < 10_000 || undefined}>
+      <span className="ag-timer-num">
         {secs} {s.play.seconds}
       </span>
     </div>
@@ -224,121 +231,159 @@ function ClueForm({ view, send }: { view: AgentsView; send: Send }) {
   }
 
   return (
-    <div className="ag-leader">
-      <KeyMap view={view} />
-      <form className="ag-clueform" onSubmit={submit}>
-        <label className="ag-label" htmlFor="ag-clue-input">
-          {s.play.clueLabel}
-        </label>
-        <input
-          id="ag-clue-input"
-          className="input ag-clue-input"
-          value={word}
-          maxLength={24}
-          autoComplete="off"
-          autoCapitalize="off"
-          spellCheck={false}
-          placeholder={s.play.cluePlaceholder}
-          aria-invalid={!!problem}
-          aria-describedby="ag-clue-hint"
-          onChange={(e) => setWord(e.target.value.replace(/\s/g, ''))}
-        />
-        <span className="ag-label">{s.play.count}</span>
-        <div className="ag-counts" role="group" aria-label={s.play.count}>
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, UNLIMITED].map((n) => (
-            <button key={n} type="button" className="chip ag-count" aria-pressed={count === n} onClick={() => setCount(n)} title={n === UNLIMITED ? s.play.unlimited : undefined}>
-              {n === UNLIMITED ? '∞' : n}
-            </button>
-          ))}
-        </div>
-        <p id="ag-clue-hint" className={problem ? 'error-text ag-small' : 'dim ag-small'}>
-          {problem ?? s.play.clueHint}
-        </p>
-        <button className="btn btn-primary btn-lg btn-block" disabled={busy || !word.trim() || !!problem}>
-          {s.play.giveClue}
-        </button>
-      </form>
+    <form className="ag-clue ag-clueform" data-team={view.team} onSubmit={submit}>
+      <label className="ag-clue-label" htmlFor="ag-clue-input">
+        {s.play.yourClue}
+      </label>
+      <input
+        id="ag-clue-input"
+        className="ag-clue-input"
+        value={word}
+        maxLength={24}
+        autoComplete="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        placeholder={s.play.cluePlaceholder}
+        aria-invalid={!!problem}
+        aria-describedby="ag-clue-hint"
+        onChange={(e) => setWord(e.target.value.replace(/\s/g, ''))}
+      />
+      <span className="ag-clue-label">{s.play.count}</span>
+      <div className="ag-counts" role="group" aria-label={s.play.count}>
+        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, UNLIMITED].map((n) => (
+          <button
+            key={n}
+            type="button"
+            className="ag-count"
+            aria-pressed={count === n}
+            aria-label={n === UNLIMITED ? s.play.unlimited : undefined}
+            onClick={() => setCount(n)}
+          >
+            {num(n)}
+          </button>
+        ))}
+      </div>
+      <p id="ag-clue-hint" className="ag-form-hint" data-error={!!problem || undefined}>
+        {problem ?? s.play.clueHint}
+      </p>
+      <button className="ag-submit" disabled={busy || !word.trim() || !!problem}>
+        {s.play.giveClue}
+      </button>
+    </form>
+  );
+}
+
+/* ---------- Tablo sonu (Sonuçlar ekranı dili) ---------- */
+
+function Crown() {
+  return (
+    <svg className="ag-crown" width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+      <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="var(--yellow)" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function OverHead({ view }: { view: AgentsView }) {
+  return (
+    <section className="ag-over" aria-live="polite">
+      <span className="ag-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+      <div className="ag-over-head">
+        <span className="ag-kicker">{view.closing ? s.over.kickerFinal : s.over.kicker}</span>
+        <h1 className="ag-over-title">{view.winner ? s.over.won(s.team[view.winner]) : s.over.ended}</h1>
+        {view.reason && <p className="ag-over-reason">{s.over.reason[view.reason]}</p>}
+      </div>
+      <div className="ag-scores">
+        <ScoreCard view={view} team="a" />
+        <span className="ag-scores-dash" aria-hidden="true">
+          –
+        </span>
+        <ScoreCard view={view} team="b" />
+      </div>
+    </section>
+  );
+}
+
+function ScoreCard({ view, team }: { view: AgentsView; team: TeamId }) {
+  const found = view.total[team] - view.remaining[team];
+  const won = view.winner === team;
+  return (
+    <div className="ag-score" data-team={team} data-won={won || undefined} data-lost={(view.winner !== null && !won) || undefined}>
+      {won && <Crown />}
+      <span className="ag-score-num" aria-hidden="true">
+        {found}
+      </span>
+      <span className="ag-score-name" aria-hidden="true">
+        {s.team[team]}
+      </span>
+      <span className="sr-only">{s.over.found(s.team[team], found, view.total[team])}</span>
     </div>
   );
 }
 
-/** Liderin gizli anahtarı: 5×5 küçük harita. */
-function KeyMap({ view }: { view: AgentsView }) {
-  if (!view.keyVisible) return null;
-  return (
-    <figure className="ag-key" aria-label={s.play.key}>
-      <div className="ag-key-grid">
-        {view.cards.map((c, i) => (
-          <span key={i} data-color={c.color ?? undefined} data-revealed={c.revealed || undefined} title={`${c.word}: ${c.color ? s.color[c.color] : ''}`} />
-        ))}
+function OverActions({ view, isHost, send }: { view: AgentsView; isHost: boolean; send: Send }) {
+  if (view.closing) {
+    return (
+      <div className="ag-over-foot">
+        <span className="ag-bar ag-bar-closing" aria-hidden="true">
+          <span />
+        </span>
+        <p className="ag-over-note">{s.over.closing}</p>
       </div>
-      <figcaption className="dim">
-        {s.play.key}. {s.play.keyHint}
-      </figcaption>
-    </figure>
-  );
-}
-
-function Over({ view, isHost, send }: { view: AgentsView; isHost: boolean; send: Send }) {
+    );
+  }
+  if (!isHost) {
+    return (
+      <div className="ag-over-foot">
+        <p className="ag-over-note">{s.over.waitHost}</p>
+      </div>
+    );
+  }
   return (
-    <section className="ag-over" data-team={view.winner ?? 'none'}>
-      <h1 className="ag-over-title">{view.winner ? s.over.won(s.team[view.winner]) : s.over.ended}</h1>
-      <p className="ag-small muted">
-        {view.reason ? s.over.reason[view.reason] : ''} {s.over.keyShown}
-      </p>
-      {view.closing ? (
-        <p className="dim ag-small">{s.over.closing}</p>
-      ) : isHost ? (
-        <div className="ag-over-actions">
-          <button type="button" className="btn btn-primary btn-lg" onClick={() => void send({ type: 'newBoard' })}>
-            {s.over.newBoard}
-          </button>
-          <button type="button" className="btn btn-outline btn-lg" onClick={() => void send({ type: 'toLobby' })}>
-            {s.over.toLobby}
-          </button>
-          <p className="dim ag-small ag-span">{s.over.newBoardHint}</p>
-        </div>
-      ) : (
-        <p className="dim ag-small">{s.over.waitHost}</p>
-      )}
-    </section>
+    <div className="ag-over-foot">
+      <p className="ag-over-note">{s.over.newBoardHint}</p>
+      <button type="button" className="ag-again" onClick={() => void send({ type: 'newBoard' })}>
+        <Icon name="replay" size={22} />
+        {s.over.newBoard}
+      </button>
+      <button type="button" className="ag-lobby" onClick={() => void send({ type: 'toLobby' })}>
+        {s.over.toLobby}
+      </button>
+    </div>
   );
 }
 
 /* ---------- Tablo ---------- */
 
 function AgentMark() {
-  // Özgün ajan simgesi: şapka ve omuzlar.
   return (
-    <svg className="ag-mark" viewBox="0 0 32 32" aria-hidden="true">
-      <path d="M7 13.5h18" strokeWidth="2.2" strokeLinecap="round" />
-      <path d="M10.5 13l1.6-6.2a1 1 0 0 1 1-.8h5.8a1 1 0 0 1 1 .8l1.6 6.2z" fill="currentColor" stroke="none" />
-      <circle cx="16" cy="17.5" r="3.4" fill="currentColor" stroke="none" />
-      <path d="M8 28c.6-4.4 3.8-6.6 8-6.6s7.4 2.2 8 6.6z" fill="currentColor" stroke="none" />
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M4 9h16l-2-4H6z" />
+      <circle cx="12" cy="13" r="3" />
+      <path d="M6 21c0-3.5 2.7-5 6-5s6 1.5 6 5z" />
     </svg>
   );
 }
 
 function AssassinMark() {
   return (
-    <svg className="ag-mark" viewBox="0 0 32 32" aria-hidden="true">
-      <circle cx="16" cy="16" r="8.5" strokeWidth="2" fill="none" />
-      <circle cx="16" cy="16" r="2.2" fill="currentColor" stroke="none" />
-      <path d="M16 3.5v6M16 22.5v6M3.5 16h6M22.5 16h6" strokeWidth="2" strokeLinecap="round" />
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="7" />
+      <path d="M12 2v5M12 17v5M2 12h5M17 12h5" />
     </svg>
   );
-}
-
-function KeyGlyph({ color }: { color: CardColor }) {
-  if (color === 'neutral') return null;
-  return <span className="ag-glyph" data-color={color} aria-hidden="true" />;
 }
 
 function Board({ view, meId, members, send }: { view: AgentsView; meId: string; members: Members; send: Send }) {
   const canTouch = view.phase === 'guess' && view.myTeam === view.team && view.role === 'guesser';
   const myVote = view.cards.findIndex((c) => c.votes.includes(meId));
   return (
-    <div className="ag-board" data-key={view.keyVisible || undefined} data-can={canTouch || undefined} data-phase={view.phase}>
+    <div className="ag-board" data-can={canTouch || undefined}>
       {view.cards.map((card, i) => (
         <CardTile
           key={`${view.board}-${i}-${view.lastReveal?.index === i ? view.lastReveal.id : 0}`}
@@ -373,6 +418,7 @@ function CardTile({
   onTouch: () => void;
 }) {
   const label = card.revealed && card.color ? `${card.word}, ${s.color[card.color]}` : card.color ? `${card.word} (${s.color[card.color]})` : card.word;
+  const len = card.word.length;
   return (
     <button
       type="button"
@@ -385,21 +431,36 @@ function CardTile({
       aria-label={label}
       onClick={onTouch}
     >
-      {card.revealed && card.color && (card.color === 'assassin' ? <AssassinMark /> : card.color !== 'neutral' ? <AgentMark /> : null)}
-      {!card.revealed && card.color && <KeyGlyph color={card.color} />}
-      <span className="ag-word" lang="tr" data-long={card.word.length > 8 || undefined}>
-        {card.word}
+      {card.revealed && (card.color === 'a' || card.color === 'b') && <AgentMark />}
+      {card.revealed && card.color === 'assassin' && <AssassinMark />}
+      <span className="ag-word" data-len={len >= 12 ? 'xl' : len >= 10 ? 'l' : len >= 8 ? 'm' : undefined}>
+        {upper(card.word)}
       </span>
       {card.votes.length > 0 && (
         <span className="ag-votes" title={s.play.votes(card.votes.length, votesNeeded)}>
-          {card.votes.slice(0, 4).map((id) => {
+          {card.votes.slice(0, 3).map((id) => {
             const m = members.get(id);
             return m ? <Avatar key={id} avatar={m.avatar} nick={m.nick} size={16} /> : null;
           })}
-          {votesNeeded > 0 && <span className="ag-votes-n mono">{`${card.votes.length}/${votesNeeded}`}</span>}
+          {votesNeeded > 0 && <span className="ag-votes-n">{`${card.votes.length}/${votesNeeded}`}</span>}
         </span>
       )}
     </button>
+  );
+}
+
+function Legend() {
+  return (
+    <div className="ag-legend">
+      <span>
+        <i data-color="neutral" aria-hidden="true" />
+        {s.play.legendNeutral}
+      </span>
+      <span>
+        <i data-color="assassin" aria-hidden="true" />
+        {s.play.legendAssassin}
+      </span>
+    </div>
   );
 }
 
@@ -408,8 +469,8 @@ function GuessBar({ view, send }: { view: AgentsView; send: Send }) {
   if (!guessing) return null;
   return (
     <div className="ag-guessbar">
-      {view.revealMode === 'vote' && <p className="dim ag-small">{s.play.votesNeed(view.votesNeeded)}</p>}
-      <button type="button" className="btn btn-outline btn-block" onClick={() => void send({ type: 'endTurn', turn: view.turn })}>
+      {view.revealMode === 'vote' && <p className="ag-hint">{s.play.votesNeed(view.votesNeeded)}</p>}
+      <button type="button" className="ag-end" onClick={() => void send({ type: 'endTurn', turn: view.turn })}>
         {s.play.endTurn}
       </button>
     </div>
@@ -421,30 +482,31 @@ function GuessBar({ view, send }: { view: AgentsView; send: Send }) {
 function Teams({ view, members, meId, isHost, send }: { view: AgentsView; members: Members; meId: string; isHost: boolean; send: Send }) {
   const over = view.phase === 'over';
   return (
-    <section className="ag-teams">
-      {TEAM_IDS.map((t) => (
+    <section className="ag-teams" aria-label={s.settings.teams}>
+      {TEAM_IDS.map((t: TeamId) => (
         <div key={t} className="ag-roster" data-team={t}>
-          <h2 className="ag-roster-head">
-            <span>{s.team[t]}</span>
-            <span className="dim ag-small">{s.play.left(view.remaining[t])}</span>
-          </h2>
-          <ul className="sg-score-list">
+          <h2 className="ag-roster-head">{upper(s.team[t])}</h2>
+          <ul className="ag-roster-list">
             {view.teams[t].map((id) => {
               const m = members.get(id);
               if (!m) return null;
               const leader = view.leaders[t] === id;
               const next = view.nextLeaders[t] === id;
               return (
-                <li key={id} className="sg-score" data-me={id === meId || undefined}>
-                  <Avatar avatar={m.avatar} nick={m.nick} size={26} dim={!m.connected} />
-                  <span className="sg-score-name">{m.nick}</span>
-                  {!m.connected && <span className="dim ag-small">{s.play.offline}</span>}
+                <li key={id} className="ag-member" data-off={!m.connected || undefined}>
+                  <Avatar avatar={m.avatar} nick={m.nick} size={28} dim={!m.connected} />
+                  <span className="ag-member-name">
+                    {m.nick}
+                    {id === meId && ` (${s.play.you})`}
+                  </span>
                   {leader && <span className="ag-tag">{s.play.leader}</span>}
                   {next && <span className="ag-tag ag-tag-next">{s.play.nextLeader}</span>}
+                  {!m.connected && <span className="ag-off">{s.play.offline}</span>}
                   {isHost && !view.closing && !(over ? next : leader) && (
                     <button
                       type="button"
                       className="ag-make"
+                      aria-label={`${m.nick}: ${over ? s.play.makeNextLeader : s.play.makeLeader}`}
                       title={over ? s.play.makeNextLeader : s.play.makeLeader}
                       onClick={() => void send({ type: 'setLeader', team: t, playerId: id })}
                     >
@@ -463,41 +525,33 @@ function Teams({ view, members, meId, isHost, send }: { view: AgentsView; member
 
 /* ---------- İpucu geçmişi ---------- */
 
-function History({ view, nick }: { view: AgentsView; nick: (id: string) => string }) {
+function History({ view }: { view: AgentsView }) {
   return (
     <section className="ag-history" aria-labelledby="ag-history-title">
       <h2 id="ag-history-title" className="ag-history-title">
-        {s.play.history}
+        {upper(s.play.history)}
       </h2>
       {view.log.length === 0 ? (
-        <p className="dim ag-small">{s.play.historyEmpty}</p>
+        <p className="ag-history-line ag-history-empty">{s.play.historyEmpty}</p>
       ) : (
         <ol className="ag-history-list">
           {[...view.log].reverse().map((e, i) => (
-            <li key={view.log.length - i} data-team={e.team}>
-              <p className="ag-history-head">
-                {e.word === null ? (
-                  <span className="dim">{s.play.noClue}</span>
-                ) : (
-                  <>
-                    <b>{e.word}</b>
-                    <span className="mono">{e.number === UNLIMITED ? '∞' : e.number}</span>
-                  </>
-                )}
-                <span className="dim ag-history-who">{nick(e.leaderId)}</span>
-              </p>
+            <li key={view.log.length - i} className="ag-history-line" data-team={e.team}>
+              <strong>
+                {s.teamShort[e.team]} · {e.word === null ? s.play.noClue : `${upper(e.word)} ${num(e.number)}`}
+              </strong>
               {e.word !== null && (
-                <p className="ag-picks">
-                  {e.picks.length === 0 ? (
-                    <span className="dim">{s.play.noPicks}</span>
-                  ) : (
-                    e.picks.map((p, k) => (
-                      <span key={k} className="ag-pick" data-color={p.color}>
-                        {p.word}
-                      </span>
-                    ))
-                  )}
-                </p>
+                <>
+                  {' — '}
+                  {e.picks.length === 0
+                    ? s.play.noPicks
+                    : e.picks.map((p, k) => (
+                        <span key={k} className="ag-pick" data-color={p.color} title={s.color[p.color]}>
+                          {k > 0 && ', '}
+                          {p.word}
+                        </span>
+                      ))}
+                </>
               )}
             </li>
           ))}
@@ -506,4 +560,3 @@ function History({ view, nick }: { view: AgentsView; nick: (id: string) => strin
     </section>
   );
 }
-

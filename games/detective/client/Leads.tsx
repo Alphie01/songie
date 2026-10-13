@@ -28,21 +28,21 @@ function Hours() {
   const cells = Math.max(budget, spent);
   return (
     <section className="dt-hours" aria-labelledby="dt-hours-t" data-out={out || undefined} data-over={spent > target || undefined}>
-      <h2 id="dt-hours-t" className="dt-label">
-        {s.leads.hours}
-      </h2>
-      <p className="dt-hours-big">
-        <span className="dt-hours-n">{spent}</span>
-        <span className="dt-hours-of">/ {budget} sa</span>
-        {over > 0 && <span className="dt-hours-over">{s.leads.overBy(over)}</span>}
-      </p>
+      <div className="dt-hours-head">
+        <h2 id="dt-hours-t" className="dt-hours-t">
+          {s.leads.hours}
+        </h2>
+        <span className="dt-hours-val">{s.leads.hoursOf(spent, budget)}</span>
+      </div>
       <div className="dt-hours-bar" role="meter" aria-valuemin={0} aria-valuemax={cells} aria-valuenow={spent} aria-label={s.leads.hoursOf(spent, budget)}>
         {Array.from({ length: cells }, (_, i) => (
           <span key={i} data-on={i < spent || undefined} data-over={i >= budget || undefined} data-target={i === target - 1 || undefined} />
         ))}
       </div>
-      <p className="dt-hours-note">{out ? s.leads.budgetOut : s.leads.target(target)}</p>
-      <p className="dt-hours-act">{s.leads.actSpent(actSpent, actLimit)}</p>
+      <p className="dt-hours-note">
+        {over > 0 && <span className="dt-hours-over">{s.leads.overBy(over)}. </span>}
+        {out ? s.leads.budgetOut : s.leads.target(target)} {s.leads.actSpent(actSpent, actLimit)}.
+      </p>
     </section>
   );
 }
@@ -54,67 +54,71 @@ function Proposal() {
   const yes = Object.values(p.votes).filter(Boolean).length;
   const mine = p.votes[meId];
   const voting = view.leadMode === 'vote';
+  const mineP = p.by === meId;
+  const by =
+    p.kind === 'lead' ? (mineP ? s.proposal.leadMine : s.proposal.lead(nick(p.by))) : mineP ? s.proposal.closeMine : s.proposal.close(nick(p.by));
   return (
     <section className="dt-proposal" aria-live="polite">
-      <p className="dt-proposal-by">{p.kind === 'lead' ? s.proposal.lead(nick(p.by)) : s.proposal.close(nick(p.by))}</p>
-      {lead && (
-        <div className="dt-proposal-lead">
-          <p className="dt-lead-title">{lead.title}</p>
-          <span className="dt-cost">{s.leads.cost(lead.hours)}</span>
-        </div>
+      <p className="dt-proposal-by">{voting ? `${by} · ${s.proposal.tally(yes, p.needed)}` : by}</p>
+      {lead ? (
+        <>
+          <p className="dt-proposal-title">{lead.title}</p>
+          <p className="dt-proposal-desc">
+            {lead.description} · {s.leads.cost(lead.hours)}
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="dt-proposal-title">{s.close.direct}</p>
+          <p className="dt-proposal-desc">{s.close.hint}</p>
+        </>
       )}
       {voting ? (
         <>
-          <div className="dt-tally">
-            <span className="dt-tally-n">{s.proposal.tally(yes, p.needed)}</span>
-            <span className="dt-tally-bar">
-              <i style={{ width: `${Math.min(100, (yes / Math.max(1, p.needed)) * 100)}%` }} />
-            </span>
-          </div>
-          <ul className="dt-voters">
-            {Object.entries(p.votes).map(([id, v]) => {
-              const pl = player(id);
-              return (
-                <li key={id} data-vote={v ? 'yes' : 'no'} title={nick(id)}>
-                  {pl && <Avatar avatar={pl.avatar} nick={pl.nick} size={24} />}
-                  <span className="dt-voter-mark">
-                    <Icon name={v ? 'check' : 'x'} size={10} />
-                  </span>
-                </li>
-              );
-            })}
-          </ul>
+          {Object.keys(p.votes).length > 0 && (
+            <ul className="dt-voters">
+              {Object.entries(p.votes).map(([id, v]) => {
+                const pl = player(id);
+                return (
+                  <li key={id} data-vote={v ? 'yes' : 'no'} title={nick(id)}>
+                    {pl && <Avatar avatar={pl.avatar} nick={pl.nick} size={26} />}
+                    <span className="dt-voter-mark">
+                      <Icon name={v ? 'check' : 'x'} size={10} />
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
           <div className="dt-vote-row">
-            <button type="button" className="btn btn-outline dt-vote" data-on={mine === true || undefined} onClick={() => void send({ type: 'vote', yes: true })}>
-              <Icon name="check" size={14} />
+            <button type="button" className="dt-vote" data-tone="yes" aria-pressed={mine === true} onClick={() => void send({ type: 'vote', yes: true })}>
               {s.proposal.yes}
             </button>
-            <button type="button" className="btn btn-outline dt-vote" data-on={mine === false || undefined} onClick={() => void send({ type: 'vote', yes: false })}>
-              <Icon name="x" size={14} />
+            <button type="button" className="dt-vote" data-tone="no" aria-pressed={mine === false} onClick={() => void send({ type: 'vote', yes: false })}>
               {s.proposal.no}
             </button>
           </div>
         </>
       ) : (
-        !isHost && <p className="dt-small dim">{s.proposal.waitHost}</p>
+        !isHost && <p className="dt-proposal-desc">{s.proposal.waitHost}</p>
       )}
-      <div className="dt-proposal-actions">
-        {isHost && p.kind === 'lead' && p.leadId && (
-          <button type="button" className="btn btn-primary btn-block" onClick={() => void send({ type: 'open', leadId: p.leadId! })}>
-            {s.proposal.hostOpen}
-          </button>
-        )}
-        {isHost && p.kind === 'close' && (
-          <button type="button" className="btn btn-primary btn-block" onClick={() => void send({ type: 'close' })}>
-            {s.proposal.hostClose}
-          </button>
-        )}
-        {(p.by === meId || isHost) && (
-          <button type="button" className="btn btn-ghost" onClick={() => void send({ type: 'cancelProposal' })}>
+      {(isHost || p.by === meId) && (
+        <div className="dt-proposal-actions">
+          {isHost && p.kind === 'lead' && p.leadId && (
+            <button type="button" className="dt-proposal-btn" onClick={() => void send({ type: 'open', leadId: p.leadId! })}>
+              {s.proposal.hostOpen}
+            </button>
+          )}
+          {isHost && p.kind === 'close' && (
+            <button type="button" className="dt-proposal-btn" onClick={() => void send({ type: 'close' })}>
+              {s.proposal.hostClose}
+            </button>
+          )}
+          <button type="button" className="dt-proposal-btn" data-tone="ghost" onClick={() => void send({ type: 'cancelProposal' })}>
             {p.by === meId ? s.proposal.cancel : s.proposal.reject}
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
@@ -123,7 +127,7 @@ function Available() {
   const { view } = useDesk();
   return (
     <section className="dt-sec" aria-labelledby="dt-avail">
-      <h2 id="dt-avail" className="dt-sec-title">
+      <h2 id="dt-avail" className="dt-label">
         {s.leads.available}
         <span className="dt-count">{view.leads.length}</span>
       </h2>
@@ -169,16 +173,16 @@ function LeadCard({ l }: { l: LeadView }) {
         !proposed && (
           <div className="dt-lead-actions">
             {isHost && !voting ? (
-              <button type="button" className="btn btn-outline dt-lead-btn" onClick={() => void send({ type: 'open', leadId: l.id })}>
+              <button type="button" className="dt-lead-btn" onClick={() => void send({ type: 'open', leadId: l.id })}>
                 {s.leads.open}
               </button>
             ) : (
-              <button type="button" className="btn btn-outline dt-lead-btn" disabled={busy} title={busyTitle} onClick={() => void send({ type: 'propose', leadId: l.id })}>
+              <button type="button" className="dt-lead-btn" disabled={busy} title={busyTitle} onClick={() => void send({ type: 'propose', leadId: l.id })}>
                 {s.leads.propose}
               </button>
             )}
             {isHost && voting && (
-              <button type="button" className="btn btn-ghost dt-lead-btn" onClick={() => void send({ type: 'open', leadId: l.id })}>
+              <button type="button" className="dt-lead-btn" data-tone="ghost" onClick={() => void send({ type: 'open', leadId: l.id })}>
                 {s.leads.openNow}
               </button>
             )}
@@ -195,7 +199,7 @@ function Opened() {
   const list = [...view.opened].reverse();
   return (
     <section className="dt-sec" aria-labelledby="dt-opened">
-      <h2 id="dt-opened" className="dt-sec-title">
+      <h2 id="dt-opened" className="dt-label">
         {s.leads.opened}
         <span className="dt-count">{view.opened.length}</span>
       </h2>
@@ -242,18 +246,23 @@ function Hint() {
   const { view, send } = useDesk();
   const { used, left } = view.hints;
   return (
-    <section className="dt-sec dt-hint" aria-labelledby="dt-hint">
-      <h2 id="dt-hint" className="dt-sec-title">
-        {s.hint.title}
-      </h2>
-      <p className="dt-small dim">{s.hint.left(left)}</p>
-      <ConfirmButton
-        label={s.hint.askCost(HINT_PENALTY)}
-        confirm={s.hint.confirm}
-        yes={s.hint.confirmYes}
-        disabled={left <= 0 || view.phase !== 'investigate'}
-        onConfirm={() => void send({ type: 'hint' })}
-      />
+    <section className="dt-hint" aria-labelledby="dt-hint">
+      <div className="dt-hint-row">
+        <span className="dt-hint-id">
+          <h2 id="dt-hint" className="dt-hint-t">
+            {s.hint.title}
+          </h2>
+          <span className="dt-hint-left">{s.hint.left(left)}</span>
+        </span>
+        <ConfirmButton
+          className="dt-hint-btn"
+          label={s.hint.askCost(HINT_PENALTY)}
+          confirm={s.hint.confirm}
+          yes={s.hint.confirmYes}
+          disabled={left <= 0 || view.phase !== 'investigate'}
+          onConfirm={() => void send({ type: 'hint' })}
+        />
+      </div>
       {used.length > 0 && (
         <ol className="dt-hint-list">
           {used.map((h, i) => (
@@ -271,22 +280,29 @@ function Hint() {
 function Close() {
   const { view, isHost, send } = useDesk();
   const voting = view.leadMode === 'vote';
+  const label = (text: string) => (
+    <>
+      <span>{text}</span>
+      <span className="dt-solve-tag">{s.close.tag}</span>
+    </>
+  );
   return (
-    <section className="dt-sec dt-close" aria-labelledby="dt-close">
-      <h2 id="dt-close" className="dt-sec-title">
-        {s.close.title}
-      </h2>
-      <p className="dt-small dim">{view.canClose ? s.close.hint : s.close.notYet}</p>
-      {view.canClose &&
-        (isHost ? (
-          <ConfirmButton label={s.close.direct} confirm={s.close.confirm} yes={s.close.confirmYes} onConfirm={() => void send({ type: 'close' })} />
-        ) : voting ? (
-          <button type="button" className="btn btn-outline btn-block" disabled={!!view.proposal} onClick={() => void send({ type: 'proposeClose' })}>
-            {s.close.propose}
-          </button>
-        ) : (
-          <p className="dt-small dim">{s.close.hostOnly}</p>
-        ))}
+    <section className="dt-close" aria-label={s.close.direct}>
+      {isHost ? (
+        <ConfirmButton
+          className="dt-solve"
+          disabled={!view.canClose}
+          label={label(s.close.direct)}
+          confirm={s.close.confirm}
+          yes={s.close.confirmYes}
+          onConfirm={() => void send({ type: 'close' })}
+        />
+      ) : voting ? (
+        <button type="button" className="dt-solve" data-long disabled={!view.canClose || !!view.proposal} onClick={() => void send({ type: 'proposeClose' })}>
+          {label(s.close.propose)}
+        </button>
+      ) : null}
+      <p className="dt-close-note">{!view.canClose ? s.close.notYet : isHost || voting ? s.close.hint : s.close.hostOnly}</p>
     </section>
   );
 }

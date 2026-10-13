@@ -510,6 +510,7 @@ export function createWhoAmIGame(deps: { pool: IdentityPool; timing?: Partial<Wh
         myHints: mine?.hints ?? [],
         hintsLeft: mine && mine.finishRank === null ? Math.max(0, state.settings.hints - mine.hints.length) : 0,
         hintLimit: state.settings.hints,
+        podiumMs: timing.podiumMs,
       };
     },
 

@@ -328,7 +328,7 @@ function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
             </li>
           ))}
         </ul>
-        {room.players.length < Math.max(2, game.minPlayers) && <p className="lobby-waiting">{tr.room.waiting}</p>}
+        {room.players.length < max && <p className="lobby-waiting">{tr.room.waiting}</p>}
       </section>
 
       <section className="lobby-settings" aria-labelledby="settings-title">

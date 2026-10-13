@@ -15,12 +15,7 @@ const POWER_PATHS: Record<Power, React.ReactNode> = {
     </>
   ),
   specialElection: <path d="M12 3.5l2.5 5.3 5.8.7-4.3 4 1.1 5.7L12 16.4l-5.1 2.8 1.1-5.7-4.3-4 5.8-.7z" />,
-  execution: (
-    <>
-      <circle cx="12" cy="12" r="6.5" />
-      <path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5" />
-    </>
-  ),
+  execution: <path d="M6 6l12 12M18 6L6 18" />,
 };
 
 export function PowerGlyph({ power, size = 18 }: { power: Power; size?: number }) {
@@ -31,7 +26,7 @@ export function PowerGlyph({ power, size = 18 }: { power: Power; size?: number }
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.8}
+      strokeWidth={2.6}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

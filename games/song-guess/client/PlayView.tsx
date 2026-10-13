@@ -49,7 +49,10 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     () => player.volume,
   );
   const remaining = useRemaining(view);
-  const [feedback, setFeedback] = useState<{ text: string; tone: Verdict } | null>(null);
+  const [feedback, setFeedback] = useState<{
+    text: string;
+    tone: Verdict;
+  } | null>(null);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const members = useMemo(() => new Map(room.players.map((p) => [p.id, p])), [room.players]);
   const isHost = room.hostId === meId;
@@ -107,53 +110,66 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
   const me = view.players.find((p) => p.id === meId);
   const waiting = view.players.filter((p) => members.get(p.id)?.connected && p.state === 'listening').length;
 
-  if (view.phase === 'podium') return <Podium view={view} members={members} />;
+  if (view.phase === 'podium') return <Podium view={view} members={members} room={room} remaining={remaining} />;
+
+  const shownStage = view.phase === 'stage' ? view.stage : view.startStage;
+  const hint =
+    view.phase === 'countdown'
+      ? s.play.countdown
+      : view.phase === 'loading'
+        ? s.play.loading
+        : blocked
+          ? s.play.tapToListen
+          : s.play.stageHint(view.stageClips[shownStage]!);
 
   return (
-    <div className="sg">
+    <div className="sg song">
       <aside className="sg-side sg-left">
         <SettingsPanel {...panelProps} section="primary" />
         <Scoreboard view={view} members={members} meId={meId} />
       </aside>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round mono">{s.play.round(Math.max(view.round, 1), view.totalRounds)}</span>
-          {me && view.totalRounds === null && (
-            <span className="sg-streak mono">
-              {s.play.streak} {me.streak} <span className="dim">/ {s.play.best} {me.bestStreak}</span>
-            </span>
-          )}
-          <span className="sg-code mono">{room.code}</span>
+      <main className="sg-center song-center">
+        <header className="song-top">
+          <span className="song-round">
+            {s.play.round(Math.max(view.round, 1), view.totalRounds)}
+            {me && view.totalRounds === null && me.streak > 1 && <span className="song-round-streak"> ×{me.streak}</span>}
+          </span>
+          <span className="song-code">{room.code}</span>
         </header>
 
-        <div className="sg-quick">
-          <PoolStrip
-            pools={pools}
-            selected={settings.pools}
-            editable={isHost}
-            onPick={(id) => void setSettings({ ...settings, pools: [id] })}
-          />
-          <DifficultyPills value={settings.difficulty} editable={isHost} onPick={(d) => void setSettings({ ...settings, difficulty: d })} />
-          {isHost && <p className="sg-live-hint">{s.settings.liveHint}</p>}
-        </div>
-
         {view.phase === 'reveal' && view.reveal ? (
-          <Reveal view={view} members={members} meId={meId} isHost={isHost} act={act} remaining={remaining} playing={!!playing && playingStage < 0} />
+          <Reveal
+            view={view}
+            members={members}
+            meId={meId}
+            isHost={isHost}
+            act={act}
+            remaining={remaining}
+            playing={!!playing && playingStage < 0}
+          />
         ) : (
           <>
             <ProgressBar
               clips={view.stageClips}
               unlocked={unlockedStage}
-              current={view.phase === 'stage' ? view.stage : view.startStage}
-              playing={playing && playingStage >= 0 ? { stage: playingStage, duration: playing.duration, key: playing.key } : null}
+              current={shownStage}
+              playing={
+                playing && playingStage >= 0
+                  ? {
+                      stage: playingStage,
+                      duration: playing.duration,
+                      key: playing.key,
+                    }
+                  : null
+              }
               onPick={(i) => void playUrl(view.clips[i])}
             />
 
-            <div className="sg-player">
+            <div className="song-stage">
               {view.phase === 'countdown' ? (
                 <div className="sg-count" role="status" aria-label={`${s.play.countdown}: ${Math.ceil(remaining / 1000)}`}>
-                  <span key={Math.ceil(remaining / 1000)} className="sg-count-num mono">
+                  <span key={Math.ceil(remaining / 1000)} className="sg-count-num">
                     {Math.max(1, Math.ceil(remaining / 1000))}
                   </span>
                 </div>
@@ -170,20 +186,23 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
                   onClick={() => void playUrl(stageUrl)}
                   aria-label={playingStage >= 0 ? s.play.stopLabel : s.play.playLabel(clipLabel(view.stageClips[view.stage]!))}
                 >
-                  <Icon name={playingStage >= 0 ? 'pause' : 'play'} size={44} />
+                  <Icon name={playingStage >= 0 ? 'pause' : 'play'} size={62} />
                 </button>
               )}
-              <div className="sg-player-info">
-                <span className="sg-clip mono">{clipShort(view.stageClips[view.phase === 'stage' ? view.stage : view.startStage]!)}</span>
+              <div className="song-meter">
+                <span className="song-eq" data-on={playingStage >= 0 || undefined} aria-hidden="true">
+                  {EQ.map((h, i) => (
+                    <i key={i} style={{ height: `${h}%` }} />
+                  ))}
+                </span>
                 {view.phase === 'stage' && view.timed && (
-                  <span className="sg-timer mono" data-low={remaining < 4000 || undefined}>
+                  <span className="sg-timer" data-low={remaining < 4000 || undefined} aria-label={`${Math.ceil(remaining / 1000)} sn`}>
                     {Math.ceil(remaining / 1000)}
                   </span>
                 )}
               </div>
+              <p className="song-hint">{hint}</p>
             </div>
-            {view.phase === 'stage' && blocked && <p className="sg-tap">{s.play.tapToListen}</p>}
-            {view.phase === 'loading' && <p className="sg-tap dim">{s.play.loading}</p>}
 
             <div className="sg-answer">
               <GuessBox
@@ -195,14 +214,13 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
               />
               <button
                 type="button"
-                className="btn btn-outline sg-skip"
+                className="sg-skip"
                 disabled={!view.me.canGuess}
                 onClick={async () => {
                   const res = await act({ type: 'skip' });
                   if (!res.ok) setFeedback({ text: res.error, tone: 'wrong' });
                 }}
               >
-                <Icon name="skip" size={14} />
                 {isLastStage ? s.play.giveUp : s.play.skip}
               </button>
             </div>
@@ -221,16 +239,16 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
                 )
               )}
               {view.phase === 'stage' && !view.timed && waiting > 0 && !view.me.canGuess && (
-                <p className="sg-wait dim">{s.play.waiting(waiting)}</p>
+                <p className="sg-wait">{s.play.waiting(waiting)}</p>
               )}
-              {view.phase === 'stage' && !view.me.canGuess && unlockedStage > 0 && <p className="sg-wait dim">{s.play.replayHint}</p>}
+              {view.phase === 'stage' && !view.me.canGuess && unlockedStage > 0 && <p className="sg-wait">{s.play.replayHint}</p>}
             </div>
 
             {view.me.guesses.length > 0 && (
               <ol className="sg-history">
                 {view.me.guesses.map((g, i) => (
                   <li key={i} data-verdict={g.verdict}>
-                    <span className="sg-history-stage mono">{clipShort(view.stageClips[g.stage]!)}</span>
+                    <span className="sg-history-stage">{clipShort(view.stageClips[g.stage]!)}</span>
                     <span className="sg-history-text">
                       {g.artist} – {g.title}
                     </span>
@@ -250,24 +268,42 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
 
         <Feed items={view.feed} members={members} clips={view.stageClips} meId={meId} />
 
+        <div className="song-spacer" />
+
         <div className="sg-mobile-only">
-          <Scoreboard view={view} members={members} meId={meId} />
+          <ScoreStrip view={view} members={members} meId={meId} />
+        </div>
+
+        <div className="sg-quick">
+          <PoolStrip
+            pools={pools}
+            selected={settings.pools}
+            editable={isHost}
+            onPick={(id) => void setSettings({ ...settings, pools: [id] })}
+          />
+          <DifficultyPills value={settings.difficulty} editable={isHost} onPick={(d) => void setSettings({ ...settings, difficulty: d })} />
+          {isHost && <p className="sg-live-hint">{s.settings.liveHint}</p>}
+        </div>
+
+        <div className="sg-mobile-only">
           <section className="sg-options">
-            <button
-              type="button"
-              className="toggle sg-options-btn"
-              aria-expanded={optionsOpen}
-              onClick={() => setOptionsOpen((o) => !o)}
-            >
+            <button type="button" className="toggle sg-options-btn" aria-expanded={optionsOpen} onClick={() => setOptionsOpen((o) => !o)}>
               <span className="sgs-opt-icon">
                 <Icon name="menu" size={14} />
                 {s.settings.options}
               </span>
-              <Icon name="chevron" size={14} style={{ transform: optionsOpen ? 'rotate(180deg)' : undefined }} />
+              <Icon
+                name="chevron"
+                size={14}
+                style={{
+                  transform: optionsOpen ? 'rotate(180deg)' : undefined,
+                }}
+              />
             </button>
             {optionsOpen && (
               <div className="sg-options-body">
                 <SettingsPanel {...panelProps} />
+                <Volume volume={volume} />
               </div>
             )}
           </section>
@@ -278,20 +314,57 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
 
       <aside className="sg-side sg-right">
         <SettingsPanel {...panelProps} section="secondary" />
-        <label className="sg-volume">
-          <span className="eyebrow">{s.settings.volume}</span>
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.05}
-            value={volume}
-            onChange={(e) => player.setVolume(Number(e.target.value))}
-            style={{ '--v': `${volume * 100}%` } as CSSProperties}
-          />
-        </label>
+        <Volume volume={volume} />
       </aside>
     </div>
+  );
+}
+
+/** Ekolayzer çubuklarının boyları (tasarımdaki gibi; dördüncüsü sarı). */
+const EQ = [30, 70, 45, 100, 55, 85, 35, 60];
+
+function Volume({ volume }: { volume: number }) {
+  return (
+    <label className="sg-volume">
+      <span className="eyebrow">{s.settings.volume}</span>
+      <input
+        type="range"
+        min={0}
+        max={1}
+        step={0.05}
+        value={volume}
+        onChange={(e) => player.setVolume(Number(e.target.value))}
+        style={{ '--v': `${volume * 100}%` } as CSSProperties}
+      />
+    </label>
+  );
+}
+
+/** Mobilde alttaki skor şeridi: lider nane, sen sarı. */
+function ScoreStrip({ view, members, meId }: { view: SongView; members: Map<string, RoomPlayer>; meId: string }) {
+  const lines = [...view.players].sort((a, b) => b.score - a.score);
+  return (
+    <ol className="song-strip" aria-label={s.play.scores}>
+      {lines.map((p, i) => {
+        const m = members.get(p.id);
+        if (!m) return null;
+        const mine = p.id === meId;
+        return (
+          <li
+            key={p.id}
+            data-me={mine || undefined}
+            data-first={(i === 0 && p.score > 0 && !mine) || undefined}
+            data-off={!m.connected || undefined}
+          >
+            <span className="song-strip-name">
+              {mine ? s.play.scoreYou : m.nick}
+              {p.streak > 1 && ` ×${p.streak}`}
+            </span>
+            <span className="song-strip-pts">{p.score.toLocaleString('tr-TR')}</span>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -346,14 +419,14 @@ function Reveal({
 
   return (
     <section className="rv" aria-live="polite">
-      <div className="rv-cover">{r.cover ? <img src={r.cover} alt="" width={180} height={180} /> : null}</div>
-      <p className="eyebrow">{s.reveal.itWas}</p>
+      <div className="rv-cover">{r.cover ? <img src={r.cover} alt="" width={180} height={180} /> : <Icon name="music" size={64} />}</div>
+      <span className="rv-sticker">{s.reveal.itWas}</span>
       <h2 className="rv-title">{r.title}</h2>
       <p className="rv-artist">
         {r.artist}
         {r.album ? ` · ${r.album}` : ''}
       </p>
-      {r.poolName && <p className="rv-pool dim">{s.reveal.fromPool(r.poolName)}</p>}
+      {r.poolName && <p className="rv-pool">{s.reveal.fromPool(r.poolName)}</p>}
       <div className="rv-links">
         <button type="button" className="btn btn-ghost" onClick={() => (playing ? player.stop() : void player.play(r.previewUrl))}>
           <Icon name={playing ? 'pause' : 'play'} size={14} />
@@ -364,39 +437,34 @@ function Reveal({
         </a>
       </div>
 
-      <p className="rv-verdict" data-won={mine?.kind === 'correct' || undefined}>
-        {mine?.kind === 'correct' ? s.reveal.won : s.reveal.lost}
-        {mine && <span className="mono"> +{mine.points.toLocaleString('tr-TR')}</span>}
+      <p className="rv-verdict" data-won={mine?.kind === 'correct' || undefined} data-artist={mine?.kind === 'artist' || undefined}>
+        {mine?.kind === 'correct' ? s.reveal.won : mine?.kind === 'artist' ? s.reveal.artistOnly : s.reveal.lost}
+        {mine && <span> +{mine.points.toLocaleString('tr-TR')}</span>}
       </p>
 
       {view.players.length > 1 &&
         (r.results.length === 0 ? (
-          <p className="dim rv-nobody">{s.reveal.nobody}</p>
+          <p className="rv-nobody">{s.reveal.nobody}</p>
         ) : (
           <ol className="rv-results">
             {r.results.map((x) => (
               <li key={x.playerId} data-kind={x.kind}>
-                <span className="rv-who">{members.get(x.playerId)?.nick ?? '?'}</span>
-                <span className="dim">
+                <span className="rv-who">{x.playerId === meId ? s.feed.you : (members.get(x.playerId)?.nick ?? '?')}</span>
+                <span className="rv-how">
                   {x.kind === 'artist' ? s.reveal.artistOnly : s.reveal.atStage(clipLabel(view.stageClips[x.stage]!))}
                 </span>
-                <span className="mono rv-pts">+{x.points.toLocaleString('tr-TR')}</span>
+                <span className="rv-pts">+{x.points.toLocaleString('tr-TR')}</span>
               </li>
             ))}
           </ol>
         ))}
 
       <div className="rv-next">
-        <button
-          type="button"
-          className="btn btn-primary btn-block btn-lg"
-          disabled={me?.ready}
-          onClick={() => void act({ type: 'next' })}
-        >
+        <button type="button" className="btn btn-primary btn-block btn-lg" disabled={me?.ready} onClick={() => void act({ type: 'next' })}>
           {last ? s.reveal.finish : s.reveal.next}
         </button>
-        {present.length > 1 && <p className="dim rv-ready mono">{s.reveal.waitingOthers(readyCount, present.length)}</p>}
-        {view.timed && <p className="dim rv-ready">{s.reveal.autoNext(Math.ceil(remaining / 1000))}</p>}
+        {present.length > 1 && <p className="rv-ready">{s.reveal.waitingOthers(readyCount, present.length)}</p>}
+        {view.timed && <p className="rv-ready">{s.reveal.autoNext(Math.ceil(remaining / 1000))}</p>}
         {isHost && present.length > 1 && me?.ready && readyCount < present.length && (
           <button type="button" className="btn btn-ghost" onClick={() => void act({ type: 'next', force: true })}>
             {s.reveal.skipWait}
@@ -407,41 +475,102 @@ function Reveal({
   );
 }
 
-function Podium({ view, members }: { view: SongView; members: Map<string, RoomPlayer> }) {
-  const ranked = [...view.players].sort((a, b) => b.score - a.score);
-  const first = ranked[0];
-  const winner = first ? members.get(first.id) : undefined;
+/** Oyun sonu (tasarım: Sonuçlar): OYUN BİTTİ, kazanan, renkli skor kartları, lobiye dönüş çubuğu. */
+function Podium({
+  view,
+  members,
+  room,
+  remaining,
+}: {
+  view: SongView;
+  members: Map<string, RoomPlayer>;
+  room: PlayViewProps<SongView>['room'];
+  remaining: number;
+}) {
+  const ranked = [...view.players].filter((p) => members.has(p.id)).sort((a, b) => b.score - a.score);
+  const [first, second] = ranked;
+  const rest = ranked.slice(2);
+  const half = Math.ceil(rest.length / 2);
+  const tie = !!first && !!second && first.score === second.score;
+  const nick = (id: string) => members.get(id)?.nick ?? '?';
+  useEffect(() => window.scrollTo(0, 0), []);
+  const progress = view.phaseMs > 0 ? Math.min(100, Math.max(0, 100 - (remaining / view.phaseMs) * 100)) : 100;
   return (
-    <main className="col podium">
-      <span className="wordmark" aria-hidden="true">
-        songie
+    <main className="col podium song-podium">
+      <span className="song-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
       </span>
-      <p className="eyebrow podium-kicker">{s.podium.title}</p>
-      {winner && first && (
-        <div className="podium-winner">
-          <Avatar avatar={winner.avatar} nick={winner.nick} size={72} />
-          <h1 className="podium-name">{winner.nick}</h1>
-          <p className="podium-score mono">{s.podium.points(first.score)}</p>
-          {first.bestStreak > 1 && <p className="dim">{s.podium.streak(first.bestStreak)}</p>}
+      <div className="song-podium-top">
+        <span>{s.name}</span>
+        <span className="song-code">{room.code}</span>
+      </div>
+      <div className="song-podium-head">
+        <span className="song-podium-sticker">{s.podium.title}</span>
+        <h1 className="song-podium-title">{first && !tie ? s.podium.winner(nick(first.id)) : s.podium.draw}</h1>
+        {first && first.bestStreak > 1 && <p className="song-podium-streak">{s.podium.streak(first.bestStreak)}</p>}
+      </div>
+      {first && (
+        <div className="song-podium-cards">
+          <div className="song-podium-card" data-first>
+            {!tie && (
+              <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+                <path
+                  d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z"
+                  fill="var(--yellow)"
+                  stroke="var(--ink)"
+                  strokeWidth="3"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            )}
+            <span className="song-podium-score">{first.score.toLocaleString('tr-TR')}</span>
+            <span className="song-podium-name">{nick(first.id)}</span>
+          </div>
+          {second && (
+            <>
+              <span className="song-podium-dash" aria-hidden="true">
+                –
+              </span>
+              <div className="song-podium-card">
+                <span className="song-podium-score">{second.score.toLocaleString('tr-TR')}</span>
+                <span className="song-podium-name">{nick(second.id)}</span>
+              </div>
+            </>
+          )}
         </div>
       )}
-      {ranked.length > 1 && (
-        <ol className="sg-score-list podium-list">
-          {ranked.map((p, i) => {
-            const m = members.get(p.id);
-            if (!m) return null;
-            return (
-              <li key={p.id} className="sg-score" data-first={i === 0 || undefined}>
-                <span className="mono dim">{String(i + 1).padStart(2, '0')}</span>
-                <Avatar avatar={m.avatar} nick={m.nick} size={28} />
-                <span className="sg-score-name">{m.nick}</span>
-                <span className="sg-score-pts mono">{p.score.toLocaleString('tr-TR')}</span>
-              </li>
-            );
-          })}
-        </ol>
+      {rest.length > 0 && (
+        <div className="song-podium-rosters">
+          {[rest.slice(0, half), rest.slice(half)].map(
+            (col, i) =>
+              col.length > 0 && (
+                <ol key={i} className="song-podium-roster" start={3 + i * half}>
+                  {col.map((p) => {
+                    const m = members.get(p.id)!;
+                    return (
+                      <li key={p.id}>
+                        <Avatar avatar={m.avatar} nick={m.nick} size={28} />
+                        <span className="song-podium-roster-name">{m.nick}</span>
+                        <span className="song-podium-roster-pts">{p.score.toLocaleString('tr-TR')}</span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ),
+          )}
+        </div>
       )}
-      <p className="dim podium-back">{s.podium.back}</p>
+      <div className="song-spacer" />
+      <div className="song-podium-foot">
+        <div className="song-podium-bar" aria-hidden="true">
+          <div style={{ width: `${progress}%` }} />
+        </div>
+        <p className="song-podium-back">{s.podium.back}</p>
+      </div>
     </main>
   );
 }

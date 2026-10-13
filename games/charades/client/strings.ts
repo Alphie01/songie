@@ -1,4 +1,4 @@
-import type { CardResult, Difficulty, Kind, TeamId } from '../shared/index.js';
+import type { CardResult, Difficulty, Kind, SignId, TeamId } from '../shared/index.js';
 
 export const s = {
   name: 'Sessiz Sinema',
@@ -67,6 +67,28 @@ export const s = {
     guess: (nick: string) => `${nick} anlatıyor, tahmin et!`,
     guessHint: 'Başlığı göremezsin. İşaretleri izle, tahminini yüksek sesle söyle.',
     guessCount: 'Bu turda bilinen',
+    headline: {
+      narrator: 'Sen anlatıyorsun · konuşmak yok!',
+      watcher: 'Başlığı sen de görüyorsun. Sakın söyleme.',
+    },
+    gesture: (g: string) => `İşaret: ${g.charAt(0).toLocaleLowerCase('tr')}${g.slice(1)}`,
+    signsLabel: 'Klasik işaretler',
+    signsShort: {
+      tur: 'Tür',
+      kelime: 'Kelime sayısı: parmak',
+      hece: 'Hece: kola dokun',
+      benzer: 'Benzer ses: kulak',
+      bildin: 'Bildin: buruna dokun',
+    } satisfies Record<SignId, string>,
+    signsTap: 'İşarete dokun, takımın ekranında görsün.',
+    signShown: (sign: SignId, kind: string | null, words: number | null) =>
+      ({
+        tur: kind ? `Tür: ${kind}` : 'Tür',
+        kelime: words ? `${words} kelime` : 'Kelime sayısı',
+        hece: 'Heceye bölüyor',
+        benzer: 'Benzer ses',
+        bildin: 'Bildin!',
+      })[sign],
     spectator: 'Bu tur izliyorsun.',
     narratorNote: 'Takımın başlığın tamamını söyleyince “Doğru”ya bas.',
     stats: { correct: 'Doğru', pass: 'Pas', foul: 'Konuştu' } satisfies Record<CardResult, string>,
@@ -77,7 +99,7 @@ export const s = {
   },
   podium: {
     title: 'Oyun bitti',
-    winner: (team: string) => `${team} kazandı`,
+    won: 'kazandı!',
     draw: 'Berabere',
     back: 'Lobiye dönülüyor…',
   },

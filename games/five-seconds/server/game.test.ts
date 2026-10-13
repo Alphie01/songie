@@ -123,6 +123,9 @@ describe('five-seconds akış', () => {
     expect(h.view('d').voted.sort()).toEqual(['a', 'c']);
     expect(h.view('d').myVote).toBeNull();
     expect(h.view('c').myVote).toBe(true);
+    // Yalnızca toplam gider: kimin ne verdiği görünümde yok.
+    expect(h.view('b').tally).toEqual({ yes: 2, no: 0 });
+    expect(JSON.stringify(h.view('b'))).not.toMatch(/"votes"/);
     await h.act('c', { type: 'vote', attemptId: v.attemptId, success: false });
     await h.act('d', { type: 'vote', attemptId: v.attemptId, success: true });
     expect(h.view('a').lastResult).toMatchObject({ performerId: 'b', success: true, yes: 2, no: 1 });

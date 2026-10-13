@@ -597,6 +597,7 @@ export function createFrequencyGame(deps: {
         serverNow: state.clock(),
         endsAt: r?.endsAt ?? 0,
         durationMs: r?.durationMs ?? 0,
+        podiumMs: timing.podiumMs,
       };
     },
 

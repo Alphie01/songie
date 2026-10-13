@@ -15,7 +15,7 @@ export function Board() {
     <div className="dt-board">
       {victims.length > 0 && (
         <section className="dt-sec" aria-labelledby="dt-victim">
-          <h2 id="dt-victim" className="dt-sec-title">
+          <h2 id="dt-victim" className="dt-label">
             {s.board.victim(view.case.genre)}
           </h2>
           {victims.map((c) => (
@@ -25,25 +25,25 @@ export function Board() {
       )}
 
       <section className="dt-sec" aria-labelledby="dt-suspects">
-        <h2 id="dt-suspects" className="dt-sec-title">
+        <h2 id="dt-suspects" className="dt-label">
           {s.board.suspects}
           <span className="dt-count">{suspects.length}</span>
         </h2>
         <div className="dt-people">
-          {suspects.map((c) => (
-            <PersonCard key={c.id} c={c} variant="suspect" />
+          {suspects.map((c, i) => (
+            <PersonCard key={c.id} c={c} variant="suspect" tone={i} />
           ))}
         </div>
       </section>
 
       {others.length > 0 && (
         <section className="dt-sec" aria-labelledby="dt-others">
-          <h2 id="dt-others" className="dt-sec-title">
+          <h2 id="dt-others" className="dt-label">
             {s.board.others}
           </h2>
           <div className="dt-people">
-            {others.map((c) => (
-              <PersonCard key={c.id} c={c} variant="other" />
+            {others.map((c, i) => (
+              <PersonCard key={c.id} c={c} variant="other" tone={i + suspects.length} />
             ))}
           </div>
         </section>
@@ -56,17 +56,21 @@ export function Board() {
   );
 }
 
-function PersonCard({ c, variant }: { c: CharacterView; variant: 'victim' | 'suspect' | 'other' }) {
+const TONES = ['pink', 'sky', 'yellow', 'mint', 'coral', 'lilac'] as const;
+
+function PersonCard({ c, variant, tone = 0 }: { c: CharacterView; variant: 'victim' | 'suspect' | 'other'; tone?: number }) {
   const { send, nick, view, setPersonFilter, setTab, readOnly, openInterview, ivUnread } = useDesk();
   const ivs = view.interviews.filter((i) => i.characterId === c.id);
   const [open, setOpen] = useState(false);
   const mentions = view.evidence.filter((e) => e.people.includes(c.id)).length;
   const setMark = (mark: Mark) => void send({ type: 'mark', characterId: c.id, mark: c.mark?.mark === mark ? null : mark });
+  const ivBadge = ivs.reduce((n, iv) => n + (ivUnread.get(iv.id)?.count ?? 0), 0);
+  const ivFresh = ivs.some((iv) => ivUnread.get(iv.id)?.fresh);
 
   return (
-    <article id={`dt-person-${c.id}`} className="dt-person" data-variant={variant} data-mark={c.mark?.mark} tabIndex={-1}>
+    <article id={`dt-person-${c.id}`} className="dt-person" data-variant={variant} data-mark={c.mark?.mark} data-open={open || undefined} tabIndex={-1} onFocus={(e) => e.target === e.currentTarget && setOpen(true)}>
       <div className="dt-person-top">
-        <div className="dt-portrait">
+        <span className="dt-portrait" data-tone={variant === 'victim' ? 'victim' : TONES[tone % TONES.length]}>
           {c.portraitUrl ? (
             <img src={c.portraitUrl} alt={c.portraitAlt ?? c.name} loading="lazy" />
           ) : (
@@ -74,70 +78,85 @@ function PersonCard({ c, variant }: { c: CharacterView; variant: 'victim' | 'sus
               {initials(c.name)}
             </span>
           )}
-          {c.mark && <span className="dt-portrait-mark">{c.mark.mark === 'suspect' ? s.board.markSuspect : s.board.markClear}</span>}
-        </div>
-        <div className="dt-person-id">
-          <h3 className="dt-person-name">{c.name}</h3>
-          <p className="dt-person-role">
+        </span>
+        <button type="button" className="dt-person-id" aria-expanded={open} aria-label={s.board.details(c.name)} onClick={() => setOpen(!open)}>
+          <span className="dt-person-name">{c.name}</span>
+          <span className="dt-person-role">
             {c.role}
-            {c.age != null && <span className="dim">, {s.board.age(c.age)}</span>}
-          </p>
+            {c.age != null && <>, {s.board.age(c.age)}</>}
+          </span>
+          {!open && c.notes.length > 0 && <span className="dt-person-notes">{s.notes.count(c.notes.length)}</span>}
+        </button>
+        <span className="dt-person-tags">
+          {c.mark && (
+            <span className="dt-mark-pill" data-tone={c.mark.mark}>
+              {c.mark.mark === 'suspect' ? s.board.markSuspect : s.board.markClear}
+            </span>
+          )}
+          {ivs.length > 0 && (
+            <button type="button" className="dt-iv-pill" onClick={() => openInterview(ivs[ivs.length - 1]!.id)}>
+              {s.interview.open}
+              {ivBadge > 0 ? <span className="dt-tab-badge">{ivBadge}</span> : ivFresh && <span className="dt-tab-dot" aria-hidden="true" />}
+            </button>
+          )}
+        </span>
+      </div>
+
+      {open && (
+        <div className="dt-person-more">
           <p className="dt-person-rel">{c.relation}</p>
-        </div>
-      </div>
-
-      <div className="dt-person-summary" data-open={open || undefined}>
-        <Paras text={c.summary} />
-      </div>
-      <button type="button" className="dt-link" onClick={() => setOpen(!open)} aria-expanded={open}>
-        {open ? s.board.less : s.board.more}
-      </button>
-
-      {variant === 'suspect' && (
-        <div className="dt-mark-row">
-          <div className="dt-seg" role="group">
-            <button type="button" className="dt-seg-btn" data-tone="suspect" aria-pressed={c.mark?.mark === 'suspect'} disabled={readOnly} onClick={() => setMark('suspect')}>
-              {s.board.markSuspect}
-            </button>
-            <button type="button" className="dt-seg-btn" data-tone="clear" aria-pressed={c.mark?.mark === 'clear'} disabled={readOnly} onClick={() => setMark('clear')}>
-              {s.board.markClear}
-            </button>
+          <div className="dt-person-summary">
+            <Paras text={c.summary} />
           </div>
-          {c.mark && <p className="dt-mark-by">{s.board.markedBy(c.mark.mark === 'suspect' ? s.board.markSuspect : s.board.markClear, nick(c.mark.by))}</p>}
+
+          {variant === 'suspect' && (
+            <div className="dt-mark-row">
+              <div className="dt-seg" role="group">
+                <button type="button" className="dt-seg-btn" data-tone="suspect" aria-pressed={c.mark?.mark === 'suspect'} disabled={readOnly} onClick={() => setMark('suspect')}>
+                  {s.board.markSuspect}
+                </button>
+                <button type="button" className="dt-seg-btn" data-tone="clear" aria-pressed={c.mark?.mark === 'clear'} disabled={readOnly} onClick={() => setMark('clear')}>
+                  {s.board.markClear}
+                </button>
+              </div>
+              {c.mark && <p className="dt-mark-by">{s.board.markedBy(c.mark.mark === 'suspect' ? s.board.markSuspect : s.board.markClear, nick(c.mark.by))}</p>}
+            </div>
+          )}
+
+          {ivs.length > 1 &&
+            ivs.map((iv) => {
+              const u = ivUnread.get(iv.id);
+              return (
+                <button key={iv.id} type="button" className="dt-person-iv" onClick={() => openInterview(iv.id)}>
+                  <IvGlyph />
+                  <span className="dt-person-iv-text">
+                    {s.interview.open}
+                    <span className="dim">, {iv.place}</span>
+                  </span>
+                  {u && u.count > 0 ? <span className="dt-tab-badge">{u.count}</span> : u?.fresh && <span className="dt-new">{s.interview.newQ}</span>}
+                </button>
+              );
+            })}
+
+          <button
+            type="button"
+            className="dt-mentions"
+            disabled={mentions === 0}
+            onClick={() => {
+              setPersonFilter(c.id);
+              setTab('cabinet');
+            }}
+          >
+            {s.board.mentions(mentions)}
+          </button>
+
+          <NoteList
+            compact
+            notes={c.notes}
+            onAdd={async (text) => (await send({ type: 'note', target: { kind: 'character', id: c.id }, text })).ok}
+          />
         </div>
       )}
-
-      {ivs.map((iv) => {
-        const u = ivUnread.get(iv.id);
-        return (
-          <button key={iv.id} type="button" className="dt-person-iv" onClick={() => openInterview(iv.id)}>
-            <IvGlyph />
-            <span className="dt-person-iv-text">
-              {s.interview.open}
-              {ivs.length > 1 && <span className="dim">, {iv.place}</span>}
-            </span>
-            {u && u.count > 0 ? <span className="dt-tab-badge" data-tone="iv">{u.count}</span> : u?.fresh && <span className="dt-new">{s.interview.newQ}</span>}
-          </button>
-        );
-      })}
-
-      <button
-        type="button"
-        className="dt-mentions"
-        disabled={mentions === 0}
-        onClick={() => {
-          setPersonFilter(c.id);
-          setTab('cabinet');
-        }}
-      >
-        {s.board.mentions(mentions)}
-      </button>
-
-      <NoteList
-        compact
-        notes={c.notes}
-        onAdd={async (text) => (await send({ type: 'note', target: { kind: 'character', id: c.id }, text })).ok}
-      />
     </article>
   );
 }
@@ -147,7 +166,7 @@ function Locations() {
   if (!view.locations.length) return null;
   return (
     <section className="dt-sec" aria-labelledby="dt-locs">
-      <h2 id="dt-locs" className="dt-sec-title">
+      <h2 id="dt-locs" className="dt-label">
         {s.board.locations}
       </h2>
       {view.locations.map((l) => (
@@ -184,7 +203,7 @@ function Timeline() {
 
   return (
     <section className="dt-sec" aria-labelledby="dt-tl">
-      <h2 id="dt-tl" className="dt-sec-title">
+      <h2 id="dt-tl" className="dt-label">
         {s.board.timeline}
       </h2>
       {days.length === 0 ? (
@@ -227,7 +246,7 @@ function Scenes() {
   if (!view.acts.length) return null;
   return (
     <section className="dt-sec" aria-labelledby="dt-scenes">
-      <h2 id="dt-scenes" className="dt-sec-title">
+      <h2 id="dt-scenes" className="dt-label">
         {s.scene.replay}
       </h2>
       <ol className="dt-scene-list">

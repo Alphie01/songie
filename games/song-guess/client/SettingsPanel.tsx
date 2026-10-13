@@ -80,7 +80,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
   }
 
   return (
-    <div className="sgs">
+    <div className="sgs song-sgs">
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
@@ -179,12 +179,12 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
           </Group>
 
           <Group title={s.settings.difficulty} hint={s.difficultyHint[settings.difficulty]}>
-            <div className="sgs-stack">
+            <div className="chips">
               {DIFFICULTIES.map((d) => (
                 <button
                   key={d}
                   type="button"
-                  className="option sgs-diff"
+                  className="chip sgs-diff"
                   aria-pressed={settings.difficulty === d}
                   disabled={!editable}
                   style={{ '--c': DIFFICULTY_COLOR[d] } as CSSProperties}

@@ -1,5 +1,15 @@
 import type { AgentsSettings, CardColor, EndReason, PackId, TeamId } from '../shared/index.js';
 
+/** Türkçe tamlayan eki: Deniz → ’in, Ali → ’nin, Ufuk → ’un. */
+function possessive(name: string): string {
+  const lower = name.toLocaleLowerCase('tr');
+  const vowels = [...lower].filter((ch) => 'aeıioöuü'.includes(ch));
+  const last = vowels.at(-1) ?? 'e';
+  const v = 'aı'.includes(last) ? 'ı' : 'ei'.includes(last) ? 'i' : 'ou'.includes(last) ? 'u' : 'ü';
+  const endsVowel = 'aeıioöuü'.includes(lower.at(-1) ?? '');
+  return `’${endsVowel ? 'n' : ''}${v}n`;
+}
+
 export const s = {
   name: 'Ajanlar',
   pitch: 'Tek kelimelik ipucuyla takımına gizli ajanlarını buldur',
@@ -11,6 +21,8 @@ export const s = {
     teamsHint: 'Bir oyuncuya dokunarak takımını değiştir. Takımı seçilmeyenler başlarken dağıtılır.',
     unassigned: 'Takımsız',
     shuffle: 'Karıştır',
+    shuffleAria: 'Takımları karıştır',
+    offline: 'bağlantı yok',
     empty: 'Henüz kimse yok',
     needTwo: 'Her takımda en az 2 kişi olmalı.',
     leaders: 'Liderler',
@@ -40,6 +52,15 @@ export const s = {
   },
   play: {
     board: (n: number) => `Tablo ${n}`,
+    pill: (n: number) => `Ajanlar · Tablo ${n}`,
+    agents: (n: number) => `${n} ajan`,
+    clueOf: (nick: string) => `Lider ${nick}${possessive(nick)} ipucu`,
+    myClue: 'Senin ipucun',
+    thinking: '…',
+    yourClue: 'İpucun',
+    legendNeutral: 'Tarafsız: sıra biter',
+    legendAssassin: 'Suikastçı: oyun biter',
+    turnShort: (team: string) => `Sıra ${team.toLocaleLowerCase('tr')}da`,
     you: 'sen',
     leader: 'lider',
     nextLeader: 'sıradaki lider',
@@ -75,7 +96,10 @@ export const s = {
     seconds: 'sn',
   },
   over: {
-    won: (team: string) => `${team} kazandı`,
+    kicker: 'Tablo bitti',
+    kickerFinal: 'Oyun bitti',
+    won: (team: string) => `${team} kazandı!`,
+    found: (team: string, n: number, total: number) => `${team}: ${total} ajandan ${n} tanesini buldu`,
     ended: 'Tablo yarıda kaldı',
     reason: {
       agents: 'Bütün ajanlarını buldular.',

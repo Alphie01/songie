@@ -89,6 +89,8 @@ export interface RoundSummary {
   didIds: string[] | null;
   /** Bu turda elenenler; isimsiz modda ya da can kapalıyken null/boş. */
   eliminatedIds: string[] | null;
+  /** "Yaptım" diyenlerden hikâyeyi anlatmaya davet edilen (sunucu seçer); isimsiz modda ya da kimse yapmadıysa null. */
+  storytellerId: string | null;
 }
 
 export interface PodiumPlayer {

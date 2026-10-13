@@ -111,7 +111,7 @@ function Room({ iv, c }: { iv: InterviewView; c: CharacterView | undefined }) {
       <header className="dt-room-head">
         <Face c={c} size="lg" />
         <div className="dt-room-id">
-          <p className="dt-room-title">{iv.title}</p>
+          {iv.title !== name && <p className="dt-room-title">{iv.title}</p>}
           <h2 id={`dt-room-${iv.id}`} className="dt-room-name">
             {name}
           </h2>

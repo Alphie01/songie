@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import type { PlayViewProps } from '@songie/game-kit/client';
 import { Avatar } from '@songie/game-kit/ui';
 import type { RoomPlayer } from '@songie/shared';
@@ -14,7 +14,7 @@ import {
   type WerewolfSettings,
   type WerewolfView,
 } from '../shared/index.js';
-import { RoleGlyph, SkyDisc } from './Glyphs';
+import { ClockRing, RoleGlyph } from './Glyphs';
 import { s } from './strings';
 
 type Send = (a: unknown) => Promise<boolean>;
@@ -80,49 +80,71 @@ export function PlayView({ view, meId, room, act, settings }: PlayViewProps<Were
   const village = <Village view={view} members={members} meId={meId} knownRoles={knownRoles} />;
   const log = <Log view={view} nick={plainNick} />;
 
+  const over = view.phase === 'over';
+  const phaseLabel = over
+    ? s.phase.over
+    : view.day > 0
+      ? `${s.phase[view.phase]} · ${view.phase === 'night' ? s.play.night(view.day) : s.play.day(view.day)}`
+      : s.phase[view.phase];
+
   return (
     <div className="ww sg" data-time={time}>
-      <div className="ww-sky" aria-hidden="true" />
+      <div className="ww-sky" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+      </div>
 
       <aside className="sg-side sg-left">
         {village}
         <InGame view={view} />
       </aside>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round">{s.phase[view.phase]}</span>
-          {view.day > 0 && view.phase !== 'over' && (
-            <span>{view.phase === 'night' ? s.play.night(view.day) : s.play.day(view.day)}</span>
+      <main className="sg-center ww-main">
+        <div className="ww-screen">
+          {over ? (
+            <header className="ww-top-plain">
+              <span>{s.name}</span>
+              <span className="ww-code">{room.code}</span>
+            </header>
+          ) : (
+            <header className="ww-top">
+              <span className="ww-phase">{phaseLabel}</span>
+              <span className="ww-code">{room.code}</span>
+            </header>
           )}
-          <span className="sg-code mono">{room.code}</span>
-        </header>
 
-        {view.phase !== 'over' && <Clock view={view} />}
+          {!over && <Clock view={view} />}
 
-        {me && view.phase !== 'over' && <RoleCard view={view} nick={plainNick} reveal={reveal} setReveal={setReveal} />}
+          <Stage view={view} meId={meId} isHost={isHost} nick={nick} plainNick={plainNick} members={members} send={send} />
 
-        <Stage view={view} meId={meId} isHost={isHost} nick={nick} plainNick={plainNick} members={members} send={send} />
+          {me?.wolfChat && me.alive && view.phase === 'night' && (
+            <Chat
+              title={s.play.wolfChat}
+              hint={s.play.wolfChatHint}
+              kind="wolf"
+              messages={me.wolfChat}
+              nick={plainNick}
+              meId={meId}
+              onSend={(text) => send({ type: 'wolfChat', text })}
+            />
+          )}
 
-        {error && (
-          <p className="error-text ww-center" role="alert">
-            {error}
-          </p>
-        )}
+          {error && (
+            <p className="error-text ww-center" role="alert">
+              {error}
+            </p>
+          )}
 
-        {me?.wolfChat && me.alive && view.phase === 'night' && (
-          <Chat
-            title={s.play.wolfChat}
-            hint={s.play.wolfChatHint}
-            kind="wolf"
-            messages={me.wolfChat}
-            nick={plainNick}
-            meId={meId}
-            onSend={(text) => send({ type: 'wolfChat', text })}
-          />
-        )}
+          {view.ghost && !over && <Ghosts view={view} nick={plainNick} meId={meId} send={send} />}
 
-        {view.ghost && view.phase !== 'over' && <Ghosts view={view} nick={plainNick} meId={meId} send={send} />}
+          {me && !over && (
+            <>
+              <div className="ww-fill" />
+              <RoleCard view={view} nick={plainNick} reveal={reveal} setReveal={setReveal} />
+            </>
+          )}
+        </div>
 
         <div className="sg-mobile-only">
           {village}
@@ -149,30 +171,37 @@ function Clock({ view }: { view: WerewolfView }) {
   const left = Math.max(0, view.endsAt - now);
   const sec = Math.ceil(left / 1000);
   const night = view.phase === 'night';
-  const title = night ? s.play.night(view.day) : s.phase[view.phase];
-  const sub = night && view.nightStep ? s.stepWakes[view.nightStep] : view.phase === 'discuss' || view.phase === 'vote' ? s.play.day(view.day) : null;
+  const aliveN = view.seats.filter((x) => x.alive).length;
+  const cur = view.nightStep ? view.nightSteps.indexOf(view.nightStep) : -1;
   return (
     <section className="ww-clock" aria-live="polite">
       <div className="ww-clock-disc">
-        <SkyDisc time={night ? 'night' : 'day'} progress={1 - left / total} />
-        <span className="ww-clock-sec mono" aria-label={`${sec} sn`}>
+        <ClockRing left={left / total} />
+        <span className="ww-clock-sec" aria-label={`${sec} sn`}>
           {sec}
         </span>
       </div>
       <div className="ww-clock-text">
-        <h1 className="ww-clock-title">{title}</h1>
-        {sub && <p className="ww-clock-sub">{sub}</p>}
-        {night && view.nightSteps.length > 0 && (
-          <ol className="ww-steps" aria-label={s.play.nightOrder}>
-            {view.nightSteps.map((st, i) => {
-              const cur = view.nightSteps.indexOf(view.nightStep!);
-              return (
-                <li key={st} data-state={i < cur ? 'done' : i === cur ? 'now' : 'next'}>
-                  {s.step[st]}
-                </li>
-              );
-            })}
-          </ol>
+        {night ? (
+          <>
+            <h2 className="ww-label">{s.play.nightOrder}</h2>
+            {view.nightSteps.length > 0 && (
+              <ol className="ww-steps" aria-label={s.play.nightOrder}>
+                {view.nightSteps.map((st, i) => (
+                  <li key={st} data-step={st} data-state={i < cur ? 'done' : i === cur ? 'now' : 'next'}>
+                    {s.step[st]}
+                  </li>
+                ))}
+              </ol>
+            )}
+            {view.nightStep && <p className="ww-clock-sub">{s.stepWakes[view.nightStep]}</p>}
+          </>
+        ) : (
+          <>
+            <h2 className="ww-label">{s.play.day(view.day)}</h2>
+            <p className="ww-clock-big">{s.phase[view.phase]}</p>
+            <p className="ww-clock-sub">{s.play.alive(aliveN)}</p>
+          </>
         )}
       </div>
     </section>
@@ -218,50 +247,47 @@ function RoleCard({ view, nick, reveal, setReveal }: { view: WerewolfView; nick:
       onContextMenu={(e) => e.preventDefault()}
     >
       {reveal ? (
-        <span className="ww-rolecard-face">
-          <span className="ww-rolecard-head">
-            <span className="ww-rolecard-icon">
-              <RoleGlyph role={me.role} size={30} />
-            </span>
-            <span className="ww-rolecard-role">{s.role[me.role]}</span>
+        <span className="ww-rolecard-in">
+          <span className="ww-rolecard-icon" data-face>
+            <RoleGlyph role={me.role} size={32} />
           </span>
-          <span className="ww-rolecard-blurb">{s.roleBlurb[me.role]}</span>
-          {me.role === 'wolf' && (
-            <span className="ww-rolecard-line">
-              {me.allies.length ? (
-                <>
-                  {s.play.allies}: <b>{me.allies.map(nick).join(', ')}</b>
-                </>
-              ) : (
-                s.play.noAllies
-              )}
-            </span>
-          )}
-          {me.lover && (
-            <span className="ww-rolecard-line" data-kind="lover">
-              {s.play.lover(nick(me.lover.id), s.side[me.lover.side])}
-              {me.lover.side !== sideOf(me.role) && <> {s.play.loverMixed}</>}
-            </span>
-          )}
-          {me.cupidPair && <span className="ww-rolecard-line">{s.play.cupidPair(nick(me.cupidPair[0]), nick(me.cupidPair[1]))}</span>}
-          {me.seerResults.length > 0 && (
-            <span className="ww-rolecard-line">
-              {s.play.seerResults}:{' '}
-              {me.seerResults.map((r, i) => (
-                <span key={r.night}>
-                  {i > 0 && ', '}
-                  <b>{nick(r.id)}</b> {r.wolf ? s.play.isWolf : s.play.notWolf}
-                </span>
-              ))}
-            </span>
-          )}
-          {me.potions && <span className="ww-rolecard-line">{s.play.potions(me.potions.heal, me.potions.poison)}</span>}
-          {!me.alive && <span className="ww-rolecard-line">{s.play.youDied}</span>}
+          <span className="ww-rolecard-text">
+            <span className="ww-rolecard-role">{s.role[me.role]}</span>
+            {me.role === 'wolf' && (
+              <span className="ww-rolecard-line">
+                {me.allies.length ? `${s.play.allies}: ${me.allies.map(nick).join(', ')}` : s.play.noAllies}
+              </span>
+            )}
+            {me.lover && (
+              <span className="ww-rolecard-line">
+                {s.play.lover(nick(me.lover.id), s.side[me.lover.side])}
+                {me.lover.side !== sideOf(me.role) && <> {s.play.loverMixed}</>}
+              </span>
+            )}
+            {me.cupidPair && <span className="ww-rolecard-line">{s.play.cupidPair(nick(me.cupidPair[0]), nick(me.cupidPair[1]))}</span>}
+            {me.seerResults.length > 0 && (
+              <span className="ww-rolecard-line">
+                {s.play.seerResults}:{' '}
+                {me.seerResults.map((r, i) => (
+                  <span key={r.night}>
+                    {i > 0 && ', '}
+                    {nick(r.id)} {r.wolf ? s.play.isWolf : s.play.notWolf}
+                  </span>
+                ))}
+              </span>
+            )}
+            {me.potions && <span className="ww-rolecard-line">{s.play.potions(me.potions.heal, me.potions.poison)}</span>}
+            {!me.alive && <span className="ww-rolecard-line">{s.play.youDied}</span>}
+            <span className="ww-rolecard-blurb">{s.roleBlurb[me.role]}</span>
+          </span>
         </span>
       ) : (
-        <span className="ww-rolecard-back">
-          <span className="ww-rolecard-hold">{s.play.roleHold}</span>
-          <span className="ww-rolecard-hint">{s.play.roleHoldHint}</span>
+        <span className="ww-rolecard-in">
+          <span className="ww-rolecard-icon">?</span>
+          <span className="ww-rolecard-text">
+            <span className="ww-rolecard-hold">{s.play.roleHold}</span>
+            <span className="ww-rolecard-hint">{s.play.roleHoldHint}</span>
+          </span>
         </span>
       )}
     </button>
@@ -308,7 +334,7 @@ function PlayerGrid({
               title={off ?? undefined}
               onClick={() => onPick?.(id)}
             >
-              <Avatar avatar={m?.avatar ?? { shape: 'circle', color: 'mint' }} nick={name} size={34} dim={!m?.connected} />
+              <Avatar avatar={m?.avatar ?? { shape: 'circle', color: 'mint' }} nick={name} size={46} dim={!m?.connected} />
               <span className="ww-tile-name">
                 {name}
                 {id === meId && <span className="dim"> ({s.play.you})</span>}
@@ -365,21 +391,39 @@ function Stage(props: StageProps) {
 
 /* ----- Gece ----- */
 
-function Sleep({ note }: { note?: string }) {
+function Sleep({ note, view, members }: { note?: string; view: WerewolfView; members: Members }) {
+  const alive = view.seats.filter((x) => x.alive);
   return (
     <section className="ww-sleep">
-      <p className="ww-sleep-title">{s.play.sleepTitle}</p>
+      <span className="ww-moon" aria-hidden="true" />
+      <h2 className="ww-sleep-title">{s.play.sleepTitle}</h2>
       <p className="ww-sleep-body">{note ?? s.play.sleepBody}</p>
+      <div className="ww-sleep-alive">
+        <h3 className="ww-label">
+          {s.play.aliveNow} · {alive.length}
+        </h3>
+        <ul className="ww-sleep-faces">
+          {alive.map((x) => {
+            const m = members.get(x.id);
+            return (
+              <li key={x.id} title={m?.nick ?? '?'}>
+                <Avatar avatar={m?.avatar ?? { shape: 'circle', color: 'mint' }} nick={m?.nick ?? '?'} size={46} dim={!m?.connected} />
+                <span className="sr-only">{m?.nick ?? '?'}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </section>
   );
 }
 
 function Night(props: StageProps) {
-  const { view } = props;
+  const { view, members } = props;
   const me = view.me;
-  if (!me) return <Sleep note={s.play.spectator} />;
-  if (!me.alive) return <Sleep note={s.play.deadNight} />;
-  if (!me.turn) return <Sleep />;
+  if (!me) return <Sleep note={s.play.spectator} view={view} members={members} />;
+  if (!me.alive) return <Sleep note={s.play.deadNight} view={view} members={members} />;
+  if (!me.turn) return <Sleep view={view} members={members} />;
   return <Turn key={view.session} turn={me.turn} {...props} />;
 }
 
@@ -799,9 +843,11 @@ function Verdict({ view, nick }: { view: WerewolfView; nick: Nick }) {
 
 /* ----- Oyun sonu ----- */
 
-function Over({ view, isHost, plainNick, send }: StageProps) {
+function Over({ view, isHost, members, plainNick, send }: StageProps) {
   const now = useServerNow(view.serverNow);
-  const left = Math.max(0, Math.ceil((view.finishAt - now) / 1000));
+  const totalRef = useRef(Math.max(1, view.finishAt - view.serverNow));
+  const leftMs = Math.max(0, view.finishAt - now);
+  const left = Math.ceil(leftMs / 1000);
   const roles = view.roles ?? {};
   const lovers = view.lovers;
   const won = (id: string) => {
@@ -812,22 +858,72 @@ function Over({ view, isHost, plainNick, send }: StageProps) {
     if (r === 'fool') return view.winner === 'fool';
     return view.winner === (r === 'wolf' ? 'wolves' : 'village');
   };
+  const wolves = view.seats.filter((x) => roles[x.id] === 'wolf');
+  const village = view.seats.filter((x) => roles[x.id] && roles[x.id] !== 'wolf');
+  const sides = [
+    { key: 'wolves' as const, label: s.play.sideWolves, seats: wolves },
+    { key: 'village' as const, label: s.play.sideVillage, seats: village },
+  ];
+  // Kazanan taraf önde ve eğik; deli ya da âşıklar kazandıysa sıra değişmez.
+  if (view.winner === 'village') sides.reverse();
+  const top = view.winner === 'wolves' || view.winner === 'village' ? view.winner : null;
   return (
-    <section className="ww-panel ww-over" data-winner={view.winner ?? 'none'}>
-      <h1 className="ww-over-title">{view.winner ? s.play.winner[view.winner] : s.play.noWinner}</h1>
-      <p className="ww-over-reason">{view.winReason ? s.play.reason[view.winReason] : ''}</p>
-      <ul className="ww-over-roles" aria-label={s.play.rolesTitle}>
-        {view.seats.map((seat) => {
-          const r = roles[seat.id];
-          return (
-            <li key={seat.id} data-role={r} data-won={won(seat.id) || undefined} data-dead={!seat.alive || undefined}>
-              {r && <RoleGlyph role={r} size={18} />}
-              <span className="ww-over-name">{plainNick(seat.id)}</span>
-              <b>{r ? s.role[r] : ''}</b>
-            </li>
-          );
-        })}
-      </ul>
+    <section className="ww-over" data-winner={view.winner ?? 'none'}>
+      <span className="ww-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+      <div className="ww-over-head">
+        <span className="ww-sticker">{s.play.gameOver}</span>
+        <h1 className="ww-over-title">{view.winner ? s.play.winnerTitle[view.winner] : s.play.noWinner}</h1>
+        {view.winReason && <p className="ww-over-reason">{s.play.reason[view.winReason]}</p>}
+      </div>
+
+      <div className="ww-over-cards">
+        {sides.map((side, i) => (
+          <Fragment key={side.key}>
+            {i > 0 && (
+              <span className="ww-over-dash" aria-hidden="true">
+                –
+              </span>
+            )}
+            <div className="ww-over-card" data-side={side.key} data-won={top === side.key || undefined}>
+              {top === side.key && (
+                <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+                  <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="#FFD23F" stroke="#0D0828" strokeWidth="3" strokeLinejoin="round" />
+                </svg>
+              )}
+              <span className="ww-over-n">{side.seats.length}</span>
+              <span className="ww-over-side">{side.label}</span>
+            </div>
+          </Fragment>
+        ))}
+      </div>
+
+      <div className="ww-over-rosters">
+        {sides.map((side) => (
+          <ul key={side.key} className="ww-over-roster" data-side={side.key} aria-label={side.label}>
+            <li className="ww-over-roster-title">{side.label}</li>
+            {side.seats.map((seat) => {
+              const r = roles[seat.id]!;
+              const m = members.get(seat.id);
+              return (
+                <li key={seat.id} data-role={r} data-won={won(seat.id) || undefined} data-dead={!seat.alive || undefined}>
+                  <Avatar avatar={m?.avatar ?? { shape: 'circle', color: 'mint' }} nick={m?.nick ?? '?'} size={28} />
+                  <span className="ww-over-name">
+                    {plainNick(seat.id)}
+                    <small>{s.role[r]}</small>
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        ))}
+      </div>
+
       {view.secret && view.secret.length > 0 && (
         <details className="ww-secret">
           <summary>{s.play.secretTitle}</summary>
@@ -838,12 +934,19 @@ function Over({ view, isHost, plainNick, send }: StageProps) {
           </ol>
         </details>
       )}
-      <p className="ww-hint ww-center">{s.play.backIn(left)}</p>
-      {isHost && (
-        <button type="button" className="btn btn-primary btn-block btn-lg" onClick={() => void send({ type: 'finish' })}>
-          {s.play.backNow}
-        </button>
-      )}
+
+      <div className="ww-fill" />
+      <div className="ww-over-foot">
+        <div className="ww-bar" aria-hidden="true">
+          <div style={{ width: `${(1 - leftMs / totalRef.current) * 100}%` }} />
+        </div>
+        <p className="ww-over-note">{s.play.backIn(left)}</p>
+        {isHost && (
+          <button type="button" className="btn btn-primary btn-block btn-lg" onClick={() => void send({ type: 'finish' })}>
+            {s.play.backNow}
+          </button>
+        )}
+      </div>
     </section>
   );
 }
@@ -881,15 +984,14 @@ function Chat({
   }
   return (
     <section className="ww-chat" data-kind={kind}>
-      <div className="ww-chat-head">
-        <h2 className="ww-h">{title}</h2>
-        <span className="ww-hint">{hint}</span>
-      </div>
+      <h2 className="ww-chat-head">
+        <span className="ww-chat-title">{title}</span> · {hint}
+      </h2>
       <ol className="ww-chat-list" ref={listRef}>
         {messages.length === 0 && <li className="dim">{s.play.chatEmpty}</li>}
         {messages.map((m) => (
           <li key={m.n} data-me={m.from === meId || undefined}>
-            <b>{nick(m.from)}</b> {m.text}
+            <b>{nick(m.from)}:</b> {m.text}
           </li>
         ))}
       </ol>

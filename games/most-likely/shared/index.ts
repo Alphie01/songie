@@ -28,7 +28,7 @@ export type MostLikelySettings = z.infer<typeof settingsSchema>;
 
 export const defaultSettings: MostLikelySettings = {
   categories: ['genel', 'arkadaslik', 'ask', 'is-okul', 'gelecek', 'aliskanliklar', CUSTOM_CATEGORY],
-  selfVote: false,
+  selfVote: true,
   anonymous: true,
   predict: false,
   seconds: 30,

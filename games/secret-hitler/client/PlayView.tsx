@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 import type { PlayViewProps } from '@songie/game-kit/client';
 import { Avatar } from '@songie/game-kit/ui';
 import type { RoomPlayer, RoomState } from '@songie/shared';
@@ -69,8 +69,11 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
   const seats = <Seats view={view} members={members} meId={meId} knownRoles={knownRoles} />;
   const log = <Log view={view} nick={plainNick} />;
 
+  const over = view.phase === 'over';
+
   return (
-    <div className="sh sg">
+    <div className="sh sg" data-over={over || undefined}>
+      <div className="sh-sky" aria-hidden="true" />
       <aside className="sg-side sg-left">
         <section className="sh-block">
           <h2 className="sh-h">{s.play.table}</h2>
@@ -78,23 +81,39 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
         </section>
       </aside>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round">{s.phase[view.phase]}</span>
-          <span className="sg-code mono">{room.code}</span>
-        </header>
+      <main className="sg-center sh-main">
+        <div className="sh-screen">
+          {over ? (
+            <header className="sh-top-plain">
+              <span>{s.name}</span>
+              <span className="sh-code">{room.code}</span>
+            </header>
+          ) : (
+            <header className="sh-top">
+              <span className="sh-phase">{s.phase[view.phase]}</span>
+              <span className="sh-code">{room.code}</span>
+            </header>
+          )}
 
-        {view.me && view.phase !== 'over' && <RoleCard view={view} nick={plainNick} reveal={reveal} setReveal={setReveal} />}
+          {!over && <Tracks view={view} />}
 
-        <Action view={view} meId={meId} isHost={isHost} nick={nick} plainNick={plainNick} send={send} />
-        {error && (
-          <p className="error-text sh-center" role="alert">
-            {error}
-          </p>
-        )}
-        {isHost && <HostBar view={view} room={room} nick={plainNick} send={send} />}
+          <Action view={view} meId={meId} isHost={isHost} nick={nick} plainNick={plainNick} members={members} send={send} />
+          {error && (
+            <p className="error-text sh-center" role="alert">
+              {error}
+            </p>
+          )}
+          {isHost && <HostBar view={view} room={room} nick={plainNick} send={send} />}
 
-        <Tracks view={view} />
+          {!over && <Strip view={view} members={members} meId={meId} knownRoles={knownRoles} />}
+
+          {view.me && !over && (
+            <>
+              <div className="sh-fill" />
+              <RoleCard view={view} nick={plainNick} reveal={reveal} setReveal={setReveal} />
+            </>
+          )}
+        </div>
 
         <div className="sg-mobile-only">
           <section className="sh-block">
@@ -112,6 +131,64 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
         <SettingsPanel {...panelProps} section="secondary" />
       </aside>
     </div>
+  );
+}
+
+/* ---------- Oyuncu şeridi (tasarımdaki kısa durum çipleri) ---------- */
+
+function Strip({
+  view,
+  members,
+  meId,
+  knownRoles,
+}: {
+  view: SecretHitlerView;
+  members: Map<string, RoomPlayer>;
+  meId: string;
+  knownRoles: Map<string, Role>;
+}) {
+  const showVotes = view.phase !== 'vote' && view.lastVote;
+  return (
+    <ol className="sh-strip" aria-label={s.play.seats}>
+      {view.seats.map((seat) => {
+        const m = members.get(seat.id);
+        const role = knownRoles.get(seat.id);
+        const isPres = view.president === seat.id;
+        const isChan = view.chancellor === seat.id;
+        const vote = showVotes ? view.lastVote!.votes[seat.id] : undefined;
+        const kind = isPres ? 'pres' : isChan ? 'chan' : undefined;
+        const status = !seat.alive
+          ? s.play.deadShort
+          : isPres
+            ? s.play.president
+            : isChan
+              ? view.phase === 'nominate' || view.phase === 'vote'
+                ? s.play.nominee
+                : s.play.chancellor
+              : seat.voted
+                ? s.play.voted
+                : vote
+                  ? vote === 'ja'
+                    ? s.play.ja
+                    : s.play.nein
+                  : role
+                    ? s.role[role]
+                    : '';
+        return (
+          <li
+            key={seat.id}
+            className="sh-chip"
+            data-kind={kind}
+            data-dead={!seat.alive || undefined}
+            data-me={seat.id === meId || undefined}
+            data-party={role ? roleParty(role) : undefined}
+          >
+            <span className="sh-chip-name">{m?.nick ?? '?'}</span>
+            <span className="sh-chip-status">{status || '\u00a0'}</span>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -156,6 +233,7 @@ function RoleCard({
       className="sh-rolecard"
       data-open={reveal || undefined}
       data-party={reveal ? party : undefined}
+      data-role={reveal ? me.role : undefined}
       aria-pressed={reveal}
       onPointerDown={(e) => {
         e.preventDefault();
@@ -174,35 +252,23 @@ function RoleCard({
     >
       {reveal ? (
         <span className="sh-rolecard-face">
-          <span className="sh-rolecard-role">{s.role[me.role]}</span>
-          <span className="sh-rolecard-blurb">{blurb}</span>
+          <span className="sh-rolecard-role">{s.play.roleOpen(s.role[me.role], blurb)}</span>
           {me.known.length > 0 && (
             <span className="sh-rolecard-team">
-              {s.play.roleTeam}:{' '}
-              {me.known.map((k, i) => (
-                <span key={k.id}>
-                  {i > 0 && ', '}
-                  <b>{nick(k.id)}</b> ({s.role[k.role]})
-                </span>
-              ))}
+              {s.play.roleTeam}: {me.known.map((k) => `${nick(k.id)} (${s.role[k.role]})`).join(', ')}
             </span>
           )}
           {me.investigations.length > 0 && (
             <span className="sh-rolecard-team">
               {s.play.investigations}:{' '}
-              {me.investigations.map((r, i) => (
-                <span key={r.target}>
-                  {i > 0 && ', '}
-                  <b>{nick(r.target)}</b> {s.party[r.party].toLocaleLowerCase('tr-TR')}
-                </span>
-              ))}
+              {me.investigations.map((r) => `${nick(r.target)} ${s.party[r.party].toLocaleLowerCase('tr-TR')}`).join(', ')}
             </span>
           )}
         </span>
       ) : (
-        <span className="sh-rolecard-back">
-          <span className="sh-rolecard-hold">{s.play.roleHold}</span>
-          <span className="sh-rolecard-hint">{s.play.roleHoldHint}</span>
+        <span className="sh-rolecard-hold">
+          {s.play.roleHold}
+          <span className="sr-only"> {s.play.roleHoldHint}</span>
         </span>
       )}
     </button>
@@ -215,77 +281,46 @@ function Tracks({ view }: { view: SecretHitlerView }) {
   return (
     <section className="sh-tracks" aria-label={`${s.play.liberalTrack}, ${s.play.fascistTrack}`}>
       <div className="sh-track" data-party="liberal">
-        <div className="sh-track-head">
-          <h2 className="sh-h">{s.play.liberalTrack}</h2>
-          <span className="mono sh-track-count">
-            {view.liberal}/{LIBERAL_TO_WIN}
-          </span>
-        </div>
+        <h2 className="sh-track-label">{s.play.trackCount(s.play.liberalTrack, view.liberal, LIBERAL_TO_WIN)}</h2>
         <ol className="sh-slots" style={{ '--n': LIBERAL_TO_WIN } as React.CSSProperties}>
           {Array.from({ length: LIBERAL_TO_WIN }, (_, i) => (
-            <li key={i} className="sh-slot" data-filled={i < view.liberal || undefined}>
-              {i < view.liberal && <PolicyGlyph policy="liberal" size={20} />}
-            </li>
+            <li key={i} className="sh-slot" data-filled={i < view.liberal || undefined} />
           ))}
         </ol>
       </div>
 
       <div className="sh-track" data-party="fascist">
-        <div className="sh-track-head">
-          <h2 className="sh-h">{s.play.fascistTrack}</h2>
-          <span className="mono sh-track-count">
-            {view.fascist}/{FASCIST_TO_WIN}
-          </span>
-        </div>
+        <h2 className="sh-track-label">{s.play.trackCount(s.play.fascistTrack, view.fascist, FASCIST_TO_WIN)}</h2>
         <ol className="sh-slots" style={{ '--n': FASCIST_TO_WIN } as React.CSSProperties}>
           {view.track.map((power, i) => (
             <li
               key={i}
               className="sh-slot"
               data-filled={i < view.fascist || undefined}
-              data-zone={i >= HITLER_ZONE || undefined}
-              title={power ? `${s.power[power]}: ${s.powerHint[power]}` : undefined}
+              data-gate={i === HITLER_ZONE - 1 || undefined}
+              title={power ? `${s.power[power]}: ${s.powerHint[power]}` : i === HITLER_ZONE - 1 ? s.play.hitlerSlot : undefined}
             >
-              {i < view.fascist ? (
-                <PolicyGlyph policy="fascist" size={20} />
-              ) : power ? (
-                <span className="sh-slot-power">
-                  <PowerGlyph power={power} size={16} />
+              {i >= view.fascist && power && (
+                <span className="sh-slot-power" role="img" aria-label={s.power[power]}>
+                  <PowerGlyph power={power} size={18} />
                 </span>
-              ) : null}
+              )}
             </li>
           ))}
         </ol>
-        <p className="sh-track-note">
-          {view.fascist >= VETO_AT ? s.play.vetoZone : s.play.hitlerZone}
-        </p>
-        <ul className="sh-legend-powers">
-          {[...new Set(view.track.filter((p) => p !== null))].map((p) => (
-            <li key={p}>
-              <PowerGlyph power={p} size={13} />
-              {s.power[p]}
-            </li>
-          ))}
-        </ul>
+        <p className="sh-track-note">{view.fascist >= VETO_AT ? s.play.vetoZone : s.play.hitlerZone}</p>
       </div>
 
       <div className="sh-meta">
-        <div className="sh-tracker" title={s.play.trackerHint}>
-          <span className="sh-meta-label">{s.play.tracker}</span>
-          <span className="sh-tracker-dots" aria-label={`${view.electionTracker}/3`}>
-            {[0, 1, 2].map((i) => (
-              <span key={i} data-on={i < view.electionTracker || undefined} />
-            ))}
-          </span>
-        </div>
-        <div className="sh-pile">
-          <span className="sh-meta-label">{s.play.deck}</span>
-          <span className="mono">{view.deckCount}</span>
-        </div>
-        <div className="sh-pile">
-          <span className="sh-meta-label">{s.play.discard}</span>
-          <span className="mono">{view.discardCount}</span>
-        </div>
+        <span className="sh-meta-label" title={s.play.trackerHint}>
+          {s.play.tracker}
+        </span>
+        <span className="sh-tracker-dots" role="img" aria-label={`${s.play.tracker} ${view.electionTracker}/3`}>
+          {[0, 1, 2].map((i) => (
+            <span key={i} data-on={i < view.electionTracker || undefined} />
+          ))}
+        </span>
+        <span className="sh-pile">{s.play.pileInfo(view.deckCount, view.discardCount)}</span>
       </div>
     </section>
   );
@@ -378,6 +413,7 @@ function Action({
   isHost,
   nick,
   plainNick,
+  members,
   send,
 }: {
   view: SecretHitlerView;
@@ -385,6 +421,7 @@ function Action({
   isHost: boolean;
   nick: Nick;
   plainNick: Nick;
+  members: Map<string, RoomPlayer>;
   send: Send;
 }) {
   const [picked, setPicked] = useState<number | null>(null);
@@ -396,7 +433,7 @@ function Action({
   const alive = !!mySeat?.alive;
   const lastVote = view.lastVote;
 
-  if (view.phase === 'over') return <Over view={view} nick={nick} isHost={isHost} send={send} />;
+  if (view.phase === 'over') return <Over view={view} nick={plainNick} members={members} isHost={isHost} send={send} />;
 
   switch (view.phase) {
     case 'nominate':
@@ -616,32 +653,87 @@ function HostBar({ view, room, nick, send }: { view: SecretHitlerView; room: Roo
   );
 }
 
-function Over({ view, nick, isHost, send }: { view: SecretHitlerView; nick: Nick; isHost: boolean; send: Send }) {
+function Over({ view, nick, members, isHost, send }: { view: SecretHitlerView; nick: Nick; members: Map<string, RoomPlayer>; isHost: boolean; send: Send }) {
   const now = useServerNow(view.serverNow);
-  const left = Math.max(0, Math.ceil((view.finishAt - now) / 1000));
+  const totalRef = useRef(Math.max(1, view.finishAt - view.serverNow));
+  const leftMs = Math.max(0, view.finishAt - now);
+  const left = Math.ceil(leftMs / 1000);
+  const roles = view.roles ?? {};
+  const sides = [
+    { key: 'liberal' as const, label: s.play.sideLiberal, seats: view.seats.filter((x) => roles[x.id] === 'liberal') },
+    { key: 'fascist' as const, label: s.play.sideFascist, seats: view.seats.filter((x) => roles[x.id] && roles[x.id] !== 'liberal') },
+  ];
+  if (view.winner === 'fascist') sides.reverse();
   return (
-    <section className="sh-panel sh-over" data-winner={view.winner ?? 'none'}>
-      <h1 className="sh-over-title">{view.winner ? s.play.winner[view.winner] : s.play.noWinner}</h1>
-      <p className="sh-over-reason">{view.winReason ? s.play.reason[view.winReason] : ''}</p>
+    <section className="sh-over" data-winner={view.winner ?? 'none'}>
+      <span className="sh-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+      <div className="sh-over-head">
+        <span className="sh-sticker">{s.play.gameOver}</span>
+        <h1 className="sh-over-title">{view.winner ? s.play.winnerTitle[view.winner] : s.play.noWinner}</h1>
+        {view.winReason && <p className="sh-over-reason">{s.play.reason[view.winReason]}</p>}
+      </div>
       {view.roles && (
-        <ul className="sh-over-roles" aria-label={s.play.rolesTitle}>
-          {view.seats.map((seat) => {
-            const r = view.roles![seat.id]!;
-            return (
-              <li key={seat.id} data-party={roleParty(r)}>
-                <span>{nick(seat.id)}</span>
-                <b>{s.role[r]}</b>
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          <div className="sh-over-cards">
+            {sides.map((side, i) => (
+              <Fragment key={side.key}>
+                {i > 0 && (
+                  <span className="sh-over-dash" aria-hidden="true">
+                    –
+                  </span>
+                )}
+                <div className="sh-over-card" data-party={side.key} data-won={view.winner === side.key || undefined}>
+                  {view.winner === side.key && (
+                    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+                      <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="#FFD23F" stroke="#0D0828" strokeWidth="3" strokeLinejoin="round" />
+                    </svg>
+                  )}
+                  <span className="sh-over-n">{side.key === 'liberal' ? view.liberal : view.fascist}</span>
+                  <span className="sh-over-side">{side.key === 'liberal' ? s.play.liberalTrack : s.play.fascistTrack}</span>
+                </div>
+              </Fragment>
+            ))}
+          </div>
+          <div className="sh-over-rosters">
+            {sides.map((side) => (
+              <ul key={side.key} className="sh-over-roster" data-party={side.key} aria-label={side.label}>
+                <li className="sh-over-roster-title">{side.label}</li>
+                {side.seats.map((seat) => {
+                  const r = roles[seat.id]!;
+                  const m = members.get(seat.id);
+                  return (
+                    <li key={seat.id} data-dead={!seat.alive || undefined}>
+                      <Avatar avatar={m?.avatar ?? { shape: 'circle', color: 'mint' }} nick={m?.nick ?? '?'} size={28} />
+                      <span className="sh-over-name">
+                        {nick(seat.id)}
+                        <small data-role={r}>{s.role[r]}</small>
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            ))}
+          </div>
+        </>
       )}
-      <p className="sh-hint sh-center">{s.play.backIn(left)}</p>
-      {isHost && (
-        <button type="button" className="btn btn-primary btn-block btn-lg" onClick={() => void send({ type: 'finish' })}>
-          {s.play.backNow}
-        </button>
-      )}
+      <div className="sh-fill" />
+      <div className="sh-over-foot">
+        <div className="sh-bar" aria-hidden="true">
+          <div style={{ width: `${(1 - leftMs / totalRef.current) * 100}%` }} />
+        </div>
+        <p className="sh-over-note">{s.play.backIn(left)}</p>
+        {isHost && (
+          <button type="button" className="btn btn-primary btn-block btn-lg" onClick={() => void send({ type: 'finish' })}>
+            {s.play.backNow}
+          </button>
+        )}
+      </div>
     </section>
   );
 }

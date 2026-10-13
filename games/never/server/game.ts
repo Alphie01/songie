@@ -180,6 +180,7 @@ export function createNeverGame(deps: { pool: StatementPool; timing?: Partial<Ne
       total: eligible.length,
       didIds: state.anonymous ? null : didIds,
       eliminatedIds: state.anonymous ? null : eliminatedIds,
+      storytellerId: state.anonymous || didIds.length === 0 ? null : didIds[Math.floor(Math.random() * didIds.length)]!,
     };
     state.reveal = summary;
     state.history.unshift(summary);

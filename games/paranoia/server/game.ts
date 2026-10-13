@@ -396,6 +396,8 @@ export function createParanoiaGame(deps: {
         seq: cur?.seq ?? state.seq,
         myTurn,
         question: cur && myTurn ? cur.question.text : null,
+        // Gönderen yalnızca soruyu alana ve yalnızca "geri seçim yok" açıkken gider (seçilemeyen kişi zaten o).
+        fromId: cur && myTurn && settings.noReturn ? cur.fromId : null,
         choices,
         holderId: holder,
         holderOffline,

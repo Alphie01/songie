@@ -2,7 +2,7 @@ import path from 'node:path';
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import { CATEGORY_IDS, cleanPromptText, customPromptSchema, type MostLikelyView } from '../shared/index.js';
+import { CATEGORY_IDS, cleanPromptText, customPromptSchema, defaultSettings, type MostLikelyView } from '../shared/index.js';
 import { mostLikelyServer } from './index.js';
 import { PromptPool } from './prompts.js';
 
@@ -41,11 +41,20 @@ describe('most-likely: oylama', () => {
     expect(v.history[0]).toMatchObject({ winners: ['ayse'], votes: 2 });
   });
 
-  it('kendine oy kuralı ayara uyar', async () => {
-    const h = await setup(['ali', 'ayse', 'cem']);
+  it('varsayılan ayarla oyuncu kendine oy verebilir', async () => {
+    expect(defaultSettings.selfVote).toBe(true);
+    const h = await setup(['ali', 'ayse', 'cem'], { selfVote: defaultSettings.selfVote });
+    expect(h.view('ali').selfVote).toBe(true);
+    expect(await h.act('ali', { type: 'vote', ...cur(h), target: 'ali' })).toMatchObject({ ok: true });
+    expect(h.view('ali').myVote).toBe('ali');
+    await h.act('ayse', { type: 'vote', ...cur(h), target: 'ali' });
+    await h.act('cem', { type: 'vote', ...cur(h), target: 'cem' });
+    expect(h.view('cem').result).toMatchObject({ winners: ['ali'], counts: [{ id: 'ali', votes: 2 }, { id: 'cem', votes: 1 }] });
+  });
+
+  it('oda sahibi kendine oyu kapatınca kendine oy verilemez', async () => {
+    const h = await setup(['ali', 'ayse', 'cem'], { selfVote: false });
     expect(await h.act('ali', { type: 'vote', ...cur(h), target: 'ali' })).toMatchObject({ ok: false, error: expect.stringContaining('kendine') });
-    const h2 = await setup(['ali', 'ayse', 'cem'], { selfVote: true });
-    expect(await h2.act('ali', { type: 'vote', ...cur(h2), target: 'ali' })).toMatchObject({ ok: true });
   });
 
   it('odada olmayan birine oy verilemez, eski tura ait hamle yutulur', async () => {

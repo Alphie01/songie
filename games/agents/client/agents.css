@@ -1,30 +1,28 @@
-/* Ajanlar — ortak düzen game-kit/ui/game-layout.css'te. a = yeşil takım, b = mor takım. */
+/* Ajanlar — "Songie Arayüz" tasarımı (Ajanlar.dc.html, Sonuclar.dc.html, Lobi.dc.html).
+   Ortak düzen game-kit/ui/game-layout.css; token'lar apps/web/src/styles/tokens.css. a = yeşil takım, b = mor takım. */
 
-.ag {
-  --ag-neutral: #8d8a7c;
-  --ag-neutral-bg: #262822;
-  --ag-assassin: var(--red);
-  --ag-assassin-bg: #1c0909;
+.ag,
+.ag-teams-set {
+  /* Tasarımın tarafsız kart rengi (token'da yok) */
+  --ag-neutral: #e8e0c8;
 }
 
 .ag [data-team='a'],
-.ag-teambox[data-team='a'],
-.ag-leaderpick[data-team='a'] {
-  --team: var(--accent);
+.ag-teambox[data-team='a'] {
+  --team: var(--mint);
 }
 
 .ag [data-team='b'],
-.ag-teambox[data-team='b'],
-.ag-leaderpick[data-team='b'] {
-  --team: var(--purple);
+.ag-teambox[data-team='b'] {
+  --team: var(--lilac);
 }
 
 .ag [data-color='a'] {
-  --c: var(--accent);
+  --c: var(--mint);
 }
 
 .ag [data-color='b'] {
-  --c: var(--purple);
+  --c: var(--lilac);
 }
 
 .ag [data-color='neutral'] {
@@ -32,228 +30,222 @@
 }
 
 .ag [data-color='assassin'] {
-  --c: var(--ag-assassin);
+  --c: var(--ink-2);
 }
 
-.ag-small {
-  font-size: 12.5px;
-  line-height: 1.45;
+.ag .ag-center {
+  gap: 12px;
+}
+
+@media (min-width: 720px) {
+  .ag .ag-center {
+    max-width: 520px;
+  }
 }
 
 .ag-error {
   text-align: center;
 }
 
-.ag-span {
-  grid-column: 1 / -1;
+/* ---------- Üst şerit ---------- */
+.ag-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Tablo için orta sütun daha geniş */
-@media (min-width: 720px) {
-  .ag .ag-center {
-    max-width: 640px;
-  }
+.ag-pill {
+  padding: 7px 14px;
+  border: 3px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .ag-wins {
-  display: inline-flex;
-  gap: 6px;
-  font-family: var(--mono);
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-3);
 }
 
 .ag-wins b {
   color: var(--team);
 }
 
-/* ---------- Kalan ajan sayaçları ---------- */
+.ag-code {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-3);
+}
+
+/* ---------- Kalan ajanlar ---------- */
 .ag-counters {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .ag-counter {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 4px 8px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
   background: var(--panel);
-  transition:
-    border-color 200ms,
-    box-shadow 200ms;
+  color: var(--text);
 }
 
-.ag-counter[data-active],
-.ag-counter[data-won] {
-  border-color: color-mix(in srgb, var(--team) 55%, transparent);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--team) 16%, transparent);
+.ag-counter[data-active] {
+  background: var(--team);
+  color: var(--ink-2);
+  box-shadow: 0 4px 0 var(--ink);
+  transform: rotate(-1deg);
 }
 
 .ag-counter-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--team);
+  min-width: 0;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ag-counter-num {
-  grid-row: span 2;
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1;
+  flex: none;
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
-.ag-pips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 3px;
-}
-
-.ag-pips span {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--team);
-}
-
-.ag-pips span[data-on] {
-  background: transparent;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--team) 45%, transparent);
-}
-
-/* ---------- Durum ---------- */
-.ag-status {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  text-align: center;
-}
-
-.ag-turn {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--team);
-}
-
-.ag-wait {
-  font-size: 15px;
-  color: var(--text-2);
-}
-
+/* ---------- İpucu kartı ---------- */
 .ag-clue {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  max-width: 100%;
-}
-
-.ag-clue-word {
-  font-size: clamp(32px, 10vw, 48px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--text);
-  overflow-wrap: anywhere;
-}
-
-.ag-clue-num {
-  display: grid;
-  place-items: center;
-  min-width: 44px;
-  height: 44px;
-  padding: 0 10px;
-  border-radius: var(--r-pill);
-  background: var(--team);
-  color: var(--accent-ink);
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.ag-clue-meta {
-  display: grid;
-  gap: 2px;
-  color: var(--text);
-  font-weight: 600;
-}
-
-.ag-clue-meta .dim {
-  font-weight: 400;
-}
-
-.ag-timer {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  width: 100%;
+  padding: 10px 14px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--paper);
+  color: var(--ink-2);
 }
 
-.ag-timer-bar {
-  height: 4px;
-  overflow: hidden;
-  border-radius: var(--r-pill);
-  background: var(--panel-2);
-}
-
-.ag-timer-bar span {
-  display: block;
-  height: 100%;
-  background: var(--team);
-  transition: width 250ms linear;
-}
-
-.ag-timer-num {
-  min-width: 52px;
-  font-size: 12px;
-  font-weight: 700;
-  text-align: right;
-  color: var(--text-2);
-}
-
-.ag-timer-num[data-low] {
-  color: var(--red);
-}
-
-/* Lider: anahtar + ipucu formu */
-.ag-leader {
-  display: grid;
-  gap: 16px;
-  width: 100%;
-  padding: 16px;
-  border: 1px solid color-mix(in srgb, var(--team) 35%, transparent);
-  border-radius: var(--r-lg);
-  background: color-mix(in srgb, var(--team) 5%, var(--panel));
-  text-align: left;
-}
-
-@media (min-width: 520px) {
-  .ag-leader {
-    grid-template-columns: auto 1fr;
-    align-items: start;
-  }
-}
-
-.ag-clueform {
-  display: grid;
-  gap: 8px;
+.ag-clue-text {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
 }
 
-.ag-label {
-  font-size: 12px;
+.ag-clue-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.ag-clue-word {
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.ag-clue-word[data-wait] {
+  color: var(--violet);
+}
+
+.ag-clue-right {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+}
+
+.ag-clue-left,
+.ag-clue-turn {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.ag-clue-turn {
+  flex: none;
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--team);
+}
+
+.ag-clue-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  background: var(--team);
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  box-sizing: border-box;
+}
+
+.ag-hint {
+  font-size: 13px;
   font-weight: 700;
   color: var(--text-2);
+  text-align: center;
+}
+
+.ag-hint-dim {
+  color: var(--text-3);
+}
+
+/* Lider: ipucu formu */
+.ag-clueform {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 12px 14px 14px;
 }
 
 .ag-clue-input {
-  font-size: 18px;
-  font-weight: 700;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 12px;
+  border: 3px solid var(--ink);
+  border-radius: 14px;
+  background: var(--paper-2);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.ag-clue-input::placeholder {
+  color: var(--violet);
+  font-size: 20px;
+  text-transform: none;
+}
+
+.ag-clue-input:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 2px;
 }
 
 .ag-clue-input[aria-invalid='true'] {
@@ -261,240 +253,228 @@
 }
 
 .ag-counts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.ag .ag-count {
-  min-width: 34px;
-  min-height: 34px;
-  padding: 0 8px;
-  font-family: var(--mono);
-  font-size: 13px;
-}
-
-.ag-key {
   display: grid;
-  justify-items: center;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 6px;
-  margin: 0;
 }
 
-.ag-key-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 16px);
-  gap: 3px;
-}
-
-.ag-key-grid span {
-  width: 16px;
-  height: 16px;
-  border-radius: 3px;
-  background: var(--c);
-}
-
-.ag-key-grid span[data-color='neutral'] {
-  background: var(--ag-neutral-bg);
-  box-shadow: inset 0 0 0 1px var(--ag-neutral);
-}
-
-.ag-key-grid span[data-color='assassin'] {
-  background: var(--ag-assassin-bg);
-  box-shadow: inset 0 0 0 2px var(--ag-assassin);
-}
-
-.ag-key-grid span[data-revealed] {
-  opacity: 0.25;
-}
-
-.ag-key figcaption {
-  max-width: 120px;
-  font-size: 11px;
-  line-height: 1.35;
-  text-align: center;
-}
-
-/* Tablo sonu */
-.ag-over {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-  padding: 8px 0;
-  text-align: center;
-}
-
-.ag-over-title {
-  font-size: clamp(32px, 9vw, 46px);
+.ag-count {
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 6px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper-2);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 18px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--team, var(--text));
 }
 
-.ag-over-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+.ag-count[aria-pressed='true'] {
+  background: var(--team);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.ag-form-hint {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.ag-form-hint[data-error] {
+  color: #c62f2f;
+}
+
+.ag-submit {
+  min-height: 56px;
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: 0 5px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ag-submit:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.ag-submit:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+/* Süre ve lobiye dönüş çubuğu */
+.ag-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ag-bar {
+  display: block;
+  flex: 1;
   width: 100%;
-  margin-top: 6px;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.ag-bar span {
+  display: block;
+  height: 100%;
+  background: var(--yellow);
+  transition: width 250ms linear;
+}
+
+.ag-timer[data-low] .ag-bar span {
+  background: var(--red);
+}
+
+.ag-timer-num {
+  min-width: 48px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: right;
+  color: var(--text-2);
+}
+
+.ag-timer[data-low] .ag-timer-num {
+  color: var(--red);
 }
 
 /* ---------- Tablo ---------- */
 .ag-board {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 5px;
-}
-
-@media (min-width: 720px) {
-  .ag-board {
-    gap: 8px;
-  }
+  gap: 6px;
 }
 
 .ag-card {
   position: relative;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
   min-width: 0;
-  aspect-ratio: 5 / 4;
-  padding: 4px;
+  min-height: 62px;
+  padding: 4px 1px;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--r-sm);
-  background: var(--panel-2);
-  color: var(--text);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--font);
   text-align: center;
-  transition:
-    border-color 120ms,
-    background 120ms,
-    transform 80ms;
 }
 
 .ag-card:disabled {
   cursor: default;
 }
 
-.ag-word {
-  position: relative;
-  z-index: 1;
-  max-width: 100%;
-  font-weight: 700;
-  line-height: 1.15;
-  /* Kelimeler bölünmesin; dar ekranda yazı küçülür (en uzun kelime ~12 harf). */
-  overflow-wrap: normal;
-  word-break: keep-all;
-  hyphens: none;
-  font-size: clamp(9px, 2.55vw, 14px);
-  letter-spacing: -0.01em;
+/* Lider (ve tablo sonunda herkes): açılmamış kartın rengi altta şerit */
+.ag-card[data-color]:not([data-revealed]) {
+  box-shadow:
+    inset 0 -8px 0 var(--c),
+    0 4px 0 var(--ink);
 }
 
-/* 9+ harfli kelimeler (Helikopter, Tahterevalli) mobilde tek satıra sığsın. */
-.ag-word[data-long] {
-  font-size: clamp(8px, 2.15vw, 13px);
+.ag-card[data-revealed] {
+  background: var(--c);
+  box-shadow: 0 1px 0 var(--ink);
+  transform: translateY(3px);
+}
+
+.ag-card[data-revealed][data-color='assassin'] {
+  color: var(--red);
 }
 
 .ag-board[data-can] .ag-card:not(:disabled):hover {
-  border-color: color-mix(in srgb, var(--team, var(--accent)) 70%, transparent);
-  background: var(--panel-3);
+  background: var(--paper-2);
 }
 
 .ag-board[data-can] .ag-card:not(:disabled):active {
-  transform: scale(0.97);
+  box-shadow: 0 1px 0 var(--ink);
+  transform: translateY(3px);
 }
 
 .ag-card:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 3px solid var(--yellow);
   outline-offset: 2px;
 }
 
 .ag-card[data-mine] {
-  box-shadow: inset 0 0 0 2px var(--accent);
+  outline: 3px solid var(--yellow);
+  outline-offset: 1px;
 }
 
-/* Lider (ve tablo sonunda herkes): açılmamış kartın rengi kenarda */
-.ag-card[data-color]:not([data-revealed]) {
-  border-color: color-mix(in srgb, var(--c) 70%, transparent);
-  background: color-mix(in srgb, var(--c) 9%, var(--panel-2));
-}
-
-.ag-card[data-color='neutral']:not([data-revealed]) {
-  border-color: var(--line-2);
-  background: var(--panel-2);
-}
-
-.ag-card[data-color='assassin']:not([data-revealed]) {
-  border-width: 2px;
-  background: var(--ag-assassin-bg);
-}
-
-.ag-glyph {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 7px;
-  height: 7px;
-  background: var(--c);
-}
-
-.ag-glyph[data-color='a'] {
-  border-radius: 50%;
-}
-
-.ag-glyph[data-color='b'] {
-  transform: rotate(45deg);
-}
-
-.ag-glyph[data-color='assassin'] {
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--c);
-  border-radius: 50%;
-  background: transparent;
-}
-
-/* Açılmış kartlar */
-.ag-card[data-revealed] {
-  border-color: transparent;
-  background: var(--c);
-  color: var(--accent-ink);
-}
-
-.ag-card[data-revealed][data-color='b'] {
-  color: #17051f;
-}
-
-.ag-card[data-revealed][data-color='neutral'] {
-  background:
-    repeating-linear-gradient(135deg, rgb(255 255 255 / 0.04) 0 6px, transparent 6px 12px),
-    var(--ag-neutral-bg);
-  color: var(--ag-neutral);
-}
-
-.ag-card[data-revealed][data-color='assassin'] {
-  border: 2px solid var(--ag-assassin);
-  background: var(--ag-assassin-bg);
-  color: #ffb4b4;
-}
-
-.ag-card[data-revealed] .ag-word {
+.ag-word {
+  max-width: 100%;
+  font-size: 10px;
   font-weight: 800;
+  letter-spacing: 0.2px;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 
-.ag-mark {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 62%;
-  height: 62%;
-  stroke: currentColor;
-  opacity: 0.22;
-  transform: translate(-50%, -50%);
+.ag-word[data-len='m'] {
+  font-size: 9px;
+  letter-spacing: 0;
 }
 
-.ag-card[data-color='assassin'] .ag-mark {
-  color: var(--ag-assassin);
-  opacity: 0.55;
+.ag-word[data-len='l'] {
+  font-size: 8px;
+  letter-spacing: -0.1px;
+}
+
+.ag-word[data-len='xl'] {
+  font-size: 7px;
+  letter-spacing: -0.2px;
+}
+
+@media (min-width: 480px) {
+  .ag-card {
+    min-height: 72px;
+  }
+
+  .ag-word {
+    font-size: 12px;
+  }
+
+  .ag-word[data-len='m'] {
+    font-size: 11px;
+  }
+
+  .ag-word[data-len='l'] {
+    font-size: 10px;
+  }
+
+  .ag-word[data-len='xl'] {
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 720px) {
+  .ag-word {
+    font-size: 13px;
+  }
+
+  .ag-word[data-len='m'] {
+    font-size: 12px;
+  }
+
+  .ag-word[data-len='l'],
+  .ag-word[data-len='xl'] {
+    font-size: 11px;
+  }
 }
 
 .ag-card[data-fresh][data-revealed] {
@@ -503,8 +483,7 @@
 
 @keyframes ag-flip {
   from {
-    transform: perspective(400px) rotateX(80deg);
-    filter: brightness(1.6);
+    transform: translateY(3px) perspective(400px) rotateX(80deg);
   }
 }
 
@@ -517,21 +496,24 @@
 /* Oylar */
 .ag-votes {
   position: absolute;
-  right: 3px;
-  bottom: 3px;
-  z-index: 2;
+  top: 2px;
+  right: 2px;
   display: inline-flex;
   align-items: center;
-  gap: 2px;
-  padding: 1px 4px 1px 1px;
+  gap: 1px;
+  padding: 1px 3px 1px 1px;
   border-radius: var(--r-pill);
-  background: rgb(3 7 4 / 0.85);
+  background: var(--ink-2);
+}
+
+.ag-votes .gk-avatar {
+  border-width: 1px !important;
 }
 
 .ag-votes-n {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--paper);
 }
 
 @media (max-width: 480px) {
@@ -540,197 +522,627 @@
   }
 }
 
-.ag-guessbar {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
-}
-
-/* ---------- Takımlar ---------- */
-.ag-teams {
-  display: grid;
-  gap: 22px;
-}
-
-.ag-roster {
-  display: grid;
-  gap: 8px;
-}
-
-.ag-roster-head {
+/* Açıklama satırı */
+.ag-legend {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 8px;
-  font-size: 14px;
-  font-weight: 800;
-  color: var(--team);
-}
-
-.ag-roster-head .ag-small {
-  font-weight: 500;
-}
-
-.ag-tag {
-  flex: none;
-  padding: 2px 8px;
-  border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--team) 16%, transparent);
-  color: var(--team);
-  font-size: 11px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 12px;
   font-weight: 700;
-}
-
-.ag-tag-next {
-  background: transparent;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--team) 45%, transparent);
-}
-
-.ag-make {
-  flex: none;
-  margin-left: auto;
-  padding: 3px 8px;
-  border: 0;
-  border-radius: var(--r-pill);
-  background: transparent;
   color: var(--text-3);
-  font-size: 11px;
-  font-weight: 600;
 }
 
-.ag-make:hover {
-  background: var(--panel-3);
-  color: var(--text);
+.ag-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.ag .sg-score .ag-tag {
-  margin-left: auto;
+.ag-legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--c);
+  box-sizing: border-box;
 }
 
-.ag .sg-score .ag-tag + .ag-make {
-  margin-left: 0;
+.ag-legend i[data-color='assassin'] {
+  border: 2px solid var(--red);
 }
 
 /* ---------- İpucu geçmişi ---------- */
 .ag-history {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel-2);
 }
 
 .ag-history-title {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--text-3);
 }
 
 .ag-history-list {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.ag-history-list li {
-  display: grid;
-  gap: 4px;
-  padding-left: 10px;
-  border-left: 2px solid var(--team);
-}
-
-.ag-history-head {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  font-size: 14px;
-}
-
-.ag-history-head b {
-  font-weight: 800;
-}
-
-.ag-history-head .mono {
-  font-size: 12px;
+.ag-history-line {
+  font-size: 13px;
   font-weight: 700;
+  color: var(--text);
+}
+
+.ag-history-line strong {
   color: var(--team);
 }
 
-.ag-history-who {
-  margin-left: auto;
-  font-size: 11.5px;
+.ag-history-empty {
+  color: var(--text-3);
 }
 
-.ag-picks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  font-size: 11.5px;
+.ag-pick[data-color='assassin'] {
+  color: var(--red);
 }
 
-.ag-pick {
-  padding: 1px 7px;
-  border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--c) 16%, transparent);
-  color: var(--c);
-  font-weight: 600;
-}
-
-/* ---------- Lobi ---------- */
-.ag-teambox {
+/* ---------- Sırayı bitir ---------- */
+.ag-guessbar {
   display: grid;
   gap: 8px;
+}
+
+.ag-end {
+  min-height: 56px;
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 0 5px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.ag-end:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+/* ---------- Takımlar (Sonuçlar ekranındaki üye listeleri) ---------- */
+.ag-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (min-width: 1100px) {
+  .ag-teams {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ag-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.ag-roster-head {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--team);
+}
+
+.ag-roster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ag-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ag-member-name {
+  /* Etiket ve "Lider yap" sığmazsa adın altına iner; ad kısalmaz. */
+  flex: 0 0 auto;
+  max-width: calc(100% - 36px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ag-tag {
+  flex: none;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--ink-2);
+  color: var(--yellow);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.ag-tag-next {
+  color: var(--team);
+}
+
+.ag-member > .gk-avatar + .ag-member-name + * {
+  margin-left: auto;
+}
+
+.ag-off {
+  font-size: 10px;
+  color: var(--text-3);
+}
+
+.ag-make {
+  position: relative;
+  flex: none;
+  min-height: 28px;
+  padding: 0 8px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--panel-2);
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Dokunma alanı 44px */
+.ag-make::after {
+  content: '';
+  position: absolute;
+  inset: -8px -2px;
+}
+
+.ag-make:hover {
+  background: var(--ink-2);
+  color: var(--text);
+}
+
+/* ---------- Tablo sonu (Sonuçlar) ---------- */
+.ag-over {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 8px;
+}
+
+.ag-confetti i {
+  position: absolute;
+  width: 16px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.ag-confetti i:nth-child(1) {
+  top: 0;
+  left: 12px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.ag-confetti i:nth-child(2) {
+  top: 40px;
+  right: 22px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.ag-confetti i:nth-child(3) {
+  top: 100px;
+  left: 46px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.ag-confetti i:nth-child(4) {
+  top: -10px;
+  right: 102px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.ag-confetti i:nth-child(5) {
+  top: 140px;
+  right: 42px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.ag-over-head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.ag-kicker {
+  padding: 5px 14px;
+  border: 3px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.ag-over-title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+.ag-over-reason {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+}
+
+.ag-scores {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ag-scores-dash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.ag-score {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  background: var(--team);
+  color: var(--ink-2);
+  text-align: center;
+}
+
+.ag-score[data-won] {
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-3deg);
+}
+
+.ag-score[data-lost] {
+  align-self: flex-end;
+  transform: rotate(2deg);
+}
+
+.ag-score-num {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ag-score[data-lost] .ag-score-num {
+  margin-top: 10px;
+  font-size: 52px;
+}
+
+.ag-score-name {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ag-over-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.ag-over-note {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+  text-align: center;
+}
+
+/* Sunucu 8 sn sonra lobiye döner (CLOSING_MS). */
+.ag-bar-closing {
+  flex: none;
+}
+
+.ag-bar-closing span {
+  width: 100%;
+  animation: ag-closing 8s linear both;
+}
+
+@keyframes ag-closing {
+  from {
+    width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ag-bar-closing {
+  flex: none;
+}
+
+.ag-bar-closing span {
+    width: 65%;
+    animation: none;
+  }
+}
+
+.ag-again,
+.ag-lobby {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  border: 3px solid var(--ink);
+  font-family: var(--display);
+  font-weight: 800;
+}
+
+.ag-again {
+  min-height: 62px;
+  border-radius: 20px;
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: 0 6px 0 var(--ink);
+  font-size: 24px;
+}
+
+.ag-again:active {
+  transform: translateY(5px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.ag-lobby {
+  min-height: 52px;
+  border-radius: 18px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 19px;
+}
+
+/* ---------- Nasıl oynanır ---------- */
+.ag-howto {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 14px;
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
+}
+
+.ag-howto-title {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.ag-howto-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ag-howto-list li {
+  display: flex;
+  gap: 12px;
+}
+
+.ag-howto-n {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ag-howto-list h3 {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ag-howto-list p {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.sgs[data-section='secondary'] {
+  margin-top: 12px;
+}
+
+.ag-side-settings .sgs[data-section='secondary'] {
+  margin-top: 0;
+}
+
+.ag-side-settings {
+  display: grid;
+  gap: 12px;
+}
+
+/* ---------- Lobi: takımlar (Lobi tasarımı) ---------- */
+.ag-teams-set {
+  display: grid;
+  gap: 10px;
+}
+
+.ag-teams-set-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ag-shuffle {
+  position: relative;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.ag-shuffle::after {
+  content: '';
+  position: absolute;
+  inset: -4px 0;
+}
+
+.ag-teamgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ag-teambox {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
   padding: 10px;
-  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
-  border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--team, var(--panel));
+  color: var(--ink-2);
+}
+
+.ag-teambox[data-team='none'] {
+  color: var(--text);
 }
 
 .ag-teambox-head {
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.ag-team-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--team, var(--text-2));
-}
-
-.ag-chips {
-  display: flex;
-  flex-wrap: wrap;
   gap: 6px;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.ag-teambox-n {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.ag-teambox-empty {
+  padding: 8px 0;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.75;
 }
 
 .ag-player {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px 4px 4px;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0;
   border: 0;
-  border-radius: var(--r-pill);
-  background: var(--panel-2);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 600;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  text-align: left;
 }
 
 .ag-player:hover:not(:disabled) {
-  background: var(--panel-3);
+  background: rgb(255 255 255 / 0.22);
 }
 
 .ag-player:disabled {
   cursor: default;
 }
 
-.ag-leaderpick {
-  display: grid;
-  gap: 6px;
+.ag-player[data-off] {
+  opacity: 0.6;
 }
 
-.ag-leaderpick .chip[aria-pressed='true'] {
-  background: color-mix(in srgb, var(--team) 12%, transparent);
-  color: var(--team);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--team) 35%, transparent);
+.ag-player:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.ag-player-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ag-player-tag {
+  margin-left: auto;
+  font-size: 10px;
+  white-space: nowrap;
 }

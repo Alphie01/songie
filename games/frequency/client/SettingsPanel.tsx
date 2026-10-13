@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from 'react';
+import { useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import {
@@ -11,13 +11,19 @@ import {
 } from '../shared/index.js';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Group({ title, hint, action, children }: { title: string; hint?: string; action?: ReactNode; children: ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
+    <div className="sgs-group" role="group" aria-labelledby={id}>
+      <div className="fq-group-head">
+        <span id={id} className="fq-legend">
+          {title}
+        </span>
+        {action}
+      </div>
       {children}
       {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    </div>
   );
 }
 
@@ -62,25 +68,23 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
   function TeamBox({ team, ids }: { team: TeamId | null; ids: string[] }) {
     return (
       <div className="fq-teambox" data-team={team ?? undefined}>
-        <div className="fq-teambox-head">
-          <span className="fq-team-name">{team ? s.team[team] : s.settings.unassigned}</span>
-          <span className="mono dim">{ids.length}</span>
-        </div>
+        <span className="fq-teambox-name">
+          {team ? s.team[team] : s.settings.unassigned}
+          <span className="fq-teambox-n">{ids.length}</span>
+        </span>
         {ids.length === 0 ? (
-          <p className="sgs-hint">{s.settings.empty}</p>
+          <p className="fq-teambox-empty">{s.settings.empty}</p>
         ) : (
-          <div className="fq-chips">
-            {ids.map((id) => {
-              const p = byId.get(id);
-              if (!p) return null;
-              return (
-                <button key={id} type="button" className="fq-player" disabled={!editable} onClick={() => cycle(id)}>
-                  <Avatar avatar={p.avatar} nick={p.nick} size={22} />
-                  {p.nick}
-                </button>
-              );
-            })}
-          </div>
+          ids.map((id) => {
+            const p = byId.get(id);
+            if (!p) return null;
+            return (
+              <button key={id} type="button" className="fq-player" disabled={!editable} onClick={() => cycle(id)}>
+                <Avatar avatar={p.avatar} nick={p.nick} size={26} dim={!p.connected} />
+                <span className="fq-player-nick">{p.nick}</span>
+              </button>
+            );
+          })
         )}
       </div>
     );
@@ -106,16 +110,19 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             <Group
               title={s.settings.teams}
               hint={teamA.length < MIN_TEAM || teamB.length < MIN_TEAM ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}
+              action={
+                editable ? (
+                  <button type="button" className="fq-shuffle" aria-label={s.settings.shuffleLabel} onClick={shuffleTeams}>
+                    {s.settings.shuffle}
+                  </button>
+                ) : null
+              }
             >
-              <TeamBox team="a" ids={teamA} />
-              <TeamBox team="b" ids={teamB} />
+              <div className="fq-teamgrid">
+                <TeamBox team="a" ids={teamA} />
+                <TeamBox team="b" ids={teamB} />
+              </div>
               {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
-              {editable && (
-                <button type="button" className="btn btn-ghost sgs-browse" onClick={shuffleTeams}>
-                  <Icon name="shuffle" size={14} />
-                  {s.settings.shuffle}
-                </button>
-              )}
             </Group>
           )}
 

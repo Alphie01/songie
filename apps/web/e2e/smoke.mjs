@@ -37,6 +37,32 @@ async function closeDialogs(p) {
 }
 
 const browser = await chromium.launch();
+// Yatay taşma: sayfa ekrandan geniş olmamalı.
+const overflows = [];
+async function checkOverflow(p, label) {
+  // Kök ve gövde taşmayı keser (clip); kırpılan öğeleri bul.
+  const out = await p.evaluate(() => {
+    const W = window.innerWidth;
+    const bad = [];
+    // Kendi içinde kayan (yatay şerit) ya da kırpan kapların içi sayılmaz.
+    const contained = (el) => {
+      for (let a = el.parentElement; a && a !== document.body; a = a.parentElement) {
+        const o = getComputedStyle(a).overflowX;
+        if (o !== 'visible') return true;
+      }
+      return false;
+    };
+    for (const el of document.querySelectorAll('body *')) {
+      if (contained(el)) continue;
+      const r = el.getBoundingClientRect();
+      if (r.width && (r.right > W + 2 || r.left < -2) && getComputedStyle(el).position !== 'fixed') {
+        if (![...bad].some((b) => b.contains(el))) bad.push(el);
+      }
+    }
+    return bad.slice(0, 4).map((el) => `${el.tagName.toLowerCase()}.${[...el.classList].join('.')} [${Math.round(el.getBoundingClientRect().left)}…${Math.round(el.getBoundingClientRect().right)}]`);
+  });
+  if (out.length) overflows.push(`${label}: ${out.join(', ')}`);
+}
 const errors = [];
 const names = ['Ayşe', 'Barış', 'Cem', 'Deniz', 'Ece'];
 const views = [devices['iPhone 13'], { viewport: { width: 1440, height: 900 } }, devices['Pixel 7'], { viewport: { width: 1024, height: 768 } }, devices['iPhone 13']];
@@ -85,11 +111,14 @@ for (const [name, count] of GAMES) {
     await A.waitForFunction((n) => document.querySelectorAll('.lobby-player').length >= n, count, { timeout: 10000 }).catch(() => {});
     await A.waitForTimeout(800);
     await A.screenshot({ path: `${out}/${slug(name)}-1-lobby-mobile.png`, fullPage: true });
+    await checkOverflow(A, `${name} lobi`);
     await rest[0].screenshot({ path: `${out}/${slug(name)}-2-lobby-desktop.png` });
     await A.getByRole('button', { name: 'Oyunu başlat' }).click();
     await A.waitForTimeout(3000);
     const startErr = await A.locator('.lobby-cta .error-text').textContent({ timeout: 300 }).catch(() => null);
     await A.screenshot({ path: `${out}/${slug(name)}-3-game-mobile.png`, fullPage: true });
+    await checkOverflow(A, `${name} oyun`);
+    await checkOverflow(rest[1], `${name} oyun (Android)`);
     await rest[0].screenshot({ path: `${out}/${slug(name)}-4-game-desktop.png` });
     await rest[1].screenshot({ path: `${out}/${slug(name)}-5-game-other.png`, fullPage: true });
     const playing = (await A.locator('.lobby-cta').count()) === 0;
@@ -104,5 +133,6 @@ for (const [name, count] of GAMES) {
   }
 }
 console.log(results.join('\n'));
+if (overflows.length) console.log('YATAY TAŞMA:\n' + overflows.join('\n'));
 if (errors.length) console.log('SAYFA HATALARI:\n' + [...new Set(errors)].join('\n'));
 await browser.close();

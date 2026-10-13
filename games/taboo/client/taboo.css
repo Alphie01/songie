@@ -1,161 +1,142 @@
-/* Tabu — ortak düzen game-kit/ui/game-layout.css'te. Takım renkleri: a = yeşil, b = mor. */
+/* Tabu — tasarım: Tabu.dc.html (oyun), Sonuclar.dc.html (oyun sonu), Lobi.dc.html (ayarlar, takım kartları).
+   Token'lar apps/web/src/styles/tokens.css. Takım renkleri: a = nane (Yeşil takım), b = lila (Mor takım). */
+
+.tb,
+.tbs {
+  --tb-ban: #ff6b8b; /* yasaklı kelime ikonu (tasarımdaki özel ton) */
+}
 
 .tb [data-team='a'],
-.tb-teambox[data-team='a'],
-.podium-name[data-team='a'] {
-  --team: var(--accent);
+.tbs [data-team='a'] {
+  --team: var(--mint);
 }
 
 .tb [data-team='b'],
-.tb-teambox[data-team='b'],
-.podium-name[data-team='b'] {
-  --team: var(--purple);
+.tbs [data-team='b'] {
+  --team: var(--lilac);
 }
 
-.tb-small {
-  font-size: 12.5px;
+/* ---------- Ekran: ortada tek sütun; üstteki 72px platform düğmelerine ayrılır ---------- */
+.tb {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: calc(440px + 2 * var(--gutter));
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 72px var(--gutter) 22px;
+  color: var(--text);
+  font-family: var(--font);
 }
 
 .tb-center {
   text-align: center;
 }
 
-.tb-error {
-  text-align: center;
-}
-
-/* Skor kartları */
-.tb-scores {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.tb-score {
-  display: grid;
-  gap: 2px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--panel);
-  transition: border-color 200ms, box-shadow 200ms;
-}
-
-.tb-score[data-active] {
-  border-color: color-mix(in srgb, var(--team) 55%, transparent);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--team) 18%, transparent);
-}
-
-.tb-score-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--team);
-}
-
-.tb-score-pts {
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-/* Hazırlık */
-.tb-ready {
-  display: grid;
-  gap: 14px;
-}
-
-.tb-next {
-  display: grid;
-  justify-items: center;
-  gap: 4px;
-  padding: 18px 0 6px;
-  text-align: center;
-}
-
-.tb-next-name {
-  font-size: clamp(30px, 9vw, 44px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--team);
-}
-
-.tb-host {
+.tb-top {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.tb-last {
-  display: grid;
-  gap: 10px;
-  padding: 14px;
-}
-
-.tb-last-head {
-  display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 8px;
+}
+
+.tb-pill {
+  padding: 7px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.tb-code {
   font-size: 13px;
-  font-weight: 700;
-}
-
-.tb-last-list {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.tb-last-list li {
-  display: grid;
-  grid-template-columns: auto auto 1fr;
-  align-items: baseline;
-  gap: 8px;
-  font-size: 12.5px;
-}
-
-.tb-last-list li[data-result='correct'] svg {
-  color: var(--accent-hi);
-}
-
-.tb-last-list li[data-result='taboo'] svg {
-  color: var(--red);
-}
-
-.tb-last-list li[data-result='pass'] svg {
+  font-weight: 800;
+  letter-spacing: 2px;
   color: var(--text-3);
 }
 
-.tb-last-word {
+.tb-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.tb-hint {
+  font-size: 13px;
   font-weight: 700;
+  color: var(--text-3);
+  text-align: center;
 }
 
-.tb-last-taboo {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* Tur */
-.tb-turn {
+/* ---------- Skor kartları ---------- */
+.tb-scores {
   display: grid;
-  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tb-score {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  padding: 8px 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.tb-score[data-active] {
+  background: var(--team);
+  color: var(--ink-2);
+  box-shadow: 0 4px 0 var(--ink);
+  transform: rotate(-1deg);
+}
+
+.tb-score-name {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tb-score-pts {
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+/* ---------- Tur ---------- */
+.tb-turn {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .tb-timer {
-  display: grid;
-  justify-items: center;
-  gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .tb-timer-num {
-  font-size: 44px;
-  font-weight: 700;
+  width: 44px;
+  flex: none;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
   line-height: 1;
-  color: var(--accent-hi);
+  color: var(--yellow);
 }
 
 .tb-timer-num[data-low] {
@@ -170,278 +151,921 @@
 }
 
 .tb-timer-bar {
-  width: 100%;
-  height: 6px;
+  flex: 1;
+  height: 14px;
   overflow: hidden;
+  border: 2px solid var(--ink);
   border-radius: var(--r-pill);
-  background: var(--panel-2);
+  background: var(--ink-2);
 }
 
-.tb-timer-bar span {
+.tb-timer-bar > span {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: var(--yellow);
   transition: width 200ms linear;
 }
 
-.tb-who {
-  font-size: 13px;
+.tb-headline {
+  font-size: 15px;
+  font-weight: 800;
   color: var(--text-2);
   text-align: center;
 }
 
-.tb-who b {
-  color: var(--team);
+.tb-stage {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 34px 0;
 }
 
-/* Kart: anlatılacak kelime ve 5 yasaklı, hepsi aynı anda görünür */
+/* Kart destesi: arkada pembe ve mavi, önde sarı kart */
+.tb-deck {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.tb-deck-back {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 290px;
+  height: 92%;
+  border: var(--bw) solid var(--ink);
+  border-radius: 28px;
+}
+
+.tb-deck-pink {
+  background: var(--pink);
+  transform: translate(-50%, -50%) rotate(6deg);
+}
+
+.tb-deck-sky {
+  background: var(--sky);
+  transform: translate(-50%, -50%) rotate(-5deg);
+}
+
 .tb-card {
   position: relative;
-  display: grid;
-  overflow: hidden;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-lg);
-  background: var(--panel);
-  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
-  animation: tb-card-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  max-width: 100%;
+  padding: 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 28px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: rotate(-1.5deg);
+  animation: tb-card-in 220ms ease-out;
 }
 
 @keyframes tb-card-in {
   from {
-    transform: translateY(8px) scale(0.98);
     opacity: 0;
+    transform: rotate(-1.5deg) translateY(10px) scale(0.97);
   }
 }
 
 .tb-word {
-  padding: 22px 16px;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: clamp(26px, 8vw, 34px);
+  padding: 14px 10px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--paper);
+  font-family: var(--display);
+  font-size: 40px;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 1;
   text-align: center;
   overflow-wrap: anywhere;
 }
 
 .tb-taboo {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0;
-  padding: 6px 0;
+  padding: 0;
   list-style: none;
 }
 
 .tb-taboo li {
-  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: var(--ink-2);
+  color: var(--text);
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 800;
   text-align: center;
-  color: #ffb4b4;
 }
 
-.tb-taboo li + li {
-  border-top: 1px solid var(--line);
+.tb-taboo svg {
+  flex: none;
+  color: var(--tb-ban);
 }
 
+/* Tahmin eden: kartı görmez, bilinen sayısı */
+.tb-guess {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 300px;
+  max-width: 100%;
+  padding: 26px 20px;
+  border: var(--bw) dashed var(--violet);
+  border-radius: 28px;
+  background: var(--panel);
+  text-align: center;
+}
+
+.tb-guess-count {
+  font-family: var(--display);
+  font-size: 110px;
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--mint);
+}
+
+.tb-guess-hint {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+/* Doğru / Pas / TABU! damgası */
 .tb-flash {
   position: absolute;
-  inset: 0;
+  top: 40%;
+  left: 50%;
   z-index: 2;
-  display: grid;
-  place-items: center;
-  font-size: 34px;
+  padding: 12px 24px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: 6px 6px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 38px;
   font-weight: 800;
+  white-space: nowrap;
   pointer-events: none;
+  transform: translate(-50%, -50%) rotate(-8deg);
   animation: tb-flash 900ms ease-out forwards;
 }
 
-.tb-flash[data-kind='correct'] {
-  background: rgb(25 223 112 / 0.85);
-  color: var(--accent-ink);
+.tb-flash[data-kind='pass'] {
+  background: var(--paper);
 }
 
 .tb-flash[data-kind='taboo'] {
-  background: rgb(246 100 100 / 0.92);
-  color: #1a0505;
-}
-
-.tb-flash[data-kind='pass'] {
-  background: rgb(22 28 23 / 0.9);
-  color: var(--text);
+  background: var(--red);
 }
 
 @keyframes tb-flash {
   0% {
-    opacity: 1;
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(0.8);
   }
-  70% {
+  15%,
+  75% {
     opacity: 1;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1);
   }
   100% {
     opacity: 0;
+    transform: translate(-50%, -50%) rotate(-8deg) scale(1);
   }
 }
 
-.tb-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.tb-span {
-  grid-column: 1 / -1;
-}
-
-.tb-undo {
-  grid-column: 1 / -1;
-  justify-self: center;
-}
-
-.tb-taboo-btn {
-  min-height: 64px;
-  background: var(--red);
-  color: #1a0505;
-  font-size: 22px;
+.tb-stats {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  font-size: 14px;
   font-weight: 800;
-  letter-spacing: 0.04em;
-  box-shadow: 0 0 32px rgb(246 100 100 / 0.35);
 }
 
-.tb-taboo-btn:hover {
-  box-shadow: 0 0 44px rgb(246 100 100 / 0.55);
+.tb-stats [data-kind='correct'] {
+  color: var(--mint);
 }
 
-/* Takım arkadaşının ekranı: kart yok */
-.tb-guess {
-  position: relative;
-  display: grid;
-  justify-items: center;
+.tb-stats [data-kind='pass'] {
+  color: var(--text);
+}
+
+.tb-stats [data-kind='taboo'] {
+  color: var(--red);
+}
+
+/* ---------- Butonlar ---------- */
+.tb-actions {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  padding: 28px 18px;
+}
+
+.tb-grid2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.tb-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
+}
+
+.tb-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.tb-btn:active:not(:disabled) {
+  transform: translateY(3px);
+}
+
+.tb-btn-correct {
+  min-height: 70px;
+  border-radius: 22px;
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: 0 6px 0 var(--ink);
+  font-size: 26px;
+}
+
+.tb-btn-white {
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: 0 4px 0 var(--ink);
+}
+
+.tb-btn-panel {
+  background: var(--panel);
+  color: var(--text);
+}
+
+.tb-btn-taboo {
+  min-height: 92px;
+  border-radius: 24px;
+  background: var(--red);
+  color: var(--ink-2);
+  box-shadow: 0 7px 0 var(--ink);
+  font-size: 40px;
+}
+
+.tb-btn-correct:active:not(:disabled),
+.tb-btn-white:active:not(:disabled),
+.tb-btn-taboo:active:not(:disabled) {
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+/* ---------- Hazırlık (tur arası) ---------- */
+.tb-ready {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tb-next {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 6px 0;
+  padding: 22px 20px;
+  border: var(--bw) dashed var(--violet);
+  border-radius: 28px;
+  background: var(--panel);
   text-align: center;
 }
 
-.tb-guess-title {
-  font-size: 20px;
+.tb-next-name {
+  max-width: 100%;
+  font-family: var(--display);
+  font-size: 48px;
   font-weight: 800;
+  line-height: 0.95;
+  color: var(--team);
+  overflow-wrap: anywhere;
 }
 
-.tb-guess-count {
-  font-size: 56px;
+.tb-next-team {
+  font-size: 15px;
   font-weight: 700;
-  line-height: 1;
-  color: var(--accent-hi);
+  color: var(--text-2);
 }
 
-.tb-flash-text {
-  font-size: 16px;
-  font-weight: 800;
-  animation: tb-flash 1.2s ease-out forwards;
-}
-
-.tb-flash-text[data-kind='correct'] {
-  color: var(--accent-hi);
-}
-
-.tb-flash-text[data-kind='taboo'] {
-  color: var(--red);
-}
-
-.tb-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.tb-last {
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  margin: 0;
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
 }
 
-.tb-stats div {
-  display: grid;
-  justify-items: center;
-  padding: 8px;
-  border-radius: var(--r-md);
-  background: var(--panel);
+.tb-last-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
 }
 
-.tb-stats dt {
-  font-size: 11px;
+.tb-last-who {
+  font-family: var(--font);
+  font-size: 13px;
   color: var(--text-3);
 }
 
-.tb-stats dd {
+.tb-last-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin: 0;
-  font-size: 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.tb-last-list li {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.tb-last-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink-2);
+}
+
+.tb-last-list li[data-result='correct'] .tb-last-icon {
+  background: var(--mint);
+}
+
+.tb-last-list li[data-result='taboo'] .tb-last-icon {
+  background: var(--red);
+}
+
+.tb-last-taboo {
+  overflow: hidden;
+  font-size: 12px;
   font-weight: 700;
+  color: var(--text-3);
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.tb-stats [data-kind='correct'] dd {
-  color: var(--accent-hi);
-}
-
-.tb-stats [data-kind='taboo'] dd {
-  color: var(--red);
-}
-
-/* Takım listeleri */
+/* Takım kartları (oyun ve oyun sonu) */
 .tb-rosters {
   display: grid;
-  gap: 20px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .tb-roster {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 10px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--team);
+  color: var(--ink-2);
 }
 
-.tb-roster h2 {
+.tb-roster-name {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.tb-roster ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tb-roster li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.tb-roster li[data-off] {
+  opacity: 0.6;
+}
+
+.tb-roster-nick {
+  overflow: hidden;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.tb-roster-tag {
+  margin-left: auto;
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--ink-2);
+  color: var(--yellow);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+/* Oyun sonunda: mor panel, takım adı renkli */
+.tb-rosters[data-end] .tb-roster {
+  gap: 8px;
+  padding: 12px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.tb-rosters[data-end] .tb-roster-name {
+  font-family: var(--font);
+  font-size: 13px;
   color: var(--team);
 }
 
-/* Lobi: takım kutuları */
-.tb-teambox {
-  display: grid;
+.tb-rosters[data-end] .tb-roster ul {
   gap: 8px;
-  padding: 10px;
-  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
-  border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
 }
 
-.tb-teambox-head {
+.tb-rosters[data-end] .tb-roster li {
+  gap: 8px;
+  font-size: 15px;
+}
+
+/* Oyun sırasında oda sahibinin ayarları */
+.tb-settings {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
+}
+
+.tb-settings-head {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 12px;
-  font-weight: 700;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
 }
 
-.tb-team-name {
-  color: var(--team, var(--text-2));
+.tb-settings > .tbs {
+  padding-bottom: 12px;
 }
 
-.tb-chips {
+/* ---------- Oyun sonu (Sonuclar.dc.html) ---------- */
+.tb.tb-end {
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  gap: 18px;
+  padding-top: 72px;
+  padding-bottom: 24px;
+  overflow: hidden;
 }
 
-.tb-player {
+.tb-end > * {
+  position: relative;
+}
+
+.tb-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.tb-confetti i {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.tb-confetti i:nth-child(1) {
+  top: 102px;
+  left: 30px;
+  width: 16px;
+  height: 7px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.tb-confetti i:nth-child(2) {
+  top: 142px;
+  right: 40px;
+  width: 16px;
+  height: 7px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.tb-confetti i:nth-child(3) {
+  top: 202px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.tb-confetti i:nth-child(4) {
+  top: 92px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.tb-confetti i:nth-child(5) {
+  top: 242px;
+  right: 60px;
+  width: 16px;
+  height: 7px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.tb-end-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.tb-end-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.tb-end-sticker {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transform: rotate(-3deg);
+}
+
+.tb-end-title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 0.95;
+}
+
+.tb-end-scores {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.tb-end-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  background: var(--team);
+  color: var(--ink-2);
+  text-align: center;
+  transform: rotate(2deg);
+  align-self: flex-end;
+}
+
+.tb-end-card[data-first] {
+  align-self: auto;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.tb-end-pts {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.tb-end-card[data-first] .tb-end-pts {
+  margin-top: 0;
+  font-size: 64px;
+}
+
+.tb-end-team {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.tb-end-dash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.tb-end-spacer {
+  flex: 1;
+}
+
+.tb-end-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.tb-end-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.tb-end-bar > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: tb-end-bar 8s linear forwards;
+}
+
+@keyframes tb-end-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.tb-end-back {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+}
+
+/* ---------- Lobi ayarları (Lobi.dc.html "Oyun ayarları" kartı) ---------- */
+.tbs {
+  gap: 12px;
+}
+
+.tbs-legend {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.tbs-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.tbs-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tbs-group[data-row] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: 8px;
+}
+
+.tbs-group[data-row] > .tbs-body {
+  margin-left: auto;
+  align-items: flex-end;
+}
+
+.tbs-group[data-row] > .tbs-hint {
+  flex-basis: 100%;
+}
+
+.tbs-group[data-row] .chips {
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.tbs-group[data-row] .chip {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 13px;
+}
+
+.tbs-group[data-row] .toggle {
+  width: auto;
+  min-width: 120px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.tbs-hint {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--text-3);
+}
+
+.tbs-readonly {
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--panel);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.tbs-teams-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.tbs-shuffle {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px 4px 4px;
-  border: 0;
-  border-radius: var(--r-pill);
-  background: var(--panel-2);
+  min-height: 44px;
+  padding: 0 12px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--panel);
   color: var(--text);
-  font-size: 12.5px;
-  font-weight: 600;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 800;
 }
 
-.tb-player:hover:not(:disabled) {
-  background: var(--panel-3);
+.tbs-addcard-toggle {
+  align-self: flex-start;
 }
 
-.tb-player:disabled {
+.tbs-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tbs-team {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+  padding: 10px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--team);
+  color: var(--ink-2);
+}
+
+.tbs-team[data-team='none'] {
+  grid-column: 1 / -1;
+  border: var(--bw) dashed var(--violet);
+  background: transparent;
+  color: var(--text-3);
+}
+
+.tbs-team-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.tbs-team-count {
+  font-family: var(--font);
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.tbs-team-empty {
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+.tbs-player {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: inherit;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.tbs-player:not(:disabled):hover {
+  background: rgb(13 8 40 / 0.1);
+}
+
+.tbs-player:disabled {
   cursor: default;
+}
+
+.tbs-player[data-off] {
+  opacity: 0.6;
+}
+
+.tbs-team[data-team='none'] .tbs-player {
+  color: var(--text);
+}
+
+.tbs-player-nick {
+  overflow: hidden;
+  min-width: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .tb-addcard {
@@ -450,14 +1074,20 @@
 }
 
 .tb-addcard .input {
-  min-height: 40px;
-  font-size: 13px;
+  min-height: 44px;
+  font-size: 16px;
 }
 
 .tb-addcard-taboo {
-  border-color: rgb(246 100 100 / 0.25);
+  border-color: var(--ink);
+  box-shadow: inset 4px 0 0 var(--tb-ban);
 }
 
-.podium-name[data-team] {
-  color: var(--team, var(--text));
+@media (prefers-reduced-motion: reduce) {
+  .tb-card,
+  .tb-flash,
+  .tb-timer-num[data-low],
+  .tb-end-bar > span {
+    animation: none;
+  }
 }

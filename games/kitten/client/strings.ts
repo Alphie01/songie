@@ -43,6 +43,23 @@ export const ACTION_NAME: Record<PendingKind, string> = {
   five: '5 farklı kedi',
 };
 
+/** El kartlarının altındaki kısa etki yazısı (tasarım: Bomba Kedi). */
+export const CARD_FX: Record<CardKind, string> = {
+  bomb: 'Çekersen patlarsın',
+  defuse: 'Bombayı etkisiz kılar',
+  attack: 'Sıradaki 2 tur oynar',
+  skip: 'Çekmeden turu bitir',
+  future: 'Üstteki 3 karta bak',
+  shuffle: 'Desteyi karıştırır',
+  favor: 'Birinden kart iste',
+  nope: 'Bir eylemi durdurur',
+  sarman: 'Kedi · çift yap',
+  tekir: 'Kedi · çift yap',
+  pamuk: 'Kedi · çift yap',
+  kara: 'Kedi · çift yap',
+  benek: 'Kedi · çift yap',
+};
+
 type Nick = (id: string | undefined) => string;
 
 export const s = {
@@ -77,7 +94,13 @@ export const s = {
     discardLabel: 'Iskarta',
     emptyDiscard: 'Boş',
     draw: 'Kart çek ve sırayı bitir',
-    selectHint: 'Oynamak için kart seç. Aynı kediden 2 ya da 3 tane seçebilirsin.',
+    selectHint: 'Aynı kediden 2 ya da 3 tane seçebilirsin.',
+    me: 'Sen',
+    deckN: (n: number) => `Deste ${n}`,
+    discardN: (n: number) => `Iskarta ${n}`,
+    risk: (bombs: number) => `Patlama riski · destede ${bombs} bomba`,
+    seats: 'Oyuncular',
+    riskLabel: 'Patlama riski',
     playAs: (name: string) => `${name} oyna`,
     chooseTarget: 'Kimden?',
     chooseNamed: 'Hangi kartı istiyorsun?',
@@ -91,7 +114,7 @@ export const s = {
     timer: (s: number) => `${s} sn`,
     hostSkip: (nick: string) => `${nick} yerine kart çek`,
     hostSkipHint: 'Bağlantısı koptu. Sırası, onun yerine kart çekilerek geçer.',
-    invalid: 'Bu kartlar birlikte oynanmaz.',
+    invalid: 'Bu kartlar birlikte oynanmaz',
     log: 'Olanlar',
     error: 'Hamle gönderilemedi. Bağlantını kontrol et.',
     // Hayır penceresi
@@ -116,6 +139,7 @@ export const s = {
     placeRandom: 'Rastgele',
     placeAt: (n: number) => `Üstten ${n}.`,
     placeBtn: (label: string) => `${label} koy`,
+    placeExact: 'Ya da tam yerini seç',
     placeOther: (nick: string) => `${nick} bombayı gizlice desteye geri koyuyor.`,
     myBomb: (i: number) => (i === 0 ? 'Koyduğun bomba şu an en üstte.' : `Koyduğun bomba şu an üstten ${i + 1}. sırada.`),
     boom: (nick: string) => `${nick} patladı!`,
@@ -193,6 +217,10 @@ export const s = {
     order: 'Patlama sırası',
     alive: 'hayatta',
     back: 'Lobiye dönülüyor…',
+    gameOver: 'Oyun bitti',
+    winnerTitle: (nick: string) => `${nick} hayatta kaldı!`,
+    survivor: 'Hayatta kaldı',
+    outAt: (n: number) => `${n}. patlayan`,
   },
   howto: {
     title: 'Nasıl oynanır',

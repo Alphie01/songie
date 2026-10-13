@@ -116,8 +116,8 @@ if (await audioFile.count()) {
   await shot(A, 'd09-audio-doc');
 }
 
-// Dosyayı kapat (oda sahibi)
-await A.getByRole('button', { name: 'Dosyayı kapat' }).first().click();
+// Davayı çöz (oda sahibi)
+await A.getByRole('button', { name: 'Davayı çöz' }).first().click();
 const yes = A.getByRole('button', { name: 'Evet, kapat' });
 if (await yes.isVisible().catch(() => false)) await yes.click();
 for (const p of [A, B, C]) await p.locator('.dt-q').first().waitFor();

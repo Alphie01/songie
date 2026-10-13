@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
-import { Avatar, Icon } from '@songie/game-kit/ui';
+import { Avatar } from '@songie/game-kit/ui';
 import { PACKS, SECONDS_OPTIONS, TEAM_IDS, type AgentsSettings, type TeamId } from '../shared/index.js';
 import { s } from './strings';
 
@@ -14,7 +14,7 @@ function Group({ title, hint, children }: { title: string; hint?: string; childr
   );
 }
 
-export function SettingsPanel({ settings, editable, onChange, section, players }: SettingsPanelProps<AgentsSettings>) {
+export function SettingsPanel({ settings, editable, onChange, section, players, meId }: SettingsPanelProps<AgentsSettings>) {
   const showPrimary = section !== 'secondary';
   const showSecondary = section !== 'primary';
   const set = (patch: Partial<AgentsSettings>) => editable && onChange({ ...settings, ...patch });
@@ -51,45 +51,54 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
     return (
       <div className="ag-teambox" data-team={team ?? 'none'}>
         <div className="ag-teambox-head">
-          <span className="ag-team-name">{team ? s.team[team] : s.settings.unassigned}</span>
-          <span className="mono dim">{ids.length}</span>
+          <span>{team ? s.team[team] : s.settings.unassigned}</span>
+          <span className="ag-teambox-n">{ids.length}</span>
         </div>
         {ids.length === 0 ? (
-          <p className="sgs-hint">{s.settings.empty}</p>
+          <p className="ag-teambox-empty">{s.settings.empty}</p>
         ) : (
-          <div className="ag-chips">
-            {ids.map((id) => {
-              const p = byId.get(id);
-              if (!p) return null;
-              return (
-                <button key={id} type="button" className="ag-player" disabled={!editable} onClick={() => cycle(id)}>
-                  <Avatar avatar={p.avatar} nick={p.nick} size={22} />
+          ids.map((id) => {
+            const p = byId.get(id);
+            if (!p) return null;
+            return (
+              <button key={id} type="button" className="ag-player" data-off={!p.connected || undefined} disabled={!editable} onClick={() => cycle(id)}>
+                <Avatar avatar={p.avatar} nick={p.nick} size={26} />
+                <span className="ag-player-name">
                   {p.nick}
-                </button>
-              );
-            })}
-          </div>
+                  {p.id === meId && ` (${s.play.you})`}
+                </span>
+                {!p.connected && <span className="ag-player-tag">{s.settings.offline}</span>}
+              </button>
+            );
+          })
         )}
       </div>
     );
   }
 
   return (
-    <div className="sgs">
+    <div className="sgs" data-section={section}>
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
-          <Group title={s.settings.teams} hint={teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}>
-            <TeamBox team="a" ids={teamA} />
-            <TeamBox team="b" ids={teamB} />
+          <section className="ag-teams-set" aria-labelledby="ag-teams-title">
+            <div className="ag-teams-set-head">
+              <h3 id="ag-teams-title" className="eyebrow">
+                {s.settings.teams}
+              </h3>
+              {editable && (
+                <button type="button" className="ag-shuffle" aria-label={s.settings.shuffleAria} onClick={shuffleTeams}>
+                  {s.settings.shuffle}
+                </button>
+              )}
+            </div>
+            <div className="ag-teamgrid">
+              <TeamBox team="a" ids={teamA} />
+              <TeamBox team="b" ids={teamB} />
+            </div>
             {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
-            {editable && (
-              <button type="button" className="btn btn-ghost sgs-browse" onClick={shuffleTeams}>
-                <Icon name="shuffle" size={14} />
-                {s.settings.shuffle}
-              </button>
-            )}
-          </Group>
+            <p className="sgs-hint">{teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}</p>
+          </section>
 
           <Group title={s.settings.leaders} hint={s.settings.leaderHint}>
             <div className="sgs-stack">

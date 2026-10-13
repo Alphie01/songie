@@ -257,7 +257,7 @@ export function ConfirmButton({
   className = 'btn btn-outline btn-block',
   disabled,
 }: {
-  label: string;
+  label: ReactNode;
   confirm: string;
   yes: string;
   onConfirm: () => void;

@@ -1,308 +1,175 @@
-/* Red Flag / Green Flag. Ortak düzen game-kit/ui/game-layout.css; renkler tokens.css.
-   Vurgu: green = --accent, red = --red, "asla olmaz" = koyu kırmızı. */
-
-.rf,
-.rf-podium,
-.rf-settings {
-  --rf-green: var(--accent);
-  --rf-green-hi: var(--accent-hi);
-  --rf-red: var(--red);
-  --rf-never: #a3263a;
-  --rf-never-hi: #ff8f9c;
-}
+/* Red Flag / Green Flag — "Songie Arayüz" tasarımı (RedFlag.dc.html, Sonuclar.dc.html).
+   Ortak düzen game-kit/ui/game-layout.css, token'lar tokens.css.
+   Green = nane, red = kırmızı, "asla olmaz" = lila. Tek gösterişli öğe: eğik, renkli bayrak kartları. */
 
 .rf [data-vote='green'],
 .rf-podium [data-vote='green'] {
-  --v: var(--rf-green);
-  --v-hi: var(--rf-green-hi);
-  --v-ink: var(--accent-ink);
+  --v: var(--mint);
 }
 
 .rf [data-vote='red'],
 .rf-podium [data-vote='red'] {
-  --v: var(--rf-red);
-  --v-hi: #ff8a8a;
-  --v-ink: #1a0505;
+  --v: var(--red);
 }
 
 .rf [data-vote='never'],
 .rf-podium [data-vote='never'] {
-  --v: var(--rf-never);
-  --v-hi: var(--rf-never-hi);
-  --v-ink: #fff;
+  --v: var(--lilac);
 }
 
-.rf-small {
-  font-size: 12.5px;
+.rf [data-vote='none'],
+.rf-podium [data-vote='none'] {
+  --v: var(--panel-3);
 }
 
 .rf-center {
   text-align: center;
 }
 
-/* ---------- Üst bilgi: süre ---------- */
-.rf-timer {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 700;
-  color: var(--text);
+.rf-self-center {
+  align-self: center;
 }
 
-.rf-timer[data-low] {
-  color: var(--red);
+.rf-spacer {
+  flex: 1;
+}
+
+.rf.sg .sg-center {
+  gap: 12px;
+  max-width: var(--col);
+}
+
+/* ---------- Üst şerit ---------- */
+.rf-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.rf-pill {
+  padding: 7px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--mint);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.rf-code {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-3);
+}
+
+/* ---------- Süre ---------- */
+.rf-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .rf-timer-bar {
-  width: 64px;
-  height: 4px;
+  flex: 1;
+  height: 10px;
   overflow: hidden;
   border-radius: var(--r-pill);
-  background: var(--panel-2);
+  background: var(--ink-2);
 }
 
 .rf-timer-bar span {
   display: block;
   height: 100%;
-  background: currentColor;
+  background: var(--yellow);
   transition: width 200ms linear;
 }
 
-/* ---------- Durum kartı: üstte yarı yeşil yarı kırmızı dikiş ---------- */
-.rf-card {
-  position: relative;
-  display: grid;
-  gap: 14px;
-  overflow: hidden;
-  padding: 26px 22px 22px;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-lg);
-  background:
-    radial-gradient(120% 80% at 0% 0%, rgb(25 223 112 / 0.07), transparent 60%),
-    radial-gradient(120% 80% at 100% 0%, rgb(246 100 100 / 0.08), transparent 60%),
-    var(--panel);
-  box-shadow: 0 20px 60px rgb(0 0 0 / 0.5);
-  animation: rf-card-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+.rf-timer-num {
+  min-width: 4ch;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: right;
+  color: var(--yellow);
 }
 
-.rf-card::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 4px;
-  background: linear-gradient(90deg, var(--rf-green) 0 50%, var(--rf-red) 50% 100%);
+.rf-timer[data-low] .rf-timer-bar span {
+  background: var(--red);
+}
+
+.rf-timer[data-low] .rf-timer-num {
+  color: var(--red);
+}
+
+.rf-untimed {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+/* ---------- Durum kartı ---------- */
+.rf-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 26px;
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: 7px 7px 0 var(--ink);
+  transform: rotate(-1.5deg);
+  animation: rf-card-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
 @keyframes rf-card-in {
   from {
-    transform: translateY(10px) scale(0.98);
     opacity: 0;
+    transform: rotate(1deg) translateY(10px);
   }
 }
 
 .rf-card-cat {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-3);
+  align-self: flex-start;
+  padding: 3px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--pink);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .rf-card-text {
-  font-size: clamp(21px, 6vw, 26px);
-  font-weight: 700;
-  line-height: 1.3;
-  text-wrap: pretty;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
   overflow-wrap: anywhere;
 }
 
-/* ---------- Oy: iki büyük bayrak ---------- */
-.rf-vote {
-  display: grid;
-  gap: 14px;
-}
-
-.rf-q {
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-  color: var(--text-2);
-}
-
-.rf-flags {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.rf-flag {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 8px;
-  min-height: 132px;
-  padding: 14px 8px;
-  border: 2px solid color-mix(in srgb, var(--v) 45%, transparent);
-  border-radius: var(--r-lg);
-  background: color-mix(in srgb, var(--v) 8%, var(--panel));
-  color: var(--v-hi);
-  font: inherit;
-  font-size: 17px;
-  font-weight: 800;
-  cursor: pointer;
-  transition:
-    transform 120ms,
-    background 160ms,
-    box-shadow 160ms,
-    border-color 160ms;
-}
-
-.rf-flag:hover:not(:disabled) {
-  border-color: var(--v);
-  box-shadow: 0 0 28px color-mix(in srgb, var(--v) 30%, transparent);
-}
-
-.rf-flag:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.rf-flag:focus-visible {
-  outline: 2px solid var(--v-hi);
-  outline-offset: 3px;
-}
-
-.rf-flag[aria-pressed='true'] {
-  border-color: var(--v);
-  background: var(--v);
-  color: var(--v-ink);
-  box-shadow: 0 0 36px color-mix(in srgb, var(--v) 45%, transparent);
-}
-
-.rf-flag[aria-pressed='true'] .rf-ico {
-  animation: rf-wave 600ms ease-out;
-  transform-origin: 20% 90%;
-}
-
-@keyframes rf-wave {
-  30% {
-    transform: rotate(-10deg);
-  }
-  60% {
-    transform: rotate(6deg);
-  }
-}
-
-.rf-flag:disabled {
-  cursor: default;
-  opacity: 0.5;
-}
-
-/* Üçüncü seçenek: tam genişlik, daha alçak */
-.rf-flag[data-vote='never'] {
-  grid-column: 1 / -1;
-  grid-auto-flow: column;
-  min-height: 56px;
-  font-size: 15px;
-}
-
-/* ---------- Tahmin ---------- */
-.rf-guess {
-  display: grid;
-  gap: 10px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--panel);
-  transition: opacity 160ms;
-}
-
-.rf-guess[data-locked] {
-  opacity: 0.6;
-}
-
-.rf-guess-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 10px;
-}
-
-.rf-guess-head h3 {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.rf-guess-opts {
-  display: flex;
-  gap: 6px;
-}
-
-.rf-guess-opt {
-  display: inline-flex;
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  min-height: 42px;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-pill);
-  background: transparent;
-  color: var(--v-hi);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.rf-guess-opt[aria-pressed='true'] {
-  border-color: var(--v);
-  background: color-mix(in srgb, var(--v) 18%, transparent);
-}
-
-.rf-guess-opt:disabled {
-  cursor: default;
-}
-
-.rf-progress {
-  font-size: 12px;
-  text-align: center;
-  color: var(--text-3);
-}
-
-.rf-host {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-/* ---------- Dağılım çubuğu (açıklamada büyür) ---------- */
 .rf-bar {
   display: flex;
-  gap: 3px;
-  height: 30px;
+  height: 18px;
   overflow: hidden;
-  border-radius: var(--r-sm);
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
   background: var(--panel-2);
 }
 
 .rf-bar span {
-  display: grid;
-  place-items: center;
-  flex-basis: 0;
   min-width: 0;
   background: var(--v);
-  color: var(--v-ink);
-  transform-origin: left center;
-  animation: rf-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  transform-origin: left;
+  animation: rf-grow 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.rf-bar span[data-vote='none'] {
-  background: transparent;
-}
-
-.rf-bar b {
-  font-size: 12px;
-  font-weight: 700;
+.rf-bar span + span {
+  border-left: 2px solid var(--ink);
 }
 
 @keyframes rf-grow {
@@ -311,183 +178,449 @@
   }
 }
 
-/* ---------- Açıklama ---------- */
+/* ---------- Oylama ---------- */
+.rf-vote,
 .rf-reveal {
-  display: grid;
-  gap: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: calc(100dvh - 420px);
 }
 
-.rf-verdict {
-  font-size: clamp(26px, 8vw, 34px);
+.rf-q {
+  font-family: var(--display);
+  font-size: 22px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.1;
+}
+
+.rf-flags {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rf-flags[data-count='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.rf-flag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 128px;
+  padding: 6px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 22px;
+  background: var(--v);
+  color: var(--ink-2);
+  box-shadow: 0 6px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1;
+  transform: rotate(var(--tilt, 0deg));
+  transition:
+    transform 100ms,
+    box-shadow 100ms,
+    opacity 120ms;
+}
+
+.rf-flag[aria-pressed='true'] {
+  box-shadow: 0 2px 0 var(--ink);
+  outline: 4px solid var(--paper);
+  outline-offset: 2px;
+  transform: rotate(var(--tilt, 0deg)) translateY(4px);
+}
+
+.rf-flags[data-picked] .rf-flag:not([aria-pressed='true']) {
+  opacity: 0.5;
+}
+
+.rf-flag:disabled {
+  cursor: default;
+}
+
+.rf-note {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
   text-align: center;
-  color: var(--v-hi, var(--text));
+}
+
+.rf-note-dim {
+  color: var(--text-3);
+}
+
+.rf-guess {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+}
+
+.rf-guess[data-locked] {
+  opacity: 0.5;
+}
+
+.rf-guess-head {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.rf-guess-head span {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.rf-guess-opts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.rf-guess-opts[data-count='2'] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Görünen 40px, dokunma alanı 44px */
+.rf-guess-opt {
+  position: relative;
+  min-height: 40px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.rf-guess-opt::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+}
+
+.rf-guess-opt[aria-pressed='true'] {
+  background: var(--yellow);
+  color: var(--ink-2);
+}
+
+.rf-guess-opt:disabled {
+  cursor: default;
+}
+
+.rf-progress {
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.rf-big {
+  min-height: 56px;
+  padding: 0 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 0 5px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
+}
+
+.rf-big:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.rf-big[data-done] {
+  background: var(--mint);
+}
+
+.rf-big:disabled {
+  cursor: default;
+}
+
+.rf-big:disabled:not([data-done]) {
+  opacity: 0.6;
+}
+
+/* ---------- Açıklama ---------- */
+.rf-verdict {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--v, var(--text));
 }
 
 .rf-verdict[data-vote='split'] {
-  background: linear-gradient(90deg, var(--rf-green-hi), var(--rf-red));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  --v: var(--text);
 }
 
 .rf-rows {
   display: grid;
-  gap: 8px;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .rf-row {
-  display: grid;
-  gap: 8px;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--v);
-  border-radius: var(--r-md);
+  padding: 8px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
   background: var(--panel);
-}
-
-.rf-row[data-top] {
-  background: color-mix(in srgb, var(--v) 9%, var(--panel));
+  font-weight: 800;
 }
 
 .rf-row-head {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--v-hi);
+  gap: 10px;
+}
+
+.rf-swatch {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--v);
 }
 
 .rf-row-name {
-  font-size: 14px;
-  font-weight: 700;
+  flex: 1;
 }
 
-.rf-row-n {
-  display: inline-flex;
-  gap: 8px;
-  margin-left: auto;
+.rf-row[data-top] {
+  background: var(--v);
+  color: var(--ink-2);
+}
+
+.rf-row[data-top] .rf-swatch {
+  background: var(--ink-2);
+}
+
+.rf-row-who {
+  margin: 4px 0 0 24px;
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.85;
+  overflow-wrap: anywhere;
+}
+
+.rf-you {
   font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
+  font-weight: 800;
+  color: var(--yellow);
 }
 
-.rf-row-pct {
-  font-weight: 400;
-}
-
-.rf-who {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.rf-who-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 3px 10px 3px 3px;
+.rf-discuss {
+  align-self: center;
+  padding: 6px 14px;
+  border: 2px solid var(--ink);
   border-radius: var(--r-pill);
-  background: var(--panel-2);
-  font-size: 12.5px;
-  font-weight: 600;
-  animation: rf-pop 260ms ease-out both;
+  background: var(--pink);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  transform: rotate(-2deg);
 }
 
-.rf-who-chip[data-me] {
-  box-shadow: inset 0 0 0 1px var(--v);
+/* ---------- Oyuncular ---------- */
+.rf-after {
+  margin-top: 10px;
 }
 
-@keyframes rf-pop {
-  from {
-    transform: scale(0.85);
-    opacity: 0;
-  }
-}
-
-.rf-mine {
+.rf-box {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   gap: 8px;
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel-2);
 }
 
-.rf-mine-vote,
-.rf-mine-guess {
+.rf-box-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.rf-player-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-player-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.rf-player-list li[data-me] .rf-player-name {
+  color: var(--yellow);
+}
+
+.rf-player-list li[data-off] {
+  opacity: 0.6;
+}
+
+.rf-player-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rf-tag {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.rf-player-list li[data-done] .rf-tag {
+  color: var(--mint);
+}
+
+.rf-player-pts {
+  min-width: 2ch;
+  text-align: right;
+}
+
+.rf-tag + .rf-player-pts {
+  margin-left: 6px;
+}
+
+.rf-player-name + .rf-player-pts {
+  margin-left: auto;
+}
+
+/* ---------- Nasıl oynanır ---------- */
+.rf-howto {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: var(--bw) dashed var(--violet);
+}
+
+.rf-howto-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-howto-list li {
+  display: flex;
+  gap: 12px;
+}
+
+.rf-howto-n {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--r-pill);
-  background: var(--panel);
-  font-size: 12.5px;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.rf-howto-list h3 {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.rf-howto-list p {
+  margin-top: 2px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text-2);
 }
 
-.rf-mine-vote {
-  color: var(--v-hi);
+.rf-side-settings {
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
 }
 
-.rf-mine-guess[data-hit] {
-  background: var(--accent-soft-2);
-  color: var(--accent-hi);
+/* ---------- Ayarlar (lobi kartı) ---------- */
+.rf-legend {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
 }
 
-.rf-next {
-  display: grid;
+.rf-set-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
 }
 
-/* ---------- Oyuncular ---------- */
-.rf-players {
-  display: grid;
-  gap: 10px;
+.rf-set-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
 }
 
-.rf-tag {
-  flex: none;
-  padding: 2px 8px;
-  border-radius: var(--r-pill);
-  background: var(--panel-2);
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-3);
+.rf-set-opts .chips {
+  justify-content: flex-end;
+  gap: 4px;
 }
 
-.rf-player[data-done] .rf-tag {
-  background: var(--accent-soft-2);
-  color: var(--accent-hi);
+.rf-set-row .toggle {
+  width: auto;
+  min-width: 120px;
 }
 
-.rf-player .sg-score-pts {
-  margin-left: auto;
+.rf-set-hint {
+  flex-basis: 100%;
 }
 
-.rf-player .rf-tag + .sg-score-pts {
-  margin-left: 8px;
-}
-
-.rf-player .rf-tag {
-  margin-left: auto;
-}
-
-/* ---------- Lobi: durum ekle ---------- */
 .rf-add {
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
 .rf-add-text {
   min-height: 84px;
   padding: 10px 12px;
-  font: inherit;
-  font-size: 13px;
-  line-height: 1.4;
+  font-size: 16px;
+  line-height: 1.3;
   resize: vertical;
 }
 
@@ -498,162 +631,384 @@
   gap: 8px;
 }
 
-/* ---------- Oyun sonu ---------- */
+.rf-small {
+  font-size: 13px;
+}
+
+/* ---------- Oyun sonu (Sonuclar.dc.html) ---------- */
 .rf-podium {
-  gap: 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100dvh;
+  padding-top: 72px;
+  padding-bottom: 24px;
+  overflow: hidden;
 }
 
-.rf-podium .rf-podium-title {
-  background: linear-gradient(90deg, var(--rf-green-hi) 20%, var(--rf-red) 80%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding-right: 0.08em;
+.rf-podium > * {
+  position: relative;
 }
 
-.rf-sum-totals .rf-bar {
-  height: 22px;
+.rf-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.rf-awards {
-  display: grid;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--line);
+.rf-confetti i {
+  position: absolute;
+  border-radius: 2px;
 }
 
-.rf-awards li {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-areas:
-    'ico label note'
-    'ico who note';
+.rf-confetti i:nth-child(1) {
+  top: 102px;
+  left: 30px;
+  width: 16px;
+  height: 7px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.rf-confetti i:nth-child(2) {
+  top: 142px;
+  right: 40px;
+  width: 16px;
+  height: 7px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.rf-confetti i:nth-child(3) {
+  top: 202px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.rf-confetti i:nth-child(4) {
+  top: 92px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.rf-confetti i:nth-child(5) {
+  top: 242px;
+  right: 60px;
+  width: 16px;
+  height: 7px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.rf-podium-top {
+  display: flex;
   align-items: center;
-  gap: 2px 12px;
-  padding: 12px 2px;
-  border-bottom: 1px solid var(--line);
-}
-
-.rf-awards .rf-ico {
-  grid-area: ico;
-  color: var(--v-hi);
-}
-
-.rf-award-label {
-  grid-area: label;
-  font-size: 12px;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
   color: var(--text-3);
 }
 
-.rf-award-who {
-  grid-area: who;
-  display: inline-flex;
+.rf-podium-head {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  min-width: 0;
-  font-size: 17px;
-  font-weight: 800;
-}
-
-.rf-award-note {
-  grid-area: note;
-  font-size: 12px;
-}
-
-.rf-sum-sec {
-  display: grid;
-  gap: 10px;
-}
-
-.rf-sum-h {
-  font-size: 15px;
-  font-weight: 800;
-}
-
-.rf-profiles {
-  display: grid;
   gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  margin-top: 18px;
+  text-align: center;
 }
 
-.rf-profiles li {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 6px 10px;
-  padding: 10px 12px;
-  border-radius: var(--r-md);
-  background: var(--panel);
-}
-
-.rf-profiles li[data-me] {
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
-}
-
-.rf-prof-name {
-  min-width: 0;
-  overflow: hidden;
+.rf-sticker {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.rf-podium-title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: clamp(36px, 12vw, 48px);
+  font-weight: 800;
+  line-height: 0.95;
+}
+
+.rf-podium-sub {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.rf-pcards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.rf-pcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+.rf-pcard-first {
+  background: var(--mint);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.rf-pcard-second {
+  align-self: flex-end;
+  background: var(--lilac);
+  transform: rotate(2deg);
+}
+
+.rf-pcard-score {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.rf-pcard-second .rf-pcard-score {
+  margin-top: 10px;
+  font-size: 52px;
+}
+
+.rf-pcard-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.rf-prof-pct {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent-hi);
+.rf-pdash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
 }
 
-.rf-profiles .rf-pbar {
-  grid-column: 1 / -1;
+.rf-sum-totals {
+  display: grid;
+  gap: 8px;
+}
+
+.rf-sum-legend {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-2);
+}
+
+.rf-awards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-awards li {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.rf-award-label {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--v);
+}
+
+.rf-award-who {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.rf-award-note {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.rf-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+  list-style: none;
+}
+
+.rf-profiles,
+.rf-divisive {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rf-profiles li,
+.rf-rest li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rf-profiles li[data-me] .rf-prof-name {
+  color: var(--yellow);
+}
+
+.rf-prof-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rf-prof-pct,
+.rf-rest-pts {
+  color: var(--yellow);
+}
+
+.rf-rest-rank {
+  color: var(--text-3);
 }
 
 .rf-pbar {
   display: flex;
-  gap: 2px;
-  height: 6px;
+  flex-basis: 100%;
+  height: 10px;
   overflow: hidden;
+  border: 2px solid var(--ink);
   border-radius: var(--r-pill);
   background: var(--panel-2);
 }
 
 .rf-pbar span {
-  flex-basis: 0;
   background: var(--v);
-  transform-origin: left center;
-  animation: rf-grow 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-}
-
-.rf-divisive {
-  display: grid;
-  gap: 14px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
 }
 
 .rf-divisive li {
   display: grid;
   gap: 6px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--paper);
+  color: var(--ink-2);
 }
 
 .rf-divisive p {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.rf-div-n {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+.rf-podium-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.rf-podium-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.rf-podium-bar div {
+  height: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: rf-bar linear forwards;
+}
+
+@keyframes rf-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.rf-podium-note {
   font-size: 14px;
-  font-weight: 600;
-  line-height: 1.4;
+  font-weight: 800;
+  color: var(--text-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .rf-card,
-  .rf-bar span,
-  .rf-pbar span,
-  .rf-who-chip,
-  .rf-flag[aria-pressed='true'] .rf-ico {
+  .rf-bar span {
     animation: none;
+  }
+
+  .rf-flag,
+  .rf-timer-bar span {
+    transition: none;
+  }
+
+  .rf-podium-bar div {
+    animation: none;
+    transform: none;
   }
 }

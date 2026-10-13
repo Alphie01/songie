@@ -43,7 +43,7 @@ const PATHS: Record<Kind, ReactNode> = {
   ),
 };
 
-export function KindIcon({ kind, size = 20 }: { kind: Kind; size?: number }) {
+export function KindIcon({ kind, size = 20, stroke = 1.8 }: { kind: Kind; size?: number; stroke?: number }) {
   return (
     <svg
       width={size}
@@ -51,7 +51,7 @@ export function KindIcon({ kind, size = 20 }: { kind: Kind; size?: number }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.8}
+      strokeWidth={stroke}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"

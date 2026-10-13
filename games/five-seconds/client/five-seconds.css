@@ -1,20 +1,12 @@
-/* 5 Saniye — ortak düzen game-kit/ui/game-layout.css'te. Tek gösterişli öğe: dev geri sayım halkası. */
+/* 5 Saniye — "Songie Arayüz" tasarımı (BesSaniye.dc.html, Sonuclar.dc.html, Lobi.dc.html).
+   Ortak düzen game-kit/ui/game-layout.css, token'lar tokens.css. Tek gösterişli öğe: sarı daire ve geri sayım halkası. */
 
-[data-team='a'].fs-team,
-[data-team='a'].fs-teambox,
-.fs-podium .podium-name[data-team='a'] {
-  --team: var(--accent);
+:is(.fs-team, .fs-teambox, .fs-pcard, .fs-roster)[data-team='a'] {
+  --team: var(--mint);
 }
 
-[data-team='b'].fs-team,
-[data-team='b'].fs-teambox,
-.fs-podium .podium-name[data-team='b'] {
-  --team: var(--purple);
-}
-
-.fs-small {
-  font-size: 12.5px;
-  line-height: 1.45;
+:is(.fs-team, .fs-teambox, .fs-pcard, .fs-roster)[data-team='b'] {
+  --team: var(--lilac);
 }
 
 .fs-center {
@@ -22,521 +14,1025 @@
 }
 
 .fs-self-center {
-  justify-self: center;
+  align-self: center;
 }
 
-.fs-legend {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--text-2);
+.fs-spacer {
+  flex: 1;
 }
 
-/* ---------- Hazırlık ---------- */
+.fs.sg .sg-center {
+  gap: 14px;
+  max-width: var(--col);
+}
+
+/* ---------- Üst şerit ---------- */
+.fs-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fs-pill {
+  min-width: 0;
+  overflow: hidden;
+  padding: 7px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-code {
+  flex: none;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-3);
+}
+
+/* ---------- Ortak parçalar ---------- */
 .fs-ready,
 .fs-turn {
-  display: grid;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: calc(100dvh - 200px);
 }
 
-.fs-next {
-  display: grid;
-  justify-items: center;
-  gap: 2px;
-  padding-top: 8px;
+@media (min-width: 1100px) {
+  .fs-ready,
+  .fs-turn {
+    min-height: 0;
+  }
+}
+
+.fs-ready {
+  align-items: center;
   text-align: center;
 }
 
-.fs-next-label {
+.fs-turn {
+  align-items: center;
+}
+
+.fs-hint {
+  max-width: 300px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-2);
+  text-align: center;
 }
 
-.fs-ready .fs-next-label:only-child {
-  font-size: clamp(30px, 9vw, 44px);
+.fs-big {
+  width: 100%;
+  min-height: 64px;
+  padding: 0 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 22px;
+  color: var(--ink-2);
+  box-shadow: 0 6px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 24px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--accent-hi);
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
 }
 
-.fs-next-name {
-  font-size: clamp(30px, 9vw, 44px);
+.fs-big:active {
+  transform: translateY(5px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.fs-big-mint {
+  min-height: 68px;
+  background: var(--mint);
+  font-size: 26px;
+}
+
+.fs-big-yellow {
+  background: var(--yellow);
+}
+
+.fs-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel-2);
+}
+
+.fs-box-title {
+  font-size: 12px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* ---------- Hazırlık ---------- */
+.fs-last {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
   overflow-wrap: anywhere;
 }
 
-.fs-go {
-  font-size: 17px;
+.fs-turn-title {
+  display: grid;
+  font-family: var(--display);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.fs-turn-label {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.fs-five {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 200px;
+  height: 200px;
+  border: 5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 0 10px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 120px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .fs-steal {
   display: grid;
   gap: 4px;
-  text-align: center;
-}
-
-.fs-steal-title {
-  font-size: 22px;
-  font-weight: 800;
-  font-style: italic;
-  color: var(--yellow);
-}
-
-.fs-steal-tag {
-  margin-right: 8px;
-  padding: 2px 8px;
-  border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--yellow) 14%, transparent);
-  color: var(--yellow);
-  font-size: 11.5px;
+  width: 100%;
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--pink);
+  color: var(--ink-2);
+  font-size: 14px;
   font-weight: 700;
 }
 
-.fs-who {
+.fs-steal-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.fs-steal-tag {
+  padding: 4px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--pink);
+  color: var(--ink-2);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-2);
-  text-align: center;
+  font-weight: 800;
+  transform: rotate(-2deg);
 }
 
 /* ---------- Görev kartı ---------- */
 .fs-prompt {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
-  padding: 20px 20px 22px;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-lg);
-  background: var(--panel);
+  width: 100%;
+  padding: 16px 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 24px;
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: 6px 6px 0 var(--ink);
+  text-align: left;
+  transform: rotate(-1.5deg);
   animation: fs-reveal 320ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
 }
 
 .fs-prompt[data-dim] {
+  opacity: 0.7;
   animation: none;
-  padding: 14px 16px;
 }
 
 .fs-prompt-cat {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: var(--accent-hi);
+  align-self: flex-start;
+  padding: 3px 10px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--coral);
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 800;
 }
 
 .fs-prompt-text {
-  font-size: clamp(22px, 6.6vw, 28px);
+  font-family: var(--display);
+  font-size: 30px;
   font-weight: 800;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-.fs-prompt[data-dim] .fs-prompt-text {
-  font-size: 17px;
-  font-weight: 700;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 @keyframes fs-reveal {
   from {
     opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: none;
+    transform: rotate(-1.5deg) scale(0.92);
   }
 }
 
-/* ---------- Geri sayım halkası ---------- */
+/* ---------- Halka ---------- */
 .fs-ring {
-  --ring: var(--accent);
   position: relative;
-  display: grid;
-  place-items: center;
-  justify-self: center;
-  width: min(76vw, 300px);
-  aspect-ratio: 1;
+  flex: none;
+  width: 230px;
+  height: 230px;
+  margin-top: 6px;
+  --ring: var(--yellow);
+}
+
+.fs-ring[data-low] {
+  --ring: var(--red);
 }
 
 .fs-ring svg {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
 }
 
 .fs-ring-track {
-  fill: none;
-  stroke: var(--panel-2);
-  stroke-width: 10;
+  fill: var(--ink-2);
+  stroke: var(--ink);
+  stroke-width: 6;
 }
 
 .fs-ring-fill {
   fill: none;
   stroke: var(--ring);
-  stroke-width: 10;
+  stroke-width: 18;
   stroke-linecap: round;
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--ring) 55%, transparent));
-  transition: stroke 200ms;
 }
 
 .fs-ring-num {
-  position: relative;
-  font-size: clamp(84px, 30vw, 128px);
-  font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: var(--text);
-  transition: color 200ms;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--display);
+  font-size: 110px;
+  font-weight: 800;
+  color: var(--ring);
 }
 
-.fs-ring[data-low] {
-  --ring: var(--red);
-  animation: fs-shake 260ms linear infinite;
-}
-
-.fs-ring[data-low] .fs-ring-num {
-  color: var(--red);
-}
-
-@keyframes fs-shake {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0);
-  }
-  25% {
-    transform: translate(-3px, 1px) rotate(-1deg);
-  }
-  50% {
-    transform: translate(2px, -1px) rotate(0.6deg);
-  }
-  75% {
-    transform: translate(-1px, 2px) rotate(-0.4deg);
-  }
-}
-
-/* ---------- 3 şey sayacı (yalnızca görsel) ---------- */
+/* ---------- Saydıkça dokun ---------- */
 .fs-three {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  justify-self: center;
-  padding: 6px 10px;
-  border: 0;
-  border-radius: var(--r-md);
-  background: transparent;
-  color: var(--text-3);
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
-.fs-three-pips {
+.fs-three-label {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.fs-pips {
   display: flex;
   gap: 12px;
 }
 
 .fs-pip {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 64px;
+  height: 64px;
+  border: var(--bw) solid var(--ink);
   border-radius: 50%;
-  box-shadow: inset 0 0 0 2px var(--line-2);
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-3);
-  transition: background 120ms, color 120ms, box-shadow 120ms;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 26px;
+  font-weight: 800;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
 }
 
-.fs-pip[data-on] {
-  background: var(--accent);
-  box-shadow: var(--accent-glow);
-  color: var(--accent-ink);
-}
-
-.fs-three-label {
-  font-size: 11.5px;
+.fs-pip[aria-pressed='true'] {
+  background: var(--mint);
+  color: var(--ink-2);
+  box-shadow: 0 1px 0 var(--ink);
+  transform: translateY(3px);
 }
 
 /* ---------- Oylama ---------- */
-.fs-vote-title {
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.2;
-  text-align: center;
-  text-wrap: balance;
+.fs-vote-wrap {
+  align-items: stretch;
+  gap: 12px;
 }
 
-.fs-vote {
+.fs-vote-title {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.fs-tallies {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
-.fs-vote .btn {
-  min-height: 64px;
-  border-radius: var(--r-md);
-  font-size: 16px;
-}
-
-.fs-yes {
-  background: var(--accent-soft);
-  color: var(--accent-hi);
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.35);
-}
-
-.fs-yes[aria-pressed='true'] {
-  background: var(--accent);
-  color: var(--accent-ink);
-  box-shadow: var(--accent-glow);
-}
-
-.fs-no {
-  background: color-mix(in srgb, var(--red) 8%, transparent);
-  color: var(--red);
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 40%, transparent);
-}
-
-.fs-no[aria-pressed='true'] {
+.fs-tally {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
   background: var(--red);
-  color: #1a0505;
+  color: var(--ink-2);
+  text-align: center;
 }
 
-.fs-vote-meta {
-  display: grid;
-  gap: 6px;
-  font-size: 12px;
-  color: var(--text-2);
+.fs-tally[data-yes] {
+  background: var(--mint);
+}
+
+button.fs-tally {
+  box-shadow: 0 5px 0 var(--ink);
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
+}
+
+button.fs-tally[aria-pressed='true'] {
+  box-shadow: 0 1px 0 var(--ink);
+  transform: translateY(4px);
+  outline: 4px solid var(--paper);
+  outline-offset: 2px;
+}
+
+.fs-tally-n {
+  font-family: var(--display);
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fs-tally-label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.fs-vote-count {
+  font-size: 14px;
+  font-weight: 800;
   text-align: center;
 }
 
 .fs-vote-bar {
   display: block;
-  height: 3px;
-  border-radius: 2px;
-  background: var(--panel-2);
+  height: 10px;
   overflow: hidden;
+  border-radius: var(--r-pill);
+  background: var(--ink-2);
 }
 
 .fs-vote-bar span {
   display: block;
   height: 100%;
-  background: var(--text-3);
+  background: var(--yellow);
 }
 
-/* ---------- Oda sahibi ve son sonuç ---------- */
+.fs-vote-wrap .fs-hint {
+  align-self: center;
+}
+
+/* ---------- Oda sahibi ---------- */
 .fs-host {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px;
-}
-
-.fs-last {
-  display: grid;
-  gap: 4px;
-  padding: 12px 14px;
-  border-left: 3px solid var(--red);
-  border-radius: var(--r-sm);
-  background: var(--panel);
-}
-
-.fs-last[data-ok] {
-  border-left-color: var(--accent);
-}
-
-.fs-last-head {
-  display: flex;
-  justify-content: space-between;
   gap: 8px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.fs-last-pts {
-  color: var(--accent-hi);
 }
 
 /* ---------- Skorlar ---------- */
-.fs-board {
-  display: grid;
-  gap: 18px;
+.fs-after {
+  margin-top: 10px;
 }
 
-.fs-board-head,
+.fs-score-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fs-score-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.fs-score-list li[data-me] {
+  color: var(--yellow);
+}
+
+.fs-score-list li[data-off],
+.fs-team-list li[data-off] {
+  opacity: 0.6;
+}
+
+.fs-teams {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.fs-team {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--team);
+  color: var(--ink-2);
+}
+
 .fs-team-head {
   display: flex;
   justify-content: space-between;
-  margin-bottom: -8px;
-  font-size: 13px;
+  gap: 6px;
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.fs-team-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fs-team-list li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.fs-team-list li[data-active] .fs-team-name {
+  text-decoration: underline 3px;
+  text-underline-offset: 3px;
+}
+
+.fs-team-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-team-pts {
+  margin-left: auto;
+}
+
+/* ---------- Nasıl oynanır ---------- */
+.fs-howto {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: var(--bw) dashed var(--violet);
+}
+
+.fs-howto-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fs-howto-list li {
+  display: flex;
+  gap: 12px;
+}
+
+.fs-howto-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.fs-howto-list h3 {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.fs-howto-list p {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.fs-side-settings {
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
+}
+
+/* ---------- Ayarlar (lobi kartı) ---------- */
+.fs-legend {
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-2);
 }
 
-.fs-team {
-  display: grid;
-  gap: 14px;
-}
-
-.fs-team-head {
-  color: var(--team);
-}
-
-.fs-row[data-active] {
-  box-shadow: inset 0 0 0 1px var(--accent);
-}
-
-.fs-rank {
-  width: 16px;
-  font-size: 11px;
-  color: var(--text-3);
-}
-
-/* ---------- Takım seçimi (lobi) ---------- */
-.fs-teambox {
-  display: grid;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid color-mix(in srgb, var(--team, var(--text-3)) 30%, transparent);
-  border-radius: var(--r-md);
-  background: color-mix(in srgb, var(--team, var(--text-3)) 6%, transparent);
-}
-
-.fs-teambox-head {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.fs-team-name {
-  color: var(--team, var(--text-2));
-}
-
-.fs-chips {
+.fs-set-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fs-set-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.fs-set-opts .chips {
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.fs-set-row .toggle {
+  width: auto;
+  min-width: 120px;
+}
+
+.fs-set-hint {
+  flex-basis: 100%;
+}
+
+.fs-teams-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fs-teams-head .sgs-legend {
+  margin: 0;
+}
+
+/* Lobi tasarımındaki "Karıştır": görünen 36px, dokunma alanı 44px */
+.fs-shuffle {
+  position: relative;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.fs-shuffle::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+}
+
+.fs-teamgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.fs-teambox {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
+  min-width: 0;
+  padding: 10px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--team);
+  color: var(--ink-2);
+}
+
+.fs-teambox[data-team='none'] {
+  border: var(--bw) dashed var(--violet);
+  background: transparent;
+  color: var(--text);
+}
+
+.fs-teambox-name {
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.fs-teambox-n {
+  font-family: var(--font);
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.fs-teambox-empty {
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.75;
 }
 
 .fs-player {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px 4px 4px;
+  min-width: 0;
+  min-height: 44px;
+  margin: -5px 0;
+  padding: 0;
   border: 0;
-  border-radius: var(--r-pill);
-  background: var(--panel-2);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 600;
-}
-
-.fs-player:hover:not(:disabled) {
-  background: var(--panel-3);
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: left;
 }
 
 .fs-player:disabled {
   cursor: default;
 }
 
-.fs-addprompt {
-  display: grid;
-  gap: 6px;
+.fs-player[data-off] {
+  opacity: 0.6;
 }
 
-/* ---------- Podyum ---------- */
-.fs-podium-title {
-  font-size: clamp(32px, 9vw, 48px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1;
-  text-align: center;
-}
-
-.fs-steps {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.fs-step {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  flex: 1;
-  max-width: 120px;
+.fs-player-name {
   min-width: 0;
-  text-align: center;
-}
-
-.fs-step[data-place='1'] {
-  order: 2;
-}
-
-.fs-step[data-place='2'] {
-  order: 1;
-}
-
-.fs-step[data-place='3'] {
-  order: 3;
-}
-
-.fs-step-name {
-  max-width: 100%;
   overflow: hidden;
-  font-size: 13px;
-  font-weight: 700;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.fs-step-pts {
-  font-size: 11.5px;
-  color: var(--text-2);
+.fs-player-tag {
+  margin-left: auto;
+  font-size: 10px;
+  white-space: nowrap;
 }
 
-.fs-step-block {
+.fs-addprompt {
   display: grid;
-  place-items: center;
-  width: 100%;
-  height: 64px;
-  border-radius: var(--r-md) var(--r-md) 0 0;
-  background: var(--panel-2);
-  font-size: 18px;
+  gap: 8px;
+}
+
+/* ---------- Podyum (Sonuclar.dc.html) ---------- */
+.fs-podium {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100dvh;
+  padding-top: 72px;
+  padding-bottom: 24px;
+  overflow: hidden;
+}
+
+.fs-podium > * {
+  position: relative;
+}
+
+.fs-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fs-confetti i {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.fs-confetti i:nth-child(1) {
+  top: 102px;
+  left: 30px;
+  width: 16px;
+  height: 7px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.fs-confetti i:nth-child(2) {
+  top: 142px;
+  right: 40px;
+  width: 16px;
+  height: 7px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.fs-confetti i:nth-child(3) {
+  top: 202px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.fs-confetti i:nth-child(4) {
+  top: 92px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.fs-confetti i:nth-child(5) {
+  top: 242px;
+  right: 60px;
+  width: 16px;
+  height: 7px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.fs-podium-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.fs-podium-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.fs-sticker {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.fs-podium-title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: clamp(36px, 12vw, 48px);
+  font-weight: 800;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+.fs-podium-sub {
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-3);
 }
 
-.fs-step[data-place='1'] .fs-step-block {
-  height: 104px;
-  background: var(--accent-soft-2);
-  color: var(--accent-hi);
-  box-shadow: inset 0 1px 0 var(--accent);
+.fs-pcards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
 }
 
-.fs-step[data-place='2'] .fs-step-block {
-  height: 80px;
+.fs-pcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  color: var(--ink-2);
+  text-align: center;
 }
 
-.fs-step[data-me] .fs-step-name {
-  color: var(--accent-hi);
+.fs-pcard-first {
+  background: var(--mint);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.fs-pcard-second {
+  align-self: flex-end;
+  background: var(--lilac);
+  transform: rotate(2deg);
+}
+
+.fs-pcard[data-team] {
+  background: var(--team);
+}
+
+.fs-pcard-score {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fs-pcard-second .fs-pcard-score {
+  margin-top: 10px;
+  font-size: 52px;
+}
+
+.fs-pcard-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-pdash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.fs-rosters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.fs-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+  list-style: none;
+}
+
+.fs-roster li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.fs-roster li.fs-roster-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--team);
+}
+
+.fs-roster-rank {
+  color: var(--text-3);
+}
+
+.fs-roster-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fs-roster-score {
+  margin-left: auto;
+  color: var(--yellow);
+}
+
+.fs-podium-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.fs-podium-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.fs-podium-bar div {
+  height: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: fs-bar linear forwards;
+}
+
+@keyframes fs-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.fs-podium-note {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fs-prompt,
-  .fs-ring[data-low] {
+  .fs-prompt {
     animation: none;
   }
 
-  .fs-ring-fill,
-  .fs-ring-num,
-  .fs-pip {
-    transition: none;
+  .fs-podium-bar div {
+    animation: none;
+    transform: none;
   }
+}
+
+/* Masaüstü yan sütunu dar: takım kartları alt alta */
+.sg-side .fs-teams {
+  grid-template-columns: minmax(0, 1fr);
 }

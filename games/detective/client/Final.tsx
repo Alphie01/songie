@@ -245,29 +245,32 @@ export function Result() {
     <div className="dt-final dt-result">
       <header className="dt-result-head">
         <p className="dt-final-case">{view.case.title}</p>
-        <div className="dt-result-stamp" data-solved={r.solved || undefined} aria-hidden="true">
+        <span className="dt-result-stamp" data-solved={r.solved || undefined}>
           {s.result.stamp}
-        </div>
-        <h1 className="dt-final-title">{r.solved ? s.result.solved : s.result.unsolved}</h1>
-        <p className="dt-small dim">{isHost ? s.result.endHost : s.result.endGuest}</p>
+        </span>
+        <h1 className="dt-result-title">{r.solved ? s.result.solved : s.result.unsolved}</h1>
         <div className="dt-result-score">
-          <div>
-            <p className="dt-label">{s.result.score}</p>
+          <div className="dt-result-card" data-tone="score">
+            <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+              <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="var(--yellow)" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
+            </svg>
             <p className="dt-result-pts">
               {r.score}
               <span>/ {r.maxScore}</span>
             </p>
+            <p className="dt-result-cap">{s.result.score}</p>
           </div>
-          <div>
-            <p className="dt-label">{s.result.rank}</p>
+          <div className="dt-result-card" data-tone="rank">
             <p className="dt-result-rank">{r.rank}</p>
+            <p className="dt-result-cap">{s.result.rank}</p>
           </div>
         </div>
         {culprits.length > 0 && (
           <p className="dt-result-culprit">
-            <span className="dt-label">{s.result.culprits}</span> {culprits.join(', ')}
+            <span className="dt-result-culprit-k">{s.result.culprits}</span> {culprits.join(', ')}
           </p>
         )}
+        <p className="dt-result-end">{isHost ? s.result.endHost : s.result.endGuest}</p>
       </header>
 
       <section className="dt-sec" aria-labelledby="dt-r-q">

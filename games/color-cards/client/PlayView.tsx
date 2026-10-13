@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react';
 import type { PlayViewProps } from '@songie/game-kit/client';
 import { Avatar } from '@songie/game-kit/ui';
 import type { RoomPlayer } from '@songie/shared';
@@ -46,10 +46,11 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     }
   }
 
-  if (view.phase === 'over') return <Podium view={view} members={members} meId={meId} />;
+  if (view.phase === 'over') return <Podium view={view} members={members} room={room} />;
 
   const panelProps = { settings, editable: isHost, api, players: room.players, meId, onChange: (n: ColorCardsSettings) => void setSettings(n) };
   const mine = view.current === meId && view.me.inGame;
+  const turnText = !view.me.inGame ? s.play.spectator : mine ? s.play.yourTurn : s.play.turnOf(nick(view.current));
 
   return (
     <div className="cc sg" data-active={view.activeColor ?? undefined}>
@@ -58,11 +59,13 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
         <Log view={view} nick={nick} />
       </aside>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round">{!view.me.inGame ? s.play.spectator : mine ? s.play.yourTurn : s.play.turnOf(nick(view.current))}</span>
-          {view.mode === 'points' && <span className="mono dim">{s.play.round(view.round)}</span>}
-          <span className="sg-code mono">{room.code}</span>
+      <main className="sg-center cc-main">
+        <header className="cc-top">
+          <span className="cc-turn" data-mine={(mine && view.phase !== 'roundOver') || undefined}>
+            {turnText}
+          </span>
+          {view.mode === 'points' && <span className="cc-round">{s.play.round(view.round)}</span>}
+          <span className="cc-code">{room.code}</span>
         </header>
 
         <Seats view={view} members={members} meId={meId} />
@@ -92,7 +95,9 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
 
       <aside className="sg-side sg-right">
         <Rules view={view} />
-        <SettingsPanel {...panelProps} section="secondary" />
+        <section className="cc-panel">
+          <SettingsPanel {...panelProps} section="secondary" />
+        </section>
       </aside>
 
       <ChallengeDialog view={view} meId={meId} nick={nick} send={send} remaining={remaining} />
@@ -110,17 +115,21 @@ function Seats({ view, members, meId }: { view: ColorCardsView; members: Members
         const m = members.get(p.id);
         const current = view.current === p.id && view.phase !== 'roundOver';
         return (
-          <li key={p.id} className="cc-seat" data-current={current || undefined} data-me={p.id === meId || undefined} data-exposed={view.exposed === p.id || undefined}>
-            <span className="cc-seat-avatar">{m ? <Avatar avatar={m.avatar} nick={m.nick} size={34} dim={!m.connected} /> : null}</span>
+          <li
+            key={p.id}
+            className="cc-seat"
+            data-current={current || undefined}
+            data-me={p.id === meId || undefined}
+            data-exposed={view.exposed === p.id || undefined}
+            data-off={m?.connected === false || undefined}
+            aria-current={current || undefined}
+          >
+            {p.called && p.cards <= 2 && <span className="cc-seat-badge">{s.play.calledBadge}</span>}
             <span className="cc-seat-name">
               {m?.nick ?? '?'}
-              {p.id === meId && <span className="dim"> ({s.play.you})</span>}
+              {p.id === meId && <span className="cc-seat-me"> ({s.play.you})</span>}
             </span>
-            <span className="cc-seat-cards mono" aria-label={s.play.cardCount(p.cards)}>
-              <span className="cc-fan" aria-hidden="true" data-n={Math.min(p.cards, 3)} />
-              {p.cards}
-            </span>
-            {p.called && p.cards <= 2 && <span className="cc-seat-badge">{s.play.calledBadge}</span>}
+            <span className="cc-seat-cards">{s.play.cardCount(p.cards)}</span>
           </li>
         );
       })}
@@ -134,49 +143,23 @@ function Table({ view }: { view: ColorCardsView }) {
   const lastSeq = view.lastPlay?.seq ?? 0;
   return (
     <section className="cc-table" aria-label="Masa">
-      <div className="cc-pile">
-        <span className="cc-stack" data-count={Math.min(view.deckCount, 3)}>
-          <CardBack size="lg" />
-        </span>
-        <span className="cc-pile-label">
-          {s.play.deck} <b className="mono">{view.deckCount}</b>
-        </span>
+      <div className="cc-cards">
+        <div className="cc-pile">
+          <CardBack />
+          <span className="cc-pile-label">
+            {s.play.deck} {view.deckCount}
+          </span>
+        </div>
+        <div className="cc-ring" data-color={view.activeColor ?? 'wild'}>
+          <span className="cc-discard" key={lastSeq} data-fresh={lastSeq > 0 || undefined}>
+            {view.top && <CardFace card={view.top} size="lg" />}
+          </span>
+        </div>
       </div>
-
-      <div className="cc-ring" data-color={view.activeColor ?? 'wild'}>
-        <svg className="cc-orbit" data-dir={view.dir} viewBox="0 0 200 200" aria-hidden="true">
-          <defs>
-            <marker id="cc-head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
-              <path d="M0 0 L10 5 L0 10 z" className="cc-orbit-headfill" />
-            </marker>
-          </defs>
-          <circle cx="100" cy="100" r="92" className="cc-orbit-track" />
-          <g className="cc-orbit-spin">
-            <path
-              d={view.dir === 1 ? 'M100 8 A92 92 0 0 1 179.7 54' : 'M179.7 54 A92 92 0 0 0 100 8'}
-              className="cc-orbit-arc"
-              markerEnd="url(#cc-head)"
-            />
-            <path
-              d={view.dir === 1 ? 'M100 192 A92 92 0 0 1 20.3 146' : 'M20.3 146 A92 92 0 0 0 100 192'}
-              className="cc-orbit-arc"
-              markerEnd="url(#cc-head)"
-            />
-          </g>
-        </svg>
-        <span className="cc-discard" key={lastSeq} data-fresh={lastSeq > 0 || undefined}>
-          {view.top && <CardFace card={view.top} size="lg" />}
-        </span>
-      </div>
-
-      <div className="cc-active">
+      <p className="cc-active">
         <Swatch color={view.activeColor} />
-        <span>
-          <span className="dim">{s.play.activeColor}</span>
-          <b>{view.activeColor ? COLOR_NAME[view.activeColor] : '—'}</b>
-        </span>
-        <span className="dim cc-small">{view.dir === 1 ? s.play.dirCw : s.play.dirCcw}</span>
-      </div>
+        {s.play.activeColor} {view.activeColor ? COLOR_NAME[view.activeColor] : '—'} · {view.dir === 1 ? s.play.dirCw : s.play.dirCcw}
+      </p>
     </section>
   );
 }
@@ -198,7 +181,7 @@ function Catch({ view, meId, nick, send }: { view: ColorCardsView; meId: string;
     return (
       <div className="cc-alert" role="alert">
         <p>{s.play.exposedMe}</p>
-        <button type="button" className="btn btn-lg cc-last-btn" onClick={() => void send({ type: 'callLast' })}>
+        <button type="button" className="btn cc-last-btn" onClick={() => void send({ type: 'callLast' })}>
           {s.play.lastCard}
         </button>
       </div>
@@ -206,7 +189,7 @@ function Catch({ view, meId, nick, send }: { view: ColorCardsView; meId: string;
   }
   if (!view.me.inGame) return null;
   return (
-    <button type="button" className="btn btn-lg btn-block cc-catch-btn" onClick={() => void send({ type: 'catch', target: view.exposed })}>
+    <button type="button" className="btn btn-block cc-catch-btn" onClick={() => void send({ type: 'catch', target: view.exposed })}>
       {s.play.catchBtn(nick(view.exposed))}
     </button>
   );
@@ -240,27 +223,46 @@ function Status({
   else text = view.penalty ? s.play.otherPenalty(nick(view.current), view.penalty) : s.play.otherTurn(nick(view.current));
 
   return (
-    <section className="cc-status" data-mine={mine || undefined} aria-live="polite">
-      <p className={mine ? 'cc-status-title' : undefined}>{text}</p>
-      {view.phase === 'color' && mine && (
-        <div className="cc-colors">
-          {COLORS.map((c) => (
-            <button key={c} type="button" className="cc-colorbtn" data-color={c} onClick={() => void send({ type: 'pickColor', color: c })}>
-              {COLOR_NAME[c]}
-            </button>
-          ))}
-        </div>
-      )}
+    <section className="cc-status" aria-live="polite">
+      <p className="cc-hint">{text}</p>
       <Timer remaining={remaining} total={view.durationMs} />
       {isHost && !mine && disconnected && (
         <div className="cc-hostskip">
-          <p className="dim cc-small">{s.play.hostSkipHint}</p>
+          <p className="cc-small">{s.play.hostSkipHint}</p>
           <button type="button" className="btn btn-outline" onClick={() => void send({ type: 'skipTurn' })}>
             {s.play.hostSkip(nick(view.current))}
           </button>
         </div>
       )}
+      {view.phase === 'color' && mine && (
+        <Modal label={s.play.chooseColor}>
+          <h2 className="cc-modal-title">{s.play.startColorMe}</h2>
+          <ColorGrid onPick={(c) => void send({ type: 'pickColor', color: c })} />
+        </Modal>
+      )}
     </section>
+  );
+}
+
+function Modal({ label, labelledBy, role = 'dialog', onClose, children }: { label?: string; labelledBy?: string; role?: 'dialog' | 'alertdialog'; onClose?: () => void; children: ReactNode }) {
+  return (
+    <div className="cc-overlay" role={role} aria-modal="true" aria-label={label} aria-labelledby={labelledBy} onClick={onClose}>
+      <div className="cc-modal" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ColorGrid({ onPick }: { onPick(c: CardColor): void }) {
+  return (
+    <div className="cc-colors">
+      {COLORS.map((c) => (
+        <button key={c} type="button" className="cc-colorbtn" data-color={c} onClick={() => onPick(c)}>
+          {COLOR_NAME[c]}
+        </button>
+      ))}
+    </div>
   );
 }
 
@@ -268,16 +270,19 @@ function Status({
 
 function HandArea({ view, meId, nick, send }: { view: ColorCardsView; meId: string; nick: Nick; send: Send }) {
   const hand = useMemo(() => sortHand(view.me.hand), [view.me.hand]);
-  const [picking, setPicking] = useState<{ card: Card; color?: CardColor } | null>(null);
+  const [picking, setPicking] = useState<{ card: Card } | null>(null);
+  const [lockedHint, setLockedHint] = useState(false);
   const playable = new Set(view.me.playable);
   const myTurn = view.current === meId && (view.phase === 'play' || view.phase === 'challenge');
   const canAct = view.current === meId && view.phase === 'play';
   const others = view.players.filter((p) => p.id !== meId);
   const me = view.players.find((p) => p.id === meId);
+  const called = !!me?.called && hand.length <= 2;
   const canCall = hand.length > 0 && hand.length <= 2 && !me?.called && view.phase !== 'roundOver' && view.exposed !== meId;
 
   // Sıra değişince açık seçici kapanır.
   useEffect(() => setPicking(null), [view.step]);
+  useEffect(() => setLockedHint(false), [hand.length]);
 
   function choose(card: Card) {
     if (!playable.has(card.id)) return;
@@ -296,26 +301,37 @@ function HandArea({ view, meId, nick, send }: { view: ColorCardsView; meId: stri
   }
 
   const bluff = picking?.card.value === 'wild4' && hand.some((c) => c.color === view.activeColor && c.id !== picking.card.id);
+  const n = hand.length;
+  const spread = n > 1 ? Math.min(6, 48 / (n - 1)) : 0;
 
   return (
     <section className="cc-handarea" data-turn={myTurn || undefined}>
+      {lockedHint && (
+        <p className="cc-hint" role="status">
+          {s.play.lastCardLocked}
+        </p>
+      )}
       <div className="cc-hand-head">
         <h2 className="cc-hand-title">
-          {s.play.hand} <span className="mono dim">{hand.length}</span>
+          {s.play.hand} {n}
         </h2>
-        {canCall && (
-          <button type="button" className="btn cc-last-btn" onClick={() => void send({ type: 'callLast' })} title={s.play.lastCardHint}>
-            {s.play.lastCard}
-          </button>
-        )}
-        {me?.called && hand.length <= 2 && <span className="cc-called">{s.play.lastCardDone}</span>}
+        <button
+          type="button"
+          className="cc-last-btn"
+          aria-disabled={!canCall || undefined}
+          data-done={called || undefined}
+          title={s.play.lastCardHint}
+          onClick={() => (canCall ? void send({ type: 'callLast' }) : !called && setLockedHint(true))}
+        >
+          {called ? s.play.lastCardDone : s.play.lastCard}
+        </button>
       </div>
 
-      <ul className="cc-hand" aria-label={s.play.hand}>
-        {hand.map((c) => {
+      <ul className="cc-hand" aria-label={s.play.hand} style={{ '--n': Math.max(n, 1) } as CSSProperties}>
+        {hand.map((c, i) => {
           const ok = playable.has(c.id);
           return (
-            <li key={c.id}>
+            <li key={c.id} style={{ '--r': `${(i - (n - 1) / 2) * spread}deg` } as CSSProperties}>
               <button
                 type="button"
                 className="cc-cardbtn"
@@ -333,51 +349,41 @@ function HandArea({ view, meId, nick, send }: { view: ColorCardsView; meId: stri
         })}
       </ul>
 
-      {picking && (
-        <div className="cc-picker" role="dialog" aria-label={picking.card.color === null ? s.play.chooseColorFor(cardName(picking.card)) : s.play.chooseSwap}>
-          {picking.card.color === null && !picking.color ? (
-            <>
-              <p className="cc-status-title">{s.play.chooseColorFor(cardName(picking.card))}</p>
-              {bluff && <p className="cc-small cc-warn">{s.play.bluffWarn}</p>}
-              <div className="cc-colors">
-                {COLORS.map((col) => (
-                  <button key={col} type="button" className="cc-colorbtn" data-color={col} onClick={() => finish({ color: col })}>
-                    {COLOR_NAME[col]}
-                  </button>
-                ))}
-              </div>
-            </>
-          ) : (
-            <>
-              <p className="cc-status-title">{s.play.chooseSwap}</p>
-              <div className="chips">
-                {others.map((p) => (
-                  <button key={p.id} type="button" className="chip" onClick={() => finish({ swapWith: p.id })}>
-                    {nick(p.id)}
-                    <span className="chip-count">{p.cards}</span>
-                  </button>
-                ))}
-              </div>
-            </>
-          )}
-          <button type="button" className="btn btn-ghost" onClick={() => setPicking(null)}>
-            {s.play.cancel}
-          </button>
-        </div>
+      {canAct && view.drew ? (
+        <button type="button" className="btn btn-outline btn-block cc-draw" onClick={() => void send({ type: 'pass', step: view.step })}>
+          {s.play.pass}
+        </button>
+      ) : (
+        <button type="button" className="btn btn-yellow btn-block cc-draw" disabled={!canAct} onClick={() => void send({ type: 'draw', step: view.step })}>
+          {view.penalty && canAct ? s.play.takePenalty(view.penalty) : s.play.draw}
+        </button>
       )}
 
-      {canAct && !picking && (
-        <div className="cc-actions">
-          {view.drew ? (
-            <button type="button" className="btn btn-outline btn-lg btn-block" onClick={() => void send({ type: 'pass', step: view.step })}>
-              {s.play.pass}
-            </button>
+      {picking && (
+        <Modal label={picking.card.color === null ? s.play.chooseColorFor(cardName(picking.card)) : s.play.chooseSwap} onClose={() => setPicking(null)}>
+          {picking.card.color === null ? (
+            <>
+              <h2 className="cc-modal-title">{s.play.chooseColorFor(cardName(picking.card))}</h2>
+              {bluff && <p className="cc-modal-warn">{s.play.bluffWarn}</p>}
+              <ColorGrid onPick={(col) => finish({ color: col })} />
+            </>
           ) : (
-            <button type="button" className="btn btn-primary btn-lg btn-block" onClick={() => void send({ type: 'draw', step: view.step })}>
-              {view.penalty ? s.play.takePenalty(view.penalty) : s.play.draw}
-            </button>
+            <>
+              <h2 className="cc-modal-title">{s.play.chooseSwap}</h2>
+              <div className="cc-swaps">
+                {others.map((p) => (
+                  <button key={p.id} type="button" className="cc-swapbtn" onClick={() => finish({ swapWith: p.id })}>
+                    <span>{nick(p.id)}</span>
+                    <span className="cc-swapbtn-n">{s.play.cardCount(p.cards)}</span>
+                  </button>
+                ))}
+              </div>
+            </>
           )}
-        </div>
+          <button type="button" className="cc-modal-cancel" onClick={() => setPicking(null)}>
+            {s.play.cancel}
+          </button>
+        </Modal>
       )}
     </section>
   );
@@ -390,36 +396,32 @@ function ChallengeDialog({ view, meId, nick, send, remaining }: { view: ColorCar
   if (view.phase !== 'challenge' || !ch || ch.victim !== meId) return null;
   const canStack = view.me.playable.length > 0;
   return (
-    <div className="cc-overlay" role="alertdialog" aria-labelledby="cc-ch-title">
-      <div className="cc-overlay-body">
-        <span className="cc-overlay-card">{view.top && <CardFace card={view.top} size="lg" />}</span>
-        <h2 id="cc-ch-title" className="cc-overlay-title">
-          {s.play.challengeTitle(nick(ch.by))}
-        </h2>
-        <p className="muted cc-small">{s.play.challengeHint(ch.penalty)}</p>
-        {canStack && <p className="cc-small">{s.play.challengeStackHint}</p>}
-        <Timer remaining={remaining} total={view.durationMs} />
-        <div className="cc-overlay-actions">
-          <button type="button" className="btn btn-lg btn-block cc-cheat-btn" onClick={() => void send({ type: 'challenge', step: view.step })}>
-            {s.play.challengeBtn}
-          </button>
-          <button type="button" className="btn btn-outline btn-lg btn-block" onClick={() => void send({ type: 'accept', step: view.step })}>
-            {s.play.acceptBtn(ch.penalty)}
-          </button>
-        </div>
-        {canStack && (
-          <ul className="cc-hand cc-hand-center">
-            {view.me.hand
-              .filter((c) => view.me.playable.includes(c.id))
-              .map((c) => (
-                <li key={c.id}>
-                  <StackFour card={c} send={send} />
-                </li>
-              ))}
-          </ul>
-        )}
-      </div>
-    </div>
+    <Modal role="alertdialog" labelledBy="cc-ch-title">
+      <span className="cc-modal-card">{view.top && <CardFace card={view.top} />}</span>
+      <h2 id="cc-ch-title" className="cc-modal-title">
+        {s.play.challengeTitle(nick(ch.by))}
+      </h2>
+      <p className="cc-modal-text">{s.play.challengeHint(ch.penalty)}</p>
+      {canStack && <p className="cc-modal-text">{s.play.challengeStackHint}</p>}
+      <Timer remaining={remaining} total={view.durationMs} />
+      <button type="button" className="btn btn-block cc-cheat-btn" onClick={() => void send({ type: 'challenge', step: view.step })}>
+        {s.play.challengeBtn}
+      </button>
+      <button type="button" className="cc-modal-cancel" onClick={() => void send({ type: 'accept', step: view.step })}>
+        {s.play.acceptBtn(ch.penalty)}
+      </button>
+      {canStack && (
+        <ul className="cc-row">
+          {view.me.hand
+            .filter((c) => view.me.playable.includes(c.id))
+            .map((c) => (
+              <li key={c.id}>
+                <StackFour card={c} send={send} />
+              </li>
+            ))}
+        </ul>
+      )}
+    </Modal>
   );
 }
 
@@ -431,15 +433,7 @@ function StackFour({ card, send }: { card: Card; send: Send }) {
         <CardFace card={card} />
       </button>
     );
-  return (
-    <div className="cc-colors">
-      {COLORS.map((col) => (
-        <button key={col} type="button" className="cc-colorbtn" data-color={col} onClick={() => void send({ type: 'play', cardId: card.id, color: col })}>
-          {COLOR_NAME[col]}
-        </button>
-      ))}
-    </div>
-  );
+  return <ColorGrid onPick={(col) => void send({ type: 'play', cardId: card.id, color: col })} />;
 }
 
 function RevealDialog({ view, nick }: { view: ColorCardsView; nick: Nick }) {
@@ -447,24 +441,24 @@ function RevealDialog({ view, nick }: { view: ColorCardsView; nick: Nick }) {
   const r = view.reveal;
   if (!r || closed === r.seq) return null;
   return (
-    <div className="cc-overlay" role="dialog" aria-labelledby="cc-rv-title" onClick={() => setClosed(r.seq)}>
-      <div className="cc-overlay-body" onClick={(e) => e.stopPropagation()}>
-        <h2 id="cc-rv-title" className="cc-overlay-title">
-          {s.play.revealTitle(nick(r.of))}
-        </h2>
-        <p className={r.guilty ? 'cc-verdict' : 'cc-verdict cc-verdict-clean'}>{r.guilty ? s.play.revealGuilty : s.play.revealClean}</p>
-        <ul className="cc-hand cc-hand-center">
-          {sortHand(r.cards).map((c) => (
-            <li key={c.id}>
-              <CardFace card={c} size="sm" />
-            </li>
-          ))}
-        </ul>
-        <button type="button" className="btn btn-primary btn-lg btn-block" autoFocus onClick={() => setClosed(r.seq)}>
-          {s.play.close}
-        </button>
-      </div>
-    </div>
+    <Modal labelledBy="cc-rv-title" onClose={() => setClosed(r.seq)}>
+      <h2 id="cc-rv-title" className="cc-modal-title">
+        {s.play.revealTitle(nick(r.of))}
+      </h2>
+      <p className="cc-verdict" data-guilty={r.guilty || undefined}>
+        {r.guilty ? s.play.revealGuilty : s.play.revealClean}
+      </p>
+      <ul className="cc-row">
+        {sortHand(r.cards).map((c) => (
+          <li key={c.id}>
+            <CardFace card={c} size="sm" />
+          </li>
+        ))}
+      </ul>
+      <button type="button" className="btn btn-primary btn-block cc-draw" autoFocus onClick={() => setClosed(r.seq)}>
+        {s.play.close}
+      </button>
+    </Modal>
   );
 }
 
@@ -474,22 +468,22 @@ function RoundOver({ view, nick, remaining }: { view: ColorCardsView; nick: Nick
   const r = view.roundResult;
   if (!r) return null;
   return (
-    <section className="cc-status cc-roundover" aria-live="polite">
-      <p className="cc-status-title">{s.play.roundOverTitle(nick(r.winner))}</p>
-      <p className="cc-points mono">{s.play.roundOverPoints(r.points)}</p>
+    <section className="cc-roundover" aria-live="polite">
+      <h2 className="cc-roundover-title">{s.play.roundOverTitle(nick(r.winner))}</h2>
+      <p className="cc-roundover-pts">{s.play.roundOverPoints(r.points)}</p>
       <ul className="cc-roundlist">
         {r.hands
           .filter((x) => x.id !== r.winner)
           .map((x) => (
             <li key={x.id}>
               <span>{nick(x.id)}</span>
-              <span className="mono dim">
+              <span>
                 {s.play.cardCount(x.cards)}, {x.points} p
               </span>
             </li>
           ))}
       </ul>
-      <p className="dim cc-small">{s.play.nextRound(Math.ceil(remaining / 1000))}</p>
+      <p className="cc-small">{s.play.nextRound(Math.ceil(remaining / 1000))}</p>
       <Timer remaining={remaining} total={view.durationMs} />
     </section>
   );
@@ -498,18 +492,18 @@ function RoundOver({ view, nick, remaining }: { view: ColorCardsView; nick: Nick
 function Scores({ view, members, meId }: { view: ColorCardsView; members: Members; meId: string }) {
   const ranked = [...view.players].sort((a, b) => b.score - a.score);
   return (
-    <section className="sg-scores">
-      <h2 className="cc-side-title">
-        {s.play.scores} <span className="dim mono">{s.play.target(view.target)}</span>
+    <section className="cc-panel">
+      <h2 className="cc-panel-title">
+        {s.play.scores} <span className="cc-panel-sub">{s.play.target(view.target)}</span>
       </h2>
-      <ol className="sg-score-list">
+      <ol className="cc-scores">
         {ranked.map((p, i) => {
           const m = members.get(p.id);
           return (
-            <li key={p.id} className="sg-score" data-me={p.id === meId || undefined} data-first={(i === 0 && p.score > 0) || undefined}>
+            <li key={p.id} className="cc-score" data-me={p.id === meId || undefined} data-first={(i === 0 && p.score > 0) || undefined}>
               {m && <Avatar avatar={m.avatar} nick={m.nick} size={26} />}
-              <span className="sg-score-name">{m?.nick ?? '?'}</span>
-              <span className="sg-score-pts mono">{p.score}</span>
+              <span className="cc-score-name">{m?.nick ?? '?'}</span>
+              <span className="cc-score-pts">{p.score}</span>
               <span className="cc-scorebar" aria-hidden="true">
                 <span style={{ width: `${Math.min(100, (p.score / view.target) * 100)}%` }} />
               </span>
@@ -524,8 +518,8 @@ function Scores({ view, members, meId }: { view: ColorCardsView; members: Member
 function Log({ view, nick }: { view: ColorCardsView; nick: Nick }) {
   const entries = [...view.log].reverse();
   return (
-    <section className="cc-log" aria-labelledby="cc-log-title">
-      <h2 id="cc-log-title" className="cc-side-title">
+    <section className="cc-panel" aria-labelledby="cc-log-title">
+      <h2 id="cc-log-title" className="cc-panel-title">
         {s.play.log}
       </h2>
       <ol className="cc-log-list">
@@ -547,13 +541,13 @@ function Rules({ view }: { view: ColorCardsView }) {
     view.rules.drawUntilPlayable && s.settings.drawUntil,
   ].filter(Boolean) as string[];
   return (
-    <section className="cc-rulesbox">
-      <h2 className="cc-side-title">{s.play.rules}</h2>
-      <p className="cc-small">
+    <section className="cc-panel">
+      <h2 className="cc-panel-title">{s.play.rules}</h2>
+      <p className="cc-rules-main">
         {view.mode === 'single' ? s.settings.single : s.settings.points}
         {view.rules.turnSeconds > 0 && `, ${s.settings.sec(view.rules.turnSeconds)}`}
       </p>
-      <p className="cc-small dim">{on.length ? on.join(', ') : s.play.noHouse}</p>
+      <p className="cc-small">{on.length ? on.join(', ') : s.play.noHouse}</p>
     </section>
   );
 }
@@ -603,39 +597,90 @@ function HowTo() {
   );
 }
 
-function Podium({ view, members, meId }: { view: ColorCardsView; members: Members; meId: string }) {
+// ---------- Oyun sonu (tasarım: Sonuçlar) ----------
+
+function Podium({ view, members, room }: { view: ColorCardsView; members: Members; room: PlayViewProps<ColorCardsView, ColorCardsSettings>['room'] }) {
   const winner = view.winner ? members.get(view.winner) : null;
+  const points = view.mode === 'points';
   const ranked = [...view.players].sort((a, b) => {
-    if (view.mode === 'points' && b.score !== a.score) return b.score - a.score;
+    if (points && b.score !== a.score) return b.score - a.score;
     if (a.id === view.winner) return -1;
     if (b.id === view.winner) return 1;
     return a.cards - b.cards;
   });
+  const [first, second, ...rest] = ranked;
+  const half = Math.ceil(rest.length / 2);
+  const big = (p: (typeof ranked)[number]) => (points ? p.score : p.cards);
+  const sub = (p: (typeof ranked)[number]) => (points ? s.podium.pts(p.score) : s.podium.cardsLeft(p.cards));
   return (
-    <main className="col podium cc-podium">
-      <span className="wordmark" aria-hidden="true">
-        songie
+    <main className="col cc-over">
+      <span className="cc-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
       </span>
-      <div className="podium-winner">
-        {view.top && <CardFace card={view.top} size="lg" />}
-        <h1 className="podium-name">{winner ? s.podium.winner(winner.nick) : s.podium.none}</h1>
+      <div className="cc-over-top">
+        <span>{s.name}</span>
+        <span className="cc-over-code">{room.code}</span>
       </div>
-      <section>
-        <h2 className="cc-side-title">{s.podium.order}</h2>
-        <ol className="sg-score-list">
-          {ranked.map((p) => {
-            const m = members.get(p.id);
-            return (
-              <li key={p.id} className="sg-score" data-me={p.id === meId || undefined} data-first={p.id === view.winner || undefined}>
-                {m && <Avatar avatar={m.avatar} nick={m.nick} size={26} />}
-                <span className="sg-score-name">{m?.nick ?? '?'}</span>
-                <span className="sg-score-pts mono">{view.mode === 'points' ? s.podium.pts(p.score) : s.podium.cards(p.cards)}</span>
-              </li>
-            );
-          })}
-        </ol>
-      </section>
-      <p className="dim podium-back">{s.podium.back}</p>
+      <div className="cc-over-head">
+        <span className="cc-over-sticker">{s.podium.over}</span>
+        <h1 className="cc-over-title">{winner ? s.podium.winner(winner.nick) : s.podium.none}</h1>
+      </div>
+      {first && (
+        <div className="cc-over-scores">
+          <div className="cc-over-card" data-first>
+            <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+              <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="var(--yellow)" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
+            </svg>
+            <span className="cc-over-score">{big(first)}</span>
+            <span className="cc-over-name">{members.get(first.id)?.nick ?? '?'}</span>
+            <span className="cc-over-sub">{sub(first)}</span>
+          </div>
+          {second && (
+            <>
+              <span className="cc-over-dash" aria-hidden="true">
+                –
+              </span>
+              <div className="cc-over-card">
+                <span className="cc-over-score">{big(second)}</span>
+                <span className="cc-over-name">{members.get(second.id)?.nick ?? '?'}</span>
+                <span className="cc-over-sub">{sub(second)}</span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+      {rest.length > 0 && (
+        <div className="cc-over-rosters">
+          {[rest.slice(0, half), rest.slice(half)].map(
+            (col, i) =>
+              col.length > 0 && (
+                <ol key={i} className="cc-over-roster" start={3 + i * half}>
+                  {col.map((p) => {
+                    const m = members.get(p.id);
+                    return (
+                      <li key={p.id}>
+                        {m && <Avatar avatar={m.avatar} nick={m.nick} size={28} />}
+                        <span className="cc-over-roster-name">{m?.nick ?? '?'}</span>
+                        <span className="cc-over-roster-score">{points ? p.score : s.podium.cards(p.cards)}</span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ),
+          )}
+        </div>
+      )}
+      <div className="cc-over-spacer" />
+      <div className="cc-over-foot">
+        <div className="cc-over-bar" aria-hidden="true">
+          <div />
+        </div>
+        <p className="cc-over-note">{s.podium.back}</p>
+      </div>
     </main>
   );
 }

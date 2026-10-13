@@ -79,48 +79,14 @@ export function RoleGlyph({ role, size = 20 }: { role: Role; size?: number }) {
   );
 }
 
-/**
- * Gök saati: gece ay, gündüz güneş; çevresindeki yay kalan süreyi gösterir.
- * `progress` 0 (yeni başladı) – 1 (süre doldu).
- */
-export function SkyDisc({ time, progress, size = 92 }: { time: 'night' | 'day'; progress: number; size?: number }) {
-  const r = 42;
+/** Süre halkası: 92 px daire, kalan süre kalın yay. `left` 1 (yeni başladı) – 0 (süre doldu). */
+export function ClockRing({ left }: { left: number }) {
+  const r = 40;
   const c = 2 * Math.PI * r;
-  const left = Math.max(0, Math.min(1, 1 - progress));
+  const l = Math.max(0, Math.min(1, left));
   return (
-    <svg className="ww-disc" width={size} height={size} viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-      <circle cx="50" cy="50" r={r} className="ww-disc-track" />
-      <circle
-        cx="50"
-        cy="50"
-        r={r}
-        className="ww-disc-arc"
-        strokeDasharray={c}
-        strokeDashoffset={c * (1 - left)}
-        transform="rotate(-90 50 50)"
-      />
-      {time === 'night' ? (
-        <g className="ww-disc-moon">
-          <circle cx="50" cy="50" r="24" />
-          <circle cx="61" cy="43" r="21" className="ww-disc-bite" />
-        </g>
-      ) : (
-        <g className="ww-disc-sun">
-          <circle cx="50" cy="50" r="15" />
-          {Array.from({ length: 8 }, (_, i) => {
-            const a = (i * Math.PI) / 4;
-            return (
-              <line
-                key={i}
-                x1={50 + Math.cos(a) * 21}
-                y1={50 + Math.sin(a) * 21}
-                x2={50 + Math.cos(a) * 27}
-                y2={50 + Math.sin(a) * 27}
-              />
-            );
-          })}
-        </g>
-      )}
+    <svg className="ww-ring" width="92" height="92" viewBox="0 0 92 92" aria-hidden="true" focusable="false">
+      <circle cx="46" cy="46" r={r} className="ww-ring-arc" strokeDasharray={c} strokeDashoffset={c * (1 - l)} transform="rotate(-90 46 46)" />
     </svg>
   );
 }

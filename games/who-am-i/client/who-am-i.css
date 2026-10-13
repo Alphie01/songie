@@ -1,499 +1,527 @@
-/* Kimim Ben? — ortak düzen game-kit/ui/game-layout.css'te.
-   Tek gösterişli öğe: alına yapıştırılmış sarı not kâğıtları. Gerisi sakin. */
+/* Kimim Ben? — "Songie Arayüz" tasarımı (KimimBen.dc.html, Sonuclar.dc.html).
+   Ortak düzen game-kit/ui/game-layout.css'te. */
 
-.wa {
-  --note: var(--yellow);
-  --note-ink: #231c00;
-  --note-done: var(--accent);
-  --a-yes: var(--accent-hi);
-  --a-no: var(--red);
-  --a-maybe: var(--yellow);
-  --a-irrelevant: var(--text-3);
+.wa,
+.wa-endscreen {
+  --wa-note-mine: #ffe680;
+  --wa-note-ink: #2b2116;
+  --wa-irrelevant: #e8e0c8;
+  --wa-track: #eee8ff;
 }
 
-@media (min-width: 1100px) {
-  .wa .sg-center {
-    max-width: 520px;
-  }
+.wa [data-answer='yes'] {
+  --a: var(--mint);
 }
 
-.wa-small {
-  font-size: 12.5px;
+.wa [data-answer='no'] {
+  --a: var(--red);
 }
 
-.wa-soft {
-  color: var(--text-2);
+.wa [data-answer='maybe'] {
+  --a: var(--yellow);
+}
+
+.wa [data-answer='irrelevant'] {
+  --a: var(--wa-irrelevant);
 }
 
 .wa-center {
   text-align: center;
 }
 
-.wa-self-center {
-  justify-self: center;
+.wa-spacer {
+  flex: 1;
 }
 
-.wa-h2 {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-/* Ayar başlıkları cümle düzeninde */
+/* Ayar başlıkları: Lobi tasarımındaki gibi cümle düzeninde */
 .wa-legend,
 .sgs-legend.wa-legend {
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-2);
 }
 
-/* ---------- Not kâğıdı ---------- */
-.wa-note {
-  position: relative;
-  display: grid;
-  place-content: center;
-  gap: 2px;
-  width: 100%;
-  min-height: 64px;
-  padding: 12px 8px 8px;
-  border-radius: 3px;
-  background: var(--note);
-  color: var(--note-ink);
-  text-align: center;
-  transform: rotate(var(--tilt, 0deg));
-  box-shadow:
-    0 1px 0 rgb(255 255 255 / 0.35) inset,
-    0 10px 18px -8px rgb(0 0 0 / 0.7);
+/* ---------- Oyun alanı: telefonda tek ekran ---------- */
+.wa-play {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: calc(100dvh - 72px - 22px);
 }
 
-/* Bant */
-.wa-note::before {
-  content: '';
-  position: absolute;
-  top: -7px;
-  left: 50%;
-  width: 38px;
-  height: 14px;
-  border-radius: 2px;
-  background: rgb(255 255 255 / 0.32);
-  transform: translateX(-50%) rotate(calc(var(--tilt, 0deg) * -1.6));
+.wa-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
 
-.wa-note-name {
-  font-size: 14.5px;
+.wa-round {
+  padding: 7px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
   font-weight: 800;
-  line-height: 1.15;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
-.wa-note-cat {
-  font-size: 10.5px;
-  font-weight: 600;
-  opacity: 0.62;
-}
-
-.wa-note[data-done] {
-  background: var(--note-done);
-  color: var(--accent-ink);
-}
-
-/* Kendi kartın: kapalı, yalnızca soru işareti */
-.wa-note[data-hidden] {
-  background: var(--panel-2);
-  color: var(--accent-hi);
-  box-shadow: inset 0 0 0 1.5px rgb(25 223 112 / 0.35);
-}
-
-.wa-note[data-hidden]::before {
-  background: rgb(255 255 255 / 0.1);
-}
-
-.wa-note-q {
-  font-size: 34px;
+.wa-code {
+  font-size: 13px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1;
+  letter-spacing: 2px;
+  color: var(--text-3);
 }
 
-.wa-note[data-size='lg'] {
-  min-height: 84px;
-  padding: 16px 14px 12px;
-}
-
-.wa-note[data-size='lg'] .wa-note-name {
-  font-size: 20px;
-}
-
-/* ---------- Alınlar ızgarası ---------- */
+/* ---------- Alın notları ---------- */
 .wa-faces {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
-  gap: 22px 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px 8px;
   margin: 0;
-  padding: 10px 0 0;
+  padding: 4px 0 0;
   list-style: none;
 }
 
 .wa-face {
-  display: grid;
-  justify-items: center;
-  align-content: start;
-  gap: 8px;
-  min-width: 0;
-  padding: 0 2px 8px;
-  border-radius: var(--r-md);
-}
-
-.wa-face[data-asking] {
-  background: var(--accent-soft);
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.35);
-}
-
-.wa-face[data-left] {
-  opacity: 0.45;
-}
-
-.wa-face-who {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  min-width: 0;
+  text-align: center;
+}
+
+.wa-face[data-left],
+.wa-face[data-offline] {
+  opacity: 0.55;
+}
+
+.wa-note {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 62px;
+  padding: 6px 4px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--note);
+  color: var(--ink-2);
+  box-shadow: 3px 3px 0 var(--ink);
+  text-align: center;
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.wa-note[data-color='pink'] {
+  --note: var(--pink);
+}
+.wa-note[data-color='sky'] {
+  --note: var(--sky);
+}
+.wa-note[data-color='mint'] {
+  --note: var(--mint);
+}
+.wa-note[data-color='yellow'] {
+  --note: var(--yellow);
+}
+.wa-note[data-color='lilac'] {
+  --note: var(--lilac);
+}
+.wa-note[data-color='coral'] {
+  --note: var(--coral);
+}
+.wa-note[data-color='mine'] {
+  --note: var(--wa-note-mine);
+  color: var(--wa-note-ink);
+}
+
+.wa-note-q {
+  font-family: var(--display);
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.wa-note-name {
   max-width: 100%;
-  margin-top: 4px;
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.wa-note-cat {
+  font-size: 9px;
+  font-weight: 800;
 }
 
 .wa-face-nick {
-  min-width: 0;
+  max-width: 100%;
   overflow: hidden;
-  font-size: 12.5px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.wa-face[data-me] .wa-face-nick {
-  color: var(--accent-hi);
-}
-
-.wa-face-ghost {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--panel-2);
-}
-
 .wa-face-meta {
-  min-height: 16px;
-  font-size: 11px;
+  margin-top: -4px;
+  font-size: 10px;
+  font-weight: 700;
   color: var(--text-3);
 }
 
-.wa-asking {
-  color: var(--accent-hi);
+.wa-face-meta[data-state='asking'] {
+  color: var(--yellow);
 }
 
-.wa-done-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  color: var(--accent-hi);
+.wa-face-meta[data-state='done'] {
+  color: var(--mint);
 }
 
-/* ---------- Sahne ---------- */
-.wa-stage {
-  display: grid;
+/* ---------- Beyaz soru kartı ---------- */
+.wa-card {
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  padding: 18px 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: var(--panel);
+  padding: 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 24px;
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: 6px 6px 0 var(--ink);
 }
 
-.wa-stage[data-tone='mine'] {
-  border-color: rgb(25 223 112 / 0.4);
-  box-shadow: var(--accent-glow);
-}
-
-.wa-stage-head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 112px;
-  align-items: center;
-  gap: 14px;
-}
-
-.wa-stage-kicker {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--text-2);
-}
-
-.wa-stage-title {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-
-.wa-myturn {
-  font-size: clamp(28px, 8vw, 36px);
+.wa-kicker {
+  font-size: 13px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--accent-hi);
 }
 
 .wa-quote {
-  font-size: 20px;
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
-.wa-form {
-  display: grid;
-  gap: 8px;
+.wa-quote-sm {
+  font-size: 22px;
 }
 
-.wa-guess {
-  display: grid;
-  gap: 6px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-}
-
-.wa-guess-label {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.wa-guess-row {
-  display: flex;
-  gap: 6px;
-}
-
-.wa-guess-row .input {
-  flex: 1;
-  min-width: 0;
-}
-
-.wa-last {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px;
-  margin-top: 4px;
-}
-
-.wa-compare {
-  display: grid;
-  justify-items: center;
-  gap: 10px;
-  padding: 4px 0 6px;
-}
-
-.wa-compare .wa-note {
-  width: min(220px, 80%);
-}
-
-/* Cevap butonları: her cevap kendi renginde */
 .wa-answers {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
 }
 
 .wa-answer {
-  --c: var(--a-yes);
-  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
-  background: color-mix(in srgb, var(--c) 8%, transparent);
-  color: var(--c);
-  font-weight: 700;
-}
-
-.wa-answer[data-answer='no'] {
-  --c: var(--a-no);
-}
-
-.wa-answer[data-answer='maybe'] {
-  --c: var(--a-maybe);
-}
-
-.wa-answer[data-answer='irrelevant'] {
-  --c: var(--text-2);
-}
-
-.wa-answer:hover {
-  background: color-mix(in srgb, var(--c) 16%, transparent);
+  min-height: 50px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--a);
+  color: var(--ink-2);
+  box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
 }
 
 .wa-answer[aria-pressed='true'] {
-  background: var(--c);
-  color: var(--accent-ink);
-  box-shadow: 0 0 24px color-mix(in srgb, var(--c) 35%, transparent);
+  box-shadow: 0 1px 0 var(--ink);
+  transform: translateY(3px);
+  outline: 3px solid var(--ink-2);
+  outline-offset: 2px;
 }
 
-.wa-verify {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+.wa-answer:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 2px;
 }
 
-.wa-btn-yes,
-.wa-btn-no {
-  --c: var(--a-yes);
-  border: 1px solid color-mix(in srgb, var(--c) 45%, transparent);
-  background: transparent;
-  color: var(--c);
-  font-weight: 700;
-}
-
-.wa-btn-no {
-  --c: var(--a-no);
-}
-
-.wa-btn-yes[aria-pressed='true'],
-.wa-btn-no[aria-pressed='true'] {
-  background: var(--c);
-  color: var(--accent-ink);
-}
-
-/* Canlı sayım */
 .wa-tally {
-  display: grid;
-  gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .wa-tally li {
-  --c: var(--a-yes);
-  display: grid;
-  grid-template-columns: 64px 1fr 18px;
+  display: flex;
   align-items: center;
   gap: 8px;
   font-size: 12px;
-}
-
-.wa-tally li[data-answer='no'] {
-  --c: var(--a-no);
-}
-
-.wa-tally li[data-answer='maybe'] {
-  --c: var(--a-maybe);
-}
-
-.wa-tally li[data-answer='irrelevant'] {
-  --c: var(--a-irrelevant);
+  font-weight: 800;
 }
 
 .wa-tally-label {
-  color: var(--text-2);
+  width: 62px;
+  flex: none;
 }
 
 .wa-tally-bar {
-  height: 6px;
+  flex: 1;
+  height: 10px;
   overflow: hidden;
   border-radius: var(--r-pill);
-  background: var(--panel-2);
+  background: var(--wa-track);
 }
 
 .wa-tally-bar span {
   display: block;
   height: 100%;
-  background: var(--c);
-  transition: width 240ms ease-out;
+  border-radius: var(--r-pill);
+  background: var(--a);
+  transition: width 300ms ease-out;
 }
 
 .wa-tally-n {
-  text-align: right;
-}
-
-/* Cevap etiketi */
-.wa-pill {
-  --c: var(--a-yes);
-  display: inline-flex;
+  width: 14px;
   flex: none;
+}
+
+.wa-count {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+.wa-card-btn {
+  display: inline-flex;
   align-items: center;
-  gap: 3px;
-  padding: 2px 9px;
-  border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--c) 14%, transparent);
-  color: var(--c);
-  font-size: 11.5px;
-  font-weight: 700;
-}
-
-.wa-pill[data-answer='no'] {
-  --c: var(--a-no);
-}
-
-.wa-pill[data-answer='maybe'] {
-  --c: var(--a-maybe);
-}
-
-.wa-pill[data-answer='irrelevant'] {
-  --c: var(--text-2);
-}
-
-/* ---------- Benim köşem ---------- */
-.wa-mine {
-  display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  align-items: start;
-  gap: 16px;
-  padding: 4px 2px;
-}
-
-.wa-mine-title {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.wa-mine[data-done] .wa-mine-title {
-  color: var(--accent-hi);
-}
-
-.wa-hints {
-  display: grid;
+  justify-content: center;
   gap: 6px;
+  align-self: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 14px;
+  font-weight: 800;
 }
 
-.wa-hint-list {
-  display: grid;
-  gap: 4px;
-  margin: 0;
-  padding: 0 0 0 18px;
-  font-size: 13px;
+.wa-card-btn[data-strong] {
+  background: var(--ink-2);
   color: var(--text);
 }
 
-.wa-hint-btn {
-  justify-self: start;
-  padding: 0 6px;
-  color: var(--yellow);
+/* ---------- Sıra sende: sarı kart ---------- */
+.wa-myturn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 24px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+.wa-myturn-title {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.wa-myturn-hint {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.wa-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wa-input {
+  min-width: 0;
+  min-height: 50px;
+  padding: 0 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 700;
+  outline: none;
+}
+
+.wa-input::placeholder {
+  color: #8b82b0;
+}
+
+.wa-input:focus-visible {
+  box-shadow: 0 0 0 3px var(--violet);
+}
+
+.wa-input-sm {
+  flex: 1;
+  min-height: 48px;
+  padding: 0 12px;
+  font-size: 16px;
+}
+
+.wa-dark-btn {
+  min-height: 52px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 16px;
+  background: var(--ink-2);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.wa-last {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.wa-guess {
+  display: flex;
+  gap: 8px;
+}
+
+.wa-guess-btn {
+  flex: none;
+  min-height: 48px;
+  padding: 0 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--pink);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.wa-guess-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.wa-myturn-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.wa-myturn-note {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wa-pass {
+  flex: none;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.wa-dark-btn:focus-visible,
+.wa-guess-btn:focus-visible,
+.wa-pass:focus-visible,
+.wa-card-btn:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 2px;
+}
+
+/* Cevap hapı */
+.wa-pill {
+  display: inline-block;
+  flex: none;
+  padding: 0 8px;
+  border-radius: var(--r-pill);
+  background: var(--a, var(--wa-irrelevant));
+  color: var(--ink-2);
+  font-weight: 800;
+}
+
+.wa-pill[data-bordered] {
+  border: 2px solid var(--ink);
 }
 
 /* ---------- Soru geçmişi ---------- */
 .wa-history {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel-2);
 }
 
 .wa-history-head {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-.wa-filter .chip {
-  min-height: 30px;
-  font-size: 11.5px;
+.wa-box-title {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.wa-filter {
+  display: flex;
+  gap: 4px;
+}
+
+.wa-filter button {
+  min-height: 32px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.wa-filter button[aria-pressed='true'] {
+  background: var(--yellow);
+  color: var(--ink-2);
+}
+
+.wa-filter button:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
 }
 
 .wa-history-list {
-  display: grid;
-  gap: 4px;
-  max-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 220px;
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -501,123 +529,416 @@
 }
 
 .wa-hrow {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 10px;
-  min-height: 44px;
-  padding: 6px 10px;
-  border-radius: var(--r-md);
-  background: var(--panel);
-}
-
-.wa-hrow-body {
-  display: grid;
-  min-width: 0;
-}
-
-.wa-hrow-who {
-  font-size: 11px;
-  color: var(--text-3);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .wa-hrow-text {
-  font-size: 13px;
+  min-width: 0;
   overflow-wrap: anywhere;
 }
 
-/* ---------- Yan sütun ---------- */
-.wa-progress {
-  display: grid;
-  gap: 10px;
+.wa-hrow-empty {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
 }
 
-.wa-check {
-  flex: none;
-  color: var(--accent-hi);
+.wa-faint {
+  color: var(--text-3);
 }
 
-/* ---------- Sonuç ---------- */
-.wa-rank {
-  display: grid;
+/* ---------- İpucu satırı ---------- */
+.wa-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wa-hint-list {
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.wa-rank-row {
-  display: grid;
-  grid-template-columns: 24px auto minmax(0, 1fr) auto;
+.wa-hint-list li {
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.wa-hint-row {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  min-height: 52px;
-  padding: 0 12px;
-  border-radius: var(--r-md);
-  background: var(--panel);
 }
 
-.wa-rank-row[data-me] {
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
-}
-
-.wa-rank-row:first-child[data-done] {
-  background: var(--accent-soft);
-}
-
-.wa-rank-n {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent-hi);
-}
-
-.wa-rank-who {
-  display: grid;
-  min-width: 0;
-}
-
-.wa-rank-nick {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.wa-rank-id {
-  font-size: 12.5px;
-  color: var(--yellow);
-  overflow-wrap: anywhere;
-}
-
-.wa-rank-q {
+.wa-hint-note {
   font-size: 12px;
-  color: var(--text-2);
-}
-
-.wa-rank-row:not([data-done]) .wa-rank-q {
+  font-weight: 700;
   color: var(--text-3);
 }
 
+.wa-hint-btn {
+  flex: none;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 2px solid var(--yellow);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.wa-hint-btn:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.wa-done {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--mint);
+  color: var(--ink-2);
+}
+
+.wa-done-title {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.wa-done-name {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.wa-done-hint {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---------- Oyuncu listesi (masaüstü yan sütun ve sonuç) ---------- */
+.wa-board {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.wa-board ol {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wa-board li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.wa-board-nick {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wa-board-q {
+  flex: none;
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.wa-board li[data-done] .wa-board-q {
+  color: var(--mint);
+}
+
+.wa-rank-n {
+  width: 22px;
+  flex: none;
+  font-family: var(--display);
+  color: var(--yellow);
+}
+
+.wa-rank-who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wa-rank-id {
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Oyun sonu ---------- */
+.wa-endscreen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100dvh;
+  padding-top: 72px;
+  padding-bottom: 24px;
+  overflow: hidden;
+}
+
+.wa-confetti {
+  position: absolute;
+  width: 16px;
+  height: 7px;
+  border-radius: 2px;
+}
+
+.wa-confetti[data-n='1'] {
+  top: 102px;
+  left: 30px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.wa-confetti[data-n='2'] {
+  top: 142px;
+  right: 40px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.wa-confetti[data-n='3'] {
+  top: 202px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.wa-confetti[data-n='4'] {
+  top: 92px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.wa-confetti[data-n='5'] {
+  top: 242px;
+  right: 60px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.wa-end-top {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.wa-end-code {
+  letter-spacing: 2px;
+}
+
+.wa-end-title {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.wa-end-tag {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.wa-end-title h1 {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+.wa-end-cards {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.wa-end-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  max-width: 220px;
+  min-width: 0;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  background: var(--lilac);
+  color: var(--ink-2);
+  text-align: center;
+  transform: rotate(2deg);
+  align-self: flex-end;
+}
+
+.wa-end-card[data-place='1'] {
+  background: var(--mint);
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-3deg);
+  align-self: auto;
+}
+
+.wa-crown path {
+  fill: var(--yellow);
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+}
+
+.wa-end-num {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.wa-end-card[data-place='1'] .wa-end-num {
+  margin-top: 0;
+  font-size: 64px;
+}
+
+.wa-end-label {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wa-end-sub {
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0.75;
+}
+
+.wa-rank {
+  position: relative;
+}
+
+.wa-end-foot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
+}
+
+.wa-end-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.wa-end-bar span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: wa-bar 12s linear both;
+}
+
+@keyframes wa-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* ---------- Lobi: kimlik ekleme ---------- */
 .wa-addcard {
   display: grid;
   gap: 6px;
 }
 
 .wa-addcard .input {
-  min-height: 40px;
-  font-size: 13px;
+  min-height: 44px;
+  font-size: 16px;
 }
 
-@media (max-width: 380px) {
-  .wa-faces {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .wa-stage-head {
-    grid-template-columns: minmax(0, 1fr) 96px;
+@media (min-width: 1100px) {
+  .wa .sg-center {
+    max-width: 480px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .wa-answer,
   .wa-tally-bar span {
     transition: none;
+  }
+
+  .wa-end-bar span {
+    animation: none;
   }
 }

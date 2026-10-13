@@ -226,6 +226,8 @@ export function createIntrigueGame(
     state.losses = [];
     state.exchange = null;
     state.winner = state.alive.length === 1 ? state.alive[0]! : null;
+    // Oyun sonu ekranındaki "lobiye dönülüyor" çubuğu için.
+    state.phaseEndsAt = ctx.now() + timing.podiumMs;
     ctx.pushViews();
     state.cancelPhase = ctx.schedule(timing.podiumMs, () => {
       const outCount = state.out.length;
@@ -741,6 +743,9 @@ export function createIntrigueGame(
       } else if (state.phase === 'exchange') {
         endsAt = state.phaseEndsAt;
         durationMs = timing.exchangeMs;
+      } else if (state.phase === 'over') {
+        endsAt = state.phaseEndsAt;
+        durationMs = timing.podiumMs;
       }
       const claimant = w ? claimantOf(state, w) : null;
       const blockers = w ? blockersOf(state, w) : [];

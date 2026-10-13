@@ -19,7 +19,7 @@ Arkadaşlar arası, gelirsiz bir çok oyunculu oyun platformu. İlk oyun: `games
 - Yayın: `cd deploy && docker compose -p songie up -d --build`
 
 ## Kurallar
-- **Her UI işinden önce `frontend-design` skill’ini yükle.** Kullanıcının açık isteği: arayüz songspot.net görünümünde (ayrıntı `docs/design.md`); yeni oyunlar da bu düzeni izler.
+- **Her UI işinden önce `frontend-design` skill’ini yükle.** Kullanıcının açık isteği: arayüz kullanıcının verdiği "Songie Arayüz" tasarımını birebir izler, yorumlanmaz (ayrıntı `docs/design.md`); yeni oyunlar da aynı görsel dili kullanır.
 - E2E: `apps/web/e2e/{flow,taboo,smoke}.mjs`, Playwright Docker imajıyla çalıştırılır (host’ta Chromium kütüphaneleri yok, kurma).
 - Arayüz metni Türkçe, cümle düzeninde, `apps/web/src/i18n/tr.ts` içinde.
 - Server otoriterdir: client'a yalnızca `viewFor` görünümü gider; cevabı ya da açılmamış klipleri sızdırma.

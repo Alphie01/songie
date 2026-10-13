@@ -38,13 +38,18 @@ export const s = {
   play: {
     round: (n: number, total: number | null) => (total ? `Soru ${n}/${total}` : `Soru ${n}`),
     you: 'sen',
-    tapToVote: 'Bir oyuncuya dokunarak oy ver. Sonuçlar açılana kadar fikrini değiştirebilirsin.',
+    tapToVote: (self: boolean) =>
+      self
+        ? 'Bir oyuncuya dokunarak oy ver; kendine de verebilirsin! Sonuçlar açılana kadar değiştirebilirsin.'
+        : 'Bir oyuncuya dokunarak oy ver. Sonuçlar açılana kadar değiştirebilirsin.',
     tapToGuess: 'Sence kim kazanacak? Bir oyuncuya dokun.',
     modeVote: 'Oyum',
     modeGuess: 'Tahminim',
     noSelf: 'Kendine oy veremezsin',
     myVote: 'Oyun',
     myGuess: 'Tahminin',
+    voted: 'oy verdi',
+    timeLeft: (n: number) => `${n} saniye kaldı`,
     progress: (done: number, total: number) => `${done}/${total} kişi oy verdi`,
     waiting: 'Beklenenler',
     offline: 'bağlantı yok',
@@ -56,6 +61,7 @@ export const s = {
     openNote: 'Oylar açık. Sonuçlarda kimin kime verdiği görünecek.',
     // Açıklama
     winnerOne: 'Unvan sahibi',
+    winnerLine: (title: string, votes: number) => `${title} · ${votes} oy`,
     winnerTie: 'Beraberlik, unvan paylaşıldı',
     noVotes: 'Kimse oy vermedi, bu unvan boşta kaldı.',
     votes: (n: number) => `${n} oy`,
@@ -71,10 +77,15 @@ export const s = {
     titles: (n: number) => (n === 0 ? 'unvan yok' : `${n} unvan`),
     guessPts: (n: number) => `${n} tahmin`,
     history: 'Unvan geçmişi',
+    settings: 'Oyun ayarları',
+    settingsNote: 'Değişiklikler sıradaki sorudan itibaren geçerli.',
     historyEmpty: 'Henüz unvan dağıtılmadı. İlk sonuçlar açılınca burada görünecek.',
   },
   podium: {
     title: 'Oyun bitti',
+    winner: (names: string) => `${names} kazandı!`,
+    titlesLabel: 'Unvanlar',
+    titleCount: (n: number) => `${n} unvan`,
     king: (n: number) => `${n} unvanla birinci`,
     nobody: 'Bu oyunda unvan dağıtılmadı',
     noTitles: 'Unvan yok',

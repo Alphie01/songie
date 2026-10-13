@@ -90,21 +90,24 @@ export function Feed({
   const name = (id: string) => (id === meId ? s.feed.you : (members.get(id)?.nick ?? '?'));
   return (
     <section className="feed" aria-label={s.feed.title} aria-live="polite">
-      <h2 className="eyebrow">{s.feed.title}</h2>
+      <h2 className="feed-title">{s.feed.title}</h2>
       <ol className="feed-list">
-        {[...items].reverse().map((f) => (
-          <li key={f.id} className="feed-item" data-kind={f.kind}>
-            <span className="feed-dot" aria-hidden="true" />
-            <span className="feed-text">
+        {[...items]
+          .reverse()
+          .slice(0, FEED_MAX)
+          .map((f) => (
+            <li key={f.id} className="feed-item" data-kind={f.kind}>
               <b>{name(f.playerId)}</b> {s.feed.text(f.kind, clipShort(clips[f.stage] ?? 0), f.text)}
-            </span>
-            {f.points ? <span className="feed-pts mono">+{f.points.toLocaleString('tr-TR')}</span> : null}
-          </li>
-        ))}
+              {f.points ? <span className="feed-pts"> +{f.points.toLocaleString('tr-TR')}</span> : null}
+            </li>
+          ))}
       </ol>
     </section>
   );
 }
+
+/** Akışta gösterilen en yeni olay sayısı. */
+const FEED_MAX = 4;
 
 export function HowToPlay() {
   return (

@@ -1,16 +1,30 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
-import { ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type RedFlagSettings } from '../shared/index.js';
+import { DISCUSS_OPTIONS, ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type RedFlagSettings } from '../shared/index.js';
 import { s } from './strings';
 
 function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
   return (
     <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
+      <legend className="sgs-legend rf-legend">{title}</legend>
       {children}
       {hint && <p className="sgs-hint">{hint}</p>}
     </fieldset>
+  );
+}
+
+/** Lobi tasarımındaki satır: solda ad, sağda seçenekler. */
+function Row({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+  const id = useId();
+  return (
+    <div className="rf-set-row" role="group" aria-labelledby={id}>
+      <span id={id} className="rf-set-label">
+        {title}
+      </span>
+      <div className="rf-set-opts">{children}</div>
+      {hint && <p className="sgs-hint rf-set-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -73,11 +87,11 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
 
       {showSecondary && (
         <>
-          <Group title={s.settings.dealBreaker} hint={s.settings.dealBreakerHint}>
+          <Row title={s.settings.dealBreaker} hint={s.settings.dealBreakerHint}>
             <Toggle on={settings.dealBreaker} editable={editable} onClick={() => set({ dealBreaker: !settings.dealBreaker })} />
-          </Group>
+          </Row>
 
-          <Group title={s.settings.names} hint={s.settings.namesHint(settings.anonymous)}>
+          <Row title={s.settings.names} hint={s.settings.namesHint(settings.anonymous)}>
             <div className="chips">
               <button type="button" className="chip" aria-pressed={!settings.anonymous} disabled={!editable} onClick={() => set({ anonymous: false })}>
                 {s.settings.open}
@@ -86,13 +100,13 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 {s.settings.anonymous}
               </button>
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.predict} hint={s.settings.predictHint}>
+          <Row title={s.settings.predict} hint={s.settings.predictHint}>
             <Toggle on={settings.predict} editable={editable} onClick={() => set({ predict: !settings.predict })} />
-          </Group>
+          </Row>
 
-          <Group title={s.settings.seconds} hint={s.settings.secondsHint(settings.seconds)}>
+          <Row title={s.settings.seconds} hint={s.settings.secondsHint(settings.seconds)}>
             <div className="chips">
               {SECONDS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.seconds === n} disabled={!editable} onClick={() => set({ seconds: n })}>
@@ -100,9 +114,19 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
 
-          <Group title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
+          <Row title={s.settings.discuss} hint={s.settings.discussHint(settings.discuss)}>
+            <div className="chips">
+              {DISCUSS_OPTIONS.map((n) => (
+                <button key={n} type="button" className="chip" aria-pressed={settings.discuss === n} disabled={!editable} onClick={() => set({ discuss: n })}>
+                  {s.settings.sec(n)}
+                </button>
+              ))}
+            </div>
+          </Row>
+
+          <Row title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
             <div className="chips">
               {ROUND_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.rounds === n} disabled={!editable} onClick={() => set({ rounds: n })}>
@@ -110,7 +134,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
-          </Group>
+          </Row>
         </>
       )}
     </div>

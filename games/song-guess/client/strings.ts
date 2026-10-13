@@ -70,6 +70,8 @@ export const s = {
     playLabel: (clip: string) => `${clip} klibi çal`,
     stopLabel: 'Durdur',
     tapToListen: 'Dinlemek için dokun',
+    stageHint: (seconds: number) => `Sadece ${seconds.toLocaleString('tr-TR')} saniye! Kulağını aç.`,
+    scoreYou: 'Sen',
     searchPlaceholder: 'Şarkıyı bul',
     guessLabel: 'Tahminin',
     noHits: 'Sonuç yok. Başka bir yazımla dene.',
@@ -136,6 +138,8 @@ export const s = {
   },
   podium: {
     title: 'Oyun bitti',
+    winner: (nick: string) => `${nick} kazandı!`,
+    draw: 'Berabere!',
     points: (n: number) => `${n.toLocaleString('tr-TR')} puan`,
     streak: (n: number) => `En uzun seri: ${n}`,
     back: 'Lobiye dönülüyor…',

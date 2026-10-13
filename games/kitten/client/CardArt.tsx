@@ -139,9 +139,9 @@ export function Glyph({ kind, size = 40 }: { kind: CardKind; size?: number }) {
   );
 }
 
-/** Kart yüzü. `size`: el (hand), küçük (mini), büyük (big). */
-export function CardFace({ kind, size = 'hand' }: { kind: CardKind; size?: 'hand' | 'mini' | 'big' }) {
-  const glyph = size === 'mini' ? 16 : size === 'big' ? 64 : 38;
+/** Kart yüzü. `size`: el/ıskarta seçimi (hand), ıskarta yığını (pile), küçük (mini), büyük (big). */
+export function CardFace({ kind, size = 'hand' }: { kind: CardKind; size?: 'hand' | 'pile' | 'mini' | 'big' }) {
+  const glyph = size === 'mini' ? 16 : size === 'big' ? 54 : 34;
   return (
     <span className="kt-card" data-kind={kind} data-size={size}>
       <Glyph kind={kind} size={glyph} />
@@ -150,15 +150,23 @@ export function CardFace({ kind, size = 'hand' }: { kind: CardKind; size?: 'hand
   );
 }
 
-/** Kartın arkası (deste). */
-export function CardBack() {
+/** Bomba simgesi (tasarımdaki deste ve patlama kartı). */
+export function BombIcon({ size = 54, sparks = false }: { size?: number; sparks?: boolean }) {
   return (
-    <span className="kt-back" aria-hidden="true">
-      <svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d={HEAD} />
-        <circle cx="24" cy="27" r="5" fill="currentColor" stroke="none" />
-        <path d="M27.5 23l2-2M30 21c1-2 3-2 4-4" />
-      </svg>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={sparks ? 2 : 2.2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <circle cx="10" cy="14" r="7" />
+      <path d="M14.5 9.5L17 7" />
+      <path d="M17 7c1-2 3-2 4-3" />
+      {sparks && <path d="M20 2l1 1M22 6h-1" />}
+    </svg>
+  );
+}
+
+/** Kartın arkası (deste). */
+export function CardBack({ small = false }: { small?: boolean }) {
+  return (
+    <span className="kt-back" data-small={small || undefined} aria-hidden="true">
+      <BombIcon size={small ? 20 : 54} />
     </span>
   );
 }

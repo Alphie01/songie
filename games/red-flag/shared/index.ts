@@ -20,6 +20,8 @@ export const CATEGORY_IDS = [
 
 /** 0 = süresiz (herkes oy verince açılır). */
 export const SECONDS_OPTIONS = [0, 15, 30] as const;
+/** Açıklamadan sonra tartışma süresi (sn); bitince sıradaki duruma geçilir. 0 = süresiz (hazırım / oda sahibi). */
+export const DISCUSS_OPTIONS = [15, 30, 0] as const;
 /** 0 = oda sahibi bitirene kadar. */
 export const ROUND_OPTIONS = [10, 20, 0] as const;
 
@@ -35,6 +37,8 @@ export const settingsSchema = z.object({
   /** Oyuncular "Çoğunluk ne diyecek?" tahmini de yapar; doğru tahmin +1 puan. */
   predict: z.boolean(),
   seconds: z.number().int().min(0).max(120),
+  /** Açıklamadan sonra tartışma süresi (sn); 0 = süresiz. */
+  discuss: z.number().int().min(0).max(300),
   rounds: z.number().int().min(0).max(100),
 });
 export type RedFlagSettings = z.infer<typeof settingsSchema>;
@@ -45,6 +49,7 @@ export const defaultSettings: RedFlagSettings = {
   anonymous: false,
   predict: true,
   seconds: 30,
+  discuss: 30,
   rounds: 10,
 };
 
@@ -141,6 +146,9 @@ export interface RedFlagView {
   durationMs: number;
   /** Açıklamadan sonra "Sonraki" bu andan itibaren çalışır. */
   nextAt: number;
+  /** Tartışma bu anda biter ve sıradaki duruma geçilir; 0 = süresiz. */
+  discussEndsAt: number;
+  discussMs: number;
   reveal: RevealInfo | null;
   scores: Record<string, number>;
   summary: Summary | null;

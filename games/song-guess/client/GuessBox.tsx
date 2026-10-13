@@ -1,6 +1,5 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from 'react';
 import type { GameApi } from '@songie/game-kit/client';
-import { Icon } from '@songie/game-kit/ui';
 import type { SearchHit } from '../shared/index.js';
 import { s } from './strings';
 
@@ -92,7 +91,6 @@ export function GuessBox({
       <label className="sr-only" htmlFor={`${listId}-input`}>
         {s.play.guessLabel}
       </label>
-      <Icon name="search" size={16} className="guess-icon" />
       <input
         id={`${listId}-input`}
         ref={inputRef}
@@ -132,10 +130,8 @@ export function GuessBox({
                 onMouseEnter={() => setActive(i)}
                 onClick={() => void pick(h)}
               >
-                {h.cover ? <img src={h.cover} alt="" width={36} height={36} loading="lazy" /> : <span className="guess-nocover" />}
                 <span className="guess-text">
-                  <span className="guess-title">{h.title}</span>
-                  <span className="guess-artist">{h.artist}</span>
+                  {h.artist} – {h.title}
                 </span>
               </li>
             ))

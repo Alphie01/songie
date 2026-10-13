@@ -10,6 +10,7 @@ import {
   type CharadesPhase,
   type CharadesSettings,
   type CharadesView,
+  type SignShown,
   type Role,
   type TeamId,
   type TurnSummary,
@@ -52,6 +53,7 @@ export interface CharadesState {
   lastTurn: TurnSummary | null;
   flash: CharadesView['flash'];
   flashSeq: number;
+  sign: SignShown | null;
   cancelTimer: (() => void) | null;
 }
 
@@ -138,6 +140,7 @@ export function createCharadesGame(deps: {
       log: [],
     };
     state.flash = null;
+    state.sign = null;
     state.phase = 'turn';
     state.cancelTimer?.();
     state.cancelTimer = ctx.schedule(state.settings.seconds * 1000, () => endTurn(ctx, state));
@@ -199,6 +202,7 @@ export function createCharadesGame(deps: {
     turn.log.push({ card: turn.card!, result });
     state.flash = { id: ++state.flashSeq, kind: result, title: turn.card!.title };
     turn.card = draw(state);
+    state.sign = null;
   }
 
   function roleOf(state: CharadesState, id: string): Role {
@@ -245,6 +249,7 @@ export function createCharadesGame(deps: {
         lastTurn: null,
         flash: null,
         flashSeq: 0,
+        sign: null,
         cancelTimer: null,
       };
       return state;
@@ -296,6 +301,18 @@ export function createCharadesGame(deps: {
           ctx.pushViews();
           return { ok: true };
         }
+        case 'sign': {
+          if (state.phase !== 'turn' || !turn?.card) throw new GameError('Şu anda tur yok.');
+          if (playerId !== turn.narratorId) throw new GameError('İşareti anlatıcı gösterir.');
+          state.sign = {
+            id: ++state.flashSeq,
+            sign: action.sign,
+            kind: action.sign === 'tur' ? turn.card.kind : null,
+            words: action.sign === 'kelime' ? turn.card.words : null,
+          };
+          ctx.pushViews();
+          return { ok: true };
+        }
         case 'undo': {
           if (state.phase !== 'turn' || !turn) throw new GameError('Şu anda tur yok.');
           if (playerId !== turn.narratorId) throw new GameError('Yalnızca anlatıcı geri alabilir.');
@@ -310,6 +327,7 @@ export function createCharadesGame(deps: {
           }
           turn.card = last.card;
           state.flash = null;
+          state.sign = null;
           ctx.pushViews();
           return { ok: true };
         }
@@ -372,6 +390,7 @@ export function createCharadesGame(deps: {
         flash,
         lastTurn: state.lastTurn,
         foulPenalty: state.settings.foulPenalty,
+        sign: state.phase === 'turn' ? state.sign : null,
       };
     },
 

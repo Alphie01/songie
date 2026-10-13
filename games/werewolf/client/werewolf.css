@@ -1,22 +1,33 @@
-/* Kurt Adam — ortak düzen game-kit/ui/game-layout.css'te, token'lar apps/web/src/styles/tokens.css.
-   Gece: koyu lacivert-mor gök, lavanta ay. Gündüz: sıcak kehribar alacakaranlık. Vurgu yeşili yalnızca eylem butonlarında. */
+/* Kurt Adam — "Songie Arayüz" tasarımı (KurtAdam.dc.html). Ortak düzen game-kit/ui/game-layout.css,
+   token'lar apps/web/src/styles/tokens.css. Gece: koyu gök (#0F0A2A), siyah çerçeve, ay sarısı halka.
+   Gündüz ve oyun sonu: platformun mor zemini. */
 
 .ww {
-  --ww-night-1: #070a1f;
-  --ww-night-2: #161a4a;
-  --ww-moon: #c9c2ff;
-  --ww-day-1: #2b1709;
-  --ww-day-2: #120b05;
-  --ww-sun: #ffb35c;
-  --ww-witch: #6aa8ff;
-  --ww-cupid: #ff7eb6;
-  --ww-tone: var(--ww-moon);
+  --ww-night: #0f0a2a;
+  --ww-night-card: #221a4d;
+  --ww-night-line: #3a2e80;
+  --ww-night-dim: #8a80b8;
+  --ww-moon: #ffe680;
+  --ww-moon-shade: #e8c64a;
+  --ww-wolf-pick: #3a1a3a;
+
+  /* Gündüz değerleri; gece aşağıda değişir */
+  --ww-card: var(--panel);
+  --ww-edge: var(--ink);
+  --ww-soft: var(--line-2);
+  --ww-dim: var(--text-3);
+  --ww-ring: var(--yellow);
+  --ww-disc: var(--panel-2);
   position: relative;
 }
 
-.ww[data-time='day'],
-.ww[data-time='over'] {
-  --ww-tone: var(--ww-sun);
+.ww[data-time='night'] {
+  --ww-card: var(--ww-night-card);
+  --ww-edge: #000;
+  --ww-soft: var(--ww-night-line);
+  --ww-dim: var(--ww-night-dim);
+  --ww-ring: var(--ww-moon);
+  --ww-disc: var(--ww-night-card);
 }
 
 .ww > :not(.ww-sky) {
@@ -24,99 +35,165 @@
   z-index: 1;
 }
 
-/* Rol renkleri */
-.ww [data-role='wolf'] { --role: var(--red); }
-.ww [data-role='villager'] { --role: var(--text-2); }
-.ww [data-role='seer'] { --role: var(--purple); }
-.ww [data-role='doctor'] { --role: var(--accent-hi); }
-.ww [data-role='hunter'] { --role: var(--orange); }
-.ww [data-role='witch'] { --role: var(--ww-witch); }
-.ww [data-role='cupid'] { --role: var(--ww-cupid); }
-.ww [data-role='fool'] { --role: var(--yellow); }
-
-/* Ayar paneli lobide .ww dışında görünür: aynı rol renkleri */
-.ww-settings [data-role='wolf'] { --role: var(--red); }
-.ww-settings [data-role='villager'] { --role: var(--text-2); }
-.ww-settings [data-role='seer'] { --role: var(--purple); }
-.ww-settings [data-role='doctor'] { --role: var(--accent-hi); }
-.ww-settings [data-role='hunter'] { --role: var(--orange); }
-.ww-settings [data-role='witch'] { --role: #6aa8ff; }
-.ww-settings [data-role='cupid'] { --role: #ff7eb6; }
+/* Rol renkleri (oyun içi ve lobi ayarları) */
+.ww [data-role='wolf'],
+.ww-settings [data-role='wolf'],
+.ww [data-step='wolves'] { --role: var(--red); }
+.ww [data-role='villager'],
+.ww-settings [data-role='villager'] { --role: var(--paper-2); }
+.ww [data-role='seer'],
+.ww-settings [data-role='seer'],
+.ww [data-step='seer'] { --role: var(--lilac); }
+.ww [data-role='doctor'],
+.ww-settings [data-role='doctor'],
+.ww [data-step='doctor'] { --role: var(--mint); }
+.ww [data-role='hunter'],
+.ww-settings [data-role='hunter'] { --role: var(--coral); }
+.ww [data-role='witch'],
+.ww-settings [data-role='witch'],
+.ww [data-step='witch'] { --role: var(--sky); }
+.ww [data-role='cupid'],
+.ww-settings [data-role='cupid'],
+.ww [data-step='cupid'] { --role: var(--pink); }
+.ww [data-role='fool'],
 .ww-settings [data-role='fool'] { --role: var(--yellow); }
 
-/* ---------- Gök: gece ve gündüz katmanları ---------- */
+/* ---------- Gök: gece koyu zemin ve üç yıldız ---------- */
 .ww-sky {
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  background: var(--ww-night);
+  opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
-.ww-sky::before,
-.ww-sky::after {
-  content: '';
+.ww[data-time='night'] .ww-sky {
+  opacity: 1;
+}
+
+.ww-sky i {
   position: absolute;
-  inset: 0;
-  transition: opacity 1.6s ease;
+  border-radius: 50%;
 }
 
-.ww-sky::before {
-  background:
-    radial-gradient(1px 1px at 12% 18%, rgb(255 255 255 / 0.55), transparent),
-    radial-gradient(1px 1px at 72% 12%, rgb(255 255 255 / 0.45), transparent),
-    radial-gradient(1.5px 1.5px at 38% 8%, rgb(255 255 255 / 0.5), transparent),
-    radial-gradient(1px 1px at 88% 30%, rgb(255 255 255 / 0.35), transparent),
-    radial-gradient(1px 1px at 55% 26%, rgb(255 255 255 / 0.3), transparent),
-    radial-gradient(circle at 80% -10%, rgb(201 194 255 / 0.16), transparent 45%),
-    linear-gradient(180deg, var(--ww-night-2) 0%, var(--ww-night-1) 55%, var(--bg) 100%);
-  opacity: 0;
+.ww-sky i:nth-child(1) {
+  top: 142px;
+  left: 30px;
+  width: 4px;
+  height: 4px;
+  background: var(--ww-moon);
 }
 
-.ww-sky::after {
-  background:
-    radial-gradient(circle at 50% -15%, rgb(255 179 92 / 0.22), transparent 50%),
-    linear-gradient(180deg, var(--ww-day-1) 0%, var(--ww-day-2) 50%, var(--bg) 100%);
-  opacity: 0;
+.ww-sky i:nth-child(2) {
+  top: 192px;
+  right: 50px;
+  width: 5px;
+  height: 5px;
+  background: var(--paper);
 }
 
-.ww[data-time='night'] .ww-sky::before {
-  opacity: 1;
-}
-
-.ww[data-time='day'] .ww-sky::after,
-.ww[data-time='over'] .ww-sky::after {
-  opacity: 1;
+.ww-sky i:nth-child(3) {
+  top: 272px;
+  left: 60px;
+  width: 3px;
+  height: 3px;
+  background: var(--lilac);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ww-sky::before,
-  .ww-sky::after {
+  .ww-sky {
     transition: none;
   }
 }
 
-/* ---------- Genel ---------- */
+/* ---------- Sütun: ilk ekran tasarımdaki gibi, rol kartı altta ---------- */
+.ww-main {
+  max-width: 440px;
+}
+
+.ww-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: calc(100dvh - 72px - 22px);
+}
+
+.ww-fill {
+  flex: 1;
+}
+
 .ww-center {
   text-align: center;
 }
 
+/* ---------- Üst şerit ---------- */
+.ww-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.ww-phase {
+  padding: 7px 14px;
+  border: 3px solid var(--ww-edge);
+  border-radius: var(--r-pill);
+  background: var(--lilac);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ww-code {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--ww-dim);
+}
+
+.ww-top-plain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.ww-top-plain .ww-code {
+  color: var(--text-3);
+}
+
+/* Küçük aralıklı etiket */
+.ww-label,
 .ww-h,
 .ww-legend {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-2);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ww-dim);
+}
+
+.ww-h {
+  font-size: 12px;
 }
 
 .ww-sub {
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 800;
   color: var(--text-2);
 }
 
 .ww-hint {
-  font-size: 12px;
-  line-height: 1.5;
-  color: var(--text-3);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ww-dim);
 }
 
 .ww-block {
@@ -124,8 +201,7 @@
   gap: 10px;
 }
 
-.ww-block-head,
-.ww-chat-head {
+.ww-block-head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -133,147 +209,135 @@
 }
 
 .ww-panel {
-  display: grid;
-  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .ww-title {
-  font-size: 20px;
+  font-family: var(--display);
+  font-size: 26px;
   font-weight: 800;
-  line-height: 1.25;
+  line-height: 1.05;
 }
 
 .ww-wait,
 .ww-done {
-  padding: 18px 16px;
-  border-radius: var(--r-md);
-  background: rgb(255 255 255 / 0.04);
-  font-size: 14px;
-  font-weight: 600;
+  padding: 16px;
+  border: 3px solid var(--ww-edge);
+  border-radius: 18px;
+  background: var(--ww-card);
+  font-size: 15px;
+  font-weight: 800;
   color: var(--text-2);
   text-align: center;
 }
 
 .ww-done {
-  color: var(--ww-tone);
+  color: var(--ww-ring);
 }
 
 .ww-rule {
-  padding: 10px 12px;
-  border-left: 2px solid var(--ww-tone);
-  border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  background: rgb(255 255 255 / 0.03);
-  font-size: 12.5px;
-  color: var(--text-2);
-}
-
-.ww-count {
-  min-width: 22px;
-  padding: 1px 6px;
-  border-radius: var(--r-pill);
-  background: rgb(255 255 255 / 0.08);
-  font-size: 11px;
+  padding: 10px;
+  border: 3px dashed var(--violet);
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
   text-align: center;
 }
 
-/* ---------- Gök saati ---------- */
+.ww-count {
+  min-width: 26px;
+  padding: 2px 7px;
+  border: 2px solid var(--ww-edge);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* ---------- Süre halkası ---------- */
 .ww-clock {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .ww-clock-disc {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex: none;
+  box-sizing: border-box;
   width: 92px;
   height: 92px;
+  border: 3px solid var(--ww-edge);
+  border-radius: 50%;
+  background: var(--ww-disc);
 }
 
-.ww-disc {
-  display: block;
+.ww-ring {
+  position: absolute;
+  inset: -3px;
 }
 
-.ww-disc-track {
+.ww-ring-arc {
   fill: none;
-  stroke: rgb(255 255 255 / 0.08);
-  stroke-width: 3;
-}
-
-.ww-disc-arc {
-  fill: none;
-  stroke: var(--ww-tone);
-  stroke-width: 3;
+  stroke: var(--ww-ring);
+  stroke-width: 7;
   stroke-linecap: round;
   transition: stroke-dashoffset 0.3s linear;
 }
 
-.ww-disc-moon circle {
-  fill: var(--ww-moon);
-  opacity: 0.22;
-}
-
-.ww-disc-moon .ww-disc-bite {
-  fill: var(--ww-night-1);
-  opacity: 1;
-}
-
-.ww-disc-sun circle {
-  fill: var(--ww-sun);
-  opacity: 0.22;
-}
-
-.ww-disc-sun line {
-  stroke: var(--ww-sun);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  opacity: 0.4;
-}
-
 .ww-clock-sec {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--text);
+  position: relative;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ww-ring);
+  font-variant-numeric: tabular-nums;
 }
 
 .ww-clock-text {
-  display: grid;
-  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   min-width: 0;
 }
 
-.ww-clock-title {
-  font-size: 28px;
+.ww-clock-big {
+  font-family: var(--display);
+  font-size: 26px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--ww-tone);
+  line-height: 1;
 }
 
 .ww-clock-sub {
   font-size: 13px;
+  font-weight: 700;
   color: var(--text-2);
 }
 
 .ww-steps {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin: 4px 0 0;
+  gap: 5px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .ww-steps li {
-  padding: 2px 8px;
+  padding: 3px 9px;
+  border: 2px solid var(--ww-soft);
   border-radius: var(--r-pill);
-  background: rgb(255 255 255 / 0.04);
-  font-size: 10.5px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 800;
   color: var(--text-3);
 }
 
@@ -282,103 +346,115 @@
 }
 
 .ww-steps li[data-state='now'] {
-  background: rgb(201 194 255 / 0.14);
-  color: var(--ww-moon);
+  border-color: var(--ww-edge);
+  background: var(--role);
+  color: var(--ink-2);
 }
 
-/* ---------- Rol kartı ---------- */
+/* ---------- Rol kartı: basılı tutunca açılır ---------- */
 .ww-rolecard {
-  display: grid;
+  --role: var(--red);
+  display: block;
   width: 100%;
-  min-height: 92px;
-  padding: 16px 18px;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-lg);
-  background:
-    repeating-linear-gradient(135deg, transparent 0 9px, rgb(255 255 255 / 0.025) 9px 10px),
-    rgb(16 21 17 / 0.85);
-  color: var(--text);
+  min-height: 84px;
+  padding: 14px 16px;
+  border: 3px solid var(--ww-edge);
+  border-radius: 22px;
+  background: var(--lilac);
+  box-shadow: 0 7px 0 var(--ww-edge);
+  color: var(--ink-2);
   font: inherit;
   text-align: left;
-  cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   touch-action: none;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
 }
 
 .ww-rolecard:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: 3px solid var(--yellow);
+  outline-offset: 3px;
 }
 
 .ww-rolecard[data-open] {
-  border-color: color-mix(in srgb, var(--role) 55%, transparent);
-  background: color-mix(in srgb, var(--role) 10%, var(--panel));
+  background: var(--role);
+  box-shadow: 0 2px 0 var(--ww-edge);
+  transform: translateY(5px);
 }
 
 .ww-rolecard[data-dead]:not([data-open]) {
   opacity: 0.7;
 }
 
-.ww-rolecard-back {
-  display: grid;
-  align-content: center;
-  gap: 4px;
+.ww-rolecard-in {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ww-rolecard-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  width: 54px;
+  height: 54px;
+  border: 3px solid var(--ww-edge);
+  border-radius: 16px;
+  background: var(--ww-moon);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.ww-rolecard-icon[data-face] {
+  background: var(--ink-2);
+  color: var(--role);
+}
+
+.ww-rolecard-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .ww-rolecard-hold {
-  font-size: 15px;
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.15;
 }
 
 .ww-rolecard-hint {
   font-size: 12px;
-  color: var(--text-3);
-}
-
-.ww-rolecard-face {
-  display: grid;
-  gap: 8px;
-}
-
-.ww-rolecard-head {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ww-rolecard-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: color-mix(in srgb, var(--role) 14%, transparent);
-  color: var(--role);
+  font-weight: 700;
+  opacity: 0.85;
 }
 
 .ww-rolecard-role {
-  font-size: 30px;
+  font-family: var(--display);
+  font-size: 24px;
   font-weight: 800;
-  font-style: italic;
   line-height: 1;
-  color: var(--role);
 }
 
-.ww-rolecard-blurb,
 .ww-rolecard-line {
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 800;
 }
 
-.ww-rolecard-line b {
-  color: var(--text);
-}
-
-.ww-rolecard-line[data-kind='lover'] {
-  color: var(--ww-cupid);
+.ww-rolecard-blurb {
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  opacity: 0.85;
 }
 
 /* ---------- Rol rozeti ---------- */
@@ -386,86 +462,143 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  justify-self: start;
+  align-self: flex-start;
   padding: 2px 8px;
+  border: 2px solid var(--ww-edge);
   border-radius: var(--r-pill);
-  background: color-mix(in srgb, var(--role) 14%, transparent);
-  color: var(--role);
-  font-size: 11px;
-  font-weight: 700;
+  background: var(--role);
+  color: var(--ink-2);
+  font-size: 12px;
+  font-weight: 800;
 }
 
-/* ---------- Gece: uyku ekranı ---------- */
+/* ---------- Gece: uyuyan köylü ---------- */
 .ww-sleep {
-  display: grid;
-  gap: 8px;
-  padding: 36px 20px;
-  border: 1px solid rgb(201 194 255 / 0.12);
-  border-radius: var(--r-lg);
-  background: rgb(7 10 31 / 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 26px 0;
   text-align: center;
 }
 
+.ww-moon {
+  box-sizing: border-box;
+  width: 110px;
+  height: 110px;
+  border: 3px solid #000;
+  border-radius: 50%;
+  background: var(--ww-moon);
+  box-shadow: inset -24px -10px 0 var(--ww-moon-shade);
+}
+
 .ww-sleep-title {
-  font-size: 22px;
+  font-family: var(--display);
+  font-size: 30px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.2;
-  color: var(--ww-moon);
+  line-height: 1.05;
 }
 
 .ww-sleep-body {
-  font-size: 13px;
-  color: var(--text-2);
+  max-width: 300px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.ww-sleep-alive {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.ww-sleep-alive .ww-label {
+  font-size: 12px;
+  color: var(--text-3);
+  text-align: left;
+}
+
+.ww-sleep-faces {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 46px);
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ww-sleep-faces .gk-avatar {
+  border-width: 3px !important;
+  border-color: #000;
+  font-size: 19px !important;
 }
 
 /* ---------- Oyuncu ızgarası ---------- */
 .ww-grid {
-  --pick: var(--ww-tone);
+  --pick: var(--yellow);
+  --pick-bg: color-mix(in srgb, var(--yellow) 22%, var(--ww-card));
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .ww-grid[data-tone='wolf'],
-.ww-grid[data-tone='poison'] { --pick: var(--red); }
-.ww-grid[data-tone='love'] { --pick: var(--ww-cupid); }
-.ww-grid[data-tone='seer'] { --pick: var(--purple); }
-.ww-grid[data-tone='heal'] { --pick: var(--accent-hi); }
-.ww-grid[data-tone='day'] { --pick: var(--ww-sun); }
+.ww-grid[data-tone='poison'] {
+  --pick: var(--red);
+  --pick-bg: var(--ww-wolf-pick);
+}
+.ww-grid[data-tone='love'] {
+  --pick: var(--pink);
+  --pick-bg: color-mix(in srgb, var(--pink) 20%, var(--ww-card));
+}
+.ww-grid[data-tone='seer'] {
+  --pick: var(--lilac);
+  --pick-bg: color-mix(in srgb, var(--lilac) 22%, var(--ww-card));
+}
+.ww-grid[data-tone='heal'] {
+  --pick: var(--mint);
+  --pick-bg: color-mix(in srgb, var(--mint) 18%, var(--ww-card));
+}
 
 .ww-tile {
   position: relative;
-  display: grid;
-  justify-items: center;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 6px;
   width: 100%;
   min-height: 96px;
-  padding: 12px 8px 10px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: rgb(16 21 17 / 0.7);
+  padding: 8px 4px;
+  border: 3px solid var(--ww-edge);
+  border-radius: 18px;
+  background: var(--ww-card);
   color: var(--text);
   font: inherit;
-  cursor: pointer;
+  transition: transform 100ms;
 }
 
-.ww-tile:hover:not(:disabled) {
-  border-color: var(--line-2);
+.ww-tile .gk-avatar {
+  border-width: 3px !important;
+  border-color: var(--ww-edge);
+  font-size: 20px !important;
 }
 
 .ww-tile:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 3px solid var(--yellow);
   outline-offset: 2px;
 }
 
 .ww-tile[aria-pressed='true'] {
-  border-color: color-mix(in srgb, var(--pick) 70%, transparent);
-  background: color-mix(in srgb, var(--pick) 14%, var(--panel));
+  border-color: var(--pick);
+  background: var(--pick-bg);
+  transform: rotate(-2deg);
 }
 
 .ww-tile:disabled {
@@ -479,21 +612,27 @@
 .ww-tile-name {
   max-width: 100%;
   overflow: hidden;
-  font-size: 12.5px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.15;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.ww-tile-name .dim {
+  font-size: 12px;
+}
+
 .ww-tile-note {
-  font-size: 10.5px;
-  color: var(--text-3);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ww-dim);
 }
 
 .ww-tile-badge {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: -8px;
+  right: -6px;
 }
 
 .ww-tile-badge:empty {
@@ -501,67 +640,83 @@
 }
 
 .ww-claw {
-  padding: 1px 6px;
+  display: block;
+  padding: 2px 7px;
+  border: 2px solid var(--ww-edge);
   border-radius: var(--r-pill);
-  background: rgb(246 100 100 / 0.18);
-  color: var(--red);
-  font-size: 10.5px;
-  font-weight: 700;
+  background: var(--red);
+  color: var(--ink-2);
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 /* ---------- Kahin sonucu ---------- */
 .ww-reveal {
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
-  padding: 22px 16px;
-  border-radius: var(--r-lg);
-  background: rgb(174 103 237 / 0.1);
-  color: var(--purple);
+  padding: 20px 16px;
+  border: 3px solid var(--ww-edge);
+  border-radius: 22px;
+  background: var(--mint);
+  box-shadow: 6px 6px 0 var(--ww-edge);
+  color: var(--ink-2);
   text-align: center;
+  transform: rotate(-2deg);
 }
 
 .ww-reveal p {
-  font-size: 18px;
+  font-family: var(--display);
+  font-size: 24px;
   font-weight: 800;
-  color: var(--text);
+  line-height: 1.05;
 }
 
 .ww-reveal[data-wolf] {
-  background: rgb(246 100 100 / 0.12);
-  color: var(--red);
+  background: var(--red);
 }
 
 .ww-witch-victim {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.15;
 }
 
 /* ---------- Sabah duyurusu ---------- */
 .ww-dawn {
-  display: grid;
-  gap: 10px;
-  padding: 16px 18px;
-  border: 1px solid rgb(255 179 92 / 0.2);
-  border-radius: var(--r-lg);
-  background: linear-gradient(180deg, rgb(255 179 92 / 0.1), rgb(255 179 92 / 0.02));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 16px;
+  border: 3px solid var(--ink);
+  border-radius: 22px;
+  background: var(--yellow);
+  box-shadow: 6px 6px 0 var(--ink);
+  color: var(--ink-2);
+  transform: rotate(-1deg);
 }
 
 .ww-dawn-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ww-sun);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .ww-dawn-none {
-  font-size: 16px;
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.05;
 }
 
 .ww-dawn-list {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -575,20 +730,24 @@
 }
 
 .ww-dawn-name {
-  font-size: 20px;
+  font-family: var(--display);
+  font-size: 26px;
   font-weight: 800;
+  line-height: 1.05;
   text-decoration: line-through;
-  text-decoration-color: rgb(255 255 255 / 0.35);
+  text-decoration-thickness: 3px;
 }
 
 /* ---------- Adaylar ---------- */
 .ww-cands {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
 .ww-cand-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 6px;
   margin: 0;
   padding: 0;
@@ -596,22 +755,27 @@
 }
 
 .ww-cand-list li {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 2px;
   padding: 10px 12px;
-  border-radius: var(--r-md);
-  background: rgb(255 179 92 / 0.08);
-  font-size: 13px;
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  background: var(--panel);
+  font-size: 15px;
+  font-weight: 800;
 }
 
 .ww-cand-list .dim {
-  font-size: 11.5px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* ---------- Oy pusulası ---------- */
 .ww-ballot {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -622,29 +786,38 @@
   align-items: center;
   gap: 12px;
   width: 100%;
-  min-height: 56px;
+  min-height: 62px;
   padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: rgb(16 21 17 / 0.75);
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: 0 4px 0 var(--ink);
   color: var(--text);
   font: inherit;
   text-align: left;
-  cursor: pointer;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
 }
 
 .ww-ballot-btn:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 3px solid var(--yellow);
   outline-offset: 2px;
 }
 
 .ww-ballot-btn[aria-pressed='true'] {
-  border-color: rgb(255 179 92 / 0.7);
-  background: rgb(255 179 92 / 0.12);
+  background: var(--yellow);
+  box-shadow: 0 1px 0 var(--ink);
+  color: var(--ink-2);
+  transform: translateY(3px);
 }
 
 .ww-ballot-btn[data-none] {
-  color: var(--text-2);
+  background: var(--panel-2);
+}
+
+.ww-ballot-btn[data-none][aria-pressed='true'] {
+  background: var(--paper-2);
 }
 
 .ww-ballot-btn:disabled {
@@ -653,9 +826,11 @@
 }
 
 .ww-ballot-none {
-  width: 32px;
-  height: 32px;
-  border: 1.5px dashed var(--line-2);
+  flex: none;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border: 3px dashed var(--violet);
   border-radius: 50%;
 }
 
@@ -663,74 +838,77 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .ww-ballot-who {
-  padding: 4px 14px 0;
-  font-size: 11.5px;
+  padding: 6px 14px 0;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--text-3);
 }
 
 /* ---------- Karar ---------- */
 .ww-verdict-title {
-  font-size: 26px;
+  font-family: var(--display);
+  font-size: 34px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.15;
-}
-
-.ww-verdict[data-hanged] .ww-verdict-title {
-  color: var(--ww-sun);
+  line-height: 1;
 }
 
 .ww-tally {
-  display: grid;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0;
-  padding: 0;
+  padding: 12px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
   list-style: none;
 }
 
 .ww-tally li {
   display: grid;
-  grid-template-columns: minmax(0, 7.5em) 1fr auto;
+  grid-template-columns: minmax(0, 7em) 1fr auto;
   align-items: center;
   gap: 10px;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .ww-tally-name {
   overflow: hidden;
-  font-weight: 600;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .ww-tally-bar {
-  height: 8px;
-  border-radius: var(--r-pill);
-  background: rgb(255 255 255 / 0.06);
+  height: 12px;
   overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
 }
 
 .ww-tally-bar span {
   display: block;
   height: 100%;
-  border-radius: inherit;
   background: var(--text-3);
 }
 
 .ww-tally li[data-top] .ww-tally-bar span {
-  background: var(--ww-sun);
+  background: var(--yellow);
 }
 
 .ww-tally-who {
   grid-column: 1 / -1;
-  font-size: 11.5px;
+  font-size: 12px;
+  font-weight: 700;
   color: var(--text-3);
 }
 
@@ -738,81 +916,237 @@
   display: none;
 }
 
-/* ---------- Oyun sonu ---------- */
+/* ---------- Oyun sonu (Sonuçlar ekranının dili) ---------- */
 .ww-over {
-  padding-top: 24px;
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.ww-over > * {
+  position: relative;
+}
+
+.ww-confetti {
+  position: absolute;
+  inset: -40px 0 auto;
+  height: 240px;
+  pointer-events: none;
+}
+
+.ww-confetti i {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.ww-confetti i:nth-child(1) { top: 50px; left: 30px; width: 16px; height: 7px; background: var(--yellow); transform: rotate(30deg); }
+.ww-confetti i:nth-child(2) { top: 90px; right: 40px; width: 16px; height: 7px; background: var(--pink); transform: rotate(-40deg); }
+.ww-confetti i:nth-child(3) { top: 150px; left: 64px; width: 11px; height: 11px; background: var(--mint); transform: rotate(20deg); }
+.ww-confetti i:nth-child(4) { top: 40px; right: 120px; width: 11px; height: 11px; border-radius: 50%; background: var(--sky); }
+.ww-confetti i:nth-child(5) { top: 190px; right: 60px; width: 16px; height: 7px; background: var(--coral); transform: rotate(70deg); }
+
+.ww-over-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.ww-sticker {
+  padding: 5px 14px;
+  border: 3px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
 }
 
 .ww-over-title {
-  font-size: clamp(34px, 9vw, 52px);
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: 48px;
   font-weight: 800;
-  font-style: italic;
-  line-height: 1;
-  text-align: center;
-  color: var(--ww-sun);
+  line-height: 0.95;
 }
 
-.ww-over[data-winner='wolves'] .ww-over-title { color: var(--red); }
-.ww-over[data-winner='village'] .ww-over-title { color: var(--accent-hi); }
-.ww-over[data-winner='fool'] .ww-over-title { color: var(--yellow); }
-.ww-over[data-winner='lovers'] .ww-over-title { color: var(--ww-cupid); }
-
 .ww-over-reason {
-  font-size: 14px;
-  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
   color: var(--text-2);
 }
 
-.ww-over-roles {
+.ww-over-cards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ww-over-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  color: var(--ink-2);
+  text-align: center;
+  transform: rotate(2deg);
+  align-self: flex-end;
+}
+
+.ww-over-card[data-side='wolves'] {
+  background: var(--red);
+}
+
+.ww-over-card[data-side='village'] {
+  background: var(--mint);
+}
+
+.ww-over-card[data-won] {
+  align-self: stretch;
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.ww-over-n {
+  margin-top: 10px;
+  font-family: var(--display);
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ww-over-card[data-won] .ww-over-n {
+  margin-top: 0;
+  font-size: 64px;
+}
+
+.ww-over-side {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.ww-over-dash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.ww-over-rosters {
   display: grid;
-  gap: 6px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.ww-over-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0;
-  padding: 0;
+  padding: 12px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
   list-style: none;
 }
 
-.ww-over-roles li {
+.ww-over-roster li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 42px;
-  padding: 0 12px;
-  border-radius: var(--r-md);
-  background: var(--panel);
-  color: var(--role);
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.ww-over-roster .ww-over-roster-title {
   font-size: 13px;
+  text-transform: uppercase;
 }
 
-.ww-over-roles li[data-won] {
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--role) 45%, transparent);
+.ww-over-roster[data-side='wolves'] .ww-over-roster-title {
+  color: var(--red);
 }
 
-.ww-over-roles li[data-dead] .ww-over-name {
-  text-decoration: line-through;
-  text-decoration-color: rgb(255 255 255 / 0.3);
+.ww-over-roster[data-side='village'] .ww-over-roster-title {
+  color: var(--mint);
 }
 
 .ww-over-name {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   overflow: hidden;
-  font-weight: 600;
-  color: var(--text);
-  text-overflow: ellipsis;
+  line-height: 1.15;
   white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ww-over-name small {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--role);
+}
+
+.ww-over-roster li[data-dead] .ww-over-name {
+  opacity: 0.6;
+}
+
+.ww-over-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ww-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.ww-bar div {
+  height: 100%;
+  background: var(--yellow);
+  transition: width 0.25s linear;
+}
+
+.ww-over-note {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
 }
 
 .ww-secret {
-  border-radius: var(--r-md);
-  background: rgb(255 255 255 / 0.03);
   padding: 10px 12px;
+  border: 3px solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel-2);
 }
 
 .ww-secret summary {
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 700;
+  min-height: 28px;
+  font-size: 14px;
+  font-weight: 800;
   color: var(--text-2);
+  cursor: pointer;
 }
 
 .ww-secret ol {
@@ -820,49 +1154,61 @@
   gap: 6px;
   margin: 10px 0 0;
   padding: 0 0 0 18px;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--text-2);
 }
 
-/* ---------- Sohbet ---------- */
+/* ---------- Sohbet (kurtlar / hayaletler) ---------- */
 .ww-chat {
-  display: grid;
-  gap: 8px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  background: rgb(16 21 17 / 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 2px solid var(--ww-soft);
+  border-radius: 14px;
+  background: var(--ww-card);
 }
 
-.ww-chat[data-kind='wolf'] {
-  border-color: rgb(246 100 100 / 0.3);
-  background: rgb(40 10 14 / 0.55);
+.ww-chat-head {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--ww-dim);
+}
+
+.ww-chat-title {
+  text-transform: uppercase;
+}
+
+.ww-chat[data-kind='wolf'] .ww-chat-head {
+  color: var(--red);
 }
 
 .ww-chat[data-kind='ghost'] {
   border-style: dashed;
-  border-color: rgb(201 194 255 / 0.25);
 }
 
 .ww-chat-list {
-  display: grid;
-  align-content: start;
+  display: flex;
+  flex-direction: column;
   gap: 4px;
-  max-height: 200px;
+  max-height: 160px;
   margin: 0;
   padding: 0;
   overflow-y: auto;
   list-style: none;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
   overflow-wrap: anywhere;
 }
 
 .ww-chat-list b {
-  color: var(--text-2);
+  font-weight: 800;
 }
 
 .ww-chat-list li[data-me] b {
-  color: var(--ww-tone);
+  color: var(--ww-ring);
 }
 
 .ww-chat-form {
@@ -872,12 +1218,13 @@
 
 .ww-chat-form .input {
   min-width: 0;
-  min-height: 40px;
-  font-size: 13px;
+  min-height: 44px;
+  font-size: 16px;
 }
 
 .ww-chat-form .btn {
-  min-height: 40px;
+  min-height: 44px;
+  font-size: 15px;
 }
 
 .ww-ghosts {
@@ -885,7 +1232,7 @@
   gap: 10px;
 }
 
-/* ---------- Köy listesi ---------- */
+/* ---------- Köy (oyuncu listesi) ---------- */
 .ww-seats {
   display: grid;
   gap: 6px;
@@ -901,12 +1248,13 @@
   gap: 8px 10px;
   min-height: 44px;
   padding: 6px 12px;
-  border-radius: var(--r-md);
-  background: rgb(16 21 17 / 0.75);
+  border: 3px solid var(--ww-edge);
+  border-radius: 16px;
+  background: var(--ww-card);
 }
 
 .ww-seat[data-me] {
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+  border-color: var(--yellow);
 }
 
 .ww-seat[data-dead] .ww-seat-name {
@@ -918,8 +1266,8 @@
   flex: 1;
   min-width: 0;
   overflow: hidden;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -932,21 +1280,21 @@
 
 .ww-tag {
   padding: 1px 7px;
+  border: 2px solid var(--ww-soft);
   border-radius: var(--r-pill);
-  background: rgb(255 255 255 / 0.06);
-  font-size: 10.5px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 800;
   color: var(--text-2);
 }
 
 .ww-tag[data-kind='dead'] { color: var(--text-3); }
-.ww-tag[data-kind='ready'] { color: var(--accent-hi); background: var(--accent-soft); }
-.ww-tag[data-kind='voted'] { color: var(--ww-sun); }
-.ww-tag[data-kind='nom'] { color: var(--ww-sun); background: rgb(255 179 92 / 0.1); }
+.ww-tag[data-kind='ready'] { border-color: var(--ww-edge); background: var(--mint); color: var(--ink-2); }
+.ww-tag[data-kind='voted'] { border-color: var(--ww-edge); background: var(--yellow); color: var(--ink-2); }
+.ww-tag[data-kind='nom'] { border-color: var(--ww-edge); background: var(--coral); color: var(--ink-2); }
 
 .ww-ingame {
   display: grid;
-  gap: 4px;
+  gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -956,7 +1304,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 12.5px;
+  font-size: 14px;
+  font-weight: 800;
   color: var(--role);
 }
 
@@ -976,17 +1325,18 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .ww-rules dt {
+  font-weight: 700;
   color: var(--text-3);
 }
 
 .ww-rules dd {
-  margin: 0;
   flex: none;
-  font-weight: 600;
+  margin: 0;
+  font-weight: 800;
   color: var(--text-2);
 }
 
@@ -1002,8 +1352,9 @@
   padding: 0;
   overflow-y: auto;
   list-style: none;
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
   color: var(--text-2);
 }
 
@@ -1012,9 +1363,43 @@
 .ww-log li[data-k='hanged'],
 .ww-log li[data-k='shot'],
 .ww-log li[data-k='grief'] { color: var(--text); }
-.ww-log li[data-k='over'] { color: var(--ww-sun); font-weight: 700; }
+.ww-log li[data-k='over'] { color: var(--yellow); font-weight: 800; }
 
-/* ---------- Lobi ayarları: roller ---------- */
+/* ---------- Lobi ayarları (Lobi tasarımındaki "Oyun ayarları" kartı) ---------- */
+.ww-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ww-set {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.ww-set-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ww-set-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.ww-set-hint {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-3);
+}
+
 .ww-rolepick {
   display: grid;
   gap: 6px;
@@ -1025,42 +1410,51 @@
   align-items: center;
   gap: 10px;
   width: 100%;
-  min-height: 42px;
+  min-height: 48px;
   padding: 0 12px;
-  border: 0;
-  border-radius: var(--r-md);
-  background: rgb(255 255 255 / 0.035);
-  color: var(--text-2);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
   font: inherit;
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 800;
   text-align: left;
-}
-
-.ww-rolerow-toggle {
-  cursor: pointer;
 }
 
 .ww-rolerow-toggle:disabled {
   cursor: default;
 }
 
+.ww-rolerow-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--ink);
+  border-radius: 9px;
+  background: var(--role);
+  color: var(--ink-2);
+}
+
+.ww-rolerow-toggle[aria-checked='false'] {
+  color: var(--text-3);
+}
+
 .ww-rolerow-toggle[aria-checked='false'] .ww-rolerow-icon {
-  opacity: 0.4;
+  background: var(--panel-2);
+  color: var(--text-3);
 }
 
 .ww-rolerow-toggle[aria-checked='true'] .toggle-knob {
-  background: var(--accent);
+  background: var(--mint);
 }
 
 .ww-rolerow-toggle[aria-checked='true'] .toggle-knob::after {
-  transform: translateX(12px);
-  background: var(--accent-ink);
-}
-
-.ww-rolerow-icon {
-  display: inline-flex;
-  color: var(--role);
+  transform: translateX(18px);
 }
 
 .ww-rolerow-name {
@@ -1079,15 +1473,16 @@
 }
 
 .ww-stepper-btn {
-  width: 28px;
-  height: 28px;
-  border: 0;
-  border-radius: var(--r-sm);
-  background: rgb(255 255 255 / 0.06);
+  width: 44px;
+  height: 36px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  background: var(--panel-2);
   color: var(--text);
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .ww-stepper-btn:disabled {
@@ -1096,27 +1491,32 @@
 }
 
 .ww-stepper-n {
-  min-width: 22px;
-  font-size: 14px;
+  min-width: 34px;
+  padding: 4px 0;
+  border-radius: 8px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
   text-align: center;
-  color: var(--text);
 }
 
 .ww-settings-problem {
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* ---------- Nasıl oynanır: rol tablosu ---------- */
 .ww-roletable {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12.5px;
+  font-size: 13px;
 }
 
 .ww-roletable th,
 .ww-roletable td {
   padding: 8px 0;
-  border-top: 1px solid var(--line);
+  border-top: 2px solid var(--ww-soft);
   vertical-align: top;
   text-align: left;
 }
@@ -1124,7 +1524,7 @@
 .ww-roletable th {
   width: 9.5em;
   padding-right: 12px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--role);
   white-space: nowrap;
 }
@@ -1135,20 +1535,27 @@
 }
 
 .ww-roletable td {
+  font-weight: 700;
   color: var(--text-2);
 }
 
+@media (min-width: 1100px) {
+  .ww-screen {
+    min-height: 0;
+  }
+}
+
 @media (max-width: 420px) {
-  .ww-clock-title {
-    font-size: 24px;
-  }
-
-  .ww-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .ww-roletable th {
     width: auto;
     white-space: normal;
   }
+}
+
+.ww-settings .ww-rec {
+  min-height: 44px;
+  border-radius: 12px;
+  box-shadow: 0 3px 0 var(--ink);
+  font-size: 15px;
+  white-space: normal;
 }

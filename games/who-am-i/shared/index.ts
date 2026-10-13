@@ -134,6 +134,8 @@ export interface WhoAmIView {
   myHints: string[];
   hintsLeft: number;
   hintLimit: number;
+  /** Sonuç ekranının süresi (lobiye dönüş çubuğu için). */
+  podiumMs: number;
 }
 
 export interface CategoryInfo {

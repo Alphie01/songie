@@ -46,7 +46,7 @@ await host.goto(base);
 await host.getByText('Adın ne?').waitFor();
 await shot(host, '01-welcome-mobile');
 await host.getByLabel('Takma ad').fill('Ayşe');
-await host.getByRole('button', { name: 'Mor' }).click();
+await host.getByRole('radio', { name: 'Mor' }).click();
 await host.getByRole('button', { name: 'Devam et' }).click();
 await host.locator('.home-tile', { hasText: 'Şarkıyı Bil' }).getByRole('button', { name: 'Oda kur' }).waitFor();
 await shot(host, '02-home-mobile');
@@ -64,8 +64,10 @@ await guest.goto(`${base}/r/${code}`);
 await guest.getByLabel('Takma ad').fill('Barış');
 await guest.getByRole('button', { name: 'Devam et' }).click();
 await guest.getByRole('button', { name: 'Hazırım' }).click();
+await guest.getByRole('button', { name: 'Sohbet' }).click();
 await guest.getByLabel('Mesaj yaz').fill('Hazırım, başlat!');
 await guest.getByRole('button', { name: 'Gönder' }).click();
+await host.getByRole('button', { name: /Sohbet/ }).click();
 await host.getByText('Hazırım, başlat!').waitFor();
 await host.getByRole('button', { name: 'Liste ekle / çıkar' }).click();
 // Spotify listesi ekle: şarkılar Deezer'da eşleştirilir.
@@ -128,7 +130,9 @@ check(true, 'herkes hazır deyince ikinci şarkıya geçildi');
 await host.getByRole('button', { name: 'Oyunu bitir' }).click();
 await host.locator('.podium').waitFor({ timeout: 10000 });
 await shot(host, '13-podium-mobile');
-await host.getByRole('button', { name: 'Oyunu başlat' }).waitFor({ timeout: 15000 });
+await host.getByRole('button', { name: 'Rövanş!' }).waitFor({ timeout: 15000 });
+await shot(host, '13b-results-mobile');
+await host.getByRole('button', { name: 'Oyunu başlat' }).waitFor({ timeout: 20000 });
 await shot(host, '14-lobby-after-mobile');
 
 // Tek başına: "Tek başına oyna" dokunuşu sesi açar, ilk parça kendiliğinden çalar.

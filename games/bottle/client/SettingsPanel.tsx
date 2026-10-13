@@ -1,25 +1,34 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
 import { PASS_OPTIONS, ROUND_OPTIONS, type BottleSettings, type CategoryInfo, type PromptKind } from '../shared/index.js';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Group({ title, hint, row, children }: { title: string; hint?: string; row?: boolean; children: ReactNode }) {
+  const id = useId();
   return (
-    <fieldset className="sgs-group">
-      <legend className="sgs-legend bt-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div className="bt-group" role="group" aria-labelledby={id} data-row={row || undefined}>
+      <div className="bt-group-line">
+        <span className="bt-group-title" id={id}>
+          {title}
+        </span>
+        <div className="bt-group-body">{children}</div>
+      </div>
+      {hint && <p className="sgs-hint bt-hint-text">{hint}</p>}
+    </div>
   );
 }
 
-function Toggle({ on, editable, onClick }: { on: boolean; editable: boolean; onClick(): void }) {
+function Toggle({ label, hint, on, editable, onClick }: { label: string; hint?: string; on: boolean; editable: boolean; onClick(): void }) {
   return (
-    <button type="button" className="toggle" role="switch" aria-checked={on} disabled={!editable} onClick={onClick}>
-      {on ? s.settings.on : s.settings.off}
-      <span className="toggle-knob" aria-hidden="true" />
-    </button>
+    <div className="bt-group">
+      <button type="button" className="toggle bt-toggle" role="switch" aria-checked={on} disabled={!editable} onClick={onClick}>
+        <span>{label}</span>
+        <span className="bt-toggle-state">{on ? s.settings.on : s.settings.off}</span>
+        <span className="toggle-knob" aria-hidden="true" />
+      </button>
+      {hint && <p className="sgs-hint bt-hint-text">{hint}</p>}
+    </div>
   );
 }
 
@@ -43,7 +52,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
   }, [api, showPrimary, reload]);
 
   return (
-    <div className="sgs">
+    <div className="sgs bt-sgs">
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
@@ -72,7 +81,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             </div>
           </Group>
 
-          <Group title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
+          <Group row title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
             <div className="chips">
               {ROUND_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.rounds === n} disabled={!editable} onClick={() => set({ rounds: n })}>
@@ -86,7 +95,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
 
       {showSecondary && (
         <>
-          <Group title={s.settings.choice}>
+          <Group row title={s.settings.choice}>
             <div className="chips">
               {(['player', 'random'] as const).map((c) => (
                 <button key={c} type="button" className="chip" aria-pressed={settings.choice === c} disabled={!editable} onClick={() => set({ choice: c })}>
@@ -96,7 +105,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             </div>
           </Group>
 
-          <Group title={s.settings.order}>
+          <Group row title={s.settings.order}>
             <div className="chips">
               {(['target', 'round'] as const).map((o) => (
                 <button key={o} type="button" className="chip" aria-pressed={settings.order === o} disabled={!editable} onClick={() => set({ order: o })}>
@@ -106,7 +115,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             </div>
           </Group>
 
-          <Group title={s.settings.passes}>
+          <Group row title={s.settings.passes}>
             <div className="chips">
               {PASS_OPTIONS.map((n) => (
                 <button key={n} type="button" className="chip" aria-pressed={settings.passes === n} disabled={!editable} onClick={() => set({ passes: n })}>
@@ -116,17 +125,11 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             </div>
           </Group>
 
-          <Group title={s.settings.passPenalty} hint={s.settings.passPenaltyHint}>
-            <Toggle on={settings.passPenalty} editable={editable} onClick={() => set({ passPenalty: !settings.passPenalty })} />
-          </Group>
+          <Toggle label={s.settings.passPenalty} hint={s.settings.passPenaltyHint} on={settings.passPenalty} editable={editable} onClick={() => set({ passPenalty: !settings.passPenalty })} />
 
-          <Group title={s.settings.vote} hint={s.settings.voteHint}>
-            <Toggle on={settings.vote} editable={editable} onClick={() => set({ vote: !settings.vote })} />
-          </Group>
+          <Toggle label={s.settings.vote} hint={s.settings.voteHint} on={settings.vote} editable={editable} onClick={() => set({ vote: !settings.vote })} />
 
-          <Group title={s.settings.fair} hint={s.settings.fairHint}>
-            <Toggle on={settings.fairSpin} editable={editable} onClick={() => set({ fairSpin: !settings.fairSpin })} />
-          </Group>
+          <Toggle label={s.settings.fair} hint={s.settings.fairHint} on={settings.fairSpin} editable={editable} onClick={() => set({ fairSpin: !settings.fairSpin })} />
 
           <AddPrompt api={api} onAdded={() => setReload((n) => n + 1)} />
         </>
@@ -160,7 +163,7 @@ function AddPrompt({ api, onAdded }: { api: SettingsPanelProps<BottleSettings>['
 
   return (
     <Group title={s.settings.add} hint={s.settings.addHint}>
-      <button type="button" className="btn btn-ghost sgs-browse" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+      <button type="button" className="btn btn-ghost bt-add-open" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
         <Icon name="chevron" size={14} style={{ transform: open ? 'rotate(180deg)' : undefined }} />
         {s.settings.add}
       </button>
@@ -182,7 +185,7 @@ function AddPrompt({ api, onAdded }: { api: SettingsPanelProps<BottleSettings>['
             aria-label={s.settings.add}
             onChange={(e) => setText(e.target.value)}
           />
-          <button className="btn btn-outline" disabled={busy || text.trim().length < 8}>
+          <button className="btn btn-yellow" disabled={busy || text.trim().length < 8}>
             {busy ? s.settings.saving : s.settings.save}
           </button>
           {msg && (

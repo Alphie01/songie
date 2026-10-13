@@ -95,6 +95,30 @@ describe('charades: oyun', () => {
     }
   });
 
+  it('anlatıcının işareti herkese gider; tür ve kelime sayısı yalnızca istenince, başlık asla', async () => {
+    const h = await setup();
+    expect(await h.act('a1', { type: 'sign', sign: 'hece' })).toMatchObject({ ok: false });
+    await h.act('a1', { type: 'start' });
+    const card = h.view('a1').card!;
+    expect(h.view('a2').sign).toBeNull();
+    expect(await h.act('a2', { type: 'sign', sign: 'tur' })).toMatchObject({ ok: false });
+    expect(await h.act('b1', { type: 'sign', sign: 'tur' })).toMatchObject({ ok: false });
+
+    await h.act('a1', { type: 'sign', sign: 'hece' });
+    expect(h.view('a2').sign).toMatchObject({ sign: 'hece', kind: null, words: null });
+    await h.act('a1', { type: 'sign', sign: 'tur' });
+    expect(h.view('a2').sign).toMatchObject({ sign: 'tur', kind: card.kind, words: null });
+    const id = h.view('a2').sign!.id;
+    await h.act('a1', { type: 'sign', sign: 'kelime' });
+    expect(h.view('a2').sign).toMatchObject({ sign: 'kelime', kind: null, words: card.words });
+    expect(h.view('b1').sign!.id).toBeGreaterThan(id);
+    expect(h.seen('a2')).not.toContain(card.title);
+
+    // Kart değişince işaret sıfırlanır.
+    await h.act('a1', { type: 'correct', cardId: card.id });
+    expect(h.view('a2').sign).toBeNull();
+  });
+
   it('doğru +1, pas puansız ve hak düşer, faul −1 ve kart geçer', async () => {
     const h = await setup({ passes: 1 });
     await h.act('a1', { type: 'start' });

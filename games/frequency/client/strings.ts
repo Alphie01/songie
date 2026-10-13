@@ -4,6 +4,7 @@ export const s = {
   name: 'Frekans',
   pitch: 'Bir ipucuyla takımını kadranda doğru noktaya getir',
   team: { a: 'Yeşil takım', b: 'Mor takım' } satisfies Record<TeamId, string>,
+  teamShort: { a: 'Yeşil', b: 'Mor' } satisfies Record<TeamId, string>,
   settings: {
     readOnly: 'Ayarları oda sahibi seçer.',
     mode: 'Nasıl oynanacak',
@@ -15,7 +16,8 @@ export const s = {
     teamsHint: 'Bir oyuncuya dokunarak takımını değiştir. Takımı seçilmeyenler başlarken dağıtılır.',
     needTwo: 'Her takımda en az 2 kişi olmalı.',
     unassigned: 'Takımsız',
-    shuffle: 'Takımları karıştır',
+    shuffle: 'Karıştır',
+    shuffleLabel: 'Takımları karıştır',
     empty: 'Henüz kimse yok',
     targetScore: 'Kazanmak için puan',
     rounds: 'Tur sayısı',
@@ -45,6 +47,7 @@ export const s = {
   play: {
     you: 'sen',
     round: (done: number, total: number | null) => (total ? `Tur ${Math.min(done + 1, total)}/${total}` : `Tur ${done + 1}`),
+    youTag: ' (sen)',
     toWin: (n: number) => `${n} puana ilk ulaşan kazanır`,
     total: 'Ortak puan',
     psychic: 'medyum',
@@ -65,6 +68,8 @@ export const s = {
     clueWait: (nick: string) => `${nick} ipucunu düşünüyor.`,
     clueSpoken: 'Sesli söylendi',
     clueLabel: 'İpucu',
+    targetHere: 'Hedef bu bölgede',
+    dialPsychicBtn: 'Takımın kadranı çeviriyor…',
     // Kadran
     dialYou: 'İpucuna göre kadranı çevirin, sonra kilitleyin.',
     dialPsychic: 'Takımın kadranı çeviriyor. Yorum yapmak yok, yüzünü de belli etme.',
@@ -104,6 +109,7 @@ export const s = {
   podium: {
     title: 'Oyun bitti',
     draw: 'Berabere',
+    won: 'kazandı!',
     back: 'Lobiye dönülüyor…',
   },
   howto: {

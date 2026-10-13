@@ -38,6 +38,12 @@ interface Round {
   predict: boolean;
   dealBreaker: boolean;
   seconds: number;
+  /** Tartışma süresi (sn), tur başında sabitlenir. */
+  discuss: number;
+  /** Açıklamada tartışma bitişi; 0 = süresiz. */
+  discussEndsAt: number;
+  /** Herkes hazır: geçiş planlandı. */
+  advancing: boolean;
   /** Bu turda oy verebilenler (başta bağlı olanlar + sonradan katılanlar). */
   voters: string[];
   votes: Record<string, Vote>;
@@ -149,6 +155,9 @@ export function createRedFlagGame(deps: { pool: Pool; timing?: Partial<RedFlagTi
       predict: s.predict,
       dealBreaker: s.dealBreaker,
       seconds: s.seconds,
+      discuss: s.discuss,
+      discussEndsAt: 0,
+      advancing: false,
       voters: ids,
       votes: {},
       guesses: {},
@@ -202,6 +211,12 @@ export function createRedFlagGame(deps: { pool: Pool; timing?: Partial<RedFlagTi
     r.nextAt = ctx.now() + timing.revealLockMs;
     state.round++;
     state.phase = 'reveal';
+    // Tartışma süresi bitince kendiliğinden sıradaki duruma geçilir.
+    if (r.discuss > 0) {
+      const ms = Math.max(r.discuss * 1000, timing.revealLockMs);
+      r.discussEndsAt = ctx.now() + ms;
+      state.cancelTimer = ctx.schedule(ms, () => advance(ctx, state));
+    }
     ctx.pushViews();
   }
 
@@ -214,10 +229,12 @@ export function createRedFlagGame(deps: { pool: Pool; timing?: Partial<RedFlagTi
 
   function checkAllReady(ctx: GameContext, state: RedFlagState): void {
     const r = state.cur;
-    if (state.phase !== 'reveal' || !r || state.cancelTimer) return;
+    if (state.phase !== 'reveal' || !r || r.advancing) return;
     const online = connected(ctx);
     const waiting = r.voters.filter((id) => online.has(id));
     if (!waiting.length || !waiting.every((id) => r.ready.includes(id))) return;
+    r.advancing = true;
+    clearTimer(state);
     const wait = r.nextAt - ctx.now();
     if (wait > 0) state.cancelTimer = ctx.schedule(wait, () => advance(ctx, state));
     else advance(ctx, state);
@@ -438,6 +455,8 @@ export function createRedFlagGame(deps: { pool: Pool; timing?: Partial<RedFlagTi
         endsAt: state.phase === 'vote' ? (r?.endsAt ?? 0) : 0,
         durationMs: (r?.seconds ?? 0) * 1000,
         nextAt: r?.nextAt ?? 0,
+        discussEndsAt: state.phase === 'reveal' ? (r?.discussEndsAt ?? 0) : 0,
+        discussMs: state.phase === 'reveal' && r?.discussEndsAt ? Math.max((r.discuss ?? 0) * 1000, timing.revealLockMs) : 0,
         reveal:
           state.phase === 'reveal' && r && res
             ? {

@@ -6,6 +6,8 @@ import type { Card, TabooSettings, TabooView, TeamId } from '../shared/index.js'
 import { SettingsPanel } from './SettingsPanel';
 import { s } from './strings';
 
+const TEAMS: TeamId[] = ['a', 'b'];
+
 function useRemaining(view: TabooView): number {
   const offset = useMemo(() => view.serverNow - Date.now(), [view.serverNow]);
   const [now, setNow] = useState(() => Date.now());
@@ -16,9 +18,11 @@ function useRemaining(view: TabooView): number {
   return Math.max(0, view.endsAt - (now + offset));
 }
 
+/** Tasarım: Tabu.dc.html (oyun), Sonuclar.dc.html (oyun sonu). */
 export function PlayView({ view, meId, room, act, api, settings, setSettings }: PlayViewProps<TabooView, TabooSettings>) {
   const members = useMemo(() => new Map(room.players.map((p) => [p.id, p])), [room.players]);
   const nick = (id: string) => (id === meId ? s.play.you : (members.get(id)?.nick ?? '?'));
+  const realNick = (id: string) => members.get(id)?.nick ?? '?';
   const isHost = room.hostId === meId;
   const remaining = useRemaining(view);
   const [error, setError] = useState<string | null>(null);
@@ -29,74 +33,43 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     if (!res.ok) setError(res.error);
   }
 
-  if (view.phase === 'podium') return <Podium view={view} members={members} meId={meId} />;
+  if (view.phase === 'podium') return <Podium view={view} members={members} meId={meId} code={room.code} />;
 
   const panelProps = { settings, editable: isHost, api, players: room.players, meId, onChange: (n: TabooSettings) => void setSettings(n) };
 
   return (
-    <div className="tb sg">
-      <aside className="sg-side sg-left">
-        <Rosters view={view} members={members} meId={meId} />
-      </aside>
+    <main className="tb">
+      <header className="tb-top">
+        <span className="tb-pill">{s.play.pill(s.play.turn(view.turnNumber, view.totalTurns))}</span>
+        <span className="tb-code">{room.code}</span>
+      </header>
 
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round mono">{s.play.turn(view.turnNumber, view.totalTurns)}</span>
-          <span className="sg-code mono">{room.code}</span>
-        </header>
+      <Scores view={view} />
 
-        <Scores view={view} />
-
-        {view.phase === 'ready' ? (
-          <Ready view={view} meId={meId} isHost={isHost} nick={nick} send={send} />
-        ) : (
-          <Turn view={view} remaining={remaining} nick={nick} send={send} />
-        )}
-        {error && (
-          <p className="error-text tb-error" role="alert">
-            {error}
-          </p>
-        )}
-
-        <div className="sg-mobile-only">
-          <Rosters view={view} members={members} meId={meId} />
-        </div>
-
-        <section className="howto" aria-labelledby="tb-howto">
-          <h2 id="tb-howto" className="howto-title">
-            {s.howto.title}
-          </h2>
-          <ol className="howto-list">
-            {s.howto.steps.map(([title, body], i) => (
-              <li key={title}>
-                <span className="howto-n mono">{String(i + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
-      </main>
-
-      <aside className="sg-side sg-right">
-        <SettingsPanel {...panelProps} section="secondary" />
-      </aside>
-    </div>
+      {view.phase === 'ready' ? (
+        <Ready view={view} meId={meId} isHost={isHost} nick={nick} send={send} members={members} panelProps={panelProps} />
+      ) : (
+        <Turn view={view} remaining={remaining} realNick={realNick} send={send} />
+      )}
+      {error && (
+        <p className="error-text tb-center" role="alert">
+          {error}
+        </p>
+      )}
+    </main>
   );
 }
 
 function Scores({ view }: { view: TabooView }) {
   return (
     <div className="tb-scores">
-      {(['a', 'b'] as TeamId[]).map((t) => (
-        <div key={t} className="tb-score" data-team={t} data-active={view.team === t || undefined} data-mine={view.myTeam === t || undefined}>
+      {TEAMS.map((t) => (
+        <div key={t} className="tb-score" data-team={t} data-active={view.team === t || undefined}>
           <span className="tb-score-name">
             {s.team[t]}
-            {view.myTeam === t && <span className="dim"> ({s.play.you})</span>}
+            {view.myTeam === t && ` (${s.play.you})`}
           </span>
-          <span className="tb-score-pts mono">{view.scores[t]}</span>
+          <span className="tb-score-pts">{view.scores[t]}</span>
         </div>
       ))}
     </div>
@@ -109,31 +82,68 @@ function Ready({
   isHost,
   nick,
   send,
+  members,
+  panelProps,
 }: {
   view: TabooView;
   meId: string;
   isHost: boolean;
   nick: (id: string) => string;
   send: (a: unknown) => Promise<void>;
+  members: Map<string, RoomPlayer>;
+  panelProps: React.ComponentProps<typeof SettingsPanel>;
 }) {
   const mine = view.narratorId === meId;
+  const [settingsOpen, setSettingsOpen] = useState(false);
   return (
     <section className="tb-ready">
+      <div className="tb-next" data-team={view.team}>
+        <span className="tb-label">{s.play.nextLabel}</span>
+        <span className="tb-next-name">{nick(view.narratorId)}</span>
+        <span className="tb-next-team">{s.team[view.team]}</span>
+      </div>
+
+      {mine ? (
+        <>
+          <button type="button" className="tb-btn tb-btn-correct" onClick={() => void send({ type: 'start' })}>
+            <Icon name="play" size={22} />
+            {s.play.startMine}
+          </button>
+          <p className="tb-hint">{s.play.startMineHint}</p>
+        </>
+      ) : (
+        <>
+          <p className="tb-hint">{s.play.waitNarrator(nick(view.narratorId))}</p>
+          {isHost && (
+            <div className="tb-grid2">
+              <button type="button" className="tb-btn tb-btn-white" onClick={() => void send({ type: 'start' })}>
+                {s.play.startForThem(nick(view.narratorId))}
+              </button>
+              <button type="button" className="tb-btn tb-btn-panel" onClick={() => void send({ type: 'skipNarrator' })}>
+                {s.play.skipNarrator}
+              </button>
+            </div>
+          )}
+        </>
+      )}
+
       {view.lastTurn && (
-        <div className="tb-last card">
+        <div className="tb-last">
           <p className="tb-last-head">
             <span>{s.play.lastTurn(s.team[view.lastTurn.team], view.lastTurn.points)}</span>
-            <span className="dim">{nick(view.lastTurn.narratorId)}</span>
+            <span className="tb-last-who">{nick(view.lastTurn.narratorId)}</span>
           </p>
           {view.lastTurn.cards.length === 0 ? (
-            <p className="dim tb-small">{s.play.noCards}</p>
+            <p className="tb-hint">{s.play.noCards}</p>
           ) : (
             <ol className="tb-last-list">
               {view.lastTurn.cards.map((c, i) => (
                 <li key={i} data-result={c.result}>
-                  <Icon name={c.result === 'correct' ? 'check' : c.result === 'taboo' ? 'x' : 'skip'} size={14} />
+                  <span className="tb-last-icon" aria-label={s.play.stats[c.result]}>
+                    <Icon name={c.result === 'correct' ? 'check' : c.result === 'taboo' ? 'x' : 'skip'} size={14} />
+                  </span>
                   <span className="tb-last-word">{c.word}</span>
-                  <span className="dim tb-last-taboo">{c.taboo.join(', ')}</span>
+                  <span className="tb-last-taboo">{c.taboo.join(', ')}</span>
                 </li>
               ))}
             </ol>
@@ -141,35 +151,16 @@ function Ready({
         </div>
       )}
 
-      <div className="tb-next">
-        <span className="eyebrow">{s.play.next}</span>
-        <p className="tb-next-name" data-team={view.team}>
-          {nick(view.narratorId)}
-        </p>
-        <p className="dim tb-small">{s.team[view.team]}</p>
-      </div>
+      <Rosters view={view} members={members} meId={meId} />
 
-      {mine ? (
-        <>
-          <button type="button" className="btn btn-primary btn-block btn-lg" onClick={() => void send({ type: 'start' })}>
-            {s.play.startMine}
+      {isHost && (
+        <section className="tb-settings">
+          <button type="button" className="tb-settings-head" aria-expanded={settingsOpen} onClick={() => setSettingsOpen((o) => !o)}>
+            <span>{s.play.settingsTitle}</span>
+            <Icon name="chevron" size={16} style={{ transform: settingsOpen ? 'rotate(180deg)' : undefined }} />
           </button>
-          <p className="dim tb-small tb-center">{s.play.startMineHint}</p>
-        </>
-      ) : (
-        <>
-          <p className="dim tb-small tb-center">{s.play.waitNarrator(nick(view.narratorId))}</p>
-          {isHost && (
-            <div className="tb-host">
-              <button type="button" className="btn btn-outline" onClick={() => void send({ type: 'start' })}>
-                {s.play.startForThem(nick(view.narratorId))}
-              </button>
-              <button type="button" className="btn btn-ghost" onClick={() => void send({ type: 'skipNarrator' })}>
-                {s.play.skipNarrator}
-              </button>
-            </div>
-          )}
-        </>
+          {settingsOpen && <SettingsPanel {...panelProps} section="secondary" />}
+        </section>
       )}
     </section>
   );
@@ -178,157 +169,205 @@ function Ready({
 function Turn({
   view,
   remaining,
-  nick,
+  realNick,
   send,
 }: {
   view: TabooView;
   remaining: number;
-  nick: (id: string) => string;
+  realNick: (id: string) => string;
   send: (a: unknown) => Promise<void>;
 }) {
   const secs = Math.ceil(remaining / 1000);
   const card = view.card;
+  const narrator = realNick(view.narratorId);
+  const headline =
+    view.role === 'narrator'
+      ? s.play.headNarrator(narrator)
+      : view.role === 'guesser'
+        ? s.play.guess(narrator)
+        : view.role === 'watcher'
+          ? s.play.headWatcher(narrator)
+          : s.play.headSpectator(narrator);
   return (
     <section className="tb-turn" data-role={view.role}>
       <div className="tb-timer">
-        <span className="tb-timer-num mono" data-low={remaining < 10_000 || undefined}>
+        <span className="tb-timer-num" data-low={remaining < 10_000 || undefined} aria-label={s.play.timeLeft(secs)}>
           {secs}
         </span>
         <span className="tb-timer-bar" aria-hidden="true">
           <span style={{ width: `${(remaining / view.durationMs) * 100}%` }} />
         </span>
       </div>
+      <p className="tb-headline">{headline}</p>
 
-      <p className="tb-who">
-        <b data-team={view.team}>{nick(view.narratorId)}</b> {s.play.narrating}
+      <div className="tb-stage">
+        {card ? (
+          <CardView card={card} />
+        ) : view.role === 'guesser' ? (
+          <div className="tb-guess">
+            <span className="tb-label">{s.play.guessedLabel}</span>
+            <span className="tb-guess-count">{view.turnStats.correct}</span>
+            <span className="tb-guess-hint">{s.play.guessHint}</span>
+          </div>
+        ) : (
+          <div className="tb-guess">
+            <span className="tb-guess-hint">{s.play.spectator}</span>
+          </div>
+        )}
+        {view.flash && (
+          <span key={view.flash.id} className="tb-flash" data-kind={view.flash.kind} role="status">
+            {s.play.flash[view.flash.kind]}
+          </span>
+        )}
+      </div>
+
+      <p className="tb-stats">
+        {(['correct', 'pass', 'taboo'] as const).map((k) => (
+          <span key={k} data-kind={k}>
+            {s.play.stats[k]} {view.turnStats[k]}
+          </span>
+        ))}
       </p>
-
-      {card ? (
-        <CardView card={card} flash={view.flash} />
-      ) : view.role === 'guesser' ? (
-        <div className="tb-guess card">
-          <p className="tb-guess-title">{s.play.guess(nick(view.narratorId))}</p>
-          <p className="dim tb-small">{s.play.guessHint}</p>
-          <p className="tb-guess-count mono">{view.turnStats.correct}</p>
-          {view.flash && (
-            <p key={view.flash.id} className="tb-flash-text" data-kind={view.flash.kind}>
-              {s.play.flash[view.flash.kind]}
-            </p>
-          )}
-        </div>
-      ) : (
-        <p className="dim tb-center">{s.play.spectator}</p>
-      )}
 
       {view.role === 'narrator' && card && (
         <div className="tb-actions">
-          <button type="button" className="btn btn-primary btn-lg tb-correct" onClick={() => void send({ type: 'correct', cardId: card.id })}>
-            <Icon name="check" size={18} />
+          <button type="button" className="tb-btn tb-btn-correct" onClick={() => void send({ type: 'correct', cardId: card.id })}>
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12l5 5L20 7" />
+            </svg>
             {s.play.correct}
           </button>
-          <button
-            type="button"
-            className="btn btn-outline btn-lg"
-            disabled={view.passesLeft !== null && view.passesLeft <= 0}
-            onClick={() => void send({ type: 'pass', cardId: card.id })}
-          >
-            <Icon name="skip" size={14} />
-            {s.play.pass(view.passesLeft)}
-          </button>
-          {view.canUndo && (
-            <button type="button" className="btn btn-ghost tb-undo" onClick={() => void send({ type: 'undo' })}>
+          <div className="tb-grid2">
+            <button
+              type="button"
+              className="tb-btn tb-btn-white"
+              disabled={view.passesLeft !== null && view.passesLeft <= 0}
+              onClick={() => void send({ type: 'pass', cardId: card.id })}
+            >
+              {s.play.pass(view.passesLeft)}
+            </button>
+            <button type="button" className="tb-btn tb-btn-panel" disabled={!view.canUndo} onClick={() => void send({ type: 'undo' })}>
               {s.play.undo}
             </button>
-          )}
-          <p className="dim tb-small tb-center tb-span">{s.play.narratorNote}</p>
+          </div>
         </div>
       )}
 
       {view.role === 'watcher' && card && (
         <div className="tb-actions">
-          <button type="button" className="btn btn-lg tb-taboo-btn tb-span" onClick={() => void send({ type: 'taboo', cardId: card.id })}>
+          <button type="button" className="tb-btn tb-btn-taboo" onClick={() => void send({ type: 'taboo', cardId: card.id })}>
             {s.play.taboo}
           </button>
-          <p className="dim tb-small tb-center tb-span">{s.play.tabooHint}</p>
+          <p className="tb-hint">{s.play.tabooHint}</p>
         </div>
       )}
-
-      <dl className="tb-stats">
-        {(['correct', 'pass', 'taboo'] as const).map((k) => (
-          <div key={k} data-kind={k}>
-            <dt>{s.play.stats[k]}</dt>
-            <dd className="mono">{view.turnStats[k]}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }
 
-function CardView({ card, flash }: { card: Card; flash: TabooView['flash'] }) {
+function CardView({ card }: { card: Card }) {
   return (
-    <div className="tb-card" key={card.id}>
-      {flash && (
-        <span key={flash.id} className="tb-flash" data-kind={flash.kind}>
-          {s.play.flash[flash.kind]}
-        </span>
-      )}
-      <p className="tb-word">{card.word}</p>
-      <ul className="tb-taboo">
-        {card.taboo.map((t) => (
-          <li key={t}>{t}</li>
-        ))}
-      </ul>
+    <div className="tb-deck">
+      <span className="tb-deck-back tb-deck-pink" aria-hidden="true" />
+      <span className="tb-deck-back tb-deck-sky" aria-hidden="true" />
+      <div className="tb-card" key={card.id}>
+        <p className="tb-word">{card.word}</p>
+        <ul className="tb-taboo">
+          {card.taboo.map((t) => (
+            <li key={t}>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" />
+                <path d="M5.6 5.6l12.8 12.8" />
+              </svg>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
 
-function Rosters({ view, members, meId }: { view: TabooView; members: Map<string, RoomPlayer>; meId: string }) {
+function Rosters({ view, members, meId, end = false }: { view: TabooView; members: Map<string, RoomPlayer>; meId: string; end?: boolean }) {
   return (
-    <section className="tb-rosters">
-      {(['a', 'b'] as TeamId[]).map((t) => (
-        <div key={t} className="tb-roster" data-team={t}>
-          <h2 className="eyebrow">
-            {s.team[t]} <span className="mono">{view.scores[t]}</span>
-          </h2>
-          <ul className="sg-score-list">
+    <div className="tb-rosters" data-end={end || undefined}>
+      {TEAMS.map((t) => (
+        <section key={t} className="tb-roster" data-team={t} aria-label={s.team[t]}>
+          <h2 className="tb-roster-name">{end ? s.team[t].toLocaleUpperCase('tr-TR') : s.team[t]}</h2>
+          <ul>
             {view.teams[t].map((id) => {
               const m = members.get(id);
               if (!m) return null;
               return (
-                <li key={id} className="sg-score" data-me={id === meId || undefined}>
-                  <Avatar avatar={m.avatar} nick={m.nick} size={26} dim={!m.connected} />
-                  <span className="sg-score-name">{m.nick}</span>
-                  {view.narratorId === id && view.team === t && <span className="tag tag-ready">{s.play.narrating}</span>}
+                <li key={id} data-off={!m.connected || undefined}>
+                  <Avatar avatar={m.avatar} nick={m.nick} size={end ? 28 : 26} />
+                  <span className="tb-roster-nick">
+                    {m.nick}
+                    {id === meId && ` (${s.play.you})`}
+                  </span>
+                  {!end && view.narratorId === id && view.team === t && <span className="tb-roster-tag">{s.play.narrating}</span>}
                 </li>
               );
             })}
           </ul>
-        </div>
+        </section>
       ))}
-    </section>
+    </div>
   );
 }
 
-function Podium({ view, members, meId }: { view: TabooView; members: Map<string, RoomPlayer>; meId: string }) {
+function Podium({ view, members, meId, code }: { view: TabooView; members: Map<string, RoomPlayer>; meId: string; code: string }) {
   const { a, b } = view.scores;
   const winner: TeamId | null = a === b ? null : a > b ? 'a' : 'b';
+  const order: TeamId[] = winner === 'b' ? ['b', 'a'] : ['a', 'b'];
   return (
-    <main className="col podium">
-      <span className="wordmark" aria-hidden="true">
-        songie
+    <main className="tb tb-end podium">
+      <span className="tb-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
       </span>
-      <p className="eyebrow podium-kicker">{s.podium.title}</p>
-      <div className="podium-winner">
-        <h1 className="podium-name" data-team={winner ?? 'none'}>
-          {winner ? s.podium.winner(s.team[winner]) : s.podium.draw}
-        </h1>
-        <p className="podium-score mono">
-          {a} – {b}
-        </p>
+      <div className="tb-end-top">
+        <span>{s.name}</span>
+        <span className="tb-code">{code}</span>
       </div>
-      <Rosters view={view} members={members} meId={meId} />
-      <p className="dim podium-back">{s.podium.back}</p>
+      <div className="tb-end-head">
+        <span className="tb-end-sticker">{s.podium.title}</span>
+        <h1 className="tb-end-title">
+          {winner ? (
+            <>
+              {s.team[winner]}
+              <br />
+              {s.podium.won}
+            </>
+          ) : (
+            s.podium.draw
+          )}
+        </h1>
+      </div>
+      <div className="tb-end-scores">
+        {order.map((t, i) => (
+          <div key={t} className="tb-end-card" data-team={t} data-first={(i === 0 && winner !== null) || undefined}>
+            {i === 0 && winner && (
+              <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+                <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="var(--yellow)" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
+              </svg>
+            )}
+            <span className="tb-end-pts">{view.scores[t]}</span>
+            <span className="tb-end-team">{s.team[t]}</span>
+          </div>
+        )).reduce<React.ReactNode[]>((acc, el, i) => (i ? [...acc, <span key="dash" className="tb-end-dash" aria-hidden="true">–</span>, el] : [el]), [])}
+      </div>
+      <Rosters view={view} members={members} meId={meId} end />
+      <div className="tb-end-spacer" />
+      <div className="tb-end-foot">
+        <span className="tb-end-bar" aria-hidden="true">
+          <span />
+        </span>
+        <span className="tb-end-back">{s.podium.back}</span>
+      </div>
     </main>
   );
 }

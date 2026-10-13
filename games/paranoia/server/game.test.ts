@@ -330,4 +330,17 @@ describe('Gizlilik Esas', () => {
     g.bank.add('Aramızda kim en çok pizza yer?', 'ali');
     expect(g.validateSettings!({ ...g.defaultSettings, categories: ['eklenen'] })).toBeNull();
   });
+  it('gönderen yalnızca soruyu alana ve yalnızca geri seçim yokken gider', async () => {
+    const h = await setup({ questionCount: 4, noReturn: true });
+    await h.act('ali', { type: 'pickFirst', targetId: 'cem' });
+    expect(h.view('cem').fromId).toBeNull();
+    await h.act('cem', { type: 'choose', seq: h.view('cem').seq, targetId: 'deniz' });
+    expect(h.view('deniz').fromId).toBe('cem');
+    for (const id of ['ali', 'ayse', 'cem']) expect(h.view(id).fromId).toBeNull();
+
+    const h2 = await setup({ questionCount: 4, noReturn: false });
+    await h2.act('ali', { type: 'pickFirst', targetId: 'cem' });
+    await h2.act('cem', { type: 'choose', seq: h2.view('cem').seq, targetId: 'deniz' });
+    expect(h2.view('deniz').fromId).toBeNull();
+  });
 });

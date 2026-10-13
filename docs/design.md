@@ -1,24 +1,21 @@
 # Songie — tasarım
 
-## Yön: songspot.net görünümü (kullanıcının açık isteği)
-İlk sürümdeki "90'lar kaset" yönü (kobalt zemin, sarı/pembe, şekilli avatarlar) kullanıcı tarafından
-"çocuk oyunu gibi" bulunup reddedildi. Kullanıcı açıkça songspot.net'in tasarımını ve özelliklerini
-istedi; frontend-design skill'indeki kural gereği brief'in kendi sözü önceliklidir.
+## Kaynak: "Songie Arayüz" tasarımı (Ekim 2026, kullanıcının verdiği canvas)
+Kullanıcı yeni arayüzü bir tasarım canvas'ı olarak verdi: https://claude.ai/artifact/6TuCRUWASPFvhWarFfG32n
+(24 ekran: ana sayfa, ilk giriş, lobi, rehber, oyun sonu ve her oyun için bir ekran).
+Kural: **tasarım yorumlanmaz, birebir uygulanır** (kullanıcı: "tasarımı benzetmeye çalışma direk uygula").
+Tasarımda olmayan bir durum gerekiyorsa aynı görsel dille genişletilir.
+Önceki songspot.net görünümü bu tasarımla değişti.
 
 ## Token'lar (`apps/web/src/styles/tokens.css`)
-- Zemin `#030704`, paneller `#101511` / `#161c17`, çizgi `rgba(255,255,255,.08)`.
-- Metin beyaz, ikincil `#b4b8b4`, sönük `#7c837c`.
-- Vurgu yeşil `#19df70` (parlama efektiyle), koyu yazı `#04160b`.
-- Zorluk renkleri: yeşil, sarı `#ffd234`, turuncu `#ff8631`, kırmızı `#f66464`, mor `#ae67ed`.
-- Yazı: Poppins (400–800, logo ve oyun adları 800 italik); süre etiketleri JetBrains Mono.
+- Zemin mor `#2A1B6E`, koyu yüzey `#1F145A`, yükseltilmiş yüzey `#3A2A8C`, pencere arkası `#150E38`.
+- Mürekkep `#0D0828`: 3px çerçeve ve sert gölge (`4px 4px 0`, butonlarda `0 6px 0`).
+- Renkler: nane `#3EE0A8`, sarı `#FFD23F`, pembe `#FF7AC6`, gök `#5AB8FF`, lila `#B794FF`, mercan `#FF8A5B`, kırmızı `#FF6B6B`, menekşe `#6E5FC4`.
+- Yazı: Baloo 2 (başlık, 800) + Nunito (metin, 600–800).
+- Kartlar hafif eğik durur (−1,2°…1°); etiketler eğik "sticker" hapı.
 
 ## Düzen
-- Sol üstte sabit menü butonu → yan menü: ses seviyesi, oyun listesi, profil.
-- Orta sütun ~400px. Masaüstünde (≥1100px) lobi ve oyun ekranı üç sütun:
-  sol = ne oynanacak (liste, zorluk, tur) ya da skor; sağ = nasıl oynanacak (süre, oynatma,
-  kolay arama, tahmin şuradan başlasın, sanatçı puanı).
-- Oyun ekranı: ilerleme çubuğu + işaretçi ve mono etiket, büyük yeşil çalma butonu, arama + Pas.
-
-## Denendi / çıkarıldı
-- Kaset yönü, Archivo genişlik ekseni, şekilli avatarlar, emoji tepkileri: kaldırıldı.
-- Avatarlar: renkli daire + baş harf; işaret (bildi/yanlış/pas) köşede küçük nokta.
+- Ana sayfa, lobi ve profil: üst çubuk (menü · logo · sağ düğme).
+- Oyun sırasında: sol üstte menü, sağ üstte "?" ve sohbet; oyunlar üstte ~72px boşluk bırakır.
+- Kategori renkleri (`[data-cat]`): takım sarı, parti nane, gizli roller lila, kart mercan, müzik pembe, dedektif gök.
+- Oyun sonu: ayrı sonuç ekranı (podyum, "Rövanş!", "Başka oyun seç", lobiye geri sayım).

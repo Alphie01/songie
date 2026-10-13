@@ -98,6 +98,11 @@ export interface ParanoiaView {
   myTurn: boolean;
   /** Yalnızca soruyu alan kişiye gider. */
   question: string | null;
+  /**
+   * Soruyu sana gönderen kişi: yalnızca soruyu alana ve "geri seçim yok" açıkken gider
+   * (o kişi zaten seçilemez olduğundan yeni bilgi sızdırmaz). İlk soruda null.
+   */
+  fromId: string | null;
   /** Seçilebilecek oyuncular: soruyu alana (ya da ilk seçimde oda sahibine) gider. */
   choices: string[];
   /** Soruyu kimin aldığı; "kime sorulduğu gizli" açıkken başkalarına null. */

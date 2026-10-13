@@ -47,6 +47,9 @@ describe('never: tam akış', () => {
     expect(r.phase).toBe('reveal');
     expect(r.reveal).toMatchObject({ round: 1, didCount: 2, answered: 3, total: 3 });
     expect(r.reveal!.didIds!.sort()).toEqual(['ali', 'cem']);
+    // Hikâyeyi anlatan "yaptım" diyenlerden biri ve herkese aynı.
+    expect(['ali', 'cem']).toContain(r.reveal!.storytellerId);
+    for (const id of ['ali', 'ayse', 'cem']) expect(h.view(id).reveal!.storytellerId).toBe(r.reveal!.storytellerId);
     expect(r.players.find((p) => p.id === 'ali')).toMatchObject({ lives: 2, didCount: 1 });
     expect(r.players.find((p) => p.id === 'ayse')).toMatchObject({ lives: 3, didCount: 0 });
     expect(r.final).toBe(false);
@@ -137,12 +140,19 @@ describe('never: gizlilik', () => {
     expect(h.seen('cem')).not.toContain('didIds":["');
   });
 
+  it('kimse yapmadıysa hikâye anlatan seçilmez', async () => {
+    const h = setup(['ali', 'ayse'], { lives: 0, rounds: 2 });
+    await h.start();
+    await answerAll(h, { ali: 'didNot', ayse: 'didNot' });
+    expect(h.view('ali').reveal).toMatchObject({ didCount: 0, storytellerId: null });
+  });
+
   it('isimsiz modda kimlikler sunucudan hiç çıkmaz', async () => {
     const h = setup(['ali', 'ayse', 'cem'], { anonymous: true, lives: 0, rounds: 1 });
     await h.start();
     await answerAll(h, { ali: 'did', ayse: 'did', cem: 'didNot' });
     const v = h.view('cem');
-    expect(v.reveal).toMatchObject({ didCount: 2, answered: 3, total: 3, didIds: null, eliminatedIds: null });
+    expect(v.reveal).toMatchObject({ didCount: 2, answered: 3, total: 3, didIds: null, eliminatedIds: null, storytellerId: null });
     expect(v.players.every((p) => p.didCount === null && p.lives === null)).toBe(true);
     h.advance(3000);
     const p = h.view('cem').podium!;
@@ -150,6 +160,7 @@ describe('never: gizlilik', () => {
     expect(p.me).toEqual({ did: 0, didNot: 1 });
     for (const id of ['ali', 'ayse', 'cem']) {
       expect(h.seen(id)).not.toMatch(/didIds":\[/);
+      expect(h.seen(id)).not.toMatch(/storytellerId":"/);
     }
     // Herkes kendi cevabını görür, başkasınınkini görmez.
     expect(h.seen('cem')).not.toContain(':"did"');

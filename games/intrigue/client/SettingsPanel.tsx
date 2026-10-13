@@ -1,16 +1,31 @@
-import type { ReactNode } from 'react';
+import { useId, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { CHALLENGE_OPTIONS, ROLES, SMALL_TABLE_MAX, TURN_OPTIONS, cardsPerRole, type IntrigueSettings } from '../shared/index.js';
 import { RoleCard } from './RoleArt';
 import { s } from './strings';
 
-function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Group({ title, hint, children, stack }: { title: string; hint?: string; children: ReactNode; stack?: boolean }) {
+  const id = useId();
+  const label = (
+    <span id={id} className="ig-set-label">
+      {title}
+    </span>
+  );
   return (
-    <fieldset className="sgs-group">
-      <legend className="eyebrow sgs-legend">{title}</legend>
-      {children}
-      {hint && <p className="sgs-hint">{hint}</p>}
-    </fieldset>
+    <div className="ig-set" role="group" aria-labelledby={id}>
+      {stack ? (
+        <>
+          {label}
+          {children}
+        </>
+      ) : (
+        <div className="ig-set-row">
+          {label}
+          {children}
+        </div>
+      )}
+      {hint && <p className="ig-set-hint">{hint}</p>}
+    </div>
   );
 }
 
@@ -22,16 +37,16 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
   const forced = n > SMALL_TABLE_MAX;
 
   return (
-    <div className="sgs">
+    <div className="ig-settings">
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
-          <Group title={s.settings.deck} hint={s.settings.deckHint(n, settings.bigDeck)}>
+          <Group stack title={s.settings.deck} hint={s.settings.deckHint(n, settings.bigDeck)}>
             <div className="ig-deckinfo" aria-hidden="true">
               {ROLES.map((r) => (
                 <span key={r} className="ig-deckinfo-role">
                   <RoleCard role={r} size="mini" />
-                  <span className="mono dim">×{cardsPerRole(n, settings.bigDeck)}</span>
+                  <span>×{cardsPerRole(n, settings.bigDeck)}</span>
                 </span>
               ))}
             </div>

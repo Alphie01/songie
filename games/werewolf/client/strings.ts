@@ -117,6 +117,7 @@ export const s = {
     sleepTitle: 'Gözlerini kapat, köy uyuyor',
     sleepBody: 'Sıran gelirse ekranın kendiliğinden uyanır. Ekranını kimseye gösterme.',
     nightOrder: 'Gecenin sırası',
+    aliveNow: 'Köyde hayatta olanlar',
     cupidTitle: 'İki kişiyi âşık et',
     cupidHint: 'Kendini de seçebilirsin. Biri ölürse diğeri de ölür; farklı taraftalarsa birlikte kazanabilirler.',
     cupidConfirm: (a: string, b: string) => `${a} ve ${b} kişisini âşık et`,
@@ -151,7 +152,7 @@ export const s = {
 
     // Kurt sohbeti
     wolfChat: 'Kurtların sohbeti',
-    wolfChatHint: 'Yalnızca kurtlar görür.',
+    wolfChatHint: 'yalnızca kurtlar görür',
     chatEmpty: 'Henüz mesaj yok.',
     chatPlaceholder: 'Mesaj yaz',
     send: 'Gönder',
@@ -204,7 +205,7 @@ export const s = {
 
     // Hayaletler
     ghosts: 'Hayaletler',
-    ghostHint: 'Yalnızca ölüler görür. Hayattakilere ipucu verme.',
+    ghostHint: 'yalnızca ölüler görür, hayattakilere ipucu verme',
     ghostRoles: 'Herkesin rolü',
     ghostSecret: 'Gece olanlar',
 
@@ -225,7 +226,16 @@ export const s = {
     } satisfies Record<WinReason, string>,
     rolesTitle: 'Roller',
     secretTitle: 'Gece neler oldu',
-    backIn: (n: number) => `${n} sn sonra lobiye dönülüyor.`,
+    backIn: (n: number) => `Lobiye dönülüyor… · ${n} sn`,
+    gameOver: 'Oyun bitti',
+    winnerTitle: {
+      village: 'Köy kazandı!',
+      wolves: 'Kurtlar kazandı!',
+      fool: 'Köyün delisi kazandı!',
+      lovers: 'Âşıklar kazandı!',
+    } satisfies Record<Winner, string>,
+    sideWolves: 'Kurtlar',
+    sideVillage: 'Köy',
     backNow: 'Lobiye dön',
     log: 'Olay günlüğü',
     logEmpty: 'Henüz bir şey olmadı.',

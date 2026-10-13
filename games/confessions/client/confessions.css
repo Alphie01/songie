@@ -1,183 +1,249 @@
-/* Gizli İtiraflar — ortak düzen game-kit/ui/game-layout.css'te, token'lar tokens.css'te.
-   Tek gösterişli öğe itiraf kartı (büyük tırnak) ve açıklamadaki "maske düşüyor" anı; gerisi sakin. */
+/* Gizli İtiraflar — "Songie Arayüz" tasarımı (GizliItiraflar.dc.html, Sonuclar.dc.html).
+   Ortak düzen game-kit/ui/game-layout.css, token'lar tokens.css. İtiraflar sarı yapışkan not kâğıdında. */
 
-.cf-small {
-  font-size: 12.5px;
-  line-height: 1.5;
+.cf,
+.cf-podium {
+  /* Tasarımda token'ı olmayan not kâğıdı renkleri */
+  --cf-note: #ffe680;
+  --cf-note-ink: #2b2116;
+  --cf-quote: #c9a400;
 }
 
 .cf-center {
   text-align: center;
 }
 
-.cf-legend {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-2);
+/* Orta sütun: telefonda tasarımın 390px'lik tek sütunu, masaüstünde en fazla 440px */
+.cf.sg .sg-center {
+  gap: 12px;
+  max-width: var(--col);
 }
 
-.cf-h2 {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
+/* ---------- Üst şerit: renkli hap + oda kodu ---------- */
+.cf-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cf-pill {
+  padding: 7px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--mint);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.cf-code {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-3);
 }
 
 /* ---------- Süre ---------- */
 .cf-timer {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .cf-timer-bar {
   flex: 1;
-  height: 6px;
+  height: 10px;
   overflow: hidden;
   border-radius: var(--r-pill);
-  background: var(--panel-2);
+  background: var(--ink-2);
 }
 
 .cf-timer-bar span {
   display: block;
   height: 100%;
-  background: var(--accent);
+  background: var(--yellow);
   transition: width 250ms linear;
 }
 
 .cf-timer[data-quiet] .cf-timer-bar span {
-  background: var(--text-3);
+  background: var(--violet);
+}
+
+.cf-timer[data-low] .cf-timer-bar span {
+  background: var(--red);
 }
 
 .cf-timer-num {
-  min-width: 2ch;
-  font-size: 15px;
-  font-weight: 700;
+  min-width: 4ch;
+  font-size: 14px;
+  font-weight: 800;
   text-align: right;
-  color: var(--accent-hi);
+  color: var(--yellow);
 }
 
-.cf-timer-num[data-low] {
+.cf-timer[data-low] .cf-timer-num {
   color: var(--red);
 }
 
-.cf-timer-label {
-  font-size: 12px;
-  text-align: center;
-}
-
-/* ---------- Konu ---------- */
-.cf-topic {
-  display: grid;
-  gap: 6px;
-  text-align: center;
-}
-
-.cf-topic-text {
-  font-size: clamp(24px, 7vw, 30px);
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
-  text-align: center;
-}
-
-.cf-topic-small {
+.cf-untimed {
   font-size: 13px;
-  font-style: italic;
-  text-align: center;
+  font-weight: 800;
+  color: var(--text-3);
 }
 
 /* ---------- Yazma ---------- */
 .cf-write,
 .cf-confession,
 .cf-summary {
-  display: grid;
-  gap: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cf-eyebrow,
+.cf-box-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.cf-topic {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .cf-form {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.cf-textarea-wrap {
+.cf-note-wrap {
   position: relative;
 }
 
-.cf-textarea {
+.cf-note-input {
+  display: block;
   width: 100%;
-  min-height: 140px;
-  padding: 14px 14px 30px;
-  resize: vertical;
-  font-family: var(--font);
-  font-size: 16px;
-  line-height: 1.5;
+  min-height: 170px;
+  padding: 16px 16px 30px;
+  resize: none;
+  border: var(--bw) solid var(--ink);
+  border-radius: 6px;
+  background: var(--cf-note);
+  color: var(--cf-note-ink);
+  box-shadow: 6px 6px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  transform: rotate(-1deg);
+  outline: none;
+}
+
+.cf-note-input::placeholder {
+  color: rgb(43 33 22 / 0.55);
+}
+
+.cf-note-input:focus-visible {
+  box-shadow:
+    6px 6px 0 var(--ink),
+    0 0 0 3px var(--yellow);
 }
 
 .cf-counter {
   position: absolute;
   right: 12px;
   bottom: 10px;
-  font-size: 11px;
-  color: var(--text-3);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--cf-note-ink);
   pointer-events: none;
 }
 
 .cf-counter[data-bad] {
-  color: var(--orange);
+  color: #b3261e;
+}
+
+/* Büyük eylem düğmesi (İtirafı gönder, Sonraki tur) */
+.cf-big {
+  min-height: 58px;
+  padding: 0 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 0 5px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 800;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
+}
+
+.cf-big:active:not(:disabled) {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--ink);
+}
+
+.cf-big:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.cf-note-line {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+/* Koyu kutu (Yazanlar, Skorlar) */
+.cf-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
 }
 
 .cf-wrote {
-  display: grid;
-  gap: 10px;
-}
-
-.cf-wrote-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.cf-wrote-list li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  min-height: 40px;
-  padding: 0 10px 0 8px;
-  border-radius: var(--r-md);
-  background: var(--panel);
-  font-size: 12.5px;
+.cf-wrote li {
+  padding: 3px 9px;
+  border: 2px solid var(--violet);
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text);
 }
 
-.cf-wrote-list li[data-me] {
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.3);
+.cf-wrote li[data-done] {
+  border-color: var(--mint);
+  background: var(--mint);
+  color: var(--ink-2);
 }
 
-.cf-wrote-name {
-  min-width: 0;
-  overflow: hidden;
-  font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.cf-wrote-state {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--text-3);
-  white-space: nowrap;
-}
-
-.cf-wrote-list li[data-done] .cf-wrote-state {
-  color: var(--accent-hi);
+.cf-wrote li[data-off] {
+  opacity: 0.6;
 }
 
 .cf-host {
@@ -191,122 +257,149 @@
 
 .cf-host p {
   flex-basis: 100%;
-}
-
-.cf-hide {
+  font-size: 13px;
+  font-weight: 700;
   color: var(--text-3);
 }
 
 .cf-hide:hover {
+  border-color: var(--red);
   color: var(--red);
 }
 
-/* ---------- İtiraf kartı ---------- */
-.cf-card {
-  position: relative;
-  margin: 0;
-  padding: 44px 22px 26px;
-  overflow: hidden;
-  border: 1px solid var(--line-2);
-  border-radius: var(--r-lg);
-  background: var(--panel);
-  box-shadow: 0 24px 60px rgb(0 0 0 / 0.55);
-  animation: cf-card-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+/* ---------- İtiraf kartı: bantlı yapışkan not ---------- */
+.cf-topic-small {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
 }
 
-@keyframes cf-card-in {
+.cf-paper {
+  position: relative;
+  margin-top: 6px;
+  animation: cf-note-in 320ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes cf-note-in {
   from {
-    transform: translateY(10px) scale(0.985);
     opacity: 0;
+    transform: translateY(10px) rotate(2deg);
   }
 }
 
-.cf-quote {
+.cf-tape {
   position: absolute;
-  top: -22px;
-  left: 12px;
-  font-size: 130px;
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1;
-  color: var(--accent);
-  text-shadow: 0 0 28px rgb(25 223 112 / 0.35);
-  user-select: none;
+  top: -14px;
+  left: 50%;
+  z-index: 1;
+  width: 80px;
+  height: 24px;
+  margin-left: -40px;
+  border-radius: 3px;
+  background: var(--paper);
+  opacity: 0.55;
+  transform: rotate(-4deg);
 }
 
-.cf-card-text {
-  position: relative;
-  font-size: clamp(19px, 5.6vw, 23px);
-  font-weight: 600;
-  line-height: 1.4;
+.cf-note {
+  margin: 0;
+  padding: 22px 18px 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 6px;
+  background: var(--cf-note);
+  color: var(--cf-note-ink);
+  box-shadow: 7px 7px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+
+.cf-quote {
+  font-family: var(--display);
+  font-size: 46px;
+  font-weight: 800;
+  line-height: 0.5;
+  color: var(--cf-quote);
+}
+
+.cf-note-text {
+  font-family: var(--display);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.15;
   overflow-wrap: anywhere;
 }
 
-.cf-card[data-hidden] {
+.cf-note[data-hidden] {
   border-style: dashed;
-  background: transparent;
+  background: var(--panel);
+  color: var(--text-3);
   box-shadow: none;
 }
 
-.cf-card[data-hidden] .cf-quote {
+.cf-note[data-hidden] .cf-quote {
   color: var(--text-3);
-  text-shadow: none;
 }
 
-.cf-card[data-hidden] .cf-card-text {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-3);
+.cf-note[data-hidden] .cf-note-text {
+  font-size: 17px;
 }
 
 /* ---------- Tepkiler ---------- */
 .cf-reactions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 6px;
 }
 
 .cf-react {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 34px;
+  position: relative;
+  min-height: 38px;
   padding: 0 12px;
-  border: 0;
+  border: 2px solid var(--ink);
   border-radius: var(--r-pill);
-  background: rgb(255 255 255 / 0.04);
-  color: var(--text-2);
-  font-size: 12.5px;
-  font-weight: 600;
-  transition: background 120ms, color 120ms;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 800;
 }
 
-.cf-react:hover {
-  color: var(--text);
+/* Görünen 38px, dokunma alanı 44px */
+.cf-react::after {
+  content: '';
+  position: absolute;
+  inset: -4px -1px;
 }
 
 .cf-react[aria-pressed='true'] {
-  background: var(--accent-soft-2);
-  color: var(--accent-hi);
-}
-
-.cf-react-n {
-  font-size: 11px;
-  opacity: 0.85;
+  background: var(--pink);
+  color: var(--ink-2);
 }
 
 /* ---------- Tahmin ---------- */
-.cf-guess {
-  display: grid;
-  gap: 4px;
-  text-align: center;
+.cf-ask {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.cf-ask[data-reveal] {
+  animation: cf-unmask 900ms cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
+@keyframes cf-unmask {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
 .cf-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
   margin: 0;
   padding: 0;
@@ -314,29 +407,49 @@
 }
 
 .cf-pick {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  max-width: 100%;
-  padding: 4px 14px 4px 6px;
-  border: 0;
-  border-radius: var(--r-pill);
+  justify-content: center;
+  width: 100%;
+  min-height: 54px;
+  padding: 4px 6px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-md);
   background: var(--panel);
   color: var(--text);
-  font-size: 14px;
-  font-weight: 600;
-  transition: background 120ms, box-shadow 120ms;
+  box-shadow: 0 4px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.1;
+  transition:
+    transform 80ms,
+    box-shadow 80ms;
 }
 
-.cf-pick:hover:not(:disabled) {
-  background: var(--panel-3);
+.cf-pick:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--ink);
 }
 
 .cf-pick[aria-pressed='true'] {
-  background: var(--accent-soft-2);
-  box-shadow: inset 0 0 0 1.5px var(--accent);
-  color: var(--accent-hi);
+  background: var(--yellow);
+  color: var(--ink-2);
+}
+
+.cf-pick[data-wrong] {
+  background: var(--red);
+  color: var(--ink-2);
+}
+
+.cf-pick[data-author] {
+  background: var(--mint);
+  color: var(--ink-2);
+}
+
+.cf-pick[data-off] {
+  opacity: 0.6;
 }
 
 .cf-pick:disabled {
@@ -344,107 +457,57 @@
 }
 
 .cf-pick-name {
-  min-width: 0;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .cf-pick-votes {
-  margin-left: 2px;
+  font-family: var(--font);
   font-size: 12px;
-  color: var(--text-3);
-}
-
-/* Açıklamada seçimin sönükleşir, yazar parlar. */
-.cf-grid[data-reveal] .cf-pick {
-  opacity: 0.6;
-}
-
-.cf-grid[data-reveal] .cf-pick[aria-pressed='true'] {
-  opacity: 0.85;
-}
-
-.cf-grid[data-reveal] .cf-pick[data-author] {
-  opacity: 1;
-  background: var(--accent);
-  box-shadow: var(--accent-glow);
-  color: var(--accent-ink);
-}
-
-.cf-grid[data-reveal] .cf-pick[data-author] .cf-pick-votes {
-  color: var(--accent-ink);
-}
-
-.cf-progress {
-  display: grid;
-  gap: 2px;
-  text-align: center;
-}
-
-.cf-avatar-gone {
-  flex: none;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--panel-3);
-}
-
-/* ---------- Açıklama: maske düşüyor ---------- */
-.cf-reveal {
-  display: grid;
-  justify-items: center;
-  gap: 6px;
-  text-align: center;
-}
-
-.cf-reveal-label {
-  font-size: 12px;
-}
-
-.cf-unmask {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  animation: cf-unmask 1100ms cubic-bezier(0.2, 0.7, 0.1, 1) both;
-}
-
-@keyframes cf-unmask {
-  0% {
-    filter: blur(14px);
-    opacity: 0;
-    transform: scale(1.12);
-  }
-  55% {
-    filter: blur(6px);
-    opacity: 0.8;
-  }
-  100% {
-    filter: blur(0);
-    opacity: 1;
-    transform: none;
-  }
-}
-
-.cf-reveal-name {
-  font-size: clamp(30px, 9vw, 42px);
   font-weight: 800;
-  font-style: italic;
-  line-height: 1.05;
-  color: var(--accent-hi);
-  overflow-wrap: anywhere;
+  opacity: 0.8;
 }
 
-.cf-reveal-anon {
+/* Alt durum kutusu */
+.cf-foot {
+  display: grid;
+  gap: 4px;
+  padding: 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel-2);
   color: var(--text-2);
-  filter: blur(0.6px);
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.cf-foot[data-tone='light'] {
+  background: var(--paper);
+  color: var(--ink-2);
+}
+
+.cf-foot[data-tone='hit'] {
+  background: var(--mint);
+  color: var(--ink-2);
+}
+
+.cf-foot-sub {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  opacity: 0.8;
 }
 
 /* ---------- Tur özeti ---------- */
 .cf-recap {
   display: grid;
-  gap: 10px;
-  margin: 0;
+  gap: 14px;
+  margin: 4px 0;
   padding: 0;
   list-style: none;
 }
@@ -453,15 +516,23 @@
   display: grid;
   gap: 8px;
   padding: 14px 16px;
-  border-left: 3px solid var(--accent);
-  border-radius: 4px var(--r-md) var(--r-md) 4px;
-  background: var(--panel);
+  border: var(--bw) solid var(--ink);
+  border-radius: 6px;
+  background: var(--cf-note);
+  color: var(--cf-note-ink);
+  box-shadow: 5px 5px 0 var(--ink);
+  transform: rotate(-1deg);
+}
+
+.cf-recap li:nth-child(even) {
+  transform: rotate(1deg);
 }
 
 .cf-recap-text {
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.45;
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
@@ -469,86 +540,451 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px 10px;
-  font-size: 12px;
+  gap: 4px 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cf-recap-meta b {
+  font-weight: 800;
+}
+
+/* ---------- Skorlar ---------- */
+.cf-after {
+  margin-top: 10px;
+}
+
+.cf-scores {
+  border-radius: 18px;
+  padding: 12px;
+}
+
+.cf-score-list {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cf-score-list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.cf-score-list li[data-me] {
+  color: var(--yellow);
+}
+
+.cf-score-name {
+  display: grid;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cf-score-name small {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+/* ---------- Nasıl oynanır ---------- */
+.cf-howto {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: var(--bw) dashed var(--violet);
+}
+
+.cf-howto-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cf-howto-list li {
+  display: flex;
+  gap: 12px;
+}
+
+.cf-howto-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.cf-howto-list h3 {
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.cf-howto-list p {
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-2);
 }
 
-.cf-recap-react {
-  color: var(--text-3);
+.cf-side-settings {
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
 }
 
-/* ---------- Puanlar ---------- */
-.cf-scores {
-  display: grid;
-  gap: 10px;
+/* ---------- Ayarlar (lobi kartı) ---------- */
+.cf-legend {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
 }
 
-.cf-score-who {
-  display: grid;
-  min-width: 0;
-}
-
-.cf-score-detail {
-  font-size: 10.5px;
-}
-
-/* ---------- Podyum ---------- */
-.cf-podium .podium-kicker {
-  font-size: 13px;
-}
-
-.cf-awards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.cf-set-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  margin: 0;
 }
 
-.cf-awards div {
-  display: grid;
+.cf-set-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.cf-set-opts .chips {
+  justify-content: flex-end;
   gap: 4px;
-  padding: 14px;
-  border-radius: var(--r-md);
-  background: var(--panel);
 }
 
-.cf-awards dt {
-  font-size: 12px;
-  color: var(--text-3);
+.cf-set-row .toggle {
+  width: auto;
+  min-width: 120px;
 }
 
-.cf-awards dd {
-  display: grid;
-  margin: 0;
-  font-size: 12px;
-}
-
-.cf-awards b {
-  font-size: 18px;
-  font-weight: 800;
-  font-style: italic;
-  color: var(--text);
-  overflow-wrap: anywhere;
+.cf-set-hint {
+  flex-basis: 100%;
 }
 
 .cf-addprompt {
   display: grid;
-  gap: 6px;
+  gap: 8px;
 }
 
-.cf-addprompt .input {
-  min-height: 40px;
+/* ---------- Podyum (Sonuclar.dc.html) ---------- */
+.cf-podium {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100dvh;
+  padding-top: 72px;
+  padding-bottom: 24px;
+  overflow: hidden;
+}
+
+.cf-podium > * {
+  position: relative;
+}
+
+.cf-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cf-confetti i {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.cf-confetti i:nth-child(1) {
+  top: 102px;
+  left: 30px;
+  width: 16px;
+  height: 7px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+
+.cf-confetti i:nth-child(2) {
+  top: 142px;
+  right: 40px;
+  width: 16px;
+  height: 7px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+
+.cf-confetti i:nth-child(3) {
+  top: 202px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+
+.cf-confetti i:nth-child(4) {
+  top: 92px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+
+.cf-confetti i:nth-child(5) {
+  top: 242px;
+  right: 60px;
+  width: 16px;
+  height: 7px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.cf-podium-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-size: 13px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.cf-podium-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
+}
+
+.cf-sticker {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.cf-podium-title {
+  margin-top: 8px;
+  font-family: var(--display);
+  font-size: clamp(36px, 12vw, 48px);
+  font-weight: 800;
+  line-height: 0.95;
+  overflow-wrap: anywhere;
+}
+
+.cf-podium-sub {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.cf-podium-cards {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.cf-pcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+.cf-pcard-first {
+  background: var(--mint);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.cf-pcard-second {
+  align-self: flex-end;
+  background: var(--lilac);
+  transform: rotate(2deg);
+}
+
+.cf-pcard-score {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.cf-pcard-second .cf-pcard-score {
+  margin-top: 10px;
+  font-size: 52px;
+}
+
+.cf-pcard-name {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cf-pdash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.cf-rosters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cf-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+  list-style: none;
+}
+
+.cf-roster-title {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cf-roster[data-tone='mint'] .cf-roster-title {
+  color: var(--mint);
+}
+
+.cf-roster[data-tone='lilac'] .cf-roster-title {
+  color: var(--lilac);
+}
+
+.cf-roster-who,
+.cf-roster-rest li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.cf-roster-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.cf-roster-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cf-roster-score {
+  margin-left: auto;
+  color: var(--yellow);
+}
+
+.cf-podium-spacer {
+  flex: 1;
+}
+
+.cf-podium-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cf-podium-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.cf-podium-bar div {
+  height: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: cf-bar linear forwards;
+}
+
+@keyframes cf-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.cf-podium-note {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-2);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cf-card,
-  .cf-unmask {
+  .cf-paper,
+  .cf-ask[data-reveal] {
     animation: none;
   }
 
   .cf-timer-bar span {
     transition: none;
+  }
+
+  .cf-podium-bar div {
+    animation: none;
+    transform: none;
   }
 }

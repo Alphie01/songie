@@ -8,6 +8,9 @@ import { s } from './strings';
 
 type Members = Map<string, RoomPlayer>;
 
+/** Sunucudaki PODIUM_MS ile aynı: sonuç ekranındaki "lobiye dönülüyor" çubuğu. */
+const PODIUM_MS = 12_000;
+
 function useRemaining(view: NeverView): number {
   const offset = useMemo(() => view.serverNow - Date.now(), [view.serverNow]);
   const [now, setNow] = useState(() => Date.now());
@@ -47,32 +50,25 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
     if (!res.ok) setError(res.error);
   }
 
-  if (view.phase === 'podium') return <Podium view={view} members={members} meId={meId} />;
+  if (view.phase === 'podium') return <Podium view={view} members={members} meId={meId} code={room.code} />;
 
   const panelProps = { settings, editable: isHost, api, players: room.players, meId, onChange: (n: NeverSettings) => void setSettings(n) };
   const me = view.players.find((p) => p.id === meId);
 
   return (
-    <div className="nv sg">
-      <aside className="sg-side sg-left">
-        <PlayerList view={view} members={members} meId={meId} />
-      </aside>
-
-      <main className="sg-center">
-        <header className="sg-top">
-          <span className="sg-round mono">{s.play.round(view.round, view.totalRounds)}</span>
-          {me?.lives != null && view.maxLives != null && <Fingers lives={me.lives} max={view.maxLives} size={14} />}
-          <span className="sg-code mono">{room.code}</span>
+    <div className="nv">
+      <main className="nv-main">
+        <header className="nv-top">
+          <span className="nv-pill">{s.play.round(view.round, view.totalRounds)}</span>
+          {me?.lives != null && view.maxLives != null ? (
+            <Fingers lives={me.lives} max={view.maxLives} />
+          ) : (
+            <span className="nv-code">{room.code}</span>
+          )}
         </header>
 
         {view.statement && (
-          <StatementCard
-            statement={view.statement}
-            phase={view.phase}
-            remaining={remaining}
-            durationMs={view.durationMs}
-            endsAt={view.endsAt}
-          />
+          <StatementCard statement={view.statement} phase={view.phase} remaining={remaining} durationMs={view.durationMs} endsAt={view.endsAt} />
         )}
 
         {view.phase === 'question' && view.statement && (
@@ -91,7 +87,7 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
         )}
 
         {view.phase === 'reveal' && view.reveal && view.statement && (
-          <Reveal view={view} reveal={view.reveal} statement={view.statement} members={members} meId={meId} isHost={isHost} nick={nick} send={send} />
+          <Reveal view={view} reveal={view.reveal} statement={view.statement} members={members} me={me} isHost={isHost} nick={nick} send={send} />
         )}
 
         {error && (
@@ -99,47 +95,25 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
             {error}
           </p>
         )}
-
-        <div className="sg-mobile-only nv-mobile">
-          <PlayerList view={view} members={members} meId={meId} />
-          <History view={view} nick={nick} />
-        </div>
-
-        <section className="howto" aria-labelledby="nv-howto">
-          <h2 id="nv-howto" className="howto-title">
-            {s.howto.title}
-          </h2>
-          <ol className="howto-list">
-            {s.howto.steps.map(([title, body], i) => (
-              <li key={title}>
-                <span className="howto-n mono">{String(i + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
       </main>
 
-      <aside className="sg-side sg-right">
+      <section className="nv-more" aria-label={s.play.more}>
+        <PlayerList view={view} members={members} meId={meId} />
         <History view={view} nick={nick} />
-        <SettingsPanel {...panelProps} section="secondary" />
-      </aside>
+        <div className="nv-box">
+          <SettingsPanel {...panelProps} section="secondary" />
+        </div>
+      </section>
     </div>
   );
 }
 
-/** Kalkık parmaklar: kalan can. İnen parmaklar sönük. */
-export function Fingers({ lives, max, size = 16 }: { lives: number; max: number; size?: number }) {
+/** Kalkık parmaklar: kalan can. İnen parmaklar mor. */
+export function Fingers({ lives, max, small = false }: { lives: number; max: number; small?: boolean }) {
   return (
-    <span className="nv-fingers" role="img" aria-label={s.play.lives(lives)}>
+    <span className="nv-fingers" data-small={small || undefined} role="img" aria-label={s.play.lives(lives)}>
       {Array.from({ length: max }, (_, i) => (
-        <svg key={i} viewBox="0 0 10 20" width={size * 0.5} height={size} aria-hidden="true" data-down={i >= lives || undefined}>
-          <rect x="1.5" y="1" width="7" height="18" rx="3.5" />
-          <path d="M3.5 5.5h3" />
-        </svg>
+        <span key={i} data-down={i >= lives || undefined} />
       ))}
     </span>
   );
@@ -166,14 +140,14 @@ function StatementCard({
           <span style={{ width: `${(remaining / durationMs) * 100}%` }} data-low={remaining < 5000 || undefined} />
         </div>
       )}
-      <p className="nv-statement">
+      <div className="nv-card-body">
         <span className="nv-lead">{s.play.lead}</span>
-        <span className="nv-rest">{splitStatement(statement.text)}</span>
-      </p>
-      <p className="nv-card-foot">
-        <span className="dim">{CATEGORY_NAMES[statement.category] ?? statement.category}</span>
-        {timed && <span className="mono nv-secs" data-low={remaining < 5000 || undefined}>{Math.ceil(remaining / 1000)} sn</span>}
-      </p>
+        <p className="nv-rest">{splitStatement(statement.text)}</p>
+        <p className="nv-card-foot">
+          <span>{CATEGORY_NAMES[statement.category] ?? statement.category}</span>
+          {timed && <span data-low={remaining < 5000 || undefined}>{s.play.secs(Math.ceil(remaining / 1000))}</span>}
+        </p>
+      </div>
     </article>
   );
 }
@@ -198,11 +172,12 @@ function Question({
   const mine = pending ?? view.myAnswer;
   const active = view.players.filter((p) => p.active);
   const answered = active.filter((p) => p.answered).length;
+  const pct = active.length ? Math.round((answered / active.length) * 100) : 0;
   return (
-    <section className="nv-question">
+    <section className="nv-phase">
       {view.canAnswer ? (
         <>
-          <div className="nv-answers" role="group" aria-label={statement.text}>
+          <div className="nv-answers" role="group" aria-label={statement.text} data-chosen={mine ?? undefined}>
             <button type="button" className="nv-answer" data-kind="did" aria-pressed={mine === 'did'} onClick={() => onAnswer('did')}>
               {s.play.did}
             </button>
@@ -210,33 +185,38 @@ function Question({
               {s.play.didNot}
             </button>
           </div>
-          <p className="dim nv-small nv-center">{mine ? s.play.answeredNote : s.play.askNote}</p>
+          <p className="nv-note">{mine ? s.play.answeredNote : s.play.askNote}</p>
         </>
       ) : (
-        <p className="nv-note">{me?.eliminated ? s.play.eliminatedNote : s.play.lateNote}</p>
+        <p className="nv-box nv-note">{me?.eliminated ? s.play.eliminatedNote : s.play.lateNote}</p>
       )}
 
-      <p className="nv-progress mono">{s.play.waiting(answered, active.length)}</p>
+      <div className="nv-progress">
+        <div className="nv-progress-bar" aria-hidden="true">
+          <span style={{ width: `${pct}%` }} />
+        </div>
+        <span>{s.play.waiting(answered, active.length)}</span>
+      </div>
 
-      <div className="nv-controls">
+      <div className="nv-spacer" />
+
+      <div className="nv-ghosts">
         {view.canAnswer && (
-          <button type="button" className="btn btn-ghost" aria-pressed={view.skip.mine} onClick={() => void send({ type: 'voteSkip', statementId: statement.id })}>
+          <button type="button" className="nv-ghost" aria-pressed={view.skip.mine} onClick={() => void send({ type: 'voteSkip', statementId: statement.id })}>
             {view.skip.mine ? s.play.skipUndo(view.skip.votes, view.skip.needed) : s.play.skip(view.skip.votes, view.skip.needed)}
           </button>
         )}
         {isHost && (
-          <>
-            <button type="button" className="btn btn-ghost" onClick={() => void send({ type: 'next', statementId: statement.id })}>
-              {s.play.nextStatement}
-            </button>
-            {answered > 0 && (
-              <button type="button" className="btn btn-outline" onClick={() => void send({ type: 'reveal', statementId: statement.id })}>
-                {s.play.revealNow}
-              </button>
-            )}
-          </>
+          <button type="button" className="nv-ghost" onClick={() => void send({ type: 'next', statementId: statement.id })}>
+            {s.play.nextStatement}
+          </button>
         )}
       </div>
+      {isHost && answered > 0 && (
+        <button type="button" className="nv-cta" onClick={() => void send({ type: 'reveal', statementId: statement.id })}>
+          {s.play.revealNow}
+        </button>
+      )}
     </section>
   );
 }
@@ -246,7 +226,7 @@ function Reveal({
   reveal,
   statement,
   members,
-  meId,
+  me,
   isHost,
   nick,
   send,
@@ -255,7 +235,7 @@ function Reveal({
   reveal: RoundSummary;
   statement: Statement;
   members: Members;
-  meId: string;
+  me: PlayerInfo | undefined;
   isHost: boolean;
   nick: (id: string) => string;
   send(a: unknown): Promise<void>;
@@ -268,20 +248,27 @@ function Reveal({
   const leader = view.anonymous
     ? null
     : [...view.players].filter((p) => (p.didCount ?? 0) > 0).sort((a, b) => (b.didCount ?? 0) - (a.didCount ?? 0))[0];
+  const youLine = view.myAnswer ? s.play.yourAnswer(view.myAnswer) : me && !me.eliminated && me.active ? s.play.noAnswer : null;
+  // Sunucu seçer; isimsiz modda hep null (kimse ifşa olmaz).
+  const tellerNick = !view.anonymous && reveal.storytellerId ? members.get(reveal.storytellerId)?.nick : null;
+
+  const lines: string[] = [];
+  if (reveal.eliminatedIds && reveal.eliminatedIds.length > 0) lines.push(`${s.play.eliminated(joinNames(reveal.eliminatedIds.map(nick)))}.`);
+  if (leader && leader.didCount != null) lines.push(s.play.leader(nick(leader.id), leader.didCount));
 
   return (
-    <section className="nv-reveal" aria-live="polite">
-      <div className="nv-tally">
-        <p className="nv-tally-head">{headline}</p>
-        <div className="nv-bar" aria-hidden="true">
-          <span style={{ width: `${pct}%` }} />
-        </div>
-        <p className="nv-small dim nv-tally-meta">
-          <span className="mono">%{pct}</span>
-          {missing > 0 && <span>{s.play.unanswered(missing)}</span>}
-          {view.myAnswer && <span>{s.play.yourAnswer(view.myAnswer)}</span>}
-        </p>
+    <section className="nv-phase" aria-live="polite">
+      <p className="nv-headline">{headline}</p>
+      <div className="nv-bar" aria-hidden="true">
+        <span style={{ width: `${pct}%` }} />
+        <b data-light={pct < 18 || undefined}>%{pct}</b>
       </div>
+      {(youLine || missing > 0) && (
+        <p className="nv-you">
+          {youLine}
+          {missing > 0 && <span className="nv-missing">{s.play.unanswered(missing)}</span>}
+        </p>
+      )}
 
       {reveal.didIds && reveal.didIds.length > 0 && (
         <ul className="nv-doers">
@@ -289,30 +276,32 @@ function Reveal({
             const m = members.get(id);
             const p = byId.get(id);
             const out = reveal.eliminatedIds?.includes(id);
+            const tail = out ? s.play.eliminatedTag : p?.lives != null ? s.play.doerLives(p.lives) : null;
             return (
-              <li key={id} className="nv-doer" data-me={id === meId || undefined} data-out={out || undefined}>
-                {m && <Avatar avatar={m.avatar} nick={m.nick} size={40} dim={!m.connected} />}
-                <span className="nv-doer-name">{nick(id)}</span>
-                {p?.lives != null && view.maxLives != null && <Fingers lives={p.lives} max={view.maxLives} size={12} />}
-                {out && <span className="nv-tag" data-kind="out">{s.play.eliminatedTag}</span>}
+              <li key={id} className="nv-doer" data-out={out || undefined}>
+                {m && <Avatar avatar={m.avatar} nick={m.nick} size={28} dim={!m.connected} />}
+                <span className="nv-doer-name">
+                  {m?.nick ?? '?'}
+                  {tail && ` · ${tail}`}
+                </span>
               </li>
             );
           })}
         </ul>
       )}
 
-      {reveal.eliminatedIds && reveal.eliminatedIds.length > 0 && (
-        <p className="nv-out">{s.play.eliminated(joinNames(reveal.eliminatedIds.map(nick)))}</p>
-      )}
+      {lines.length > 0 && <p className="nv-note nv-left">{lines.join(' ')}</p>}
 
-      {leader && leader.didCount != null && <p className="nv-small dim nv-center">{s.play.leader(nick(leader.id), leader.didCount)}</p>}
+      {tellerNick && <p className="nv-teller">{s.play.storyteller(tellerNick)}</p>}
+
+      <div className="nv-spacer" />
 
       {isHost ? (
-        <button type="button" className="btn btn-primary btn-lg btn-block" onClick={() => void send({ type: 'next', statementId: statement.id })}>
+        <button type="button" className="nv-cta nv-cta-lg" onClick={() => void send({ type: 'next', statementId: statement.id })}>
           {view.final ? s.play.toResults : s.play.next}
         </button>
       ) : (
-        <p className="dim nv-small nv-center">{view.final ? s.play.finalNote : s.play.waitHost}</p>
+        <p className="nv-note">{view.final ? s.play.finalNote : s.play.waitHost}</p>
       )}
     </section>
   );
@@ -321,26 +310,26 @@ function Reveal({
 function PlayerList({ view, members, meId }: { view: NeverView; members: Members; meId: string }) {
   const sorted = [...view.players].sort((a, b) => Number(a.eliminated) - Number(b.eliminated) || (b.lives ?? 0) - (a.lives ?? 0));
   return (
-    <section className="nv-players">
-      <h2 className="nv-side-title">
-        {s.play.players} <span className="mono dim">{view.players.length}</span>
+    <section className="nv-box nv-list">
+      <h2 className="nv-box-title">
+        {s.play.players} <span>{view.players.length}</span>
       </h2>
-      <ul className="sg-score-list">
+      <ul className="nv-rows">
         {sorted.map((p) => {
           const m = members.get(p.id);
           if (!m) return null;
           const tag = p.eliminated ? 'out' : view.phase === 'question' ? (p.answered ? 'answered' : 'waiting') : null;
           return (
-            <li key={p.id} className="sg-score" data-me={p.id === meId || undefined} data-out={p.eliminated || undefined}>
-              <Avatar avatar={m.avatar} nick={m.nick} size={26} dim={!m.connected || p.eliminated} />
-              <span className="sg-score-name">{m.nick}</span>
-              <span className="nv-score-end">
+            <li key={p.id} className="nv-row" data-me={p.id === meId || undefined} data-out={p.eliminated || undefined}>
+              <Avatar avatar={m.avatar} nick={m.nick} size={28} dim={!m.connected || p.eliminated} />
+              <span className="nv-row-name">{m.nick}</span>
+              <span className="nv-row-end">
                 {tag && (
                   <span className="nv-tag" data-kind={tag}>
                     {tag === 'out' ? s.play.eliminatedTag : tag === 'answered' ? s.play.answered : s.play.waitingTag}
                   </span>
                 )}
-                {p.lives != null && view.maxLives != null && !p.eliminated && <Fingers lives={p.lives} max={view.maxLives} size={12} />}
+                {p.lives != null && view.maxLives != null && !p.eliminated && <Fingers lives={p.lives} max={view.maxLives} small />}
               </span>
             </li>
           );
@@ -352,19 +341,19 @@ function PlayerList({ view, members, meId }: { view: NeverView; members: Members
 
 function History({ view, nick }: { view: NeverView; nick: (id: string) => string }) {
   return (
-    <section className="nv-history">
-      <h2 className="nv-side-title">{s.play.history}</h2>
+    <section className="nv-box nv-list">
+      <h2 className="nv-box-title">{s.play.history}</h2>
       {view.history.length === 0 ? (
         <p className="sgs-hint">{s.play.historyEmpty}</p>
       ) : (
-        <ol className="nv-history-list">
+        <ol className="nv-history">
           {view.history.map((r) => (
             <li key={r.round + r.text}>
               <span className="nv-history-text">{r.text}</span>
-              <span className="nv-small dim">
-                <span className="mono">
+              <span className="nv-history-meta">
+                <b>
                   {r.didCount}/{r.answered}
-                </span>
+                </b>
                 {r.didIds && r.didIds.length > 0 && ` ${r.didIds.map(nick).join(', ')}`}
               </span>
             </li>
@@ -375,7 +364,15 @@ function History({ view, nick }: { view: NeverView; nick: (id: string) => string
   );
 }
 
-function Podium({ view, members, meId }: { view: NeverView; members: Members; meId: string }) {
+function Crown() {
+  return (
+    <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+      <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="var(--yellow)" stroke="var(--ink)" strokeWidth="3" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function Podium({ view, members, meId, code }: { view: NeverView; members: Members; meId: string; code: string }) {
   const p = view.podium;
   const nick = (id: string) => members.get(id)?.nick ?? '?';
   const rows = p?.players ? [...p.players].sort((a, b) => (b.lives ?? 0) - (a.lives ?? 0) || a.did - b.did) : null;
@@ -387,61 +384,96 @@ function Podium({ view, members, meId }: { view: NeverView; members: Members; me
   else if (least && p?.players && p.players.length > 1) title = s.podium.cleanest(nick(least.id));
   else title = s.podium.title;
 
+  const livesMode = view.maxLives != null;
+  const first = rows?.[0] ?? null;
+  const second = most && first && most.id !== first.id && most.did > 0 ? most : null;
+  const half = rows ? Math.ceil(rows.length / 2) : 0;
+
   return (
-    <main className="col podium nv-podium">
-      <span className="wordmark" aria-hidden="true">
-        songie
+    <main className="nv-end">
+      <span className="nv-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
       </span>
-      <div className="podium-winner">
-        <h1 className="podium-name">{title}</h1>
-        <p className="dim">{s.podium.summary(p?.rounds ?? 0)}</p>
+      <div className="nv-end-top">
+        <span>{s.name}</span>
+        <span className="nv-end-code">{code}</span>
+      </div>
+      <div className="nv-end-head">
+        <span className="nv-sticker">{s.podium.gameOver}</span>
+        <h1 className="nv-end-title">{title}</h1>
+        <p className="nv-end-sub">{s.podium.summary(p?.rounds ?? 0)}</p>
       </div>
 
-      {most && most.did > 0 && <p className="nv-center nv-podium-line">{s.podium.mostDid(nick(most.id))}</p>}
+      {first && (
+        <div className="nv-end-cards">
+          <div className="nv-end-card" data-first="">
+            <Crown />
+            <span className="nv-end-num">{livesMode ? (first.lives ?? 0) : first.did}</span>
+            <span className="nv-end-cap">{livesMode ? s.podium.livesLeft : s.podium.timesDid}</span>
+            <span className="nv-end-name">{nick(first.id)}</span>
+          </div>
+          {second && (
+            <>
+              <span className="nv-end-dash" aria-hidden="true">
+                –
+              </span>
+              <div className="nv-end-card" data-second="">
+                <span className="nv-end-num">{second.did}</span>
+                <span className="nv-end-cap">{s.podium.mostDidCaption}</span>
+                <span className="nv-end-name">{nick(second.id)}</span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
 
       {p?.hottest && (
-        <div className="nv-hot card">
-          <p className="nv-small dim">{s.podium.hottest}</p>
+        <div className="nv-hot">
+          <span className="nv-hot-label">{s.podium.hottest}</span>
           <p className="nv-hot-text">{p.hottest.text}</p>
-          <p className="nv-small mono dim">{s.podium.hottestCount(p.hottest.didCount, p.hottest.total)}</p>
+          <span className="nv-hot-label">{s.podium.hottestCount(p.hottest.didCount, p.hottest.total)}</span>
         </div>
       )}
 
       {rows ? (
-        <table className="nv-table">
-          <thead>
-            <tr>
-              <th scope="col">
-                <span className="sr-only">Oyuncu</span>
-              </th>
-              <th scope="col">{s.podium.did}</th>
-              <th scope="col">{s.podium.didNot}</th>
-              {view.maxLives != null && <th scope="col">{s.podium.lives}</th>}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r) => {
-              const m = members.get(r.id);
-              return (
-                <tr key={r.id} data-me={r.id === meId || undefined} data-out={r.eliminated || undefined}>
-                  <th scope="row">
-                    {m && <Avatar avatar={m.avatar} nick={m.nick} size={24} dim={r.eliminated} />}
-                    <span>{nick(r.id)}</span>
-                  </th>
-                  <td className="mono">{r.did}</td>
-                  <td className="mono">{r.didNot}</td>
-                  {view.maxLives != null && <td>{r.lives != null && <Fingers lives={r.lives} max={view.maxLives} size={12} />}</td>}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <div className="nv-rosters">
+          {[rows.slice(0, half), rows.slice(half)].map(
+            (col, i) =>
+              col.length > 0 && (
+                <ol key={i} className="nv-roster" start={1 + i * half}>
+                  {col.map((r) => {
+                    const m = members.get(r.id);
+                    return (
+                      <li key={r.id} data-me={r.id === meId || undefined} data-out={r.eliminated || undefined}>
+                        {m && <Avatar avatar={m.avatar} nick={m.nick} size={28} dim={r.eliminated} />}
+                        <span className="nv-roster-name">{nick(r.id)}</span>
+                        <span className="nv-roster-score" title={`${s.podium.did}: ${r.did}, ${s.podium.didNot}: ${r.didNot}`}>
+                          {s.podium.timesShort(r.did)}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ),
+          )}
+        </div>
       ) : (
-        <p className="dim nv-center">{s.podium.anonymousNote}</p>
+        <p className="nv-note">{s.podium.anonymousNote}</p>
       )}
 
-      {p?.me && <p className="nv-center nv-small">{s.podium.me(p.me.did, p.me.didNot)}</p>}
-      <p className="dim podium-back">{s.podium.back}</p>
+      {p?.me && <p className="nv-note">{s.podium.me(p.me.did, p.me.didNot)}</p>}
+
+      <div className="nv-spacer" />
+      <div className="nv-end-foot">
+        <div className="nv-end-bar" aria-hidden="true">
+          <div style={{ animationDuration: `${PODIUM_MS}ms` }} />
+        </div>
+        <p className="nv-end-note">{s.podium.back}</p>
+      </div>
     </main>
   );
 }
