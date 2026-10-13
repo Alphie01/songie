@@ -40,7 +40,7 @@ export const guide: GameGuide = {
     {
       title: 'Ayarlar',
       items: [
-        { term: 'Kategoriler', text: 'İlişki, ilk buluşma, iş, aile, sosyal medya ve daha fazlası. Cesur (+18) varsayılan olarak kapalı.' },
+        { term: 'Kategoriler', text: 'İlişki, ilk buluşma, iş, aile, sosyal medya ve daha fazlası. +18 kategoriler (Cesur, Yatak odası, Fantezi) varsayılan olarak kapalıdır ve açık cinsel içerik içerir.' },
         { term: 'Üçüncü seçenek', text: '“Asla olmaz” seçeneğini ekler. Varsayılan: Kapalı.' },
         { term: 'Kim ne dedi', text: 'Açık ya da İsimsiz. Varsayılan: Açık.' },
         { term: 'Tahmin modu', text: 'Çoğunluk tahmini ve puan. Varsayılan: Açık.' },

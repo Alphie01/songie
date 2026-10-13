@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { GameApi, SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
-import { LIVES_OPTIONS, ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type NeverSettings } from '../shared/index.js';
+import { LIVES_OPTIONS, ROUND_OPTIONS, SECONDS_OPTIONS, isAdultCategory, type CategoryInfo, type NeverSettings } from '../shared/index.js';
 import { s } from './strings';
 
 function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
@@ -37,7 +37,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
-          <Group title={s.settings.categories} hint={s.settings.categoriesHint}>
+          <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.adultHint : s.settings.categoriesHint}>
             <div className="chips">
               {(categories ?? []).map((c) => (
                 <button
@@ -45,6 +45,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                   type="button"
                   className="chip"
                   aria-pressed={settings.categories.includes(c.id)}
+                  data-bold={isAdultCategory(c.id) || undefined}
                   disabled={!editable}
                   onClick={() => {
                     const has = settings.categories.includes(c.id);

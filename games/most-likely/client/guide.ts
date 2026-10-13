@@ -34,7 +34,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       body: 'Ayarları oda sahibi seçer. Oyun sürerken yapılan değişiklikler sıradaki sorudan itibaren geçerli olur.',
       items: [
-        { term: 'Soru kategorileri', text: 'Sorunun geleceği konular. Cesur (+18) varsayılan olarak kapalıdır.', tone: 'neutral' },
+        { term: 'Soru kategorileri', text: 'Sorunun geleceği konular. +18 kategoriler (Cesur, Yatak odası, Sarhoş gece) varsayılan olarak kapalıdır ve açık cinsel içerik içerir.', tone: 'neutral' },
         { term: 'Oy süresi', text: 'Süresiz, 15 ya da 30 sn. Varsayılan: 30 sn.', tone: 'neutral' },
         { term: 'Soru sayısı', text: '10, 20 ya da Sınırsız. Varsayılan: 10.', tone: 'neutral' },
         { term: 'Kendine oy', text: 'Serbest ya da Yasak. Varsayılan: Yasak.', tone: 'neutral' },

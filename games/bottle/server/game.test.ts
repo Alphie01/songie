@@ -345,10 +345,10 @@ describe('oyun sonu', () => {
 });
 
 describe('hazır içerik', () => {
-  it('en az 130 doğruluk ve 130 cesaret, beş kategori, tekrar yok', () => {
+  it('en az 130 doğruluk ve 130 cesaret, yedi kategori, tekrar yok', () => {
     const game = bottleServer({ db: new Database(':memory:') });
     const cats = game.bank.categories();
-    expect(cats.map((c) => c.id)).toEqual(['eglenceli', 'arkadaslar', 'ask', 'utanc', 'cesur', 'oyuncular']);
+    expect(cats.map((c) => c.id)).toEqual(['eglenceli', 'arkadaslar', 'ask', 'utanc', 'cesur', 'yatak-odasi', 'sarhos-gece', 'oyuncular']);
     const ids = cats.map((c) => c.id);
     const truths = game.bank.prompts(ids, 'truth');
     const dares = game.bank.prompts(ids, 'dare');

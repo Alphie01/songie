@@ -40,7 +40,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       items: [
         { term: 'Ne itiraf edilsin', text: 'Her tur bir konu ya da serbest itiraf. Varsayılan: her tur bir konu.', tone: 'neutral' },
-        { term: 'Konu kategorileri', text: 'Genel, Çocukluk, Okul ve iş, Aşk, Utanç, Alışkanlıklar, Cesur (+18) ve Arkadaş konuları. Cesur dışındakiler varsayılan olarak açık.', tone: 'neutral' },
+        { term: 'Konu kategorileri', text: 'Genel, Çocukluk, Okul ve iş, Aşk, Utanç, Alışkanlıklar, Cesur (+18), Yatak odası (+18), Fantezi (+18) ve Arkadaş konuları. +18 kategoriler açık cinsel içerik içerir ve varsayılan olarak kapalıdır; diğerleri açık.', tone: 'neutral' },
         { term: 'Yazma süresi', text: '60 sn, 120 sn ya da süresiz. Varsayılan: 120 sn.', tone: 'neutral' },
         { term: 'Tahmin süresi', text: 'Her itiraf için 30, 45 ya da 60 sn. Varsayılan: 45 sn.', tone: 'neutral' },
         { term: 'Tur sayısı', text: '3, 5 ya da sınırsız. Varsayılan: 3.', tone: 'neutral' },

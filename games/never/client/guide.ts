@@ -34,7 +34,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       body: 'Ayarları oda sahibi seçer. Can ve isimsiz açıklama oyunun başında sabitlenir; kategori, süre ve tur sayısı oyun sürerken de değişebilir.',
       items: [
-        { term: 'Kategoriler', text: 'Cümlelerin geleceği konular. Cesur (+18) varsayılan olarak kapalıdır.', tone: 'neutral' },
+        { term: 'Kategoriler', text: 'Cümlelerin geleceği konular. Cesur (+18), Yatak odası (+18) ve Fantezi (+18) açık cinsel içerik içerir; yalnızca yetişkinler içindir ve varsayılan olarak kapalıdır.', tone: 'neutral' },
         { term: 'Can (parmak)', text: '3, 5, 10 ya da Kapalı. Varsayılan: 5.', tone: 'neutral' },
         { term: 'İsimsiz açıklama', text: 'Açınca can sistemi kapanır, çünkü canlar kimin yaptığını belli eder. Varsayılan: Kapalı.', tone: 'neutral' },
         { term: 'Cevap süresi', text: 'Süresiz, 15 ya da 30 sn. Varsayılan: 30 sn.', tone: 'neutral' },

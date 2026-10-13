@@ -35,7 +35,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       items: [
         { term: 'Soru sayısı', text: '5, 10, 15 ya da 20. Varsayılan: 10.', tone: 'neutral' },
-        { term: 'Kategoriler', text: 'Genel, Arkadaşlık, Aşk, Gelecek, Utanç, Yetenek, Cesur (+18) ve Sizin sorularınız. Cesur dışındakiler varsayılan olarak açık; Cesur’da açık içerik yoktur.', tone: 'neutral' },
+        { term: 'Kategoriler', text: 'Genel, Arkadaşlık, Aşk, Gelecek, Utanç, Yetenek, Cesur (+18), Yatak odası (+18), Sarhoş gece (+18) ve Sizin sorularınız. +18 kategoriler açık cinsel içerik içerir, yalnızca yetişkinler içindir ve varsayılan olarak kapalıdır; diğerleri açık.', tone: 'neutral' },
         { term: 'Düşünme süresi', text: 'Süresiz, 20 sn ya da 40 sn. Varsayılan: 40 sn.', tone: 'neutral' },
         { term: 'Süre bitince', text: 'Rastgele seçilir ya da pas geçilir. Varsayılan: rastgele.', tone: 'neutral' },
         { term: 'Kendini seçebilir', text: 'Açıkken cevap olarak kendini de seçebilirsin. Varsayılan: Kapalı.', tone: 'neutral' },

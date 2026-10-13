@@ -23,6 +23,7 @@ export const CATEGORY_NAMES: Record<string, string> = {
   kitap: 'Kitaplar',
   sarki: 'Şarkılar',
   'atasozu-deyim': 'Atasözleri ve deyimler',
+  'yatak-odasi': 'Yatak odası (+18)',
   [CUSTOM_CATEGORY]: 'Arkadaş başlıkları',
 };
 

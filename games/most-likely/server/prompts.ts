@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type Database from 'better-sqlite3';
-import { CUSTOM_CATEGORY, type CategoryInfo, type Prompt } from '../shared/index.js';
+import { CATEGORY_IDS, CUSTOM_CATEGORY, type CategoryInfo, type Prompt } from '../shared/index.js';
 
 const CONTENT_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), 'content');
 
@@ -15,8 +15,12 @@ export const CATEGORY_NAMES: Record<string, string> = {
   utanc: 'Utanç',
   aliskanliklar: 'Alışkanlıklar',
   cesur: 'Cesur (+18)',
+  'yatak-odasi': 'Yatak odası (+18)',
+  'sarhos-gece': 'Sarhoş gece (+18)',
   [CUSTOM_CATEGORY]: 'Arkadaş soruları',
 };
+
+const ORDER = new Map<string, number>(CATEGORY_IDS.map((id, i) => [id, i]));
 
 /** Hazır sorular (JSON) + oyuncuların eklediği sorular (`most_likely_prompts`). */
 export class PromptPool {
@@ -48,6 +52,7 @@ export class PromptPool {
   categories(): CategoryInfo[] {
     const out: CategoryInfo[] = [...this.builtIn].map(([id, list]) => ({ id, name: CATEGORY_NAMES[id] ?? id, count: list.length }));
     const n = (this.db.prepare('SELECT COUNT(*) AS n FROM most_likely_prompts').get() as { n: number }).n;
+    out.sort((a, b) => (ORDER.get(a.id) ?? 99) - (ORDER.get(b.id) ?? 99));
     out.push({ id: CUSTOM_CATEGORY, name: CATEGORY_NAMES[CUSTOM_CATEGORY]!, count: n });
     return out;
   }

@@ -10,7 +10,7 @@ export const s = {
     modeFree: 'Serbest itiraf',
     modeHint: { topics: 'Her tur herkes aynı konuda yazar.', free: 'Konu yok; aklına gelen herhangi bir itirafı yaz.' },
     categories: 'Konu kategorileri',
-    cesurHint: 'Cesur kategorisi yetişkinler içindir; açık cinsel içerik yoktur.',
+    cesurHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
     write: 'Yazma süresi',
     guess: 'Tahmin süresi',
     rounds: 'Tur sayısı',

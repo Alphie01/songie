@@ -41,6 +41,13 @@ const PATHS: Record<Kind, ReactNode> = {
       <path d="M13.5 13.5c0-3.5 1.5-6 4.5-7M13.5 13.5h4v4.5h-4z" />
     </>
   ),
+  // Konuşma balonu
+  ifade: (
+    <>
+      <path d="M4.5 6.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H11l-4 3.5v-3.5h-.5a2 2 0 0 1-2-2z" />
+      <path d="M8.5 10.5h7" />
+    </>
+  ),
 };
 
 export function KindIcon({ kind, size = 20, stroke = 1.8 }: { kind: Kind; size?: number; stroke?: number }) {

@@ -20,6 +20,8 @@ export const CATEGORY_NAMES: Record<string, string> = {
   ask: 'Aşk',
   utanc: 'Utanç',
   cesur: 'Cesur (+18)',
+  'yatak-odasi': 'Yatak odası (+18)',
+  'sarhos-gece': 'Sarhoş gece (+18)',
   [CUSTOM_CATEGORY]: 'Oyuncuların ekledikleri',
 };
 

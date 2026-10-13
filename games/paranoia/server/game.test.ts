@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness, type Harness } from '@songie/game-kit/testing';
-import type { ParanoiaView } from '../shared/index.js';
+import { ADULT_CATEGORIES, type ParanoiaView } from '../shared/index.js';
 import { paranoiaServer } from './index.js';
 
 const PLAYERS = ['ali', 'ayse', 'cem', 'deniz'];
@@ -326,6 +326,13 @@ describe('Gizlilik Esas', () => {
     const total = cats.reduce((n, c) => n + c.count, 0);
     expect(total).toBeGreaterThanOrEqual(220);
     for (const c of cats.filter((x) => x.id !== 'eklenen')) expect(c.count).toBeGreaterThanOrEqual(25);
+    expect(cats.find((x) => x.id === 'cesur')!.count).toBeGreaterThanOrEqual(50);
+    for (const c of ['yatak-odasi', 'sarhos-gece']) {
+      const cat = cats.find((x) => x.id === c)!;
+      expect(cat.count).toBeGreaterThanOrEqual(60);
+      expect(cat.name).toMatch(/\(\+18\)$/);
+    }
+    for (const c of ADULT_CATEGORIES) expect(g.defaultSettings.categories).not.toContain(c);
     expect(g.validateSettings!({ ...g.defaultSettings, categories: ['eklenen'] })).toMatch(/soru yok/);
     g.bank.add('Aramızda kim en çok pizza yer?', 'ali');
     expect(g.validateSettings!({ ...g.defaultSettings, categories: ['eklenen'] })).toBeNull();

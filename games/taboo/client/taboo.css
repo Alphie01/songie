@@ -1091,3 +1091,9 @@
     animation: none;
   }
 }
+
+/* +18 kategoriler seçiliyken kırmızı. */
+.tbs-group .chip[data-bold][aria-pressed='true'] {
+  background: var(--red);
+  border-color: var(--red);
+}

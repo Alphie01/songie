@@ -1036,3 +1036,9 @@ button.fs-tally[aria-pressed='true'] {
 .sg-side .fs-teams {
   grid-template-columns: minmax(0, 1fr);
 }
+
+/* +18 kategoriler seçiliyken kırmızı. */
+.sgs-group .chip[data-bold][aria-pressed='true'] {
+  background: var(--red);
+  border-color: var(--red);
+}

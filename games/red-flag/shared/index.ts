@@ -15,8 +15,13 @@ export const CATEGORY_IDS = [
   'sosyal-medya',
   'aliskanliklar',
   'cesur',
+  'yatak-odasi',
+  'fantezi',
   CUSTOM_CATEGORY,
 ] as const;
+
+/** Yetişkin kategoriler: varsayılan kapalı, seçilince lobide uyarı çıkar. */
+export const ADULT_CATEGORY_IDS: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi'];
 
 /** 0 = süresiz (herkes oy verince açılır). */
 export const SECONDS_OPTIONS = [0, 15, 30] as const;

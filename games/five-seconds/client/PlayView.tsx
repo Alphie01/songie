@@ -18,6 +18,8 @@ const CATEGORY_LABEL: Record<string, string> = {
   'pop-kultur': 'Pop kültür',
   sacma: 'Saçma sapan',
   cesur: 'Cesur',
+  'yatak-odasi': 'Yatak odası',
+  'sarhos-gece': 'Sarhoş gece',
   arkadas: 'Arkadaş görevi',
 };
 

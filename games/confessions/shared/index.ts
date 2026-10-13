@@ -18,7 +18,10 @@ export const GUESS_OPTIONS = [30, 45, 60] as const;
 export const ROUND_OPTIONS = [3, 5, 0] as const;
 
 export const CUSTOM_CATEGORY = 'arkadas';
-export const CATEGORY_IDS = ['genel', 'cocukluk', 'okul-is', 'ask', 'utanc', 'aliskanliklar', 'cesur', CUSTOM_CATEGORY] as const;
+export const CATEGORY_IDS = ['genel', 'cocukluk', 'okul-is', 'ask', 'utanc', 'aliskanliklar', 'cesur', 'yatak-odasi', 'fantezi', CUSTOM_CATEGORY] as const;
+/** Yetişkin (+18) kategoriler: varsayılan ayarlarda kapalı, lobide uyarıyla gösterilir. */
+export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi'];
+export const isAdultCategory = (id: string) => ADULT_CATEGORIES.includes(id);
 
 export const REACTIONS = ['yok', 'bende', 'efsane', 'olamaz'] as const;
 export type ReactionId = (typeof REACTIONS)[number];

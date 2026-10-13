@@ -1305,3 +1305,9 @@
     animation: none;
   }
 }
+
+/* +18 kategoriler seçiliyken kırmızı. */
+.ch-set .chip[data-bold][aria-pressed='true'] {
+  background: var(--red);
+  border-color: var(--red);
+}

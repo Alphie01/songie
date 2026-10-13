@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { GameApi, SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
-import { ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type MostLikelySettings } from '../shared/index.js';
+import { ADULT_CATEGORY_IDS, ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type MostLikelySettings } from '../shared/index.js';
 import { s } from './strings';
 
 function Group({ title, hint, row, children }: { title: string; hint?: string; row?: boolean; children: ReactNode }) {
@@ -66,6 +66,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                   className="chip"
                   aria-pressed={settings.categories.includes(c.id)}
                   disabled={!editable}
+                  data-bold={ADULT_CATEGORY_IDS.includes(c.id) || undefined}
                   onClick={() => {
                     const has = settings.categories.includes(c.id);
                     const next = has ? settings.categories.filter((x) => x !== c.id) : [...settings.categories, c.id];
@@ -77,6 +78,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
+            <AdultWarning categories={categories} selected={settings.categories} />
           </Group>
 
           <Group row title={s.settings.rounds} hint={s.settings.roundsHint(settings.rounds)}>
@@ -186,5 +188,16 @@ function AddPrompt({ api, onAdded }: { api: GameApi; onAdded(): void }) {
         </form>
       )}
     </Group>
+  );
+}
+
+/** Seçili +18 kategoriler varsa lobide uyarı. */
+function AdultWarning({ categories, selected }: { categories: CategoryInfo[] | null; selected: string[] }) {
+  const names = (categories ?? []).filter((c) => ADULT_CATEGORY_IDS.includes(c.id) && selected.includes(c.id)).map((c) => c.name);
+  if (!names.length) return null;
+  return (
+    <p className="ml-adult" role="note">
+      {s.settings.adultWarning(names.join(', '))}
+    </p>
   );
 }

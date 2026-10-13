@@ -3,6 +3,7 @@ import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import {
   PASS_OPTIONS,
+  isAdultCategory,
   SECONDS_OPTIONS,
   TURN_OPTIONS,
   type CategoryInfo,
@@ -111,13 +112,14 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
           </div>
           <p className="tbs-hint">{teamA.length < 2 || teamB.length < 2 ? `${s.settings.needTwo} ${s.settings.teamsHint}` : s.settings.teamsHint}</p>
 
-          <Group title={s.settings.categories}>
+          <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.adultHint : undefined}>
             <div className="chips">
               {(categories ?? []).map((c) => (
                 <button
                   key={c.id}
                   type="button"
                   className="chip"
+                  data-bold={isAdultCategory(c.id) || undefined}
                   aria-pressed={settings.categories.includes(c.id)}
                   disabled={!editable}
                   onClick={() => {

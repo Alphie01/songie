@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
-import { PASS_OPTIONS, ROUND_OPTIONS, type BottleSettings, type CategoryInfo, type PromptKind } from '../shared/index.js';
+import { PASS_OPTIONS, ROUND_OPTIONS, isAdultCategory, type BottleSettings, type CategoryInfo, type PromptKind } from '../shared/index.js';
 import { s } from './strings';
 
 function Group({ title, hint, row, children }: { title: string; hint?: string; row?: boolean; children: ReactNode }) {
@@ -56,7 +56,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
       {showPrimary && (
         <>
           {!editable && <p className="sgs-readonly">{s.settings.readOnly}</p>}
-          <Group title={s.settings.categories} hint={s.settings.categoriesHint}>
+          <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.categoriesHint : undefined}>
             <div className="sgs-stack">
               {(categories ?? []).map((c) => {
                 const on = settings.categories.includes(c.id);
@@ -67,7 +67,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                     className="option bt-cat"
                     aria-pressed={on}
                     disabled={!editable}
-                    data-bold={c.id === 'cesur' || undefined}
+                    data-bold={isAdultCategory(c.id) || undefined}
                     onClick={() => {
                       const next = on ? settings.categories.filter((x) => x !== c.id) : [...settings.categories, c.id];
                       if (next.length) set({ categories: next });

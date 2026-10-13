@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
-import { QUESTION_COUNT_OPTIONS, THINK_OPTIONS, type CategoryInfo, type ParanoiaSettings } from '../shared/index.js';
+import { QUESTION_COUNT_OPTIONS, THINK_OPTIONS, isAdultCategory, type CategoryInfo, type ParanoiaSettings } from '../shared/index.js';
 import { s } from './strings';
 
 /** Lobi tasarımındaki satır: solda etiket, sağda seçenekler; `stack` uzun seçenekleri alta indirir. */
@@ -81,7 +81,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
             <Choice options={QUESTION_COUNT_OPTIONS} value={settings.questionCount as (typeof QUESTION_COUNT_OPTIONS)[number]} label={String} disabled={off} onPick={(n) => set({ questionCount: n })} />
           </Group>
 
-          <Group title={s.settings.categories} hint={s.settings.categoriesHint} stack>
+          <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.adultHint : s.settings.categoriesHint} stack>
             <div className="chips">
               {(categories ?? []).map((c) => (
                 <button
@@ -89,6 +89,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                   type="button"
                   className="chip"
                   aria-pressed={settings.categories.includes(c.id)}
+                  data-bold={isAdultCategory(c.id) || undefined}
                   disabled={off}
                   onClick={() => {
                     const has = settings.categories.includes(c.id);

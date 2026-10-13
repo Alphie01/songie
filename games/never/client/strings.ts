@@ -4,7 +4,8 @@ export const s = {
   settings: {
     readOnly: 'Ayarları oda sahibi seçer.',
     categories: 'Kategoriler',
-    categoriesHint: 'Cesur kategori +18 sorular içerir; açık cinsel içerik yok.',
+    categoriesHint: '+18 kategoriler varsayılan olarak kapalıdır.',
+    adultHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
     lives: 'Can (parmak)',
     livesHint: (n: number) => (n === 0 ? 'Kimse elenmez; oyun tur sayısıyla ya da oda sahibi bitirince biter.' : `“Yaptım” diyen 1 can kaybeder. ${n} canı biten elenir ama izlemeye devam eder.`),
     off: 'Kapalı',

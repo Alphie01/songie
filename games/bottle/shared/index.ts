@@ -6,7 +6,10 @@ export const MIN_PLAYERS = 2;
 export const MAX_PLAYERS = 16;
 
 /** Hazır kategoriler (server/content/<id>.json) + oyuncuların eklediği sorular. */
-export const BUILTIN_CATEGORIES = ['eglenceli', 'arkadaslar', 'ask', 'utanc', 'cesur'] as const;
+export const BUILTIN_CATEGORIES = ['eglenceli', 'arkadaslar', 'ask', 'utanc', 'cesur', 'yatak-odasi', 'sarhos-gece'] as const;
+/** Yetişkin (+18) kategoriler: varsayılan ayarlarda kapalı, lobide uyarıyla gösterilir. */
+export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'sarhos-gece'];
+export const isAdultCategory = (id: string) => ADULT_CATEGORIES.includes(id);
 export const CUSTOM_CATEGORY = 'oyuncular';
 
 export const KINDS = ['truth', 'dare'] as const;

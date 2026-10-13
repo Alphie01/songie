@@ -7,7 +7,8 @@ export const s = {
   voteShort: { green: 'Green', red: 'Red', never: 'Asla' } satisfies Record<Vote, string>,
   settings: {
     categories: 'Kategoriler',
-    categoriesHint: 'Cesur kategorisi +18 ama açık içerik yok.',
+    categoriesHint: '+18 kategoriler varsayılan olarak kapalıdır.',
+    adultWarning: (names: string) => `${names} açık cinsel içerik içerir; yalnızca yetişkinler içindir.`,
     dealBreaker: 'Üçüncü seçenek',
     dealBreakerHint: 'Green ve red’in yanına “Asla olmaz” eklenir.',
     names: 'Kim ne dedi',

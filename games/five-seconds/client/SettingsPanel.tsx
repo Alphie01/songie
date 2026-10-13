@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { GameApi, SettingsPanelProps } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
-import { ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type FiveSecondsSettings, type TeamId } from '../shared/index.js';
+import { ROUND_OPTIONS, isAdultCategory, SECONDS_OPTIONS, type CategoryInfo, type FiveSecondsSettings, type TeamId } from '../shared/index.js';
 import { s } from './strings';
 
 /** Lobi tasarımındaki satır: solda ad, sağda seçenekler. */
@@ -132,14 +132,14 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             </div>
           )}
 
-          <Group title={s.settings.categories} hint={s.settings.categoriesHint}>
+          <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.adultHint : s.settings.categoriesHint}>
             <div className="chips">
               {(categories ?? []).map((c) => (
                 <button
                   key={c.id}
                   type="button"
                   className="chip"
-                  data-bold={c.id === 'cesur' || undefined}
+                  data-bold={isAdultCategory(c.id) || undefined}
                   aria-pressed={settings.categories.includes(c.id)}
                   disabled={!editable}
                   onClick={() => {

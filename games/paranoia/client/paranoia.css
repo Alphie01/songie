@@ -1085,3 +1085,9 @@ button.pr-env {
 .pr-side-settings .pr-toggle.toggle {
   width: 100%;
 }
+
+/* +18 kategoriler seçiliyken kırmızı. */
+.sgs .chip[data-bold][aria-pressed='true'] {
+  background: var(--red);
+  border-color: var(--red);
+}

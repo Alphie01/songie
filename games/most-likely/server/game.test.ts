@@ -2,7 +2,7 @@ import path from 'node:path';
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import { CATEGORY_IDS, cleanPromptText, customPromptSchema, defaultSettings, type MostLikelyView } from '../shared/index.js';
+import { ADULT_CATEGORY_IDS, CATEGORY_IDS, cleanPromptText, customPromptSchema, defaultSettings, type MostLikelyView } from '../shared/index.js';
 import { mostLikelyServer } from './index.js';
 import { PromptPool } from './prompts.js';
 
@@ -281,6 +281,18 @@ describe('most-likely: içerik', () => {
     const cats = pool.categories();
     for (const id of CATEGORY_IDS) expect(cats.find((c) => c.id === id)?.count ?? 0).toBeGreaterThanOrEqual(25);
     expect(pool.prompts([...CATEGORY_IDS]).length).toBeGreaterThanOrEqual(220);
+    const texts = pool.prompts([...CATEGORY_IDS]).map((p) => p.text);
+    expect(new Set(texts).size).toBe(texts.length);
+  });
+
+  it('+18 kategoriler dolu, adları (+18) ile biter ve varsayılan olarak kapalı', () => {
+    const cats = new PromptPool(new Database(':memory:')).categories();
+    for (const id of ADULT_CATEGORY_IDS) {
+      const c = cats.find((x) => x.id === id)!;
+      expect(c.name.endsWith('(+18)')).toBe(true);
+      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : 60);
+      expect(defaultSettings.categories).not.toContain(id);
+    }
   });
 
   it('eklenen soru kalıptan temizlenir ve arkadaş kategorisine girer', () => {

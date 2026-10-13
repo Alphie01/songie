@@ -34,7 +34,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       body: 'Ayarları oda sahibi seçer.',
       items: [
-        { term: 'Kategoriler', text: 'Eğlenceli, Arkadaşlar, Aşk, Utanç, Cesur (+18) ve Oyuncuların ekledikleri. Cesur varsayılan olarak kapalıdır.', tone: 'neutral' },
+        { term: 'Kategoriler', text: 'Eğlenceli, Arkadaşlar, Aşk, Utanç, Cesur (+18), Yatak odası (+18), Sarhoş gece (+18) ve Oyuncuların ekledikleri. +18 kategoriler açık cinsel içerik içerir ve varsayılan olarak kapalıdır.', tone: 'neutral' },
         { term: 'Doğruluk mu cesaret mi', text: 'Oyuncu seçer ya da Rastgele. Varsayılan: Oyuncu seçer.', tone: 'neutral' },
         { term: 'Pas hakkı (kişi başı)', text: '1, 2, 3 ya da Sınırsız; oyunun tamamı için. Varsayılan: 2.', tone: 'neutral' },
         { term: 'Pas cezası', text: 'Açıksa pas geçen 1 puan kaybeder. Varsayılan: Açık.', tone: 'neutral' },

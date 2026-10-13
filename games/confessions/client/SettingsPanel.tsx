@@ -7,6 +7,7 @@ import {
   PROMPT_MIN,
   ROUND_OPTIONS,
   WRITE_OPTIONS,
+  isAdultCategory,
   type CategoryInfo,
   type ConfessionsSettings,
 } from '../shared/index.js';
@@ -71,7 +72,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
           </Group>
 
           {settings.mode === 'topics' && (
-            <Group title={s.settings.categories} hint={settings.categories.includes('cesur') ? s.settings.cesurHint : undefined}>
+            <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.cesurHint : undefined}>
               <div className="chips">
                 {(categories ?? []).map((c) => (
                   <button
@@ -79,6 +80,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                     type="button"
                     className="chip"
                     aria-pressed={settings.categories.includes(c.id)}
+                    data-bold={isAdultCategory(c.id) || undefined}
                     disabled={!editable}
                     onClick={() => {
                       const has = settings.categories.includes(c.id);

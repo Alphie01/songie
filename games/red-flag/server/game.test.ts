@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import { CUSTOM_CATEGORY, type RedFlagView } from '../shared/index.js';
+import { ADULT_CATEGORY_IDS, CUSTOM_CATEGORY, defaultSettings, type RedFlagView } from '../shared/index.js';
 import { DEFAULT_TIMING, majorityOf } from './game.js';
 import { redFlagServer } from './index.js';
 
@@ -31,10 +31,22 @@ describe('red-flag: içerik', () => {
       'sosyal-medya',
       'aliskanliklar',
       'cesur',
+      'yatak-odasi',
+      'fantezi',
     ]);
     expect(builtIn.reduce((n, c) => n + c.count, 0)).toBeGreaterThanOrEqual(250);
     const texts = g.pool.items(builtIn.map((c) => c.id)).map((s) => s.text);
     expect(new Set(texts).size).toBe(texts.length);
+  });
+
+  it('+18 kategoriler dolu, adları (+18) ile biter ve varsayılan olarak kapalı', () => {
+    const cats = game().pool.categories();
+    for (const id of ADULT_CATEGORY_IDS) {
+      const c = cats.find((x) => x.id === id)!;
+      expect(c.name.endsWith('(+18)')).toBe(true);
+      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : 60);
+      expect(defaultSettings.categories).not.toContain(id);
+    }
   });
 
   it('stores player-added situations in red_flag_items and plays them', async () => {

@@ -8,7 +8,8 @@ export const s = {
   settings: {
     readOnly: 'Ayarları oda sahibi seçer.',
     categories: 'Soru kategorileri',
-    categoriesHint: 'Cesur (+18) kategorisi içki, flört ve utanç verici itiraflar içerir.',
+    categoriesHint: '+18 kategoriler varsayılan olarak kapalıdır.',
+    adultWarning: (names: string) => `${names} açık cinsel içerik içerir; yalnızca yetişkinler içindir.`,
     seconds: 'Oy süresi',
     sec: (n: number) => (n === 0 ? 'Süresiz' : `${n} sn`),
     secondsHint: (n: number) => (n === 0 ? 'Herkes oy verince sonuçlar açılır.' : 'Süre bitince oy vermeyenler beklenmez.'),

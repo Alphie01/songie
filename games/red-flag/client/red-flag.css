@@ -1012,3 +1012,19 @@
     transform: none;
   }
 }
+
+/* +18 kategoriler: seçiliyken kırmızı, altında uyarı */
+.rf-settings .chip[data-bold][aria-pressed='true'] {
+  background: var(--red);
+}
+
+.rf-adult {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border: 2px solid var(--red);
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--text);
+}

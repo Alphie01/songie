@@ -912,3 +912,9 @@
     animation-duration: 0s !important;
   }
 }
+
+/* +18 kategoriler seçiliyken kırmızı. */
+.sgs .chip[data-bold][aria-pressed='true'] {
+  background: var(--red);
+  border-color: var(--red);
+}

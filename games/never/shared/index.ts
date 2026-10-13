@@ -20,8 +20,14 @@ export const CATEGORY_NAMES: Record<string, string> = {
   teknoloji: 'Teknoloji',
   yemek: 'Yemek',
   cesur: 'Cesur (+18)',
+  'yatak-odasi': 'Yatak odası (+18)',
+  fantezi: 'Fantezi (+18)',
   [CUSTOM_CATEGORY]: 'Arkadaş cümleleri',
 };
+
+/** +18 kategoriler: varsayılan ayarlarda yoktur, oda sahibi bilerek açar. */
+export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi'];
+export const isAdultCategory = (id: string): boolean => ADULT_CATEGORIES.includes(id);
 
 export const settingsSchema = z.object({
   categories: z.array(z.string().min(1).max(40)).min(1, 'En az bir kategori seç').max(30),

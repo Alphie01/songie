@@ -2,7 +2,7 @@ import path from 'node:path';
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import { countWords, type CharadesView } from '../shared/index.js';
+import { ADULT_CATEGORIES, countWords, defaultSettings, type CharadesView } from '../shared/index.js';
 import { TitleBank } from './titles.js';
 import { charadesServer } from './index.js';
 
@@ -25,7 +25,7 @@ describe('charades: içerik', () => {
   it('gerçek içerikte en az 260 başlık var, hepsi türlü ve zorluk etiketli', () => {
     const bank = new TitleBank(new Database(':memory:'));
     const cats = bank.categories().filter((c) => c.id !== 'arkadas');
-    expect(cats.map((c) => c.id).sort()).toEqual(['atasozu-deyim', 'dizi-turk', 'dizi-yabanci', 'film-turk', 'film-yabanci', 'kitap', 'sarki']);
+    expect(cats.map((c) => c.id).sort()).toEqual(['atasozu-deyim', 'dizi-turk', 'dizi-yabanci', 'film-turk', 'film-yabanci', 'kitap', 'sarki', 'yatak-odasi']);
     const all = bank.cards(cats.map((c) => c.id), 'karisik');
     expect(all.length).toBeGreaterThanOrEqual(260);
     const easy = bank.cards(cats.map((c) => c.id), 'kolay');
@@ -35,6 +35,15 @@ describe('charades: içerik', () => {
     expect(hard.length).toBeGreaterThan(80);
     expect(new Set(all.map((c) => c.title)).size).toBe(all.length);
     for (const c of all) expect(c.words).toBeGreaterThan(0);
+  });
+
+  it('+18 türler varsayılan kapalı ve en az 60 başlık', () => {
+    const bank = new TitleBank(new Database(':memory:'));
+    for (const id of ADULT_CATEGORIES) {
+      expect(defaultSettings.categories).not.toContain(id);
+      expect(bank.categories().find((c) => c.id === id)!.name).toMatch(/\(\+18\)$/);
+      expect(bank.cards([id], 'karisik').length).toBeGreaterThanOrEqual(60);
+    }
   });
 
   it('kelime sayısı noktalamayı saymaz', () => {

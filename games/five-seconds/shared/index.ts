@@ -9,7 +9,10 @@ export const SECONDS_OPTIONS = [5, 7, 10] as const;
 export const ROUND_OPTIONS = [3, 5, 0] as const;
 
 export const CUSTOM_CATEGORY = 'arkadas';
-export const CATEGORY_IDS = ['genel', 'ask', 'is-okul', 'yemek', 'turkiye', 'pop-kultur', 'sacma', 'cesur'] as const;
+export const CATEGORY_IDS = ['genel', 'ask', 'is-okul', 'yemek', 'turkiye', 'pop-kultur', 'sacma', 'cesur', 'yatak-odasi', 'sarhos-gece'] as const;
+/** Varsayılan kapalı, yalnızca yetişkinler için kategoriler. */
+export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'sarhos-gece'];
+export const isAdultCategory = (id: string) => ADULT_CATEGORIES.includes(id);
 
 export const settingsSchema = z.object({
   seconds: z.number().int().min(3).max(30),

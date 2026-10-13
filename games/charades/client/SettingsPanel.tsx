@@ -6,6 +6,7 @@ import {
   DIFFICULTIES,
   KINDS,
   PASS_OPTIONS,
+  isAdultCategory,
   SECONDS_OPTIONS,
   TURN_OPTIONS,
   type CategoryInfo,
@@ -121,7 +122,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
             {unassigned.length > 0 && <TeamBox team={null} ids={unassigned} />}
           </Group>
 
-          <Group title={s.settings.categories}>
+          <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.adultHint : undefined}>
             <div className="chips">
               {(categories ?? []).map((c) => {
                 const kind = CATEGORY_KIND[c.id];
@@ -130,6 +131,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section, play
                     key={c.id}
                     type="button"
                     className="chip ch-kind-chip"
+                    data-bold={isAdultCategory(c.id) || undefined}
                     aria-pressed={settings.categories.includes(c.id)}
                     disabled={!editable}
                     onClick={() => {

@@ -11,7 +11,11 @@ export const THINK_OPTIONS = [0, 20, 40] as const;
 /** Oyuncuların eklediği sorular bu kategoride toplanır. */
 export const CUSTOM_CATEGORY = 'eklenen';
 
-export const BUILT_IN_CATEGORIES = ['genel', 'arkadaslik', 'ask', 'gelecek', 'utanc', 'yetenek', 'cesur'] as const;
+export const BUILT_IN_CATEGORIES = ['genel', 'arkadaslik', 'ask', 'gelecek', 'utanc', 'yetenek', 'cesur', 'yatak-odasi', 'sarhos-gece'] as const;
+
+/** +18 kategoriler: varsayılan ayarlarda yoktur, oda sahibi bilerek açar. */
+export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'sarhos-gece'];
+export const isAdultCategory = (id: string): boolean => ADULT_CATEGORIES.includes(id);
 
 export const settingsSchema = z.object({
   questionCount: z.number().int().min(1).max(40),

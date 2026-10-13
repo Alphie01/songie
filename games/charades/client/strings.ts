@@ -4,13 +4,14 @@ export const s = {
   name: 'Sessiz Sinema',
   pitch: 'Tek kelime etmeden filmi, diziyi, şarkıyı takımına anlat',
   team: { a: 'Yeşil takım', b: 'Mor takım' } satisfies Record<TeamId, string>,
-  kind: { film: 'Film', dizi: 'Dizi', kitap: 'Kitap', sarki: 'Şarkı', deyim: 'Atasözü ya da deyim' } satisfies Record<Kind, string>,
+  kind: { film: 'Film', dizi: 'Dizi', kitap: 'Kitap', sarki: 'Şarkı', deyim: 'Atasözü ya da deyim', ifade: 'İfade' } satisfies Record<Kind, string>,
   kindGesture: {
     film: 'Eski kamera kolu çevir',
     dizi: 'Havaya ekran çiz',
     kitap: 'Ellerini kitap gibi aç',
     sarki: 'Elini ağzına götürüp şarkı söyler gibi yap',
     deyim: 'İki elinle tırnak işareti yap',
+    ifade: 'Elini ağzının önünde açıp kapat, konuşur gibi yap',
   } satisfies Record<Kind, string>,
   words: (n: number) => `${n} kelime`,
   settings: {
@@ -20,6 +21,7 @@ export const s = {
     shuffle: 'Karıştır',
     empty: 'Henüz kimse yok',
     categories: 'Türler',
+    adultHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
     difficulty: 'Zorluk',
     difficultyName: { kolay: 'Kolay', karisik: 'Karışık', zor: 'Zor' } satisfies Record<Difficulty, string>,
     difficultyHint: {
@@ -40,7 +42,7 @@ export const s = {
     readOnly: 'Ayarları oda sahibi seçer.',
     addTitle: 'Başlık ekle',
     addTitleHint: 'Eklediğin başlık “Arkadaş başlıkları” türüne girer ve kimseye listelenmez.',
-    titleLabel: 'Film, dizi, kitap, şarkı ya da deyim',
+    titleLabel: 'Film, dizi, kitap, şarkı, deyim ya da ifade',
     kindLabel: 'Türü',
     save: 'Başlığı ekle',
     saving: 'Ekleniyor…',
@@ -113,7 +115,7 @@ export const s = {
     ] as [string, string][],
     signsTitle: 'Klasik işaretler',
     signs: [
-      ['Tür', 'Önce türü göster: film için kamera kolu çevir, dizi için ekran çiz, kitap için ellerini aç, şarkı için şarkı söyler gibi yap, deyim için tırnak işareti.'],
+      ['Tür', 'Önce türü göster: film için kamera kolu çevir, dizi için ekran çiz, kitap için ellerini aç, şarkı için şarkı söyler gibi yap, deyim için tırnak işareti, ifade için elini ağzının önünde açıp kapat.'],
       ['Kelime sayısı', 'Kaç kelime olduğunu parmaklarınla göster.'],
       ['Kaçıncı kelime', 'Hangi kelimeyi anlattığını yine parmakla göster; sıra karışmasın.'],
       ['Hece', 'Kelimeyi heceye bölmek için parmaklarını ön koluna koy: kaç parmak, o kadar hece.'],

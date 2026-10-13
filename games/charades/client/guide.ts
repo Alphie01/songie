@@ -22,7 +22,7 @@ export const guide: GameGuide = {
         { term: 'Anlatıcı', text: 'Başlığı, türünü ve kelime sayısını görür. “Doğru”, “Pas” ve “Geri al” düğmeleri onda.', tone: 'green' },
         { term: 'Anlatan takım', text: 'Başlığı göremez. İşaretleri izler, tahminini yüksek sesle söyler.', tone: 'yellow' },
         { term: 'Rakip takım', text: 'Başlığı görür ama söylemez. Anlatıcı ses çıkarır ya da dudaklarıyla söylerse “Konuştu!”ya basar; kart geçer.', tone: 'purple' },
-        { term: 'Tür işareti', text: 'Önce türü göster: film için kamera kolu çevir, dizi için havaya ekran çiz, kitap için ellerini aç, şarkı için şarkı söyler gibi yap, deyim için tırnak işareti yap.', tone: 'neutral' },
+        { term: 'Tür işareti', text: 'Önce türü göster: film için kamera kolu çevir, dizi için havaya ekran çiz, kitap için ellerini aç, şarkı için şarkı söyler gibi yap, deyim için tırnak işareti yap, ifade için elini ağzının önünde açıp kapat.', tone: 'neutral' },
         { term: 'Kelime ve hece', text: 'Kelime sayısını ve kaçıncı kelimeyi parmaklarınla göster. Hece için parmaklarını ön koluna koy.', tone: 'neutral' },
       ],
     },
@@ -39,7 +39,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       items: [
         { term: 'Takımlar', text: 'Lobide bir oyuncuya dokunarak takımını değiştir ya da “Karıştır” de. Takımı seçilmeyenler başlarken dağıtılır.', tone: 'neutral' },
-        { term: 'Türler', text: 'Türk ve yabancı filmler, Türk ve yabancı diziler, kitaplar, şarkılar, atasözleri ve deyimler, arkadaş başlıkları. Varsayılan: hepsi.', tone: 'neutral' },
+        { term: 'Türler', text: 'Türk ve yabancı filmler, Türk ve yabancı diziler, kitaplar, şarkılar, atasözleri ve deyimler, arkadaş başlıkları. Varsayılan: hepsi; yalnızca Yatak odası (+18) kapalıdır, açık cinsel içerik içerir.', tone: 'neutral' },
         { term: 'Zorluk', text: 'Kolay, Karışık ya da Zor. Varsayılan: Karışık.', tone: 'neutral' },
         { term: 'Tur süresi', text: '60, 90, 120 ya da 180 sn. Varsayılan: 90 sn.', tone: 'neutral' },
         { term: 'Pas hakkı', text: 'Tur başına 1, 3 ya da sınırsız. Varsayılan: 3.', tone: 'neutral' },

@@ -11,7 +11,9 @@ export const SECONDS_OPTIONS = [0, 15, 30] as const;
 export const ROUND_OPTIONS = [10, 20, 0] as const;
 
 export const CUSTOM_CATEGORY = 'arkadas';
-export const CATEGORY_IDS = ['genel', 'arkadaslik', 'ask', 'is-okul', 'gelecek', 'utanc', 'aliskanliklar', 'cesur'] as const;
+export const CATEGORY_IDS = ['genel', 'arkadaslik', 'ask', 'is-okul', 'gelecek', 'utanc', 'aliskanliklar', 'cesur', 'yatak-odasi', 'sarhos-gece'] as const;
+/** Yetişkin kategoriler: varsayılan kapalı, seçilince lobide uyarı çıkar. */
+export const ADULT_CATEGORY_IDS: readonly string[] = ['cesur', 'yatak-odasi', 'sarhos-gece'];
 
 export const settingsSchema = z.object({
   categories: z.array(z.string().min(1).max(40)).min(1, 'En az bir kategori seç').max(20),

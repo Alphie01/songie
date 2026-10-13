@@ -14,11 +14,13 @@ export const CATEGORY_NAMES: Record<string, string> = {
   utanc: 'Utanç',
   yetenek: 'Yetenek',
   cesur: 'Cesur (+18)',
+  'yatak-odasi': 'Yatak odası (+18)',
+  'sarhos-gece': 'Sarhoş gece (+18)',
   [CUSTOM_CATEGORY]: 'Sizin sorularınız',
 };
 
 /** Kategori sırası: ayar panelinde bu sırayla görünür. */
-const ORDER = ['genel', 'arkadaslik', 'ask', 'gelecek', 'utanc', 'yetenek', 'cesur'];
+const ORDER = ['genel', 'arkadaslik', 'ask', 'gelecek', 'utanc', 'yetenek', 'cesur', 'yatak-odasi', 'sarhos-gece'];
 
 export interface Question {
   id: string;

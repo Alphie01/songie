@@ -14,7 +14,7 @@ export const DIFFICULTIES = ['kolay', 'karisik', 'zor'] as const;
 export type Difficulty = (typeof DIFFICULTIES)[number];
 
 /** Başlığın türü: anlatıcının ilk işareti (film çevirmek, kitap açmak…). */
-export const KINDS = ['film', 'dizi', 'kitap', 'sarki', 'deyim'] as const;
+export const KINDS = ['film', 'dizi', 'kitap', 'sarki', 'deyim', 'ifade'] as const;
 export type Kind = (typeof KINDS)[number];
 
 /** Hazır kategoriler ve türleri. Arkadaş başlıkları kendi türünü taşır. */
@@ -26,7 +26,12 @@ export const CATEGORY_KIND: Record<string, Kind> = {
   kitap: 'kitap',
   sarki: 'sarki',
   'atasozu-deyim': 'deyim',
+  'yatak-odasi': 'ifade',
 };
+
+/** Varsayılan kapalı, yalnızca yetişkinler için kategoriler. */
+export const ADULT_CATEGORIES: readonly string[] = ['yatak-odasi'];
+export const isAdultCategory = (id: string) => ADULT_CATEGORIES.includes(id);
 
 export const CUSTOM_CATEGORY = 'arkadas';
 
@@ -53,7 +58,7 @@ export const defaultSettings: CharadesSettings = {
   seconds: 90,
   passes: 3,
   turns: 4,
-  categories: [...Object.keys(CATEGORY_KIND), CUSTOM_CATEGORY],
+  categories: [...Object.keys(CATEGORY_KIND).filter((id) => !isAdultCategory(id)), CUSTOM_CATEGORY],
   difficulty: 'karisik',
   foulPenalty: true,
 };

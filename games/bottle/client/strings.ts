@@ -6,7 +6,7 @@ export const s = {
   kind: { truth: 'Doğruluk', dare: 'Cesaret' } satisfies Record<PromptKind, string>,
   settings: {
     categories: 'Kategoriler',
-    categoriesHint: 'Cesur kategorisi yetişkinler içindir; açık cinsel içerik yoktur.',
+    categoriesHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir. Cesaret görevlerinde dokunma yalnızca karşıdaki kabul ederse.',
     truthDare: (t: number, d: number) => `${t} doğruluk, ${d} cesaret`,
     choice: 'Doğruluk mu cesaret mi',
     choicePlayer: 'Oyuncu seçer',

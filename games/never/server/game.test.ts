@@ -2,7 +2,7 @@ import path from 'node:path';
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import type { NeverView } from '../shared/index.js';
+import { ADULT_CATEGORIES, defaultSettings, type NeverView } from '../shared/index.js';
 import { neverServer } from './index.js';
 
 const TEST_DIR = path.join(import.meta.dirname, 'test-content');
@@ -117,6 +117,13 @@ describe('never: tam akış', () => {
     for (const c of ['genel', 'okul-is', 'ask-iliski', 'seyahat', 'utanc', 'teknoloji', 'yemek', 'cesur']) {
       expect(cats.find((x) => x.id === c)?.count ?? 0).toBeGreaterThan(0);
     }
+    expect(cats.find((x) => x.id === 'cesur')!.count).toBeGreaterThanOrEqual(50);
+    for (const c of ['yatak-odasi', 'fantezi']) {
+      const cat = cats.find((x) => x.id === c)!;
+      expect(cat.count).toBeGreaterThanOrEqual(60);
+      expect(cat.name).toMatch(/\(\+18\)$/);
+    }
+    for (const c of ADULT_CATEGORIES) expect(defaultSettings.categories).not.toContain(c);
     const all = g.pool.statements(cats.map((c) => c.id));
     expect(all.length).toBeGreaterThanOrEqual(220);
     expect(new Set(all.map((s) => s.text)).size).toBe(all.length);

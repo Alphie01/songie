@@ -37,7 +37,10 @@ export function <ad>Server(deps: { db: Database.Database; timing?: Partial<…> 
 - `end(ctx, state)`: oda sahibi "Oyunu bitir" dediğinde podyum/özet göster, sonra `ctx.finish(results)`.
 - Uygunsa `onSettings` (oyun sırasında ayar değişikliği, sıradaki turdan itibaren).
 - İçerik (sorular, kartlar…) `server/content/` altında JSON; Türkçe yazımı doğru, arkadaş ortamına uygun.
-  "+18/cesur" kategorisi olabilir ama açık cinsel içerik yok. İsteğe bağlı oyuncu eklemeli içerik
+  +18 kategoriler (adı "(+18)" ile biter, `ADULT_CATEGORIES`) açık cinsel içerik taşıyabilir (kullanıcı isteği,
+  Ekim 2026): varsayılan ayarlarda kapalı, seçilince lobide uyarı çıkar. Sınırlar: herkes yetişkin (okul dönemi yok),
+  rıza dışı / ensest / gizli kayıt / ifşa yok; cesaret görevlerinde gerçek cinsel eylem yok, dokunma yalnızca
+  "kabul eden biriyle". İsteğe bağlı oyuncu eklemeli içerik
   `routes(app)` ile (`/api/games/<id>/…`, `req.profile` ile kimlik) ve `deps.db` tablosunda (`<id>_` önekli).
 - Testler: `server/*.test.ts`, `createHarness` (`@songie/game-kit/testing`) ile. Bütün akışı, yetkileri,
   gizliliği (`h.seen(id)` gizli metni içermemeli), zamanlayıcıları (`h.advance`), bağlantı kopmasını ve

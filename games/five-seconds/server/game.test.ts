@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import { CUSTOM_CATEGORY, type FiveSecondsView } from '../shared/index.js';
+import { ADULT_CATEGORIES, CUSTOM_CATEGORY, defaultSettings, type FiveSecondsView } from '../shared/index.js';
 import { fiveSecondsServer } from './index.js';
 
 const TIMING = { voteMs: 20_000, podiumMs: 5_000, awayMs: 8_000, tickMs: 1_000 };
@@ -35,9 +35,19 @@ describe('five-seconds içerik', () => {
     const g = game();
     const cats = g.bank.categories();
     const builtIn = cats.filter((c) => c.id !== CUSTOM_CATEGORY);
-    expect(builtIn.map((c) => c.id).sort()).toEqual(['ask', 'cesur', 'genel', 'is-okul', 'pop-kultur', 'sacma', 'turkiye', 'yemek']);
+    expect(builtIn.map((c) => c.id).sort()).toEqual(['ask', 'cesur', 'genel', 'is-okul', 'pop-kultur', 'sacma', 'sarhos-gece', 'turkiye', 'yatak-odasi', 'yemek']);
     expect(builtIn.reduce((n, c) => n + c.count, 0)).toBeGreaterThanOrEqual(260);
     for (const p of g.bank.prompts(builtIn.map((c) => c.id))) expect(p.text).toMatch(/^3 .+ söyle/);
+  });
+
+  it('+18 kategoriler varsayılan kapalı ve yeterince dolu', () => {
+    const cats = game().bank.categories();
+    for (const id of ADULT_CATEGORIES) {
+      expect(defaultSettings.categories).not.toContain(id);
+      const c = cats.find((x) => x.id === id)!;
+      expect(c.name).toMatch(/\(\+18\)$/);
+      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : 60);
+    }
   });
 
   it('oyuncu görevi eklenir, sayılır ama listelenmez', () => {
@@ -55,7 +65,7 @@ describe('five-seconds akış', () => {
     const { g, h } = setup();
     await h.start();
     expect(h.view('a')).toMatchObject({ phase: 'ready', performerId: 'a', prompt: null, round: 1 });
-    const all = g.bank.prompts(['genel', 'ask', 'is-okul', 'yemek', 'turkiye', 'pop-kultur', 'sacma', 'cesur']);
+    const all = g.bank.prompts(['genel', 'ask', 'is-okul', 'yemek', 'turkiye', 'pop-kultur', 'sacma', 'cesur', 'yatak-odasi', 'sarhos-gece']);
     for (const id of ['a', 'b', 'c']) for (const p of all) expect(h.seen(id)).not.toContain(p.text);
 
     expect(await h.act('b', { type: 'ready', attemptId: h.view('a').attemptId })).toMatchObject({ ok: false });

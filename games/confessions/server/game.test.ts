@@ -31,7 +31,7 @@ describe('confessions', () => {
   it('ships at least 120 prompts in the required categories', () => {
     const g = game();
     const cats = g.prompts.categories();
-    expect(cats.map((c) => c.id)).toEqual(expect.arrayContaining(['genel', 'cocukluk', 'okul-is', 'ask', 'utanc', 'aliskanliklar', 'cesur', 'arkadas']));
+    expect(cats.map((c) => c.id)).toEqual(expect.arrayContaining(['genel', 'cocukluk', 'okul-is', 'ask', 'utanc', 'aliskanliklar', 'cesur', 'yatak-odasi', 'fantezi', 'arkadas']));
     expect(cats.reduce((n, c) => n + c.count, 0)).toBeGreaterThanOrEqual(120);
   });
 

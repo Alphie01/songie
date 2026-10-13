@@ -11,6 +11,7 @@ export const s = {
     shuffle: 'Karıştır',
     empty: 'Henüz kimse yok',
     categories: 'Kategoriler',
+    adultHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
     seconds: 'Tur süresi',
     sec: (n: number) => `${n} sn`,
     passes: 'Pas hakkı',

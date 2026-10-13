@@ -7,7 +7,8 @@ export const s = {
   settings: {
     readOnly: 'Ayarları oda sahibi seçer.',
     categories: 'Kategoriler',
-    categoriesHint: 'Cesur kategorisi +18 şakalar içerir, açık cinsel içerik yoktur.',
+    categoriesHint: '+18 kategoriler varsayılan olarak kapalıdır.',
+    adultHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
     mode: 'Oyun modu',
     solo: 'Herkes kendine',
     teams: 'İki takım',

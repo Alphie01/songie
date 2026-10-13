@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import { Icon } from '@songie/game-kit/ui';
-import { DISCUSS_OPTIONS, ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type RedFlagSettings } from '../shared/index.js';
+import { ADULT_CATEGORY_IDS, DISCUSS_OPTIONS, ROUND_OPTIONS, SECONDS_OPTIONS, type CategoryInfo, type RedFlagSettings } from '../shared/index.js';
 import { s } from './strings';
 
 function Group({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
@@ -69,6 +69,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                   className="chip"
                   aria-pressed={settings.categories.includes(c.id)}
                   disabled={!editable}
+                  data-bold={ADULT_CATEGORY_IDS.includes(c.id) || undefined}
                   onClick={() => {
                     const has = settings.categories.includes(c.id);
                     const next = has ? settings.categories.filter((x) => x !== c.id) : [...settings.categories, c.id];
@@ -80,6 +81,7 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
                 </button>
               ))}
             </div>
+            <AdultWarning categories={categories} selected={settings.categories} />
           </Group>
           <AddItem api={api} />
         </>
@@ -194,5 +196,16 @@ function AddItem({ api }: { api: SettingsPanelProps<RedFlagSettings>['api'] }) {
         </form>
       )}
     </Group>
+  );
+}
+
+/** Seçili +18 kategoriler varsa lobide uyarı. */
+function AdultWarning({ categories, selected }: { categories: CategoryInfo[] | null; selected: string[] }) {
+  const names = (categories ?? []).filter((c) => ADULT_CATEGORY_IDS.includes(c.id) && selected.includes(c.id)).map((c) => c.name);
+  if (!names.length) return null;
+  return (
+    <p className="rf-adult" role="note">
+      {s.settings.adultWarning(names.join(', '))}
+    </p>
   );
 }
