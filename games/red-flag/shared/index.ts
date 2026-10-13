@@ -17,11 +17,16 @@ export const CATEGORY_IDS = [
   'cesur',
   'yatak-odasi',
   'fantezi',
+  'sinir-testi',
+  'sinirsiz',
   CUSTOM_CATEGORY,
 ] as const;
 
 /** Yetişkin kategoriler: varsayılan kapalı, seçilince lobide uyarı çıkar. */
-export const ADULT_CATEGORY_IDS: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi'];
+export const ADULT_CATEGORY_IDS: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi', 'sinir-testi', 'sinirsiz'];
+
+/** Sınır testi: kartlar pratik/fetiş; seçenekler Varım / Hayır / Sınırım olarak gösterilir, üçüncü seçenek hep açık. */
+export const LIMIT_CATEGORY = 'sinir-testi';
 
 /** 0 = süresiz (herkes oy verince açılır). */
 export const SECONDS_OPTIONS = [0, 15, 30] as const;

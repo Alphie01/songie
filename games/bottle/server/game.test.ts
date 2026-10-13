@@ -2,7 +2,7 @@ import path from 'node:path';
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness, type Harness } from '@songie/game-kit/testing';
-import { seatAngle, type BottleView } from '../shared/index.js';
+import { ADULT_CATEGORIES, seatAngle, type BottleView } from '../shared/index.js';
 import { bottleServer } from './index.js';
 
 const TIMING = { leadMs: 100, spinMinMs: 1000, spinMaxMs: 1000, voteMs: 5000, podiumMs: 1000 };
@@ -196,6 +196,19 @@ describe('pas hakkı', () => {
     expect(h.view('a').scores[t1]).toMatchObject({ points: 0, done: 1, passes: 1 });
   });
 
+  it('+18 kartta pas her zaman serbest: hak tüketmez, puan düşürmez', async () => {
+    const { h } = setup(['a', 'b'], { categories: ['cift-odasi'], passes: 1, passPenalty: true, rounds: 0 }, 6);
+    await h.start();
+    for (let i = 0; i < 4; i++) {
+      const t = await spinToReveal(h);
+      const r = h.view(t).round;
+      await h.act(t, { type: 'choose', round: r, kind: 'dare' });
+      expect(h.view(t).passesLeft).toBeNull();
+      expect(await h.act(t, { type: 'pass', round: r })).toMatchObject({ ok: true });
+    }
+    expect(h.view('a').scores.a!.points + h.view('a').scores.b!.points).toBe(0);
+  });
+
   it('sınırsız pas ve cezasız mod', async () => {
     const { h } = setup(['a', 'b'], { passes: -1, passPenalty: false, rounds: 0 }, 6);
     await h.start();
@@ -345,10 +358,10 @@ describe('oyun sonu', () => {
 });
 
 describe('hazır içerik', () => {
-  it('en az 130 doğruluk ve 130 cesaret, yedi kategori, tekrar yok', () => {
+  it('en az 130 doğruluk ve 130 cesaret, on kategori, tekrar yok', () => {
     const game = bottleServer({ db: new Database(':memory:') });
     const cats = game.bank.categories();
-    expect(cats.map((c) => c.id)).toEqual(['eglenceli', 'arkadaslar', 'ask', 'utanc', 'cesur', 'yatak-odasi', 'sarhos-gece', 'oyuncular']);
+    expect(cats.map((c) => c.id)).toEqual(['eglenceli', 'arkadaslar', 'ask', 'utanc', 'cesur', 'yatak-odasi', 'sarhos-gece', 'sinir-testi', 'sinirsiz', 'cift-odasi', 'oyuncular']);
     const ids = cats.map((c) => c.id);
     const truths = game.bank.prompts(ids, 'truth');
     const dares = game.bank.prompts(ids, 'dare');
@@ -357,5 +370,16 @@ describe('hazır içerik', () => {
     const texts = [...truths, ...dares].map((p) => p.text);
     expect(new Set(texts).size).toBe(texts.length);
     expect(game.validateSettings!(game.defaultSettings)).toBeNull();
+  });
+
+  it('+18 kategoriler varsayılan kapalı; yeni +18 kategorilerde ≥70 doğruluk ve ≥70 cesaret', () => {
+    const game = bottleServer({ db: new Database(':memory:') });
+    for (const id of ADULT_CATEGORIES) expect(game.defaultSettings.categories).not.toContain(id);
+    for (const id of ['sinir-testi', 'sinirsiz', 'cift-odasi']) {
+      const c = game.bank.categories().find((x) => x.id === id)!;
+      expect(c.name).toMatch(/\(\+18\)$/);
+      expect(c.truth).toBeGreaterThanOrEqual(70);
+      expect(c.dare).toBeGreaterThanOrEqual(70);
+    }
   });
 });

@@ -35,7 +35,7 @@ export const guide: GameGuide = {
       body: 'Ayarları oda sahibi seçer.',
       items: [
         { term: 'Takımlar', text: 'Bir oyuncuya dokunarak takımını değiştir. Takımı seçilmeyenler başlarken dengeli dağıtılır.', tone: 'neutral' },
-        { term: 'Kategoriler', text: 'Kartların geleceği konular. Eklenen kartlar “Arkadaş kartları”na girer. Yatak odası (+18) açık cinsel içerik içerir ve varsayılan olarak kapalıdır.', tone: 'neutral' },
+        { term: 'Kategoriler', text: 'Kartların geleceği konular. Eklenen kartlar “Arkadaş kartları”na girer. Yatak odası (+18) ve Sınırsız (+18) açık cinsel içerik içerir ve varsayılan olarak kapalıdır.', tone: 'neutral' },
         { term: 'Tur süresi', text: '60, 90 ya da 120 sn. Varsayılan: 60 sn.', tone: 'neutral' },
         { term: 'Pas hakkı', text: 'Her tur için 3, 5 ya da Sınırsız. Varsayılan: 3.', tone: 'neutral' },
         { term: 'Takım başına anlatma', text: '2, 4, 6 ya da oda sahibi bitirene kadar. Varsayılan: 4 (toplam 8 tur).', tone: 'neutral' },

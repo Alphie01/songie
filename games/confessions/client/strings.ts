@@ -11,6 +11,7 @@ export const s = {
     modeHint: { topics: 'Her tur herkes aynı konuda yazar.', free: 'Konu yok; aklına gelen herhangi bir itirafı yaz.' },
     categories: 'Konu kategorileri',
     cesurHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
+    coupleHint: 'Çift odası: partnerinle ikiniz için. Konular partnerinle ilgili; pas hakkı her zaman var, durmak isteyen durdurur.',
     write: 'Yazma süresi',
     guess: 'Tahmin süresi',
     rounds: 'Tur sayısı',

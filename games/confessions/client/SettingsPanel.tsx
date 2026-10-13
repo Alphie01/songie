@@ -7,6 +7,7 @@ import {
   PROMPT_MIN,
   ROUND_OPTIONS,
   WRITE_OPTIONS,
+  COUPLE_CATEGORY,
   isAdultCategory,
   type CategoryInfo,
   type ConfessionsSettings,
@@ -72,7 +73,14 @@ export function SettingsPanel({ settings, editable, onChange, api, section }: Se
           </Group>
 
           {settings.mode === 'topics' && (
-            <Group title={s.settings.categories} hint={settings.categories.some(isAdultCategory) ? s.settings.cesurHint : undefined}>
+            <Group title={s.settings.categories} hint={
+                [
+                  settings.categories.some(isAdultCategory) ? s.settings.cesurHint : '',
+                  settings.categories.includes(COUPLE_CATEGORY) ? s.settings.coupleHint : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ') || undefined
+              }>
               <div className="chips">
                 {(categories ?? []).map((c) => (
                   <button

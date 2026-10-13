@@ -12,7 +12,7 @@ export const TURN_OPTIONS = [2, 4, 6, 0] as const;
 
 export const CUSTOM_CATEGORY = 'arkadas';
 /** Varsayılan kapalı, yalnızca yetişkinler için kategoriler. */
-export const ADULT_CATEGORIES: readonly string[] = ['yatak-odasi'];
+export const ADULT_CATEGORIES: readonly string[] = ['yatak-odasi', 'sinirsiz'];
 export const isAdultCategory = (id: string) => ADULT_CATEGORIES.includes(id);
 
 export const settingsSchema = z.object({

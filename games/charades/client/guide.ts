@@ -39,7 +39,7 @@ export const guide: GameGuide = {
       title: 'Ayarlar',
       items: [
         { term: 'Takımlar', text: 'Lobide bir oyuncuya dokunarak takımını değiştir ya da “Karıştır” de. Takımı seçilmeyenler başlarken dağıtılır.', tone: 'neutral' },
-        { term: 'Türler', text: 'Türk ve yabancı filmler, Türk ve yabancı diziler, kitaplar, şarkılar, atasözleri ve deyimler, arkadaş başlıkları. Varsayılan: hepsi; yalnızca Yatak odası (+18) kapalıdır, açık cinsel içerik içerir.', tone: 'neutral' },
+        { term: 'Türler', text: 'Türk ve yabancı filmler, Türk ve yabancı diziler, kitaplar, şarkılar, atasözleri ve deyimler, arkadaş başlıkları. Varsayılan: hepsi; yalnızca Yatak odası (+18) ve Sınırsız (+18) kapalıdır, açık cinsel içerik içerir.', tone: 'neutral' },
         { term: 'Zorluk', text: 'Kolay, Karışık ya da Zor. Varsayılan: Karışık.', tone: 'neutral' },
         { term: 'Tur süresi', text: '60, 90, 120 ya da 180 sn. Varsayılan: 90 sn.', tone: 'neutral' },
         { term: 'Pas hakkı', text: 'Tur başına 1, 3 ya da sınırsız. Varsayılan: 3.', tone: 'neutral' },

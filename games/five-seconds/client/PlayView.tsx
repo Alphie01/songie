@@ -20,6 +20,8 @@ const CATEGORY_LABEL: Record<string, string> = {
   cesur: 'Cesur',
   'yatak-odasi': 'Yatak odası',
   'sarhos-gece': 'Sarhoş gece',
+  sinirsiz: 'Sınırsız',
+  'cift-odasi': 'Çift odası',
   arkadas: 'Arkadaş görevi',
 };
 

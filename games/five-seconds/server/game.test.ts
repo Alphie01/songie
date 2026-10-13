@@ -35,7 +35,7 @@ describe('five-seconds içerik', () => {
     const g = game();
     const cats = g.bank.categories();
     const builtIn = cats.filter((c) => c.id !== CUSTOM_CATEGORY);
-    expect(builtIn.map((c) => c.id).sort()).toEqual(['ask', 'cesur', 'genel', 'is-okul', 'pop-kultur', 'sacma', 'sarhos-gece', 'turkiye', 'yatak-odasi', 'yemek']);
+    expect(builtIn.map((c) => c.id).sort()).toEqual(['ask', 'cesur', 'cift-odasi', 'genel', 'is-okul', 'pop-kultur', 'sacma', 'sarhos-gece', 'sinirsiz', 'turkiye', 'yatak-odasi', 'yemek']);
     expect(builtIn.reduce((n, c) => n + c.count, 0)).toBeGreaterThanOrEqual(260);
     for (const p of g.bank.prompts(builtIn.map((c) => c.id))) expect(p.text).toMatch(/^3 .+ söyle/);
   });
@@ -46,7 +46,8 @@ describe('five-seconds içerik', () => {
       expect(defaultSettings.categories).not.toContain(id);
       const c = cats.find((x) => x.id === id)!;
       expect(c.name).toMatch(/\(\+18\)$/);
-      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : 60);
+      if (id === 'cift-odasi') for (const p of game().bank.prompts([id])) expect(p.text).toMatch(/partner/);
+      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : ['sinirsiz', 'cift-odasi'].includes(id) ? 70 : 60);
     }
   });
 
@@ -65,7 +66,7 @@ describe('five-seconds akış', () => {
     const { g, h } = setup();
     await h.start();
     expect(h.view('a')).toMatchObject({ phase: 'ready', performerId: 'a', prompt: null, round: 1 });
-    const all = g.bank.prompts(['genel', 'ask', 'is-okul', 'yemek', 'turkiye', 'pop-kultur', 'sacma', 'cesur', 'yatak-odasi', 'sarhos-gece']);
+    const all = g.bank.prompts(['genel', 'ask', 'is-okul', 'yemek', 'turkiye', 'pop-kultur', 'sacma', 'cesur', 'yatak-odasi', 'sarhos-gece', 'sinirsiz', 'cift-odasi']);
     for (const id of ['a', 'b', 'c']) for (const p of all) expect(h.seen(id)).not.toContain(p.text);
 
     expect(await h.act('b', { type: 'ready', attemptId: h.view('a').attemptId })).toMatchObject({ ok: false });

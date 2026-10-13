@@ -22,11 +22,16 @@ export const CATEGORY_NAMES: Record<string, string> = {
   cesur: 'Cesur (+18)',
   'yatak-odasi': 'Yatak odası (+18)',
   fantezi: 'Fantezi (+18)',
+  sinirsiz: 'Sınırsız (+18)',
+  'sinir-testi': 'Sınır testi (+18)',
+  'cift-odasi': 'Çift odası (+18)',
   [CUSTOM_CATEGORY]: 'Arkadaş cümleleri',
 };
 
 /** +18 kategoriler: varsayılan ayarlarda yoktur, oda sahibi bilerek açar. */
-export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi'];
+export const ADULT_CATEGORIES: readonly string[] = ['cesur', 'yatak-odasi', 'fantezi', 'sinirsiz', 'sinir-testi', 'cift-odasi'];
+/** Yalnızca partnerinle ikiniz için. */
+export const COUPLE_CATEGORY = 'cift-odasi';
 export const isAdultCategory = (id: string): boolean => ADULT_CATEGORIES.includes(id);
 
 export const settingsSchema = z.object({

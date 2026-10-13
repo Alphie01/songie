@@ -27,10 +27,11 @@ export const CATEGORY_KIND: Record<string, Kind> = {
   sarki: 'sarki',
   'atasozu-deyim': 'deyim',
   'yatak-odasi': 'ifade',
+  sinirsiz: 'ifade',
 };
 
 /** Varsayılan kapalı, yalnızca yetişkinler için kategoriler. */
-export const ADULT_CATEGORIES: readonly string[] = ['yatak-odasi'];
+export const ADULT_CATEGORIES: readonly string[] = ['yatak-odasi', 'sinirsiz'];
 export const isAdultCategory = (id: string) => ADULT_CATEGORIES.includes(id);
 
 export const CUSTOM_CATEGORY = 'arkadas';

@@ -9,6 +9,7 @@ export const s = {
     categories: 'Kategoriler',
     categoriesHint: '+18 kategoriler varsayılan olarak kapalıdır.',
     adultHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir.',
+    coupleHint: 'Çift odası: partnerinle ikiniz için. Pas hakkı her zaman var; durmak isteyen durdurur.',
     mode: 'Oyun modu',
     solo: 'Herkes kendine',
     teams: 'İki takım',

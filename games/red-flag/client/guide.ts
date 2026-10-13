@@ -40,8 +40,9 @@ export const guide: GameGuide = {
     {
       title: 'Ayarlar',
       items: [
-        { term: 'Kategoriler', text: 'İlişki, ilk buluşma, iş, aile, sosyal medya ve daha fazlası. +18 kategoriler (Cesur, Yatak odası, Fantezi) varsayılan olarak kapalıdır ve açık cinsel içerik içerir.' },
+        { term: 'Kategoriler', text: 'İlişki, ilk buluşma, iş, aile, sosyal medya ve daha fazlası. +18 kategoriler (Cesur, Yatak odası, Fantezi, Sınır testi, Sınırsız) varsayılan olarak kapalıdır ve açık cinsel içerik içerir.' },
         { term: 'Üçüncü seçenek', text: '“Asla olmaz” seçeneğini ekler. Varsayılan: Kapalı.' },
+        { term: 'Sınır testi', text: 'Her kart bir pratik ya da fetiş. Seçenekler Varım, Hayır ve Sınırım olur; Sınırım hep açıktır.' },
         { term: 'Kim ne dedi', text: 'Açık ya da İsimsiz. Varsayılan: Açık.' },
         { term: 'Tahmin modu', text: 'Çoğunluk tahmini ve puan. Varsayılan: Açık.' },
         { term: 'Oy süresi', text: '15 sn, 30 sn ya da Süresiz. Varsayılan: 30 sn.' },

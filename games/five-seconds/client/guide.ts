@@ -40,7 +40,7 @@ export const guide: GameGuide = {
         { term: 'Süre', text: '5, 7 ya da 10 sn. Varsayılan: 5 sn.' },
         { term: 'Oyuncu başına sıra', text: '3, 5 ya da Sınırsız (oda sahibi bitirene kadar). Varsayılan: 3.' },
         { term: 'Çalma kuralı', text: 'Başarısız görevi sıradaki oyuncu dener. Varsayılan: Kapalı.' },
-        { term: 'Kategoriler', text: 'Genel, aşk, iş ve okul, yemek, Türkiye, pop kültür, saçma sapan. Cesur (+18), Yatak odası (+18) ve Sarhoş gece (+18) açık cinsel içerik içerir ve varsayılan olarak kapalıdır.' },
+        { term: 'Kategoriler', text: 'Genel, aşk, iş ve okul, yemek, Türkiye, pop kültür, saçma sapan. Cesur, Yatak odası, Sarhoş gece ve Sınırsız (+18) açık cinsel içerik içerir ve varsayılan olarak kapalıdır. Çift odası (+18) partnerinle ikiniz içindir; pas hakkı her zaman var.' },
         { term: 'Görev ekle', text: 'Kendi görevini yaz; “Arkadaş görevleri” kategorisine girer ve kimseye listelenmez.' },
       ],
     },

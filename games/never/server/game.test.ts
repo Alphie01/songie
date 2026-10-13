@@ -119,6 +119,12 @@ describe('never: tam akış', () => {
     }
     expect(cats.find((x) => x.id === 'cesur')!.count).toBeGreaterThanOrEqual(50);
     for (const c of ['yatak-odasi', 'fantezi']) {
+      expect(cats.find((x) => x.id === c)!.count).toBeGreaterThanOrEqual(60);
+    }
+    for (const c of ['sinirsiz', 'sinir-testi', 'cift-odasi']) {
+      expect(cats.find((x) => x.id === c)!.count).toBeGreaterThanOrEqual(70);
+    }
+    for (const c of ['yatak-odasi', 'fantezi', 'sinirsiz', 'sinir-testi', 'cift-odasi']) {
       const cat = cats.find((x) => x.id === c)!;
       expect(cat.count).toBeGreaterThanOrEqual(60);
       expect(cat.name).toMatch(/\(\+18\)$/);

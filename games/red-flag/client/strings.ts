@@ -5,6 +5,8 @@ export const s = {
   pitch: 'Durumu oku, gizlice bayrağını kaldır, kim ne dedi gör',
   vote: { green: 'Green flag', red: 'Red flag', never: 'Asla olmaz' } satisfies Record<Vote, string>,
   voteShort: { green: 'Green', red: 'Red', never: 'Asla' } satisfies Record<Vote, string>,
+  /** Sınır testi kartlarında seçeneklerin adı. */
+  limitVote: { green: 'Varım', red: 'Hayır', never: 'Sınırım' } satisfies Record<Vote, string>,
   settings: {
     categories: 'Kategoriler',
     categoriesHint: '+18 kategoriler varsayılan olarak kapalıdır.',

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import type { PlayViewProps } from '@songie/game-kit/client';
 import { Avatar } from '@songie/game-kit/ui';
 import type { RoomPlayer } from '@songie/shared';
-import type { Counts, RedFlagSettings, RedFlagView, Vote } from '../shared/index.js';
+import { LIMIT_CATEGORY, type Counts, type RedFlagSettings, type RedFlagView, type Vote } from '../shared/index.js';
 import { VoteIcon } from './Flag';
 import { SettingsPanel } from './SettingsPanel';
 import { s } from './strings';
@@ -26,6 +26,9 @@ function useUntil(serverNow: number, at: number): number {
   }, [at]);
   return at ? Math.max(0, at - (now + offset)) : 0;
 }
+
+/** Seçenek adları: sınır testinde Varım / Hayır / Sınırım. */
+const labelsFor = (view: RedFlagView): Record<Vote, string> => (view.item?.category === LIMIT_CATEGORY ? s.limitVote : s.vote);
 
 const pct = (n: number, total: number) => (total ? Math.round((n / total) * 100) : 0);
 
@@ -64,7 +67,7 @@ export function PlayView({ view, meId, room, act, api, settings, setSettings }: 
           <article className="rf-card" key={view.item.id} data-phase={view.phase}>
             <span className="rf-card-cat">{view.categoryName}</span>
             <p className="rf-card-text">{view.item.text}</p>
-            {view.phase === 'reveal' && view.reveal && <Bar counts={view.reveal.counts} total={view.reveal.total} options={options} />}
+            {view.phase === 'reveal' && view.reveal && <Bar counts={view.reveal.counts} total={view.reveal.total} options={options} labels={labelsFor(view)} />}
           </article>
         )}
 
@@ -141,7 +144,7 @@ function VotePanel({ view, options, send, isHost, meId }: { view: RedFlagView; o
             onClick={() => void send({ type: 'vote', itemId, vote: v })}
           >
             <VoteIcon vote={v} size={40} />
-            <span>{s.vote[v]}</span>
+            <span>{labelsFor(view)[v]}</span>
           </button>
         ))}
       </div>
@@ -162,7 +165,7 @@ function VotePanel({ view, options, send, isHost, meId }: { view: RedFlagView; o
                 disabled={!view.myVote}
                 onClick={() => void send({ type: 'guess', itemId, vote: v })}
               >
-                {s.voteShort[v]}
+                {view.item?.category === LIMIT_CATEGORY ? s.limitVote[v] : s.voteShort[v]}
               </button>
             ))}
           </div>
@@ -187,9 +190,9 @@ function VotePanel({ view, options, send, isHost, meId }: { view: RedFlagView; o
 }
 
 /** Dağılım çubuğu (kartın altında). */
-function Bar({ counts, total, options }: { counts: Counts; total: number; options: Vote[] }) {
+function Bar({ counts, total, options, labels }: { counts: Counts; total: number; options: Vote[]; labels: Record<Vote, string> }) {
   return (
-    <div className="rf-bar" role="img" aria-label={options.map((v) => `${s.vote[v]} ${counts[v]}`).join(', ')}>
+    <div className="rf-bar" role="img" aria-label={options.map((v) => `${labels[v]} ${counts[v]}`).join(', ')}>
       {options.map((v, i) =>
         counts[v] > 0 ? <span key={v} data-vote={v} style={{ flexGrow: counts[v], animationDelay: `${i * 90}ms` }} /> : null,
       )}
@@ -214,15 +217,16 @@ function Reveal({
   send: Send;
 }) {
   const r = view.reveal!;
+  const label = labelsFor(view);
   const lock = useUntil(view.serverNow, view.nextAt);
   const discussLeft = useUntil(view.serverNow, view.discussEndsAt);
   const locked = lock > 0;
   const iAmReady = view.ready.includes(meId);
   const unanimous = r.total > 1 && options.some((v) => r.counts[v] === r.total);
   const verdict =
-    r.total === 0 ? s.play.nobody : unanimous ? s.play.unanimous : r.majority.length > 1 ? s.play.tie : s.play.majority(s.vote[r.majority[0]!]);
+    r.total === 0 ? s.play.nobody : unanimous ? s.play.unanimous : r.majority.length > 1 ? s.play.tie : s.play.majority(label[r.majority[0]!]);
   const hit = r.myGuess !== null && r.correct.includes(meId);
-  const you = [r.myVote ? s.play.yourVote(s.vote[r.myVote]) : null, view.predict ? (r.myGuess === null ? s.play.noGuess : hit ? s.play.guessHit : s.play.guessMiss(s.vote[r.myGuess])) : null]
+  const you = [r.myVote ? s.play.yourVote(label[r.myVote]) : null, view.predict ? (r.myGuess === null ? s.play.noGuess : hit ? s.play.guessHit : s.play.guessMiss(label[r.myGuess])) : null]
     .filter(Boolean)
     .join(' · ');
 
@@ -239,7 +243,7 @@ function Reveal({
             <li key={v} className="rf-row" data-vote={v} data-top={(r.majority.length === 1 && r.majority[0] === v) || undefined}>
               <div className="rf-row-head">
                 <span className="rf-swatch" aria-hidden="true" />
-                <span className="rf-row-name">{s.vote[v]}</span>
+                <span className="rf-row-name">{label[v]}</span>
                 <span>
                   {r.counts[v]} · %{pct(r.counts[v], r.total)}
                 </span>
@@ -386,7 +390,7 @@ function Podium({ view, members, meId, code }: { view: RedFlagView; members: Mem
       {totalVotes > 0 && (
         <div className="rf-sum-totals">
           <span className="rf-box-title">{s.podium.totals}</span>
-          <Bar counts={sum.totals} total={totalVotes} options={sum.totals.never > 0 ? ['green', 'red', 'never'] : ['green', 'red']} />
+          <Bar counts={sum.totals} total={totalVotes} options={sum.totals.never > 0 ? ['green', 'red', 'never'] : ['green', 'red']} labels={s.vote} />
           <span className="rf-sum-legend">
             {sum.totals.green} green · {sum.totals.red} red{sum.totals.never ? ` · ${sum.totals.never} asla` : ''}
           </span>

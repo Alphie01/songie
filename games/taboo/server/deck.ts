@@ -18,6 +18,7 @@ export const CATEGORY_NAMES: Record<string, string> = {
   'bilim-teknoloji': 'Bilim ve teknoloji',
   turkiye: 'Türkiye',
   'yatak-odasi': 'Yatak odası (+18)',
+  sinirsiz: 'Sınırsız (+18)',
   [CUSTOM_CATEGORY]: 'Arkadaş kartları',
 };
 

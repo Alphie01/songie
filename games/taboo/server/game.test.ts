@@ -32,7 +32,7 @@ describe('taboo: +18 deste', () => {
       const info = deck.categories().find((c) => c.id === id)!;
       expect(info.name).toMatch(/\(\+18\)$/);
       const cards = deck.cards([id]);
-      expect(cards.length).toBeGreaterThanOrEqual(60);
+      expect(cards.length).toBeGreaterThanOrEqual(id === 'sinirsiz' ? 90 : 60);
       for (const c of cards) expect(c.taboo).toHaveLength(5);
     }
   });

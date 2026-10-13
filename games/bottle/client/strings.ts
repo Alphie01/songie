@@ -7,6 +7,7 @@ export const s = {
   settings: {
     categories: 'Kategoriler',
     categoriesHint: '+18 kategoriler açık cinsel içerik içerir; yalnızca yetişkinler içindir. Cesaret görevlerinde dokunma yalnızca karşıdaki kabul ederse.',
+    coupleHint: 'Çift odası: partnerinle ikiniz için. Görevler yalnızca partnerler arasında; pas hakkı her zaman var, durmak isteyen durdurur.',
     truthDare: (t: number, d: number) => `${t} doğruluk, ${d} cesaret`,
     choice: 'Doğruluk mu cesaret mi',
     choicePlayer: 'Oyuncu seçer',

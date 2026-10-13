@@ -33,6 +33,8 @@ describe('red-flag: içerik', () => {
       'cesur',
       'yatak-odasi',
       'fantezi',
+      'sinir-testi',
+      'sinirsiz',
     ]);
     expect(builtIn.reduce((n, c) => n + c.count, 0)).toBeGreaterThanOrEqual(250);
     const texts = g.pool.items(builtIn.map((c) => c.id)).map((s) => s.text);
@@ -44,7 +46,7 @@ describe('red-flag: içerik', () => {
     for (const id of ADULT_CATEGORY_IDS) {
       const c = cats.find((x) => x.id === id)!;
       expect(c.name.endsWith('(+18)')).toBe(true);
-      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : 60);
+      expect(c.count).toBeGreaterThanOrEqual(id === 'sinir-testi' ? 90 : id === 'sinirsiz' ? 70 : id === 'cesur' ? 50 : 60);
       expect(defaultSettings.categories).not.toContain(id);
     }
   });
@@ -67,6 +69,14 @@ describe('red-flag: içerik', () => {
 });
 
 describe('red-flag: oylama', () => {
+  it('sınır testinde "Sınırım" seçeneği üçüncü seçenek kapalıyken de açık', async () => {
+    const { h, item } = setup({ categories: ['sinir-testi'], dealBreaker: false });
+    await h.start();
+    expect(h.view('ali').dealBreaker).toBe(true);
+    await h.act('ali', { type: 'vote', itemId: item(), vote: 'never' });
+    expect(h.view('ali').myVote).toBe('never');
+  });
+
   it('reveals once everyone voted and counts the distribution', async () => {
     const { h, item } = setup();
     await h.start();

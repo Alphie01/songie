@@ -290,7 +290,7 @@ describe('most-likely: içerik', () => {
     for (const id of ADULT_CATEGORY_IDS) {
       const c = cats.find((x) => x.id === id)!;
       expect(c.name.endsWith('(+18)')).toBe(true);
-      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : 60);
+      expect(c.count).toBeGreaterThanOrEqual(id === 'cesur' ? 50 : ['sinir-testi', 'sinirsiz'].includes(id) ? 70 : 60);
       expect(defaultSettings.categories).not.toContain(id);
     }
   });

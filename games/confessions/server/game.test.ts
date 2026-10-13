@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
 import { createHarness } from '@songie/game-kit/testing';
-import type { ConfessionsView } from '../shared/index.js';
+import { ADULT_CATEGORIES, type ConfessionsView } from '../shared/index.js';
 import { DEFAULT_TIMING, type ConfessionsState } from './game.js';
 import { confessionsServer } from './index.js';
 
@@ -31,8 +31,18 @@ describe('confessions', () => {
   it('ships at least 120 prompts in the required categories', () => {
     const g = game();
     const cats = g.prompts.categories();
-    expect(cats.map((c) => c.id)).toEqual(expect.arrayContaining(['genel', 'cocukluk', 'okul-is', 'ask', 'utanc', 'aliskanliklar', 'cesur', 'yatak-odasi', 'fantezi', 'arkadas']));
+    expect(cats.map((c) => c.id)).toEqual(expect.arrayContaining(['genel', 'cocukluk', 'okul-is', 'ask', 'utanc', 'aliskanliklar', 'cesur', 'yatak-odasi', 'fantezi', 'sinir-testi', 'sinirsiz', 'cift-odasi', 'arkadas']));
     expect(cats.reduce((n, c) => n + c.count, 0)).toBeGreaterThanOrEqual(120);
+  });
+
+  it('+18 kategoriler varsayılan kapalı; yeni +18 kategorilerde ≥70 konu', () => {
+    const g = game();
+    for (const id of ADULT_CATEGORIES) expect(g.defaultSettings.categories).not.toContain(id);
+    for (const id of ['sinir-testi', 'sinirsiz', 'cift-odasi']) {
+      const c = g.prompts.categories().find((x) => x.id === id)!;
+      expect(c.name).toMatch(/\(\+18\)$/);
+      expect(c.count).toBeGreaterThanOrEqual(70);
+    }
   });
 
   it('keeps confessions private while writing and shows only who wrote', async () => {

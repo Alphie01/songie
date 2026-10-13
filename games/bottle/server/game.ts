@@ -6,6 +6,7 @@ import {
   MIN_PLAYERS,
   actionSchema,
   defaultSettings,
+  isAdultCategory,
   seatAngle,
   settingsSchema,
   type BottleAction,
@@ -222,8 +223,11 @@ export function createBottleGame(deps: {
     ctx.pushViews();
   }
 
+  /** +18 kartlarda pas her zaman serbesttir: kimse istemediği bir şeyi yapmak zorunda kalmaz. */
+  const freePass = (state: BottleState) => !!state.prompt && isAdultCategory(state.prompt.category);
+
   function passesLeft(state: BottleState, id: string): number | null {
-    if (state.settings.passes < 0) return null;
+    if (state.settings.passes < 0 || freePass(state)) return null;
     return Math.max(0, state.settings.passes - (state.passesUsed[id] ?? 0));
   }
 
@@ -238,8 +242,10 @@ export function createBottleGame(deps: {
       score.failed++;
     } else if (outcome === 'pass') {
       score.passes++;
-      state.passesUsed[targetId] = (state.passesUsed[targetId] ?? 0) + 1;
-      if (state.settings.passPenalty) score.points--;
+      if (!freePass(state)) {
+        state.passesUsed[targetId] = (state.passesUsed[targetId] ?? 0) + 1;
+        if (state.settings.passPenalty) score.points--;
+      }
     }
     state.lastResult = {
       targetId,

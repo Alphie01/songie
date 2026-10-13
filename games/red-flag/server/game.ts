@@ -1,6 +1,7 @@
 import { UserFacingError, type GameContext, type ServerGame } from '@songie/game-kit/server';
 import {
   GAME_ID,
+  LIMIT_CATEGORY,
   VOTES,
   actionSchema,
   defaultSettings,
@@ -149,11 +150,13 @@ export function createRedFlagGame(deps: { pool: Pool; timing?: Partial<RedFlagTi
     const now = ctx.now();
     const ids = voters ?? ctx.players().filter((p) => p.connected).map((p) => p.id);
     for (const id of ids) ensurePlayer(state, id);
+    const item = draw(state);
     state.cur = {
-      item: draw(state),
+      item,
       anonymous: s.anonymous,
       predict: s.predict,
-      dealBreaker: s.dealBreaker,
+      // Sınır testinde "Sınırım" seçeneği her zaman açık.
+      dealBreaker: s.dealBreaker || item.category === LIMIT_CATEGORY,
       seconds: s.seconds,
       discuss: s.discuss,
       discussEndsAt: 0,

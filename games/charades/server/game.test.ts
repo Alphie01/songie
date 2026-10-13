@@ -25,7 +25,7 @@ describe('charades: içerik', () => {
   it('gerçek içerikte en az 260 başlık var, hepsi türlü ve zorluk etiketli', () => {
     const bank = new TitleBank(new Database(':memory:'));
     const cats = bank.categories().filter((c) => c.id !== 'arkadas');
-    expect(cats.map((c) => c.id).sort()).toEqual(['atasozu-deyim', 'dizi-turk', 'dizi-yabanci', 'film-turk', 'film-yabanci', 'kitap', 'sarki', 'yatak-odasi']);
+    expect(cats.map((c) => c.id).sort()).toEqual(['atasozu-deyim', 'dizi-turk', 'dizi-yabanci', 'film-turk', 'film-yabanci', 'kitap', 'sarki', 'sinirsiz', 'yatak-odasi']);
     const all = bank.cards(cats.map((c) => c.id), 'karisik');
     expect(all.length).toBeGreaterThanOrEqual(260);
     const easy = bank.cards(cats.map((c) => c.id), 'kolay');
@@ -42,7 +42,7 @@ describe('charades: içerik', () => {
     for (const id of ADULT_CATEGORIES) {
       expect(defaultSettings.categories).not.toContain(id);
       expect(bank.categories().find((c) => c.id === id)!.name).toMatch(/\(\+18\)$/);
-      expect(bank.cards([id], 'karisik').length).toBeGreaterThanOrEqual(60);
+      expect(bank.cards([id], 'karisik').length).toBeGreaterThanOrEqual(id === 'sinirsiz' ? 90 : 60);
     }
   });
 

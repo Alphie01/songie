@@ -327,7 +327,8 @@ describe('Gizlilik Esas', () => {
     expect(total).toBeGreaterThanOrEqual(220);
     for (const c of cats.filter((x) => x.id !== 'eklenen')) expect(c.count).toBeGreaterThanOrEqual(25);
     expect(cats.find((x) => x.id === 'cesur')!.count).toBeGreaterThanOrEqual(50);
-    for (const c of ['yatak-odasi', 'sarhos-gece']) {
+    for (const c of ['sinirsiz', 'sinir-testi']) expect(cats.find((x) => x.id === c)!.count).toBeGreaterThanOrEqual(70);
+    for (const c of ['yatak-odasi', 'sarhos-gece', 'sinirsiz', 'sinir-testi']) {
       const cat = cats.find((x) => x.id === c)!;
       expect(cat.count).toBeGreaterThanOrEqual(60);
       expect(cat.name).toMatch(/\(\+18\)$/);
