@@ -3,11 +3,11 @@ import './ui.css';
 
 /** Avatar renkleri (şema adları içseldir; kullanıcı rengi görür). */
 export const AVATAR_COLOR: Record<AvatarData['color'], string> = {
-  mint: '#19df70',
-  signal: '#ffd234',
-  label: '#f66464',
-  sky: '#6aa8ff',
-  paper: '#ae67ed',
+  mint: '#3ee0a8',
+  signal: '#ffd23f',
+  label: '#ff6b6b',
+  sky: '#5ab8ff',
+  paper: '#b794ff',
 };
 
 export type AvatarMark = 'correct' | 'artist' | 'locked' | 'skipped' | null;
@@ -38,7 +38,7 @@ export function Avatar({
     <span
       className="gk-avatar"
       data-dim={dim || undefined}
-      style={{ width: size, height: size, fontSize: size * 0.42, color, background: `${color}1f`, boxShadow: `inset 0 0 0 1px ${color}40` }}
+      style={{ width: size, height: size, fontSize: size * 0.46, background: color, borderWidth: size >= 40 ? 3 : 2 }}
     >
       {letter}
       {mark && (

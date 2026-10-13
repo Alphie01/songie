@@ -19,29 +19,21 @@ export function GuideDialog({ game, onClose }: { game: ClientGame; onClose(): vo
       onClose={onClose}
       footer={
         <>
-          <div className="dlg-dots" aria-hidden="true">
+          <div className="dlg-dots">
             {Array.from({ length: total }, (_, i) => (
-              <span key={i} data-on={i === page || undefined} />
+              <span key={i} data-on={i === page || undefined} aria-hidden="true" />
             ))}
+            <span className="dlg-count">
+              {page + 1}/{total}
+            </span>
           </div>
-          <span className="dlg-count mono">
-            {page + 1}/{total}
-          </span>
           <div className="dlg-nav">
-            {page > 0 && (
-              <button type="button" className="btn btn-ghost" onClick={() => setPage((p) => p - 1)}>
-                {tr.guide.back}
-              </button>
-            )}
-            {last ? (
-              <button type="button" className="btn btn-primary" onClick={onClose}>
-                {tr.guide.done}
-              </button>
-            ) : (
-              <button type="button" className="btn btn-primary" onClick={() => setPage((p) => p + 1)}>
-                {tr.guide.next}
-              </button>
-            )}
+            <button type="button" className="btn btn-light" disabled={page === 0} onClick={() => setPage((p) => p - 1)}>
+              {tr.guide.back}
+            </button>
+            <button type="button" className="btn btn-yellow" onClick={last ? onClose : () => setPage((p) => p + 1)}>
+              {last ? tr.guide.done : tr.guide.next}
+            </button>
           </div>
         </>
       }
@@ -49,9 +41,9 @@ export function GuideDialog({ game, onClose }: { game: ClientGame; onClose(): vo
       {page === 0 ? (
         <div className="guide-cover">
           <span className="guide-icon">
-            <Icon name={game.icon} size={28} />
+            <Icon name={game.icon} size={40} />
           </span>
-          <h2 id="guide-title" className="guide-name">
+          <h2 id="guide-title" className="display guide-name">
             {game.name}
           </h2>
           <p className="guide-summary">{guide?.summary ?? game.pitch}</p>
@@ -72,7 +64,8 @@ export function GuideDialog({ game, onClose }: { game: ClientGame; onClose(): vo
               {sections.map((s, i) => (
                 <li key={s.title}>
                   <button type="button" onClick={() => setPage(i + 1)}>
-                    <span className="mono">{String(i + 1).padStart(2, '0')}</span> {s.title}
+                    <span className="guide-toc-n">{String(i + 1).padStart(2, '0')}</span>
+                    {s.title}
                   </button>
                 </li>
               ))}
@@ -82,8 +75,10 @@ export function GuideDialog({ game, onClose }: { game: ClientGame; onClose(): vo
       ) : (
         section && (
           <div className="guide-page">
-            <p className="guide-kicker">{game.name}</p>
-            <h2 id="guide-title" className="guide-title">
+            <p className="guide-kicker">
+              {game.name} · {page}
+            </p>
+            <h2 id="guide-title" className="display guide-title">
               {section.title}
             </h2>
             {section.body?.split(/\n\s*\n/).map((p, i) => (

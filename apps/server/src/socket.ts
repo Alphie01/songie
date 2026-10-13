@@ -111,6 +111,7 @@ export function bindSockets(io: IO, players: PlayerStore, rooms: RoomManager): v
       rooms.leave(me.id);
       if (c) io.in(playerChannel(me.id)).socketsLeave(roomChannel(c));
     });
+    handle('room:game', (p: { gameId: string }) => rooms.changeGame(me.id, p.gameId));
     handle('room:settings', (p: { settings: unknown }) => rooms.updateSettings(me.id, p.settings));
     handle('room:ready', (p: { ready: boolean }) => rooms.setReady(me.id, p.ready));
     handle('room:start', () => rooms.start(me.id));

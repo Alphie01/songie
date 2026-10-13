@@ -45,7 +45,7 @@ const B = await page('Barış', devices['iPhone 13']);
 const C = await page('Cem', { viewport: { width: 1440, height: 900 } });
 
 await signup(A, 'Ayşe', base);
-await A.locator('.home-game', { hasText: 'Dedektif' }).getByRole('button', { name: 'Oda kur' }).click();
+await A.locator('.home-tile', { hasText: 'Dedektif' }).getByRole('button', { name: 'Oda kur' }).click();
 await A.waitForURL(/\/r\/[A-Z]{4}$/);
 const url = A.url();
 await A.locator('.dt-case').first().waitFor();

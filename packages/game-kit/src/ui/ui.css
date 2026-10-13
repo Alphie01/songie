@@ -3,13 +3,17 @@
   display: inline-grid;
   place-items: center;
   flex: none;
+  box-sizing: border-box;
+  border: 2px solid var(--ink, #0d0828);
   border-radius: 50%;
-  font-weight: 700;
+  color: var(--ink-2, #120c2e);
+  font-family: var(--display, sans-serif);
+  font-weight: 800;
   line-height: 1;
 }
 
 .gk-avatar[data-dim] {
-  opacity: 0.35;
+  opacity: 0.45;
 }
 
 .gk-mark {
@@ -20,8 +24,8 @@
   height: 38%;
   min-width: 12px;
   min-height: 12px;
+  border: 2px solid var(--ink, #0d0828);
   border-radius: 50%;
-  box-shadow: 0 0 0 2px var(--bg, #030704);
 }
 
 .gk-mark[data-mark='correct'] {

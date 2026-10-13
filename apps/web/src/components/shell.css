@@ -1,28 +1,29 @@
-.shell-menu-btn {
-  position: fixed;
-  top: 16px;
-  left: 16px;
-  z-index: 120;
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--panel);
-  color: var(--text-2);
-  box-shadow: 0 8px 28px rgb(0 0 0 / 0.35);
+/* Üst çubuk: menü · logo · sağ düğme */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.shell-menu-btn:hover {
-  color: var(--text);
+.topbar-spacer {
+  width: 44px;
+}
+
+/* Oyun sırasında menü düğmesi: sol üst (oyunlar üstte bu şerit kadar boşluk bırakır) */
+.shell-fab {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 120;
+  box-shadow: var(--shadow-sm);
 }
 
 .shell-scrim {
   position: fixed;
   inset: 0;
   z-index: 129;
-  background: rgb(0 0 0 / 0.55);
+  background: rgb(13 8 40 / 0.6);
   opacity: 0;
   pointer-events: none;
   transition: opacity 180ms;
@@ -39,13 +40,13 @@
   z-index: 130;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: min(340px, 86vw);
-  padding: 20px 18px max(20px, env(safe-area-inset-bottom));
+  gap: 18px;
+  width: min(350px, 88vw);
+  padding: 18px 16px max(20px, env(safe-area-inset-bottom));
   overflow-y: auto;
-  border-right: 1px solid var(--line);
-  background: #0a0f0b;
-  transform: translateX(-102%);
+  border-right: var(--bw) solid var(--ink);
+  background: var(--bg);
+  transform: translateX(-104%);
   transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -55,72 +56,86 @@
 
 .shell-head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
 }
 
-.shell-sub {
-  margin-top: 2px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text-3);
+.shell-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: var(--shadow);
+  text-decoration: none;
 }
 
-.shell-close {
+.shell-profile > span:last-child {
   display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: 0;
-  border-radius: 50%;
-  background: var(--panel-2);
-  color: var(--text-2);
 }
 
-.shell-section {
-  display: grid;
-  gap: 10px;
+.shell-profile-nick {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.shell-profile-sub {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--violet);
 }
 
 .shell-volume {
   display: grid;
-  gap: 10px;
+  gap: 8px;
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-md);
+  background: var(--panel-2);
 }
 
 .shell-volume-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: var(--text-3);
+  color: var(--text-2);
 }
 
-/* Ses kaydırıcısı: yeşil dolum çizgisi */
-input[type='range'] {
+.shell-volume input[type='range'] {
   flex: 1;
-  height: 4px;
-  appearance: none;
+  height: 14px;
+  margin: 0;
+  border: 2px solid var(--ink);
   border-radius: var(--r-pill);
-  background: linear-gradient(to right, var(--accent) var(--v, 50%), var(--panel-3) var(--v, 50%));
-}
-
-input[type='range']::-webkit-slider-thumb {
+  background: linear-gradient(to right, var(--yellow) var(--v), var(--ink-2) var(--v));
   appearance: none;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--text);
 }
 
-input[type='range']::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border: 0;
+.shell-volume input[type='range']::-webkit-slider-thumb {
+  width: 22px;
+  height: 22px;
+  border: var(--bw) solid var(--ink);
   border-radius: 50%;
-  background: var(--text);
+  background: var(--paper);
+  appearance: none;
 }
 
-.shell-title {
-  margin-bottom: 2px;
+.shell-volume input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.shell-section {
+  display: grid;
+  gap: 10px;
 }
 
 .shell-games {
@@ -131,77 +146,47 @@ input[type='range']::-moz-range-thumb {
   list-style: none;
 }
 
-/* Oyun kartı (songspot'taki "Borderspot / Countspot" kartları) */
-.game-tile {
+.shell-game {
   display: flex;
   align-items: center;
   gap: 12px;
   width: 100%;
-  padding: 12px;
-  border: 1px solid var(--line);
+  min-height: 60px;
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
   border-radius: var(--r-md);
   background: var(--panel);
+  color: var(--text);
   text-align: left;
 }
 
-.game-tile:hover {
-  border-color: rgb(25 223 112 / 0.35);
+.shell-game:hover {
+  background: var(--panel-3);
 }
 
-.game-tile-icon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 36px;
-  height: 36px;
-  border-radius: var(--r-sm);
-  background: var(--accent-soft);
-  color: var(--accent);
+.shell-game .game-mono {
+  width: 38px;
+  height: 38px;
+  font-size: 14px;
+  border-radius: 12px;
 }
 
-.game-tile-text {
+.shell-game-text {
   display: grid;
   min-width: 0;
 }
 
-.game-tile-name {
-  font-size: 15px;
+.shell-game-name {
+  font-family: var(--display);
+  font-size: 17px;
   font-weight: 800;
-  font-style: italic;
+  line-height: 1.1;
 }
 
-.game-tile-pitch {
+.shell-game-pitch {
   overflow: hidden;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-3);
-  text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.shell-note {
-  font-size: 12px;
-}
-
-.shell-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: auto;
-  padding: 12px;
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  text-decoration: none;
-}
-
-.shell-profile > span:last-child {
-  display: grid;
-}
-
-.shell-profile-nick {
-  font-weight: 700;
-}
-
-.shell-profile-sub {
-  font-size: 12px;
-  color: var(--text-3);
+  text-overflow: ellipsis;
 }

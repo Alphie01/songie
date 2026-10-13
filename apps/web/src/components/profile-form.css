@@ -1,24 +1,86 @@
 .pf {
-  display: grid;
-  gap: 18px;
-}
-
-.pf-row {
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.pf-nick {
+  flex-direction: column;
+  gap: 22px;
   flex: 1;
 }
 
+.pf-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 22px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.pf-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pf-head > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.pf-title {
+  font-size: 30px;
+}
+
+.pf-sub,
+.pf-note {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.pf-input {
+  min-height: 56px;
+  padding: 0 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 700;
+  outline: none;
+}
+
+.pf-input:focus-visible {
+  outline: 3px solid var(--violet);
+  outline-offset: 2px;
+}
+
+.pf-error {
+  margin-top: -6px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #c2185b;
+}
+
 .pf-colors {
-  display: grid;
-  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.pf-label {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .pf-swatches {
@@ -27,21 +89,38 @@
 }
 
 .pf-swatch {
-  width: 30px;
-  height: 30px;
+  width: 48px;
+  height: 48px;
   padding: 0;
-  border: 0;
+  border: var(--bw) solid var(--ink);
   border-radius: 50%;
-  background: var(--c);
-  opacity: 0.55;
-  transition: opacity 120ms, box-shadow 120ms;
 }
 
-.pf-swatch:hover {
-  opacity: 0.85;
+.pf-swatch[aria-checked='true'] {
+  box-shadow:
+    0 0 0 4px var(--paper),
+    0 0 0 7px var(--ink);
+  transform: scale(1.05);
 }
 
-.pf-swatch[aria-pressed='true'] {
-  opacity: 1;
-  box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--c);
+.pf-spacer {
+  flex: 1;
+}
+
+.pf-submit {
+  position: relative;
+  min-height: 66px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-lg);
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: 0 7px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.pf-submit:active:not(:disabled) {
+  transform: translateY(5px);
+  box-shadow: 0 2px 0 var(--ink);
 }

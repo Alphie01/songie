@@ -1,121 +1,456 @@
 .home {
-  display: grid;
-  gap: 20px;
-  padding-top: 72px;
-  padding-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 20px;
+  padding-bottom: 32px;
+}
+
+.home-me {
+  display: inline-flex;
+  border-radius: 50%;
 }
 
 .home-hello {
-  text-align: center;
-  font-size: 13px;
-  font-weight: 500;
-  margin-top: -6px;
+  display: grid;
+  gap: 4px;
 }
 
-.home-join {
+.home-hello h1 {
+  font-size: 40px;
+}
+
+.home-hello p {
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+/* Pembe kahraman kartı */
+.home-hero {
+  position: relative;
   display: grid;
+  gap: 16px;
+  padding: 24px 20px 22px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-xl);
+  background: var(--pink);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-hero h2 {
+  font-size: 40px;
+  line-height: 0.95;
+  letter-spacing: -0.5px;
+}
+
+.home-hero p {
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.home-hero-sticker {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  transform: rotate(6deg);
+}
+
+.home-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home-badges li {
+  padding: 5px 12px;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.home-badges li:nth-child(1) {
+  background: var(--mint);
+  transform: rotate(-3deg);
+}
+.home-badges li:nth-child(2) {
+  background: var(--sky);
+  transform: rotate(2deg);
+}
+.home-badges li:nth-child(3) {
+  background: var(--paper);
+  transform: rotate(-1deg);
+}
+.home-badges li:nth-child(4) {
+  background: var(--yellow);
+  transform: rotate(3deg);
+}
+
+.home-back {
+  justify-content: space-between;
+  min-height: 60px;
+  padding: 0 18px;
+  font-size: 21px;
+}
+
+/* Sarı katıl kartı */
+.home-join {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 20px 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 26px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.home-join h2 {
+  font-size: 30px;
+}
+
+.home-join-sticker {
+  position: absolute;
+  top: -14px;
+  right: 16px;
+  background: var(--pink);
+  transform: rotate(5deg);
 }
 
 .home-join-row {
   display: flex;
-  gap: 8px;
+  align-items: stretch;
+  overflow: hidden;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--paper);
+}
+
+.home-join-row:focus-within {
+  outline: 3px solid var(--ink-2);
+  outline-offset: 2px;
 }
 
 .home-code {
-  flex: 1;
-  font-family: var(--mono);
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.35em;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 0 18px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 10px;
   text-transform: uppercase;
+  outline: none;
 }
 
 .home-code::placeholder {
-  letter-spacing: 0.35em;
+  color: #b9b0d8;
 }
 
 .home-join-btn {
-  min-height: 48px;
+  min-height: 58px;
   padding: 0 22px;
+  border: 0;
+  border-left: var(--bw) solid var(--ink);
+  background: var(--ink-2);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
 }
 
-.home-hint {
-  font-size: 12px;
+.home-join-btn:disabled {
+  color: #8b82b0;
 }
 
+.home-join-hint,
+.home-join-error {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.home-join-error {
+  font-weight: 800;
+  color: #a1123a;
+}
+
+/* Dedektif vitrini */
+.home-feature {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 24px;
+  background: var(--ink-2);
+  color: var(--text);
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+}
+
+.home-feature-file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 72px;
+  height: 88px;
+  border: var(--bw) solid #000;
+  border-radius: 6px 16px 16px 16px;
+  background: #f3e6c4;
+  color: #2b2116;
+  transform: rotate(-6deg);
+}
+
+.home-feature-text {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.home-feature-tag {
+  justify-self: start;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--sky);
+  color: var(--ink-2);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.home-feature-name {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.home-feature-lead {
+  font-size: 14px;
+  color: #d6cff5;
+  line-height: 1.35;
+}
+
+/* Oyunlar */
 .home-games {
   display: grid;
-  gap: 10px;
-  margin-top: 12px;
+  gap: 14px;
 }
 
 .home-games-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
-.home-games-title {
-  text-align: left;
+.home-games-head h2 {
+  font-size: 30px;
 }
 
-.home-game {
-  position: relative;
+.home-games-count {
+  font-size: 18px;
+  color: var(--yellow);
 }
 
-.home-game-guide {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  padding: 4px 10px;
-  border: 1px solid var(--line-2);
+.home-chips {
+  display: flex;
+  gap: 8px;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 4px var(--gutter) 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.home-chip {
+  flex: none;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: var(--bw) solid var(--ink);
   border-radius: var(--r-pill);
-  background: transparent;
-  color: var(--text-2);
-  font-size: 12px;
-  font-weight: 600;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 3px 0 var(--ink);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 
-.home-game-guide:hover {
-  color: var(--accent-hi);
-  border-color: rgb(25 223 112 / 0.4);
+.home-chip[aria-pressed='true'] {
+  background: var(--cat, var(--paper));
+  color: var(--ink-2);
+  box-shadow: 0 4px 0 var(--ink);
+  transform: rotate(-2deg);
 }
 
-.home-game-head {
-  padding-right: 120px;
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
 }
 
-.home-game {
+@media (min-width: 640px) {
+  .home-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.home-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 236px;
+  padding: 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-lg);
+  background: var(--cat);
+  color: var(--ink-2);
+  box-shadow: var(--shadow);
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.home-tile .game-mono {
+  background: var(--paper);
+}
+
+.home-tile-name {
+  font-size: 19px;
+}
+
+.home-tile-pitch {
+  flex: 1 1 auto;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.home-tile-players {
+  font-size: 11px;
+  font-weight: 800;
+  opacity: 0.8;
+}
+
+.home-tile-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.home-tile-help {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.home-tile-create,
+.home-tile-solo {
+  flex: 1;
+  min-height: 40px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--ink-2);
+  color: var(--text);
+  font-family: var(--display);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.home-tile-solo {
+  flex: none;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+/* 3 adım */
+.home-steps {
   display: grid;
   gap: 16px;
-  padding: 16px;
+  padding: 22px 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 26px;
+  background: var(--panel-2);
 }
 
-.home-game-head {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
+.home-steps h2 {
+  font-size: 26px;
 }
 
-.home-game-name {
-  font-size: 18px;
-  font-weight: 800;
-  font-style: italic;
-  line-height: 1.2;
-}
-
-.home-game-pitch {
-  margin-top: 2px;
-  font-size: 13px;
-}
-
-.home-game-actions {
+.home-steps ol {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.home-game-actions .btn-outline {
-  border-radius: var(--r-pill);
+.home-steps li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.home-steps li > span:last-child {
+  display: grid;
+  font-size: 14px;
+  color: #d6cff5;
+}
+
+.home-steps strong {
+  font-size: 17px;
+  color: var(--text);
+}
+
+.home-step-n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  color: var(--ink-2);
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.home-steps [data-step='0'] .home-step-n {
+  background: var(--yellow);
+}
+.home-steps [data-step='1'] .home-step-n {
+  background: var(--pink);
+}
+.home-steps [data-step='2'] .home-step-n {
+  background: var(--mint);
+}
+
+.home-foot {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
 }

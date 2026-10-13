@@ -40,7 +40,7 @@ beforeEach(() => {
     react: () => {},
     gameView: () => {},
   };
-  rooms = new RoomManager(new Map([['dummy', dummyGame]]), transport, (...args) => saved.push(args), {
+  rooms = new RoomManager(new Map([['dummy', dummyGame], ['duo', { ...dummyGame, id: 'duo', maxPlayers: 2, defaultSettings: { n: 7 } }]]), transport, (...args) => saved.push(args), {
     lobbyGraceMs: 1000,
     emptyRoomMs: 5000,
   });
@@ -51,6 +51,24 @@ afterEach(() => vi.useRealTimers());
 const last = () => states[states.length - 1]!;
 
 describe('RoomManager', () => {
+  it('lets the host change the game in the lobby', async () => {
+    const { code } = rooms.create(p('a'), 'dummy');
+    rooms.join(p('b'), code);
+    rooms.updateSettings('a', { n: 3 });
+    rooms.setReady('b', true);
+    expect(() => rooms.changeGame('b', 'duo')).toThrow('oda sahibi');
+    expect(() => rooms.changeGame('a', 'nope')).toThrow('bulunamadı');
+    rooms.changeGame('a', 'duo');
+    expect(last()).toMatchObject({ gameId: 'duo', settings: { n: 7 } });
+    expect(last().players.every((pl) => !pl.ready)).toBe(true);
+    // Odada 3 kişi varken iki kişilik oyuna geçilemez.
+    rooms.changeGame('a', 'dummy');
+    rooms.join(p('c'), code);
+    expect(() => rooms.changeGame('a', 'duo')).toThrow('en fazla 2');
+    await rooms.start('a');
+    expect(() => rooms.changeGame('a', 'duo')).toThrow('Oyun sürerken');
+  });
+
   it('enforces capacity and host-only actions', async () => {
     const { code } = rooms.create(p('a'), 'dummy');
     rooms.join(p('b'), code);

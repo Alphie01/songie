@@ -38,7 +38,7 @@ const C = await page('Cem', { viewport: { width: 1440, height: 900 } });
 const D = await page('Deniz', devices['Pixel 7']);
 
 await signup(A, 'Ayşe', base);
-await A.locator('.home-game', { hasText: 'Tabu' }).getByRole('button', { name: 'Oda kur' }).click();
+await A.locator('.home-tile', { hasText: 'Tabu' }).getByRole('button', { name: 'Oda kur' }).click();
 await A.waitForURL(/\/r\/[A-Z]{4}$/);
 const url = A.url();
 for (const [p, n] of [[B, 'Barış'], [C, 'Cem'], [D, 'Deniz']]) await signup(p, n, url);

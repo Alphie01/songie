@@ -56,7 +56,7 @@ for (let i = 0; i < 5; i++) {
     await p.screenshot({ path: `${out}/0-tour-2.png`, fullPage: false });
   }
   await closeDialogs(p);
-  await p.locator('.home-game').first().waitFor();
+  await p.locator('.home-tile').first().waitFor();
   pages.push(p);
 }
 const slug = (s) => s.toLocaleLowerCase('tr').replace(/[^a-z0-9ğüşıöç]+/g, '-');
@@ -66,7 +66,7 @@ for (const [name, count] of GAMES) {
   const [A, ...rest] = pages;
   try {
     await A.goto(base);
-    await A.locator('.home-game').filter({ has: A.locator('.home-game-name', { hasText: new RegExp(`^${name.replace(/[?/]/g, '\\$&')}$`) }) }).getByRole('button', { name: 'Oda kur' }).click();
+    await A.locator('.home-tile').filter({ has: A.locator('.home-tile-name', { hasText: new RegExp(`^${name.replace(/[?/]/g, '\\$&')}$`) }) }).getByRole('button', { name: 'Oda kur' }).click();
     await A.waitForURL(/\/r\/[A-Z]{4}$/, { timeout: 10000 });
     const url = A.url();
     // Oyuna ilk girişte rehber açılmalı.
@@ -82,7 +82,7 @@ for (const [name, count] of GAMES) {
       await p.locator('.dlg').waitFor({ timeout: 4000 }).catch(() => {});
       await closeDialogs(p);
     }
-    await A.waitForFunction((n) => document.querySelectorAll('.row').length >= n, count, { timeout: 10000 }).catch(() => {});
+    await A.waitForFunction((n) => document.querySelectorAll('.lobby-player').length >= n, count, { timeout: 10000 }).catch(() => {});
     await A.waitForTimeout(800);
     await A.screenshot({ path: `${out}/${slug(name)}-1-lobby-mobile.png`, fullPage: true });
     await rest[0].screenshot({ path: `${out}/${slug(name)}-2-lobby-desktop.png` });

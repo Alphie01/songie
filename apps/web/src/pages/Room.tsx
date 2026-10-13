@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router';
 import type { ClientGameModule } from '@songie/game-kit/client';
 import { Avatar, Icon } from '@songie/game-kit/ui';
 import { MAX_ROOM_PLAYERS, type RoomState } from '@songie/shared';
+import { GamePicker } from '../components/GamePicker';
+import { TopBar } from '../components/Shell';
 import { findGame } from '../games';
 import { tr } from '../i18n/tr';
 import { gameApi } from '../lib/api';
@@ -49,6 +51,8 @@ export function RoomPage() {
   }, [room, upper, navigate]);
 
   const mod = useGameModule(room?.code === upper ? room.gameId : undefined);
+  // Oyun bitince önce sonuç ekranı; görülen sıralama bir daha açılmaz.
+  const [resultsSeen, setResultsSeen] = useState<string | null>(null);
   const { showGuideOnce } = useGuide();
   // Bu oyuna ilk kez giriliyorsa tanıtımı aç.
   const gameId = room?.code === upper ? room.gameId : undefined;
@@ -59,11 +63,9 @@ export function RoomPage() {
   if (joinError) {
     return (
       <main className="col room-missing">
-        <span className="wordmark" aria-hidden="true">
-          songie
-        </span>
+        <TopBar />
         <div className="card room-missing-card">
-          <p className="mono room-missing-code">{upper}</p>
+          <p className="room-missing-code">{upper}</p>
           <p className="muted">{joinError}</p>
           <Link to="/" className="btn btn-primary">
             {tr.room.home}
@@ -83,7 +85,10 @@ export function RoomPage() {
     );
   }
 
-  return room.phase === 'playing' ? <Playing room={room} mod={mod} /> : <Lobby room={room} mod={mod} />;
+  if (room.phase === 'playing') return <Playing room={room} mod={mod} />;
+  const standingsKey = room.lastStandings?.map((s) => `${s.playerId}:${s.score}`).join() || null;
+  if (standingsKey && resultsSeen !== standingsKey) return <Results room={room} onDone={() => setResultsSeen(standingsKey)} />;
+  return <Lobby room={room} mod={mod} />;
 }
 
 function Playing({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
@@ -154,7 +159,7 @@ function Playing({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
 }
 
 function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
-  const { profile, emit, notify } = useSession();
+  const { profile, emit, notify, chat } = useSession();
   const { openGuide } = useGuide();
   const navigate = useNavigate();
   const me = profile!;
@@ -163,11 +168,23 @@ function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
   const api = useMemo(() => gameApi(room.gameId), [room.gameId]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const [picking, setPicking] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [seen, setSeen] = useState(chat.length);
   const max = Math.min(MAX_ROOM_PLAYERS, game.maxPlayers);
   const connected = room.players.filter((p) => p.connected).length;
   const enough = connected >= game.minPlayers;
+  const readyCount = room.players.filter((p) => p.ready || p.id === room.hostId).length;
   const myself = room.players.find((p) => p.id === me.id);
+  const canShare = typeof navigator !== 'undefined' && !!navigator.share;
+  const url = `${location.origin}/r/${room.code}`;
   const { SettingsPanel } = mod;
+
+  useEffect(() => {
+    if (chatOpen) setSeen(chat.length);
+  }, [chatOpen, chat.length]);
+  const unread = chat.slice(seen).filter((m) => m.playerId !== me.id).length;
 
   async function start() {
     setBusy(true);
@@ -178,17 +195,27 @@ function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
   }
 
   async function copyLink() {
-    const url = `${location.origin}/r/${room.code}`;
     try {
-      if (navigator.share && matchMedia('(pointer: coarse)').matches) {
-        await navigator.share({ title: game.name, text: `${game.name} oynuyoruz, gel!`, url });
-        return;
-      }
       await navigator.clipboard.writeText(url);
-      notify(tr.room.copied);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
     } catch {
       notify(url);
     }
+  }
+
+  async function share() {
+    try {
+      await navigator.share({ title: game.name, text: tr.room.shareText(game.name), url });
+    } catch {
+      // paylaşım penceresi kapatıldı
+    }
+  }
+
+  async function changeGame(gameId: string) {
+    setPicking(false);
+    const res = await emit('room:game', { gameId });
+    if (!res.ok) notify(res.error);
   }
 
   async function leave() {
@@ -209,120 +236,290 @@ function Lobby({ room, mod }: { room: RoomState; mod: ClientGameModule }) {
   };
 
   return (
-    <main className="lobby">
-      <aside className="lobby-side lobby-left" aria-label="Oyun ayarları">
-        <SettingsPanel {...settingsProps} section="primary" />
-      </aside>
+    <main className="col lobby">
+      <TopBar
+        compact
+        right={
+          game.guide ? (
+            <button type="button" className="icon-btn" aria-label={tr.guide.open} onClick={() => openGuide(game.id)}>
+              ?
+            </button>
+          ) : undefined
+        }
+      />
 
-      <div className="lobby-center">
-        <span className="wordmark" aria-hidden="true">
-          songie
-        </span>
-
-        <section className="lobby-room card">
-          <div className="lobby-room-head">
-            <span className="eyebrow">{tr.room.codeLabel}</span>
-            <span className="lobby-game">{game.name}</span>
-          </div>
-          <p className="lobby-code mono" aria-label={`${tr.room.codeLabel}: ${room.code.split('').join(' ')}`}>
-            {room.code}
-          </p>
-          <button type="button" className="btn btn-outline btn-block" onClick={copyLink}>
-            <Icon name="copy" size={16} />
-            {tr.room.copyLink}
+      <section className="lobby-code-card" aria-labelledby="code-title">
+        <div className="lobby-code-head">
+          <span>
+            <span id="code-title" className="lobby-code-label">
+              {tr.room.codeLabel}
+            </span>
+            <span className="lobby-code-game">{game.name}</span>
+          </span>
+          <span className="lobby-code-tiles" aria-label={`${tr.room.codeLabel}: ${room.code.split('').join(' ')}`}>
+            {room.code.split('').map((ch, i) => (
+              <span key={i} aria-hidden="true">
+                {ch}
+              </span>
+            ))}
+          </span>
+        </div>
+        <div className="lobby-code-actions">
+          <button type="button" className="btn btn-dark" onClick={copyLink}>
+            <Icon name={copied ? 'check' : 'link'} size={16} />
+            {copied ? tr.room.copyDone : tr.room.copyLink}
           </button>
+          <button type="button" className="btn btn-primary" onClick={canShare ? share : copyLink}>
+            <Icon name="share" size={16} />
+            {tr.room.share}
+          </button>
+        </div>
+      </section>
+
+      <section className="lobby-game">
+        <span className="lobby-game-icon" aria-hidden="true">
+          <Icon name={game.icon} size={26} />
+        </span>
+        <span className="lobby-game-text">
+          <span className="lobby-game-label">{tr.room.selectedGame}</span>
+          <span className="lobby-game-name">{game.name}</span>
           {game.guide && (
-            <button type="button" className="btn btn-ghost lobby-guide" onClick={() => openGuide(game.id)}>
+            <button type="button" className="lobby-game-guide" onClick={() => openGuide(game.id)}>
               {tr.guide.open}
             </button>
           )}
-        </section>
-
-        {room.lastStandings && room.lastStandings.length > 0 && (
-          <section className="lobby-block" aria-labelledby="last-title">
-            <h2 id="last-title" className="eyebrow">
-              {tr.room.lastGame}
-            </h2>
-            <ol className="rows">
-              {room.lastStandings.map((s) => (
-                <li key={s.playerId} className="row" data-first={s.rank === 1 || undefined}>
-                  <span className="row-rank mono">{String(s.rank).padStart(2, '0')}</span>
-                  <Avatar avatar={s.avatar} nick={s.nick} size={28} />
-                  <span className="row-name">{s.nick}</span>
-                  <span className="row-score mono">{s.score.toLocaleString('tr-TR')}</span>
-                </li>
-              ))}
-            </ol>
-          </section>
+        </span>
+        {isHost && (
+          <button type="button" className="btn btn-dark lobby-game-change" onClick={() => setPicking(true)}>
+            {tr.room.change}
+          </button>
         )}
+      </section>
 
-        <section className="lobby-block" aria-labelledby="players-title">
-          <h2 id="players-title" className="eyebrow">
-            {tr.room.players}{' '}
-            <span className="mono">
-              {room.players.length}/{max}
-            </span>
+      <section className="lobby-players" aria-labelledby="players-title">
+        <div className="lobby-players-head">
+          <h2 id="players-title" className="display">
+            {tr.room.players} {room.players.length}/{max}
           </h2>
-          <ul className="rows">
-            {room.players.map((p) => (
-              <li key={p.id} className="row">
-                <Avatar avatar={p.avatar} nick={p.nick} size={28} dim={!p.connected} />
-                <span className="row-name">
-                  {p.nick}
-                  {p.id === me.id && <span className="dim"> ({tr.room.you})</span>}
-                </span>
-                <span className="row-tags">
-                  {p.id === room.hostId && <span className="tag">{tr.room.host}</span>}
-                  {!p.connected && <span className="tag tag-off">{tr.room.offline}</span>}
-                  {p.ready && p.id !== room.hostId && <span className="tag tag-ready">{tr.room.ready}</span>}
-                </span>
-                {isHost && p.id !== me.id && (
-                  <button type="button" className="btn btn-ghost row-kick" onClick={() => void emit('room:kick', { playerId: p.id })}>
-                    {tr.room.kick}
-                  </button>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <div className="lobby-cta">
-          {error && (
-            <p className="error-text" role="alert">
-              {error}
-            </p>
-          )}
-          {isHost ? (
-            <>
-              <button type="button" className="btn btn-primary btn-block btn-lg" disabled={!enough || busy} onClick={start}>
-                {busy ? tr.room.starting : tr.room.start}
-              </button>
-              {!enough && <p className="dim lobby-note">{tr.room.needPlayers(game.minPlayers)}</p>}
-            </>
-          ) : (
-            <>
-              <button
-                type="button"
-                className={`btn btn-block btn-lg ${myself?.ready ? 'btn-outline' : 'btn-primary'}`}
-                onClick={() => void emit('room:ready', { ready: !myself?.ready })}
-              >
-                {myself?.ready ? tr.room.notReady : tr.room.imReady}
-              </button>
-              <p className="dim lobby-note">{tr.room.waitHost}</p>
-            </>
-          )}
+          <span className="lobby-ready-count">{tr.room.readyCount(readyCount)}</span>
         </div>
+        <ul className="lobby-player-grid card">
+          {room.players.map((p) => (
+            <li key={p.id} className="lobby-player" data-off={!p.connected || undefined}>
+              <Avatar avatar={p.avatar} nick={p.nick} size={30} dim={!p.connected} />
+              <span className="lobby-player-name">
+                {p.nick}
+                {p.id === me.id && ` (${tr.room.you})`}
+              </span>
+              <span className="lobby-player-tag">
+                {p.id === room.hostId ? (
+                  <span className="lobby-host">{tr.room.host}</span>
+                ) : !p.connected ? (
+                  tr.room.offline
+                ) : p.ready ? (
+                  tr.room.ready
+                ) : null}
+              </span>
+              {isHost && p.id !== me.id && (
+                <button type="button" className="lobby-kick" aria-label={`${p.nick}: ${tr.room.kick}`} onClick={() => void emit('room:kick', { playerId: p.id })}>
+                  <Icon name="close" size={14} />
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+        {room.players.length < Math.max(2, game.minPlayers) && <p className="lobby-waiting">{tr.room.waiting}</p>}
+      </section>
 
-        <Chat room={room} />
+      <section className="lobby-settings" aria-labelledby="settings-title">
+        <h2 id="settings-title" className="display">
+          {tr.room.settings}
+        </h2>
+        <SettingsPanel {...settingsProps} section="primary" />
+        <SettingsPanel {...settingsProps} section="secondary" />
+      </section>
 
-        <button type="button" className="btn btn-ghost lobby-leave" onClick={leave}>
+      <div className="lobby-spacer" />
+      <div className="lobby-cta">
+        {error && (
+          <p className="error-text" role="alert">
+            {error}
+          </p>
+        )}
+        {isHost ? (
+          <>
+            <button type="button" className="btn btn-primary btn-block btn-lg" disabled={!enough || busy} onClick={start}>
+              <Icon name="play" size={20} />
+              {busy ? tr.room.starting : tr.room.start}
+            </button>
+            {!enough && <p className="lobby-note">{tr.room.needPlayers(game.minPlayers)}</p>}
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              className={`btn btn-block btn-lg ${myself?.ready ? 'btn-outline' : 'btn-primary'}`}
+              onClick={() => void emit('room:ready', { ready: !myself?.ready })}
+            >
+              {myself?.ready ? tr.room.notReady : tr.room.imReady}
+            </button>
+            <p className="lobby-note">{tr.room.waitHost}</p>
+          </>
+        )}
+      </div>
+
+      {chatOpen && (
+        <div className="lobby-chat">
+          <Chat room={room} />
+        </div>
+      )}
+
+      <div className="lobby-foot">
+        <button type="button" className="btn btn-ghost" aria-expanded={chatOpen} onClick={() => setChatOpen((o) => !o)}>
+          <Icon name="chat" size={16} />
+          {tr.room.chat}
+          {!chatOpen && unread > 0 && <span className="lobby-unread">{unread}</span>}
+        </button>
+        <button type="button" className="lobby-leave" onClick={leave}>
           {tr.room.leave}
         </button>
       </div>
 
-      <aside className="lobby-side lobby-right" aria-label="Oynanış ayarları">
-        <SettingsPanel {...settingsProps} section="secondary" />
-      </aside>
+      {picking && (
+        <GamePicker title={tr.picker.changeTitle} current={room.gameId} onClose={() => setPicking(false)} onPick={(id) => void changeGame(id)} />
+      )}
+    </main>
+  );
+}
+
+const RESULTS_MS = 15000;
+
+/** Oyun sonu ekranı (tasarım: Sonuçlar). Süre dolunca ya da "Lobiye dön" ile lobiye geçer. */
+function Results({ room, onDone }: { room: RoomState; onDone(): void }) {
+  const { profile, emit, notify } = useSession();
+  const me = profile!;
+  const isHost = room.hostId === me.id;
+  const game = findGame(room.gameId)!;
+  const standings = room.lastStandings ?? [];
+  const myself = room.players.find((p) => p.id === me.id);
+  const [busy, setBusy] = useState(false);
+  const [picking, setPicking] = useState(false);
+  const winners = standings.filter((s) => s.rank === 1);
+  const [first, second] = standings;
+  const rest = standings.slice(2);
+  const half = Math.ceil(rest.length / 2);
+
+  const done = useRef(onDone);
+  done.current = onDone;
+  useEffect(() => {
+    if (picking) return;
+    const t = setTimeout(() => done.current(), RESULTS_MS);
+    return () => clearTimeout(t);
+  }, [picking]);
+
+  async function rematch() {
+    setBusy(true);
+    const res = await emit('room:start', {});
+    setBusy(false);
+    if (!res.ok) notify(res.error);
+  }
+
+  return (
+    <main className="col results">
+      <span className="results-confetti" aria-hidden="true">
+        <i />
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+      <div className="results-top">
+        <span>{game.name}</span>
+        <span className="results-code">{room.code}</span>
+      </div>
+      <div className="results-head">
+        <span className="results-sticker">{tr.room.gameOver}</span>
+        <h1 className="display results-title">{winners.length === 1 ? tr.room.winner(winners[0]!.nick) : tr.room.draw}</h1>
+      </div>
+      {first && (
+        <div className="results-scores">
+          <div className="results-card results-card-first">
+            <svg width="40" height="28" viewBox="0 0 40 28" aria-hidden="true">
+              <path d="M3 25L6 6l9 9 5-12 5 12 9-9 3 19z" fill="#FFD23F" stroke="#0D0828" strokeWidth="3" strokeLinejoin="round" />
+            </svg>
+            <span className="results-score">{first.score.toLocaleString('tr-TR')}</span>
+            <span className="results-name">{first.nick}</span>
+          </div>
+          {second && (
+            <>
+              <span className="results-dash" aria-hidden="true">
+                –
+              </span>
+              <div className="results-card results-card-second">
+                <span className="results-score">{second.score.toLocaleString('tr-TR')}</span>
+                <span className="results-name">{second.nick}</span>
+              </div>
+            </>
+          )}
+        </div>
+      )}
+      {rest.length > 0 && (
+        <div className="results-rosters">
+          {[rest.slice(0, half), rest.slice(half)].map(
+            (col, i) =>
+              col.length > 0 && (
+                <ol key={i} className="results-roster" start={3 + i * half}>
+                  {col.map((s) => (
+                    <li key={s.playerId}>
+                      <Avatar avatar={s.avatar} nick={s.nick} size={28} />
+                      <span className="results-roster-name">{s.nick}</span>
+                      <span className="results-roster-score">{s.score.toLocaleString('tr-TR')}</span>
+                    </li>
+                  ))}
+                </ol>
+              ),
+          )}
+        </div>
+      )}
+      <div className="lobby-spacer" />
+      <div className="results-foot">
+        <div className="results-bar" aria-hidden="true">
+          <div style={{ animationDuration: `${RESULTS_MS}ms`, animationPlayState: picking ? 'paused' : 'running' }} />
+        </div>
+        <p className="results-note">
+          {tr.room.backToLobby} · {tr.room.saved}
+        </p>
+        {isHost ? (
+          <button type="button" className="btn btn-primary btn-block results-rematch" disabled={busy} onClick={rematch}>
+            <Icon name="replay" size={22} />
+            {tr.room.rematch}
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={`btn btn-block results-rematch ${myself?.ready ? 'btn-outline' : 'btn-primary'}`}
+            onClick={() => void emit('room:ready', { ready: !myself?.ready })}
+          >
+            {myself?.ready ? tr.room.notReady : tr.room.imReady}
+          </button>
+        )}
+        <button type="button" className="btn btn-outline btn-block results-other" onClick={isHost ? () => setPicking(true) : onDone}>
+          {isHost ? tr.room.otherGame : tr.room.toLobby}
+        </button>
+      </div>
+      {picking && (
+        <GamePicker
+          title={tr.picker.changeTitle}
+          current={room.gameId}
+          onClose={() => setPicking(false)}
+          onPick={async (id) => {
+            setPicking(false);
+            const res = await emit('room:game', { gameId: id });
+            if (!res.ok) notify(res.error);
+            else onDone();
+          }}
+        />
+      )}
     </main>
   );
 }

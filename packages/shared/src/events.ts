@@ -12,6 +12,7 @@ export const clientEvents = {
   'room:join': z.object({ code: roomCodeSchema }),
   'room:leave': z.object({}),
   'room:settings': z.object({ settings: z.unknown() }),
+  'room:game': z.object({ gameId: z.string() }),
   'room:ready': z.object({ ready: z.boolean() }),
   'room:start': z.object({}),
   'room:lobby': z.object({}),

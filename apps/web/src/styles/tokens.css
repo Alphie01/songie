@@ -1,39 +1,66 @@
-/* Tasarım token'ları: songspot.net görünümü (kullanıcının isteği). Ayrıntı: docs/design.md */
+/* Tasarım token'ları: "Songie Arayüz" tasarımı (Ekim 2026, kullanıcının verdiği canvas). Ayrıntı: docs/design.md
+   Mor zemin, kalın mürekkep çerçeveli renkli kartlar, sert gölge; Baloo 2 (başlık) + Nunito (metin). */
 :root {
-  --bg: #030704;
-  --panel: #101511;
-  --panel-2: #161c17;
-  --panel-3: #1d241e;
-  --line: rgb(255 255 255 / 0.08);
-  --line-2: rgb(255 255 255 / 0.14);
+  /* Zemin ve yüzeyler */
+  --bg: #2a1b6e;
+  --bg-deep: #150e38;
+  --panel: #3a2a8c;
+  --panel-2: #1f145a;
+  --panel-3: #4a389e;
+  --paper: #ffffff;
+  --paper-2: #f1ecff;
+  --paper-3: #d9d0f5;
+
+  /* Mürekkep: çerçeve, gölge ve açık zeminde yazı */
+  --ink: #0d0828;
+  --ink-2: #120c2e;
+  --ink-soft: #4a4170;
+  --line: #0d0828;
+  --line-2: #6e5fc4;
 
   --text: #ffffff;
-  --text-2: #b4b8b4;
-  --text-3: #7c837c;
+  --text-2: #e4dcff;
+  --text-3: #c9bef5;
 
-  --accent: #19df70;
-  --accent-hi: #39e887;
-  --accent-ink: #04160b;
-  --accent-soft: rgb(25 223 112 / 0.09);
-  --accent-soft-2: rgb(25 223 112 / 0.16);
-  --accent-glow: 0 0 32px rgb(25 223 112 / 0.35);
+  /* Renkler */
+  --mint: #3ee0a8;
+  --yellow: #ffd23f;
+  --pink: #ff7ac6;
+  --sky: #5ab8ff;
+  --lilac: #b794ff;
+  --coral: #ff8a5b;
+  --red: #ff6b6b;
+  --orange: var(--coral);
+  --purple: var(--lilac);
+  --violet: #6e5fc4;
+  --cream: #fff4c2;
 
-  /* Zorluk renkleri */
-  --yellow: #ffd234;
-  --orange: #ff8631;
-  --red: #f66464;
-  --purple: #ae67ed;
+  /* Eski adlar (oyunlar kullanıyor): ana vurgu nane yeşili */
+  --accent: var(--mint);
+  --accent-hi: #6ff0c2;
+  --accent-ink: var(--ink-2);
+  --accent-soft: rgb(62 224 168 / 0.16);
+  --accent-soft-2: rgb(62 224 168 / 0.28);
+  --accent-glow: 0 0 0 transparent;
 
-  --font: 'Poppins', system-ui, sans-serif;
-  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font: 'Nunito', system-ui, sans-serif;
+  --display: 'Baloo 2', 'Nunito', system-ui, sans-serif;
+  --mono: 'Baloo 2', 'Nunito', system-ui, sans-serif;
 
-  --r-sm: 10px;
-  --r-md: 12px;
-  --r-lg: 16px;
+  --bw: 3px;
+  --shadow-sm: 3px 3px 0 var(--ink);
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-lg: 6px 6px 0 var(--ink);
+  --shadow-btn: 0 6px 0 var(--ink);
+
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 22px;
+  --r-xl: 28px;
   --r-pill: 999px;
 
-  --gutter: 16px;
-  --col: 420px;
+  --gutter: 18px;
+  --col: 440px;
 }
 
 @media (min-width: 720px) {

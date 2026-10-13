@@ -1,4 +1,5 @@
 import { ProfileForm } from '../components/ProfileForm';
+import { TopBar } from '../components/Shell';
 import { tr } from '../i18n/tr';
 import { useSession } from '../lib/session';
 import './profile.css';
@@ -16,28 +17,27 @@ export function ProfilePage() {
     : [];
   return (
     <main className="col profile">
-      <span className="wordmark" aria-hidden="true">
-        songie
-      </span>
-      <div className="card profile-card">
-        <h1 className="profile-title">{tr.profile.title}</h1>
-        <dl className="stats">
-          {rows.map(([label, value]) => (
-            <div key={label} className="stat">
-              <dt className="eyebrow">{label}</dt>
-              <dd className="mono">{value.toLocaleString('tr-TR')}</dd>
-            </div>
-          ))}
-        </dl>
-        <ProfileForm
-          initial={{ nick: profile.nick, avatar: profile.avatar }}
-          submitLabel={tr.profile.save}
-          onSubmit={async (input) => {
-            await saveProfile(input);
-            notify(tr.profile.saved);
-          }}
-        />
-      </div>
+      <TopBar />
+      <ProfileForm
+        initial={{ nick: profile.nick, avatar: profile.avatar }}
+        submitLabel={tr.profile.save}
+        onSubmit={async (input) => {
+          await saveProfile(input);
+          notify(tr.profile.saved);
+        }}
+        before={
+          rows.length > 0 && (
+            <dl className="stats">
+              {rows.map(([label, value]) => (
+                <div key={label} className="stat">
+                  <dt>{label}</dt>
+                  <dd className="display">{value.toLocaleString('tr-TR')}</dd>
+                </div>
+              ))}
+            </dl>
+          )
+        }
+      />
     </main>
   );
 }

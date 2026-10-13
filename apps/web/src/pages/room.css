@@ -2,116 +2,313 @@
   display: grid;
   place-items: center;
   min-height: 60dvh;
+  font-weight: 800;
 }
 
 .room-missing {
   display: grid;
-  gap: 28px;
-  padding-top: 72px;
+  gap: 22px;
+  padding-top: 18px;
 }
 
 .room-missing-card {
   display: grid;
-  justify-items: center;
   gap: 14px;
-  padding: 24px;
+  justify-items: center;
+  padding: 24px 18px;
+  background: var(--paper);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-lg);
   text-align: center;
 }
 
 .room-missing-code {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 8px;
 }
 
-/* ---------- Lobi: songspot gibi üç sütun ---------- */
-
+/* ---------- Lobi (tasarım: Oda lobisi) ---------- */
 .lobby {
-  display: grid;
-  gap: 28px;
-  width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 72px var(--gutter) 48px;
-}
-
-.lobby-center {
-  display: grid;
-  align-content: start;
-  gap: 22px;
-  width: 100%;
-  max-width: var(--col);
-  margin: 0 auto;
-}
-
-.lobby-side {
-  width: 100%;
-  max-width: var(--col);
-  margin: 0 auto;
-}
-
-/* Mobilde: önce oda, sonra ayarlar */
-.lobby-left {
-  order: 2;
-}
-
-.lobby-center {
-  order: 1;
-}
-
-.lobby-right {
-  order: 3;
-}
-
-@media (min-width: 1100px) {
-  .lobby {
-    grid-template-columns: 200px minmax(0, 1fr) 200px;
-    gap: 40px;
-    padding-top: 40px;
-  }
-
-  .lobby-left,
-  .lobby-center,
-  .lobby-right {
-    order: 0;
-  }
-
-  .lobby-side {
-    padding-top: 112px;
-  }
-}
-
-.lobby-room {
-  display: grid;
-  gap: 12px;
-  padding: 18px;
-}
-
-.lobby-room-head {
   display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 100dvh;
+  padding-top: 18px;
+  padding-bottom: 22px;
+}
+
+.lobby-spacer {
+  flex: 1;
+}
+
+.lobby-code-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 24px;
+  background: var(--yellow);
+  color: var(--ink-2);
+  box-shadow: var(--shadow-lg);
+}
+
+.lobby-code-head {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: baseline;
+  gap: 10px;
+}
+
+.lobby-code-head > span:first-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.lobby-code-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.lobby-code-game {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.lobby-code-tiles {
+  display: flex;
+  gap: 5px;
+}
+
+.lobby-code-tiles span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 50px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 11px;
+  background: var(--paper);
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.lobby-code-tiles span:nth-child(1) {
+  transform: rotate(-4deg);
+}
+.lobby-code-tiles span:nth-child(2) {
+  transform: rotate(3deg);
+}
+.lobby-code-tiles span:nth-child(3) {
+  transform: rotate(-2deg);
+}
+.lobby-code-tiles span:nth-child(4) {
+  background: var(--pink);
+  transform: rotate(4deg);
+}
+
+.lobby-code-actions {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 8px;
+}
+
+.lobby-code-actions .btn {
+  min-height: 48px;
+  padding: 0 6px;
+  border-radius: 14px;
+  box-shadow: none;
+  font-size: 15px;
+  gap: 6px;
+}
+
+.lobby-code-actions .btn-primary {
+  font-size: 16px;
 }
 
 .lobby-game {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-lg);
+  background: var(--paper);
+  color: var(--ink-2);
+  transform: rotate(-1deg);
+}
+
+.lobby-game-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--yellow);
+  transform: rotate(-6deg);
+}
+
+.lobby-game-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.lobby-game-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.lobby-game-name {
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.lobby-game-guide {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--violet);
   font-size: 13px;
   font-weight: 800;
-  font-style: italic;
-  color: var(--text-2);
+  text-decoration: underline;
 }
 
-.lobby-code {
-  font-size: 44px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.22em;
-  color: var(--accent-hi);
-  user-select: all;
+.lobby-game-change {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: none;
+  font-family: var(--font);
+  font-size: 14px;
 }
 
-.lobby-block {
+.lobby-players {
   display: grid;
   gap: 10px;
+}
+
+.lobby-players-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.lobby-players-head h2 {
+  font-size: 22px;
+}
+
+.lobby-ready-count {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--mint);
+}
+
+.lobby-player-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 10px;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.lobby-player {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 30px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.lobby-player[data-off] {
+  opacity: 0.6;
+}
+
+.lobby-player .gk-avatar {
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 12px !important;
+}
+
+.lobby-player-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.lobby-player-tag {
+  margin-left: auto;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.lobby-host {
+  padding: 1px 6px;
+  border-radius: 6px;
+  background: var(--ink-2);
+  color: var(--yellow);
+  font-size: 10px;
+}
+
+.lobby-kick {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  background: var(--panel-2);
+  color: var(--text);
+}
+
+.lobby-waiting {
+  padding: 10px;
+  border: var(--bw) dashed var(--violet);
+  border-radius: 18px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.lobby-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
+}
+
+.lobby-settings h2 {
+  font-size: 18px;
 }
 
 .lobby-cta {
@@ -119,92 +316,318 @@
   gap: 8px;
 }
 
+.lobby-cta .btn-lg {
+  border-radius: 22px;
+  box-shadow: 0 7px 0 var(--ink);
+}
+
 .lobby-note {
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-3);
   text-align: center;
 }
 
-.lobby-leave {
-  justify-self: center;
+.lobby-chat {
+  padding: 12px 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 20px;
+  background: var(--panel-2);
 }
 
-/* Satır listesi (oyuncular, sıralama) */
-.rows {
-  display: grid;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.row {
+.lobby-foot {
   display: flex;
   align-items: center;
-  gap: 10px;
-  min-height: 46px;
-  padding: 0 12px;
-  border-radius: var(--r-md);
-  background: var(--panel);
+  justify-content: space-between;
 }
 
-.row[data-first] {
-  background: var(--accent-soft);
-  box-shadow: inset 0 0 0 1px rgb(25 223 112 / 0.2);
+.lobby-foot .btn-ghost {
+  gap: 6px;
+  color: var(--text-2);
 }
 
-.row-rank {
+.lobby-unread {
+  padding: 0 6px;
+  border-radius: var(--r-pill);
+  background: var(--pink);
+  color: var(--ink-2);
   font-size: 12px;
+}
+
+.lobby-leave {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-3);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+/* ---------- Oyun sonu (tasarım: Sonuçlar) ---------- */
+.results {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 100dvh;
+  padding-top: 20px;
+  padding-bottom: 24px;
+  overflow: hidden;
+}
+
+.results > * {
+  position: relative;
+}
+
+.results-confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.results-confetti i {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.results-confetti i:nth-child(1) {
+  top: 50px;
+  left: 30px;
+  width: 16px;
+  height: 7px;
+  background: var(--yellow);
+  transform: rotate(30deg);
+}
+.results-confetti i:nth-child(2) {
+  top: 90px;
+  right: 40px;
+  width: 16px;
+  height: 7px;
+  background: var(--pink);
+  transform: rotate(-40deg);
+}
+.results-confetti i:nth-child(3) {
+  top: 150px;
+  left: 64px;
+  width: 11px;
+  height: 11px;
+  background: var(--mint);
+  transform: rotate(20deg);
+}
+.results-confetti i:nth-child(4) {
+  top: 40px;
+  right: 120px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+.results-confetti i:nth-child(5) {
+  top: 190px;
+  right: 60px;
+  width: 16px;
+  height: 7px;
+  background: var(--coral);
+  transform: rotate(70deg);
+}
+
+.results-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 800;
   color: var(--text-3);
 }
 
-.row-name {
-  min-width: 0;
-  overflow: hidden;
-  font-size: 14px;
-  font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.results-code {
+  letter-spacing: 2px;
 }
 
-.row-score {
-  margin-left: auto;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.row[data-first] .row-score {
-  color: var(--accent-hi);
-}
-
-.row-tags {
+.results-head {
   display: flex;
-  gap: 4px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  text-align: center;
 }
 
-.row-kick {
-  margin-left: auto;
-}
-
-.tag {
-  padding: 2px 8px;
+.results-sticker {
+  padding: 5px 14px;
+  border: var(--bw) solid var(--ink);
   border-radius: var(--r-pill);
-  background: var(--panel-3);
+  background: var(--yellow);
+  color: var(--ink-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+
+.results-title {
+  margin-top: 8px;
+  font-size: 48px;
+  line-height: 0.95;
+}
+
+.results-scores {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 12px;
+}
+
+.results-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border: 4px solid var(--ink);
+  border-radius: 26px;
+  color: var(--ink-2);
+  text-align: center;
+}
+
+.results-card-first {
+  background: var(--mint);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-3deg);
+}
+
+.results-card-second {
+  align-self: flex-end;
+  background: var(--lilac);
+  transform: rotate(2deg);
+}
+
+.results-score {
+  font-family: var(--display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.results-card-second .results-score {
+  margin-top: 10px;
+  font-size: 52px;
+}
+
+.results-name {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.results-dash {
+  align-self: center;
+  font-family: var(--display);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-3);
+}
+
+.results-rosters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.results-roster {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  list-style: none;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel);
+}
+
+.results-roster li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.results-roster-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.results-roster-score {
+  margin-left: auto;
+  color: var(--yellow);
+}
+
+.results-foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.results-bar {
+  width: 100%;
+  height: 12px;
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: var(--r-pill);
+  background: var(--panel-2);
+}
+
+.results-bar div {
+  width: 100%;
+  height: 100%;
+  background: var(--yellow);
+  transform-origin: left;
+  animation: results-bar linear forwards;
+}
+
+@keyframes results-bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.results-note {
+  font-size: 14px;
+  font-weight: 800;
   color: var(--text-2);
-  font-size: 11px;
-  font-weight: 600;
 }
 
-.tag-off {
-  background: rgb(246 100 100 / 0.1);
-  color: var(--red);
+.results-rematch {
+  min-height: 62px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-btn);
+  font-size: 24px;
+  gap: 10px;
 }
 
-.tag-ready {
-  background: var(--accent-soft);
-  color: var(--accent-hi);
+.results-other {
+  min-height: 52px;
+  border-radius: 18px;
+  box-shadow: none;
+  font-size: 19px;
 }
 
-/* Sohbet */
+/* ---------- Sohbet ---------- */
 .chat-list {
   display: grid;
   gap: 4px;
@@ -213,13 +636,14 @@
   padding: 0;
   overflow-y: auto;
   list-style: none;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
   overflow-wrap: anywhere;
 }
 
 .chat-nick {
-  font-weight: 700;
-  color: var(--accent-hi);
+  font-weight: 800;
+  color: var(--yellow);
 }
 
 .chat-empty {
@@ -264,8 +688,8 @@
 /* Oyun içi sohbet: menü butonunun karşısında, sağ üstte (oyun içeriğinin üstüne binmesin) */
 .chat-dock {
   position: fixed;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 14px;
   z-index: 100;
   display: flex;
   flex-direction: column-reverse;
@@ -274,9 +698,9 @@
 }
 
 .chat-dock-panel {
-  width: min(320px, calc(100vw - 32px));
+  width: min(320px, calc(100vw - 28px));
   padding: 14px;
-  box-shadow: 0 16px 48px rgb(0 0 0 / 0.6);
+  box-shadow: var(--shadow-lg);
 }
 
 .chat-compact {
@@ -292,13 +716,13 @@
   position: relative;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--line-2);
-  border-radius: 50%;
-  background: var(--panel-2);
+  width: 44px;
+  height: 44px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--panel);
   color: var(--text);
-  box-shadow: 0 8px 28px rgb(0 0 0 / 0.45);
+  box-shadow: var(--shadow-sm);
 }
 
 .chat-dock-badge {
@@ -309,13 +733,91 @@
   height: 20px;
   padding: 0 5px;
   border-radius: var(--r-pill);
-  background: var(--accent);
-  color: var(--accent-ink);
+  border: 2px solid var(--ink);
+  background: var(--pink);
+  color: var(--ink-2);
   font-size: 11px;
-  font-weight: 700;
-  line-height: 20px;
+  font-weight: 800;
+  line-height: 16px;
 }
 
-.lobby-guide {
-  justify-self: center;
+.playing {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
+
+.playing-footer {
+  display: flex;
+  justify-content: center;
+  padding: 8px var(--gutter) max(16px, env(safe-area-inset-bottom));
+}
+
+.conn-banner {
+  position: sticky;
+  top: 0;
+  z-index: 110;
+  padding: 8px var(--gutter);
+  background: var(--red);
+  color: #1a0505;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Oyun içi sohbet: menü butonunun karşısında, sağ üstte (oyun içeriğinin üstüne binmesin) */
+.chat-dock {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.chat-dock-panel {
+  width: min(320px, calc(100vw - 28px));
+  padding: 14px;
+  box-shadow: var(--shadow-lg);
+}
+
+.chat-compact {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-compact .chat-list {
+  max-height: 240px;
+}
+
+.chat-dock-btn {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+.chat-dock-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: var(--r-pill);
+  border: 2px solid var(--ink);
+  background: var(--pink);
+  color: var(--ink-2);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 16px;
+}
+

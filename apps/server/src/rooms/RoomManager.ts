@@ -213,6 +213,23 @@ export class RoomManager {
     this.transport.roomClosed(room.code, [targetId], 'Oda sahibi seni odadan çıkardı.');
   }
 
+  /** Oda sahibi lobide oyunu değiştirir; ayarlar yeni oyunun varsayılanına döner. */
+  changeGame(hostId: string, gameId: string): void {
+    const room = this.hostRoom(hostId);
+    if (room.game) throw new RoomError('Oyun sürerken oyun değiştirilemez.');
+    const impl = this.games.get(gameId);
+    if (!impl) throw new RoomError('Bu oyun bulunamadı.');
+    if (room.gameId === gameId) return;
+    if (room.members.size > impl.maxPlayers) {
+      throw new RoomError(`Bu oyun en fazla ${impl.maxPlayers} kişiyle oynanır; odada ${room.members.size} kişi var.`);
+    }
+    room.gameId = gameId;
+    room.settings = impl.defaultSettings;
+    room.lastStandings = null;
+    for (const m of room.members.values()) m.ready = false;
+    this.broadcast(room);
+  }
+
   updateSettings(hostId: string, settings: unknown): void {
     const room = this.hostRoom(hostId);
     const impl = this.games.get(room.gameId)!;

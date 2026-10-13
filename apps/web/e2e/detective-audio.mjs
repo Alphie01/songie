@@ -19,7 +19,7 @@ const check = (c, m) => {
 await p.goto(base);
 await p.getByLabel('Takma ad').fill('Dinleyici');
 await p.getByRole('button', { name: 'Devam et' }).click();
-await p.locator('.home-game', { hasText: 'Dedektif' }).getByRole('button', { name: 'Oda kur' }).click();
+await p.locator('.home-tile', { hasText: 'Dedektif' }).getByRole('button', { name: 'Oda kur' }).click();
 await p.locator('.dt-case').filter({ hasText: 'Yalıda' }).click();
 await p.getByRole('button', { name: 'Oyunu başlat' }).click();
 await p.getByRole('button', { name: 'Anlatıcıyı dinle' }).click();
