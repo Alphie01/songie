@@ -68,7 +68,6 @@ export function Home() {
       </div>
 
       <section className="home-hero">
-        <span className="sticker home-hero-sticker">{tr.home.free}</span>
         <h2 className="display">{tr.home.heroTitle}</h2>
         <p>{tr.home.heroLead}</p>
         <button type="button" className="btn btn-dark btn-lg btn-block" onClick={() => setPicking(true)}>

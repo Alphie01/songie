@@ -47,12 +47,11 @@ export const tr = {
   home: {
     hello: (nick: string) => `Selam, ${nick}!`,
     helloSub: 'Bu akşam ne oynuyoruz?',
-    free: 'Ücretsiz!',
     heroTitle: 'Arkadaşlarını topla, oyun başlasın!',
     heroLead: 'Odanı kur, linki gruba at. Herkes kendi telefonundan katılır.',
     createRoom: 'Oda Oluştur',
     badgesLabel: 'Songie hakkında',
-    badges: ['Reklamsız', 'Üyelik yok', 'İndirme yok', '%100 Türkçe'],
+    badges: ['Üyelik yok', 'İndirme yok', '%100 Türkçe'],
     joinSticker: '4 harf yeter',
     joinTitle: 'Odaya katıl',
     join: 'Katıl',
