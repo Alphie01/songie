@@ -1,0 +1,138 @@
+{
+  "view": {
+    "phase": "exchange",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "deniz",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k136x",
+          "role": "treasurer"
+        },
+        {
+          "id": "k137x",
+          "role": "assassin"
+        }
+      ],
+      "coins": 2
+    },
+    "deckCount": 5,
+    "cardsPerRole": 3,
+    "pending": {
+      "actor": "ali",
+      "action": "exchange",
+      "target": null,
+      "claim": "spy",
+      "block": null
+    },
+    "window": null,
+    "lose": null,
+    "exchange": {
+      "options": [
+        {
+          "id": "k136x",
+          "role": "treasurer"
+        },
+        {
+          "id": "k137x",
+          "role": "assassin"
+        },
+        {
+          "id": "k144x",
+          "role": "treasurer"
+        },
+        {
+          "id": "k145x",
+          "role": "assassin"
+        }
+      ],
+      "keep": 2
+    },
+    "exchanging": "ali",
+    "serverNow": 1000000,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ali"
+      },
+      {
+        "seq": 3,
+        "t": "act",
+        "by": "ali",
+        "action": "exchange",
+        "role": "spy"
+      },
+      {
+        "seq": 4,
+        "t": "done",
+        "by": "ali",
+        "action": "exchange",
+        "n": 2
+      }
+    ],
+    "flash": null,
+    "winner": null
+  },
+  "settings": {
+    "challengeSeconds": 8,
+    "turnSeconds": 0,
+    "bigDeck": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

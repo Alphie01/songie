@@ -1,0 +1,237 @@
+{
+  "view": {
+    "phase": "clue",
+    "board": 2,
+    "turn": 4,
+    "cards": [
+      {
+        "word": "Duman",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Sünger",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Yastık",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Uzay",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Şövalye",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Fil",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kristal",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Uydu",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kemer",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Mayın",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Pasta",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Çapa",
+        "color": "assassin",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kâğıt",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Ağaç",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Hazine",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kamera",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Arı",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Karpuz",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Davul",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Boya",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Volkan",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Bulut",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kutu",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Teleskop",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kurt",
+        "color": "b",
+        "revealed": false,
+        "votes": []
+      }
+    ],
+    "keyVisible": true,
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": [
+        "deniz",
+        "ece"
+      ]
+    },
+    "leaders": {
+      "a": "cem",
+      "b": "ece"
+    },
+    "nextLeaders": {},
+    "myTeam": "b",
+    "role": "leader",
+    "team": "a",
+    "startTeam": "a",
+    "remaining": {
+      "a": 9,
+      "b": 8
+    },
+    "total": {
+      "a": 9,
+      "b": 8
+    },
+    "clue": null,
+    "guessesLeft": null,
+    "log": [],
+    "revealMode": "first",
+    "votesNeeded": 2,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "winner": null,
+    "reason": null,
+    "wins": {
+      "a": 1,
+      "b": 0
+    },
+    "closing": false,
+    "lastReveal": null
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": [
+        "deniz",
+        "ece"
+      ]
+    },
+    "leaders": {
+      "a": "ali",
+      "b": "deniz"
+    },
+    "leaderPick": "host",
+    "revealMode": "first",
+    "timer": "off",
+    "seconds": 120,
+    "packs": [
+      "genel"
+    ]
+  },
+  "me": "ece",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece"
+  ],
+  "offline": []
+}

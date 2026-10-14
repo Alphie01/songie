@@ -1,0 +1,68 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": 10,
+    "item": {
+      "id": "aile:28",
+      "text": "Baban sevgiline senin önünde 'sabırlı ol, zor biridir' dedi.",
+      "category": "aile"
+    },
+    "categoryName": "Aile",
+    "dealBreaker": false,
+    "anonymous": false,
+    "predict": true,
+    "voters": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "done": [],
+    "ready": [],
+    "myVote": null,
+    "myGuess": null,
+    "serverNow": 1015000,
+    "endsAt": 0,
+    "durationMs": 15000,
+    "nextAt": 1018000,
+    "discussEndsAt": 1030000,
+    "discussMs": 15000,
+    "reveal": {
+      "counts": {
+        "green": 0,
+        "red": 0,
+        "never": 0
+      },
+      "total": 0,
+      "majority": [],
+      "votes": [],
+      "correct": [],
+      "myVote": null,
+      "myGuess": null
+    },
+    "scores": {
+      "ali": 0,
+      "ayse": 0,
+      "cem": 0
+    },
+    "summary": null
+  },
+  "settings": {
+    "categories": [
+      "aile"
+    ],
+    "dealBreaker": false,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 15,
+    "discuss": 15,
+    "rounds": 10
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

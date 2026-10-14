@@ -1,0 +1,144 @@
+{
+  "view": {
+    "phase": "roundOver",
+    "mode": "points",
+    "target": 500,
+    "round": 1,
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "cards": 0,
+        "score": 202,
+        "called": false
+      },
+      {
+        "id": "ayse",
+        "cards": 2,
+        "score": 64,
+        "called": false
+      },
+      {
+        "id": "cem",
+        "cards": 2,
+        "score": 0,
+        "called": false
+      }
+    ],
+    "current": "ali",
+    "dir": 1,
+    "step": 3,
+    "top": {
+      "id": "f142",
+      "color": "green",
+      "value": "1"
+    },
+    "activeColor": "green",
+    "deckCount": 86,
+    "discardCount": 2,
+    "penalty": 0,
+    "drew": false,
+    "drawnId": null,
+    "me": {
+      "inGame": true,
+      "hand": [],
+      "playable": []
+    },
+    "challenge": null,
+    "reveal": null,
+    "exposed": null,
+    "lastPlay": {
+      "seq": 1,
+      "by": "ali",
+      "card": {
+        "id": "f142",
+        "color": "green",
+        "value": "1"
+      }
+    },
+    "serverNow": 1791968299921,
+    "endsAt": 1008000,
+    "durationMs": 8000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "round",
+        "by": "ali",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "firstCard",
+        "card": {
+          "color": "green",
+          "value": "7"
+        }
+      },
+      {
+        "seq": 4,
+        "t": "play",
+        "by": "ali",
+        "card": {
+          "color": "green",
+          "value": "1"
+        }
+      },
+      {
+        "seq": 5,
+        "t": "roundWin",
+        "by": "ali",
+        "n": 82
+      }
+    ],
+    "roundResult": {
+      "winner": "ali",
+      "points": 82,
+      "hands": [
+        {
+          "id": "ali",
+          "cards": 0,
+          "points": 0
+        },
+        {
+          "id": "ayse",
+          "cards": 2,
+          "points": 29
+        },
+        {
+          "id": "cem",
+          "cards": 2,
+          "points": 53
+        }
+      ]
+    },
+    "winner": null,
+    "rules": {
+      "stacking": false,
+      "sevenZero": false,
+      "drawUntilPlayable": false,
+      "turnSeconds": 0
+    }
+  },
+  "settings": {
+    "mode": "points",
+    "turnSeconds": 0,
+    "stacking": false,
+    "sevenZero": false,
+    "drawUntilPlayable": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "view": {
+    "phase": "over",
+    "mode": "points",
+    "target": 500,
+    "round": 1,
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz",
+      "ece"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "cards": 0,
+        "score": 554,
+        "called": false
+      },
+      {
+        "id": "ayse",
+        "cards": 1,
+        "score": 210,
+        "called": false
+      },
+      {
+        "id": "cem",
+        "cards": 2,
+        "score": 95,
+        "called": false
+      },
+      {
+        "id": "deniz",
+        "cards": 1,
+        "score": 30,
+        "called": false
+      },
+      {
+        "id": "ece",
+        "cards": 3,
+        "score": 0,
+        "called": false
+      }
+    ],
+    "current": "ali",
+    "dir": 1,
+    "step": 3,
+    "top": {
+      "id": "f148",
+      "color": "green",
+      "value": "1"
+    },
+    "activeColor": "green",
+    "deckCount": 72,
+    "discardCount": 2,
+    "penalty": 0,
+    "drew": false,
+    "drawnId": null,
+    "me": {
+      "inGame": true,
+      "hand": [
+        {
+          "id": "f150",
+          "color": "purple",
+          "value": "2"
+        },
+        {
+          "id": "f151",
+          "color": "purple",
+          "value": "3"
+        }
+      ],
+      "playable": []
+    },
+    "challenge": null,
+    "reveal": null,
+    "exposed": null,
+    "lastPlay": {
+      "seq": 1,
+      "by": "ali",
+      "card": {
+        "id": "f148",
+        "color": "green",
+        "value": "1"
+      }
+    },
+    "serverNow": 1791968299921,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 5
+      },
+      {
+        "seq": 2,
+        "t": "round",
+        "by": "ali",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "firstCard",
+        "card": {
+          "color": "purple",
+          "value": "9"
+        }
+      },
+      {
+        "seq": 4,
+        "t": "play",
+        "by": "ali",
+        "card": {
+          "color": "green",
+          "value": "1"
+        }
+      },
+      {
+        "seq": 5,
+        "t": "roundWin",
+        "by": "ali",
+        "n": 74
+      }
+    ],
+    "roundResult": {
+      "winner": "ali",
+      "points": 74,
+      "hands": [
+        {
+          "id": "ali",
+          "cards": 0,
+          "points": 0
+        },
+        {
+          "id": "ayse",
+          "cards": 1,
+          "points": 50
+        },
+        {
+          "id": "cem",
+          "cards": 2,
+          "points": 5
+        },
+        {
+          "id": "deniz",
+          "cards": 1,
+          "points": 1
+        },
+        {
+          "id": "ece",
+          "cards": 3,
+          "points": 18
+        }
+      ]
+    },
+    "winner": "ali",
+    "rules": {
+      "stacking": false,
+      "sevenZero": false,
+      "drawUntilPlayable": false,
+      "turnSeconds": 0
+    }
+  },
+  "settings": {
+    "mode": "points",
+    "turnSeconds": 0,
+    "stacking": false,
+    "sevenZero": false,
+    "drawUntilPlayable": false
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece"
+  ]
+}

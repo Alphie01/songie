@@ -1,0 +1,90 @@
+{
+  "view": {
+    "phase": "play",
+    "players": [
+      {
+        "id": "ali",
+        "identity": {
+          "name": "Barış Manço",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 1,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "ayse",
+        "identity": {
+          "name": "Kemal Sunal",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 0,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "cem",
+        "identity": null,
+        "finished": false,
+        "finishRank": null,
+        "questions": 0,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "deniz",
+        "identity": {
+          "name": "Zürafa",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 0,
+        "hints": 0,
+        "left": false
+      }
+    ],
+    "askerId": "ali",
+    "turnNumber": 1,
+    "turnQuestions": 1,
+    "turnMode": "classic",
+    "typedQuestions": true,
+    "groupVerify": false,
+    "question": {
+      "id": 1,
+      "askerId": "ali",
+      "text": "İnsan mıyım?",
+      "counts": {
+        "yes": 1,
+        "no": 0,
+        "maybe": 0,
+        "irrelevant": 0
+      },
+      "answered": [
+        "ayse"
+      ],
+      "expected": 3,
+      "myAnswer": null
+    },
+    "guess": null,
+    "history": [],
+    "myHints": [],
+    "hintsLeft": 3,
+    "hintLimit": 3,
+    "podiumMs": 5000
+  },
+  "settings": {
+    "categories": [
+      "test"
+    ],
+    "turnMode": "classic",
+    "typedQuestions": true,
+    "groupVerify": false,
+    "hints": 3
+  },
+  "me": "cem"
+}

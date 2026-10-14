@@ -1,0 +1,217 @@
+{
+  "cases": [
+    {
+      "slug": "ankara-ihalesi",
+      "title": "Ankara İhalesi",
+      "subtitle": "Kavaklıdere, Ankara — Nisan 2026",
+      "genre": "rüşvet",
+      "difficulty": "çok zor",
+      "minutes": 130,
+      "teaser": "Dikmen Vadisi metro bağlantı yolu ihalesinin karar toplantısına bir gün kala, komisyonun teknik üyesi Haluk Tezcan Kavaklıdere’deki proje ofisinde ölü bulunur. Elinde kendi tabancası, ekranda iki satırlık bir veda notu vardır.\n\nÇekmecede bir zarf dolar, masada bir müteahhidin kartviziti, binada da gece yarısı içeriden açılmış bir arka kapı. İki buçuk milyar liralık bir ihalenin etrafında herkesin saklayacak bir şeyi var. ",
+      "coverUrl": "/api/games/detective/img/ankara-ihalesi/74b4313fd4c17a515ced.webp",
+      "acts": 5,
+      "evidenceCount": 64,
+      "solved": null
+    },
+    {
+      "slug": "ayvalik-miras",
+      "title": "Hasat Gecesi",
+      "subtitle": "Ayvalık, Balıkesir — Kasım 2025",
+      "genre": "cinayet",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Ayvalık’ta yüz otuz yıllık bir zeytinyağı fabrikası, otele dönüşmeden önceki son hasadını kutluyor. Sabaha karşı fabrikanın sahibi Rıza Karaçam, eski sıkımhanedeki taş havuzda bulunuyor.\n\nBir oğul gece tekneyle denize açılmış, bir ustabaşı evinden çıkarılmak üzere, bir yatırımcı parasını geri istiyor. Fabrikada beş kamera var; ama sıkımhaneye giden yollardan birini hiçbiri görmüyor.",
+      "coverUrl": "/api/games/detective/img/ayvalik-miras/7e86c1686f69c893e369.webp",
+      "acts": 4,
+      "evidenceCount": 65,
+      "solved": {
+        "rank": "Komiser",
+        "score": 72
+      }
+    },
+    {
+      "slug": "bodrum-zehir",
+      "title": "Son Tadım",
+      "subtitle": "Gümüşlük, Bodrum — Eylül 2026",
+      "genre": "zehirlenme",
+      "difficulty": "çok zor",
+      "minutes": 130,
+      "teaser": "Gümüşlük’te yeni açılan Kırlangıç Taşevleri’nin basın gecesinde, ünlü yemek eleştirmeni Gülseren Tanyeli sekiz tabaklık tadım menüsünün ortasında fenalaşır ve sabaha karşı ölür. Kabuklu alerjisi herkesçe bilinir; altıncı tabak da karidestir.\n\nAma hastanenin kan tahlilinde, kadının hiç kullanmadığı bir kalp ilacı çıkar. Masada yedi kişi, mutfakta iki aşçı, koridorda bir sommelier vardı. Sekiz tabağın, sekiz eşleştirmenin ve on iki dakikalık bir havai fişeğin içinde bir zaman çizelgesi saklı.",
+      "coverUrl": "/api/games/detective/img/bodrum-zehir/544686b50d6b13e05cdc.webp",
+      "acts": 5,
+      "evidenceCount": 62,
+      "solved": null
+    },
+    {
+      "slug": "eskisehir-laboratuvar",
+      "title": "Soğuk Oda",
+      "subtitle": "Porsuk Üniversitesi, Eskişehir — Şubat 2026",
+      "genre": "cinayet",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Büyük bir proje başvurusunun teslim gecesi, Biyokimya Bölümü’nün en hırslı araştırmacısı laboratuvarının soğuk odasında ölü bulunur. Kapının iç kolu boşta dönmektedir; başvuru ise gece 23:41’de, onun hesabından gönderilmiştir.\n\nArızalı bir kapı mı, yoksa birinin kusursuz kurduğu bir gece mi? Kartlı geçişler, sunucu kayıtları, bir soğutma cihazının hafızası ve bir laboratuvar defteri aynı soruyu soruyor: Sinan Oktay en son ne zaman nefes alıyordu?",
+      "coverUrl": "/api/games/detective/img/eskisehir-laboratuvar/433190b60b4433501f40.webp",
+      "acts": 4,
+      "evidenceCount": 66,
+      "solved": null
+    },
+    {
+      "slug": "gaziantep-kuyumcu",
+      "title": "Arife Gecesi",
+      "subtitle": "Zincirli Bedesten, Gaziantep — Mayıs 2026",
+      "genre": "hırsızlık",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Kurban Bayramı sabahı, Zincirli Bedesten’in yanı başındaki altmış sekiz yıllık Aksöğüt Kuyumculuk’un kasası boş bulunur. Kapılarda zorlama yok, alarm bütün gece susmuş, izleme merkezine tek bir tehlike sinyali gitmemiş.\n\nKasa geçerli bir kodla açılmış. O kodu bilen bir avuç insan var ve o gece her biri bir yerdedir. Çarşıda herkesin bir sırrı vardır.",
+      "coverUrl": "/api/games/detective/img/gaziantep-kuyumcu/2dfdf89771938d1c433b.webp",
+      "acts": 4,
+      "evidenceCount": 60,
+      "solved": null
+    },
+    {
+      "slug": "izmir-santaj",
+      "title": "Kordon’da Şantaj",
+      "subtitle": "Alsancak, İzmir — Eylül 2026",
+      "genre": "şantaj",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Lojistikçi Halit Erensoy, belediye başkanlığı adaylığını açıklamaya üç hafta kala şifreli bir uygulamadan mesajlar almaya başlar. On iki yıl önceki bir gecenin fotoğrafları, iki milyon liralık bir kripto talebi. Tuttuğu özel dedektif şantajcıyı bir haftada bulur.\n\nİki gün sonra o adam Kordon’da, Pasaport İskelesi’nin birkaç yüz adım ötesinde sudan çıkarılır. Yanında taşıdığı zarf yoktur. Telefonu gece yarısından önce susmuştur. Ama şantajcının hesabı, bir saat sonra bir mesaj daha atar.",
+      "coverUrl": "/api/games/detective/img/izmir-santaj/92c3aa05bb0b0ed58355.webp",
+      "acts": 4,
+      "evidenceCount": 57,
+      "solved": null
+    },
+    {
+      "slug": "kapadokya-kayip",
+      "title": "Peri Bacaları Arasında",
+      "subtitle": "Göreme, Nevşehir — Eylül 2025",
+      "genre": "kayıp",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Genç bir jeoloji doktora öğrencisi, gün doğumunda balonla Göreme’nin üstünden geçti. Üç saat sonra kaldığı mağara otelden çıkış yaptı, çantasını otogara bıraktı ve gece sevgilisine tek bir mesaj attı: “Bitti.”\n\nKâğıt üstünde her şey bir kaçışı anlatıyor. Ama annesi, Nehir’in ertesi sabah önemli bir randevusu olduğunu ve ondan asla kaçmayacağını söylüyor.",
+      "coverUrl": "/api/games/detective/img/kapadokya-kayip/1bba91f396da2a16595d.webp",
+      "acts": 4,
+      "evidenceCount": 70,
+      "solved": null
+    },
+    {
+      "slug": "koza-han-yangini",
+      "title": "Kemerli Han Yangını",
+      "subtitle": "Hanlar Bölgesi, Bursa — Eylül 2026",
+      "genre": "kundaklama",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Bursa’nın Hanlar Bölgesi’nde, beş yüz yıllık Kemerli Han’da bir perşembe gecesi yangın çıktı. Doğu kanadındaki depo ile yanındaki ipek dükkânı kül oldu; dumanın içine ilk koşan gece bekçisi yoğun bakımda.\n\nSigortası geçen ay neredeyse dört katına çıkan bir dükkân. Kiracısını çıkaramayan bir mal sahibi. Depoda tiner bırakan bir restorasyon ekibi. Herkesin bir nedeni var gibi görünüyor. O gece handa ne olduğunu en iyi bilen adam ise şimdi konuşamıyor.",
+      "coverUrl": "/api/games/detective/img/koza-han-yangini/630e4e2b12695324e087.webp",
+      "acts": 4,
+      "evidenceCount": 67,
+      "solved": null
+    },
+    {
+      "slug": "mardin-kacakcilik",
+      "title": "Taştaki Yüz",
+      "subtitle": "Mardin — Mayıs 2026",
+      "genre": "kaçakçılık",
+      "difficulty": "çok zor",
+      "minutes": 120,
+      "teaser": "Mardin’deki bir müzenin restorasyon deposunda, altı yıldır gazlı bezin altında bekleyen Roma dönemi bir mozaik paneli nihayet açılır ve yüzünün başka bir yüz olduğu anlaşılır. Sahteliği fark eden arkeolog, ertesi sabah savcılığa gitmeden önceki gece Midyat yolunda aracının tekerini kaybeder.\n\nKaza mı? Tesadüf mü? Paneli son görenler, kopyayı yapan usta, ihracatı yürüten müşavir ve sessiz kalan bir müdür… Mardin’in taş sokaklarında herkesin anlatacak bir akşamı var.",
+      "coverUrl": "/api/games/detective/img/mardin-kacakcilik/31dc73f711f105d5c55b.webp",
+      "acts": 4,
+      "evidenceCount": 63,
+      "solved": null
+    },
+    {
+      "slug": "mersin-limani",
+      "title": "Mersin Limanı",
+      "subtitle": "Karaduvar, Mersin — Mart 2026",
+      "genre": "dolandırıcılık",
+      "difficulty": "çok zor",
+      "minutes": 130,
+      "teaser": "Akyel Narenciye’nin sigortalı limon konteyneri, Köstence yolunda bir fırtına gecesi “denizde kaybolur”. Sigorta ödemesine günler kala firmanın on sekiz yıllık muhasebecisi Erol Tunca ortadan kaybolur. Patronunun telefonuna bir itiraf mesajı düşer, arabası Karaduvar Balıkçı Barınağı’nda bulunur.\n\nÜç gün sonra deniz onu Kazanlı sahiline bırakır. Bekçi, Erol Bey’in o gece mendireğe tek başına yürüdüğünü gördüğüne yemin eder. Herkesin bir hesabı, herkesin bir alibisi var. Ama limanda hiçbir şey göründüğü yere yüklenmez.",
+      "coverUrl": "/api/games/detective/img/mersin-limani/aec9efd0d1c29f443746.webp",
+      "acts": 5,
+      "evidenceCount": 68,
+      "solved": null
+    },
+    {
+      "slug": "pera-gecesi",
+      "title": "Pera Gecesi",
+      "subtitle": "Galata, İstanbul — Ekim 2025",
+      "genre": "hırsızlık",
+      "difficulty": "orta",
+      "minutes": 55,
+      "teaser": "Galata’daki Galeri Nirengi, Osmanlı resmi sergisini kalabalık bir geceyle açtı. Ertesi sabah sigorta eksperi ultraviyole lambasını yaktığında, sergideki en değerli tablonun yerinde başka bir resim asılıydı.\n\nÇerçeve aynı, duvar aynı, alarm bütün gece susmuş. Altmış milyon liralık bir eser, kimse kapıyı zorlamadan galeriden çıktı.",
+      "coverUrl": "/api/games/detective/img/pera-gecesi/bba89698764f32e65325.webp",
+      "acts": 3,
+      "evidenceCount": 45,
+      "solved": null
+    },
+    {
+      "slug": "sahnede-olum",
+      "title": "Sahnede Ölüm",
+      "subtitle": "Beyoğlu, İstanbul — Mart 2026",
+      "genre": "cinayet",
+      "difficulty": "çok zor",
+      "minutes": 130,
+      "teaser": "Dünya Tiyatro Günü’nün akşamı, Beyoğlu’nun altmış dört yıllık Mahfil Sahnesi’nde “Kör Kuyu” prömiyer yapıyor. İkinci perdenin sonunda başrol oyuncusu Haluk Erenler bir gaz lambasını eline alıp demir merdivene tutunuyor ve yere yığılıyor. Seyirci önce bunu oyunun bir parçası sanıyor.\n\nSahne arkasında, kimsenin takmadığı bir ara kablo bulunuyor. O gece kulisteki herkesin bir sırrı, herkesin de bir alibisi vardı.",
+      "coverUrl": "/api/games/detective/img/sahnede-olum/46bdd96e2afb3be3435f.webp",
+      "acts": 4,
+      "evidenceCount": 71,
+      "solved": null
+    },
+    {
+      "slug": "uludag-firtina",
+      "title": "Fırtınada Köşk",
+      "subtitle": "Uludağ, Bursa — Aralık 2025",
+      "genre": "cinayet",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Kar fırtınası Uludağ’daki Karaçam Dağ Oteli’nin yolunu kapatmıştır. Otelde bir otomotiv şirketinin yönetim ekibi yıl sonu kampı yapmaktadır. 29 Aralık sabahı genel müdür Taner Akbulut, kaldığı dağ köşkünde merdiven dibinde ölü bulunur. Köşkün çevresindeki taze karda kendi ayak izinden başka iz yoktur. Gece boyunca kartı kullanılmış, kapıda görülmüş, resepsiyonu aramıştır.\n\nOtel iki gün dış dünyadan kopuk kalır. Jandarma yol açılınca gelir; elinde sabahın fotoğrafları ve bir yığın kayıttan başka bir şey yoktur.",
+      "coverUrl": "/api/games/detective/img/uludag-firtina/322acb4cd9686abb950a.webp",
+      "acts": 4,
+      "evidenceCount": 60,
+      "solved": null
+    },
+    {
+      "slug": "yalida-son-aksam",
+      "title": "Yalıda Son Akşam",
+      "subtitle": "Kandilli, İstanbul — Şubat 2026",
+      "genre": "cinayet",
+      "difficulty": "zor",
+      "minutes": 75,
+      "teaser": "Vardarlı Holding’in kurucusu Nevzat Vardarlı, yetmişinci doğum günü yemeğinin gecesi Kandilli’deki yalısının çalışma odasında ölü bulunur. Aile kalbine yorar; lodos yüzünden kesilen elektrik, karanlıkta geçen yirmi dakikayı da açıklar gibidir.\n\nAma ambulans doktoru gözlerdeki minik kanamaları not eder ve dosya Cinayet Büro’ya düşer. O gece sofrada yedi kişi vardı. Kurban dışında her birinin saklayacak bir şeyi var.",
+      "coverUrl": "/api/games/detective/img/yalida-son-aksam/f9622a7bb703b4f2ad35.webp",
+      "acts": 4,
+      "evidenceCount": 45,
+      "solved": null
+    },
+    {
+      "slug": "yayla-sisi",
+      "title": "Yayla Sisi",
+      "subtitle": "Huser Yaylası, Çamlıhemşin — Ağustos 2026",
+      "genre": "cinayet",
+      "difficulty": "zor",
+      "minutes": 120,
+      "teaser": "Rize’de, Ayder’in yukarısındaki Huser Yaylası’nda yoğun sisli bir ağustos gecesi. Dalkılıç Çay’ın yetmiş dokuz yaşındaki kurucusu Haşim Dalkılıç, sabah evinin yanındaki kayalığın otuz sekiz metre aşağısında bulunur. Sis, ıslak kaya, telefonun ancak tek bir taşın üstünde çektiği bir sırt: herkes kaza der.\n\nAma sırtla yayla arasındaki vadiden bir yük teleferiği geçer ve o gece kasa, kimsenin kabul etmediği iki sefer yapmıştır. Yayla küçüktür; herkes birbirinin nerede olduğunu bildiğini sanır.",
+      "coverUrl": "/api/games/detective/img/yayla-sisi/1d0eb2f44c78c92d9007.webp",
+      "acts": 4,
+      "evidenceCount": 60,
+      "solved": null
+    }
+  ],
+  "sessions": [
+    {
+      "id": "abc123",
+      "slug": "ankara-ihalesi",
+      "title": "Ankara İhalesi",
+      "act": 2,
+      "acts": 5,
+      "hoursSpent": 7,
+      "updatedAt": 1791957836727,
+      "members": [
+        "Ali",
+        "Ayşe"
+      ]
+    }
+  ]
+}

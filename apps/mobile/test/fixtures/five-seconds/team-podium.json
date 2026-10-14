@@ -1,0 +1,88 @@
+{
+  "view": {
+    "phase": "podium",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "scores": {
+      "ali": 0,
+      "ayse": 1,
+      "cem": 0,
+      "deniz": 0
+    },
+    "teamMode": true,
+    "teams": {
+      "a": [
+        "ali",
+        "cem"
+      ],
+      "b": [
+        "ayse",
+        "deniz"
+      ]
+    },
+    "teamScores": {
+      "a": 0,
+      "b": 1
+    },
+    "myTeam": "b",
+    "round": 1,
+    "totalRounds": null,
+    "attemptId": "3",
+    "performerId": "cem",
+    "stealFrom": null,
+    "prompt": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 7000,
+    "voteEndsAt": 0,
+    "voteMs": 20000,
+    "voted": [],
+    "voters": [],
+    "myVote": null,
+    "tally": null,
+    "lastResult": {
+      "attemptId": "2",
+      "performerId": "ayse",
+      "prompt": "3 asansörde yapılmaması gereken şey söyle",
+      "success": true,
+      "yes": 3,
+      "no": 0,
+      "steal": false,
+      "scorerId": "ayse",
+      "skipped": false
+    },
+    "steal": false
+  },
+  "settings": {
+    "seconds": 7,
+    "rounds": 0,
+    "steal": false,
+    "teamMode": true,
+    "teams": {
+      "a": [
+        "ali",
+        "cem"
+      ],
+      "b": [
+        "ayse",
+        "deniz"
+      ]
+    },
+    "categories": [
+      "genel",
+      "yemek"
+    ]
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

@@ -1,0 +1,80 @@
+{
+  "view": {
+    "phase": "podium",
+    "players": [
+      {
+        "id": "ali",
+        "identity": {
+          "name": "Barış Manço",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 1,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "ayse",
+        "identity": {
+          "name": "Kemal Sunal",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 0,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "cem",
+        "identity": {
+          "name": "Örümcek Adam",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 0,
+        "hints": 0,
+        "left": true
+      }
+    ],
+    "askerId": null,
+    "turnNumber": 1,
+    "turnQuestions": 1,
+    "turnMode": "three",
+    "typedQuestions": false,
+    "groupVerify": false,
+    "question": null,
+    "guess": null,
+    "history": [
+      {
+        "id": 1,
+        "kind": "question",
+        "askerId": "ali",
+        "text": null,
+        "counts": {
+          "yes": 0,
+          "no": 2,
+          "maybe": 0,
+          "irrelevant": 0
+        },
+        "result": "no"
+      }
+    ],
+    "myHints": [],
+    "hintsLeft": 0,
+    "hintLimit": 0,
+    "podiumMs": 5000
+  },
+  "settings": {
+    "categories": [
+      "test"
+    ],
+    "turnMode": "three",
+    "typedQuestions": false,
+    "groupVerify": false,
+    "hints": 0
+  },
+  "me": "ayse"
+}

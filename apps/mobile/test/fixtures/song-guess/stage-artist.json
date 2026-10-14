@@ -1,0 +1,141 @@
+{
+  "view": {
+    "phase": "stage",
+    "round": 1,
+    "totalRounds": 3,
+    "stage": 1,
+    "stageClips": [
+      0.1,
+      0.5,
+      2,
+      8,
+      15
+    ],
+    "serverNow": 1005500,
+    "phaseEndsAt": 1005500,
+    "phaseMs": 0,
+    "clips": [
+      "/api/games/song-guess/media/t108n1/0",
+      "/api/games/song-guess/media/t108n1/1",
+      null,
+      null,
+      null
+    ],
+    "poolNames": [
+      "Türkçe Pop"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "score": 350,
+        "roundPoints": 350,
+        "state": "artist",
+        "solvedStage": 0,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "ayse",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "listening",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "cem",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "listening",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "deniz",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "listening",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      }
+    ],
+    "me": {
+      "state": "artist",
+      "canGuess": true,
+      "guesses": [
+        {
+          "stage": 0,
+          "title": "Senden Daha Güzel",
+          "artist": "Duman",
+          "verdict": "artist"
+        }
+      ]
+    },
+    "reveal": null,
+    "timed": false,
+    "startStage": 0,
+    "easySearch": false,
+    "pools": [
+      "tr-test"
+    ],
+    "artistCredit": true,
+    "difficulty": "medium",
+    "feed": [
+      {
+        "id": 1,
+        "at": 1005500,
+        "playerId": "ayse",
+        "kind": "wrong",
+        "stage": 0
+      },
+      {
+        "id": 2,
+        "at": 1005500,
+        "playerId": "ali",
+        "kind": "artist",
+        "stage": 0,
+        "points": 350
+      },
+      {
+        "id": 3,
+        "at": 1005500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 0
+      },
+      {
+        "id": 4,
+        "at": 1005500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 0
+      }
+    ]
+  },
+  "settings": {
+    "rounds": 3,
+    "pools": [
+      "tr-test"
+    ],
+    "difficulty": "medium",
+    "timer": 0,
+    "startAt": "random",
+    "startStage": 0,
+    "easySearch": false,
+    "artistCredit": true
+  },
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "me": "ali"
+}

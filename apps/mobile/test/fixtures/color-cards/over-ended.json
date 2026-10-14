@@ -1,0 +1,129 @@
+{
+  "view": {
+    "phase": "over",
+    "mode": "single",
+    "target": 500,
+    "round": 1,
+    "order": [
+      "ali",
+      "ayse"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "cards": 7,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "ayse",
+        "cards": 7,
+        "score": 0,
+        "called": false
+      }
+    ],
+    "current": "ayse",
+    "dir": 1,
+    "step": 2,
+    "top": {
+      "id": "r1c15",
+      "color": "yellow",
+      "value": "2"
+    },
+    "activeColor": "yellow",
+    "deckCount": 93,
+    "discardCount": 1,
+    "penalty": 0,
+    "drew": false,
+    "drawnId": null,
+    "me": {
+      "inGame": true,
+      "hand": [
+        {
+          "id": "r1c1",
+          "color": "red",
+          "value": "skip"
+        },
+        {
+          "id": "r1c3",
+          "color": "red",
+          "value": "skip"
+        },
+        {
+          "id": "r1c5",
+          "color": "green",
+          "value": "2"
+        },
+        {
+          "id": "r1c7",
+          "color": "red",
+          "value": "9"
+        },
+        {
+          "id": "r1c9",
+          "color": "purple",
+          "value": "1"
+        },
+        {
+          "id": "r1c11",
+          "color": "purple",
+          "value": "3"
+        },
+        {
+          "id": "r1c13",
+          "color": "green",
+          "value": "4"
+        }
+      ],
+      "playable": []
+    },
+    "challenge": null,
+    "reveal": null,
+    "exposed": null,
+    "lastPlay": null,
+    "serverNow": 1791968299921,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 2
+      },
+      {
+        "seq": 2,
+        "t": "round",
+        "by": "ali",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "firstCard",
+        "card": {
+          "color": "yellow",
+          "value": "2"
+        }
+      }
+    ],
+    "roundResult": null,
+    "winner": null,
+    "rules": {
+      "stacking": false,
+      "sevenZero": false,
+      "drawUntilPlayable": false,
+      "turnSeconds": 0
+    }
+  },
+  "settings": {
+    "mode": "single",
+    "turnSeconds": 0,
+    "stacking": false,
+    "sevenZero": false,
+    "drawUntilPlayable": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse"
+  ]
+}

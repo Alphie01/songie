@@ -1,0 +1,69 @@
+{
+  "view": {
+    "phase": "podium",
+    "round": 1,
+    "totalRounds": null,
+    "topic": null,
+    "hiddenAuthor": true,
+    "serverNow": 1000000,
+    "endsAt": 1010000,
+    "durationMs": 10000,
+    "stats": {
+      "ali": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "myConfession": null,
+    "index": 0,
+    "count": 3,
+    "current": null,
+    "picked": [],
+    "myPick": null,
+    "reveal": null,
+    "recap": null,
+    "podium": {
+      "detective": null,
+      "trickster": null,
+      "confessions": 3
+    }
+  },
+  "settings": {
+    "mode": "free",
+    "categories": [
+      "genel",
+      "cocukluk",
+      "okul-is",
+      "ask",
+      "utanc",
+      "aliskanliklar",
+      "arkadas"
+    ],
+    "writeSeconds": 0,
+    "guessSeconds": 45,
+    "rounds": 0,
+    "hiddenAuthor": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

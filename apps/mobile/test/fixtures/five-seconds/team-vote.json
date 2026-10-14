@@ -1,0 +1,90 @@
+{
+  "view": {
+    "phase": "vote",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "scores": {
+      "ali": 0,
+      "ayse": 0,
+      "cem": 0,
+      "deniz": 0
+    },
+    "teamMode": true,
+    "teams": {
+      "a": [
+        "ali",
+        "cem"
+      ],
+      "b": [
+        "ayse",
+        "deniz"
+      ]
+    },
+    "teamScores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "a",
+    "round": 1,
+    "totalRounds": null,
+    "attemptId": "1",
+    "performerId": "ali",
+    "stealFrom": null,
+    "prompt": {
+      "id": "yemek:9",
+      "text": "3 diyet bozma bahanesi söyle",
+      "category": "yemek"
+    },
+    "serverNow": 1000000,
+    "endsAt": 1007000,
+    "durationMs": 7000,
+    "voteEndsAt": 1020000,
+    "voteMs": 20000,
+    "voted": [],
+    "voters": [
+      "ayse",
+      "cem"
+    ],
+    "myVote": null,
+    "tally": {
+      "yes": 0,
+      "no": 0
+    },
+    "lastResult": null,
+    "steal": false
+  },
+  "settings": {
+    "seconds": 7,
+    "rounds": 0,
+    "steal": false,
+    "teamMode": true,
+    "teams": {
+      "a": [
+        "ali",
+        "cem"
+      ],
+      "b": [
+        "ayse",
+        "deniz"
+      ]
+    },
+    "categories": [
+      "genel",
+      "yemek"
+    ]
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": [
+    "deniz"
+  ]
+}

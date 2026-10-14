@@ -1,0 +1,74 @@
+{
+  "view": {
+    "phase": "task",
+    "seats": [
+      "ayse",
+      "ali",
+      "cem"
+    ],
+    "round": 1,
+    "turnNumber": 0,
+    "totalRounds": null,
+    "spinnerId": "ali",
+    "targetId": "ayse",
+    "spin": {
+      "id": 1,
+      "startAt": 1000400,
+      "durationMs": 4287,
+      "fromDeg": 164.22918934375048,
+      "toDeg": 1807.8901616949588
+    },
+    "restDeg": 1807.8901616949588,
+    "kind": "truth",
+    "prompt": {
+      "id": "eglenceli:truth:1",
+      "text": "Test doğruluk iki?",
+      "category": "eglenceli"
+    },
+    "scores": {
+      "ayse": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ali": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "cem": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      }
+    },
+    "passesLeft": 1,
+    "vote": null,
+    "lastResult": null,
+    "serverNow": 1005200,
+    "choice": "player",
+    "passPenalty": true
+  },
+  "settings": {
+    "categories": [
+      "eglenceli"
+    ],
+    "choice": "player",
+    "passes": 1,
+    "passPenalty": true,
+    "vote": false,
+    "order": "target",
+    "rounds": 0,
+    "fairSpin": true
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

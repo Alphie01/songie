@@ -1,0 +1,80 @@
+{
+  "view": {
+    "phase": "podium",
+    "seats": [
+      "cem",
+      "ali",
+      "ayse"
+    ],
+    "round": 2,
+    "turnNumber": 1,
+    "totalRounds": 3,
+    "spinnerId": "ayse",
+    "targetId": null,
+    "spin": {
+      "id": 1,
+      "startAt": 1000400,
+      "durationMs": 4413,
+      "fromDeg": 189.8809343855828,
+      "toDeg": 1334.0513369464315
+    },
+    "restDeg": 1334.0513369464315,
+    "kind": null,
+    "prompt": null,
+    "scores": {
+      "cem": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ali": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ayse": {
+        "points": 1,
+        "done": 1,
+        "passes": 0,
+        "failed": 0
+      }
+    },
+    "passesLeft": null,
+    "vote": null,
+    "lastResult": {
+      "targetId": "ayse",
+      "spinnerId": "ali",
+      "kind": "dare",
+      "text": "Test cesaret bir yap.",
+      "outcome": "done",
+      "votes": {
+        "yes": 1,
+        "no": 1
+      }
+    },
+    "serverNow": 1005200,
+    "choice": "player",
+    "passPenalty": true
+  },
+  "settings": {
+    "categories": [
+      "eglenceli"
+    ],
+    "choice": "player",
+    "passes": 2,
+    "passPenalty": true,
+    "vote": true,
+    "order": "target",
+    "rounds": 3,
+    "fairSpin": true
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

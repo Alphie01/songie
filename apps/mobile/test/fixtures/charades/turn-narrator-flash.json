@@ -1,0 +1,72 @@
+{
+  "view": {
+    "phase": "turn",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 1,
+      "b": 0
+    },
+    "myTeam": "a",
+    "role": "narrator",
+    "turnNumber": 0,
+    "totalTurns": 4,
+    "team": "a",
+    "narratorId": "ali",
+    "serverNow": 1000000,
+    "endsAt": 1060000,
+    "durationMs": 60000,
+    "passesLeft": 1,
+    "turnStats": {
+      "correct": 1,
+      "pass": 0,
+      "foul": 0
+    },
+    "card": {
+      "id": "film-turk:2",
+      "title": "Babam ve Oğlum",
+      "kind": "film",
+      "words": 3,
+      "category": "film-turk"
+    },
+    "canUndo": true,
+    "flash": {
+      "id": 3,
+      "kind": "correct",
+      "title": "Kış Uykusu"
+    },
+    "lastTurn": null,
+    "foulPenalty": true,
+    "sign": null
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 1,
+    "turns": 2,
+    "categories": [
+      "film-turk",
+      "atasozu-deyim"
+    ],
+    "difficulty": "karisik",
+    "foulPenalty": true
+  },
+  "me": "ali"
+}

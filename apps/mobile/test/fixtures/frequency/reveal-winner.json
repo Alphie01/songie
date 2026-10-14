@@ -1,0 +1,113 @@
+{
+  "view": {
+    "phase": "reveal",
+    "mode": "teams",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 4,
+      "b": 0
+    },
+    "myTeam": "b",
+    "role": "opponent",
+    "roundId": 1,
+    "completed": 1,
+    "totalRounds": null,
+    "targetScore": 3,
+    "team": "a",
+    "psychicId": "ali",
+    "options": null,
+    "card": {
+      "id": "degerler:0",
+      "left": "Ahlaki",
+      "right": "Ahlaksız"
+    },
+    "target": 50,
+    "clue": "ılık süt",
+    "dial": 50,
+    "dialBy": null,
+    "lockVotes": [],
+    "votesNeeded": 1,
+    "side": "left",
+    "sideBy": "cem",
+    "result": {
+      "id": 1,
+      "team": "a",
+      "psychicId": "ali",
+      "card": {
+        "id": "degerler:0",
+        "left": "Ahlaki",
+        "right": "Ahlaksız"
+      },
+      "clue": "ılık süt",
+      "target": 50,
+      "dial": 50,
+      "points": 4,
+      "side": "left",
+      "sidePoint": false,
+      "again": false
+    },
+    "history": [
+      {
+        "id": 1,
+        "team": "a",
+        "psychicId": "ali",
+        "card": {
+          "id": "degerler:0",
+          "left": "Ahlaki",
+          "right": "Ahlaksız"
+        },
+        "clue": "ılık süt",
+        "target": 50,
+        "dial": 50,
+        "points": 4,
+        "side": "left",
+        "sidePoint": false,
+        "again": false
+      }
+    ],
+    "winner": "a",
+    "rating": null,
+    "serverNow": 1000200,
+    "endsAt": 0,
+    "durationMs": 0,
+    "podiumMs": 9000
+  },
+  "settings": {
+    "mode": "teams",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "targetScore": 3,
+    "rounds": 7,
+    "seconds": 0,
+    "cardChoice": true,
+    "majorityLock": false,
+    "catchUp": true,
+    "friendCards": true
+  },
+  "me": "cem",
+  "host": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

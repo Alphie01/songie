@@ -1,0 +1,110 @@
+{
+  "view": {
+    "phase": "play",
+    "mode": "single",
+    "target": 500,
+    "round": 1,
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "cards": 1,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "ayse",
+        "cards": 2,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "cem",
+        "cards": 1,
+        "score": 0,
+        "called": false
+      }
+    ],
+    "current": "ayse",
+    "dir": 1,
+    "step": 2,
+    "top": {
+      "id": "f141",
+      "color": "green",
+      "value": "5"
+    },
+    "activeColor": "green",
+    "deckCount": 2,
+    "discardCount": 1,
+    "penalty": 0,
+    "drew": false,
+    "drawnId": null,
+    "me": {
+      "inGame": true,
+      "hand": [
+        {
+          "id": "f135",
+          "color": "yellow",
+          "value": "1"
+        }
+      ],
+      "playable": []
+    },
+    "challenge": null,
+    "reveal": null,
+    "exposed": null,
+    "lastPlay": null,
+    "serverNow": 1791968299920,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "round",
+        "by": "ali",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "firstCard",
+        "card": {
+          "color": "green",
+          "value": "7"
+        }
+      }
+    ],
+    "roundResult": null,
+    "winner": null,
+    "rules": {
+      "stacking": false,
+      "sevenZero": false,
+      "drawUntilPlayable": false,
+      "turnSeconds": 0
+    }
+  },
+  "settings": {
+    "mode": "single",
+    "turnSeconds": 0,
+    "stacking": false,
+    "sevenZero": false,
+    "drawUntilPlayable": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": [
+    "ayse"
+  ]
+}

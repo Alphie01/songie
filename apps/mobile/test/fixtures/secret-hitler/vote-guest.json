@@ -1,0 +1,121 @@
+{
+  "view": {
+    "phase": "vote",
+    "playerCount": 7,
+    "seats": [
+      {
+        "id": "ali",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "deniz",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "ece",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "fatih",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "gul",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      }
+    ],
+    "me": {
+      "role": "liberal",
+      "known": [],
+      "investigations": []
+    },
+    "president": "ayse",
+    "chancellor": "cem",
+    "lastElected": null,
+    "eligible": [],
+    "liberal": 0,
+    "fascist": 0,
+    "track": [
+      null,
+      "investigate",
+      "specialElection",
+      "execution",
+      "execution",
+      null
+    ],
+    "electionTracker": 0,
+    "deckCount": 17,
+    "discardCount": 0,
+    "vetoUnlocked": false,
+    "session": 1,
+    "voteRound": 1,
+    "myVote": null,
+    "hand": null,
+    "vetoRequested": false,
+    "vetoDenied": false,
+    "power": null,
+    "peek": null,
+    "lastVote": null,
+    "log": [
+      {
+        "k": "start",
+        "president": "ece"
+      },
+      {
+        "k": "nominate",
+        "president": "ayse",
+        "chancellor": "cem"
+      }
+    ],
+    "waitingFor": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz",
+      "ece",
+      "fatih",
+      "gul"
+    ],
+    "skipAt": 1030000,
+    "serverNow": 1000000,
+    "winner": null,
+    "winReason": null,
+    "roles": null,
+    "finishAt": 0
+  },
+  "settings": {
+    "skipAfter": 30
+  },
+  "me": "deniz",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece",
+    "fatih",
+    "gul"
+  ]
+}

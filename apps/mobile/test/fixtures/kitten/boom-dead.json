@@ -1,0 +1,97 @@
+{
+  "view": {
+    "phase": "play",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": false,
+        "cards": 0,
+        "out": 1
+      }
+    ],
+    "current": "ali",
+    "turnsLeft": 1,
+    "turn": 2,
+    "me": {
+      "inGame": true,
+      "alive": false,
+      "hand": []
+    },
+    "deckCount": 3,
+    "deckBombs": 1,
+    "discardTop": "sarman",
+    "discardCount": 2,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335211,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "bomb",
+        "by": "cem"
+      },
+      {
+        "seq": 4,
+        "t": "boom",
+        "by": "cem"
+      },
+      {
+        "seq": 5,
+        "t": "turn",
+        "by": "ali",
+        "n": 1
+      }
+    ],
+    "flash": {
+      "seq": 1,
+      "t": "boom",
+      "by": "cem"
+    },
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

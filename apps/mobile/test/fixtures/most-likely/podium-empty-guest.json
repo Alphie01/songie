@@ -1,0 +1,80 @@
+{
+  "view": {
+    "phase": "podium",
+    "round": 1,
+    "totalRounds": 10,
+    "prompt": {
+      "id": "genel:2",
+      "text": "önce evlenecek",
+      "category": "genel"
+    },
+    "people": [
+      {
+        "id": "ali",
+        "nick": "ali",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "ayse",
+        "nick": "ayse",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "cem",
+        "nick": "cem",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      }
+    ],
+    "selfVote": true,
+    "anonymous": true,
+    "predict": false,
+    "voted": [],
+    "guessed": [],
+    "waitingFor": [],
+    "myVote": null,
+    "myGuess": null,
+    "serverNow": 1015000,
+    "endsAt": 0,
+    "durationMs": 15000,
+    "result": {
+      "counts": [],
+      "winners": [],
+      "total": 0,
+      "ballots": null,
+      "correctGuessers": null
+    },
+    "history": [],
+    "guessScores": {}
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "selfVote": true,
+    "anonymous": true,
+    "predict": false,
+    "seconds": 15,
+    "rounds": 10
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "view": {
+    "phase": "turn",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "a",
+    "role": "narrator",
+    "turnNumber": 0,
+    "totalTurns": 4,
+    "team": "a",
+    "narratorId": "ali",
+    "serverNow": 1000000,
+    "endsAt": 1060000,
+    "durationMs": 60000,
+    "passesLeft": 3,
+    "turnStats": {
+      "correct": 0,
+      "pass": 0,
+      "taboo": 0
+    },
+    "card": {
+      "id": "genel:2",
+      "word": "Kedi",
+      "taboo": [
+        "Miyav",
+        "Hayvan",
+        "Fare",
+        "Tüy",
+        "Evcil"
+      ],
+      "category": "genel"
+    },
+    "canUndo": false,
+    "flash": null,
+    "lastTurn": null,
+    "tabooPenalty": true
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 3,
+    "turns": 2,
+    "categories": [
+      "genel"
+    ],
+    "tabooPenalty": true
+  },
+  "me": "ali"
+}

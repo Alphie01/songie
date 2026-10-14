@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "200614992898",
+    "project_id": "songie-app",
+    "storage_bucket": "songie-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200614992898:android:ab7bc54fad2374ac2edb1b",
+        "android_client_info": {
+          "package_name": "com.monolithyazilim.songie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200614992898-ffl2nrhqqpbludfqar3tsdb83ggeegil.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.monolithyazilim.songie",
+            "certificate_hash": "d390de227070714ca51d0181f866eeb5bd404238"
+          }
+        },
+        {
+          "client_id": "200614992898-8ap3p13h0tkaml6tbr85lgkghjp6kh21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAog4TEhSqCQ8VdSkJyxTGthoO9MlwJAec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200614992898-8ap3p13h0tkaml6tbr85lgkghjp6kh21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200614992898-mg7iktl5mff22osnk0guco4d7im9uenj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.monolithyazilim.songie"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,78 @@
+{
+  "view": {
+    "phase": "ready",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "scores": {
+      "ali": 0,
+      "ayse": 0,
+      "cem": 0,
+      "deniz": 0
+    },
+    "teamMode": true,
+    "teams": {
+      "a": [
+        "ali",
+        "cem"
+      ],
+      "b": [
+        "ayse",
+        "deniz"
+      ]
+    },
+    "teamScores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "b",
+    "round": 1,
+    "totalRounds": null,
+    "attemptId": "1",
+    "performerId": "ali",
+    "stealFrom": null,
+    "prompt": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 7000,
+    "voteEndsAt": 0,
+    "voteMs": 20000,
+    "voted": [],
+    "voters": [],
+    "myVote": null,
+    "tally": null,
+    "lastResult": null,
+    "steal": false
+  },
+  "settings": {
+    "seconds": 7,
+    "rounds": 0,
+    "steal": false,
+    "teamMode": true,
+    "teams": {
+      "a": [
+        "ali",
+        "cem"
+      ],
+      "b": [
+        "ayse",
+        "deniz"
+      ]
+    },
+    "categories": [
+      "genel",
+      "yemek"
+    ]
+  },
+  "me": "deniz",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

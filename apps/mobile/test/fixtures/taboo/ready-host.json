@@ -1,0 +1,98 @@
+{
+  "view": {
+    "phase": "ready",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "a",
+    "role": "watcher",
+    "turnNumber": 1,
+    "totalTurns": 4,
+    "team": "b",
+    "narratorId": "cem",
+    "serverNow": 1060000,
+    "endsAt": 0,
+    "durationMs": 60000,
+    "passesLeft": 3,
+    "turnStats": {
+      "correct": 0,
+      "pass": 0,
+      "taboo": 0
+    },
+    "card": null,
+    "canUndo": false,
+    "flash": null,
+    "lastTurn": {
+      "team": "a",
+      "narratorId": "ali",
+      "points": 0,
+      "cards": [
+        {
+          "word": "Kedi",
+          "taboo": [
+            "Miyav",
+            "Hayvan",
+            "Fare",
+            "Tüy",
+            "Evcil"
+          ],
+          "result": "correct"
+        },
+        {
+          "word": "Saat",
+          "taboo": [
+            "Zaman",
+            "Dakika",
+            "Kol",
+            "Akrep",
+            "Yelkovan"
+          ],
+          "result": "pass"
+        },
+        {
+          "word": "Uçak",
+          "taboo": [
+            "Pilot",
+            "Havalimanı",
+            "Uçmak",
+            "Kanat",
+            "Bilet"
+          ],
+          "result": "taboo"
+        }
+      ]
+    },
+    "tabooPenalty": true
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 3,
+    "turns": 2,
+    "categories": [
+      "genel"
+    ],
+    "tabooPenalty": true
+  },
+  "me": "ali"
+}

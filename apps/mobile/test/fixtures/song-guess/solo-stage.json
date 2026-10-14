@@ -1,0 +1,71 @@
+{
+  "view": {
+    "phase": "stage",
+    "round": 3,
+    "totalRounds": null,
+    "stage": 0,
+    "stageClips": [
+      0.1,
+      0.5,
+      2,
+      8,
+      15
+    ],
+    "serverNow": 1012000,
+    "phaseEndsAt": 1012000,
+    "phaseMs": 0,
+    "clips": [
+      "/api/games/song-guess/media/t110n3/0",
+      null,
+      null,
+      null,
+      null
+    ],
+    "poolNames": [
+      "Türkçe Pop"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "score": 2460,
+        "roundPoints": 0,
+        "state": "listening",
+        "solvedStage": null,
+        "streak": 2,
+        "bestStreak": 2,
+        "ready": false
+      }
+    ],
+    "me": {
+      "state": "listening",
+      "canGuess": true,
+      "guesses": []
+    },
+    "reveal": null,
+    "timed": false,
+    "startStage": 0,
+    "easySearch": false,
+    "pools": [
+      "tr-test"
+    ],
+    "artistCredit": true,
+    "difficulty": "medium",
+    "feed": []
+  },
+  "settings": {
+    "rounds": 0,
+    "pools": [
+      "tr-test"
+    ],
+    "difficulty": "medium",
+    "timer": 0,
+    "startAt": "random",
+    "startStage": 0,
+    "easySearch": false,
+    "artistCredit": true
+  },
+  "players": [
+    "ali"
+  ],
+  "me": "ali"
+}

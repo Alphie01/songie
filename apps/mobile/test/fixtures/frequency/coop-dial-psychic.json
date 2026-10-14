@@ -1,0 +1,76 @@
+{
+  "view": {
+    "phase": "dial",
+    "mode": "coop",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": []
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "a",
+    "role": "psychic",
+    "roundId": 1,
+    "completed": 0,
+    "totalRounds": 2,
+    "targetScore": null,
+    "team": "a",
+    "psychicId": "ali",
+    "options": null,
+    "card": {
+      "id": "degerler:0",
+      "left": "Ahlaki",
+      "right": "Ahlaksız"
+    },
+    "target": 50,
+    "clue": "tam orta",
+    "dial": 50,
+    "dialBy": null,
+    "lockVotes": [],
+    "votesNeeded": 1,
+    "side": null,
+    "sideBy": null,
+    "result": null,
+    "history": [],
+    "winner": null,
+    "rating": 0,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "podiumMs": 9000
+  },
+  "settings": {
+    "mode": "coop",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "targetScore": 10,
+    "rounds": 2,
+    "seconds": 0,
+    "cardChoice": false,
+    "majorityLock": false,
+    "catchUp": true,
+    "friendCards": true
+  },
+  "me": "ali",
+  "host": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

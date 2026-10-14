@@ -1,0 +1,144 @@
+{
+  "view": {
+    "phase": "choose",
+    "seats": [
+      "oyuncu4",
+      "oyuncu12",
+      "oyuncu9",
+      "oyuncu1",
+      "oyuncu7",
+      "oyuncu11",
+      "oyuncu5",
+      "oyuncu6",
+      "oyuncu8",
+      "oyuncu2",
+      "oyuncu10",
+      "oyuncu3"
+    ],
+    "round": 1,
+    "turnNumber": 0,
+    "totalRounds": 20,
+    "spinnerId": "oyuncu1",
+    "targetId": "oyuncu9",
+    "spin": {
+      "id": 1,
+      "startAt": 1000400,
+      "durationMs": 4530,
+      "fromDeg": 211.42274086363614,
+      "toDeg": 1506.5672508697025
+    },
+    "restDeg": 1506.5672508697025,
+    "kind": null,
+    "prompt": null,
+    "scores": {
+      "oyuncu4": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu12": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu9": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu1": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu7": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu11": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu5": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu6": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu8": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu2": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu10": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "oyuncu3": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      }
+    },
+    "passesLeft": 2,
+    "vote": null,
+    "lastResult": null,
+    "serverNow": 1005200,
+    "choice": "player",
+    "passPenalty": true
+  },
+  "settings": {
+    "categories": [
+      "eglenceli"
+    ],
+    "choice": "player",
+    "passes": 2,
+    "passPenalty": true,
+    "vote": true,
+    "order": "target",
+    "rounds": 20,
+    "fairSpin": true
+  },
+  "me": "oyuncu2",
+  "players": [
+    "oyuncu1",
+    "oyuncu2",
+    "oyuncu3",
+    "oyuncu4",
+    "oyuncu5",
+    "oyuncu6",
+    "oyuncu7",
+    "oyuncu8",
+    "oyuncu9",
+    "oyuncu10",
+    "oyuncu11",
+    "oyuncu12"
+  ],
+  "offline": [
+    "oyuncu7"
+  ]
+}

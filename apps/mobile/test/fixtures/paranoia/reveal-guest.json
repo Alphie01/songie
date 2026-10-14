@@ -1,0 +1,67 @@
+{
+  "view": {
+    "phase": "reveal",
+    "players": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "names": {
+      "ali": "ali",
+      "ayse": "ayse",
+      "cem": "cem",
+      "deniz": "deniz"
+    },
+    "total": 3,
+    "answered": 3,
+    "serverNow": 1040000,
+    "endsAt": null,
+    "durationMs": 40000,
+    "seq": 3,
+    "myTurn": false,
+    "question": null,
+    "fromId": null,
+    "choices": [],
+    "holderId": null,
+    "holderOffline": false,
+    "pulse": 3,
+    "mine": [],
+    "revealed": [
+      {
+        "n": 1,
+        "question": "Aramızda kim en iyi yalancı?",
+        "askedId": "ayse",
+        "answerId": "cem",
+        "how": "chosen"
+      }
+    ],
+    "revealTotal": 3,
+    "votes": 0,
+    "votesNeeded": 3,
+    "myVote": false,
+    "stats": [],
+    "closesAt": 0
+  },
+  "settings": {
+    "questionCount": 3,
+    "categories": [
+      "genel"
+    ],
+    "thinkSeconds": 40,
+    "onTimeout": "pass",
+    "allowSelf": false,
+    "noReturn": true,
+    "hideHolder": true,
+    "firstHolder": "host",
+    "revealBy": "host"
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

@@ -1,0 +1,98 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": null,
+    "prompt": {
+      "id": "genel:1",
+      "text": "çok gülen",
+      "category": "genel"
+    },
+    "people": [
+      {
+        "id": "ali",
+        "nick": "ali",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "ayse",
+        "nick": "ayse",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "cem",
+        "nick": "cem",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      }
+    ],
+    "selfVote": false,
+    "anonymous": true,
+    "predict": false,
+    "voted": [
+      "ali"
+    ],
+    "guessed": [],
+    "waitingFor": [],
+    "myVote": null,
+    "myGuess": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "result": {
+      "counts": [
+        {
+          "id": "ayse",
+          "votes": 1
+        }
+      ],
+      "winners": [
+        "ayse"
+      ],
+      "total": 1,
+      "ballots": null,
+      "correctGuessers": null
+    },
+    "history": [
+      {
+        "round": 1,
+        "text": "çok gülen",
+        "winners": [
+          "ayse"
+        ],
+        "votes": 1
+      }
+    ],
+    "guessScores": {}
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "selfVote": false,
+    "anonymous": true,
+    "predict": false,
+    "seconds": 0,
+    "rounds": 0
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

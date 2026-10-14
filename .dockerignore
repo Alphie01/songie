@@ -10,3 +10,5 @@ games/detective/server/cases/*/.export
 **/node_modules
 screenshots
 test-results
+# Mobil uygulama sunucu imajına girmez
+apps/mobile

@@ -1,0 +1,76 @@
+{
+  "view": {
+    "phase": "podium",
+    "round": 2,
+    "totalRounds": 2,
+    "topic": null,
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1010000,
+    "durationMs": 10000,
+    "stats": {
+      "ali": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 1,
+        "correct": 0,
+        "fooled": 1
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myConfession": null,
+    "index": 0,
+    "count": 4,
+    "current": null,
+    "picked": [],
+    "myPick": null,
+    "reveal": null,
+    "recap": null,
+    "podium": {
+      "detective": {
+        "playerId": "ali",
+        "value": 1
+      },
+      "trickster": {
+        "playerId": "cem",
+        "value": 1
+      },
+      "confessions": 8
+    }
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

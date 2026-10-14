@@ -1,0 +1,87 @@
+{
+  "view": {
+    "phase": "ready",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 2
+    },
+    "myTeam": "b",
+    "role": "watcher",
+    "turnNumber": 2,
+    "totalTurns": 4,
+    "team": "a",
+    "narratorId": "ayse",
+    "serverNow": 1120000,
+    "endsAt": 0,
+    "durationMs": 60000,
+    "passesLeft": 3,
+    "turnStats": {
+      "correct": 0,
+      "pass": 0,
+      "taboo": 0
+    },
+    "card": null,
+    "canUndo": false,
+    "flash": null,
+    "lastTurn": {
+      "team": "b",
+      "narratorId": "cem",
+      "points": 2,
+      "cards": [
+        {
+          "word": "Kitap",
+          "taboo": [
+            "Okumak",
+            "Sayfa",
+            "Yazar",
+            "Roman",
+            "Kütüphane"
+          ],
+          "result": "correct"
+        },
+        {
+          "word": "Baklava",
+          "taboo": [
+            "Tatlı",
+            "Şerbet",
+            "Fıstık",
+            "Hamur",
+            "Gaziantep"
+          ],
+          "result": "correct"
+        }
+      ]
+    },
+    "tabooPenalty": true
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 3,
+    "turns": 2,
+    "categories": [
+      "genel"
+    ],
+    "tabooPenalty": true
+  },
+  "me": "deniz"
+}

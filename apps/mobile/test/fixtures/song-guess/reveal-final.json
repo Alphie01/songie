@@ -1,0 +1,224 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 3,
+    "totalRounds": 3,
+    "stage": 4,
+    "stageClips": [
+      0.1,
+      0.5,
+      2,
+      8,
+      15
+    ],
+    "serverNow": 1016700,
+    "phaseEndsAt": 1016700,
+    "phaseMs": 0,
+    "clips": [
+      "/api/games/song-guess/media/t107n4/0",
+      "/api/games/song-guess/media/t107n4/1",
+      "/api/games/song-guess/media/t107n4/2",
+      "/api/games/song-guess/media/t107n4/3",
+      "/api/games/song-guess/media/t107n4/4"
+    ],
+    "poolNames": [
+      "Türkçe Pop",
+      "Global Hits"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "score": 897,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 1,
+        "ready": false
+      },
+      {
+        "id": "ayse",
+        "score": 254,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "cem",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "deniz",
+        "score": 1234,
+        "roundPoints": 1234,
+        "state": "correct",
+        "solvedStage": 0,
+        "streak": 1,
+        "bestStreak": 1,
+        "ready": false
+      }
+    ],
+    "me": {
+      "state": "skipped",
+      "canGuess": false,
+      "guesses": []
+    },
+    "reveal": {
+      "trackId": 107,
+      "title": "Senden Daha Güzel",
+      "artist": "Duman",
+      "album": "Senden Daha Güzel (Albüm)",
+      "cover": null,
+      "year": null,
+      "link": "https://www.deezer.com/track/107",
+      "previewUrl": "/api/games/song-guess/media/t107n4/full",
+      "poolName": "Türkçe Pop",
+      "results": [
+        {
+          "playerId": "deniz",
+          "stage": 0,
+          "points": 1234,
+          "kind": "correct"
+        }
+      ]
+    },
+    "timed": false,
+    "startStage": 0,
+    "easySearch": false,
+    "pools": [
+      "tr-test",
+      "global-test"
+    ],
+    "artistCredit": true,
+    "difficulty": "medium",
+    "feed": [
+      {
+        "id": 41,
+        "at": 1016700,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 0
+      },
+      {
+        "id": 42,
+        "at": 1016700,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 0
+      },
+      {
+        "id": 43,
+        "at": 1016700,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 1
+      },
+      {
+        "id": 44,
+        "at": 1016700,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 1
+      },
+      {
+        "id": 45,
+        "at": 1016700,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 1
+      },
+      {
+        "id": 46,
+        "at": 1016700,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 47,
+        "at": 1016700,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 48,
+        "at": 1016700,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 49,
+        "at": 1016700,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 50,
+        "at": 1016700,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 51,
+        "at": 1016700,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 52,
+        "at": 1016700,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 53,
+        "at": 1016700,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 54,
+        "at": 1016700,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 4
+      }
+    ]
+  },
+  "settings": {
+    "rounds": 3,
+    "pools": [
+      "tr-test",
+      "global-test"
+    ],
+    "difficulty": "medium",
+    "timer": 0,
+    "startAt": "random",
+    "startStage": 0,
+    "easySearch": false,
+    "artistCredit": true
+  },
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "me": "ali"
+}

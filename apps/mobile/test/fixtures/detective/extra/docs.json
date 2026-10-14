@@ -1,0 +1,429 @@
+{
+  "e-scene": {
+    "ok": true,
+    "doc": {
+      "kind": "report",
+      "variant": "scene",
+      "agency": "İstanbul Emniyet Müdürlüğü · Olay Yeri İnceleme Şube Müdürlüğü",
+      "docNo": "OYİ-2025/0412",
+      "datetime": "15.02.2025 08:40",
+      "heading": "Olay yeri inceleme tutanağı",
+      "sections": [
+        {
+          "title": "Olay yeri",
+          "text": "Arka oda kapısı içeriden kilitli bulunmuştur. Anahtar kilidin üzerindedir."
+        },
+        {
+          "title": "Bulgular",
+          "text": "Tezgâhta yarım bardak çay. Avlu penceresi aralık. Pencere altında çamurlu ayak izi."
+        }
+      ],
+      "signature": "Komiser Yrd. Ece Tan"
+    },
+    "title": "Olay yeri inceleme raporu",
+    "evidenceId": "e-scene",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-sevim": {
+    "ok": true,
+    "doc": {
+      "kind": "statement",
+      "person": "sevim",
+      "capacity": "tanık",
+      "takenBy": "Komiser Yrd. Ece Tan",
+      "place": "Kadıköy İlçe Emniyet Müdürlüğü",
+      "datetime": "15.02.2025 10:15",
+      "qa": [
+        {
+          "q": "Cesedi nasıl buldunuz?",
+          "a": "Çay saatinde kapı açılmadı. Yedek anahtarla girdim."
+        },
+        {
+          "q": "Dün akşam bir şey gördünüz mü?",
+          "a": "Dokuz gibi Kerem'i dükkândan çıkarken gördüm galiba."
+        }
+      ]
+    },
+    "title": "Sevim Er'in ifadesi",
+    "evidenceId": "e-sevim",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-kerem": {
+    "ok": true,
+    "doc": {
+      "kind": "statement",
+      "person": "kerem",
+      "capacity": "şüpheli",
+      "takenBy": "Komiser Yrd. Ece Tan",
+      "place": "Kadıköy İlçe Emniyet Müdürlüğü",
+      "datetime": "15.02.2025 11:30",
+      "qa": [
+        {
+          "q": "Dün dükkândan ne zaman ayrıldınız?",
+          "a": "Yedide çıktım, eve gittim."
+        }
+      ]
+    },
+    "title": "Kerem Yalçın'ın ifadesi",
+    "evidenceId": "e-kerem",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-plan": {
+    "ok": true,
+    "doc": {
+      "kind": "floorplan",
+      "location": "shop",
+      "caption": "Arka odaya yalnızca satış bölümünden ve avlu penceresinden girilebilir."
+    },
+    "title": "Dükkân krokisi",
+    "evidenceId": "e-plan",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-pharmacy": {
+    "ok": true,
+    "doc": {
+      "kind": "table",
+      "heading": "14 Şubat 2025 nöbetçi eczaneler",
+      "columns": [
+        "Eczane",
+        "Eczacı",
+        "Saat"
+      ],
+      "rows": [
+        [
+          "Bahariye Eczanesi",
+          "Leyla Aksoy",
+          "19:00–09:00"
+        ]
+      ]
+    },
+    "title": "Eczane nöbet listesi",
+    "evidenceId": "e-pharmacy",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-access": {
+    "ok": true,
+    "doc": {
+      "kind": "accessLog",
+      "system": "Kartlı geçiş",
+      "site": "Bahariye Eczanesi",
+      "period": "14.02.2025",
+      "rows": [
+        {
+          "time": "19:02",
+          "card": "0007",
+          "holder": "Leyla Aksoy",
+          "door": "Personel",
+          "result": "GEÇİŞ"
+        },
+        {
+          "time": "23:41",
+          "card": "0007",
+          "holder": "Leyla Aksoy",
+          "door": "Personel",
+          "result": "ÇIKIŞ"
+        }
+      ]
+    },
+    "title": "Eczane kapı kaydı",
+    "evidenceId": "e-access",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-ticket": {
+    "ok": true,
+    "doc": {
+      "kind": "ticket",
+      "variant": "parking",
+      "title": "Moda Sahil Otoparkı",
+      "fields": [
+        {
+          "label": "Giriş",
+          "value": "14.02.2025 20:15"
+        },
+        {
+          "label": "Çıkış",
+          "value": "14.02.2025 23:05"
+        }
+      ],
+      "serial": "No 004412"
+    },
+    "title": "Otopark fişi",
+    "evidenceId": "e-ticket",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-cam": {
+    "ok": true,
+    "doc": {
+      "kind": "photo",
+      "image": "cam-street",
+      "caption": "Kapüşonlu bir kişi dükkâna doğru yürüyor.",
+      "cctv": {
+        "camera": "KAM-03 MODA CD",
+        "timestamp": "14.02.2025 21:08:41"
+      }
+    },
+    "title": "Sokak kamerası, 21:08",
+    "evidenceId": "e-cam",
+    "images": {
+      "cam-street": {
+        "url": "/api/games/detective/img/mini/ffdc2a3a2bcf53ca9765.webp",
+        "alt": "Islak dar sokakta kapüşonlu yağmurluk giymiş bir kişi yürüyor; yüzü görünmüyor, elinde bir şemsiye var."
+      }
+    },
+    "audioUrl": null
+  },
+  "e-autopsy": {
+    "ok": true,
+    "doc": {
+      "kind": "report",
+      "variant": "autopsy",
+      "agency": "Adli Tıp Kurumu İstanbul Grup Başkanlığı",
+      "docNo": "2025/1187",
+      "datetime": "16.02.2025",
+      "heading": "Ön otopsi raporu",
+      "sections": [
+        {
+          "title": "Ölüm nedeni",
+          "text": "Siyanür zehirlenmesi. Tahmini ölüm saati 21:00–22:00."
+        }
+      ],
+      "signature": "Dr. Murat Kaya"
+    },
+    "title": "Otopsi raporu",
+    "evidenceId": "e-autopsy",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-news": {
+    "ok": true,
+    "doc": {
+      "kind": "newspaper",
+      "paper": "Kadıköy Postası",
+      "date": "16 Şubat 2025",
+      "headline": "Moda'nın saatçisi dükkânında ölü bulundu",
+      "subhead": "Polis şüpheli ölüm üzerinde duruyor",
+      "body": "Kırk yıldır Moda'da saat tamir eden Nuri Aksoy dün sabah dükkânında ölü bulundu.",
+      "image": "cover"
+    },
+    "title": "Gazete haberi",
+    "evidenceId": "e-news",
+    "images": {
+      "cover": {
+        "url": null,
+        "alt": "Yağmurlu gecede kepengi yarı inik küçük bir saatçi dükkânı."
+      }
+    },
+    "audioUrl": null
+  },
+  "e-call": {
+    "ok": true,
+    "doc": {
+      "kind": "audio",
+      "variant": "emergency-call",
+      "source": "155 Polis İmdat Çağrı Merkezi kaydı",
+      "datetime": "15.02.2025 07:58",
+      "lines": [
+        {
+          "name": "Operatör",
+          "voice": {
+            "gender": "female",
+            "age": "adult",
+            "style": "sakin, profesyonel"
+          },
+          "text": "Polis imdat, dinliyorum."
+        },
+        {
+          "character": "sevim",
+          "text": "Kızım, Moda Caddesi'ndeki saatçi... Nuri Bey... yerde yatıyor, kıpırdamıyor!",
+          "delivery": "nefes nefese, panik içinde"
+        },
+        {
+          "name": "Operatör",
+          "voice": {
+            "gender": "female",
+            "age": "adult",
+            "style": "sakin, profesyonel"
+          },
+          "text": "Sakin olun hanımefendi. İçeri nasıl girdiniz?"
+        },
+        {
+          "character": "sevim",
+          "text": "Yedek anahtarım var, her sabah çay içeriz. Arka odanın kapısı kilitliydi, camdan gördüm.",
+          "delivery": "titreyen sesle",
+          "pause": 1
+        }
+      ],
+      "ambience": "sokak gürültüsü, uzakta martılar"
+    },
+    "title": "155 ihbar kaydı, 07:58",
+    "evidenceId": "e-call",
+    "images": {},
+    "audioUrl": "/api/games/detective/audio/mini/c558919531a32e587071.mp3"
+  },
+  "e-email": {
+    "ok": true,
+    "doc": {
+      "kind": "email",
+      "from": "nuri.aksoy@ornekposta.com",
+      "to": "kati@ornek-noter.com",
+      "date": "10.02.2025 09:12",
+      "subject": "Vasiyet randevusu",
+      "body": "Merhaba,\n\nGeçen hafta konuştuğumuz değişiklik için 17 Şubat'taki randevuyu teyit ederim.",
+      "attachments": [
+        "taslak.pdf"
+      ]
+    },
+    "title": "Noterle yazışma",
+    "evidenceId": "e-email",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-receipt": {
+    "ok": true,
+    "doc": {
+      "kind": "receipt",
+      "merchant": "Usta Çilingir",
+      "address": "Bahariye Cd. No:12 Kadıköy",
+      "datetime": "12.02.2025 17:48",
+      "items": [
+        {
+          "name": "Anahtar kopyalama (pirinç)",
+          "qty": 1,
+          "price": 150
+        }
+      ],
+      "payment": "Nakit"
+    },
+    "title": "Anahtarcı fişi",
+    "evidenceId": "e-receipt",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-keyphoto": {
+    "ok": true,
+    "doc": {
+      "kind": "photo",
+      "image": "obj-key",
+      "caption": "Arka oda kilidinde bulunan anahtar.",
+      "tag": "D-4"
+    },
+    "title": "Kilitteki anahtar",
+    "evidenceId": "e-keyphoto",
+    "images": {
+      "obj-key": {
+        "url": null,
+        "alt": "Beyaz zemin üzerinde eski pirinç bir anahtar; dişlerinde yeni törpü izleri."
+      }
+    },
+    "audioUrl": null
+  },
+  "e-hts": {
+    "ok": true,
+    "doc": {
+      "kind": "phoneLog",
+      "subscriber": "Kerem Yalçın",
+      "number": "0532 *** 41 18",
+      "period": "14.02.2025 18:00–24:00",
+      "rows": [
+        {
+          "datetime": "14.02.2025 21:12",
+          "type": "giden arama",
+          "other": "0544 *** 09 77",
+          "duration": "00:01:40",
+          "tower": "Moda Cd. / Kadıköy"
+        },
+        {
+          "datetime": "14.02.2025 22:30",
+          "type": "gelen SMS",
+          "other": "BANKA",
+          "tower": "Göztepe"
+        }
+      ]
+    },
+    "title": "Kerem Yalçın HTS kaydı",
+    "evidenceId": "e-hts",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-note": {
+    "ok": true,
+    "doc": {
+      "kind": "letter",
+      "hand": "handwritten",
+      "date": "13 Şubat",
+      "body": "Kerem'e söyle: pazartesi noterdeyim. Dükkân onun.",
+      "signoff": "N.",
+      "condition": "Kahve lekeli"
+    },
+    "title": "Tezgâh altındaki not",
+    "evidenceId": "e-note",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-msg": {
+    "ok": true,
+    "doc": {
+      "kind": "messages",
+      "owner": "Kerem",
+      "with": "Tahsin",
+      "source": "Mesajlaşma uygulaması dökümü",
+      "messages": [
+        {
+          "from": "them",
+          "time": "14.02 18:02",
+          "text": "Cuma son gün."
+        },
+        {
+          "from": "me",
+          "time": "14.02 18:05",
+          "text": "Ayarlayacağım abi, bu gece hallediyorum."
+        },
+        {
+          "from": "me",
+          "time": "14.02 21:40",
+          "text": "Silindi",
+          "deleted": true
+        }
+      ]
+    },
+    "title": "Kerem'in telefonundaki mesajlar",
+    "evidenceId": "e-msg",
+    "images": {},
+    "audioUrl": null
+  },
+  "e-bank": {
+    "ok": true,
+    "doc": {
+      "kind": "bank",
+      "bank": "Örnek Katılım Bankası",
+      "holder": "Kerem Yalçın",
+      "iban": "TR00 0000 0000 0000 0000 0000 00",
+      "period": "01.02.2025–15.02.2025",
+      "rows": [
+        {
+          "date": "03.02",
+          "desc": "Maaş",
+          "amount": 32000,
+          "balance": 33210
+        },
+        {
+          "date": "14.02",
+          "desc": "ATM çekim",
+          "amount": -30000,
+          "balance": 3210
+        }
+      ]
+    },
+    "title": "Kerem'in banka dökümü",
+    "evidenceId": "e-bank",
+    "images": {},
+    "audioUrl": null
+  }
+}

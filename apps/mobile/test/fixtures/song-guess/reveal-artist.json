@@ -1,0 +1,242 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": 3,
+    "stage": 4,
+    "stageClips": [
+      0.1,
+      0.5,
+      2,
+      8,
+      15
+    ],
+    "serverNow": 1009500,
+    "phaseEndsAt": 1009500,
+    "phaseMs": 0,
+    "clips": [
+      "/api/games/song-guess/media/t108n1/0",
+      "/api/games/song-guess/media/t108n1/1",
+      "/api/games/song-guess/media/t108n1/2",
+      "/api/games/song-guess/media/t108n1/3",
+      "/api/games/song-guess/media/t108n1/4"
+    ],
+    "poolNames": [
+      "Türkçe Pop"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "score": 897,
+        "roundPoints": 897,
+        "state": "correct",
+        "solvedStage": 1,
+        "streak": 1,
+        "bestStreak": 1,
+        "ready": false
+      },
+      {
+        "id": "ayse",
+        "score": 254,
+        "roundPoints": 254,
+        "state": "skipped",
+        "solvedStage": 1,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "cem",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "deniz",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      }
+    ],
+    "me": {
+      "state": "skipped",
+      "canGuess": false,
+      "guesses": [
+        {
+          "stage": 0,
+          "title": "Şımarık",
+          "artist": "Tarkan",
+          "verdict": "wrong"
+        },
+        {
+          "stage": 1,
+          "title": "Senden Daha Güzel",
+          "artist": "Duman",
+          "verdict": "artist"
+        }
+      ]
+    },
+    "reveal": {
+      "trackId": 108,
+      "title": "Bu Akşam",
+      "artist": "Duman",
+      "album": "Bu Akşam (Albüm)",
+      "cover": null,
+      "year": null,
+      "link": "https://www.deezer.com/track/108",
+      "previewUrl": "/api/games/song-guess/media/t108n1/full",
+      "poolName": "Türkçe Pop",
+      "results": [
+        {
+          "playerId": "ali",
+          "stage": 1,
+          "points": 897,
+          "kind": "correct"
+        },
+        {
+          "playerId": "ayse",
+          "stage": 1,
+          "points": 254,
+          "kind": "artist"
+        }
+      ]
+    },
+    "timed": false,
+    "startStage": 0,
+    "easySearch": false,
+    "pools": [
+      "tr-test"
+    ],
+    "artistCredit": true,
+    "difficulty": "medium",
+    "feed": [
+      {
+        "id": 4,
+        "at": 1005500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 0
+      },
+      {
+        "id": 5,
+        "at": 1009500,
+        "playerId": "ali",
+        "kind": "correct",
+        "stage": 1,
+        "points": 897
+      },
+      {
+        "id": 6,
+        "at": 1009500,
+        "playerId": "ayse",
+        "kind": "artist",
+        "stage": 1,
+        "points": 254
+      },
+      {
+        "id": 7,
+        "at": 1009500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 1
+      },
+      {
+        "id": 8,
+        "at": 1009500,
+        "playerId": "deniz",
+        "kind": "wrong",
+        "stage": 1
+      },
+      {
+        "id": 9,
+        "at": 1009500,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 10,
+        "at": 1009500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 11,
+        "at": 1009500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 12,
+        "at": 1009500,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 13,
+        "at": 1009500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 14,
+        "at": 1009500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 15,
+        "at": 1009500,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 16,
+        "at": 1009500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 17,
+        "at": 1009500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 4
+      }
+    ]
+  },
+  "settings": {
+    "rounds": 3,
+    "pools": [
+      "tr-test"
+    ],
+    "difficulty": "medium",
+    "timer": 0,
+    "startAt": "random",
+    "startStage": 0,
+    "easySearch": false,
+    "artistCredit": true
+  },
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "me": "ayse"
+}

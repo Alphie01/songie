@@ -1,0 +1,68 @@
+{
+  "view": {
+    "phase": "turn",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "a",
+    "role": "narrator",
+    "turnNumber": 0,
+    "totalTurns": 4,
+    "team": "a",
+    "narratorId": "ali",
+    "serverNow": 1000000,
+    "endsAt": 1060000,
+    "durationMs": 60000,
+    "passesLeft": 1,
+    "turnStats": {
+      "correct": 0,
+      "pass": 0,
+      "foul": 0
+    },
+    "card": {
+      "id": "film-turk:3",
+      "title": "Kış Uykusu",
+      "kind": "film",
+      "words": 2,
+      "category": "film-turk"
+    },
+    "canUndo": false,
+    "flash": null,
+    "lastTurn": null,
+    "foulPenalty": true,
+    "sign": null
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 1,
+    "turns": 2,
+    "categories": [
+      "film-turk",
+      "atasozu-deyim"
+    ],
+    "difficulty": "karisik",
+    "foulPenalty": true
+  },
+  "me": "ali"
+}

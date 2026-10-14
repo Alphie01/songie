@@ -1,0 +1,110 @@
+{
+  "view": {
+    "phase": "reveal",
+    "mode": "coop",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": []
+    },
+    "scores": {
+      "a": 4,
+      "b": 0
+    },
+    "myTeam": "a",
+    "role": "dialer",
+    "roundId": 1,
+    "completed": 1,
+    "totalRounds": 3,
+    "targetScore": null,
+    "team": "a",
+    "psychicId": "ali",
+    "options": null,
+    "card": {
+      "id": "degerler:0",
+      "left": "Ahlaki",
+      "right": "Ahlaksız"
+    },
+    "target": 50,
+    "clue": "tam orta",
+    "dial": 50,
+    "dialBy": null,
+    "lockVotes": [],
+    "votesNeeded": 1,
+    "side": null,
+    "sideBy": null,
+    "result": {
+      "id": 1,
+      "team": "a",
+      "psychicId": "ali",
+      "card": {
+        "id": "degerler:0",
+        "left": "Ahlaki",
+        "right": "Ahlaksız"
+      },
+      "clue": "tam orta",
+      "target": 50,
+      "dial": 50,
+      "points": 4,
+      "side": null,
+      "sidePoint": null,
+      "again": true
+    },
+    "history": [
+      {
+        "id": 1,
+        "team": "a",
+        "psychicId": "ali",
+        "card": {
+          "id": "degerler:0",
+          "left": "Ahlaki",
+          "right": "Ahlaksız"
+        },
+        "clue": "tam orta",
+        "target": 50,
+        "dial": 50,
+        "points": 4,
+        "side": null,
+        "sidePoint": null,
+        "again": true
+      }
+    ],
+    "winner": null,
+    "rating": 2,
+    "serverNow": 1000200,
+    "endsAt": 0,
+    "durationMs": 0,
+    "podiumMs": 9000
+  },
+  "settings": {
+    "mode": "coop",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "targetScore": 10,
+    "rounds": 2,
+    "seconds": 0,
+    "cardChoice": false,
+    "majorityLock": false,
+    "catchUp": true,
+    "friendCards": true
+  },
+  "me": "cem",
+  "host": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

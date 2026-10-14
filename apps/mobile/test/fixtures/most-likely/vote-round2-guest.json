@@ -1,0 +1,102 @@
+{
+  "view": {
+    "phase": "vote",
+    "round": 2,
+    "totalRounds": 2,
+    "prompt": {
+      "id": "genel:1",
+      "text": "çok gülen",
+      "category": "genel"
+    },
+    "people": [
+      {
+        "id": "ali",
+        "nick": "ali",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "ayse",
+        "nick": "ayse",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "cem",
+        "nick": "cem",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "deniz",
+        "nick": "deniz",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": false
+      }
+    ],
+    "selfVote": true,
+    "anonymous": false,
+    "predict": true,
+    "voted": [],
+    "guessed": [],
+    "waitingFor": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "myVote": null,
+    "myGuess": null,
+    "serverNow": 1000000,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "result": null,
+    "history": [
+      {
+        "round": 1,
+        "text": "geç kalan",
+        "winners": [
+          "cem"
+        ],
+        "votes": 3
+      }
+    ],
+    "guessScores": {
+      "ali": 1,
+      "cem": 1,
+      "deniz": 1
+    }
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "selfVote": true,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 30,
+    "rounds": 2
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

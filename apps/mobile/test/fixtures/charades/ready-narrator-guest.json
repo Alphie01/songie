@@ -1,0 +1,83 @@
+{
+  "view": {
+    "phase": "ready",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "b",
+    "role": "guesser",
+    "turnNumber": 1,
+    "totalTurns": 4,
+    "team": "b",
+    "narratorId": "cem",
+    "serverNow": 1060000,
+    "endsAt": 0,
+    "durationMs": 60000,
+    "passesLeft": 1,
+    "turnStats": {
+      "correct": 0,
+      "pass": 0,
+      "foul": 0
+    },
+    "card": null,
+    "canUndo": false,
+    "flash": null,
+    "lastTurn": {
+      "team": "a",
+      "narratorId": "ali",
+      "points": 0,
+      "cards": [
+        {
+          "title": "Kış Uykusu",
+          "kind": "film",
+          "result": "correct"
+        },
+        {
+          "title": "Babam ve Oğlum",
+          "kind": "film",
+          "result": "pass"
+        },
+        {
+          "title": "Ahlat Ağacı",
+          "kind": "film",
+          "result": "foul"
+        }
+      ]
+    },
+    "foulPenalty": true,
+    "sign": null
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 1,
+    "turns": 2,
+    "categories": [
+      "film-turk",
+      "atasozu-deyim"
+    ],
+    "difficulty": "karisik",
+    "foulPenalty": true
+  },
+  "me": "cem"
+}

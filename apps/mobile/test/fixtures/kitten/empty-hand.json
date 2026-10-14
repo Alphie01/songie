@@ -1,0 +1,77 @@
+{
+  "view": {
+    "phase": "play",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 0,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turnsLeft": 1,
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": []
+    },
+    "deckCount": 12,
+    "deckBombs": 2,
+    "discardTop": null,
+    "discardCount": 0,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335212,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      }
+    ],
+    "flash": null,
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": true
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

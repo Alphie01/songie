@@ -1,0 +1,114 @@
+{
+  "view": {
+    "phase": "summary",
+    "round": 2,
+    "totalRounds": 2,
+    "topic": {
+      "text": "Kimseye söylemediğin gizli bir yeteneğin",
+      "category": "genel"
+    },
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1015000,
+    "durationMs": 15000,
+    "stats": {
+      "ali": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 1,
+        "correct": 0,
+        "fooled": 1
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myConfession": null,
+    "index": 0,
+    "count": 4,
+    "current": null,
+    "picked": [],
+    "myPick": null,
+    "reveal": null,
+    "recap": [
+      {
+        "id": "r2c1",
+        "text": "Kahvaltıda gizlice çikolata yerim ve bunu kimse bilmiyor",
+        "authorId": "ali",
+        "reactions": {
+          "yok": 0,
+          "bende": 0,
+          "efsane": 0,
+          "olamaz": 0
+        }
+      },
+      {
+        "id": "r2c2",
+        "text": "Ehliyet sınavından üç kez kaldım ve bunu kimse bilmiyor",
+        "authorId": "cem",
+        "reactions": {
+          "yok": 0,
+          "bende": 0,
+          "efsane": 0,
+          "olamaz": 0
+        }
+      },
+      {
+        "id": "r2c3",
+        "text": "Bitkilerime isim koyup konuşurum ve bunu kimse bilmiyor",
+        "authorId": "deniz",
+        "reactions": {
+          "yok": 0,
+          "bende": 0,
+          "efsane": 0,
+          "olamaz": 0
+        }
+      },
+      {
+        "id": "r2c4",
+        "text": "Hâlâ ışık açık uyuyorum ve bunu kimse bilmiyor",
+        "authorId": "ayse",
+        "reactions": {
+          "yok": 0,
+          "bende": 0,
+          "efsane": 0,
+          "olamaz": 0
+        }
+      }
+    ],
+    "podium": null
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

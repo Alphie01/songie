@@ -1,0 +1,70 @@
+{
+  "view": {
+    "phase": "choose",
+    "seats": [
+      "cem",
+      "ali",
+      "ayse"
+    ],
+    "round": 1,
+    "turnNumber": 0,
+    "totalRounds": 3,
+    "spinnerId": "ali",
+    "targetId": "ayse",
+    "spin": {
+      "id": 1,
+      "startAt": 1000400,
+      "durationMs": 4413,
+      "fromDeg": 189.8809343855828,
+      "toDeg": 1334.0513369464315
+    },
+    "restDeg": 1334.0513369464315,
+    "kind": null,
+    "prompt": null,
+    "scores": {
+      "cem": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ali": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ayse": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      }
+    },
+    "passesLeft": 2,
+    "vote": null,
+    "lastResult": null,
+    "serverNow": 1005200,
+    "choice": "player",
+    "passPenalty": true
+  },
+  "settings": {
+    "categories": [
+      "eglenceli"
+    ],
+    "choice": "player",
+    "passes": 2,
+    "passPenalty": true,
+    "vote": true,
+    "order": "target",
+    "rounds": 3,
+    "fairSpin": true
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

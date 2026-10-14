@@ -1,0 +1,130 @@
+{
+  "view": {
+    "phase": "play",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 13,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 3,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "cards": 2,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turnsLeft": 1,
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "f1",
+          "kind": "defuse"
+        },
+        {
+          "id": "f2",
+          "kind": "attack"
+        },
+        {
+          "id": "f3",
+          "kind": "skip"
+        },
+        {
+          "id": "f4",
+          "kind": "future"
+        },
+        {
+          "id": "f5",
+          "kind": "shuffle"
+        },
+        {
+          "id": "f6",
+          "kind": "favor"
+        },
+        {
+          "id": "f7",
+          "kind": "nope"
+        },
+        {
+          "id": "f8",
+          "kind": "tekir"
+        },
+        {
+          "id": "f9",
+          "kind": "tekir"
+        },
+        {
+          "id": "f10",
+          "kind": "sarman"
+        },
+        {
+          "id": "f11",
+          "kind": "pamuk"
+        },
+        {
+          "id": "f12",
+          "kind": "kara"
+        },
+        {
+          "id": "f13",
+          "kind": "benek"
+        }
+      ]
+    },
+    "deckCount": 12,
+    "deckBombs": 2,
+    "discardTop": "attack",
+    "discardCount": 2,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335202,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      }
+    ],
+    "flash": null,
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": true
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

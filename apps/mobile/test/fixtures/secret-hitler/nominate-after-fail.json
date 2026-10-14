@@ -1,0 +1,165 @@
+{
+  "view": {
+    "phase": "nominate",
+    "playerCount": 7,
+    "seats": [
+      {
+        "id": "ali",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "deniz",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "ece",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "fatih",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "gul",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      }
+    ],
+    "me": {
+      "role": "fascist",
+      "known": [
+        {
+          "id": "ece",
+          "role": "fascist"
+        },
+        {
+          "id": "gul",
+          "role": "hitler"
+        }
+      ],
+      "investigations": []
+    },
+    "president": "cem",
+    "chancellor": null,
+    "lastElected": null,
+    "eligible": [
+      "ali",
+      "ayse",
+      "deniz",
+      "ece",
+      "fatih",
+      "gul"
+    ],
+    "liberal": 0,
+    "fascist": 0,
+    "track": [
+      null,
+      "investigate",
+      "specialElection",
+      "execution",
+      "execution",
+      null
+    ],
+    "electionTracker": 1,
+    "deckCount": 17,
+    "discardCount": 0,
+    "vetoUnlocked": false,
+    "session": 2,
+    "voteRound": 1,
+    "myVote": null,
+    "hand": null,
+    "vetoRequested": false,
+    "vetoDenied": false,
+    "power": null,
+    "peek": null,
+    "lastVote": {
+      "president": "ayse",
+      "chancellor": "cem",
+      "votes": {
+        "ali": "ja",
+        "ayse": "ja",
+        "cem": "ja",
+        "deniz": "nein",
+        "ece": "nein",
+        "fatih": "nein",
+        "gul": "nein"
+      },
+      "passed": false
+    },
+    "log": [
+      {
+        "k": "start",
+        "president": "ece"
+      },
+      {
+        "k": "nominate",
+        "president": "ayse",
+        "chancellor": "cem"
+      },
+      {
+        "k": "vote",
+        "president": "ayse",
+        "chancellor": "cem",
+        "ja": [
+          "ali",
+          "ayse",
+          "cem"
+        ],
+        "nein": [
+          "deniz",
+          "ece",
+          "fatih",
+          "gul"
+        ],
+        "passed": false
+      },
+      {
+        "k": "tracker",
+        "count": 1
+      }
+    ],
+    "waitingFor": [
+      "cem"
+    ],
+    "skipAt": 1030000,
+    "serverNow": 1000000,
+    "winner": null,
+    "winReason": null,
+    "roles": null,
+    "finishAt": 0
+  },
+  "settings": {
+    "skipAfter": 30
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece",
+    "fatih",
+    "gul"
+  ]
+}

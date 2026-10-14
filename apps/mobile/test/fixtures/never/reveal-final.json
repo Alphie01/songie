@@ -1,0 +1,104 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 2,
+    "totalRounds": 2,
+    "statement": {
+      "id": "genel:0",
+      "text": "Ben hiç test cümlesi bir yazmadım.",
+      "category": "genel"
+    },
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 30000,
+    "anonymous": false,
+    "maxLives": 3,
+    "players": [
+      {
+        "id": "ali",
+        "lives": 1,
+        "eliminated": false,
+        "answered": false,
+        "active": true,
+        "didCount": 2
+      },
+      {
+        "id": "ayse",
+        "lives": 1,
+        "eliminated": false,
+        "answered": false,
+        "active": true,
+        "didCount": 2
+      },
+      {
+        "id": "cem",
+        "lives": 2,
+        "eliminated": false,
+        "answered": false,
+        "active": true,
+        "didCount": 1
+      }
+    ],
+    "myAnswer": "did",
+    "canAnswer": false,
+    "skip": {
+      "votes": 0,
+      "needed": 2,
+      "mine": false
+    },
+    "reveal": {
+      "round": 2,
+      "text": "Ben hiç test cümlesi bir yazmadım.",
+      "didCount": 3,
+      "answered": 3,
+      "total": 3,
+      "didIds": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "eliminatedIds": [],
+      "storytellerId": "ayse"
+    },
+    "history": [
+      {
+        "round": 2,
+        "text": "Ben hiç test cümlesi bir yazmadım.",
+        "didCount": 3,
+        "answered": 3,
+        "total": 3,
+        "didIds": [
+          "ali",
+          "ayse",
+          "cem"
+        ],
+        "eliminatedIds": [],
+        "storytellerId": "ayse"
+      },
+      {
+        "round": 1,
+        "text": "Ben hiç test cümlesi iki yazmadım.",
+        "didCount": 2,
+        "answered": 3,
+        "total": 3,
+        "didIds": [
+          "ali",
+          "ayse"
+        ],
+        "eliminatedIds": [],
+        "storytellerId": "ayse"
+      }
+    ],
+    "final": true,
+    "podium": null
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "lives": 3,
+    "anonymous": false,
+    "seconds": 30,
+    "rounds": 2
+  }
+}

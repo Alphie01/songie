@@ -1,0 +1,66 @@
+{
+  "view": {
+    "phase": "write",
+    "round": 1,
+    "totalRounds": 2,
+    "topic": {
+      "text": "Herkesin sevdiği ama senin hiç sevmediğin bir şey",
+      "category": "genel"
+    },
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1060000,
+    "durationMs": 60000,
+    "stats": {
+      "ali": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali"
+    ],
+    "myConfession": null,
+    "index": 0,
+    "count": 0,
+    "current": null,
+    "picked": [],
+    "myPick": null,
+    "reveal": null,
+    "recap": null,
+    "podium": null
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

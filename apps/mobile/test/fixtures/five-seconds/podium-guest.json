@@ -1,0 +1,66 @@
+{
+  "view": {
+    "phase": "podium",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "scores": {
+      "ali": 0,
+      "ayse": 1,
+      "cem": 0
+    },
+    "teamMode": false,
+    "teams": null,
+    "teamScores": null,
+    "myTeam": null,
+    "round": 1,
+    "totalRounds": 2,
+    "attemptId": "4",
+    "performerId": "cem",
+    "stealFrom": null,
+    "prompt": null,
+    "serverNow": 1005000,
+    "endsAt": 0,
+    "durationMs": 5000,
+    "voteEndsAt": 0,
+    "voteMs": 20000,
+    "voted": [],
+    "voters": [],
+    "myVote": null,
+    "tally": null,
+    "lastResult": {
+      "attemptId": "3",
+      "performerId": "ayse",
+      "prompt": "",
+      "success": false,
+      "yes": 0,
+      "no": 0,
+      "steal": false,
+      "scorerId": null,
+      "skipped": true
+    },
+    "steal": true
+  },
+  "settings": {
+    "seconds": 5,
+    "rounds": 2,
+    "steal": true,
+    "teamMode": false,
+    "teams": {
+      "a": [],
+      "b": []
+    },
+    "categories": [
+      "genel"
+    ]
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

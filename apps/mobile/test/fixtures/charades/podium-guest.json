@@ -1,0 +1,67 @@
+{
+  "view": {
+    "phase": "podium",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 2
+    },
+    "myTeam": "b",
+    "role": "guesser",
+    "turnNumber": 3,
+    "totalTurns": 4,
+    "team": "b",
+    "narratorId": "deniz",
+    "serverNow": 1180000,
+    "endsAt": 0,
+    "durationMs": 60000,
+    "passesLeft": 1,
+    "turnStats": {
+      "correct": 0,
+      "pass": 0,
+      "foul": 0
+    },
+    "card": null,
+    "canUndo": false,
+    "flash": null,
+    "lastTurn": {
+      "team": "a",
+      "narratorId": "ayse",
+      "points": 0,
+      "cards": []
+    },
+    "foulPenalty": true,
+    "sign": null
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 1,
+    "turns": 2,
+    "categories": [
+      "film-turk",
+      "atasozu-deyim"
+    ],
+    "difficulty": "karisik",
+    "foulPenalty": true
+  },
+  "me": "cem"
+}

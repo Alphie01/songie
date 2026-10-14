@@ -1,0 +1,103 @@
+{
+  "view": {
+    "phase": "summary",
+    "round": 1,
+    "totalRounds": 2,
+    "topic": {
+      "text": "Herkesin sevdiği ama senin hiç sevmediğin bir şey",
+      "category": "genel"
+    },
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1015000,
+    "durationMs": 15000,
+    "stats": {
+      "ali": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 1,
+        "correct": 0,
+        "fooled": 1
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myConfession": null,
+    "index": 0,
+    "count": 4,
+    "current": null,
+    "picked": [],
+    "myPick": null,
+    "reveal": null,
+    "recap": [
+      {
+        "id": "r1c1",
+        "text": "Ehliyet sınavından üç kez kaldım",
+        "authorId": "cem",
+        "reactions": {
+          "yok": 0,
+          "bende": 1,
+          "efsane": 1,
+          "olamaz": 0
+        }
+      },
+      {
+        "id": "r1c3",
+        "text": "Bitkilerime isim koyup konuşurum",
+        "authorId": "deniz",
+        "reactions": {
+          "yok": 0,
+          "bende": 0,
+          "efsane": 0,
+          "olamaz": 0
+        }
+      },
+      {
+        "id": "r1c4",
+        "text": "Hâlâ ışık açık uyuyorum",
+        "authorId": "ayse",
+        "reactions": {
+          "yok": 0,
+          "bende": 0,
+          "efsane": 0,
+          "olamaz": 0
+        }
+      }
+    ],
+    "podium": null
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

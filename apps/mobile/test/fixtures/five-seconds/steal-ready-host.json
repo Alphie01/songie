@@ -1,0 +1,70 @@
+{
+  "view": {
+    "phase": "ready",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "scores": {
+      "ali": 0,
+      "ayse": 0,
+      "cem": 0
+    },
+    "teamMode": false,
+    "teams": null,
+    "teamScores": null,
+    "myTeam": null,
+    "round": 1,
+    "totalRounds": 2,
+    "attemptId": "2",
+    "performerId": "ayse",
+    "stealFrom": "ali",
+    "prompt": {
+      "id": "genel:2",
+      "text": "3 kırmızı renkli şey söyle",
+      "category": "genel"
+    },
+    "serverNow": 1005000,
+    "endsAt": 0,
+    "durationMs": 5000,
+    "voteEndsAt": 0,
+    "voteMs": 20000,
+    "voted": [],
+    "voters": [],
+    "myVote": null,
+    "tally": null,
+    "lastResult": {
+      "attemptId": "1",
+      "performerId": "ali",
+      "prompt": "3 kırmızı renkli şey söyle",
+      "success": false,
+      "yes": 0,
+      "no": 2,
+      "steal": false,
+      "scorerId": null,
+      "skipped": false
+    },
+    "steal": true
+  },
+  "settings": {
+    "seconds": 5,
+    "rounds": 2,
+    "steal": true,
+    "teamMode": false,
+    "teams": {
+      "a": [],
+      "b": []
+    },
+    "categories": [
+      "genel"
+    ]
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

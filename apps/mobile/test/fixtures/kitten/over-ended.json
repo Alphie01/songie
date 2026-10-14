@@ -1,0 +1,130 @@
+{
+  "view": {
+    "phase": "over",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": false,
+        "cards": 0,
+        "out": 1
+      }
+    ],
+    "current": "ali",
+    "turnsLeft": 1,
+    "turn": 2,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k47",
+          "kind": "defuse"
+        },
+        {
+          "id": "k1",
+          "kind": "benek"
+        },
+        {
+          "id": "k2",
+          "kind": "nope"
+        },
+        {
+          "id": "k3",
+          "kind": "pamuk"
+        },
+        {
+          "id": "k4",
+          "kind": "nope"
+        },
+        {
+          "id": "k5",
+          "kind": "shuffle"
+        },
+        {
+          "id": "k6",
+          "kind": "favor"
+        },
+        {
+          "id": "k7",
+          "kind": "benek"
+        }
+      ]
+    },
+    "deckCount": 2,
+    "deckBombs": 0,
+    "discardTop": null,
+    "discardCount": 0,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335214,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "bomb",
+        "by": "cem"
+      },
+      {
+        "seq": 4,
+        "t": "boom",
+        "by": "cem"
+      },
+      {
+        "seq": 5,
+        "t": "turn",
+        "by": "ali",
+        "n": 1
+      }
+    ],
+    "flash": {
+      "seq": 1,
+      "t": "boom",
+      "by": "cem"
+    },
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": true
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "view": {
+    "phase": "guess",
+    "board": 1,
+    "turn": 2,
+    "cards": [
+      {
+        "word": "Heykel",
+        "color": "neutral",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Ateş",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Gölge",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Tuğla",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Mozaik",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Balık",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Fotoğraf",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kelebek",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Doktor",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Liman",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Makas",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Paraşüt",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Telefon",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kaktüs",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Elbise",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Çöl",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Dalga",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Ambulans",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Pilot",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kervan",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kafes",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Çekiç",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Saksı",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Balon",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Tilki",
+        "color": null,
+        "revealed": false,
+        "votes": []
+      }
+    ],
+    "keyVisible": false,
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": [
+        "deniz",
+        "ece"
+      ]
+    },
+    "leaders": {
+      "a": "ali",
+      "b": "deniz"
+    },
+    "nextLeaders": {},
+    "myTeam": "a",
+    "role": "guesser",
+    "team": "a",
+    "startTeam": "b",
+    "remaining": {
+      "a": 8,
+      "b": 8
+    },
+    "total": {
+      "a": 8,
+      "b": 9
+    },
+    "clue": {
+      "word": "zıpzıp",
+      "number": -1
+    },
+    "guessesLeft": null,
+    "log": [
+      {
+        "team": "b",
+        "leaderId": "deniz",
+        "word": "zıpzıp",
+        "number": 2,
+        "picks": [
+          {
+            "word": "Ateş",
+            "color": "b"
+          },
+          {
+            "word": "Heykel",
+            "color": "neutral"
+          }
+        ]
+      },
+      {
+        "team": "a",
+        "leaderId": "ali",
+        "word": "zıpzıp",
+        "number": -1,
+        "picks": []
+      }
+    ],
+    "revealMode": "first",
+    "votesNeeded": 2,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "winner": null,
+    "reason": null,
+    "wins": {
+      "a": 0,
+      "b": 0
+    },
+    "closing": false,
+    "lastReveal": {
+      "id": 2,
+      "index": 0,
+      "color": "neutral"
+    }
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": [
+        "deniz",
+        "ece"
+      ]
+    },
+    "leaders": {
+      "a": "ali",
+      "b": "deniz"
+    },
+    "leaderPick": "host",
+    "revealMode": "first",
+    "timer": "off",
+    "seconds": 120,
+    "packs": [
+      "genel"
+    ]
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece"
+  ],
+  "offline": []
+}

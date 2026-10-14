@@ -1,0 +1,105 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 2,
+    "totalRounds": null,
+    "stage": 0,
+    "stageClips": [
+      0.1,
+      0.5,
+      2,
+      8,
+      15
+    ],
+    "serverNow": 1009000,
+    "phaseEndsAt": 1009000,
+    "phaseMs": 0,
+    "clips": [
+      "/api/games/song-guess/media/t103n2/0",
+      "/api/games/song-guess/media/t103n2/1",
+      "/api/games/song-guess/media/t103n2/2",
+      "/api/games/song-guess/media/t103n2/3",
+      "/api/games/song-guess/media/t103n2/4"
+    ],
+    "poolNames": [
+      "Türkçe Pop"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "score": 2460,
+        "roundPoints": 1230,
+        "state": "correct",
+        "solvedStage": 0,
+        "streak": 2,
+        "bestStreak": 2,
+        "ready": false
+      }
+    ],
+    "me": {
+      "state": "correct",
+      "canGuess": false,
+      "guesses": [
+        {
+          "stage": 0,
+          "title": "Gülümse",
+          "artist": "Sezen Aksu",
+          "verdict": "correct"
+        }
+      ]
+    },
+    "reveal": {
+      "trackId": 103,
+      "title": "Gülümse",
+      "artist": "Sezen Aksu",
+      "album": "Gülümse (Albüm)",
+      "cover": null,
+      "year": null,
+      "link": "https://www.deezer.com/track/103",
+      "previewUrl": "/api/games/song-guess/media/t103n2/full",
+      "poolName": "Türkçe Pop",
+      "results": [
+        {
+          "playerId": "ali",
+          "stage": 0,
+          "points": 1230,
+          "kind": "correct"
+        }
+      ]
+    },
+    "timed": false,
+    "startStage": 0,
+    "easySearch": false,
+    "pools": [
+      "tr-test"
+    ],
+    "artistCredit": true,
+    "difficulty": "medium",
+    "feed": [
+      {
+        "id": 2,
+        "at": 1009000,
+        "playerId": "ali",
+        "kind": "correct",
+        "stage": 0,
+        "points": 1230
+      }
+    ]
+  },
+  "settings": {
+    "rounds": 0,
+    "pools": [
+      "tr-test"
+    ],
+    "difficulty": "medium",
+    "timer": 0,
+    "startAt": "random",
+    "startStage": 0,
+    "easySearch": false,
+    "artistCredit": true
+  },
+  "players": [
+    "ali"
+  ],
+  "me": "ali"
+}

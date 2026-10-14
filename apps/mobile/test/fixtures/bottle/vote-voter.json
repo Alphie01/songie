@@ -1,0 +1,81 @@
+{
+  "view": {
+    "phase": "vote",
+    "seats": [
+      "cem",
+      "ali",
+      "ayse"
+    ],
+    "round": 1,
+    "turnNumber": 0,
+    "totalRounds": 3,
+    "spinnerId": "ali",
+    "targetId": "ayse",
+    "spin": {
+      "id": 1,
+      "startAt": 1000400,
+      "durationMs": 4413,
+      "fromDeg": 189.8809343855828,
+      "toDeg": 1334.0513369464315
+    },
+    "restDeg": 1334.0513369464315,
+    "kind": "dare",
+    "prompt": {
+      "id": "eglenceli:dare:0",
+      "text": "Test cesaret bir yap.",
+      "category": "eglenceli"
+    },
+    "scores": {
+      "cem": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ali": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ayse": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      }
+    },
+    "passesLeft": 2,
+    "vote": {
+      "yes": 0,
+      "no": 0,
+      "voters": 2,
+      "myVote": null,
+      "canVote": true,
+      "endsAt": 1025200
+    },
+    "lastResult": null,
+    "serverNow": 1005200,
+    "choice": "player",
+    "passPenalty": true
+  },
+  "settings": {
+    "categories": [
+      "eglenceli"
+    ],
+    "choice": "player",
+    "passes": 2,
+    "passPenalty": true,
+    "vote": true,
+    "order": "target",
+    "rounds": 3,
+    "fairSpin": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

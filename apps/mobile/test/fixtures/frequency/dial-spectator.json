@@ -1,0 +1,80 @@
+{
+  "view": {
+    "phase": "dial",
+    "mode": "teams",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": null,
+    "role": "spectator",
+    "roundId": 1,
+    "completed": 0,
+    "totalRounds": null,
+    "targetScore": 10,
+    "team": "a",
+    "psychicId": "ali",
+    "options": null,
+    "card": {
+      "id": "degerler:0",
+      "left": "Ahlaki",
+      "right": "Ahlaksız"
+    },
+    "target": null,
+    "clue": "ılık süt",
+    "dial": 50,
+    "dialBy": null,
+    "lockVotes": [],
+    "votesNeeded": 1,
+    "side": null,
+    "sideBy": null,
+    "result": null,
+    "history": [],
+    "winner": null,
+    "rating": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "podiumMs": 9000
+  },
+  "settings": {
+    "mode": "teams",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "targetScore": 10,
+    "rounds": 7,
+    "seconds": 0,
+    "cardChoice": true,
+    "majorityLock": false,
+    "catchUp": true,
+    "friendCards": true
+  },
+  "me": "zeki",
+  "host": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "zeki"
+  ],
+  "offline": []
+}

@@ -1,0 +1,105 @@
+{
+  "view": {
+    "phase": "play",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz",
+      "ece",
+      "fuat"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "deniz",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "ece",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "fuat",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      }
+    ],
+    "current": "ayse",
+    "turnsLeft": 1,
+    "turn": 1,
+    "me": {
+      "inGame": false,
+      "alive": false,
+      "hand": []
+    },
+    "deckCount": 12,
+    "deckBombs": 2,
+    "discardTop": null,
+    "discardCount": 0,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335213,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 2
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ece",
+        "n": 1
+      }
+    ],
+    "flash": null,
+    "winner": null,
+    "fiveCats": false
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": false
+  },
+  "me": "gul",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece",
+    "fuat",
+    "gul"
+  ],
+  "offline": [
+    "ayse"
+  ]
+}

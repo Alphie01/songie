@@ -1,0 +1,138 @@
+{
+  "view": {
+    "phase": "power",
+    "playerCount": 5,
+    "seats": [
+      {
+        "id": "ali",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "deniz",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      },
+      {
+        "id": "ece",
+        "alive": true,
+        "voted": false,
+        "investigated": false
+      }
+    ],
+    "me": {
+      "role": "liberal",
+      "known": [],
+      "investigations": []
+    },
+    "president": "ayse",
+    "chancellor": "deniz",
+    "lastElected": {
+      "president": "ayse",
+      "chancellor": "deniz"
+    },
+    "eligible": [],
+    "liberal": 0,
+    "fascist": 3,
+    "track": [
+      null,
+      null,
+      "peek",
+      "execution",
+      "execution",
+      null
+    ],
+    "electionTracker": 0,
+    "deckCount": 17,
+    "discardCount": 2,
+    "vetoUnlocked": false,
+    "session": 4,
+    "voteRound": 1,
+    "myVote": null,
+    "hand": null,
+    "vetoRequested": false,
+    "vetoDenied": false,
+    "power": "peek",
+    "peek": [
+      "liberal",
+      "fascist",
+      "fascist"
+    ],
+    "lastVote": {
+      "president": "ayse",
+      "chancellor": "deniz",
+      "votes": {
+        "ali": "ja",
+        "ayse": "ja",
+        "cem": "ja",
+        "deniz": "ja",
+        "ece": "ja"
+      },
+      "passed": true
+    },
+    "log": [
+      {
+        "k": "start",
+        "president": "deniz"
+      },
+      {
+        "k": "nominate",
+        "president": "ayse",
+        "chancellor": "deniz"
+      },
+      {
+        "k": "vote",
+        "president": "ayse",
+        "chancellor": "deniz",
+        "ja": [
+          "ali",
+          "ayse",
+          "cem",
+          "deniz",
+          "ece"
+        ],
+        "nein": [],
+        "passed": true
+      },
+      {
+        "k": "enact",
+        "policy": "fascist",
+        "chaos": false
+      }
+    ],
+    "waitingFor": [
+      "ayse"
+    ],
+    "skipAt": 1030000,
+    "serverNow": 1000000,
+    "winner": null,
+    "winReason": null,
+    "roles": null,
+    "finishAt": 0
+  },
+  "settings": {
+    "skipAfter": 30
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece"
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "view": {
+    "phase": "play",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 2,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      }
+    ],
+    "current": "ayse",
+    "turnsLeft": 1,
+    "turn": 2,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "f95",
+          "kind": "attack"
+        },
+        {
+          "id": "f96",
+          "kind": "kara"
+        }
+      ]
+    },
+    "deckCount": 6,
+    "deckBombs": 1,
+    "discardTop": "defuse",
+    "discardCount": 1,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": 2,
+    "discardPick": null,
+    "serverNow": 1791968335210,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "bomb",
+        "by": "ali"
+      },
+      {
+        "seq": 4,
+        "t": "defuse",
+        "by": "ali"
+      },
+      {
+        "seq": 5,
+        "t": "placed",
+        "by": "ali"
+      },
+      {
+        "seq": 6,
+        "t": "turn",
+        "by": "ayse",
+        "n": 1
+      }
+    ],
+    "flash": {
+      "seq": 1,
+      "t": "defuse",
+      "by": "ali"
+    },
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 30,
+    "fiveCats": true
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

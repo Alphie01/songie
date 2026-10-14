@@ -1,0 +1,98 @@
+{
+  "view": {
+    "phase": "action",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "coins": 3,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "deniz",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k1x",
+          "role": "treasurer"
+        },
+        {
+          "id": "k2x",
+          "role": "assassin"
+        }
+      ],
+      "coins": 3
+    },
+    "deckCount": 7,
+    "cardsPerRole": 3,
+    "pending": null,
+    "window": null,
+    "lose": null,
+    "exchange": null,
+    "exchanging": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ali"
+      }
+    ],
+    "flash": null,
+    "winner": null
+  },
+  "settings": {
+    "challengeSeconds": 8,
+    "turnSeconds": 0,
+    "bigDeck": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

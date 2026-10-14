@@ -9,6 +9,8 @@ Arkadaşlar arası, gelirsiz bir çok oyunculu oyun platformu. İlk oyun: `games
 - `packages/game-kit` — oyun eklenti arayüzleri (`/server`, `/client`).
 - `games/<oyun>/{shared,server,client}` — oyun modülleri (19 oyun: `song-guess`, `taboo`, `never`, `bottle`, `most-likely`, `secret-hitler`, `charades`, `paranoia`, `confessions`, `kitten`, `red-flag`, `five-seconds`, `who-am-i`, `agents`, `frequency`, `intrigue`, `color-cards`, `werewolf`, `detective`; her birinde `client/guide.ts` tanıtımı). Yeni oyun: `docs/oyun-ekleme.md`. Kayıt: `apps/server/src/games.ts` ve `apps/web/src/games.ts`. Oyun ekranlarının ortak düzeni: `packages/game-kit/src/ui/game-layout.css`.
 - `games/detective` — Dedektif Masası: vakalar `server/cases/<slug>/case.json` + `img/*.webp`. Yazım kuralları `docs/dedektif-yazim.md`; araçlar `pnpm --filter @songie/detective case:check|case:export|case:images|case:voices <slug>`. Görseller (OpenAI gpt-image-2) ve sesler (ElevenLabs eleven_v3, diyaloglar tek parça; oyuncu seçimi `audio/cast.json`, anlatıcı "Adam") yalnızca geliştirmede üretilir. Anahtarlar `games/detective/tools/.env.local` (git'e ve imaja girmez); OpenAI bütçesi 25 $ (`tools/.image-spend.json`), ElevenLabs Starter aylık 40 bin kredi (vaka başına ~2.800).
+- `apps/mobile` — Flutter (iOS + Android) native istemci, paket kimliği `com.monolithyazilim.songie`. Web arayüzünün birebir karşılığı, aynı sunucuya bağlanır (web ve mobil aynı odada oynar). Oyunların taşınma kuralları `apps/mobile/PORTING.md`. Oyun adları/rehberleri `assets/catalog.json`'dan gelir (`pnpm --filter @songie/web mobile:catalog` ile web'den üretilir; web'de oyun metni değişince yeniden üret). Widget testleri gerçek sunucu görünümleriyle çalışır: `apps/server/scripts/mobile-fixtures/<oyun>.ts` → `apps/mobile/test/fixtures`.
+- Google ile giriş (isteğe bağlı): Firebase projesi `songie-app`. Sunucu Firebase ID token'ını `jose` ile doğrular (`apps/server/src/firebase.ts`), profili hesaba bağlar ya da başka cihazdaki anonim profili birleştirir (`POST /api/auth/google`). Bir profilin birden çok cihaz token'ı olabilir (`player_tokens`).
 - `deploy/` — Docker Compose projesi `songie` (app + kendi cloudflared'ı).
 
 ## Komutlar
@@ -17,8 +19,10 @@ Arkadaşlar arası, gelirsiz bir çok oyunculu oyun platformu. İlk oyun: `games
 - `pnpm typecheck`
 - `pnpm seed` — Deezer'dan başlangıç havuzlarını çeker
 - Yayın: `cd deploy && docker compose -p songie up -d --build`
+- Mobil (`apps/mobile`): `flutter analyze`, `flutter test`; yerel sunucuya karşı çalıştırma `flutter run --dart-define=SONGIE_URL=http://<LAN-IP>:4310` (simülatörde `http://127.0.0.1:4310`, Android emülatöründe `http://10.0.2.2:4310`). Firebase: `flutterfire configure --project songie-app --platforms ios,android`. İkon/açılış: `flutter test tool/render_icon_test.dart && dart run flutter_launcher_icons && dart run flutter_native_splash:create`. Flutter 3.35 ile iOS derlemesi için `firebase_auth` < 6.3 (UIScene) sabit.
 
 ## Kurallar
+- Mobil arayüz de aynı tasarımı birebir izler: CSS değerleri sayıyla taşınır (`apps/mobile/lib/ui/tokens.dart`), yeni bir web ekranı değişince mobildeki karşılığı da güncellenir.
 - **Her UI işinden önce `frontend-design` skill’ini yükle.** Kullanıcının açık isteği: arayüz kullanıcının verdiği "Songie Arayüz" tasarımını birebir izler, yorumlanmaz (ayrıntı `docs/design.md`); yeni oyunlar da aynı görsel dili kullanır.
 - E2E: `apps/web/e2e/{flow,taboo,smoke}.mjs`, Playwright Docker imajıyla çalıştırılır (host’ta Chromium kütüphaneleri yok, kurma).
 - Arayüz metni Türkçe, cümle düzeninde, `apps/web/src/i18n/tr.ts` içinde.

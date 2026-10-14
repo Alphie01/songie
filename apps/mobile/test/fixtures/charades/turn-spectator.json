@@ -1,0 +1,66 @@
+{
+  "view": {
+    "phase": "turn",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": null,
+    "role": "spectator",
+    "turnNumber": 0,
+    "totalTurns": 4,
+    "team": "a",
+    "narratorId": "ali",
+    "serverNow": 1000000,
+    "endsAt": 1060000,
+    "durationMs": 60000,
+    "passesLeft": 0,
+    "turnStats": {
+      "correct": 1,
+      "pass": 1,
+      "foul": 1
+    },
+    "card": null,
+    "canUndo": false,
+    "flash": {
+      "id": 5,
+      "kind": "foul",
+      "title": null
+    },
+    "lastTurn": null,
+    "foulPenalty": true,
+    "sign": null
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "seconds": 60,
+    "passes": 1,
+    "turns": 2,
+    "categories": [
+      "film-turk",
+      "atasozu-deyim"
+    ],
+    "difficulty": "karisik",
+    "foulPenalty": true
+  },
+  "me": "ayse"
+}

@@ -1,0 +1,129 @@
+{
+  "view": {
+    "phase": "lose",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "coins": 0,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "deniz",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k93x",
+          "role": "spy"
+        },
+        {
+          "id": "k94x",
+          "role": "guard"
+        }
+      ],
+      "coins": 2
+    },
+    "deckCount": 7,
+    "cardsPerRole": 3,
+    "pending": {
+      "actor": "ali",
+      "action": "assassinate",
+      "target": "ayse",
+      "claim": "assassin",
+      "block": null
+    },
+    "window": null,
+    "lose": {
+      "player": "ayse",
+      "reason": "challenge"
+    },
+    "exchange": null,
+    "exchanging": null,
+    "serverNow": 1000000,
+    "endsAt": 1020000,
+    "durationMs": 20000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ali"
+      },
+      {
+        "seq": 3,
+        "t": "act",
+        "by": "ali",
+        "to": "ayse",
+        "action": "assassinate",
+        "role": "assassin"
+      },
+      {
+        "seq": 4,
+        "t": "challenge",
+        "by": "ayse",
+        "to": "ali",
+        "role": "assassin",
+        "ok": true
+      }
+    ],
+    "flash": {
+      "seq": 1,
+      "claimant": "ali",
+      "challenger": "ayse",
+      "role": "assassin",
+      "had": true
+    },
+    "winner": null
+  },
+  "settings": {
+    "challengeSeconds": 8,
+    "turnSeconds": 0,
+    "bigDeck": false
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

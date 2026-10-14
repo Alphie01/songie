@@ -1,0 +1,99 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": 2,
+    "item": {
+      "id": "iliski:17",
+      "text": "Sevgilin ortak bir Netflix dizisini sensiz izlemeye devam etti.",
+      "category": "iliski"
+    },
+    "categoryName": "İlişki",
+    "dealBreaker": true,
+    "anonymous": false,
+    "predict": true,
+    "voters": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "done": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "ready": [],
+    "myVote": "red",
+    "myGuess": "green",
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 30000,
+    "nextAt": 1003000,
+    "discussEndsAt": 1030000,
+    "discussMs": 30000,
+    "reveal": {
+      "counts": {
+        "green": 1,
+        "red": 2,
+        "never": 1
+      },
+      "total": 4,
+      "majority": [
+        "red"
+      ],
+      "votes": [
+        {
+          "playerId": "ali",
+          "vote": "red"
+        },
+        {
+          "playerId": "ayse",
+          "vote": "green"
+        },
+        {
+          "playerId": "cem",
+          "vote": "red"
+        },
+        {
+          "playerId": "deniz",
+          "vote": "never"
+        }
+      ],
+      "correct": [
+        "ali",
+        "ayse",
+        "deniz"
+      ],
+      "myVote": "red",
+      "myGuess": "green"
+    },
+    "scores": {
+      "ali": 1,
+      "ayse": 1,
+      "cem": 0,
+      "deniz": 1
+    },
+    "summary": null
+  },
+  "settings": {
+    "categories": [
+      "iliski"
+    ],
+    "dealBreaker": true,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 30,
+    "discuss": 30,
+    "rounds": 2
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

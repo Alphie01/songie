@@ -1,0 +1,131 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": 2,
+    "topic": {
+      "text": "Herkesin sevdiği ama senin hiç sevmediğin bir şey",
+      "category": "genel"
+    },
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1008000,
+    "durationMs": 8000,
+    "stats": {
+      "ali": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 1,
+        "correct": 0,
+        "fooled": 1
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myConfession": null,
+    "index": 1,
+    "count": 4,
+    "current": {
+      "id": "r1c1",
+      "text": "Ehliyet sınavından üç kez kaldım",
+      "hidden": false,
+      "candidates": [
+        "ali",
+        "ayse",
+        "cem",
+        "deniz"
+      ],
+      "reactions": {
+        "yok": 0,
+        "bende": 1,
+        "efsane": 1,
+        "olamaz": 0
+      },
+      "myReactions": []
+    },
+    "picked": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myPick": "ayse",
+    "reveal": {
+      "authorId": "cem",
+      "correct": [
+        "ali",
+        "ayse"
+      ],
+      "picks": [
+        {
+          "playerId": "ali",
+          "targetId": "cem"
+        },
+        {
+          "playerId": "ayse",
+          "targetId": "cem"
+        },
+        {
+          "playerId": "deniz",
+          "targetId": "ayse"
+        }
+      ],
+      "tally": {
+        "ali": 0,
+        "ayse": 1,
+        "cem": 2,
+        "deniz": 0
+      },
+      "points": [
+        {
+          "playerId": "ali",
+          "delta": 1
+        },
+        {
+          "playerId": "ayse",
+          "delta": 1
+        },
+        {
+          "playerId": "cem",
+          "delta": 1
+        }
+      ]
+    },
+    "recap": null,
+    "podium": null
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "deniz",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

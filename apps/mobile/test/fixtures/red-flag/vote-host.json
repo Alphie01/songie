@@ -1,0 +1,59 @@
+{
+  "view": {
+    "phase": "vote",
+    "round": 0,
+    "totalRounds": 2,
+    "item": {
+      "id": "iliski:17",
+      "text": "Sevgilin ortak bir Netflix dizisini sensiz izlemeye devam etti.",
+      "category": "iliski"
+    },
+    "categoryName": "İlişki",
+    "dealBreaker": true,
+    "anonymous": false,
+    "predict": true,
+    "voters": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "done": [],
+    "ready": [],
+    "myVote": null,
+    "myGuess": null,
+    "serverNow": 1000000,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "nextAt": 0,
+    "discussEndsAt": 0,
+    "discussMs": 0,
+    "reveal": null,
+    "scores": {
+      "ali": 0,
+      "ayse": 0,
+      "cem": 0,
+      "deniz": 0
+    },
+    "summary": null
+  },
+  "settings": {
+    "categories": [
+      "iliski"
+    ],
+    "dealBreaker": true,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 30,
+    "discuss": 30,
+    "rounds": 2
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

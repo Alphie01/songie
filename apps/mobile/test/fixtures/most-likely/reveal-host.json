@@ -1,0 +1,146 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": 2,
+    "prompt": {
+      "id": "genel:0",
+      "text": "geç kalan",
+      "category": "genel"
+    },
+    "people": [
+      {
+        "id": "ali",
+        "nick": "ali",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "ayse",
+        "nick": "ayse",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "cem",
+        "nick": "cem",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "deniz",
+        "nick": "deniz",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      }
+    ],
+    "selfVote": true,
+    "anonymous": false,
+    "predict": true,
+    "voted": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "guessed": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "waitingFor": [],
+    "myVote": "cem",
+    "myGuess": "cem",
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 30000,
+    "result": {
+      "counts": [
+        {
+          "id": "cem",
+          "votes": 3
+        },
+        {
+          "id": "ayse",
+          "votes": 1
+        }
+      ],
+      "winners": [
+        "cem"
+      ],
+      "total": 4,
+      "ballots": [
+        {
+          "voter": "ali",
+          "target": "cem"
+        },
+        {
+          "voter": "ayse",
+          "target": "cem"
+        },
+        {
+          "voter": "cem",
+          "target": "ayse"
+        },
+        {
+          "voter": "deniz",
+          "target": "cem"
+        }
+      ],
+      "correctGuessers": [
+        "ali",
+        "cem",
+        "deniz"
+      ]
+    },
+    "history": [
+      {
+        "round": 1,
+        "text": "geç kalan",
+        "winners": [
+          "cem"
+        ],
+        "votes": 3
+      }
+    ],
+    "guessScores": {
+      "ali": 1,
+      "cem": 1,
+      "deniz": 1
+    }
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "selfVote": true,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 30,
+    "rounds": 2
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

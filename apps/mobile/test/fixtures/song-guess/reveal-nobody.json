@@ -1,0 +1,217 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 2,
+    "totalRounds": 3,
+    "stage": 4,
+    "stageClips": [
+      0.1,
+      0.5,
+      2,
+      8,
+      15
+    ],
+    "serverNow": 1012500,
+    "phaseEndsAt": 1012500,
+    "phaseMs": 0,
+    "clips": [
+      "/api/games/song-guess/media/t112n2/0",
+      "/api/games/song-guess/media/t112n2/1",
+      "/api/games/song-guess/media/t112n2/2",
+      "/api/games/song-guess/media/t112n2/3",
+      "/api/games/song-guess/media/t112n2/4"
+    ],
+    "poolNames": [
+      "Türkçe Pop",
+      "Global Hits"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "score": 897,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 1,
+        "ready": false
+      },
+      {
+        "id": "ayse",
+        "score": 254,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "cem",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      },
+      {
+        "id": "deniz",
+        "score": 0,
+        "roundPoints": 0,
+        "state": "skipped",
+        "solvedStage": null,
+        "streak": 0,
+        "bestStreak": 0,
+        "ready": false
+      }
+    ],
+    "me": {
+      "state": "skipped",
+      "canGuess": false,
+      "guesses": []
+    },
+    "reveal": {
+      "trackId": 112,
+      "title": "Everyway That I Can",
+      "artist": "Sertab Erener",
+      "album": "Everyway That I Can (Albüm)",
+      "cover": null,
+      "year": null,
+      "link": "https://www.deezer.com/track/112",
+      "previewUrl": "/api/games/song-guess/media/t112n2/full",
+      "poolName": "Türkçe Pop",
+      "results": []
+    },
+    "timed": false,
+    "startStage": 0,
+    "easySearch": false,
+    "pools": [
+      "tr-test",
+      "global-test"
+    ],
+    "artistCredit": true,
+    "difficulty": "medium",
+    "feed": [
+      {
+        "id": 25,
+        "at": 1012500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 1
+      },
+      {
+        "id": 26,
+        "at": 1012500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 1
+      },
+      {
+        "id": 27,
+        "at": 1012500,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 28,
+        "at": 1012500,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 29,
+        "at": 1012500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 30,
+        "at": 1012500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 2
+      },
+      {
+        "id": 31,
+        "at": 1012500,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 32,
+        "at": 1012500,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 33,
+        "at": 1012500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 34,
+        "at": 1012500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 3
+      },
+      {
+        "id": 35,
+        "at": 1012500,
+        "playerId": "ali",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 36,
+        "at": 1012500,
+        "playerId": "ayse",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 37,
+        "at": 1012500,
+        "playerId": "cem",
+        "kind": "skip",
+        "stage": 4
+      },
+      {
+        "id": 38,
+        "at": 1012500,
+        "playerId": "deniz",
+        "kind": "skip",
+        "stage": 4
+      }
+    ]
+  },
+  "settings": {
+    "rounds": 3,
+    "pools": [
+      "tr-test",
+      "global-test"
+    ],
+    "difficulty": "medium",
+    "timer": 0,
+    "startAt": "random",
+    "startStage": 0,
+    "easySearch": false,
+    "artistCredit": true
+  },
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "me": "ali"
+}

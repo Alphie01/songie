@@ -1,0 +1,95 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": null,
+    "topic": null,
+    "hiddenAuthor": true,
+    "serverNow": 1000000,
+    "endsAt": 1008000,
+    "durationMs": 8000,
+    "stats": {
+      "ali": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "myConfession": null,
+    "index": 1,
+    "count": 3,
+    "current": {
+      "id": "r1c1",
+      "text": "Kahvaltıda gizlice çikolata yerim",
+      "hidden": false,
+      "candidates": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "reactions": {
+        "yok": 0,
+        "bende": 0,
+        "efsane": 0,
+        "olamaz": 0
+      },
+      "myReactions": []
+    },
+    "picked": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "myPick": "ayse",
+    "reveal": {
+      "authorId": null,
+      "correct": [],
+      "picks": null,
+      "tally": {
+        "ali": 0,
+        "ayse": 2,
+        "cem": 0
+      },
+      "points": []
+    },
+    "recap": null,
+    "podium": null
+  },
+  "settings": {
+    "mode": "free",
+    "categories": [
+      "genel",
+      "cocukluk",
+      "okul-is",
+      "ask",
+      "utanc",
+      "aliskanliklar",
+      "arkadas"
+    ],
+    "writeSeconds": 0,
+    "guessSeconds": 45,
+    "rounds": 0,
+    "hiddenAuthor": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

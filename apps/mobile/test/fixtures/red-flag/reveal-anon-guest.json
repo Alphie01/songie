@@ -1,0 +1,74 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": null,
+    "item": {
+      "id": "is:5",
+      "text": "İş arkadaşın kamerayı hiç açmıyor.",
+      "category": "is"
+    },
+    "categoryName": "İş",
+    "dealBreaker": false,
+    "anonymous": true,
+    "predict": false,
+    "voters": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "done": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "ready": [],
+    "myVote": "red",
+    "myGuess": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "nextAt": 1003000,
+    "discussEndsAt": 0,
+    "discussMs": 0,
+    "reveal": {
+      "counts": {
+        "green": 1,
+        "red": 2,
+        "never": 0
+      },
+      "total": 3,
+      "majority": [
+        "red"
+      ],
+      "votes": null,
+      "correct": [],
+      "myVote": "red",
+      "myGuess": null
+    },
+    "scores": {
+      "ali": 0,
+      "ayse": 0,
+      "cem": 0
+    },
+    "summary": null
+  },
+  "settings": {
+    "categories": [
+      "is"
+    ],
+    "dealBreaker": false,
+    "anonymous": true,
+    "predict": false,
+    "seconds": 0,
+    "discuss": 0,
+    "rounds": 0
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ],
+  "offline": []
+}

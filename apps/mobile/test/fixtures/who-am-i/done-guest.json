@@ -1,0 +1,136 @@
+{
+  "view": {
+    "phase": "play",
+    "players": [
+      {
+        "id": "ali",
+        "identity": {
+          "name": "Barış Manço",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 3,
+        "hints": 1,
+        "left": false
+      },
+      {
+        "id": "ayse",
+        "identity": {
+          "name": "Kemal Sunal",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 1,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "cem",
+        "identity": {
+          "name": "Örümcek Adam",
+          "category": "test"
+        },
+        "finished": true,
+        "finishRank": 0,
+        "questions": 0,
+        "hints": 0,
+        "left": false
+      },
+      {
+        "id": "deniz",
+        "identity": {
+          "name": "Zürafa",
+          "category": "test"
+        },
+        "finished": false,
+        "finishRank": null,
+        "questions": 0,
+        "hints": 0,
+        "left": false
+      }
+    ],
+    "askerId": "deniz",
+    "turnNumber": 4,
+    "turnQuestions": 0,
+    "turnMode": "classic",
+    "typedQuestions": true,
+    "groupVerify": false,
+    "question": null,
+    "guess": null,
+    "history": [
+      {
+        "id": 1,
+        "kind": "question",
+        "askerId": "ali",
+        "text": "İnsan mıyım?",
+        "counts": {
+          "yes": 2,
+          "no": 0,
+          "maybe": 1,
+          "irrelevant": 0
+        },
+        "result": "yes"
+      },
+      {
+        "id": 2,
+        "kind": "question",
+        "askerId": "ali",
+        "text": null,
+        "counts": {
+          "yes": 0,
+          "no": 3,
+          "maybe": 0,
+          "irrelevant": 0
+        },
+        "result": "no"
+      },
+      {
+        "id": 3,
+        "kind": "question",
+        "askerId": "ayse",
+        "text": "Erkek miyim?",
+        "counts": {
+          "yes": 0,
+          "no": 1,
+          "maybe": 0,
+          "irrelevant": 1
+        },
+        "result": "maybe"
+      },
+      {
+        "id": 4,
+        "kind": "guess",
+        "askerId": "ayse",
+        "text": "Kedi",
+        "correct": false,
+        "reveal": null,
+        "byGroup": false
+      },
+      {
+        "id": 5,
+        "kind": "guess",
+        "askerId": "cem",
+        "text": "Örümcek Adam",
+        "correct": true,
+        "reveal": "Örümcek Adam",
+        "byGroup": false
+      }
+    ],
+    "myHints": [],
+    "hintsLeft": 0,
+    "hintLimit": 3,
+    "podiumMs": 5000
+  },
+  "settings": {
+    "categories": [
+      "test"
+    ],
+    "turnMode": "classic",
+    "typedQuestions": true,
+    "groupVerify": false,
+    "hints": 3
+  },
+  "me": "cem"
+}

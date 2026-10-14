@@ -1,0 +1,286 @@
+{
+  "view": {
+    "phase": "over",
+    "board": 1,
+    "turn": 1,
+    "cards": [
+      {
+        "word": "Lamba",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Tencere",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Ağaç",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Dinozor",
+        "color": "assassin",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Beyin",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Kuğu",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Tren",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kafes",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kaya",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kilit",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Peri",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Kartal",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Sis",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Prenses",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Nehir",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Fincan",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Merdiven",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Dedektif",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Yağmur",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Fırça",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Bardak",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Çiçek",
+        "color": "neutral",
+        "revealed": false,
+        "votes": []
+      },
+      {
+        "word": "Kaplan",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Bulmaca",
+        "color": "b",
+        "revealed": true,
+        "votes": []
+      },
+      {
+        "word": "Dolap",
+        "color": "a",
+        "revealed": false,
+        "votes": []
+      }
+    ],
+    "keyVisible": true,
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": [
+        "deniz",
+        "ece"
+      ]
+    },
+    "leaders": {
+      "a": "ali",
+      "b": "deniz"
+    },
+    "nextLeaders": {},
+    "myTeam": "a",
+    "role": "guesser",
+    "team": "b",
+    "startTeam": "b",
+    "remaining": {
+      "a": 8,
+      "b": 0
+    },
+    "total": {
+      "a": 8,
+      "b": 9
+    },
+    "clue": null,
+    "guessesLeft": null,
+    "log": [
+      {
+        "team": "b",
+        "leaderId": "deniz",
+        "word": "zıpzıp",
+        "number": -1,
+        "picks": [
+          {
+            "word": "Beyin",
+            "color": "b"
+          },
+          {
+            "word": "Peri",
+            "color": "b"
+          },
+          {
+            "word": "Nehir",
+            "color": "b"
+          },
+          {
+            "word": "Fincan",
+            "color": "b"
+          },
+          {
+            "word": "Merdiven",
+            "color": "b"
+          },
+          {
+            "word": "Dedektif",
+            "color": "b"
+          },
+          {
+            "word": "Fırça",
+            "color": "b"
+          },
+          {
+            "word": "Kaplan",
+            "color": "b"
+          },
+          {
+            "word": "Bulmaca",
+            "color": "b"
+          }
+        ]
+      }
+    ],
+    "revealMode": "first",
+    "votesNeeded": 1,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "winner": "b",
+    "reason": "agents",
+    "wins": {
+      "a": 0,
+      "b": 1
+    },
+    "closing": false,
+    "lastReveal": {
+      "id": 9,
+      "index": 23,
+      "color": "b"
+    }
+  },
+  "settings": {
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "cem"
+      ],
+      "b": [
+        "deniz",
+        "ece"
+      ]
+    },
+    "leaders": {
+      "a": "ali",
+      "b": "deniz"
+    },
+    "leaderPick": "host",
+    "revealMode": "first",
+    "timer": "off",
+    "seconds": 120,
+    "packs": [
+      "genel"
+    ]
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece"
+  ],
+  "offline": []
+}

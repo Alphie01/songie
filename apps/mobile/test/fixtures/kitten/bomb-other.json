@@ -1,0 +1,115 @@
+{
+  "view": {
+    "phase": "bomb",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 3,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turnsLeft": 1,
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k49",
+          "kind": "defuse"
+        },
+        {
+          "id": "k15",
+          "kind": "pamuk"
+        },
+        {
+          "id": "k16",
+          "kind": "pamuk"
+        },
+        {
+          "id": "k17",
+          "kind": "sarman"
+        },
+        {
+          "id": "k18",
+          "kind": "attack"
+        },
+        {
+          "id": "k19",
+          "kind": "shuffle"
+        },
+        {
+          "id": "k20",
+          "kind": "future"
+        },
+        {
+          "id": "k21",
+          "kind": "tekir"
+        }
+      ]
+    },
+    "deckCount": 5,
+    "deckBombs": 0,
+    "discardTop": null,
+    "discardCount": 0,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335208,
+    "endsAt": 1020000,
+    "durationMs": 20000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "bomb",
+        "by": "ali"
+      }
+    ],
+    "flash": null,
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 30,
+    "fiveCats": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

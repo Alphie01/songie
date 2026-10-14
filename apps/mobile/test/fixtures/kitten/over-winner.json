@@ -1,0 +1,155 @@
+{
+  "view": {
+    "phase": "over",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz",
+      "ece"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": false,
+        "cards": 0,
+        "out": 1
+      },
+      {
+        "id": "cem",
+        "alive": false,
+        "cards": 0,
+        "out": 2
+      },
+      {
+        "id": "deniz",
+        "alive": false,
+        "cards": 0,
+        "out": 3
+      },
+      {
+        "id": "ece",
+        "alive": false,
+        "cards": 0,
+        "out": 4
+      }
+    ],
+    "current": "ece",
+    "turnsLeft": 1,
+    "turn": 4,
+    "me": {
+      "inGame": true,
+      "alive": false,
+      "hand": []
+    },
+    "deckCount": 1,
+    "deckBombs": 0,
+    "discardTop": null,
+    "discardCount": 0,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335214,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "deniz",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "bomb",
+        "by": "ayse"
+      },
+      {
+        "seq": 4,
+        "t": "boom",
+        "by": "ayse"
+      },
+      {
+        "seq": 5,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      },
+      {
+        "seq": 6,
+        "t": "bomb",
+        "by": "cem"
+      },
+      {
+        "seq": 7,
+        "t": "boom",
+        "by": "cem"
+      },
+      {
+        "seq": 8,
+        "t": "turn",
+        "by": "deniz",
+        "n": 1
+      },
+      {
+        "seq": 9,
+        "t": "bomb",
+        "by": "deniz"
+      },
+      {
+        "seq": 10,
+        "t": "boom",
+        "by": "deniz"
+      },
+      {
+        "seq": 11,
+        "t": "turn",
+        "by": "ece",
+        "n": 1
+      },
+      {
+        "seq": 12,
+        "t": "bomb",
+        "by": "ece"
+      },
+      {
+        "seq": 13,
+        "t": "boom",
+        "by": "ece"
+      }
+    ],
+    "flash": {
+      "seq": 4,
+      "t": "boom",
+      "by": "ece"
+    },
+    "winner": "ali",
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece"
+  ]
+}

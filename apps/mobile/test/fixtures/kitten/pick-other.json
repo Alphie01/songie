@@ -1,0 +1,117 @@
+{
+  "view": {
+    "phase": "pick",
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "alive": true,
+        "cards": 1,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "alive": true,
+        "cards": 8,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turnsLeft": 1,
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k49",
+          "kind": "defuse"
+        },
+        {
+          "id": "k15",
+          "kind": "pamuk"
+        },
+        {
+          "id": "k16",
+          "kind": "pamuk"
+        },
+        {
+          "id": "k17",
+          "kind": "sarman"
+        },
+        {
+          "id": "k18",
+          "kind": "attack"
+        },
+        {
+          "id": "k19",
+          "kind": "shuffle"
+        },
+        {
+          "id": "k20",
+          "kind": "future"
+        },
+        {
+          "id": "k21",
+          "kind": "tekir"
+        }
+      ]
+    },
+    "deckCount": 12,
+    "deckBombs": 2,
+    "discardTop": "benek",
+    "discardCount": 11,
+    "pending": null,
+    "favor": null,
+    "peek": null,
+    "myBomb": null,
+    "discardPick": null,
+    "serverNow": 1791968335208,
+    "endsAt": 1025000,
+    "durationMs": 20000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 1
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "cem",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "play",
+        "by": "ali",
+        "action": "five",
+        "n": 5
+      }
+    ],
+    "flash": null,
+    "winner": null,
+    "fiveCats": true
+  },
+  "settings": {
+    "nopeSeconds": 5,
+    "turnSeconds": 0,
+    "fiveCats": true
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

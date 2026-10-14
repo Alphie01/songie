@@ -1,0 +1,80 @@
+{
+  "view": {
+    "phase": "pick",
+    "mode": "teams",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "fatma"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "scores": {
+      "a": 0,
+      "b": 0
+    },
+    "myTeam": "b",
+    "role": "opponent",
+    "roundId": 1,
+    "completed": 0,
+    "totalRounds": null,
+    "targetScore": 10,
+    "team": "a",
+    "psychicId": "ali",
+    "options": null,
+    "card": null,
+    "target": null,
+    "clue": null,
+    "dial": 50,
+    "dialBy": null,
+    "lockVotes": [],
+    "votesNeeded": 1,
+    "side": null,
+    "sideBy": null,
+    "result": null,
+    "history": [],
+    "winner": null,
+    "rating": null,
+    "serverNow": 1000000,
+    "endsAt": 0,
+    "durationMs": 0,
+    "podiumMs": 9000
+  },
+  "settings": {
+    "mode": "teams",
+    "teams": {
+      "a": [
+        "ali",
+        "ayse",
+        "fatma"
+      ],
+      "b": [
+        "cem",
+        "deniz"
+      ]
+    },
+    "targetScore": 10,
+    "rounds": 7,
+    "seconds": 0,
+    "cardChoice": true,
+    "majorityLock": false,
+    "catchUp": true,
+    "friendCards": true
+  },
+  "me": "deniz",
+  "host": "deniz",
+  "players": [
+    "ali",
+    "ayse",
+    "fatma",
+    "cem",
+    "deniz"
+  ],
+  "offline": [
+    "ali"
+  ]
+}

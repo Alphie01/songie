@@ -1,0 +1,121 @@
+{
+  "view": {
+    "phase": "lose",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "coins": 0,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "deniz",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k110x",
+          "role": "pirate"
+        },
+        {
+          "id": "k111x",
+          "role": "spy"
+        }
+      ],
+      "coins": 2
+    },
+    "deckCount": 7,
+    "cardsPerRole": 3,
+    "pending": {
+      "actor": "ali",
+      "action": "coup",
+      "target": "ayse",
+      "claim": null,
+      "block": null
+    },
+    "window": null,
+    "lose": {
+      "player": "ayse",
+      "reason": "coup"
+    },
+    "exchange": null,
+    "exchanging": null,
+    "serverNow": 1000000,
+    "endsAt": 1020000,
+    "durationMs": 20000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ali"
+      },
+      {
+        "seq": 3,
+        "t": "act",
+        "by": "ali",
+        "to": "ayse",
+        "action": "coup"
+      },
+      {
+        "seq": 4,
+        "t": "done",
+        "by": "ali",
+        "to": "ayse",
+        "action": "coup"
+      }
+    ],
+    "flash": null,
+    "winner": null
+  },
+  "settings": {
+    "challengeSeconds": 8,
+    "turnSeconds": 0,
+    "bigDeck": false
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

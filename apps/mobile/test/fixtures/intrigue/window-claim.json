@@ -1,0 +1,126 @@
+{
+  "view": {
+    "phase": "window",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "cem",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "deniz",
+        "coins": 2,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      }
+    ],
+    "current": "ali",
+    "turn": 1,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k48x",
+          "role": "spy"
+        },
+        {
+          "id": "k49x",
+          "role": "guard"
+        }
+      ],
+      "coins": 2
+    },
+    "deckCount": 7,
+    "cardsPerRole": 3,
+    "pending": {
+      "actor": "ali",
+      "action": "tax",
+      "target": null,
+      "claim": "treasurer",
+      "block": null
+    },
+    "window": {
+      "id": 1,
+      "kind": "claim",
+      "claimant": "ali",
+      "claimRole": "treasurer",
+      "eligible": [
+        "ayse",
+        "cem",
+        "deniz"
+      ],
+      "passed": [],
+      "canChallenge": true,
+      "blockers": [],
+      "blockRoles": [],
+      "endsAt": 1008000
+    },
+    "lose": null,
+    "exchange": null,
+    "exchanging": null,
+    "serverNow": 1000000,
+    "endsAt": 1008000,
+    "durationMs": 8000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ali"
+      },
+      {
+        "seq": 3,
+        "t": "act",
+        "by": "ali",
+        "action": "tax",
+        "role": "treasurer"
+      }
+    ],
+    "flash": null,
+    "winner": null
+  },
+  "settings": {
+    "challengeSeconds": 8,
+    "turnSeconds": 0,
+    "bigDeck": false
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

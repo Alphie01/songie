@@ -1,0 +1,90 @@
+{
+  "view": {
+    "phase": "vote",
+    "round": 1,
+    "totalRounds": 2,
+    "prompt": {
+      "id": "genel:0",
+      "text": "geç kalan",
+      "category": "genel"
+    },
+    "people": [
+      {
+        "id": "ali",
+        "nick": "ali",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "ayse",
+        "nick": "ayse",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "cem",
+        "nick": "cem",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      },
+      {
+        "id": "deniz",
+        "nick": "deniz",
+        "avatar": {
+          "shape": "circle",
+          "color": "mint"
+        },
+        "present": true,
+        "connected": true
+      }
+    ],
+    "selfVote": true,
+    "anonymous": false,
+    "predict": true,
+    "voted": [],
+    "guessed": [],
+    "waitingFor": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myVote": null,
+    "myGuess": null,
+    "serverNow": 1000000,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "result": null,
+    "history": [],
+    "guessScores": {}
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "selfVote": true,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 30,
+    "rounds": 2
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

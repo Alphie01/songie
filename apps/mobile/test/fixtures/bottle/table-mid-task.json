@@ -1,0 +1,122 @@
+{
+  "view": {
+    "phase": "task",
+    "seats": [
+      "hakan",
+      "ece",
+      "fatma",
+      "cem",
+      "ali",
+      "deniz",
+      "ayse",
+      "irem",
+      "gul"
+    ],
+    "round": 1,
+    "turnNumber": 0,
+    "totalRounds": 20,
+    "spinnerId": "ali",
+    "targetId": "ece",
+    "spin": {
+      "id": 1,
+      "startAt": 1000400,
+      "durationMs": 4461,
+      "fromDeg": 326.0237400792539,
+      "toDeg": 2205.5972682870924
+    },
+    "restDeg": 2205.5972682870924,
+    "kind": "truth",
+    "prompt": {
+      "id": "eglenceli:truth:2",
+      "text": "Test doğruluk üç?",
+      "category": "eglenceli"
+    },
+    "scores": {
+      "hakan": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ece": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "fatma": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "cem": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ali": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "deniz": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "ayse": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "irem": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      },
+      "gul": {
+        "points": 0,
+        "done": 0,
+        "passes": 0,
+        "failed": 0
+      }
+    },
+    "passesLeft": 2,
+    "vote": null,
+    "lastResult": null,
+    "serverNow": 1005200,
+    "choice": "random",
+    "passPenalty": true
+  },
+  "settings": {
+    "categories": [
+      "eglenceli"
+    ],
+    "choice": "random",
+    "passes": 2,
+    "passPenalty": true,
+    "vote": false,
+    "order": "target",
+    "rounds": 20,
+    "fairSpin": true
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz",
+    "ece",
+    "fatma",
+    "gul",
+    "hakan",
+    "irem"
+  ],
+  "offline": []
+}

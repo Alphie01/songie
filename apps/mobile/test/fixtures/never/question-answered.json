@@ -1,0 +1,63 @@
+{
+  "view": {
+    "phase": "question",
+    "round": 1,
+    "totalRounds": 2,
+    "statement": {
+      "id": "genel:1",
+      "text": "Ben hiç test cümlesi iki yazmadım.",
+      "category": "genel"
+    },
+    "serverNow": 1000000,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "anonymous": false,
+    "maxLives": 3,
+    "players": [
+      {
+        "id": "ali",
+        "lives": 3,
+        "eliminated": false,
+        "answered": true,
+        "active": true,
+        "didCount": 0
+      },
+      {
+        "id": "ayse",
+        "lives": 3,
+        "eliminated": false,
+        "answered": false,
+        "active": true,
+        "didCount": 0
+      },
+      {
+        "id": "cem",
+        "lives": 3,
+        "eliminated": false,
+        "answered": false,
+        "active": true,
+        "didCount": 0
+      }
+    ],
+    "myAnswer": "did",
+    "canAnswer": true,
+    "skip": {
+      "votes": 0,
+      "needed": 2,
+      "mine": false
+    },
+    "reveal": null,
+    "history": [],
+    "final": false,
+    "podium": null
+  },
+  "settings": {
+    "categories": [
+      "genel"
+    ],
+    "lives": 3,
+    "anonymous": false,
+    "seconds": 30,
+    "rounds": 2
+  }
+}

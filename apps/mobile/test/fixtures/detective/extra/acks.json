@@ -1,0 +1,22 @@
+{
+  "notebook": {
+    "ok": true,
+    "version": 1
+  },
+  "notebookConflict": {
+    "ok": false,
+    "error": "Not defteri bu sırada başkası tarafından değişti; son hali yüklendi. Eklemenizi tekrar yapın."
+  },
+  "confrontMiss": {
+    "ok": true,
+    "hit": false
+  },
+  "confrontHit": {
+    "ok": true,
+    "hit": true
+  },
+  "askStale": {
+    "ok": true,
+    "stale": true
+  }
+}

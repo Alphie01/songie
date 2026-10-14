@@ -1,0 +1,97 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 1,
+    "totalRounds": 2,
+    "topic": {
+      "text": "Herkesin sevdiği ama senin hiç sevmediğin bir şey",
+      "category": "genel"
+    },
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1008000,
+    "durationMs": 8000,
+    "stats": {
+      "ali": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 1,
+        "correct": 1,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 1,
+        "correct": 0,
+        "fooled": 1
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myConfession": null,
+    "index": 2,
+    "count": 4,
+    "current": {
+      "id": "r1c2",
+      "text": null,
+      "hidden": true,
+      "candidates": [
+        "ali",
+        "ayse",
+        "cem",
+        "deniz"
+      ],
+      "reactions": {
+        "yok": 0,
+        "bende": 0,
+        "efsane": 0,
+        "olamaz": 0
+      },
+      "myReactions": []
+    },
+    "picked": [],
+    "myPick": null,
+    "reveal": {
+      "authorId": "ali",
+      "correct": [],
+      "picks": [],
+      "tally": {
+        "ali": 0,
+        "ayse": 0,
+        "cem": 0,
+        "deniz": 0
+      },
+      "points": []
+    },
+    "recap": null,
+    "podium": null
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "cem",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

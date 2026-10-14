@@ -1,0 +1,100 @@
+{
+  "view": {
+    "phase": "reveal",
+    "round": 2,
+    "totalRounds": 2,
+    "item": {
+      "id": "iliski:22",
+      "text": "Sevgilin her kararı vermeden önce astroloji uygulamasına bakıyor.",
+      "category": "iliski"
+    },
+    "categoryName": "İlişki",
+    "dealBreaker": true,
+    "anonymous": false,
+    "predict": true,
+    "voters": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "done": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "ready": [],
+    "myVote": "red",
+    "myGuess": "red",
+    "serverNow": 1003000,
+    "endsAt": 0,
+    "durationMs": 30000,
+    "nextAt": 1006000,
+    "discussEndsAt": 1033000,
+    "discussMs": 30000,
+    "reveal": {
+      "counts": {
+        "green": 0,
+        "red": 4,
+        "never": 0
+      },
+      "total": 4,
+      "majority": [
+        "red"
+      ],
+      "votes": [
+        {
+          "playerId": "ali",
+          "vote": "red"
+        },
+        {
+          "playerId": "ayse",
+          "vote": "red"
+        },
+        {
+          "playerId": "cem",
+          "vote": "red"
+        },
+        {
+          "playerId": "deniz",
+          "vote": "red"
+        }
+      ],
+      "correct": [
+        "ali",
+        "ayse",
+        "cem",
+        "deniz"
+      ],
+      "myVote": "red",
+      "myGuess": "red"
+    },
+    "scores": {
+      "ali": 2,
+      "ayse": 2,
+      "cem": 1,
+      "deniz": 2
+    },
+    "summary": null
+  },
+  "settings": {
+    "categories": [
+      "iliski"
+    ],
+    "dealBreaker": true,
+    "anonymous": false,
+    "predict": true,
+    "seconds": 30,
+    "discuss": 30,
+    "rounds": 2
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ],
+  "offline": []
+}

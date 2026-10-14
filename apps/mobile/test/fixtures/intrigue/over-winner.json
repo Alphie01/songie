@@ -1,0 +1,189 @@
+{
+  "view": {
+    "phase": "over",
+    "order": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "coins": 0,
+        "hidden": 2,
+        "revealed": [],
+        "alive": true,
+        "out": null
+      },
+      {
+        "id": "ayse",
+        "coins": 0,
+        "hidden": 0,
+        "revealed": [
+          "pirate"
+        ],
+        "alive": false,
+        "out": 1
+      },
+      {
+        "id": "cem",
+        "coins": 0,
+        "hidden": 0,
+        "revealed": [
+          "spy"
+        ],
+        "alive": false,
+        "out": 2
+      },
+      {
+        "id": "deniz",
+        "coins": 0,
+        "hidden": 0,
+        "revealed": [
+          "guard"
+        ],
+        "alive": false,
+        "out": 3
+      }
+    ],
+    "current": "ali",
+    "turn": 6,
+    "me": {
+      "inGame": true,
+      "alive": true,
+      "hand": [
+        {
+          "id": "k191x",
+          "role": "treasurer"
+        },
+        {
+          "id": "k192x",
+          "role": "assassin"
+        }
+      ],
+      "coins": 0
+    },
+    "deckCount": 7,
+    "cardsPerRole": 3,
+    "pending": null,
+    "window": null,
+    "lose": null,
+    "exchange": null,
+    "exchanging": null,
+    "serverNow": 1000000,
+    "endsAt": 1010000,
+    "durationMs": 10000,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "turn",
+        "by": "ali"
+      },
+      {
+        "seq": 3,
+        "t": "act",
+        "by": "ali",
+        "to": "ayse",
+        "action": "coup"
+      },
+      {
+        "seq": 4,
+        "t": "done",
+        "by": "ali",
+        "to": "ayse",
+        "action": "coup"
+      },
+      {
+        "seq": 5,
+        "t": "lose",
+        "by": "ayse",
+        "role": "pirate"
+      },
+      {
+        "seq": 6,
+        "t": "out",
+        "by": "ayse"
+      },
+      {
+        "seq": 7,
+        "t": "turn",
+        "by": "cem"
+      },
+      {
+        "seq": 8,
+        "t": "act",
+        "by": "ali",
+        "to": "cem",
+        "action": "coup"
+      },
+      {
+        "seq": 9,
+        "t": "done",
+        "by": "ali",
+        "to": "cem",
+        "action": "coup"
+      },
+      {
+        "seq": 10,
+        "t": "lose",
+        "by": "cem",
+        "role": "spy"
+      },
+      {
+        "seq": 11,
+        "t": "out",
+        "by": "cem"
+      },
+      {
+        "seq": 12,
+        "t": "turn",
+        "by": "deniz"
+      },
+      {
+        "seq": 13,
+        "t": "act",
+        "by": "ali",
+        "to": "deniz",
+        "action": "coup"
+      },
+      {
+        "seq": 14,
+        "t": "done",
+        "by": "ali",
+        "to": "deniz",
+        "action": "coup"
+      },
+      {
+        "seq": 15,
+        "t": "lose",
+        "by": "deniz",
+        "role": "guard"
+      },
+      {
+        "seq": 16,
+        "t": "out",
+        "by": "deniz"
+      }
+    ],
+    "flash": null,
+    "winner": "ali"
+  },
+  "settings": {
+    "challengeSeconds": 8,
+    "turnSeconds": 0,
+    "bigDeck": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

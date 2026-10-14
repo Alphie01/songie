@@ -1,0 +1,137 @@
+{
+  "view": {
+    "phase": "color",
+    "mode": "single",
+    "target": 500,
+    "round": 1,
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "cards": 7,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "ayse",
+        "cards": 7,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "cem",
+        "cards": 7,
+        "score": 0,
+        "called": false
+      }
+    ],
+    "current": "cem",
+    "dir": 1,
+    "step": 1,
+    "top": {
+      "id": "r1c22",
+      "color": null,
+      "value": "wild"
+    },
+    "activeColor": null,
+    "deckCount": 86,
+    "discardCount": 1,
+    "penalty": 0,
+    "drew": false,
+    "drawnId": null,
+    "me": {
+      "inGame": true,
+      "hand": [
+        {
+          "id": "r1c1",
+          "color": "yellow",
+          "value": "3"
+        },
+        {
+          "id": "r1c4",
+          "color": "purple",
+          "value": "7"
+        },
+        {
+          "id": "r1c7",
+          "color": "purple",
+          "value": "4"
+        },
+        {
+          "id": "r1c10",
+          "color": "yellow",
+          "value": "6"
+        },
+        {
+          "id": "r1c13",
+          "color": "red",
+          "value": "draw2"
+        },
+        {
+          "id": "r1c16",
+          "color": "green",
+          "value": "5"
+        },
+        {
+          "id": "r1c19",
+          "color": "green",
+          "value": "8"
+        }
+      ],
+      "playable": []
+    },
+    "challenge": null,
+    "reveal": null,
+    "exposed": null,
+    "lastPlay": null,
+    "serverNow": 1791968299918,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "round",
+        "by": "ayse",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "firstCard",
+        "card": {
+          "color": null,
+          "value": "wild"
+        }
+      }
+    ],
+    "roundResult": null,
+    "winner": null,
+    "rules": {
+      "stacking": false,
+      "sevenZero": false,
+      "drawUntilPlayable": false,
+      "turnSeconds": 0
+    }
+  },
+  "settings": {
+    "mode": "single",
+    "turnSeconds": 0,
+    "stacking": false,
+    "sevenZero": false,
+    "drawUntilPlayable": false
+  },
+  "me": "ali",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}

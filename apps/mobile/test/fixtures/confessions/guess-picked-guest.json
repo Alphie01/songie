@@ -1,0 +1,88 @@
+{
+  "view": {
+    "phase": "guess",
+    "round": 1,
+    "totalRounds": 2,
+    "topic": {
+      "text": "Herkesin sevdiği ama senin hiç sevmediğin bir şey",
+      "category": "genel"
+    },
+    "hiddenAuthor": false,
+    "serverNow": 1000000,
+    "endsAt": 1030000,
+    "durationMs": 30000,
+    "stats": {
+      "ali": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "ayse": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "cem": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      },
+      "deniz": {
+        "score": 0,
+        "correct": 0,
+        "fooled": 0
+      }
+    },
+    "written": [
+      "ali",
+      "ayse",
+      "cem",
+      "deniz"
+    ],
+    "myConfession": null,
+    "index": 1,
+    "count": 4,
+    "current": {
+      "id": "r1c1",
+      "text": "Ehliyet sınavından üç kez kaldım",
+      "hidden": false,
+      "candidates": [
+        "ali",
+        "ayse",
+        "cem",
+        "deniz"
+      ],
+      "reactions": {
+        "yok": 0,
+        "bende": 1,
+        "efsane": 1,
+        "olamaz": 0
+      },
+      "myReactions": []
+    },
+    "picked": [
+      "ayse"
+    ],
+    "myPick": "cem",
+    "reveal": null,
+    "recap": null,
+    "podium": null
+  },
+  "settings": {
+    "mode": "topics",
+    "categories": [
+      "genel"
+    ],
+    "writeSeconds": 60,
+    "guessSeconds": 30,
+    "rounds": 2,
+    "hiddenAuthor": false
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem",
+    "deniz"
+  ]
+}

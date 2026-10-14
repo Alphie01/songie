@@ -1,0 +1,178 @@
+{
+  "view": {
+    "phase": "play",
+    "mode": "single",
+    "target": 500,
+    "round": 1,
+    "order": [
+      "ali",
+      "ayse",
+      "cem"
+    ],
+    "players": [
+      {
+        "id": "ali",
+        "cards": 2,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "ayse",
+        "cards": 7,
+        "score": 0,
+        "called": false
+      },
+      {
+        "id": "cem",
+        "cards": 1,
+        "score": 0,
+        "called": false
+      }
+    ],
+    "current": "cem",
+    "dir": 1,
+    "step": 4,
+    "top": {
+      "id": "f103",
+      "color": null,
+      "value": "wild4"
+    },
+    "activeColor": "red",
+    "deckCount": 6,
+    "discardCount": 2,
+    "penalty": 0,
+    "drew": false,
+    "drawnId": null,
+    "me": {
+      "inGame": true,
+      "hand": [
+        {
+          "id": "f106",
+          "color": "purple",
+          "value": "1"
+        },
+        {
+          "id": "f108",
+          "color": "purple",
+          "value": "9"
+        },
+        {
+          "id": "f109",
+          "color": "purple",
+          "value": "9"
+        },
+        {
+          "id": "f110",
+          "color": "purple",
+          "value": "9"
+        },
+        {
+          "id": "f111",
+          "color": "purple",
+          "value": "9"
+        },
+        {
+          "id": "f112",
+          "color": "purple",
+          "value": "9"
+        },
+        {
+          "id": "f113",
+          "color": "purple",
+          "value": "9"
+        }
+      ],
+      "playable": []
+    },
+    "challenge": null,
+    "reveal": {
+      "seq": 1,
+      "of": "ali",
+      "cards": [
+        {
+          "id": "f104",
+          "color": "red",
+          "value": "1"
+        },
+        {
+          "id": "f105",
+          "color": "yellow",
+          "value": "7"
+        }
+      ],
+      "guilty": false
+    },
+    "exposed": null,
+    "lastPlay": {
+      "seq": 1,
+      "by": "ali",
+      "card": {
+        "id": "f103",
+        "color": null,
+        "value": "wild4"
+      }
+    },
+    "serverNow": 1791968299919,
+    "endsAt": 0,
+    "durationMs": 0,
+    "log": [
+      {
+        "seq": 1,
+        "t": "start",
+        "n": 3
+      },
+      {
+        "seq": 2,
+        "t": "round",
+        "by": "ali",
+        "n": 1
+      },
+      {
+        "seq": 3,
+        "t": "firstCard",
+        "card": {
+          "color": "green",
+          "value": "7"
+        }
+      },
+      {
+        "seq": 4,
+        "t": "play",
+        "by": "ali",
+        "card": {
+          "color": null,
+          "value": "wild4"
+        },
+        "color": "red"
+      },
+      {
+        "seq": 5,
+        "t": "challengeLose",
+        "by": "ayse",
+        "to": "ali",
+        "n": 6
+      }
+    ],
+    "roundResult": null,
+    "winner": null,
+    "rules": {
+      "stacking": false,
+      "sevenZero": false,
+      "drawUntilPlayable": false,
+      "turnSeconds": 0
+    }
+  },
+  "settings": {
+    "mode": "single",
+    "turnSeconds": 0,
+    "stacking": false,
+    "sevenZero": false,
+    "drawUntilPlayable": false
+  },
+  "me": "ayse",
+  "players": [
+    "ali",
+    "ayse",
+    "cem"
+  ]
+}
