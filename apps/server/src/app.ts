@@ -2,10 +2,11 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import type { AnyServerGame } from '@songie/game-kit/server';
 import { openDb, type DB } from './db.js';
 import { loadGames, type GameDeps } from './games.js';
-import { registerHttp } from './http.js';
+import { registerHttp, type AppLinks } from './http.js';
 import { PlayerStore } from './players.js';
 import { RoomManager, type RoomTimings } from './rooms/RoomManager.js';
-import { bindSockets, createIO, socketTransport, type IO } from './socket.js';
+import { firebaseVerifier, type IdTokenVerifier } from './firebase.js';
+import { bindSockets, createIO, disconnectPlayer, socketTransport, type IO } from './socket.js';
 
 export interface AppOptions {
   dataDir: string;
@@ -19,6 +20,11 @@ export interface AppOptions {
   logger?: boolean | { level: string };
   trustProxy?: boolean;
   gameOverrides?: GameDeps['overrides'];
+  firebaseProjectId?: string;
+  /** Testlerde sahte doğrulayıcı. */
+  verifyIdToken?: IdTokenVerifier;
+  minAppVersion?: string;
+  appLinks?: AppLinks;
 }
 
 export interface App {
@@ -46,7 +52,16 @@ export async function buildApp(opts: AppOptions): Promise<App> {
     opts.timings,
   );
   bindSockets(io, players, rooms);
-  await registerHttp(http, { players, rooms, games, webDist: opts.webDist });
+  await registerHttp(http, {
+    players,
+    rooms,
+    games,
+    webDist: opts.webDist,
+    verifyIdToken: opts.verifyIdToken ?? firebaseVerifier(opts.firebaseProjectId ?? 'songie-app'),
+    disconnectPlayer: (id) => disconnectPlayer(io, id),
+    minAppVersion: opts.minAppVersion ?? '1.0.0',
+    appLinks: opts.appLinks ?? { appleTeamId: '', androidCertSha256: [] },
+  });
 
   return {
     http,

@@ -29,6 +29,11 @@ export function createIO(http: HttpServer, allowedOrigins: string[]): IO {
   });
 }
 
+/** Profilin açık socket'lerini kapatır (profil başka profile katıldığında). */
+export function disconnectPlayer(io: IO, playerId: string): void {
+  io.in(playerChannel(playerId)).disconnectSockets(true);
+}
+
 export function socketTransport(io: IO): RoomTransport {
   return {
     roomState: (code, state) => {

@@ -1,17 +1,21 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { io, type Socket } from 'socket.io-client';
 import type {
+  Account,
   Ack,
+  AuthResponse,
   ChatMessage,
   ClientEventName,
   ClientEventPayload,
   GameViewPayload,
+  MeResponse,
   Profile,
   ProfileInput,
   ProfileStats,
   RoomState,
 } from '@songie/shared';
 import { api, ApiError, getToken, setToken } from './api';
+import { firebaseSignOut, googleIdToken } from './firebase';
 
 type Status = 'loading' | 'anonymous' | 'ready';
 type Connection = 'connecting' | 'online' | 'offline';
@@ -21,6 +25,8 @@ interface Session {
   connection: Connection;
   profile: Profile | null;
   stats: ProfileStats | null;
+  /** Bağlı Google hesabı; anonim profilde null. */
+  account: Account | null;
   room: RoomState | null;
   gameView: GameViewPayload | null;
   chat: ChatMessage[];
@@ -28,6 +34,10 @@ interface Session {
   notice: string | null;
   saveProfile(input: ProfileInput): Promise<void>;
   refreshStats(): Promise<void>;
+  /** Google ile giriş: mevcut profili bağlar ya da başka cihazdaki profili getirir. */
+  signInWithGoogle(): Promise<void>;
+  /** Bu cihazda oturumu kapatır (yalnızca Google'a bağlı profilde anlamlı). */
+  signOut(): Promise<void>;
   emit<E extends ClientEventName>(event: E, payload: ClientEventPayload<E>): Promise<Ack<Record<string, unknown>>>;
   notify(text: string | null): void;
 }
@@ -39,6 +49,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [connection, setConnection] = useState<Connection>('connecting');
   const [profile, setProfile] = useState<Profile | null>(null);
   const [stats, setStats] = useState<ProfileStats | null>(null);
+  const [account, setAccount] = useState<Account | null>(null);
+  // Token değişince (başka profile geçiş) socket yeniden kurulur.
+  const [tokenVersion, setTokenVersion] = useState(0);
   const [room, setRoom] = useState<RoomState | null>(null);
   const [gameView, setGameView] = useState<GameViewPayload | null>(null);
   const [chat, setChat] = useState<ChatMessage[]>([]);
@@ -53,9 +66,10 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       return;
     }
     try {
-      const me = await api.get<{ profile: Profile; stats: ProfileStats }>('/api/me');
+      const me = await api.get<MeResponse>('/api/me');
       setProfile(me.profile);
       setStats(me.stats);
+      setAccount(me.account);
       setStatus('ready');
     } catch (err) {
       if (err instanceof ApiError && err.status === 401) {
@@ -107,7 +121,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       socket.close();
       socketRef.current = null;
     };
-  }, [status]);
+  }, [status, tokenVersion]);
 
   useEffect(() => {
     if (!notice) return;
@@ -141,6 +155,38 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     [profile],
   );
 
+  const signInWithGoogle = useCallback(async () => {
+    const idToken = await googleIdToken();
+    const previous = getToken();
+    const res = await api.post<AuthResponse>('/api/auth/google', { idToken });
+    setToken(res.token);
+    const me = await api.get<MeResponse>('/api/me');
+    setProfile(me.profile);
+    setStats(me.stats);
+    setAccount(me.account);
+    if (previous !== res.token) {
+      // Başka bir profile geçildi: eski odanın görüntüsü kalmasın.
+      setRoom(null);
+      setGameView(null);
+      setChat([]);
+      setTokenVersion((v) => v + 1);
+    }
+    setStatus('ready');
+  }, []);
+
+  const signOut = useCallback(async () => {
+    await api.post('/api/auth/logout', {}).catch(() => {});
+    await firebaseSignOut();
+    setToken(null);
+    setProfile(null);
+    setStats(null);
+    setAccount(null);
+    setRoom(null);
+    setGameView(null);
+    setChat([]);
+    setStatus('anonymous');
+  }, []);
+
   const refreshStats = useCallback(async () => {
     const me = await api.get<{ stats: ProfileStats }>('/api/me');
     setStats(me.stats);
@@ -158,6 +204,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       connection,
       profile,
       stats,
+      account,
       room,
       gameView,
       chat,
@@ -165,10 +212,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       notice,
       saveProfile,
       refreshStats,
+      signInWithGoogle,
+      signOut,
       emit,
       notify: setNotice,
     }),
-    [status, connection, profile, stats, room, gameView, chat, reactions, notice, saveProfile, refreshStats, emit],
+    [status, connection, profile, stats, account, room, gameView, chat, reactions, notice, saveProfile, refreshStats, signInWithGoogle, signOut, emit],
   );
 
   return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;

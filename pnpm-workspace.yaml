@@ -6,3 +6,6 @@ allowBuilds:
   better-sqlite3: true
   esbuild: true
   ffmpeg-static: true
+  # firebase (web): kurulum betikleri gerekmiyor
+  '@firebase/util': false
+  protobufjs: false

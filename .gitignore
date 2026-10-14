@@ -10,3 +10,4 @@ screenshots
 .image-spend.json
 _candidates
 tsconfig.tsbuildinfo
+.DS_Store

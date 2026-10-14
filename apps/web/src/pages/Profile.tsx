@@ -1,3 +1,4 @@
+import { AccountCard } from '../components/GoogleAuth';
 import { ProfileForm } from '../components/ProfileForm';
 import { TopBar } from '../components/Shell';
 import { tr } from '../i18n/tr';
@@ -26,16 +27,19 @@ export function ProfilePage() {
           notify(tr.profile.saved);
         }}
         before={
-          rows.length > 0 && (
-            <dl className="stats">
-              {rows.map(([label, value]) => (
-                <div key={label} className="stat">
-                  <dt>{label}</dt>
-                  <dd className="display">{value.toLocaleString('tr-TR')}</dd>
-                </div>
-              ))}
-            </dl>
-          )
+          <>
+            {rows.length > 0 && (
+              <dl className="stats">
+                {rows.map(([label, value]) => (
+                  <div key={label} className="stat">
+                    <dt>{label}</dt>
+                    <dd className="display">{value.toLocaleString('tr-TR')}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <AccountCard />
+          </>
         }
       />
     </main>

@@ -2,10 +2,22 @@ import fs from 'node:fs';
 import path from 'node:path';
 import fastifyStatic from '@fastify/static';
 import type { FastifyInstance, FastifyRequest } from 'fastify';
-import { profileInputSchema, roomCodeSchema, type Profile } from '@songie/shared';
+import { z } from 'zod';
+import { profileInputSchema, roomCodeSchema, type AppConfig, type AuthResponse, type MeResponse, type Profile } from '@songie/shared';
 import type { AnyServerGame } from '@songie/game-kit/server';
+import type { IdTokenVerifier } from './firebase.js';
 import type { PlayerStore } from './players.js';
 import type { RoomManager } from './rooms/RoomManager.js';
+
+/** Mobil uygulamanın kimliği (Universal Links / App Links doğrulaması). */
+export const APP_ID = 'com.monolithyazilim.songie';
+
+export interface AppLinks {
+  appleTeamId: string;
+  androidCertSha256: string[];
+}
+
+const authGoogleSchema = z.object({ idToken: z.string().min(20).max(8192) });
 
 export function bearer(req: FastifyRequest): string | null {
   const h = req.headers.authorization;
@@ -20,7 +32,16 @@ declare module 'fastify' {
 
 export async function registerHttp(
   app: FastifyInstance,
-  deps: { players: PlayerStore; rooms: RoomManager; games: Map<string, AnyServerGame>; webDist: string },
+  deps: {
+    players: PlayerStore;
+    rooms: RoomManager;
+    games: Map<string, AnyServerGame>;
+    webDist: string;
+    verifyIdToken: IdTokenVerifier;
+    disconnectPlayer(playerId: string): void;
+    minAppVersion: string;
+    appLinks: AppLinks;
+  },
 ): Promise<void> {
   const { players, rooms, games } = deps;
 
@@ -39,7 +60,73 @@ export async function registerHttp(
 
   app.get('/api/me', async (req, reply) => {
     if (!req.profile) return reply.code(401).send({ error: 'Profil bulunamadı.' });
-    return { profile: req.profile, stats: players.stats(req.profile.id), room: rooms.roomOf(req.profile.id) };
+    const id = req.profile.id;
+    return { profile: req.profile, stats: players.stats(id), room: rooms.roomOf(id), account: players.account(id) } satisfies MeResponse;
+  });
+
+  // Davet linkleri (/r/KOD) yüklü uygulamada açılsın. Kimlikler ayarlanmamışsa dosyalar yok (404).
+  const { appleTeamId, androidCertSha256 } = deps.appLinks;
+  if (appleTeamId) {
+    app.get('/.well-known/apple-app-site-association', async (_req, reply) =>
+      reply.type('application/json').send({
+        applinks: { details: [{ appIDs: [`${appleTeamId}.${APP_ID}`], components: [{ '/': '/r/*' }] }] },
+      }),
+    );
+  }
+  if (androidCertSha256.length) {
+    app.get('/.well-known/assetlinks.json', async () => [
+      {
+        relation: ['delegate_permission/common.handle_all_urls'],
+        target: { namespace: 'android_app', package_name: APP_ID, sha256_cert_fingerprints: androidCertSha256 },
+      },
+    ]);
+  }
+
+  app.get('/api/app/config', async () => ({ minAppVersion: deps.minAppVersion }) satisfies AppConfig);
+
+  /**
+   * Google ile giriş (isteğe bağlı). Mevcut anonim profil hesaba bağlanır; hesap zaten başka bir
+   * profile bağlıysa anonim profil ona katılır. Yeni cihazda aynı profile yeni bir token verilir.
+   */
+  app.post('/api/auth/google', async (req, reply) => {
+    const parsed = authGoogleSchema.safeParse(req.body);
+    if (!parsed.success) return reply.code(400).send({ error: 'Geçersiz istek.' });
+    let google;
+    try {
+      google = await deps.verifyIdToken(parsed.data.idToken);
+    } catch {
+      return reply.code(401).send({ error: 'Google girişi doğrulanamadı. Tekrar dene.' });
+    }
+    const current = req.profile;
+    const currentToken = bearer(req);
+    const anonymous = current !== null && players.account(current.id) === null;
+    const owner = players.byFirebaseUid(google.uid);
+    let token: string;
+    let profile: Profile;
+    if (owner) {
+      if (current && anonymous && current.id !== owner.id) {
+        rooms.leave(current.id);
+        deps.disconnectPlayer(current.id);
+        players.mergeInto(current.id, owner.id);
+      }
+      players.linkFirebase(owner.id, google.uid, google.email);
+      token = current?.id === owner.id && currentToken ? currentToken : players.issueToken(owner.id);
+      profile = owner;
+    } else if (current && anonymous && currentToken) {
+      players.linkFirebase(current.id, google.uid, google.email);
+      token = currentToken;
+      profile = current;
+    } else {
+      ({ token, profile } = players.createFromGoogle(google));
+    }
+    return { token, profile, account: { provider: 'google', email: google.email } } satisfies AuthResponse;
+  });
+
+  app.post('/api/auth/logout', async (req, reply) => {
+    const token = bearer(req);
+    if (!req.profile || !token) return reply.code(401).send({ error: 'Profil bulunamadı.' });
+    players.revokeToken(token);
+    return { ok: true };
   });
 
   app.put('/api/me', async (req, reply) => {

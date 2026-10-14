@@ -1,0 +1,125 @@
+/* Google ile giriş: beyaz buton, mürekkep çerçeve ve sert gölge (Songie butonlarıyla aynı dil). */
+.google-btn {
+  min-height: 56px;
+  border-radius: 18px;
+  background: var(--paper);
+  color: var(--ink-2);
+  gap: 12px;
+  font-size: 19px;
+}
+
+.google-mark {
+  flex: none;
+}
+
+/* Giriş ekranı */
+.welcome-google {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.welcome-or {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.welcome-or::before,
+.welcome-or::after {
+  content: '';
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--line-2);
+}
+
+.welcome-google-hint {
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--text-3);
+}
+
+/* Profil sayfası hesap kartı */
+.account-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 18px 18px;
+  border: var(--bw) solid var(--ink);
+  border-radius: var(--r-lg);
+  background: var(--panel-2);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-0.6deg);
+}
+
+.account-sticker {
+  position: absolute;
+  top: -14px;
+  right: 16px;
+  background: var(--mint);
+  color: var(--ink-2);
+  transform: rotate(4deg);
+}
+
+.account-title {
+  font-size: 24px;
+}
+
+.account-lead {
+  margin-bottom: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.account-card-linked {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  transform: none;
+  box-shadow: var(--shadow);
+}
+
+.account-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: none;
+  border: var(--bw) solid var(--ink);
+  border-radius: 14px;
+  background: var(--paper);
+  transform: rotate(-6deg);
+}
+
+.account-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.account-card-linked .account-title {
+  font-size: 19px;
+}
+
+.account-email {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

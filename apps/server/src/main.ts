@@ -9,6 +9,9 @@ const app = await buildApp({
   allowedOrigins: config.allowedOrigins,
   logger: config.isProd ? { level: 'warn' } : false,
   trustProxy: true,
+  firebaseProjectId: config.firebaseProjectId,
+  minAppVersion: config.minAppVersion,
+  appLinks: config.appLinks,
 });
 
 await app.http.listen({ port: config.port, host: config.host });

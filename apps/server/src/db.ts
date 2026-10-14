@@ -33,6 +33,19 @@ export function openDb(dataDir: string, file = 'songie.db'): DB {
     );
     CREATE INDEX game_results_player ON game_results(player_id, game_id);
   `);
+  // Bir profil birden çok cihazda açık olabilir (Google ile giriş); her cihazın kendi token'ı var.
+  migrate(db, 'core-002', `
+    CREATE TABLE player_tokens (
+      token_hash TEXT PRIMARY KEY,
+      player_id TEXT NOT NULL REFERENCES players(id) ON DELETE CASCADE,
+      created_at INTEGER NOT NULL
+    );
+    CREATE INDEX player_tokens_player ON player_tokens(player_id);
+    INSERT INTO player_tokens (token_hash, player_id, created_at) SELECT token_hash, id, created_at FROM players;
+    ALTER TABLE players ADD COLUMN firebase_uid TEXT;
+    ALTER TABLE players ADD COLUMN email TEXT;
+    CREATE UNIQUE INDEX players_firebase_uid ON players(firebase_uid) WHERE firebase_uid IS NOT NULL;
+  `);
   return db;
 }
 

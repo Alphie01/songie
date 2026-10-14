@@ -1,3 +1,4 @@
+import { WelcomeGoogle } from '../components/GoogleAuth';
 import { ProfileForm } from '../components/ProfileForm';
 import { BrandLarge } from '../components/Shell';
 import { tr } from '../i18n/tr';
@@ -13,6 +14,7 @@ export function Welcome() {
       <ProfileForm
         submitLabel={tr.welcome.save}
         onSubmit={saveProfile}
+        after={<WelcomeGoogle />}
         before={
           <div className="welcome-brand">
             <BrandLarge />

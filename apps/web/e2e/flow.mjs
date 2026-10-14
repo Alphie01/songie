@@ -45,6 +45,8 @@ const guest = await newPage({ viewport: { width: 1440, height: 900 } });
 await host.goto(base);
 await host.getByText('Adın ne?').waitFor();
 await shot(host, '01-welcome-mobile');
+// Google ile giriş isteğe bağlı: buton görünür, gerçek Google akışı testte çalıştırılmaz.
+check(await host.getByRole('button', { name: 'Google ile devam et' }).isVisible(), 'giriş ekranında Google ile devam et butonu');
 await host.getByLabel('Takma ad').fill('Ayşe');
 await host.getByRole('radio', { name: 'Mor' }).click();
 await host.getByRole('button', { name: 'Devam et' }).click();

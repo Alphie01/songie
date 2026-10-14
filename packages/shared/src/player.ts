@@ -31,3 +31,28 @@ export interface ProfileStats {
   bestScore: number;
   bestStreak: number;
 }
+
+/** Profile bağlı giriş hesabı. Yalnızca sahibine gider (`Profile` odadaki herkese gider). */
+export interface Account {
+  provider: 'google';
+  email: string | null;
+}
+
+export interface MeResponse {
+  profile: Profile;
+  stats: ProfileStats;
+  room: string | null;
+  account: Account | null;
+}
+
+/** `POST /api/auth/google`: dönen token önceki token'ın yerine saklanır. */
+export interface AuthResponse {
+  token: string;
+  profile: Profile;
+  account: Account;
+}
+
+/** `GET /api/app/config`: mobil uygulamanın en düşük desteklenen sürümü. */
+export interface AppConfig {
+  minAppVersion: string;
+}

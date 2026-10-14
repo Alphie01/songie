@@ -19,12 +19,15 @@ export function ProfileForm({
   submitLabel,
   onSubmit,
   before,
+  after,
 }: {
   initial?: ProfileInput;
   submitLabel: string;
   onSubmit(input: ProfileInput): Promise<void>;
   /** Kartın üstüne (aynı form içinde) eklenecek içerik. */
   before?: ReactNode;
+  /** Gönder butonunun altına eklenecek içerik (ör. Google ile giriş). */
+  after?: ReactNode;
 }) {
   const [nick, setNick] = useState(initial?.nick ?? '');
   const [color, setColor] = useState<AvatarData['color']>(
@@ -105,6 +108,7 @@ export function ProfileForm({
       <button className="pf-submit" disabled={busy}>
         {busy ? tr.welcome.saving : submitLabel}
       </button>
+      {after}
     </form>
   );
 }
