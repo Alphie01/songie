@@ -14,7 +14,7 @@ import { fixtureWriter } from './lib.js';
  */
 const out = fixtureWriter('detective');
 const repo = path.resolve(import.meta.dirname, '../../../..');
-const extraDir = path.join(repo, 'apps/mobile/test/fixtures/detective/extra');
+const extraDir = path.join(repo, 'packages/songie_core/test/fixtures/detective/extra');
 fs.mkdirSync(extraDir, { recursive: true });
 const writeExtra = (name: string, data: unknown) => fs.writeFileSync(path.join(extraDir, `${name}.json`), JSON.stringify(data, null, 2) + '\n');
 
@@ -151,7 +151,23 @@ writeExtra('acks', acks);
   const res: CasesResponse = {
     cases,
     sessions: first
-      ? [{ id: 'abc123', slug: first.slug, title: first.title, act: 2, acts: first.acts, hoursSpent: 7, updatedAt: Date.now() - 3 * 3600_000, members: ['Ali', 'Ayşe'] }]
+      ? [
+        {
+          id: 'abc123',
+          slug: first.slug,
+          title: first.title,
+          act: 2,
+          acts: first.acts,
+          hoursSpent: 7,
+          hoursBudget: 30,
+          updatedAt: Date.now() - 3 * 3600_000,
+          members: ['p1', 'p2'],
+          crew: [
+            { id: 'p1', nick: 'Ali', avatar: { shape: 'circle', color: 'mint' } },
+            { id: 'p2', nick: 'Ayşe', avatar: { shape: 'circle', color: 'sky' } },
+          ],
+        },
+      ]
       : [],
   };
   writeExtra('cases', res);

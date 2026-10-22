@@ -22,6 +22,19 @@ export const sideOf = (r: Role): Side => (r === 'wolf' ? 'wolves' : 'village');
 /** Gece sırası: aşk okçusu yalnızca ilk gece, sonra kurtlar, kahin, doktor, cadı. */
 export type NightStep = 'cupid' | 'wolves' | 'seer' | 'doctor' | 'witch';
 export const NIGHT_ORDER: NightStep[] = ['cupid', 'wolves', 'seer', 'doctor', 'witch'];
+/**
+ * Gece düzeni. Sıralı: roller tek tek uyanır. Aynı anda: bütün roller birlikte uyanır (cadı kurbanı
+ * görmesi için ikinci, kısa bir turda); o sırada rolü olmayanlar mini oyun oynar.
+ */
+export type NightMode = 'sequential' | 'simultaneous';
+export const NIGHT_MODES: NightMode[] = ['sequential', 'simultaneous'];
+
+/** Aynı anda düzeninde gecenin turları: ilk turda herkes, ikincide kurbanı gören cadı. */
+export const SIMULTANEOUS_STAGES: NightStep[][] = [['cupid', 'wolves', 'seer', 'doctor'], ['witch']];
+
+/** Aynı anda düzenindeki mini oyunda kaç ateşböceği yakalanınca iş biter. */
+export const CHORES_GOAL = 6;
+
 export const STEP_ROLE: Record<NightStep, Role> = {
   cupid: 'cupid',
   wolves: 'wolf',
@@ -61,6 +74,10 @@ export const settingsSchema = z.object({
   wolfTie: z.enum(['random', 'none']),
   /** Ölüler (hayaletler) bütün rolleri ve gece olanları görebilir. */
   ghostsSeeRoles: z.boolean(),
+  /** Gece düzeni: sıralı ya da aynı anda. */
+  nightMode: z.enum(['sequential', 'simultaneous']).default('sequential'),
+  /** Gecede yapılacak herkes bitirince adım (ya da tur) süreyi beklemeden biter. */
+  nightEndsEarly: z.boolean().default(false),
 });
 export type WerewolfSettings = z.infer<typeof settingsSchema>;
 
@@ -89,6 +106,8 @@ export const defaultSettings: WerewolfSettings = {
   dayTie: 'runoff',
   wolfTie: 'random',
   ghostsSeeRoles: true,
+  nightMode: 'sequential',
+  nightEndsEarly: false,
 };
 
 export const specialCount = (r: RoleCounts) => SPECIAL_ROLES.reduce((sum, k) => sum + r[k], 0);
@@ -120,6 +139,8 @@ export const actionSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('witch'), session, heal: z.boolean(), poison: id.nullable() }),
   /** Avcı: ölürken yanında götüreceği kişi. */
   z.object({ type: z.literal('shoot'), session, target: id }),
+  /** Aynı anda düzeninde gece mini oyununu bitirdi. */
+  z.object({ type: z.literal('chores'), session }),
   /** Tartışmada "hazırım". */
   z.object({ type: z.literal('ready'), session, ready: z.boolean() }),
   /** Tartışmada aday göster (null = adaylığı geri çek). */
@@ -218,6 +239,11 @@ export interface MeView {
   potions: { heal: boolean; poison: boolean } | null;
   /** Gece sırası sendeyse eylem paneli. */
   turn: NightTurn | null;
+  /**
+   * Aynı anda düzeninde gece mini oyunu (hayattaysan, rolün olsa da olmasa da): false = sürüyor,
+   * true = bitti. Sıralı düzende ya da gündüz null.
+   */
+  chores: boolean | null;
   /** Kurtların gizli sohbeti (yalnızca kurtlara). */
   wolfChat: ChatMsg[] | null;
 }
@@ -249,6 +275,12 @@ export interface WerewolfView {
   session: number;
   /** Bu gecenin sırası (ayarlardan çıkar, herkese aynı). */
   nightSteps: NightStep[];
+  /** Bu gecenin turları: sıralı düzende her adım tek başına, aynı anda düzeninde birlikte. */
+  nightStages: NightStep[][];
+  nightMode: NightMode;
+  /** Şu anki tur (nightStages içinde); gece değilse -1. */
+  stageIndex: number;
+  /** Şu anki turun ilk adımı (eski istemciler için). */
   nightStep: NightStep | null;
   endsAt: number;
   serverNow: number;

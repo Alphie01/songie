@@ -307,6 +307,12 @@ describe('song-guess over sockets', () => {
     expect(room.lastStandings).toHaveLength(1);
     const me = await app.http.inject({ method: 'GET', url: '/api/me', headers: { authorization: `Bearer ${(s.socket.auth as { token: string }).token}` } });
     expect(me.json().stats.bestStreak).toBe(1);
+    // Oyuna özel istatistikte tek kişilik oyunun skoru da en yüksek skora girer.
+    const stats = await app.http.inject({ method: 'GET', url: '/api/me/stats/song-guess', headers: { authorization: `Bearer ${(s.socket.auth as { token: string }).token}` } });
+    expect(stats.json()).toMatchObject({ gamesPlayed: 1, wins: 0, bestStreak: 1 });
+    expect(stats.json().bestScore).toBeGreaterThan(0);
+    expect(me.json().stats.bestScore).toBe(0);
+    expect((await app.http.inject({ method: 'GET', url: '/api/me/stats/nope', headers: { authorization: `Bearer ${(s.socket.auth as { token: string }).token}` } })).statusCode).toBe(404);
     s.socket.close();
   }, 20_000);
 

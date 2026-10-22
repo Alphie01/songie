@@ -844,3 +844,144 @@ describe('bağlantı ve oda sahibi', () => {
     expect(roles.filter((r) => r === 'wolf')).toHaveLength(1);
   });
 });
+
+describe('gece düzeni: aynı anda', () => {
+  const SIM = { nightMode: 'simultaneous' } as const;
+  const roleless = [HUNTER, FOOL, VIL];
+
+  it('ilk turda bütün roller birlikte, ikinci turda cadı uyanır', async () => {
+    const { h, s } = await setup({ settings: SIM });
+    const t0 = h.now;
+    expect(s.nightStages).toEqual([['cupid', 'wolves', 'seer', 'doctor'], ['witch']]);
+    expect(h.view(VIL).stageIndex).toBe(0);
+    for (const [id, st] of [[CUPID, 'cupid'], [W1, 'wolves'], [SEER, 'seer'], [DOC, 'doctor']] as const) {
+      expect(h.view(id).me!.turn?.step).toBe(st);
+    }
+    expect(h.view(WITCH).me!.turn).toBeNull();
+    await ok(h, W1, { type: 'wolfVote', session: s.session, target: VIL });
+    await ok(h, W2, { type: 'wolfVote', session: s.session, target: VIL });
+    await ok(h, SEER, { type: 'seer', session: s.session, target: W1 });
+    await ok(h, DOC, { type: 'doctor', session: s.session, target: SEER });
+    await ok(h, CUPID, { type: 'cupid', session: s.session, a: HUNTER, b: FOOL });
+    endStep(h, s);
+    expect(s.stepIndex).toBe(1);
+    expect(h.view(WITCH).me!.turn).toMatchObject({ step: 'witch', victim: VIL });
+    endStep(h, s);
+    expect(s.phase).toBe('discuss');
+    expect(s.dead).toEqual([VIL]);
+    expect(h.now - t0).toBe(2 * ROLE_MS);
+  });
+
+  it('cadı yoksa gece tek tur; ikinci gece okçu ilk tura girmez', async () => {
+    const { h, s } = await setup({ settings: SIM, roles: { ...FULL, witch: 0 } });
+    expect(s.nightStages).toEqual([['cupid', 'wolves', 'seer', 'doctor']]);
+    endNight(h, s);
+    await ok(h, h.ctx.hostId(), { type: 'hostSkip', session: s.session });
+    h.advance(VERDICT);
+    expect(s.nightStages).toEqual([['wolves', 'seer', 'doctor']]);
+  });
+
+  it('yaşayan herkes mini oyun görür; rolü olan da olmayan da aynı alanları alır', async () => {
+    const { h, s } = await setup({ settings: SIM });
+    for (const id of s.seats) expect(h.view(id).me!.chores).toBe(false);
+    await ok(h, VIL, { type: 'chores', session: s.session });
+    h.advance(TICK);
+    expect(h.view(VIL).me!.chores).toBe(true);
+    const keys = [SEER, VIL, W1].map((id) => Object.keys(h.view(id).me!).sort());
+    expect(keys[1]).toEqual(keys[0]);
+    expect(keys[2]).toEqual(keys[0]);
+    // Gündüz mini oyun yok.
+    endNight(h, s);
+    expect(h.view(VIL).me!.chores).toBeNull();
+  });
+
+  it('sıralı düzende mini oyun yok', async () => {
+    const { h, s } = await setup();
+    expect(h.view(VIL).me!.chores).toBeNull();
+    expect(await h.act(VIL, { type: 'chores', session: s.session })).toMatchObject({ ok: true, stale: true });
+  });
+
+  it('gece görünümleri rol kartı dışında herkese aynı', async () => {
+    const { h, s } = await setup({ settings: SIM });
+    const check = () => {
+      const base = withoutMe(h.view(VIL));
+      for (const id of s.seats) expect(withoutMe(h.view(id)), id).toEqual(base);
+    };
+    await ok(h, SEER, { type: 'seer', session: s.session, target: W1 });
+    await ok(h, FOOL, { type: 'chores', session: s.session });
+    h.advance(TICK);
+    check();
+    endStep(h, s);
+    check();
+  });
+
+  it('ölüler mini oyun oynamaz', async () => {
+    const { h, s } = await setup({ settings: SIM });
+    s.dead.push(VIL);
+    expect(h.view(VIL).me!.chores).toBeNull();
+    await fail(h, VIL, { type: 'chores', session: s.session }, /Ölüler/);
+  });
+});
+
+describe('gece erken bitiş', () => {
+  it('kapalıyken herkes bitirse de tur süre sonunda biter', async () => {
+    const { h, s } = await setup({ settings: { nightMode: 'simultaneous' } });
+    await ok(h, CUPID, { type: 'cupid', session: s.session, a: HUNTER, b: FOOL });
+    await ok(h, W1, { type: 'wolfVote', session: s.session, target: VIL });
+    await ok(h, W2, { type: 'wolfVote', session: s.session, target: VIL });
+    await ok(h, SEER, { type: 'seer', session: s.session, target: W1 });
+    await ok(h, DOC, { type: 'doctor', session: s.session, target: SEER });
+    for (const id of [HUNTER, WITCH, FOOL, VIL]) await ok(h, id, { type: 'chores', session: s.session });
+    expect(s.stepIndex).toBe(0);
+  });
+
+  it('aynı anda: roller eylemini, diğerleri mini oyunu bitirince tur hemen biter', async () => {
+    const { h, s } = await setup({ settings: { nightMode: 'simultaneous', nightEndsEarly: true } });
+    const t0 = h.now;
+    await ok(h, CUPID, { type: 'cupid', session: s.session, a: HUNTER, b: FOOL });
+    await ok(h, W1, { type: 'wolfVote', session: s.session, target: VIL });
+    await ok(h, W2, { type: 'wolfVote', session: s.session, target: SEER });
+    await ok(h, SEER, { type: 'seer', session: s.session, target: W1 });
+    await ok(h, DOC, { type: 'doctor', session: s.session, target: SEER });
+    for (const id of [HUNTER, WITCH, FOOL, VIL]) await ok(h, id, { type: 'chores', session: s.session });
+    // Kurtlar henüz aynı kişide birleşmedi.
+    expect(s.stepIndex).toBe(0);
+    await ok(h, W2, { type: 'wolfVote', session: s.session, target: VIL });
+    expect(s.stepIndex).toBe(1);
+    expect(h.now).toBe(t0);
+    // İkinci tur: cadı ve diğerleri (rol sahipleri de artık mini oyunda).
+    for (const id of s.seats.filter((x) => x !== WITCH)) await ok(h, id, { type: 'chores', session: s.session });
+    expect(s.phase).toBe('night');
+    await ok(h, WITCH, { type: 'witch', session: s.session, heal: true, poison: null });
+    expect(s.phase).toBe('discuss');
+    expect(s.dead).toEqual([]);
+  });
+
+  it('aynı anda: kopan oyuncu beklenmez', async () => {
+    const { h, s } = await setup({ n: 6, roles: { wolf: 1, seer: 0, doctor: 0, hunter: 0, witch: 0, cupid: 0, fool: 0 }, settings: { nightMode: 'simultaneous', nightEndsEarly: true } });
+    await ok(h, 'p0', { type: 'wolfVote', session: s.session, target: 'p1' });
+    for (const id of ['p1', 'p2', 'p3', 'p4']) await ok(h, id, { type: 'chores', session: s.session });
+    expect(s.phase).toBe('night');
+    h.setConnected('p5', false);
+    expect(s.phase).toBe('discuss');
+  });
+
+  it('sıralı: adımın rol sahibi bitirince adım hemen biter; sahibi yoksa süre dolar', async () => {
+    const { h, s } = await setup({ settings: { nightEndsEarly: true } });
+    const t0 = h.now;
+    await ok(h, CUPID, { type: 'cupid', session: s.session, a: HUNTER, b: FOOL });
+    expect(step(s)).toBe('wolves');
+    await ok(h, W1, { type: 'wolfVote', session: s.session, target: VIL });
+    expect(step(s)).toBe('wolves');
+    await ok(h, W2, { type: 'wolfVote', session: s.session, target: VIL });
+    expect(step(s)).toBe('seer');
+    expect(h.now).toBe(t0);
+    s.dead.push(DOC);
+    await ok(h, SEER, { type: 'seer', session: s.session, target: W1 });
+    expect(step(s)).toBe('doctor');
+    h.advance(ROLE_MS - 1);
+    expect(step(s)).toBe('doctor');
+    h.advance(1);
+    expect(step(s)).toBe('witch');
+  });
+});

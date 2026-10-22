@@ -1,0 +1,246 @@
+{
+  "view": {
+    "phase": "discuss",
+    "day": 1,
+    "session": 7,
+    "nightSteps": [
+      "cupid",
+      "wolves",
+      "seer",
+      "doctor",
+      "witch"
+    ],
+    "nightStages": [
+      [
+        "cupid"
+      ],
+      [
+        "wolves"
+      ],
+      [
+        "seer"
+      ],
+      [
+        "doctor"
+      ],
+      [
+        "witch"
+      ]
+    ],
+    "nightMode": "sequential",
+    "stageIndex": -1,
+    "nightStep": null,
+    "endsAt": 1160000,
+    "serverNow": 1100000,
+    "seats": [
+      {
+        "id": "p0",
+        "alive": true,
+        "role": null,
+        "ready": false,
+        "voted": false,
+        "nominatedBy": [
+          "p2"
+        ]
+      },
+      {
+        "id": "p1",
+        "alive": true,
+        "role": null,
+        "ready": false,
+        "voted": false,
+        "nominatedBy": []
+      },
+      {
+        "id": "p2",
+        "alive": true,
+        "role": null,
+        "ready": false,
+        "voted": false,
+        "nominatedBy": [
+          "p0",
+          "p1"
+        ]
+      },
+      {
+        "id": "p3",
+        "alive": true,
+        "role": null,
+        "ready": false,
+        "voted": false,
+        "nominatedBy": []
+      },
+      {
+        "id": "p4",
+        "alive": false,
+        "role": "hunter",
+        "ready": false,
+        "voted": false,
+        "nominatedBy": []
+      },
+      {
+        "id": "p5",
+        "alive": true,
+        "role": null,
+        "ready": true,
+        "voted": false,
+        "nominatedBy": []
+      },
+      {
+        "id": "p6",
+        "alive": true,
+        "role": null,
+        "ready": false,
+        "voted": false,
+        "nominatedBy": []
+      },
+      {
+        "id": "p7",
+        "alive": false,
+        "role": "fool",
+        "ready": false,
+        "voted": false,
+        "nominatedBy": []
+      },
+      {
+        "id": "p8",
+        "alive": true,
+        "role": null,
+        "ready": false,
+        "voted": false,
+        "nominatedBy": []
+      }
+    ],
+    "roleCounts": {
+      "wolf": 2,
+      "villager": 1,
+      "seer": 1,
+      "doctor": 1,
+      "hunter": 1,
+      "witch": 1,
+      "cupid": 1,
+      "fool": 1
+    },
+    "candidates": [
+      "p0",
+      "p2"
+    ],
+    "runoff": false,
+    "liveVotes": null,
+    "myVote": null,
+    "myNomination": "p0",
+    "lastNight": {
+      "night": 1,
+      "deaths": [
+        {
+          "id": "p4",
+          "role": "hunter"
+        }
+      ]
+    },
+    "lastVote": null,
+    "hunter": null,
+    "log": [
+      {
+        "k": "start",
+        "players": 9
+      },
+      {
+        "k": "night",
+        "night": 1
+      },
+      {
+        "k": "dawn",
+        "night": 1,
+        "deaths": [
+          {
+            "id": "p4",
+            "role": "hunter"
+          }
+        ]
+      },
+      {
+        "k": "shot",
+        "hunter": "p4",
+        "target": "p7",
+        "role": "fool"
+      },
+      {
+        "k": "nominate",
+        "by": "p2",
+        "target": "p0"
+      },
+      {
+        "k": "nominate",
+        "by": "p0",
+        "target": "p2"
+      },
+      {
+        "k": "nominate",
+        "by": "p1",
+        "target": "p2"
+      }
+    ],
+    "me": {
+      "role": "seer",
+      "alive": true,
+      "allies": [],
+      "lover": null,
+      "cupidPair": null,
+      "seerResults": [
+        {
+          "night": 1,
+          "id": "p0",
+          "wolf": true
+        }
+      ],
+      "doctorLast": null,
+      "potions": null,
+      "turn": null,
+      "chores": null,
+      "wolfChat": null
+    },
+    "ghost": null,
+    "winner": null,
+    "winReason": null,
+    "roles": null,
+    "lovers": null,
+    "secret": null,
+    "finishAt": 0
+  },
+  "settings": {
+    "roles": {
+      "wolf": 2,
+      "seer": 1,
+      "doctor": 1,
+      "hunter": 1,
+      "witch": 1,
+      "cupid": 1,
+      "fool": 1
+    },
+    "roleSeconds": 20,
+    "discussSeconds": 60,
+    "voteSeconds": 30,
+    "revealRoles": true,
+    "doctorNoRepeat": true,
+    "openVotes": true,
+    "dayTie": "runoff",
+    "wolfTie": "random",
+    "ghostsSeeRoles": true,
+    "nightMode": "sequential",
+    "nightEndsEarly": false
+  },
+  "me": "p2",
+  "players": [
+    "p0",
+    "p1",
+    "p2",
+    "p3",
+    "p4",
+    "p5",
+    "p6",
+    "p7",
+    "p8",
+    "late"
+  ]
+}

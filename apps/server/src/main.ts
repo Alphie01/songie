@@ -9,7 +9,7 @@ const app = await buildApp({
   allowedOrigins: config.allowedOrigins,
   logger: config.isProd ? { level: 'warn' } : false,
   trustProxy: true,
-  firebaseProjectId: config.firebaseProjectId,
+  firebaseProjectIds: config.firebaseProjectIds,
   minAppVersion: config.minAppVersion,
   appLinks: config.appLinks,
 });

@@ -1,7 +1,7 @@
 /**
  * Mobil uygulamanın widget testleri için gerçek oyun görünümleri üretir:
  * oyunun sunucusu test düzeneğinde oynatılır, her durumun JSON'u
- * `apps/mobile/test/fixtures/<oyun>/<ad>.json` dosyasına yazılır.
+ * `packages/songie_core/test/fixtures/<oyun>/<ad>.json` dosyasına yazılır.
  * Çalıştır: cd apps/server && npx tsx scripts/mobile-fixtures/<oyun>.ts
  */
 import fs from 'node:fs';
@@ -11,7 +11,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 
 export function fixtureWriter(gameId: string) {
-  const dir = path.resolve(here, '../../../mobile/test/fixtures', gameId);
+  const dir = path.resolve(here, '../../../../packages/songie_core/test/fixtures', gameId);
   fs.rmSync(dir, { recursive: true, force: true });
   fs.mkdirSync(dir, { recursive: true });
   const written: string[] = [];

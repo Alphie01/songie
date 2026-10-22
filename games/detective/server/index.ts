@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import type Database from 'better-sqlite3';
 import type { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
 import type { ServerGame } from '@songie/game-kit/server';
+import type { Avatar } from '@songie/shared';
 import type { CaseCard, CasesResponse, DetectiveAction, DetectiveSettings, SessionCard } from '../shared/index.js';
 import { createDetectiveGame, type DetectiveState } from './game.js';
 import { CaseLibrary, DEFAULT_CASES_DIR } from './library.js';
@@ -34,6 +35,26 @@ function sendFile(req: FastifyRequest, reply: FastifyReply, file: string, type: 
 
 const RANK_ORDER = ['Stajyer', 'Komiser Yardımcısı', 'Komiser', 'Başkomiser'];
 
+/** Üyelerin adı ve avatarı: profiller sunucunun `players` tablosunda (aynı veritabanı). */
+function crewLookup(db: Database.Database): (ids: string[]) => SessionCard['crew'] {
+  let stmt: Database.Statement | null = null;
+  try {
+    stmt = db.prepare('SELECT id, nick, avatar FROM players WHERE id = ?');
+  } catch {
+    // Tablo yoksa (oyunun kendi testleri) üyeler adsız kalır.
+  }
+  return (ids) =>
+    ids.flatMap((id) => {
+      const row = stmt?.get(id) as { id: string; nick: string; avatar: string } | undefined;
+      if (!row) return [];
+      try {
+        return [{ id: row.id, nick: row.nick, avatar: JSON.parse(row.avatar) as Avatar }];
+      } catch {
+        return [];
+      }
+    });
+}
+
 export function detectiveServer(deps: {
   db: Database.Database;
   casesDir?: string;
@@ -41,6 +62,7 @@ export function detectiveServer(deps: {
   const library = new CaseLibrary(deps.casesDir ?? DEFAULT_CASES_DIR);
   const sessions = new SessionStore(deps.db);
   const game = createDetectiveGame({ library, sessions });
+  const crewOf = crewLookup(deps.db);
 
   return {
     ...game,
@@ -74,7 +96,20 @@ export function detectiveServer(deps: {
           ? sessions.forMember(profileId, 'active').flatMap((s) => {
               const c = library.get(s.slug)?.data;
               if (!c) return [];
-              return [{ id: s.id, slug: s.slug, title: c.meta.title, act: s.act + 1, acts: c.acts.length, hoursSpent: s.hoursSpent, updatedAt: s.updatedAt, members: s.members }];
+              return [
+                {
+                  id: s.id,
+                  slug: s.slug,
+                  title: c.meta.title,
+                  act: s.act + 1,
+                  acts: c.acts.length,
+                  hoursSpent: s.hoursSpent,
+                  hoursBudget: c.meta.hoursBudget,
+                  updatedAt: s.updatedAt,
+                  members: s.members,
+                  crew: crewOf(s.members),
+                },
+              ];
             })
           : [];
         return { cases, sessions: active };

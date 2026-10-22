@@ -1,4 +1,4 @@
-import type { NightStep, Phase, Role, Side, WinReason, Winner } from '../shared/index.js';
+import type { NightMode, NightStep, Phase, Role, Side, WinReason, Winner } from '../shared/index.js';
 
 export const s = {
   name: 'Kurt Adam',
@@ -43,6 +43,7 @@ export const s = {
     doctor: 'Doktor',
     witch: 'Cadı',
   } satisfies Record<NightStep, string>,
+  allWake: 'Herkes aynı anda uyanıyor. Ekranındaki işi yap, kimseye gösterme.',
   stepWakes: {
     cupid: 'Aşk okçusu uyanıyor ve iki kişiyi âşık ediyor.',
     wolves: 'Kurtlar uyanıyor ve kurbanını seçiyor.',
@@ -70,7 +71,20 @@ export const s = {
     less: (r: string) => `${r} sayısını azalt`,
     more: (r: string) => `${r} sayısını artır`,
     roleSeconds: 'Gece rol süresi',
-    roleSecondsHint: 'Her rol gece bu kadar süre uyanık kalır. Rol erken bitirse de süre dolmadan sıra geçmez; böylece kimse kimin hangi rolde olduğunu süreden anlayamaz.',
+    roleSecondsHint: 'Her rol gece bu kadar süre uyanık kalır. Erken bitiş kapalıysa rol erken bitirse de süre dolmadan sıra geçmez; böylece kimse kimin hangi rolde olduğunu süreden anlayamaz.',
+    nightMode: 'Gece düzeni',
+    nightModeOpts: { sequential: 'Sıralı', simultaneous: 'Aynı anda' } satisfies Record<NightMode, string>,
+    nightModeHint: {
+      sequential: 'Roller tek tek uyanır. Kim hangi sırada telefonuna bakıyor, dikkatli olan rolleri tahmin edebilir.',
+      simultaneous:
+        'Bütün roller birlikte uyanır; cadı kurbanı görmek için kısa bir ikinci turda oynar. Rolü olmayanlar ve işini bitirenler o sırada ateşböceği toplar, böylece herkes aynı anda telefonuyla uğraşır.',
+    } satisfies Record<NightMode, string>,
+    nightEnd: 'Gece bitişi',
+    nightEndsEarly: 'Herkes bitirince gece erken bitsin',
+    nightEndsEarlyHint: {
+      sequential: 'Sıralı düzende erken bitiş, rolün sahibinin ölü olup olmadığını süreden ele verebilir.',
+      simultaneous: 'Rolü olanlar seçimini, diğerleri ateşböceklerini bitirince tur süreyi beklemeden kapanır.',
+    } satisfies Record<NightMode, string>,
     discussSeconds: 'Tartışma süresi',
     discussHint: 'Hayattaki herkes "Hazırım" derse tartışma erken biter.',
     voteSeconds: 'Oylama süresi',
@@ -147,6 +161,14 @@ export const s = {
     witchHint: 'Kararını bir kez verirsin. Süre dolarsa iksir kullanmadan geçersin.',
     witchDone: 'Kararını verdin. Süre dolunca uyuyacaksın.',
     stepDone: 'Seçimin kaydedildi. Süre dolunca uyuyacaksın.',
+    // Aynı anda düzeni: mini oyun
+    choresTitle: 'Ateşböceklerini topla',
+    choresHint: (left: number) => `Yanan ateşböceğine dokun. ${left} tane kaldı.`,
+    choresWait: 'Herkes işini yaparken sen de ateşböceklerini topla.',
+    choresDone: 'Hepsini topladın. Gece bitene kadar toplamaya devam edebilirsin.',
+    choresCaught: (n: number) => `${n} ateşböceği`,
+    firefly: 'Ateşböceği',
+    fireflyOff: 'Boş çalı',
     stepLeft: (sec: number) => `${sec} sn`,
     deadNight: 'Ölüler gece uyanmaz. Hayaletler kanalında olanları izleyebilirsin.',
 
@@ -246,7 +268,7 @@ export const s = {
     title: 'Nasıl oynanır',
     steps: [
       ['Rolünü gizlice öğren', 'Rol kartına basılı tutunca rolün görünür. Kurtlar birbirini tanır; diğer herkes yalnızca kendini bilir.'],
-      ['Gece', 'Anlatıcı sunucudur. Roller sırayla uyanır: aşk okçusu (ilk gece), kurtlar, kahin, doktor, cadı. Her rolün süresi sabittir; ekranın uyanmazsa uyumaya devam et.'],
+      ['Gece', 'Anlatıcı sunucudur. Sıralı düzende roller tek tek uyanır: aşk okçusu (ilk gece), kurtlar, kahin, doktor, cadı; ekranın uyanmazsa uyumaya devam et. Aynı anda düzeninde herkes birlikte uyanır, rolü olmayanlar ateşböceği toplar.'],
       ['Sabah', 'Gece ölenler açıklanır. Avcı öldüyse son atışını yapar.'],
       ['Tartışma', 'Hayattakiler konuşur, şüphelendiklerini aday gösterir. Herkes hazır olunca ya da süre dolunca oylamaya geçilir.'],
       ['Oylama', 'Herkes aynı anda adaylardan birine ya da "Kimseyi asma"ya oy verir. En çok oyu alan asılır.'],

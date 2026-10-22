@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "527145095492",
+    "project_id": "itiraf-kosesi-app",
+    "storage_bucket": "itiraf-kosesi-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:527145095492:android:53acfa40e9b7f20195c711",
+        "android_client_info": {
+          "package_name": "com.monolithyazilim.itirafkosesi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "527145095492-on8emsm6p5q3l79iu0c2kt5suh2je38s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA32S4PCpeNnou_pwl7BYnjQ-sj-rhOr0M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "527145095492-on8emsm6p5q3l79iu0c2kt5suh2je38s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "527145095492-0n6ao52k2lst16hpnie89kjm61k39uor.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.monolithyazilim.itirafkosesi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

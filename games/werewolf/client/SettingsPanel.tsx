@@ -2,6 +2,7 @@ import { useId } from 'react';
 import type { SettingsPanelProps } from '@songie/game-kit/client';
 import {
   DISCUSS_SECONDS_OPTIONS,
+  NIGHT_MODES,
   ROLE_SECONDS_OPTIONS,
   SPECIAL_ROLES,
   VOTE_SECONDS_OPTIONS,
@@ -161,6 +162,18 @@ export function SettingsPanel({ settings, editable, onChange, section, players }
 
       {showSecondary && (
         <>
+          <Group title={s.settings.nightMode} hint={s.settings.nightModeHint[settings.nightMode]}>
+            <Chips
+              options={NIGHT_MODES}
+              value={settings.nightMode}
+              label={(v) => s.settings.nightModeOpts[v]}
+              editable={editable}
+              onPick={(v) => set({ nightMode: v })}
+            />
+          </Group>
+          <Stack title={s.settings.nightEnd} hint={s.settings.nightEndsEarlyHint[settings.nightMode]}>
+            <Toggle label={s.settings.nightEndsEarly} on={settings.nightEndsEarly} editable={editable} onChange={(v) => set({ nightEndsEarly: v })} />
+          </Stack>
           <Group title={s.settings.roleSeconds} hint={s.settings.roleSecondsHint}>
             <Chips options={ROLE_SECONDS_OPTIONS} value={settings.roleSeconds as never} label={s.settings.sec} editable={editable} onPick={(v) => set({ roleSeconds: v })} />
           </Group>

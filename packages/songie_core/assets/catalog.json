@@ -1,0 +1,2125 @@
+{
+  "categories": [
+    {
+      "id": "all",
+      "label": "Tümü"
+    },
+    {
+      "id": "takim",
+      "label": "Takım"
+    },
+    {
+      "id": "parti",
+      "label": "Parti & İtiraf"
+    },
+    {
+      "id": "gizli",
+      "label": "Gizli Roller"
+    },
+    {
+      "id": "kart",
+      "label": "Kart"
+    },
+    {
+      "id": "muzik",
+      "label": "Müzik"
+    },
+    {
+      "id": "dedektif",
+      "label": "Dedektif"
+    }
+  ],
+  "games": [
+    {
+      "id": "song-guess",
+      "name": "Şarkıyı Bil",
+      "pitch": "Şarkıyı 0,1 saniyeden bil",
+      "icon": "music",
+      "category": "muzik",
+      "mono": "ŞB",
+      "teams": false,
+      "minPlayers": 1,
+      "maxPlayers": 12,
+      "playersLabel": "1–12 oyuncu",
+      "soloSettings": {
+        "rounds": 0,
+        "pools": [
+          "tr-top",
+          "global-top"
+        ],
+        "difficulty": "medium",
+        "timer": 0,
+        "startAt": "random",
+        "startStage": 0,
+        "easySearch": false,
+        "artistCredit": true
+      },
+      "guide": {
+        "summary": "Şarkı önce 0,1 saniyelik bir parçayla çalar, kimse bilemezse parça uzar. Şarkıyı herkesten önce ve en kısa parçada bulan en çok puanı alır.",
+        "players": "1–12 oyuncu, herkes kendi için",
+        "duration": "10 şarkı yaklaşık 10–15 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Her turda bir şarkının önizlemesinden parçalar çalar. Şarkıyı olabildiğince kısa parçada ve hızlı bulmaya çalış.\n\nOyun seçilen tur sayısı kadar sürer ya da tur sayısı sınırsızsa oda sahibi bitirene kadar devam eder. Tek başına da oynayabilirsin; o zaman tur sınırı yoktur ve serini büyütmeye çalışırsın."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "“Hazır ol” geri sayımından sonra ilk parça açılır. Çal butonuyla parçayı istediğin kadar tekrar dinleyebilirsin.\n\n“Şarkıyı bul” kutusuna şarkının ya da sanatçının adını yaz, önerilerden doğru şarkıyı seç. Her parçada tek tahmin hakkın var. Bilmiyorsan “Pas” de; son parçada bu buton “Pes et” olur.\n\nBilmeyen herkes pas deyince ya da yanlış tahmin edince sıradaki, daha uzun parça herkese açılır. Herkes bilince ya da son parça da bitince şarkı açıklanır.",
+            "tip": "Beklerken açılmış parçalara çubuktan dokunup tekrar dinleyebilirsin."
+          },
+          {
+            "title": "Parçalar",
+            "items": [
+              {
+                "term": "0,1 sn",
+                "text": "İlk parça. Burada bilen 1000 puanla başlar.",
+                "tone": "purple"
+              },
+              {
+                "term": "0,5 sn",
+                "text": "İkinci parça, 700 puan.",
+                "tone": "green"
+              },
+              {
+                "term": "2 sn",
+                "text": "Üçüncü parça, 450 puan.",
+                "tone": "yellow"
+              },
+              {
+                "term": "8 sn",
+                "text": "Dördüncü parça, 250 puan.",
+                "tone": "orange"
+              },
+              {
+                "term": "15 sn",
+                "text": "Son parça, 100 puan. Buton “Pes et” olur.",
+                "tone": "red"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Puan, bildiğin parçanın taban puanı ile hız bonusunun toplamıdır. Parça açılır açılmaz bilirsen 200’e kadar hız bonusu alırsın; beklemek bonusu eritir. Süresiz oyunda bonus ilk 15 saniyeye göre hesaplanır. Şarkıyı o turda ilk bilen ayrıca 50 puan alır.\n\n“Sanatçıyı bilene puan” açıksa sanatçısı doğru ama şarkısı yanlış tahmin puanın %30’unu getirir. Sonra şarkıyı da bulursan bu puan tam puanla değiştirilir.\n\nArt arda bildiğin şarkılar serini büyütür. Oyun sonunda en çok puanı olan kazanır.",
+            "tip": "Turu sürerken başkalarının puanını değil, kimin hangi parçada bildiğini görürsün; tahminler hiç gösterilmez."
+          },
+          {
+            "title": "Ayarlar",
+            "body": "Ayarları oda sahibi seçer. Oyun sürerken de değiştirilebilir; değişiklikler sıradaki şarkıdan itibaren geçerli olur.",
+            "items": [
+              {
+                "term": "Liste",
+                "text": "Şarkıların geleceği listeler. Deezer ya da Spotify playlist linki ekleyebilirsin.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Zorluk",
+                "text": "Kolaydan İmkânsız’a; ne kadar az dinlenen şarkıların geleceğini belirler. Varsayılan: Orta.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tur sayısı",
+                "text": "5, 10, 15, 20 ya da Sınırsız. Varsayılan: 10.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Süre",
+                "text": "Her parça için Süresiz, 10, 20 ya da 30 sn. Varsayılan: Süresiz.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Oynatma",
+                "text": "Önizleme rastgele bir yerden ya da baştan başlar. Varsayılan: Rastgele bir yerden.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tahmin şuradan başlasın",
+                "text": "Oyunu daha uzun bir parçadan başlatır; öncekiler baştan açık gelir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kolay arama",
+                "text": "Öneriler yalnızca seçili listelerden gelir. Varsayılan: Kapalı.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Sanatçıyı bilene puan",
+                "text": "Sadece sanatçıyı bilen puanın %30’unu alır. Varsayılan: Açık.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Süresiz oyunda oda sahibi, kimse bir şey yapmıyorsa “Sonraki parçayı herkese aç” ile oyunu ilerletebilir.\n\nŞarkı açıklandıktan sonra herkes “Sonraki şarkı”ya basınca yeni şarkı gelir. Oda sahibi “Beklemeden geç” ile beklemeyi atlayabilir; süreli oyunda sonuç ekranı kendiliğinden kapanır.",
+            "tip": "Bilmiyorsan hemen pas de: bilmeyen herkes pas deyince sıradaki parça beklemeden açılır."
+          }
+        ]
+      }
+    },
+    {
+      "id": "taboo",
+      "name": "Tabu",
+      "pitch": "Yasaklı kelimeleri söylemeden takımına anlat",
+      "icon": "cards",
+      "category": "takim",
+      "mono": "TB",
+      "teams": true,
+      "minPlayers": 4,
+      "maxPlayers": 12,
+      "playersLabel": "4–12 · iki takım",
+      "soloSettings": null,
+      "guide": {
+        "summary": "İki takım sırayla anlatır. Anlatıcı kartındaki kelimeyi, yasaklı 5 kelimeyi söylemeden takımına buldurmaya çalışır.",
+        "players": "4–12 oyuncu, iki takım (her takımda en az 2 kişi)",
+        "duration": "20–40 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Yeşil takım ve Mor takım sırayla anlatır. Her turda anlatan takımdan bir kişi anlatıcı olur, süre bitene kadar olabildiğince çok kart buldurur.\n\nOyun bittiğinde puanı yüksek olan takım kazanır; puanlar eşitse berabere biter."
+          },
+          {
+            "title": "Kim neyi görür",
+            "items": [
+              {
+                "term": "Anlatıcı",
+                "text": "Kartı görür. Kelimeyi ve yasaklı kelimeleri söylemeden anlatır.",
+                "tone": "green"
+              },
+              {
+                "term": "Tahmin eden takım",
+                "text": "Kartı göremez. Anlatıcıyı dinler, cevabı yüksek sesle söyler.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Rakip takım",
+                "text": "Kartı görür ve anlatıcıyı denetler. Yasaklı kelime söylenirse “Tabu!”ya basar.",
+                "tone": "purple"
+              }
+            ]
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Sıradaki anlatıcı “Anlatmaya başla”ya basınca süre işlemeye başlar. Anlatıcı bağlı değilse oda sahibi onun yerine başlatabilir ya da “Anlatıcıyı atla” diyebilir.\n\nTakımın kelimeyi bilince anlatıcı “Doğru”ya basar. Zor bir kartı “Pas” ile geçebilir. Yanlışlıkla basılırsa “Geri al” son işaretlemeyi geri alır.\n\nSüre bitince yarım kalan kart desteye döner, sıra diğer takıma geçer. Her takımda anlatıcılık sırayla döner.",
+            "tip": "Anlatırken kartın kelimesini de söylemek tabudur; parçalarını ya da eş anlamlısını kullan."
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Her “Doğru” anlatan takıma 1 puan kazandırır. Pas puan kazandırmaz ama pas hakkı sınırlıdır.\n\nTabu cezası açıksa rakip takım “Tabu!”ya her bastığında anlatan takımdan 1 puan düşer ve sıradaki karta geçilir. Aynı karta iki kişi birden basarsa yalnızca biri sayılır."
+          },
+          {
+            "title": "Ayarlar",
+            "body": "Ayarları oda sahibi seçer.",
+            "items": [
+              {
+                "term": "Takımlar",
+                "text": "Bir oyuncuya dokunarak takımını değiştir. Takımı seçilmeyenler başlarken dengeli dağıtılır.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kategoriler",
+                "text": "Kartların geleceği konular. Eklenen kartlar “Arkadaş kartları”na girer. Yatak odası (+18) ve Sınırsız (+18) açık cinsel içerik içerir ve varsayılan olarak kapalıdır.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tur süresi",
+                "text": "60, 90 ya da 120 sn. Varsayılan: 60 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Pas hakkı",
+                "text": "Her tur için 3, 5 ya da Sınırsız. Varsayılan: 3.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Takım başına anlatma",
+                "text": "2, 4, 6 ya da oda sahibi bitirene kadar. Varsayılan: 4 (toplam 8 tur).",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tabu cezası",
+                "text": "Açıksa her tabu 1 puan götürür. Varsayılan: Açık.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Ayarlardaki “Kart ekle” ile kendi kartlarınızı yazabilirsiniz: bir kelime ve 5 yasaklı kelime.\n\nRakip takımdaysan kartı göreceğin için tahmin etme; işin anlatıcıyı dikkatle dinlemek.",
+            "tip": "Pas hakkını erken harcama; turun sonuna zor bir kart kalabilir."
+          }
+        ]
+      }
+    },
+    {
+      "id": "werewolf",
+      "name": "Kurt Adam",
+      "pitch": "Köy uyurken kurtlar avlanır; gündüz kimin kurt olduğunu bulup asın",
+      "icon": "user",
+      "category": "gizli",
+      "mono": "KA",
+      "teams": false,
+      "minPlayers": 5,
+      "maxPlayers": 16,
+      "playersLabel": "5–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Köyün içine kurtlar saklanmış. Geceleri kurtlar gizlice avlanır, gündüz köy tartışıp birini asar. Anlatıcı sunucudur; herkes oyuncudur.",
+        "players": "5–16 oyuncu, gizli roller",
+        "duration": "20–45 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Oyun başında herkes gizlice bir rol alır. Rolünü görmek için karta basılı tut; yalnızca basılıyken açılır.\n\nKöy, bütün kurtları asmaya çalışır. Kurtlar, köylülere sayıca yetişene kadar her gece birini avlar. Kurtlar birbirini tanır; diğer herkes yalnızca kendi rolünü bilir.",
+            "tip": "Ekranını kimseye gösterme: gece herkesin ekranı aynı süre \"köy uyuyor\" der, sıran gelince yalnızca seninki uyanır."
+          },
+          {
+            "title": "Gece",
+            "body": "Gece iki düzende oynanabilir. Sıralı düzende roller tek tek uyanır: aşk okçusu (yalnızca ilk gece), kurtlar, kahin, doktor, cadı. Her rolün sabit bir süresi vardır (20, 30 ya da 45 sn). Rol erken seçse de sıra süre dolunca geçer; rolün sahibi ölmüş olsa bile adım aynı süre sürer. Böylece kimin hangi rolde olduğu süreden anlaşılmaz.\n\nAynı anda düzeninde bütün roller birlikte uyanır; cadı, kurtların kurbanını görebilmek için kısa bir ikinci turda oynar. Rolü olmayanlar ve işini bitirenler o sırada ekranda ateşböceği toplar. Herkes aynı anda telefonuyla uğraştığı için kimin ne zaman oynadığından rol anlaşılmaz.\n\nErken bitiş ayarı açıksa, gecede yapılacak herkes bitirince adım (ya da tur) süreyi beklemeden kapanır: aynı anda düzeninde rolü olanlar seçimini, diğerleri ateşböceklerini bitirince. Sıralı düzende bu, rolün sahibinin ölü olup olmadığını süreden ele verebilir.\n\nKurtlar kendi aralarında gizli bir sohbetle konuşur ve kurbana oy verir; en çok oyu alan ölür. Beraberlikte ayara göre rastgele biri ölür ya da kimse ölmez. Süre dolunca seçim yapmayan rol eylemsiz geçer."
+          },
+          {
+            "title": "Gündüz",
+            "body": "Sabah gece ölenler açıklanır; ayar açıksa rolleri de. Ardından tartışma başlar (60, 120 ya da 180 sn). Hayattakiler konuşur, ölüler susar.\n\nTartışmada şüphelendiğin birini aday gösterebilirsin. Hayattaki herkes \"Hazırım\" derse ya da süre dolarsa oylamaya geçilir. Herkes aynı anda adaylardan birine ya da \"Kimseyi asma\"ya oy verir; en çok oyu alan, \"Kimseyi asma\"dan fazla oy aldıysa asılır. Hiç aday yoksa o gün kimse asılmaz.\n\nBeraberlikte ayara göre kimse asılmaz ya da berabere kalanlar arasında ikinci tur yapılır (ikinci turda da beraberlik çıkarsa kimse asılmaz)."
+          },
+          {
+            "title": "Roller",
+            "items": [
+              {
+                "term": "Kurt Adam",
+                "text": "Her gece diğer kurtlarla birlikte bir kurban seçer. Kurtlar birbirini tanır ve gece gizlice yazışır.",
+                "tone": "red"
+              },
+              {
+                "term": "Köylü",
+                "text": "Özel gücü yok. Gündüz konuşur, aday gösterir ve oy verir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kahin",
+                "text": "Her gece bir kişinin kurt olup olmadığını öğrenir. Sonucu yalnızca kendisi görür.",
+                "tone": "purple"
+              },
+              {
+                "term": "Doktor",
+                "text": "Her gece bir kişiyi kurtlara karşı korur; kendini de koruyabilir. Ayar açıksa aynı kişiyi üst üste iki gece koruyamaz.",
+                "tone": "green"
+              },
+              {
+                "term": "Avcı",
+                "text": "Gece ya da gündüz ölünce son atışıyla birini yanında götürür. Süre dolarsa atışsız ölür.",
+                "tone": "orange"
+              },
+              {
+                "term": "Cadı",
+                "text": "Kurtların kurbanını görür. Bir iyileştirme iksiriyle kurbanı kurtarabilir, bir zehir iksiriyle birini öldürebilir; her biri oyunda bir kez.",
+                "tone": "purple"
+              },
+              {
+                "term": "Aşk okçusu",
+                "text": "İlk gece iki kişiyi âşık eder. Âşıklar birbirini ve birbirinin tarafını bilir; biri ölünce diğeri de kalp acısından ölür.",
+                "tone": "orange"
+              },
+              {
+                "term": "Köyün delisi",
+                "text": "Gündüz oylamasında asılırsa tek başına kazanır. Gece ölürse kaybeder.",
+                "tone": "yellow"
+              }
+            ],
+            "tip": "Oda sahibi lobide kurt sayısını ve açılacak rolleri seçer; kalan herkes köylü olur. \"Önerilen dağılım\" odadaki kişi sayısına göre doldurur."
+          },
+          {
+            "title": "Kazanma",
+            "items": [
+              {
+                "term": "Köy",
+                "text": "Bütün kurtlar ölünce kazanır.",
+                "tone": "green"
+              },
+              {
+                "term": "Kurtlar",
+                "text": "Hayattaki kurt sayısı diğerlerine eşit ya da fazla olunca kazanır.",
+                "tone": "red"
+              },
+              {
+                "term": "Köyün delisi",
+                "text": "Gündüz asılırsa oyun hemen biter, yalnız o kazanır.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Âşıklar",
+                "text": "Biri kurt, biri köyden olan âşıklar son iki kişi kalırsa ikisi birlikte kazanır.",
+                "tone": "orange"
+              }
+            ],
+            "body": "Ölen avcı her zaman önce ateş eder; kazanan ondan sonra belli olur. Oyun bitince bütün roller ve gece olanlar açılır."
+          },
+          {
+            "title": "Ölüler ve ayarlar",
+            "body": "Ölüler oy veremez, aday gösteremez ve konuşmaz. Hayaletler kanalında birbirleriyle yazışabilir; ayar açıksa bütün rolleri ve gece olanları görür.\n\nDiğer ayarlar: ölenin rolü açıklansın mı, açık ya da gizli oy, oylama süresi (30, 45 ya da 60 sn). Bağlantısı kopan oyuncunun gece sırası süreyle geçer; oda sahibi tartışmayı ve oylamayı erken bitirebilir.",
+            "tip": "Olay günlüğü kimin kimi aday gösterdiğini ve oyların nasıl dağıldığını tutar; çelişkileri orada ara."
+          }
+        ]
+      }
+    },
+    {
+      "id": "detective",
+      "name": "Dedektif Masası",
+      "pitch": "Belgeleri birlikte incele, izleri seç, faili ekipçe bul",
+      "icon": "search",
+      "category": "dedektif",
+      "mono": "DM",
+      "teams": false,
+      "minPlayers": 1,
+      "maxPlayers": 8,
+      "playersLabel": "1–8 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Bir vaka dosyasını ekipçe açarsınız: ifadeler, raporlar, telefon kayıtları, fişler, fotoğraflar. Hangi izin peşine düşeceğinize birlikte karar verir, sonunda faili, yöntemi ve nedeni ortak bir formla açıklarsınız.",
+        "players": "1–8 oyuncu, herkes aynı ekipte",
+        "duration": "30–150 dk, istenirse birkaç oturumda",
+        "sections": [
+          {
+            "title": "Bölümler",
+            "body": "Her vaka 2–5 bölümden oluşur. Bölüm bir açılış sahnesiyle başlar ve dosyaya ilk belgeleri ekler. Herkes \"Okudum, devam\" deyince ya da oda sahibi beklemeden başlatınca masaya geçilir.\n\nBölümün kilit izleri açılınca ya da bölüme ayrılan saat harcanınca sonraki bölüm gelir. Önceki sahneleri panodan yeniden okuyabilirsiniz."
+          },
+          {
+            "title": "İzler ve saat bütçesi",
+            "body": "Sağ sütunda açılabilir izler durur: \"Kapıcıyla yeniden görüş\", \"Banka kayıtlarını iste\" gibi. Her izin bir saat maliyeti vardır ve vakanın bir saat bütçesi bulunur. Bütçe aşılabilir; oyun sizi durdurmaz, ama aşılan her 2 saat sonuçtan 1 puan düşer (en fazla 10).\n\nOylama modunda biri bir iz önerir, gereken evet sayısına ulaşınca iz açılır. Aynı anda tek öneri olur; öneren ya da oda sahibi geri çekebilir. Oda sahibi modunda herkes önerir ama izi oda sahibi açar. Oda sahibi her iki modda da izi doğrudan açabilir.",
+            "tip": "Her iz yeni belge getirmez ama her saat puandan yer. Önce elinizdeki belgeleri iyice okuyun."
+          },
+          {
+            "title": "Ortak dosya",
+            "items": [
+              {
+                "term": "Kanıt dolabı",
+                "text": "Açılan bütün belgeler. Birini seçince gerçek hâliyle açılır; büyütebilir, iğneleyebilir, not düşebilirsin.",
+                "tone": "green"
+              },
+              {
+                "term": "Pano",
+                "text": "Şüpheliler, mekânlar ve krokiler, belgelerden çıkan saatlerle zaman çizelgesi. Şüphelileri herkes için \"şüpheli\" ya da \"temiz\" diye işaretleyin.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Ortak not defteri",
+                "text": "Herkesin aynı anda gördüğü defter. Çelişkileri ve saatleri buraya yazın.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Olay akışı",
+                "text": "Kim hangi izi açtı, kim not düştü; masada olan her şey.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Amirden ipucu",
+            "body": "Takılırsanız amirden ipucu isteyebilirsiniz: her bölümde en fazla 2 ipucu, her biri sonuçtan 5 puan düşer. İpuçları hafiften yön vericiye doğru gider. Oda sahibi lobide ipuçlarını tamamen kapatabilir."
+          },
+          {
+            "title": "Dosyayı kapatma ve ortak çözüm",
+            "body": "Yeterince bildiğinizi düşününce dosyayı kapatın: oylama modunda kapatma önerilir, oda sahibi doğrudan da kapatabilir. Sonra herkes suçlama formunu kendisi doldurur: kim, nasıl, neden ve hangi belge kanıtlıyor.\n\nOda sahibi formları toplayınca cevaplar yan yana gelir. Her soruda çoğunluğun cevabı seçilidir; oda sahibi tartışmaya göre değiştirip ekip cevabını teslim eder. İsterse teslimden önce soruşturmaya geri dönülebilir."
+          },
+          {
+            "title": "Puan ve dereceler",
+            "body": "Ekip cevabındaki her doğru soru kendi puanını getirir. Hedef saatin altında kalan her saat 2 bonus puan (en fazla 20), her ipucu 5 puan ceza. Sonuç ekranında gerçekte ne olduğunu, gerçek zaman çizelgesini, bulduğunuz ve kaçırdığınız kanıtları ve herkesin sırrını görürsünüz.",
+            "items": [
+              {
+                "term": "Stajyer",
+                "text": "Dosya henüz çözülmedi; bir dahaki sefere.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Komiser Yardımcısı",
+                "text": "Doğru yoldasınız ama zincirde eksik halkalar var.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Komiser",
+                "text": "Fail ve yöntem doğru, dosya sağlam.",
+                "tone": "orange"
+              },
+              {
+                "term": "Başkomiser",
+                "text": "Neredeyse kusursuz: doğru cevaplar, az saat, az ipucu.",
+                "tone": "green"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "intrigue",
+      "name": "Entrika",
+      "pitch": "Saraydaki rolünü sakla, blöf yap, son ayakta kalan ol",
+      "icon": "cards",
+      "category": "gizli",
+      "mono": "EN",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 10,
+      "playersLabel": "2–10 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Sarayda gizli rollerle oynanan bir blöf oyunu. Herkesin 2 gizli kartı var; rol iddia et, altın topla, rakiplerini kart kaybetmeye zorla. Son ayakta kalan kazanır.",
+        "players": "2–10 oyuncu (en iyisi 3–6)",
+        "duration": "10–20 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Herkes 2 gizli rol kartı ve 2 altınla başlar (2 kişide başlayan oyuncu 1 altınla). Kart kaybedince hangi kartını açacağını sen seçersin; iki kartı da açılan elenir.\n\nSon ayakta kalan kazanır. Sıralama elenme sırasına göredir.",
+            "tip": "Açılan kartlar herkese açık: hangi rollerin oyundan çıktığını takip et."
+          },
+          {
+            "title": "Sıra sende",
+            "body": "Her turda tek bir eylem yaparsın. Bu üçü için rol gerekmez:",
+            "items": [
+              {
+                "term": "Gelir",
+                "text": "+1 altın. Engellenemez, itiraz edilemez.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Yardım iste",
+                "text": "+2 altın. Hazinedar olduğunu söyleyen herkes engelleyebilir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Darbe",
+                "text": "7 altın öde, seçtiğin oyuncu bir kart kaybeder. Engellenemez. 10 ya da daha fazla altının varsa zorunludur.",
+                "tone": "red"
+              }
+            ]
+          },
+          {
+            "title": "Roller",
+            "body": "Her rolden 3 kart var (7–10 kişide 4). Elinde olmasa bile her rolü iddia edebilirsin.",
+            "items": [
+              {
+                "term": "Hazinedar",
+                "text": "Vergi: +3 altın. Yardım isteyeni engeller.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Fedai",
+                "text": "Suikast: 3 altın öde, seçtiğin oyuncu bir kart kaybeder. Engellense de altın geri gelmez.",
+                "tone": "red"
+              },
+              {
+                "term": "Muhafız",
+                "text": "Kendisine yapılan suikastı engeller.",
+                "tone": "purple"
+              },
+              {
+                "term": "Korsan",
+                "text": "Çal: bir oyuncudan 2 altın al. Kendisinden çalınmasını engeller.",
+                "tone": "orange"
+              },
+              {
+                "term": "Casus",
+                "text": "Değiş tokuş: desteden 2 kart çek, elindekilerle birlikte bak, elindeki kart sayısı kadarını seçip sakla, kalanı desteye dönsün. Kendisinden çalınmasını engeller.",
+                "tone": "green"
+              }
+            ]
+          },
+          {
+            "title": "Yalan! ve engel",
+            "body": "Bir rol iddia edilince ekranda geri sayım başlar (ayar: 5, 8 ya da 12 sn). Herkes “Yalan!” diyebilir ya da geçebilir; herkes geçerse pencere erken kapanır. Hedef alınan oyuncu bu sırada engelleyebilir.\n\nİtiraz edilince iddia eden kartını gösterir. Kart varsa itiraz eden bir kart kaybeder; gösterilen kart desteye karışır ve yerine yenisi çekilir. Kart yoksa iddia eden bir kart kaybeder ve eylemi boşa gider.\n\nEngel de bir iddiadır: ona da “Yalan!” denebilir. Engel ayakta kalırsa eylem gerçekleşmez.",
+            "tip": "Blöf yakalanırsa bir kart gider; emin değilsen bazen geçmek daha ucuzdur."
+          },
+          {
+            "title": "Süre ve kopan oyuncular",
+            "body": "Tur süresi açıksa (45 ya da 90 sn) süre bitince oyuncu yerine Gelir alınır. Kart seçme süresi dolarsa rastgele bir kart açılır; değiş tokuşta süre dolarsa elindekiler kalır.\n\nBağlantısı kopan oyuncu itiraz penceresinde geçmiş sayılır. Oda sahibi onun yerine varsayılanı uygulayabilir: Gelir, geç ya da rastgele kart."
+          }
+        ]
+      }
+    },
+    {
+      "id": "color-cards",
+      "name": "Renk Renk",
+      "pitch": "Rengi ya da sayıyı eşle, elini ilk sen bitir",
+      "icon": "cards",
+      "category": "kart",
+      "mono": "RR",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 10,
+      "playersLabel": "2–10 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Renk ya da sayı eşleştirerek elindeki kartları bitirmeye çalıştığın hızlı bir kart oyunu. Atla, Yön değiştir ve +2’lerle rakiplerinin işini zorlaştır.",
+        "players": "2–10 oyuncu",
+        "duration": "Tek el 5–15 dk, 500 puan 30–60 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Herkese 7 kart dağıtılır, bir kart ortaya açılır. Elini ilk bitiren eli kazanır.\n\nTek el modunda oyun orada biter. 500 puan modunda eli bitiren, rakiplerin elinde kalan kartların puanını alır; 500’e ilk ulaşan kazanır."
+          },
+          {
+            "title": "Sıra sende",
+            "body": "Ortadaki kartla aynı renkte ya da aynı sayı/simgede bir kart oyna. Renk seç kartları her zaman oynanır.\n\nUyan kartın yoksa 1 kart çek. Çektiğin kart uyuyorsa hemen oynayabilir ya da elinde tutup sırayı geçirebilirsin.",
+            "tip": "Elinde oynanabilen kartlar parlak, oynanamayanlar soluk görünür."
+          },
+          {
+            "title": "Kartlar",
+            "body": "Dört renk var: yeşil, sarı, kırmızı ve mor. Her renkte bir 0, ikişer 1–9, Atla, Yön değiştir ve +2; ayrıca 4 Renk seç ve 4 Renk seç +4. Toplam 108 kart.",
+            "items": [
+              {
+                "term": "Sayı kartları (0–9)",
+                "text": "Rengi ya da sayısı eşleşince oynanır.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Atla",
+                "text": "Sıradaki oyuncu bu turu oynayamaz.",
+                "tone": "green"
+              },
+              {
+                "term": "Yön değiştir",
+                "text": "Oyunun yönü tersine döner. 2 kişide Atla gibi çalışır: sıra yine sende.",
+                "tone": "yellow"
+              },
+              {
+                "term": "+2",
+                "text": "Sıradaki oyuncu 2 kart çeker ve sırası geçer.",
+                "tone": "red"
+              },
+              {
+                "term": "Renk seç",
+                "text": "Her zaman oynanır. Devam edilecek rengi sen seçersin.",
+                "tone": "purple"
+              },
+              {
+                "term": "Renk seç +4",
+                "text": "Rengi seçersin; sıradaki 4 kart çeker ve sırası geçer. Yalnızca elinde etkin renkte kart yokken oynamalısın; yoksa itiraz edilebilir.",
+                "tone": "orange"
+              }
+            ]
+          },
+          {
+            "title": "+4 ve “Hile!”",
+            "body": "Biri +4 oynayınca sıradaki oyuncu kabul edip 4 kart çekebilir ya da “Hile!” diyerek itiraz edebilir. Oynayanın eli yalnızca itiraz edene gösterilir.\n\nElinde o renkte kart varsa itiraz haklıdır: 4 kartı oynayan çeker, itiraz eden sırasını oynar. Yoksa itiraz eden 6 kart çeker ve sırası geçer.",
+            "tip": "Az kartı kalan birine +4 geldiyse itiraz riskine değebilir."
+          },
+          {
+            "title": "Son kart!",
+            "body": "Elinde 1 kart kalınca “Son kart!” butonuna bas. Elinde 2 kart varken de önceden söyleyebilirsin.\n\nSöylemezsen, sıradaki oyuncu hamlesini yapmadan önce biri “Yakaladım!” derse 2 kart çekersin."
+          },
+          {
+            "title": "Ev kuralları ve süre",
+            "body": "Oda sahibi lobide açabilir; hepsi varsayılan olarak kapalıdır. Tur süresi seçilirse süre dolan oyuncu yerine kart çekilir ve sıra geçer.",
+            "items": [
+              {
+                "term": "Ceza yığma",
+                "text": "+2 üstüne +2 ya da +4, +4 üstüne +4 konur. Ceza birikir; koyamayan hepsini çeker. Haklı bir itirazda biriken cezanın tamamını +4’ü oynayan çeker."
+              },
+              {
+                "term": "7-0 kuralı",
+                "text": "0 oynanınca herkes elini oyun yönündeki komşusuna verir. 7 oynayan seçtiği oyuncuyla el değiştirir."
+              },
+              {
+                "term": "Sınırsız çekme",
+                "text": "Uyan kartın yoksa oynanabilir kart gelene kadar çekersin."
+              }
+            ]
+          },
+          {
+            "title": "Puanlama",
+            "body": "500 puan modunda eli bitiren, rakiplerin elindeki kartları toplar. Son kart +2 ya da +4 ise sıradaki o kartları yine çeker ve puana sayılır.",
+            "items": [
+              {
+                "term": "0–9",
+                "text": "Kartın üstündeki sayı kadar.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Atla, Yön değiştir, +2",
+                "text": "20 puan.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Renk seç, Renk seç +4",
+                "text": "50 puan.",
+                "tone": "purple"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "never",
+      "name": "Ben Hiç",
+      "pitch": "Gizlice “yaptım” ya da “yapmadım” de, sonra kimin yaptığı ortaya çıksın",
+      "icon": "check",
+      "category": "parti",
+      "mono": "BH",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 16,
+      "playersLabel": "2–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Her turda bir “Ben hiç …” cümlesi çıkar. Herkes gizlice “Yaptım” ya da “Yapmadım” der, sonra kimlerin yaptığı ortaya çıkar.",
+        "players": "2–16 oyuncu",
+        "duration": "15–30 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Kazanmaktan çok birbirinizi tanımak için bir oyun. Cümleler açıldıkça kimin neler yaptığı ortaya çıkar, hikâyeleri anlatmak serbest.\n\nCan sistemi açıksa her “yaptım” bir parmak indirir. Canı biten elenir; ayakta kalan son kişi kazanır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Ekranda bir cümle çıkar: “Ben hiç … .” Yaptıysan “Yaptım”, yapmadıysan “Yapmadım”a bas. Cevabın açılana kadar fikrini değiştirebilirsin.\n\nHerkes cevaplayınca ya da süre bitince cevaplar açılır. Cevap vermeyen o turda sayılmaz.\n\nAçıklamadan sonra oda sahibi “Sıradaki cümle” ile yeni tura geçer.",
+            "tip": "Cümleyi beğenmediysen “Bu cümleyi atla”ya bas; oyuncuların yarısından fazlası isterse cümle değişir."
+          },
+          {
+            "title": "Kim neyi görür",
+            "items": [
+              {
+                "term": "Cevap verirken",
+                "text": "Herkes yalnızca kendi cevabını görür. Diğerleri için sadece “cevapladı” ya da “düşünüyor” yazar.",
+                "tone": "purple"
+              },
+              {
+                "term": "Açıklamada",
+                "text": "Kaç kişinin yaptığı ve kimlerin yaptığı gösterilir.",
+                "tone": "green"
+              },
+              {
+                "term": "İsimsiz açıklama",
+                "text": "Açıksa yalnızca kaç kişinin yaptığı gösterilir; kim olduğu hiç kimseye gönderilmez.",
+                "tone": "yellow"
+              }
+            ]
+          },
+          {
+            "title": "Canlar ve kazanma",
+            "body": "Can sistemi açıksa herkes aynı canla başlar. Açıklamada “yaptım” diyen 1 can kaybeder; canı biten elenir ama oyunu izlemeye devam eder.\n\nOyun, tur sayısı dolunca, ayakta tek kişi kalınca ya da oda sahibi bitirince sona erer. Sonuçlarda en çok yapan, en masum ve en çok yapılan cümle gösterilir.\n\nCan sistemi kapalıysa kimse elenmez; skor tablosunda “yapmadım” sayıları öne çıkar."
+          },
+          {
+            "title": "Ayarlar",
+            "body": "Ayarları oda sahibi seçer. Can ve isimsiz açıklama oyunun başında sabitlenir; kategori, süre ve tur sayısı oyun sürerken de değişebilir.",
+            "items": [
+              {
+                "term": "Kategoriler",
+                "text": "Cümlelerin geleceği konular. Cesur, Yatak odası, Fantezi, Sınırsız, Sınır testi ve Çift odası (+18) açık cinsel içerik içerir; yalnızca yetişkinler içindir ve varsayılan olarak kapalıdır. Çift odası partnerinle ikiniz içindir; pas hakkı her zaman var, durmak isteyen durdurur.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Can (parmak)",
+                "text": "3, 5, 10 ya da Kapalı. Varsayılan: 5.",
+                "tone": "neutral"
+              },
+              {
+                "term": "İsimsiz açıklama",
+                "text": "Açınca can sistemi kapanır, çünkü canlar kimin yaptığını belli eder. Varsayılan: Kapalı.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Cevap süresi",
+                "text": "Süresiz, 15 ya da 30 sn. Varsayılan: 30 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tur sayısı",
+                "text": "10, 20 ya da Sınırsız. Varsayılan: 20.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Cümle ekle",
+                "text": "“Kendi cümleni yaz” ile eklediğin cümle “Arkadaş cümleleri” kategorisine girer.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Oda sahibi cevap aşamasında “Cevapları şimdi aç” ile beklemeyi kesebilir ya da “Başka cümle getir” ile cümleyi değiştirebilir.",
+            "tip": "Grup utangaçsa isimsiz açıklamayla başlayın; sayılar da yeterince konuşturur."
+          }
+        ]
+      }
+    },
+    {
+      "id": "bottle",
+      "name": "Şişe Çevirmece",
+      "pitch": "Şişe kimi gösterirse o seçer: doğruluk mu, cesaret mi?",
+      "icon": "shuffle",
+      "category": "parti",
+      "mono": "ŞÇ",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 16,
+      "playersLabel": "2–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Şişe herkesin ekranında aynı anda döner ve birini gösterir. Gösterilen kişi doğruluk ya da cesaret seçer, soruyu cevaplar ya da görevi yapar.",
+        "players": "2–16 oyuncu",
+        "duration": "20–40 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Soruları dürüstçe cevapla, görevleri yap ve puan topla. Tamamlanan her soru ve görev 1 puan getirir.\n\nOyun seçilen çevirme sayısı dolunca ya da oda sahibi bitirince sona erer. En çok puanı olan kazanır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Sırası gelen “Şişeyi çevir”e basar. Şişe çevireni hiç göstermez; masadaki başka birinde durur.\n\nŞişenin gösterdiği kişi Doğruluk ya da Cesaret seçer. Soru ya da görev herkesin ekranında görünür. Cevapladıysa “Cevapladım”, görevi yaptıysa “Yaptım”a basar; istemezse “Pas” der.\n\nİlk şişeyi oda sahibi çevirir. Sonrasında sıradaki çeviren, ayara göre şişenin gösterdiği kişi ya da masada sıradaki kişidir."
+          },
+          {
+            "title": "Doğruluk ve cesaret",
+            "items": [
+              {
+                "term": "Doğruluk",
+                "text": "Bir soru gelir; dürüstçe cevaplaman gerekir.",
+                "tone": "green"
+              },
+              {
+                "term": "Cesaret",
+                "text": "Bir görev gelir; masanın önünde yapman gerekir.",
+                "tone": "orange"
+              },
+              {
+                "term": "Pas",
+                "text": "Soruyu ya da görevi geçer. Hakkın oyun boyunca sınırlıdır; ceza açıksa 1 puan götürür.",
+                "tone": "red"
+              },
+              {
+                "term": "“Yaptı mı?” oylaması",
+                "text": "Açıksa diğerleri 20 saniye içinde Evet ya da Hayır der. Hayır çoğunluktaysa puan yok; eşitlikte puan verilir.",
+                "tone": "purple"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Tamamlanan soru ya da görev: +1 puan. Masa “yapmadı” derse puan yok. Pas cezası açıksa pas: −1 puan.\n\nOyuncu bağlantısını kaybederse oda sahibi “Sırayı atla” ya da “Turu puansız geç” ile oyunu sürdürebilir."
+          },
+          {
+            "title": "Ayarlar",
+            "body": "Ayarları oda sahibi seçer.",
+            "items": [
+              {
+                "term": "Kategoriler",
+                "text": "Eğlenceli, Arkadaşlar, Aşk, Utanç, Cesur (+18), Yatak odası (+18), Sarhoş gece (+18), Sınır testi (+18), Sınırsız (+18), Çift odası (+18) ve Oyuncuların ekledikleri. Çift odası partnerinle ikiniz içindir; görevler yalnızca partnerler arasındadır. +18 kategoriler açık cinsel içerik içerir ve varsayılan olarak kapalıdır.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Doğruluk mu cesaret mi",
+                "text": "Oyuncu seçer ya da Rastgele. Varsayılan: Oyuncu seçer.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Pas hakkı (kişi başı)",
+                "text": "1, 2, 3 ya da Sınırsız; oyunun tamamı için. Varsayılan: 2.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Pas cezası",
+                "text": "Açıksa pas geçen 1 puan kaybeder. Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "“Yaptı mı?” oylaması",
+                "text": "Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Sıradaki çeviren",
+                "text": "Şişenin gösterdiği ya da Masada sırayla. Varsayılan: Şişenin gösterdiği.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Çevirme sayısı",
+                "text": "10, 20 ya da Sınırsız. Varsayılan: 20.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Adil şişe",
+                "text": "Son iki çevirmede seçilenlere şişenin yeniden gelme olasılığı azalır. Varsayılan: Açık.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Ayarlardaki “Soru ya da görev ekle” ile kendi sorularınızı ve görevlerinizi yazabilirsiniz; bir sonraki çekilişlerde çıkabilirler.",
+            "tip": "Pas hakkın oyun boyunca yetmeli; ilk zor soruda harcama."
+          }
+        ]
+      }
+    },
+    {
+      "id": "most-likely",
+      "name": "Aramızdaki En",
+      "pitch": "Aramızdaki en geç kalan kim? Herkes gizlice oy verir, unvanı biri kapar",
+      "icon": "user",
+      "category": "parti",
+      "mono": "AE",
+      "teams": false,
+      "minPlayers": 3,
+      "maxPlayers": 16,
+      "playersLabel": "3–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "“Aramızdaki en … kim?” sorusuna herkes gizlice oy verir. En çok oyu alan unvanı kapar.",
+        "players": "3–16 oyuncu",
+        "duration": "10 soru yaklaşık 10–15 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Her soruda gruptaki birini seçersin: aramızdaki en geç kalan, en unutkan, en romantik… Oylar açılınca unvanı kimin kaptığı ortaya çıkar.\n\nOyun sonunda en çok unvanı toplayan birinci olur. Tahmin modu açıksa sıralama doğru tahminlere göre yapılır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Ekranda soru çıkar. Soruya en çok uyan oyuncuya dokunarak oy ver. Sonuçlar açılana kadar fikrini değiştirebilirsin.\n\nHerkes oy verince ya da süre bitince oylar sayılır. En çok oyu alan unvanı kapar; beraberlikte unvan paylaşılır. Kimse oy vermediyse unvan boşta kalır.\n\nSonuçlardan sonra oda sahibi “Sıradaki soru” ile yeni soruya geçer.",
+            "tip": "Bağlantısı kopan oyuncu beklenmez; odadan çıkan birine verilen oylar düşer, o oyu verenler yeniden seçer."
+          },
+          {
+            "title": "Kim neyi görür",
+            "items": [
+              {
+                "term": "Oy verirken",
+                "text": "Kimin oy verdiği görünür, kime verdiği görünmez. Kendi oyunu yalnızca sen görürsün.",
+                "tone": "purple"
+              },
+              {
+                "term": "İsimsiz oylar",
+                "text": "Sonuçlarda yalnızca kimin kaç oy aldığı açılır; kimin kime verdiği hiç kimseye gönderilmez.",
+                "tone": "green"
+              },
+              {
+                "term": "Açık oylar",
+                "text": "Sonuçlarda kimin kime oy verdiği de görünür.",
+                "tone": "orange"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Her unvan sahibine bir unvan yazılır; beraberlikte hepsine. Unvanlar yan taraftaki unvan geçmişinde birikir.\n\nTahmin modu açıksa oy verirken “Sence kim kazanacak?” sorusunu da cevaplarsın. Tahmin ettiğin kişi unvanı aldıysa (paylaşsa da) 1 puan kazanırsın.\n\nOyun sonunda tahmin modu hiç açılmadıysa unvan sayısı, en az bir turda açıldıysa doğru tahmin puanı sıralamayı belirler."
+          },
+          {
+            "title": "Ayarlar",
+            "body": "Ayarları oda sahibi seçer. Oyun sürerken yapılan değişiklikler sıradaki sorudan itibaren geçerli olur.",
+            "items": [
+              {
+                "term": "Soru kategorileri",
+                "text": "Sorunun geleceği konular. +18 kategoriler (Cesur, Yatak odası, Sarhoş gece, Sınır testi, Sınırsız) varsayılan olarak kapalıdır ve açık cinsel içerik içerir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Oy süresi",
+                "text": "Süresiz, 15 ya da 30 sn. Varsayılan: 30 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Soru sayısı",
+                "text": "10, 20 ya da Sınırsız. Varsayılan: 10.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kendine oy",
+                "text": "Serbest ya da Yasak. Varsayılan: Yasak.",
+                "tone": "neutral"
+              },
+              {
+                "term": "İsimsiz oylar",
+                "text": "Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tahmin modu",
+                "text": "Doğru tahmin 1 puan. Varsayılan: Kapalı.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Soru ekle",
+                "text": "Eklediğin soru “Arkadaş soruları” kategorisine girer.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Oda sahibi oy sırasında “Soruyu atla” ile soruyu değiştirebilir ya da en az bir oy geldiyse “Sonuçları şimdi aç” ile beklemeyi kesebilir.",
+            "tip": "Tahmin modunda kendi oyunla değil, grubun nasıl oy vereceğiyle düşün."
+          }
+        ]
+      }
+    },
+    {
+      "id": "secret-hitler",
+      "name": "Secret Hitler",
+      "pitch": "Liberaller ve faşistler; gizli Hitler’i bul ya da şansölye yap",
+      "icon": "flag",
+      "category": "gizli",
+      "mono": "SH",
+      "teams": false,
+      "minPlayers": 5,
+      "maxPlayers": 10,
+      "playersLabel": "5–10 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Gizli rollerle oynanan bir sosyal çıkarım oyunu. Liberaller faşistleri ve gizli Hitler’i bulmaya, faşistler ise kimliklerini saklayıp iktidarı ele geçirmeye çalışır.",
+        "players": "5–10 oyuncu, iki gizli takım",
+        "duration": "30–45 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Oyun başında herkes gizlice rolünü öğrenir. Rolünü görmek için karta basılı tut; yalnızca basılıyken açılır. Liberaller çoğunluktadır ama kimin ne olduğunu bilmez.\n\nFaşistler birbirini ve Hitler’i tanır. Hitler, 5–6 kişilik oyunda faşisti tanır; 7 ve üstünde kimseyi tanımaz.\n\nLiberaller liberal yasalar çıkarmaya ya da Hitler’i idam ettirmeye, faşistler faşist yasalar çıkarmaya ya da Hitler’i şansölye seçtirmeye çalışır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Seçim: Başkanlık oturma sırasıyla döner. Başkan bir şansölye adayı seçer, herkes aynı anda Ja! ya da Nein der. Oylar herkes oy verince birlikte açılır; yarıdan fazlası Ja! derse hükümet kurulur. Son seçilen şansölye aday olamaz; 5’ten fazla kişi hayattaysa son başkan da olamaz.\n\nYasama: Başkan desteden 3 kart çeker, birini atar, kalan ikisi şansölyeye gider; şansölye birini yasalaştırır. Bu sırada ikisi de konuşmaz, işaret vermez. Sonrasında istediklerini söyleyebilirler; yalan da serbest.\n\nSeçim sayacı: Hükümet kurulamazsa sayaç ilerler. 3 başarısız seçimde destenin üstündeki yasa kendiliğinden çıkar; yetkisi kullanılmaz ve aday olma kısıtları sıfırlanır."
+          },
+          {
+            "title": "Roller ve yetkiler",
+            "body": "Faşist yasa çıkınca bazen başkan bir yetki kazanır. Hangi yasada hangi yetkinin geldiği oyuncu sayısına göre değişir; pistteki simgeler gösterir.",
+            "items": [
+              {
+                "term": "Liberal",
+                "text": "5–6 kişide 3–4, 7–8 kişide 4–5, 9–10 kişide 5–6 liberal olur. Kimseyi tanımaz.",
+                "tone": "green"
+              },
+              {
+                "term": "Faşist",
+                "text": "5–6 kişide 1, 7–8 kişide 2, 9–10 kişide 3 faşist olur. Takım arkadaşlarını ve Hitler’i tanır.",
+                "tone": "red"
+              },
+              {
+                "term": "Hitler",
+                "text": "Her oyunda 1 tane. Faşist takımdadır; liberal gibi davranıp güven kazanmaya çalışır.",
+                "tone": "red"
+              },
+              {
+                "term": "Politika önizleme",
+                "text": "Başkan destenin üstündeki 3 kartı görür. 5–6 kişide 3. faşist yasada gelir.",
+                "tone": "purple"
+              },
+              {
+                "term": "Sadakat sorgulama",
+                "text": "Başkan bir oyuncunun partisini öğrenir; sonucu yalnızca o görür. Hitler faşist görünür, aynı kişi iki kez sorgulanamaz. 7–8 kişide 2., 9–10 kişide 1. ve 2. faşist yasada gelir.",
+                "tone": "purple"
+              },
+              {
+                "term": "Özel seçim",
+                "text": "Başkan sıradaki başkanı seçer; sonra sıra kaldığı yerden devam eder. 7–10 kişide 3. faşist yasada gelir.",
+                "tone": "purple"
+              },
+              {
+                "term": "İdam",
+                "text": "Başkan bir oyuncuyu oyundan çıkarır. Hitler değilse rolü açıklanmaz; idam edilen oy veremez. Her oyuncu sayısında 4. ve 5. faşist yasada gelir.",
+                "tone": "orange"
+              },
+              {
+                "term": "Veto",
+                "text": "5 faşist yasadan sonra şansölye “Veto öner” diyebilir. Başkan kabul ederse iki kart da atılır ve seçim sayacı ilerler; reddederse şansölye bir yasa seçmek zorundadır.",
+                "tone": "yellow"
+              }
+            ]
+          },
+          {
+            "title": "Kazanma",
+            "items": [
+              {
+                "term": "5 liberal yasa",
+                "text": "Liberaller kazanır.",
+                "tone": "green"
+              },
+              {
+                "term": "Hitler idam edilirse",
+                "text": "Liberaller hemen kazanır.",
+                "tone": "green"
+              },
+              {
+                "term": "6 faşist yasa",
+                "text": "Faşistler kazanır.",
+                "tone": "red"
+              },
+              {
+                "term": "Hitler şansölye seçilirse",
+                "text": "3 faşist yasa çıktıktan sonra Hitler şansölye seçilirse faşistler hemen kazanır.",
+                "tone": "red"
+              }
+            ],
+            "body": "Destede 6 liberal ve 11 faşist kart vardır. Oyun bitince herkesin rolü açılır; kazanan takımdaki herkes 1 puan alır."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Bekleyen oyuncuyu atlama",
+                "text": "Varsayılan 30 sn (15 sn, 30 sn, 1 dk ya da 2 dk). Bu süreden sonra oda sahibi, sırası gelen oyuncu adına varsayılanı uygulayabilir; bağlantısı kopan oyuncu hemen atlanabilir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Atlanınca ne olur",
+                "text": "Oy vermeyen Nein sayılır, aday ve kart rastgele seçilir, yetki kullanılmadan geçilir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Rol dağılımı",
+                "text": "Oyuncu sayısından kendiliğinden belirlenir; ayar panelinde odadaki kişi sayısına göre gösterilir.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları ve lisans",
+            "body": "Olay günlüğü kimin kime oy verdiğini ve hangi hükümetin ne çıkardığını tutar; çelişkileri orada ara.\n\nSecret Hitler, Goat, Wolf & Cabbage tarafından CC BY-NC-SA 4.0 lisansıyla yayımlanmıştır. Bu ticari olmayan uyarlama aynı lisansla paylaşılır; görseller özgündür.",
+            "tip": "3 faşist yasadan sonra şansölye adaylarına dikkat et: Hitler seçilirse oyun biter."
+          }
+        ]
+      }
+    },
+    {
+      "id": "charades",
+      "name": "Sessiz Sinema",
+      "pitch": "Tek kelime etmeden filmi, diziyi, şarkıyı takımına anlat",
+      "icon": "play",
+      "category": "takim",
+      "mono": "SS",
+      "teams": true,
+      "minPlayers": 4,
+      "maxPlayers": 16,
+      "playersLabel": "4–16 · iki takım",
+      "soloSettings": null,
+      "guide": {
+        "summary": "İki takımlı klasik sessiz sinema. Anlatıcı filmi, diziyi, kitabı, şarkıyı ya da deyimi tek kelime etmeden hareketle anlatır; takımı süre bitmeden bilmeye çalışır.",
+        "players": "4–16 oyuncu, iki takım (takım başına en az 2)",
+        "duration": "20–40 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Yeşil takım ve Mor takım sırayla anlatır. Her turda anlatan takımdan bir kişi anlatıcı olur; anlatıcılar takım içinde sırayla değişir.\n\nTurun süresi içinde takımına olabildiğince çok başlık bildir. Oyun sonunda puanı yüksek olan takım kazanır; eşitlikte berabere biter."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Sıradaki anlatıcı hazır olunca “Anlatmaya başla”ya basar; süre o an işlemeye başlar. Anlatıcı başlığı, türünü ve kaç kelime olduğunu görür. Konuşmadan, ses çıkarmadan, yalnızca hareketle anlatır.\n\nTakımı tahminlerini yüksek sesle söyler. Başlığın tamamı söylenince anlatıcı “Doğru”ya basar, yeni kart gelir. Takılırsa “Pas” ile geçebilir; yanlış bastıysa “Geri al” son işaretlemeyi geri alır.\n\nSüre bitince tur kapanır ve bu turda geçen kartlar herkese gösterilir. Yarım kalan kart desteye geri döner. Sıra diğer takıma geçer."
+          },
+          {
+            "title": "Kim neyi görür",
+            "items": [
+              {
+                "term": "Anlatıcı",
+                "text": "Başlığı, türünü ve kelime sayısını görür. “Doğru”, “Pas” ve “Geri al” düğmeleri onda.",
+                "tone": "green"
+              },
+              {
+                "term": "Anlatan takım",
+                "text": "Başlığı göremez. İşaretleri izler, tahminini yüksek sesle söyler.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Rakip takım",
+                "text": "Başlığı görür ama söylemez. Anlatıcı ses çıkarır ya da dudaklarıyla söylerse “Konuştu!”ya basar; kart geçer.",
+                "tone": "purple"
+              },
+              {
+                "term": "Tür işareti",
+                "text": "Önce türü göster: film için kamera kolu çevir, dizi için havaya ekran çiz, kitap için ellerini aç, şarkı için şarkı söyler gibi yap, deyim için tırnak işareti yap, ifade için elini ağzının önünde açıp kapat.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kelime ve hece",
+                "text": "Kelime sayısını ve kaçıncı kelimeyi parmaklarınla göster. Hece için parmaklarını ön koluna koy.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "items": [
+              {
+                "term": "Doğru",
+                "text": "Anlatan takıma +1 puan.",
+                "tone": "green"
+              },
+              {
+                "term": "Pas",
+                "text": "Puan değişmez; pas hakkından düşer.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Konuştu!",
+                "text": "Kart geçer. Konuşma cezası açıksa anlatan takımdan 1 puan düşülür; puan eksiye de inebilir.",
+                "tone": "red"
+              }
+            ],
+            "body": "Belirlenen sayıda anlatma bitince oyun biter ve podyum gelir. “Takım başına anlatma” sınırsızsa oyunu oda sahibi bitirir."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Takımlar",
+                "text": "Lobide bir oyuncuya dokunarak takımını değiştir ya da “Karıştır” de. Takımı seçilmeyenler başlarken dağıtılır.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Türler",
+                "text": "Türk ve yabancı filmler, Türk ve yabancı diziler, kitaplar, şarkılar, atasözleri ve deyimler, arkadaş başlıkları. Varsayılan: hepsi; yalnızca Yatak odası (+18) ve Sınırsız (+18) kapalıdır, açık cinsel içerik içerir.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Zorluk",
+                "text": "Kolay, Karışık ya da Zor. Varsayılan: Karışık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tur süresi",
+                "text": "60, 90, 120 ya da 180 sn. Varsayılan: 90 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Pas hakkı",
+                "text": "Tur başına 1, 3 ya da sınırsız. Varsayılan: 3.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Takım başına anlatma",
+                "text": "2, 4, 6 ya da oda sahibi bitirene kadar. Varsayılan: 4 (toplam 8 tur).",
+                "tone": "neutral"
+              },
+              {
+                "term": "Konuşma cezası",
+                "text": "Açıksa her “Konuştu!” anlatan takıma −1. Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Başlık ekle",
+                "text": "Eklediğin başlık “Arkadaş başlıkları” türüne girer ve kimseye listelenmez.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Anlatıcının bağlantısı koparsa oda sahibi tur başlamadan “Anlatıcıyı atla” diyebilir ya da onun yerine turu başlatabilir. Anlatıcı tur ortasında odadan çıkarsa tur o ana kadarki puanlarla biter.",
+            "tip": "Uzun başlıkta önce en kolay kelimeyi anlat; parmakla kaçıncı kelime olduğunu göstermeyi unutma."
+          }
+        ]
+      }
+    },
+    {
+      "id": "paranoia",
+      "name": "Gizlilik Esas",
+      "pitch": "Sana gizli bir soru gelir, cevabın biri olur; hepsi en sonda açılır",
+      "icon": "user",
+      "category": "parti",
+      "mono": "GE",
+      "teams": false,
+      "minPlayers": 3,
+      "maxPlayers": 16,
+      "playersLabel": "3–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Sana yalnızca senin gördüğün bir soru gelir, cevabın odadaki biri olur. Kim neyi sordu, kim kimi seçti; hepsi en sonda teker teker açılır.",
+        "players": "3–16 oyuncu",
+        "duration": "10–25 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Kazanmak ya da kaybetmek yok; amaç güldürmek ve merak ettirmek. “Aramızda kim en kıskanç?” gibi bir soru alırsın ve cevap olarak birini seçersin.\n\nOyun boyunca kimse kime ne sorulduğunu, kimin kimi seçtiğini bilmez. Sorular bitince hepsi sırayla açılır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "İlk soruyu rastgele biri alır ya da oda sahibi seçer. Sıra sana gelince ekranında “Sıra sende” yazar ve soruyu yalnızca sen görürsün. Cevap olarak bir oyuncu seçip “Seçimi onayla”ya bas.\n\nSeçtiğin kişi sıradaki soruyu alır. Soru sayısına ulaşana kadar zincir böyle sürer. Beklerken kendi aldığın soruları ve cevaplarını “Senin gizli cevapların” bölümünde görebilirsin.\n\nDüşünme süresi biterse ayara göre senin yerine rastgele biri seçilir ya da soru pas geçilir. Pas geçilen sorudan sonra sıradaki soru rastgele birine gider."
+          },
+          {
+            "title": "Açıklama ve gizlilik",
+            "items": [
+              {
+                "term": "Soru",
+                "text": "Oyun sırasında yalnızca soruyu alan kişi görür.",
+                "tone": "purple"
+              },
+              {
+                "term": "Cevap",
+                "text": "Kimi seçtiğini açıklamaya kadar kimse görmez.",
+                "tone": "purple"
+              },
+              {
+                "term": "Soruyu kim aldı",
+                "text": "“Kime sorulduğu gizli” açıksa sıranın kimde olduğunu bile yalnızca o kişi bilir; diğerleri yalnızca birinin düşündüğünü görür.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Açıklama",
+                "text": "Her soru sırayla açılır: önce soru, sonra kime sorulduğu, en sonda cevap. Süre dolup rastgele seçildiyse ya da pas geçildiyse bu da yazılır.",
+                "tone": "green"
+              },
+              {
+                "term": "Özet",
+                "text": "Bütün sorular açılınca kimin kaç kez cevap olarak seçildiği listelenir.",
+                "tone": "green"
+              }
+            ]
+          },
+          {
+            "title": "Açıklamada sıradaki soru",
+            "body": "Ayara göre “Sıradaki soruyu aç” düğmesine oda sahibi basar ya da herkes “Sıradakine geç” oyu verir; bağlı oyuncuların çoğunluğu oy verince sıradaki soru açılır. Oy modunda da oda sahibi tek başına ilerletebilir.\n\nÖzet ekranında oda sahibi “Oyunu bitir ve lobiye dön” der; demezse oda 2 dakika sonra kendiliğinden lobiye döner."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Soru sayısı",
+                "text": "5, 10, 15 ya da 20. Varsayılan: 10.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kategoriler",
+                "text": "Genel, Arkadaşlık, Aşk, Gelecek, Utanç, Yetenek, Cesur (+18), Yatak odası (+18), Sarhoş gece (+18), Sınırsız (+18), Sınır testi (+18) ve Sizin sorularınız. +18 kategoriler açık cinsel içerik içerir, yalnızca yetişkinler içindir ve varsayılan olarak kapalıdır; diğerleri açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Düşünme süresi",
+                "text": "Süresiz, 20 sn ya da 40 sn. Varsayılan: 40 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Süre bitince",
+                "text": "Rastgele seçilir ya da pas geçilir. Varsayılan: rastgele.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kendini seçebilir",
+                "text": "Açıkken cevap olarak kendini de seçebilirsin. Varsayılan: Kapalı.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Geri seçim yok",
+                "text": "Soruyu sana gönderen kişiyi seçemezsin; soru iki kişi arasında gidip gelmez. Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kime sorulduğu gizli",
+                "text": "Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "İlk soruyu kim alır",
+                "text": "Rastgele ya da oda sahibi seçer. Varsayılan: Rastgele.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Açıklamada sıradaki soru",
+                "text": "Oda sahibi açar ya da çoğunluk oylar. Varsayılan: oda sahibi.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Soru ekle",
+                "text": "Eklediğin sorular “Sizin sorularınız” kategorisine girer, kimseye listelenmez; oyunda sürpriz olarak çıkar.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Sırası gelen oyuncunun bağlantısı koparsa oda sahibi “Onun yerine rastgele seç” ya da “Soruyu başkasına ver” diyebilir.",
+            "tip": "Seçtiğin kişi sıradaki soruyu alır; zinciri kime uzattığını da düşün."
+          }
+        ]
+      }
+    },
+    {
+      "id": "confessions",
+      "name": "Gizli İtiraflar",
+      "pitch": "İsimsiz itiraf yaz, kimin yazdığını bil",
+      "icon": "chat",
+      "category": "parti",
+      "mono": "Gİ",
+      "teams": false,
+      "minPlayers": 3,
+      "maxPlayers": 16,
+      "playersLabel": "3–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Herkes isimsiz bir itiraf yazar, sonra itiraflar tek tek ekrana gelir ve kimin yazdığını tahmin edersiniz. Doğru bilen de, herkesi yanıltan da puan alır.",
+        "players": "3–16 oyuncu",
+        "duration": "15–30 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Arkadaşlarının itiraflarını kimin yazdığını bil, kendi itirafınla da onları yanılt. Oyun sonunda en çok puanı olan kazanır; podyumda “En iyi dedektif” ve “En iyi yanıltıcı” da gösterilir."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Yaz: Her tur bir konu çıkar (serbest modda konu yoktur). İtirafını yazıp “İtirafı gönder”e bas; süre bitene kadar güncelleyebilirsin. İtiraf 10–240 karakter olmalı. Herkes yazınca, süre bitince ya da oda sahibi “Yazmayı bitir” deyince tahmine geçilir.\n\nTahmin et: İtiraflar karışık sırayla tek tek gelir. “Sence kim yazdı?” sorusuna bu tur yazanlar arasından birini seç. Kendi itirafın gelse de birini seç; seçimin sayılmaz ve kimse anlamaz.\n\nAçıklama: Herkes seçince ya da süre bitince yazan, bilenler ve kime kaç oy gittiği gösterilir. Sonra sıradaki itirafa geçilir. Tur sonunda o turun itirafları yazarlarıyla birlikte özetlenir."
+          },
+          {
+            "title": "Kim neyi görür",
+            "items": [
+              {
+                "term": "Yazarken",
+                "text": "Kimin yazdığını görürsün ama ne yazdığını görmezsin. Kendi itirafını yalnızca sen görürsün.",
+                "tone": "purple"
+              },
+              {
+                "term": "Tahminde",
+                "text": "İtiraf metni herkese açıktır, yazarı gizlidir. Kimin seçim yaptığı görünür, kimi seçtiği görünmez.",
+                "tone": "purple"
+              },
+              {
+                "term": "Yazarın seçimi",
+                "text": "Yazarın kendi itirafındaki seçimi hiçbir yerde gösterilmez ve sayılmaz.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Tepkiler",
+                "text": "“Yok artık”, “Ben de!”, “Efsane” ve “Olamaz” tepkileri isimsizdir; yalnızca sayıları görünür.",
+                "tone": "green"
+              },
+              {
+                "term": "İtirafı gizle",
+                "text": "Oda sahibi uygunsuz bir itirafı gizleyebilir. Gizlenen itiraf kimseye bir daha gönderilmez, yazarı açıklanmaz, puan verilmez.",
+                "tone": "red"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "items": [
+              {
+                "term": "Doğru tahmin",
+                "text": "Yazarı doğru bilen 1 puan alır.",
+                "tone": "green"
+              },
+              {
+                "term": "Yanıltma",
+                "text": "Yazar, yanlış tahmin eden her kişi için 1 puan alır.",
+                "tone": "orange"
+              },
+              {
+                "term": "Seçim yapmamak",
+                "text": "Seçim yapmayan puan almaz; yazara da puan kazandırmaz.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Yazar açıklanmasın",
+                "text": "Bu ayar açıksa yazar hiç söylenmez, yalnızca oy dağılımı görünür ve kimse puan almaz.",
+                "tone": "neutral"
+              }
+            ],
+            "body": "Belirlenen tur sayısı bitince podyum gelir. Tur sayısı sınırsızsa oda sahibi oyunu bitirene kadar sürer."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Ne itiraf edilsin",
+                "text": "Her tur bir konu ya da serbest itiraf. Varsayılan: her tur bir konu.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Konu kategorileri",
+                "text": "Genel, Çocukluk, Okul ve iş, Aşk, Utanç, Alışkanlıklar, Cesur (+18), Yatak odası (+18), Fantezi (+18), Sınır testi (+18), Sınırsız (+18), Çift odası (+18) ve Arkadaş konuları. Çift odası, partnerlerden oluşan masalar içindir. +18 kategoriler açık cinsel içerik içerir ve varsayılan olarak kapalıdır; diğerleri açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Yazma süresi",
+                "text": "60 sn, 120 sn ya da süresiz. Varsayılan: 120 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tahmin süresi",
+                "text": "Her itiraf için 30, 45 ya da 60 sn. Varsayılan: 45 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tur sayısı",
+                "text": "3, 5 ya da sınırsız. Varsayılan: 3.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Yazar açıklanmasın",
+                "text": "Tamamen anonim oyun. Varsayılan: Kapalı.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Konu ekle",
+                "text": "Eklediğin konu “Arkadaş konuları” kategorisine girer ve sonraki oyunlarda çıkabilir.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Oda sahibi beklemek istemezse “Tahmini bitir”, “Sıradaki itiraf” ve “Sonraki tura geç” ile oyunu hızlandırabilir.",
+            "tip": "Herkesi yanıltmak için başkasının yazacağı gibi bir itiraf yaz; ama gerçek olsun."
+          }
+        ]
+      }
+    },
+    {
+      "id": "five-seconds",
+      "name": "5 Saniye",
+      "pitch": "Görev açılır, saat işler: 3 şey söyle, sonra arkadaşların karar versin",
+      "icon": "play",
+      "category": "takim",
+      "mono": "5S",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 16,
+      "playersLabel": "2–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Sıra sana gelince bir görev açılır: “3 … söyle”. Süre bitmeden üç şeyi yüksek sesle say, sonra arkadaşların başarıp başarmadığına karar versin.",
+        "players": "2–16 oyuncu, istersen iki takım",
+        "duration": "10–20 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Baskı altında aklına gelen ilk üç şeyi söylemek. Her başarılı görev 1 puan; oyun sonunda en çok puanı olan (ya da takım modunda en çok puanı olan takım) kazanır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Sıra sana gelince “Hazırım”a bas. Görev herkesin ekranında aynı anda açılır ve süre başlar. Yüksek sesle 3 şey söyle; bitirdiysen “Söyledim”e basıp süreyi erken kapatabilirsin.\n\nSüre bitince diğer oyuncular “Başardı” ya da “Başaramadı” der. Herkes oy verince ya da 20 saniye dolunca sonuç açıklanır ve sıra sıradaki oyuncuya geçer."
+          },
+          {
+            "title": "Roller ve düğmeler",
+            "items": [
+              {
+                "term": "Sırası gelen",
+                "text": "“Hazırım” ile görevi açar, 3 şeyi söyler. Kendine oy veremez.",
+                "tone": "green"
+              },
+              {
+                "term": "Oy verenler",
+                "text": "Diğer herkes. Oylama sürerken oyunu değiştirebilirsin; kimin ne verdiği gizlidir.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Saydıkça dokun",
+                "text": "İzlerken söylenenleri saymak için kendi sayacın; sonucu etkilemez.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Çalma şansı",
+                "text": "Çalma kuralı açıksa başarısız görevi sıradaki oyuncu aynı sürede dener. Takım modunda çalan rakip takımdan olur.",
+                "tone": "purple"
+              },
+              {
+                "term": "Görevi değiştir",
+                "text": "Oda sahibi, açılmış görevi yenisiyle değiştirir; süre baştan başlar.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Sırayı atla",
+                "text": "Oda sahibi sırayı puansız geçer. Bağlantısı kopan oyuncunun sırası birkaç saniye sonra kendiliğinden atlanır.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Çoğunluk “Başardı” derse +1 puan. Eşitlikte, hatta kimse oy vermezse de başardı sayılır.\n\nÇalma denemesi başarılı olursa puanı çalan oyuncu alır. Takım modunda puanlar takımın hanesine toplanır; Yeşil takım ile Mor takım yarışır.\n\nHerkes ayarlanan sayıda sıra aldıktan sonra oyun biter ve “En hızlı ağızlar” sıralaması gelir."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Oyun modu",
+                "text": "Herkes kendine ya da İki takım. İki takımda her takımda en az 2 kişi olmalı. Varsayılan: Herkes kendine."
+              },
+              {
+                "term": "Takımlar",
+                "text": "Oyuncuya dokunarak takımını değiştir; seçilmeyenler başlarken dağıtılır. Takımlar sırayla oynar."
+              },
+              {
+                "term": "Süre",
+                "text": "5, 7 ya da 10 sn. Varsayılan: 5 sn."
+              },
+              {
+                "term": "Oyuncu başına sıra",
+                "text": "3, 5 ya da Sınırsız (oda sahibi bitirene kadar). Varsayılan: 3."
+              },
+              {
+                "term": "Çalma kuralı",
+                "text": "Başarısız görevi sıradaki oyuncu dener. Varsayılan: Kapalı."
+              },
+              {
+                "term": "Kategoriler",
+                "text": "Genel, aşk, iş ve okul, yemek, Türkiye, pop kültür, saçma sapan. Cesur, Yatak odası, Sarhoş gece ve Sınırsız (+18) açık cinsel içerik içerir ve varsayılan olarak kapalıdır. Çift odası (+18) partnerinle ikiniz içindir; pas hakkı her zaman var."
+              },
+              {
+                "term": "Görev ekle",
+                "text": "Kendi görevini yaz; “Arkadaş görevleri” kategorisine girer ve kimseye listelenmez."
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Kusursuz cevap aramayın; akla gelen ilk şeyi söyleyin. Takılmak serbest, susmak yasak.",
+            "tip": "Oy verirken cömert olun: eşitlik zaten başardı sayılır."
+          }
+        ]
+      }
+    },
+    {
+      "id": "red-flag",
+      "name": "Red Flag / Green Flag",
+      "pitch": "Durumu oku, gizlice bayrağını kaldır, kim ne dedi gör",
+      "icon": "flag",
+      "category": "parti",
+      "mono": "RF",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 16,
+      "playersLabel": "2–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Ekrana bir durum gelir; herkes gizlice “Green flag” mi “Red flag” mi olduğuna oy verir. Oylar birlikte açılır, kimin ne dediğine bakıp tartışırsınız.",
+        "players": "2–16 oyuncu",
+        "duration": "10–20 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Kazanmaktan çok tanışmak için bir oyun: kim neye hoşgörülü, kim neye katı, onu görürsünüz.\n\nTahmin modu açıksa bir de puan yarışı var: çoğunluğun ne diyeceğini en çok tutturan öne geçer."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Her turda seçili kategorilerden bir durum çıkar. “Sen ne dersin?” altında oyunu verirsin; oyun açılana kadar gizlidir ve değiştirebilirsin.\n\nHerkes oy verince (tahmin modunda tahminini de yapınca) ya da süre bitince oylar birlikte açılır. Dağılımı görüp tartışırsınız.\n\nHazır olunca “Hazırım”a basın; herkes hazır olunca ya da oda sahibi “Sonraki durum”a basınca sıradaki duruma geçilir. Açılıştan sonraki ilk birkaç saniye tartışma için geçiş kilitlidir."
+          },
+          {
+            "title": "Seçenekler",
+            "items": [
+              {
+                "term": "Green flag",
+                "text": "Sorun yok, hatta hoşuna gider.",
+                "tone": "green"
+              },
+              {
+                "term": "Red flag",
+                "text": "Bu bir uyarı işareti.",
+                "tone": "red"
+              },
+              {
+                "term": "Asla olmaz",
+                "text": "Yalnızca “Üçüncü seçenek” açıksa çıkar: kesinlikle kabul edilemez.",
+                "tone": "purple"
+              },
+              {
+                "term": "Çoğunluk ne diyecek?",
+                "text": "Tahmin modunda kendi oyundan sonra grubun çoğunluğunun ne diyeceğini seçersin.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Oyları şimdi aç",
+                "text": "Oda sahibi herkesi beklemeden oyları açabilir (en az bir oy varsa).",
+                "tone": "neutral"
+              },
+              {
+                "term": "Durumu atla",
+                "text": "Oda sahibi durumu oylamadan geçebilir; atlanan durum sayılmaz.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Puan yalnızca tahmin modunda var: çoğunluğu doğru tahmin eden +1 puan alır. Oylar bölünürse en çok oy alan seçeneklerden herhangi birini tahmin etmek yeter.\n\nOyun sonunda “Red flag toleransı” özeti gelir: en hoşgörülü, en katı ve en aykırı (en çok azınlıkta kalan) oyuncu, herkesin green oranı ve en çok bölen durumlar."
+          },
+          {
+            "title": "Kim neyi görür",
+            "body": "“Kim ne dedi” Açık ise açılışta herkesin oyu adıyla görünür. İsimsiz ise yalnızca dağılım görünür; kimin ne dediği sunucudan hiç gönderilmez.\n\nOyunda bir tur bile isimsiz oynandıysa sonuç özetinde herkes yalnızca kendi profilini görür ve en hoşgörülü, en katı gibi unvanlar verilmez."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Kategoriler",
+                "text": "İlişki, ilk buluşma, iş, aile, sosyal medya ve daha fazlası. +18 kategoriler (Cesur, Yatak odası, Fantezi, Sınır testi, Sınırsız) varsayılan olarak kapalıdır ve açık cinsel içerik içerir."
+              },
+              {
+                "term": "Üçüncü seçenek",
+                "text": "“Asla olmaz” seçeneğini ekler. Varsayılan: Kapalı."
+              },
+              {
+                "term": "Sınır testi",
+                "text": "Her kart bir pratik ya da fetiş. Seçenekler Varım, Hayır ve Sınırım olur; Sınırım hep açıktır."
+              },
+              {
+                "term": "Kim ne dedi",
+                "text": "Açık ya da İsimsiz. Varsayılan: Açık."
+              },
+              {
+                "term": "Tahmin modu",
+                "text": "Çoğunluk tahmini ve puan. Varsayılan: Açık."
+              },
+              {
+                "term": "Oy süresi",
+                "text": "15 sn, 30 sn ya da Süresiz. Varsayılan: 30 sn."
+              },
+              {
+                "term": "Durum sayısı",
+                "text": "10, 20 ya da Sınırsız (oda sahibi bitirene kadar). Varsayılan: 10."
+              },
+              {
+                "term": "Durum ekle",
+                "text": "Kendi durumunu yaz; “Arkadaşların ekledikleri” kategorisine girer ve kimseye listelenmez."
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "En eğlenceli kısım açılıştan sonraki tartışma. Acele etmeyin, azınlıkta kalan kendini savunsun.",
+            "tip": "Tahmin modunda kendi fikrini değil, grubun ne diyeceğini düşün; ikisi çoğu zaman farklıdır."
+          }
+        ]
+      }
+    },
+    {
+      "id": "kitten",
+      "name": "Bomba Kedi",
+      "pitch": "Desteden bomba çekmemeye çalış, son kalan sen ol",
+      "icon": "cards",
+      "category": "kart",
+      "mono": "BK",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 10,
+      "playersLabel": "2–10 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Sırayla desteden kart çektiğin bir şans ve blöf oyunu. Destede bombalar var; bomba çekip Etkisiz Kıl’ın yoksa patlarsın. Patlamayan son oyuncu kazanır.",
+        "players": "2–10 oyuncu",
+        "duration": "10–20 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Herkes 1 Etkisiz Kıl ve 7 kartla başlar. Destede oyuncu sayısının bir eksiği kadar bomba vardır; yani biri hariç herkes eninde sonunda patlar.\n\n2–5 kişide tek deste, 6–10 kişide iki deste birleştirilir. Patlamayan son oyuncu kazanır."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Sıra sendeyken elinden istediğin kadar kart oynayabilir ya da hiç oynamayabilirsin. Sıran, “Kart çek ve sırayı bitir”e basıp desteden bir kart çekince biter.\n\nBir eylem oynanınca kısa bir geri sayım başlar; bu sürede herkes “Hayır!” diyebilir. Kimse durdurmazsa eylem uygulanır.\n\nBomba çekersen Etkisiz Kıl’ı oynarsın ve bombayı destede istediğin yere gizlice geri koyarsın. Etkisiz Kıl yoksa patlarsın; elindeki kartlar ıskartaya gider ve oyundan çıkarsın."
+          },
+          {
+            "title": "Kartlar",
+            "items": [
+              {
+                "term": "Bomba",
+                "text": "Çektiğin an patlarsın; elinde Etkisiz Kıl yoksa oyundan çıkarsın. Hayır ile durdurulamaz.",
+                "tone": "red"
+              },
+              {
+                "term": "Etkisiz Kıl",
+                "text": "Yalnızca bomba çekince oynanır. Bombayı en üste, en alta, rastgele ya da istediğin sıraya koyarsın; yerini yalnızca sen bilirsin.",
+                "tone": "green"
+              },
+              {
+                "term": "Saldır",
+                "text": "Kart çekmeden sıranı bitirir; sıradaki oyuncu art arda 2 tur oynar. Saldırı altındayken oynarsan kalan turların da ona geçer.",
+                "tone": "orange"
+              },
+              {
+                "term": "Atla",
+                "text": "Kart çekmeden bir turunu bitirir. Saldırı altındaysan yalnızca bir turu siler.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Geleceği Gör",
+                "text": "Destenin en üstteki 3 kartına gizlice bakarsın.",
+                "tone": "purple"
+              },
+              {
+                "term": "Karıştır",
+                "text": "Desteyi karıştırır; kimse bombanın yerini artık bilemez.",
+                "tone": "purple"
+              },
+              {
+                "term": "İyilik İste",
+                "text": "Bir oyuncu seç; elinden seçtiği bir kartı sana vermek zorunda.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Hayır",
+                "text": "Bomba ve Etkisiz Kıl dışındaki her eylemi durdurur. Hayır’a da Hayır denebilir; çift sayıda Hayır eylemi geri getirir. Her Hayır geri sayımı baştan başlatır.",
+                "tone": "red"
+              },
+              {
+                "term": "Kedi kartları",
+                "text": "Sarman Paşa, Tekir Hoca, Pamuk Bulut, Kara Kömür ve Benekli Bıyık. Tek başına oynanmaz.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kedi çifti",
+                "text": "Aynı kediden 2 tane: seçtiğin oyuncudan rastgele bir kart çalarsın.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Kedi üçlüsü",
+                "text": "Aynı kediden 3 tane: bir oyuncu seçip bir kart adı söylersin; onda varsa senin olur. Bomba istenemez.",
+                "tone": "neutral"
+              },
+              {
+                "term": "5 farklı kedi",
+                "text": "5 farklı kedi birlikte oynanırsa ıskartadan istediğin kartı alırsın (ayar açıksa).",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Kim neyi görür",
+            "body": "Elini yalnızca sen görürsün; diğerleri yalnızca kaç kartın olduğunu görür. Çektiğin kartın ne olduğunu sen bilirsin; diğerleri yalnızca kart çektiğini görür.\n\nÇalınan ya da İyilik ile verilen kartı yalnızca iki taraf görür. Geleceği Gör’deki kartları ve geri koyduğun bombanın yerini yalnızca sen görürsün; desteden kart çekildikçe bombanın sırası güncellenir, deste karışınca bu bilgi silinir."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Hayır süresi",
+                "text": "Bir eylem oynanınca herkesin Hayır diyebileceği süre: 3, 5 ya da 8 sn. Varsayılan: 5 sn.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Tur süresi",
+                "text": "Süresiz, 30 sn ya da 60 sn. Süre biterse oyuncu yerine kart çekilir. Varsayılan: Süresiz.",
+                "tone": "neutral"
+              },
+              {
+                "term": "5 farklı kedi",
+                "text": "5 farklı kediyle ıskartadan kart alma kuralı. Varsayılan: Açık.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Deste",
+                "text": "Oyuncu sayısına göre kendiliğinden ayarlanır: 6–10 kişide iki deste kullanılır.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "İyilik, bomba, bomba yerleştirme ve ıskartadan seçme için 25 saniyen var; süre biterse senin yerine rastgele seçilir. Bağlantısı kopan oyuncunun sırasını oda sahibi onun yerine kart çekerek geçirebilir.",
+            "tip": "Etkisiz Kıl’ını kullandıysan bombayı en üste koy; sıradaki oyuncu Karıştır, Atla ya da Saldır oynamazsa onu çeker."
+          }
+        ]
+      }
+    },
+    {
+      "id": "agents",
+      "name": "Ajanlar",
+      "pitch": "Tek kelimelik ipucuyla takımına gizli ajanlarını buldur",
+      "icon": "cards",
+      "category": "takim",
+      "mono": "AJ",
+      "teams": true,
+      "minPlayers": 4,
+      "maxPlayers": 16,
+      "playersLabel": "4–16 · iki takım",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Yeşil ve mor iki takım, 25 kelimelik bir tablo. Liderler tek kelimelik ipuçlarıyla takımlarına kendi ajanlarını buldurmaya çalışır; suikastçıyı açan takım kaybeder.",
+        "players": "4–16 oyuncu, iki takım (takım başına en az 2)",
+        "duration": "Tablo başına 10–20 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Tablodaki kendi ajanlarınızın hepsini rakipten önce bulmak. Başlayan takımın 9, diğerinin 8 ajanı var.\n\nHangi kelimenin kime ait olduğunu gösteren gizli anahtarı yalnızca iki lider görür. Takımın geri kalanı yalnızca kelimeleri görür."
+          },
+          {
+            "title": "Roller",
+            "items": [
+              {
+                "term": "Lider",
+                "text": "Gizli anahtarı görür, sırası gelince ipucunu verir. Kartlara dokunamaz; takımı tahmin ederken yüzü bir şey belli etmemeli.",
+                "tone": "purple"
+              },
+              {
+                "term": "Tahminci",
+                "text": "Liderin ipucuna göre takımıyla konuşur ve kartlara dokunur. Anahtarı görmez.",
+                "tone": "yellow"
+              },
+              {
+                "term": "İzleyici",
+                "text": "Takımı olmayan oyuncu tabloyu izler.",
+                "tone": "neutral"
+              }
+            ]
+          },
+          {
+            "title": "Bir sıra nasıl geçer",
+            "body": "Sırası gelen takımın lideri tek kelimelik bir ipucu ve “Kaç kart” sayısı verir: “deniz 3”, üç kartın denizle ilgili olduğunu söyler. “İpucunu ver” ile gönderir.\n\nTakım kartlara dokunur. Kendi ajanınızı açtıkça devam edersiniz; en fazla sayının bir fazlası kadar kart açabilirsiniz. Sayı 0 ya da “Sınırsız” seçildiyse hak sınırı yoktur.\n\nİstediğiniz an “Sırayı bitir” ile sırayı rakibe verebilirsiniz."
+          },
+          {
+            "title": "İpucu kuralları",
+            "items": [
+              {
+                "term": "Tek kelime",
+                "text": "Boşluk, rakam ya da işaret olmaz; yalnızca harfler, 2–24 harf."
+              },
+              {
+                "term": "Tablodaki kelime yasak",
+                "text": "Açılmamış bir kelimenin kendisi, kökü ya da ondan türeyen kelime kabul edilmez (göz → gözlük, kitap → kitabı)."
+              },
+              {
+                "term": "Bileşik kelime",
+                "text": "Tablodaki bir kelimeyle biten bileşik ipucu da reddedilir (yıldız → denizyıldızı)."
+              },
+              {
+                "term": "Sayı",
+                "text": "0–9 ya da Sınırsız. Sayı + 1 açma hakkı verir."
+              }
+            ]
+          },
+          {
+            "title": "Kartlar",
+            "items": [
+              {
+                "term": "Kendi ajanınız",
+                "text": "Takımınıza sayılır, tahmin etmeye devam edersiniz.",
+                "tone": "green"
+              },
+              {
+                "term": "Rakip ajan",
+                "text": "Rakibe sayılır ve sıra hemen rakibe geçer.",
+                "tone": "purple"
+              },
+              {
+                "term": "Tarafsız",
+                "text": "Kimseye sayılmaz ama sıranızı bitirir. Tabloda 7 tane var.",
+                "tone": "neutral"
+              },
+              {
+                "term": "Suikastçı",
+                "text": "Açan takım anında kaybeder. Tabloda 1 tane var.",
+                "tone": "red"
+              }
+            ]
+          },
+          {
+            "title": "Kazanma ve ayarlar",
+            "body": "Bütün ajanlarını önce bulan takım tabloyu kazanır; rakibin son ajanını siz açarsanız da rakip kazanır. Tablo bitince anahtar herkese açılır, oda sahibi “Yeni tablo” ile devam eder (liderler sırayla değişir, başlayan takım değişir) ya da “Lobiye dön” der.",
+            "items": [
+              {
+                "term": "Liderler",
+                "text": "Başlarken rastgele ya da Oda sahibi seçer. Varsayılan: rastgele."
+              },
+              {
+                "term": "Kart nasıl açılsın",
+                "text": "İlk dokunuş açar ya da Takım oylaması (bağlı tahmincilerin çoğunluğu aynı karta dokununca açılır). Varsayılan: İlk dokunuş açar."
+              },
+              {
+                "term": "Süre",
+                "text": "Süresiz, Lider ve takım ayrı ya da Sıra başına toplam; 60 ya da 120 sn. Süre dolunca sıra rakibe geçer. Varsayılan: Süresiz."
+              },
+              {
+                "term": "Kelime paketleri",
+                "text": "Genel, Kolay, Zor. Varsayılan: Genel."
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Büyük sayılar cazip ama riskli. Bir kelime hem kendi ajanınıza hem suikastçıya yakınsa o ipucundan vazgeçin.",
+            "tip": "Kalan fazladan hakkı, önceki sıralardan bulamadığınız ajanlar için kullanın."
+          }
+        ]
+      }
+    },
+    {
+      "id": "frequency",
+      "name": "Frekans",
+      "pitch": "Bir ipucuyla takımını kadranda doğru noktaya getir",
+      "icon": "volume",
+      "category": "takim",
+      "mono": "FR",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 16,
+      "playersLabel": "2–16 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Medyum iki zıt kavram arasında gizli bir hedef görür ve tek bir ipucu verir. Takımı kadranı çevirip hedefe ne kadar yaklaşırsa o kadar puan alır.",
+        "players": "2–16 oyuncu; takımlı modda iki takım (takım başına en az 2)",
+        "duration": "20–40 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Her turda bir spektrum kartı çıkar: “Soğuk – Sıcak” gibi iki zıt uç. Kadranda gizli bir hedef var ve onu yalnızca medyum görür.\n\nMedyumun ipucuyla takım ibreyi hedefe olabildiğince yakın getirmeye çalışır. Medyumluk her turda takımda sırayla döner."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Medyum (“Medyum kartı seçsin” açıksa) iki karttan ipucu bulmaya uygun olanı seçer; hedef iki kartta da aynı yerdedir. Sonra hedefin iki uç arasındaki yerini anlatan bir ipucu yazar ya da sesli söyleyip “İpucunu verdim”e basar.\n\nMedyumun takımı tartışarak kadranı çevirir ve “Kadranı kilitle”ye basar. Medyum kadrana dokunamaz, yorum yapmamalı.\n\nTakımlı modda kilitten sonra rakip takım hedefin ibrenin “Solunda” mı “Sağında” mı olduğunu tahmin eder; ilk basan oyuncunun cevabı geçerli olur. Sonra perde açılır ve oyunculardan biri “Sıradaki tura geç”e basar."
+          },
+          {
+            "title": "Kadran ve puan bantları",
+            "body": "Kadran soldan sağa 0 ile 100 arasında. Hedef bölgesi kadranın yaklaşık beşte biri genişliğinde ve beş banttan oluşur: 2-3-4-3-2.",
+            "items": [
+              {
+                "term": "4 puan",
+                "text": "Tam isabet: ibre hedef merkezine en fazla 2 birim uzakta.",
+                "tone": "green"
+              },
+              {
+                "term": "3 puan",
+                "text": "Merkezin hemen yanındaki bantlar: en fazla 6 birim.",
+                "tone": "yellow"
+              },
+              {
+                "term": "2 puan",
+                "text": "Hedef bölgesinin kenarları: en fazla 10 birim.",
+                "tone": "orange"
+              },
+              {
+                "term": "Iska",
+                "text": "Daha uzaktaysa puan yok.",
+                "tone": "red"
+              },
+              {
+                "term": "Sağ-sol tahmini",
+                "text": "Takımlı modda rakip doğru bilirse +1 puan alır. Tam isabette (4 puan) sayılmaz.",
+                "tone": "purple"
+              }
+            ]
+          },
+          {
+            "title": "Kazanma",
+            "body": "Takımlı modda hedef puana ilk ulaşan takım kazanır. İki takım aynı anda aynı puanla hedefe ulaşırsa bir tur daha oynanır.\n\nBirlikte modunda herkes tek takımdır. Turlar bitince ortak puanınız, alınabilecek en yüksek puana oranla bir derece verir: Parazit, Cızırtılı yayın, Aynı kanaldasınız, Net yayın, Telepati."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Nasıl oynanacak",
+                "text": "Takımlı ya da Birlikte. Varsayılan: Takımlı."
+              },
+              {
+                "term": "Kazanmak için puan",
+                "text": "Takımlı modda 10 ya da 15. Varsayılan: 10."
+              },
+              {
+                "term": "Tur sayısı",
+                "text": "Birlikte modunda 7, 10 ya da 13. Varsayılan: 7."
+              },
+              {
+                "term": "Kadran süresi",
+                "text": "Süresiz, 60 ya da 90 sn. Süre bitince kadran olduğu yerde kilitlenir; rakibin sağ-sol tahmini için 30 sn kalır. Varsayılan: Süresiz."
+              },
+              {
+                "term": "Medyum kartı seçsin",
+                "text": "Medyum iki karttan birini seçer. Varsayılan: Açık."
+              },
+              {
+                "term": "Kilit için çoğunluk",
+                "text": "Açıkken takımın yarıdan fazlası “Kilidi onayla” demeli; kadran oynarsa onaylar sıfırlanır. Varsayılan: Kapalı."
+              },
+              {
+                "term": "Yetişme kuralı",
+                "text": "Tam isabet yapan takım hâlâ gerideyse bir tur daha oynar; birlikte modunda +1 tur kazandırır. Varsayılan: Açık."
+              },
+              {
+                "term": "Arkadaş kartları",
+                "text": "Oyuncuların eklediği spektrumlar desteye karışır. Varsayılan: Açık."
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "İyi ipucu, iki uçtan birine ne kadar yakın olduğunu sezdirir. Kadranı çevirirken herkes neden orayı düşündüğünü anlatsın; rakip de bu tartışmayı dinliyor.",
+            "tip": "Medyumsan sus ve yüzünü belli etme; kadranı takımın çevirir."
+          }
+        ]
+      }
+    },
+    {
+      "id": "who-am-i",
+      "name": "Kimim Ben?",
+      "pitch": "Alnındaki kartı herkes görüyor, bir tek sen bilmiyorsun",
+      "icon": "user",
+      "category": "takim",
+      "mono": "KB",
+      "teams": false,
+      "minPlayers": 2,
+      "maxPlayers": 12,
+      "playersLabel": "2–12 oyuncu",
+      "soloSettings": null,
+      "guide": {
+        "summary": "Herkesin alnında bir kimlik kartı var: başkalarınınkini görürsün, kendininkini göremezsin. Evet/hayır soruları sorarak kim olduğunu bul.",
+        "players": "2–12 oyuncu",
+        "duration": "15–30 dk",
+        "sections": [
+          {
+            "title": "Amaç",
+            "body": "Kendi kimliğini en az soruyla bulmak. Ünlü, karakter, hayvan, nesne, meslek ya da arkadaşların eklediği biri olabilirsin.\n\nKendi kartın sen bilene kadar ekranına hiç gelmez; diğerlerinin kartlarını oyuncu listesinde görürsün."
+          },
+          {
+            "title": "Bir tur nasıl geçer",
+            "body": "Sıra sana gelince evet/hayır ile cevaplanacak bir soru sor: “İnsan mıyım?”, “Yaşıyor muyum?” Sesli sorup “Soruyu sordum”a bas ya da yazılı soru açıksa yazıp “Soruyu gönder”e bas.\n\nDiğerleri cevaplar; çoğunluğun cevabı geçerli olur. Herkes cevaplayınca soru kapanır; beklemek istemezsen sen ya da oda sahibi “Gelen cevaplarla bitir” diyebilir.\n\nBildiğini düşündüğünde kimliğini yazıp “Tahmin et”e bas. Doğruysa bitirirsin, yanlışsa sıra geçer. İstersen “Sırayı geçir” ile sıranı bırakabilirsin."
+          },
+          {
+            "title": "Cevaplar",
+            "items": [
+              {
+                "term": "Evet",
+                "text": "Soru kimliğe uyuyor. Sormaya devam edersin.",
+                "tone": "green"
+              },
+              {
+                "term": "Hayır",
+                "text": "Uymuyor. “Hayır çıkana kadar” modunda sıra geçer.",
+                "tone": "red"
+              },
+              {
+                "term": "Belki",
+                "text": "Tam emin değiliz ya da yarı yarıya doğru. Cevaplar eşit dağılırsa da sonuç Belki olur.",
+                "tone": "yellow"
+              },
+              {
+                "term": "Alakasız",
+                "text": "Soru bu kimlik için anlamsız. Sormaya devam edersin.",
+                "tone": "neutral"
+              },
+              {
+                "term": "İpucu al",
+                "text": "Sırayla kategori, baş harf, kelime ve harf sayısı. Yalnızca sen görürsün; her ipucu 1 soru sayılır.",
+                "tone": "purple"
+              }
+            ]
+          },
+          {
+            "title": "Puanlama ve kazanma",
+            "body": "Oyun herkes kimliğini bilince biter. Sıralamada bilenler öndedir; aralarında en az soruda bilen kazanır, soru sayısı eşitse önce bilen öne geçer. İpuçları da soru sayısına eklenir.\n\nKimliğini bilen oyuncu diğerlerinin sorularını cevaplamaya devam eder. Oda sahibi oyunu erken bitirirse bilemeyenler sona yazılır."
+          },
+          {
+            "title": "Ayarlar",
+            "items": [
+              {
+                "term": "Kimlikler nereden gelsin",
+                "text": "Türk ve dünya ünlüleri, karakterler, hayvanlar, nesneler, meslekler, tarihi kişiler, sporcular, arkadaş kartları."
+              },
+              {
+                "term": "Soru hakkı",
+                "text": "“Hayır çıkana kadar” ya da “Her turda 3 soru” (cevap ne olursa olsun 3 sorudan sonra sıra geçer). Varsayılan: Hayır çıkana kadar."
+              },
+              {
+                "term": "Yazılı soru",
+                "text": "Soruyu sesli sormanın yanında yazabilirsin; soru geçmişinde kalır. Varsayılan: Açık."
+              },
+              {
+                "term": "Tahmin kontrolü",
+                "text": "Otomatik: yazım farkları ve takma adlar kabul edilir. Grup onaylasın: diğerleri “Doğru” ya da “Yanlış” der, eşitlikte otomatik kontrol karar verir. Varsayılan: Otomatik."
+              },
+              {
+                "term": "Kişi başı ipucu",
+                "text": "0, 1 ya da 3. Varsayılan: 1."
+              },
+              {
+                "term": "Kendi kimliğini ekle",
+                "text": "Eklediğin kimlik “Arkadaş kartları”na girer; kimseye listelenmez ve mümkünse sana düşmez."
+              }
+            ]
+          },
+          {
+            "title": "İpuçları",
+            "body": "Geniş sorularla başla, sonra daralt. Soru geçmişine bakarak neyi zaten öğrendiğini unutma.",
+            "tip": "Emin değilsen tahmin etme; yanlış tahmin sırayı geçirir ama soru sayın yine de artmaz."
+          }
+        ]
+      }
+    }
+  ]
+}

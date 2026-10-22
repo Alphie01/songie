@@ -5,9 +5,11 @@ import type { RoomPlayer } from '@songie/shared';
 import {
   ALL_ROLES,
   CHAT_MAX,
+  CHORES_GOAL,
   sideOf,
   type ChatMsg,
   type LogEntry,
+  type NightStep,
   type NightTurn,
   type Role,
   type SecretEntry,
@@ -172,7 +174,9 @@ function Clock({ view }: { view: WerewolfView }) {
   const sec = Math.ceil(left / 1000);
   const night = view.phase === 'night';
   const aliveN = view.seats.filter((x) => x.alive).length;
-  const cur = view.nightStep ? view.nightSteps.indexOf(view.nightStep) : -1;
+  // Adımın durumu turuna göre: aynı anda düzeninde bir turdaki bütün adımlar birlikte "şimdi" olur.
+  const stageOf = (st: NightStep) => view.nightStages.findIndex((stage) => stage.includes(st));
+  const together = (view.nightStages[view.stageIndex]?.length ?? 0) > 1;
   return (
     <section className="ww-clock" aria-live="polite">
       <div className="ww-clock-disc">
@@ -187,14 +191,14 @@ function Clock({ view }: { view: WerewolfView }) {
             <h2 className="ww-label">{s.play.nightOrder}</h2>
             {view.nightSteps.length > 0 && (
               <ol className="ww-steps" aria-label={s.play.nightOrder}>
-                {view.nightSteps.map((st, i) => (
-                  <li key={st} data-step={st} data-state={i < cur ? 'done' : i === cur ? 'now' : 'next'}>
+                {view.nightSteps.map((st) => (
+                  <li key={st} data-step={st} data-state={stageOf(st) < view.stageIndex ? 'done' : stageOf(st) === view.stageIndex ? 'now' : 'next'}>
                     {s.step[st]}
                   </li>
                 ))}
               </ol>
             )}
-            {view.nightStep && <p className="ww-clock-sub">{s.stepWakes[view.nightStep]}</p>}
+            {view.nightStep && <p className="ww-clock-sub">{together ? s.allWake : s.stepWakes[view.nightStep]}</p>}
           </>
         ) : (
           <>
@@ -423,8 +427,75 @@ function Night(props: StageProps) {
   const me = view.me;
   if (!me) return <Sleep note={s.play.spectator} view={view} members={members} />;
   if (!me.alive) return <Sleep note={s.play.deadNight} view={view} members={members} />;
+  // Aynı anda düzeni: herkesin ekranında ateşböcekleri; rolü olan önce eylemini yapar.
+  if (me.chores !== null) {
+    return (
+      <>
+        {me.turn && <Turn key={view.session} turn={me.turn} {...props} />}
+        <Chores key={`chores-${view.session}`} view={view} done={me.chores} send={props.send} />
+      </>
+    );
+  }
   if (!me.turn) return <Sleep view={view} members={members} />;
   return <Turn key={view.session} turn={me.turn} {...props} />;
+}
+
+const FLY_CELLS = 9;
+const FLY_HOP_MS = 1300;
+
+/** Aynı anda düzeninin mini oyunu: yanan ateşböceğine dokun. Hedef sayıya ulaşınca sunucuya bildirilir. */
+function Chores({ view, done, send }: { view: WerewolfView; done: boolean; send: Send }) {
+  const [hits, setHits] = useState(0);
+  const [lit, setLit] = useState(() => Math.floor(Math.random() * FLY_CELLS));
+  const sent = useRef(false);
+  const session = view.session;
+
+  const hop = () => setLit((cur) => (cur + 1 + Math.floor(Math.random() * (FLY_CELLS - 1))) % FLY_CELLS);
+
+  useEffect(() => {
+    const t = setInterval(hop, FLY_HOP_MS);
+    return () => clearInterval(t);
+  }, [hits]);
+
+  useEffect(() => {
+    if (hits >= CHORES_GOAL && !done && !sent.current) {
+      sent.current = true;
+      void send({ type: 'chores', session }).then((ok) => {
+        if (!ok) sent.current = false;
+      });
+    }
+  }, [hits, done, send, session]);
+
+  const finished = done || hits >= CHORES_GOAL;
+  const left = Math.max(0, CHORES_GOAL - hits);
+  return (
+    <section className="ww-panel ww-chores" data-done={finished || undefined}>
+      <h2 className="ww-title">{s.play.choresTitle}</h2>
+      <ul className="ww-grid ww-flies">
+        {Array.from({ length: FLY_CELLS }, (_, i) => (
+          <li key={i}>
+            <button
+              type="button"
+              className="ww-tile ww-fly"
+              data-lit={i === lit || undefined}
+              aria-label={i === lit ? s.play.firefly : s.play.fireflyOff}
+              onClick={() => {
+                if (i !== lit) return;
+                setHits((n) => n + 1);
+                hop();
+              }}
+            >
+              <span className="ww-fly-dot" aria-hidden="true" />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p className="ww-hint" aria-live="polite">
+        {finished ? s.play.choresDone : s.play.choresHint(left)}
+      </p>
+      <p className="ww-chores-count">{s.play.choresCaught(hits)}</p>
+    </section>
+  );
 }
 
 function Turn({ turn, view, meId, members, nick, plainNick, send }: StageProps & { turn: NightTurn }) {
@@ -1092,6 +1163,7 @@ function InGame({ view }: { view: WerewolfView }) {
 
 function Rules({ settings }: { settings: WerewolfSettings }) {
   const rows: [string, string][] = [
+    [s.settings.nightMode, s.settings.nightModeOpts[settings.nightMode]],
     [s.settings.roleSeconds, s.settings.sec(settings.roleSeconds)],
     [s.settings.discussSeconds, s.settings.sec(settings.discussSeconds)],
     [s.settings.voteSeconds, s.settings.sec(settings.voteSeconds)],
@@ -1099,6 +1171,7 @@ function Rules({ settings }: { settings: WerewolfSettings }) {
     [s.settings.wolfTie, s.settings.wolfTieOpts[settings.wolfTie]],
   ];
   const flags: [string, boolean][] = [
+    [s.settings.nightEndsEarly, settings.nightEndsEarly],
     [s.settings.revealRoles, settings.revealRoles],
     [s.settings.openVotes, settings.openVotes],
     [s.settings.doctorNoRepeat, settings.doctorNoRepeat],

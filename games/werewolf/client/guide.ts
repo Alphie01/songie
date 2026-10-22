@@ -15,7 +15,7 @@ export const guide: GameGuide = {
     {
       title: 'Gece',
       body:
-        'Roller sırayla uyanır: aşk okçusu (yalnızca ilk gece), kurtlar, kahin, doktor, cadı. Her rolün sabit bir süresi vardır (20, 30 ya da 45 sn). Rol erken seçse de sıra süre dolunca geçer; rolün sahibi ölmüş olsa bile adım aynı süre sürer. Böylece kimin hangi rolde olduğu süreden anlaşılmaz.\n\nKurtlar kendi aralarında gizli bir sohbetle konuşur ve kurbana oy verir; en çok oyu alan ölür. Beraberlikte ayara göre rastgele biri ölür ya da kimse ölmez. Süre dolunca seçim yapmayan rol eylemsiz geçer.',
+        'Gece iki düzende oynanabilir. Sıralı düzende roller tek tek uyanır: aşk okçusu (yalnızca ilk gece), kurtlar, kahin, doktor, cadı. Her rolün sabit bir süresi vardır (20, 30 ya da 45 sn). Rol erken seçse de sıra süre dolunca geçer; rolün sahibi ölmüş olsa bile adım aynı süre sürer. Böylece kimin hangi rolde olduğu süreden anlaşılmaz.\n\nAynı anda düzeninde bütün roller birlikte uyanır; cadı, kurtların kurbanını görebilmek için kısa bir ikinci turda oynar. Rolü olmayanlar ve işini bitirenler o sırada ekranda ateşböceği toplar. Herkes aynı anda telefonuyla uğraştığı için kimin ne zaman oynadığından rol anlaşılmaz.\n\nErken bitiş ayarı açıksa, gecede yapılacak herkes bitirince adım (ya da tur) süreyi beklemeden kapanır: aynı anda düzeninde rolü olanlar seçimini, diğerleri ateşböceklerini bitirince. Sıralı düzende bu, rolün sahibinin ölü olup olmadığını süreden ele verebilir.\n\nKurtlar kendi aralarında gizli bir sohbetle konuşur ve kurbana oy verir; en çok oyu alan ölür. Beraberlikte ayara göre rastgele biri ölür ya da kimse ölmez. Süre dolunca seçim yapmayan rol eylemsiz geçer.',
     },
     {
       title: 'Gündüz',

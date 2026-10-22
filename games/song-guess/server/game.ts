@@ -163,6 +163,7 @@ export function createSongGame(deps: {
   function beginRound(ctx: GameContext, state: SongState, prepared: Prepared): void {
     if (state.current) media.release(state.current.media.token);
     state.current = prepared;
+    console.log('[DEBUG-TEMP answer]', JSON.stringify({ id: prepared.track.id, title: prepared.track.title, artist: prepared.track.artist })); // DEBUG-TEMP
     state.round++;
     state.firstSolved = false;
     state.reveal = null;
@@ -373,6 +374,7 @@ export function createSongGame(deps: {
       if (!guess) throw new GameError('Öneri listesinden bir şarkı seç.');
       const answer = state.current!.track;
       let verdict = judge(answer, guess);
+      console.log('[DEBUG-TEMP guess]', JSON.stringify({ playerId, trackId: action.trackId, guess: [guess.id, guess.title, guess.artist, guess.norm_title, guess.norm_artist], answer: [answer.id, answer.title, answer.artist, answer.norm_title, answer.norm_artist], verdict, state: me.solved, lock: me.stageLock })); // DEBUG-TEMP
       if (verdict === 'artist' && (!state.settings.artistCredit || me.solved === 'artist')) verdict = 'wrong';
       me.guesses.push({ stage: state.stage, title: guess.title, artist: guess.artist, verdict });
 

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Avatar } from '@songie/shared';
 import type { CaseDoc, DocKind, FloorPlan, TimelineEntry } from './case-schema.js';
 
 export * from './case-schema.js';
@@ -105,8 +106,12 @@ export interface SessionCard {
   act: number;
   acts: number;
   hoursSpent: number;
+  /** Vakanın saat bütçesi. */
+  hoursBudget: number;
   updatedAt: number;
   members: string[];
+  /** Üyelerin adı ve avatarı (profili silinmiş üye listede yer almaz). */
+  crew: { id: string; nick: string; avatar: Avatar }[];
 }
 
 export interface CasesResponse {

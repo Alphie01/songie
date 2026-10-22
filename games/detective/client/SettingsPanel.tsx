@@ -142,7 +142,7 @@ function SessionRow({ ss, selected, editable, onPick }: { ss: SessionCard; selec
       <span className="dt-session-meta">
         {s.settings.sessionAct(ss.act, ss.acts)}, {s.settings.sessionHours(ss.hoursSpent)}, {ago(ss.updatedAt)}
       </span>
-      {ss.members.length > 0 && <span className="dt-session-members">{ss.members.join(', ')}</span>}
+      {(ss.crew ?? []).length > 0 && <span className="dt-session-members">{(ss.crew ?? []).map((m) => m.nick).join(', ')}</span>}
     </button>
   );
 }

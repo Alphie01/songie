@@ -44,7 +44,8 @@ export const s = {
     selected: 'Seçili',
     sessions: 'Devam eden dosyalar',
     sessionsHint: 'Yarım kalan bir soruşturmayı kaldığı yerden sürdür.',
-    sessionAct: (act: number, acts: number) => `Bölüm ${act + 1}/${acts}`,
+    /** `act` sunucudan 1'den başlayarak gelir. */
+    sessionAct: (act: number, acts: number) => `Bölüm ${act}/${acts}`,
     sessionHours: (n: number) => `${n} sa harcandı`,
     leadMode: 'İzlere kim karar verir',
     leadModes: { vote: 'Oylama', host: 'Oda sahibi' } as Record<'vote' | 'host', string>,

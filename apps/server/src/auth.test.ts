@@ -10,10 +10,11 @@ import { firebaseVerifier, type GoogleIdentity } from './firebase.js';
 import { nickFromName } from './players.js';
 
 // Sahte doğrulayıcı: "google:<uid>:<ad>" biçimindeki token'lar geçerli.
+// "apple:<uid>:<ad>:<e-posta>": başka bir uygulamanın Firebase projesinden Apple girişi.
 const fakeVerify = async (idToken: string): Promise<GoogleIdentity> => {
-  const [kind, uid, name] = idToken.split(':');
-  if (kind !== 'google' || !uid) throw new Error('bad token');
-  return { uid, email: `${uid}@ornek.com`, name: name ?? null };
+  const [kind, uid, name, email] = idToken.split(':');
+  if ((kind !== 'google' && kind !== 'apple') || !uid) throw new Error('bad token');
+  return { uid, email: email || `${uid}@ornek.com`, name: name || null, emailVerified: true, provider: `${kind}.com` };
 };
 const idToken = (uid: string, name = 'Ece Kaya') => `google:${uid}:${name}`.padEnd(24, ' ');
 
@@ -128,14 +129,47 @@ describe('Google ile giriş', () => {
 
   it('davet linkleri için doğrulama dosyaları', async () => {
     const apple = await app.http.inject({ method: 'GET', url: '/.well-known/apple-app-site-association' });
-    expect(apple.json().applinks.details[0].appIDs).toEqual(['TEAM123.com.monolithyazilim.songie']);
+    expect(apple.json().applinks.details[0].appIDs).toEqual([
+      'TEAM123.com.monolithyazilim.songie',
+      'TEAM123.com.monolithyazilim.itirafkosesi',
+      'TEAM123.com.monolithyazilim.casebook',
+      'TEAM123.com.monolithyazilim.weknows',
+    ]);
     const android = await app.http.inject({ method: 'GET', url: '/.well-known/assetlinks.json' });
+    expect(android.json().map((x: { target: { package_name: string } }) => x.target.package_name)).toHaveLength(4);
     expect(android.json()[0].target.sha256_cert_fingerprints).toEqual(['AA:BB']);
   });
 
   it('uygulama ayarı en düşük sürümü verir', async () => {
     const res = await app.http.inject({ method: 'GET', url: '/api/app/config' });
     expect(res.json()).toEqual({ minAppVersion: '1.2.0' });
+  });
+});
+
+describe('dört uygulama, ayrı Firebase projeleri', () => {
+  const login = (raw: string, token?: string) =>
+    app.http.inject({ method: 'POST', url: '/api/auth/google', headers: token ? auth(token) : {}, payload: { idToken: raw.padEnd(24, ' ') } });
+
+  it('başka projeden (farklı uid) aynı e-postayla gelen giriş aynı hesaba bağlanır', async () => {
+    const first = (await google('uid-songie')).json<AuthResponse>();
+    // Casebook'ta anonim profil; aynı kişi Apple ile giriyor (uid farklı, e-posta aynı).
+    const cb = await anon('Casebookçu');
+    const res = (await login('apple:uid-casebook::uid-songie@ornek.com', cb.token)).json<AuthResponse>();
+    expect(res.profile.id).toBe(first.profile.id);
+    expect(res.account.provider).toBe('apple');
+    expect((await me(cb.token)).statusCode).toBe(401);
+    // Sonraki girişte uid'den tanınır.
+    const again = (await login('apple:uid-casebook::degisti@ornek.com')).json<AuthResponse>();
+    expect(again.profile.id).toBe(first.profile.id);
+    // Ana hesabın sağlayıcısı ve e-postası değişmez.
+    const meRes = (await me(first.token)).json<MeResponse>();
+    expect(meRes.account).toEqual({ provider: 'google', email: 'uid-songie@ornek.com' });
+  });
+
+  it('Apple ile açılan hesap Apple olarak görünür', async () => {
+    const res = (await login('apple:uid-apple-yeni:Deniz Su:deniz@ornek.com')).json<AuthResponse>();
+    expect(res.profile.nick).toBe('Deniz Su');
+    expect((await me(res.token)).json<MeResponse>().account).toEqual({ provider: 'apple', email: 'deniz@ornek.com' });
   });
 });
 
@@ -153,11 +187,13 @@ describe('firebaseVerifier', () => {
   const project = 'songie-test';
   let sign: (claims: Record<string, unknown>, aud?: string) => Promise<string>;
   let verify: ReturnType<typeof firebaseVerifier>;
+  let keys: ReturnType<typeof createLocalJWKSet>;
 
   beforeAll(async () => {
     const { publicKey, privateKey } = await generateKeyPair('RS256');
     const jwk = { ...(await exportJWK(publicKey)), kid: 'k1', alg: 'RS256' };
-    verify = firebaseVerifier(project, createLocalJWKSet({ keys: [jwk] }));
+    keys = createLocalJWKSet({ keys: [jwk] });
+    verify = firebaseVerifier(project, keys);
     sign = (claims, aud = project) =>
       new SignJWT(claims)
         .setProtectedHeader({ alg: 'RS256', kid: 'k1' })
@@ -171,11 +207,19 @@ describe('firebaseVerifier', () => {
 
   it('Google oturumunu kabul eder', async () => {
     const t = await sign({ email: 'a@b.com', name: 'Ali', firebase: { sign_in_provider: 'google.com' } });
-    expect(await verify(t)).toEqual({ uid: 'uid-1', email: 'a@b.com', name: 'Ali' });
+    expect(await verify(t)).toEqual({ uid: 'uid-1', email: 'a@b.com', name: 'Ali', emailVerified: false, provider: 'google.com' });
+  });
+
+  it('Apple oturumunu ve izinli diğer projeleri kabul eder', async () => {
+    const t = await sign({ email: 'x@privaterelay.appleid.com', email_verified: true, firebase: { sign_in_provider: 'apple.com' } });
+    expect(await verify(t)).toMatchObject({ provider: 'apple.com', emailVerified: true });
+    const multi = firebaseVerifier(['diger', project], keys);
+    expect(await multi(t)).toMatchObject({ uid: 'uid-1' });
   });
 
   it('başka projeyi ve başka sağlayıcıyı reddeder', async () => {
     await expect(verify(await sign({ firebase: { sign_in_provider: 'google.com' } }, 'baska'))).rejects.toThrow();
     await expect(verify(await sign({ firebase: { sign_in_provider: 'password' } }))).rejects.toThrow();
+    await expect(verify(await sign({ firebase: { sign_in_provider: 'anonymous' } }))).rejects.toThrow();
   });
 });

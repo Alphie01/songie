@@ -11,4 +11,8 @@ games/detective/server/cases/*/.export
 screenshots
 test-results
 # Mobil uygulama sunucu imajına girmez
-apps/mobile
+apps/songie
+apps/itiraf_kosesi
+apps/casebook
+apps/weknows
+packages/songie_core

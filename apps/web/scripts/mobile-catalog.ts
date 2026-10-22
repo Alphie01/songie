@@ -1,6 +1,6 @@
 /**
  * Mobil uygulamanın oyun kataloğu: web'deki oyun kaydından (ad, tanıtım, rehber, kategori)
- * `apps/mobile/assets/catalog.json` üretir. Metinler tek kaynakta kalsın diye elle kopyalanmaz.
+ * `packages/songie_core/assets/catalog.json` üretir. Metinler tek kaynakta kalsın diye elle kopyalanmaz.
  * Çalıştır: pnpm --filter @songie/web mobile:catalog
  */
 import fs from 'node:fs';
@@ -9,7 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { CATEGORIES, GAMES, playersLabel } from '../src/games';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const out = path.resolve(here, '../../mobile/assets/catalog.json');
+const out = path.resolve(here, '../../../packages/songie_core/assets/catalog.json');
 
 const catalog = {
   categories: CATEGORIES,

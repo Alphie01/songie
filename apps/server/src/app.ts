@@ -20,7 +20,7 @@ export interface AppOptions {
   logger?: boolean | { level: string };
   trustProxy?: boolean;
   gameOverrides?: GameDeps['overrides'];
-  firebaseProjectId?: string;
+  firebaseProjectIds?: string[];
   /** Testlerde sahte doğrulayıcı. */
   verifyIdToken?: IdTokenVerifier;
   minAppVersion?: string;
@@ -57,7 +57,7 @@ export async function buildApp(opts: AppOptions): Promise<App> {
     rooms,
     games,
     webDist: opts.webDist,
-    verifyIdToken: opts.verifyIdToken ?? firebaseVerifier(opts.firebaseProjectId ?? 'songie-app'),
+    verifyIdToken: opts.verifyIdToken ?? firebaseVerifier(opts.firebaseProjectIds ?? ['songie-app']),
     disconnectPlayer: (id) => disconnectPlayer(io, id),
     minAppVersion: opts.minAppVersion ?? '1.0.0',
     appLinks: opts.appLinks ?? { appleTeamId: '', androidCertSha256: [] },

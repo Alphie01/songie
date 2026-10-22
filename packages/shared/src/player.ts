@@ -34,7 +34,7 @@ export interface ProfileStats {
 
 /** Profile bağlı giriş hesabı. Yalnızca sahibine gider (`Profile` odadaki herkese gider). */
 export interface Account {
-  provider: 'google';
+  provider: 'google' | 'apple';
   email: string | null;
 }
 

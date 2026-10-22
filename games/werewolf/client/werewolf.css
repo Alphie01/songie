@@ -1559,3 +1559,52 @@
   font-size: 15px;
   white-space: normal;
 }
+
+/* ---------- Aynı anda düzeni: ateşböcekleri ---------- */
+.ww-chores {
+  margin-top: 4px;
+}
+
+.ww-flies .ww-tile {
+  min-height: 74px;
+}
+
+.ww-fly-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ww-soft);
+  transition:
+    transform 160ms,
+    background 160ms,
+    box-shadow 160ms;
+}
+
+.ww-fly[data-lit] {
+  border-color: var(--ww-ring);
+}
+
+.ww-fly[data-lit] .ww-fly-dot {
+  background: var(--ww-moon);
+  box-shadow:
+    0 0 0 6px color-mix(in srgb, var(--ww-moon) 25%, transparent),
+    0 0 22px 6px color-mix(in srgb, var(--ww-moon) 55%, transparent);
+  transform: scale(1.35);
+}
+
+.ww-fly:active {
+  transform: scale(0.96);
+}
+
+.ww-chores-count {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--ww-dim);
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ww-fly-dot {
+    transition: none;
+  }
+}

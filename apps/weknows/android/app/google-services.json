@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1019234390374",
+    "project_id": "weknows-app",
+    "storage_bucket": "weknows-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019234390374:android:77340dfa3e40f2e8f238a7",
+        "android_client_info": {
+          "package_name": "com.monolithyazilim.weknows"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019234390374-3l0ofoposbmn1vm5ahrmtnnh1lq5encv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKVfVEyIN7uZupcDTwRR9E0UPIFgaJ7Rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019234390374-3l0ofoposbmn1vm5ahrmtnnh1lq5encv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1019234390374-cvo0rqda2qbh9grjo2hdv3jmlc7ka3c1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.monolithyazilim.weknows"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

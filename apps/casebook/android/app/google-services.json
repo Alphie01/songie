@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "127657499191",
+    "project_id": "casebook-monolith",
+    "storage_bucket": "casebook-monolith.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127657499191:android:a239989c516e1e4db63db2",
+        "android_client_info": {
+          "package_name": "com.monolithyazilim.casebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127657499191-b2lqsd9cqmhkai4kn5m5o2q2e2nhiloe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwjc40hiEpYyDczVElEJONWVYI1Tin1D0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127657499191-b2lqsd9cqmhkai4kn5m5o2q2e2nhiloe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127657499191-k3ce0u5ruosfi7kk8r5pact7j5pjc6a2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.monolithyazilim.casebook"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

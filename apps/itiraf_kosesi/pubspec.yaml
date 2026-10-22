@@ -1,0 +1,68 @@
+name: itiraf_kosesi
+description: "İtiraf Köşesi — arkadaşlarınla en dürüst gece"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  songie_core:
+    path: ../../packages/songie_core
+  firebase_core: ">=4.1.0 <4.14.0"
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  # İkon çizimi ve testler için (uygulama bunları songie_core üzerinden kullanır).
+  provider: ^6.1.5+1
+  shared_preferences: ^2.5.5
+  flutter_svg: ^2.3.0
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Baloo2
+      fonts:
+        - asset: packages/songie_core/fonts/Baloo2-SemiBold.ttf
+          weight: 600
+        - asset: packages/songie_core/fonts/Baloo2-Bold.ttf
+          weight: 700
+        - asset: packages/songie_core/fonts/Baloo2-ExtraBold.ttf
+          weight: 800
+    - family: Nunito
+      fonts:
+        - asset: packages/songie_core/fonts/Nunito-Medium.ttf
+          weight: 500
+        - asset: packages/songie_core/fonts/Nunito-SemiBold.ttf
+          weight: 600
+        - asset: packages/songie_core/fonts/Nunito-Bold.ttf
+          weight: 700
+        - asset: packages/songie_core/fonts/Nunito-ExtraBold.ttf
+          weight: 800
+
+# Uygulama ikonu (assets/icon: packages/songie_core/tool/render_app_icons_test.dart ile dört uygulama birlikte üretilir). Üret: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: assets/icon/icon.png
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  adaptive_icon_background: "#2A1B6E"
+  adaptive_icon_foreground: assets/icon/foreground.png
+  min_sdk_android: 23
+
+# Açılış ekranı: mor zemin + logo rozeti. Üret: dart run flutter_native_splash:create
+flutter_native_splash:
+  color: "#2A1B6E"
+  image: assets/icon/splash.png
+  android_12:
+    color: "#2A1B6E"
+    image: assets/icon/foreground.png

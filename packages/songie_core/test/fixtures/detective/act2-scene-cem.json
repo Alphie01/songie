@@ -1,0 +1,542 @@
+{
+  "view": {
+    "phase": "scene",
+    "serverNow": 1792592645885,
+    "sessionId": "qbDC6T6k",
+    "leadMode": "vote",
+    "case": {
+      "slug": "mini",
+      "title": "Moda'da Kapanan Kapı",
+      "subtitle": "Moda, İstanbul — Şubat 2025",
+      "genre": "cinayet",
+      "difficulty": "orta",
+      "coverUrl": null
+    },
+    "act": {
+      "index": 1,
+      "total": 3,
+      "title": "Zehir",
+      "scene": "Otopsi sonucu geldi.",
+      "imageUrl": null,
+      "imageAlt": null,
+      "narrationUrl": null
+    },
+    "acts": [
+      {
+        "index": 0,
+        "title": "Kilitli oda",
+        "scene": "Sabah yedi elli beş. Sevim Er yedek anahtarla saatçi dükkânının kapısını açıyor.\n\nArka oda içeriden kilitli.",
+        "imageUrl": null,
+        "narrationUrl": "/api/games/detective/audio/mini/a10c42ca432ceba47684.mp3"
+      },
+      {
+        "index": 1,
+        "title": "Zehir",
+        "scene": "Otopsi sonucu geldi.",
+        "imageUrl": null,
+        "narrationUrl": null
+      }
+    ],
+    "hours": {
+      "spent": 4,
+      "budget": 12,
+      "target": 7,
+      "actSpent": 0,
+      "actLimit": 4
+    },
+    "characters": [
+      {
+        "id": "nuri",
+        "name": "Nuri Aksoy",
+        "age": 71,
+        "role": "Emekli saatçi",
+        "relation": "Kurban",
+        "summary": "Moda'da kırk yıldır saatçi dükkânı işletiyordu. Yalnız yaşıyordu.",
+        "portraitUrl": null,
+        "portraitAlt": "Beyaz bıyıklı, hırkalı, yaşlı bir adam.",
+        "victim": true,
+        "suspect": false,
+        "mark": null,
+        "notes": []
+      },
+      {
+        "id": "leyla",
+        "name": "Leyla Aksoy",
+        "age": 44,
+        "role": "Kurbanın kızı",
+        "relation": "Tek mirasçı",
+        "summary": "Kadıköy'de eczacı. Babasıyla araları son yıllarda soğuktu.",
+        "portraitUrl": null,
+        "portraitAlt": "Kısa koyu saçlı, yağmurluklu, kırklarında bir kadın.",
+        "victim": false,
+        "suspect": true,
+        "mark": {
+          "mark": "clear",
+          "by": "cem"
+        },
+        "notes": []
+      },
+      {
+        "id": "kerem",
+        "name": "Kerem Yalçın",
+        "age": 33,
+        "role": "Çırak",
+        "relation": "Dükkânda beş yıldır çalışıyor",
+        "summary": "Dükkânın anahtarlarından birini taşıyor. Borçları olduğu konuşuluyor.",
+        "portraitUrl": "/api/games/detective/img/mini/6a71e941bc1791831f81.webp",
+        "portraitAlt": "Sakallı, deri ceketli, otuzlarında gergin bir adam.",
+        "victim": false,
+        "suspect": true,
+        "mark": {
+          "mark": "suspect",
+          "by": "ayse"
+        },
+        "notes": [
+          {
+            "id": "n2",
+            "by": "cem",
+            "text": "Borçlu olabilir",
+            "at": 1000000
+          }
+        ]
+      },
+      {
+        "id": "sevim",
+        "name": "Sevim Er",
+        "age": 60,
+        "role": "Komşu, kuru temizlemeci",
+        "relation": "Cesedi bulan kişi",
+        "summary": "Karşı dükkânın sahibi. Her sabah Nuri Bey'le çay içerdi.",
+        "portraitUrl": null,
+        "portraitAlt": null,
+        "victim": false,
+        "suspect": true,
+        "mark": null,
+        "notes": []
+      }
+    ],
+    "locations": [
+      {
+        "id": "shop",
+        "name": "Aksoy Saat Atölyesi",
+        "description": "Ön tarafta satış tezgâhı, arkada çalışma odası. Arka odanın tek kapısı ve avluya bakan küçük bir penceresi var.",
+        "imageUrl": null,
+        "imageAlt": "Duvarlarda saatler, tezgâhta aletler; dar bir atölye.",
+        "plan": {
+          "width": 12,
+          "height": 8,
+          "rooms": [
+            {
+              "id": "front",
+              "label": "Satış",
+              "x": 0,
+              "y": 0,
+              "w": 7,
+              "h": 8
+            },
+            {
+              "id": "back",
+              "label": "Arka oda",
+              "x": 7,
+              "y": 0,
+              "w": 5,
+              "h": 5
+            },
+            {
+              "id": "yard",
+              "label": "Avlu",
+              "x": 7,
+              "y": 5,
+              "w": 5,
+              "h": 3,
+              "outdoor": true
+            }
+          ],
+          "doors": [
+            {
+              "x": 3,
+              "y": 8,
+              "label": "Sokak kapısı"
+            },
+            {
+              "x": 7,
+              "y": 2.5,
+              "vertical": true,
+              "label": "Arka oda kapısı"
+            }
+          ],
+          "windows": [
+            {
+              "x": 9.5,
+              "y": 5
+            }
+          ],
+          "markers": [
+            {
+              "x": 9,
+              "y": 2,
+              "label": "Ceset",
+              "kind": "body"
+            },
+            {
+              "x": 10.5,
+              "y": 4.5,
+              "label": "Ayak izi",
+              "kind": "stain"
+            }
+          ]
+        }
+      }
+    ],
+    "evidence": [
+      {
+        "id": "e-scene",
+        "title": "Olay yeri inceleme raporu",
+        "summary": "Olay Yeri İnceleme Şube Müdürlüğü'nün ilk raporu.",
+        "kind": "report",
+        "act": 0,
+        "source": null,
+        "seq": 1,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "nuri",
+          "sevim"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-sevim",
+        "title": "Sevim Er'in ifadesi",
+        "summary": "Cesedi bulan komşunun ifadesi.",
+        "kind": "statement",
+        "act": 0,
+        "source": null,
+        "seq": 2,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "sevim",
+          "kerem"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-kerem",
+        "title": "Kerem Yalçın'ın ifadesi",
+        "summary": "Çırağın ilk ifadesi.",
+        "kind": "statement",
+        "act": 0,
+        "source": null,
+        "seq": 3,
+        "pinned": true,
+        "notes": [
+          {
+            "id": "n1",
+            "by": "ayse",
+            "text": "Saat 19 diyor",
+            "at": 1000000
+          }
+        ],
+        "people": [
+          "kerem"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-plan",
+        "title": "Dükkân krokisi",
+        "summary": "Olay yeri ekibinin çizdiği kroki.",
+        "kind": "floorplan",
+        "act": 0,
+        "source": null,
+        "seq": 4,
+        "pinned": false,
+        "notes": [],
+        "people": [],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-pharmacy",
+        "title": "Eczane nöbet listesi",
+        "summary": "Kadıköy Eczacı Odası nöbet çizelgesi.",
+        "kind": "table",
+        "act": 0,
+        "source": "Leyla'nın akşamını doğrula",
+        "seq": 5,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "leyla"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-access",
+        "title": "Eczane kapı kaydı",
+        "summary": "Eczanenin kartlı giriş sistemi.",
+        "kind": "accessLog",
+        "act": 0,
+        "source": "Leyla'nın akşamını doğrula",
+        "seq": 6,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "leyla"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-ticket",
+        "title": "Otopark fişi",
+        "summary": "Sevim Er'in arabasından.",
+        "kind": "ticket",
+        "act": 0,
+        "source": "Sevim Er ile görüşme",
+        "seq": 7,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "sevim"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-cam",
+        "title": "Sokak kamerası, 21:08",
+        "summary": "Moda Caddesi'ne bakan esnaf kamerası.",
+        "kind": "photo",
+        "act": 0,
+        "source": "Cadde kameralarını topla",
+        "seq": 8,
+        "pinned": false,
+        "notes": [],
+        "people": [],
+        "thumbUrl": "/api/games/detective/img/mini/b21813d65b0339b7beb7.webp"
+      },
+      {
+        "id": "e-autopsy",
+        "title": "Otopsi raporu",
+        "summary": "Adli Tıp Kurumu ön raporu.",
+        "kind": "report",
+        "act": 1,
+        "source": null,
+        "seq": 9,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "nuri"
+        ],
+        "thumbUrl": null
+      },
+      {
+        "id": "e-news",
+        "title": "Gazete haberi",
+        "summary": "Yerel gazetede çıkan haber.",
+        "kind": "newspaper",
+        "act": 1,
+        "source": null,
+        "seq": 10,
+        "pinned": false,
+        "notes": [],
+        "people": [
+          "nuri"
+        ],
+        "thumbUrl": null
+      }
+    ],
+    "timeline": [
+      {
+        "at": "2025-02-14T21:00",
+        "text": "Tahmini ölüm aralığı başlıyor.",
+        "evidenceId": "e-autopsy"
+      },
+      {
+        "at": "2025-02-14T21:08",
+        "text": "Kapüşonlu biri dükkâna yürüyor (KAM-03).",
+        "evidenceId": "e-cam"
+      },
+      {
+        "at": "2025-02-15T07:55",
+        "text": "Sevim Er cesedi buluyor.",
+        "evidenceId": "e-scene"
+      }
+    ],
+    "leads": [
+      {
+        "id": "l-sevim",
+        "title": "Sevim Er'in akşamını sor",
+        "description": "Kerem'i gördüğünü söylüyor; kendisi neredeydi?",
+        "hours": 1,
+        "from": null
+      },
+      {
+        "id": "l-kerem-phone",
+        "title": "Kerem'in HTS kaydını iste",
+        "description": "Çırak akşam yedide eve gittiğini söylüyor.",
+        "hours": 2,
+        "from": null
+      },
+      {
+        "id": "l-wallet",
+        "title": "Kerem'in üstünü aratın",
+        "description": "Kamera kaydındaki kişi kim?",
+        "hours": 1,
+        "from": null
+      },
+      {
+        "id": "l-email",
+        "title": "Kurbanın e-postalarını incele",
+        "description": "Son haftalarda kiminle yazıştı?",
+        "hours": 2,
+        "from": null
+      }
+    ],
+    "opened": [
+      {
+        "id": "l-leyla",
+        "title": "Leyla'nın akşamını doğrula",
+        "description": "Tek mirasçı o.",
+        "hours": 2,
+        "outcome": "Eczane kayıtları geldi.",
+        "act": 0,
+        "by": "ayse",
+        "evidence": [
+          "e-pharmacy",
+          "e-access"
+        ]
+      },
+      {
+        "id": "l-camera",
+        "title": "Cadde kameralarını topla",
+        "description": "Moda Caddesi'nde esnaf kameraları var.",
+        "hours": 2,
+        "outcome": "Bir kamera kaydı bulundu.",
+        "act": 0,
+        "by": "ali",
+        "evidence": [
+          "e-cam"
+        ]
+      }
+    ],
+    "interviews": [
+      {
+        "id": "iv-sevim",
+        "characterId": "sevim",
+        "title": "Sevim Er ile görüşme",
+        "place": "Kuru temizleme dükkânı",
+        "intro": "Sevim Hanım ütü masasının başında, elleri titriyor.",
+        "act": 0,
+        "transcript": [
+          {
+            "kind": "ask",
+            "prompt": "Nuri Bey'in düşmanı var mıydı?",
+            "evidenceId": null,
+            "answer": "Düşmanı olmaz onun. Ama Kerem'le son zamanlarda bağırışıyorlardı.",
+            "by": "ayse",
+            "at": 1000000,
+            "audioUrl": null,
+            "unlocked": []
+          },
+          {
+            "kind": "ask",
+            "prompt": "Kerem'i tam olarak saat kaçta gördünüz?",
+            "evidenceId": null,
+            "answer": "Dokuzu geçiyordu. Yüzünü görmedim ama yürüyüşü onundu.",
+            "by": "ali",
+            "at": 1000000,
+            "audioUrl": null,
+            "unlocked": [
+              "e-ticket"
+            ]
+          },
+          {
+            "kind": "deflect",
+            "prompt": "Olay yeri inceleme raporu",
+            "evidenceId": "e-scene",
+            "answer": "Bunu bilmem ben.",
+            "by": "cem",
+            "at": 1000000,
+            "audioUrl": null,
+            "unlocked": []
+          },
+          {
+            "kind": "confront",
+            "prompt": "Otopark fişi",
+            "evidenceId": "e-ticket",
+            "answer": "Evet, otoparktaydım. Saatleri karıştırmış olabilirim.",
+            "by": "cem",
+            "at": 1000000,
+            "audioUrl": null,
+            "unlocked": []
+          }
+        ],
+        "questions": [
+          {
+            "id": "q1",
+            "ask": "Dün akşam dükkânınızı kaçta kapattınız?"
+          }
+        ]
+      }
+    ],
+    "proposal": null,
+    "notebook": {
+      "text": "Kerem yalan söylüyor.\nEczane kayıtlarına bak.",
+      "version": 1,
+      "by": "ali",
+      "at": 1000000
+    },
+    "hints": {
+      "enabled": true,
+      "used": [
+        {
+          "act": 0,
+          "text": "Kerem'in ifadesindeki saati başka bir belgeyle karşılaştırın."
+        }
+      ],
+      "left": 2
+    },
+    "canClose": false,
+    "sceneReady": [],
+    "questions": [],
+    "accuse": null,
+    "reconcile": null,
+    "result": null,
+    "log": [
+      {
+        "at": 1000000,
+        "text": "Bölüm 1: Kilitli oda"
+      },
+      {
+        "at": 1000000,
+        "text": "ayse önerdi: Leyla'nın akşamını doğrula"
+      },
+      {
+        "at": 1000000,
+        "text": "İz açıldı: Leyla'nın akşamını doğrula (2 sa)"
+      },
+      {
+        "at": 1000000,
+        "text": "cem amirden ipucu istedi (−5 puan)."
+      },
+      {
+        "at": 1000000,
+        "text": "cem, Sevim Er bir belge gösterdi."
+      },
+      {
+        "at": 1000000,
+        "text": "İz açıldı: Cadde kameralarını topla (2 sa)"
+      },
+      {
+        "at": 1000000,
+        "text": "Bölüm 2: Zehir"
+      }
+    ]
+  },
+  "settings": {
+    "caseSlug": "mini",
+    "resume": null,
+    "leadMode": "vote",
+    "hints": true
+  }
+}

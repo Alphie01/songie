@@ -1,3 +1,4 @@
+import type { ZodType } from 'zod';
 import { UserFacingError, type GameContext, type GameResult, type ServerGame } from '@songie/game-kit/server';
 import {
   ALL_ROLES,
@@ -5,6 +6,7 @@ import {
   MAX_PLAYERS,
   MIN_PLAYERS,
   NIGHT_ORDER,
+  SIMULTANEOUS_STAGES,
   SPECIAL_ROLES,
   STEP_ROLE,
   actionSchema,
@@ -61,7 +63,12 @@ export interface WerewolfState {
   session: number;
   endsAt: number;
   nightSteps: NightStep[];
+  /** Gecenin turları; sıralı düzende her adım tek başına. */
+  nightStages: NightStep[][];
+  /** Şu anki tur (nightStages içinde). */
   stepIndex: number;
+  /** Aynı anda düzeninde mini oyununu bitirenler (bu tur). */
+  choresDone: string[];
 
   // Gece
   wolfVotes: Record<string, string>;
@@ -132,7 +139,9 @@ export function createWerewolfGame(deps: {
   const alive = (s: WerewolfState) => s.seats.filter((id) => !s.dead.includes(id));
   const roleMs = (s: WerewolfState) => s.settings.roleSeconds * 1000;
   const shownRole = (s: WerewolfState, id: string): Role | null => (s.settings.revealRoles ? s.roles[id]! : null);
-  const currentStep = (s: WerewolfState): NightStep | null => (s.phase === 'night' ? (s.nightSteps[s.stepIndex] ?? null) : null);
+  const currentSteps = (s: WerewolfState): NightStep[] => (s.phase === 'night' ? (s.nightStages[s.stepIndex] ?? []) : []);
+  const currentStep = (s: WerewolfState): NightStep | null => currentSteps(s)[0] ?? null;
+  const simultaneous = (s: WerewolfState) => s.settings.nightMode === 'simultaneous';
   const mixedLovers = (s: WerewolfState) => !!s.lovers && sideOf(s.roles[s.lovers[0]]!) !== sideOf(s.roles[s.lovers[1]]!);
 
   function online(ctx: GameContext): Set<string> {
@@ -248,8 +257,11 @@ export function createWerewolfGame(deps: {
     s.candidates = [];
     s.votes = {};
     // Sıra yalnızca ayarlardaki rollere göre belirlenir (herkese açık); rolün sahibi ölmüş olsa da
-    // adım tam süre sürer. Böylece gecenin uzunluğu kimin hangi rolde ya da hayatta olduğunu ele vermez.
+    // adım tam süre sürer (erken bitiş ayarı kapalıyken). Böylece gecenin uzunluğu kimin hangi rolde ya da hayatta olduğunu ele vermez.
     s.nightSteps = NIGHT_ORDER.filter((st) => s.counts[STEP_ROLE[st]] > 0 && (st !== 'cupid' || s.day === 1));
+    s.nightStages = simultaneous(s)
+      ? SIMULTANEOUS_STAGES.map((stage) => stage.filter((st) => s.nightSteps.includes(st))).filter((stage) => stage.length > 0)
+      : s.nightSteps.map((st) => [st]);
     s.log.push({ k: 'night', night: s.day });
     startStep(ctx, s, 0);
     startTick(ctx, s);
@@ -257,15 +269,60 @@ export function createWerewolfGame(deps: {
 
   function startStep(ctx: GameContext, s: WerewolfState, index: number): void {
     s.stepIndex = index;
+    s.choresDone = [];
     setPhase(ctx, s, 'night', roleMs(s), () => endStep(ctx, s));
     ctx.pushViews();
   }
 
   function endStep(ctx: GameContext, s: WerewolfState): void {
-    const step = currentStep(s);
-    if (step === 'wolves') decideVictim(s);
-    if (s.stepIndex + 1 < s.nightSteps.length) startStep(ctx, s, s.stepIndex + 1);
+    if (currentSteps(s).includes('wolves')) decideVictim(s);
+    if (s.stepIndex + 1 < s.nightStages.length) startStep(ctx, s, s.stepIndex + 1);
     else resolveNight(ctx, s);
+  }
+
+  /** Bu oyuncu bu turdaki rol eylemini bitirdi mi. */
+  function stepDone(s: WerewolfState, step: NightStep, id: string, living: string[]): boolean {
+    switch (step) {
+      case 'cupid':
+        return !!s.lovers;
+      case 'wolves': {
+        // Bütün yaşayan kurtlar aynı kişide birleşince kurtların işi biter.
+        const wolves = living.filter((w) => s.roles[w] === 'wolf');
+        const target = s.wolfVotes[id];
+        return !!target && wolves.every((w) => s.wolfVotes[w] === target);
+      }
+      case 'seer':
+        return !!s.seerTonight;
+      case 'doctor':
+        return !!s.doctorPick;
+      case 'witch':
+        return s.witchDone;
+    }
+  }
+
+  /**
+   * Erken bitiş ayarı açıksa: bu turda yapılacak her şey bittiyse turu hemen kapatır. Sıralı düzende
+   * yalnızca adımın rol sahipleri beklenir (hiç yoksa adım süresince sürer); aynı anda düzeninde
+   * bütün yaşayanlar — rolü olanlar eylemini, olmayanlar mini oyununu — bitirmelidir.
+   */
+  function maybeEndEarly(ctx: GameContext, s: WerewolfState): void {
+    if (!s.settings.nightEndsEarly || s.phase !== 'night') return;
+    const steps = currentSteps(s);
+    const on = online(ctx);
+    const living = alive(s).filter((id) => on.has(id));
+    let waiting = 0;
+    for (const id of living) {
+      const step = steps.find((st) => STEP_ROLE[st] === s.roles[id]);
+      if (step) {
+        waiting++;
+        if (!stepDone(s, step, id, living)) return;
+      } else if (simultaneous(s)) {
+        waiting++;
+        if (!s.choresDone.includes(id)) return;
+      }
+    }
+    if (waiting === 0) return;
+    endStep(ctx, s);
   }
 
   function decideVictim(s: WerewolfState): void {
@@ -425,7 +482,7 @@ export function createWerewolfGame(deps: {
   }
 
   /** Gece eylemi geçerli mi: doğru adım ve oturum. Değilse eski bir tıklamadır. */
-  const inStep = (s: WerewolfState, step: NightStep, session: number) => currentStep(s) === step && s.session === session;
+  const inStep = (s: WerewolfState, step: NightStep, session: number) => currentSteps(s).includes(step) && s.session === session;
 
   function pushChat(s: WerewolfState, list: ChatMsg[], from: string, text: string): void {
     list.push({ n: ++s.chatSeq, from, text });
@@ -433,8 +490,8 @@ export function createWerewolfGame(deps: {
   }
 
   function turnFor(s: WerewolfState, id: string): NightTurn | null {
-    const step = currentStep(s);
-    if (!step || !isAlive(s, id) || s.roles[id] !== STEP_ROLE[step]) return null;
+    const step = currentSteps(s).find((st) => STEP_ROLE[st] === s.roles[id]);
+    if (!step || !isAlive(s, id)) return null;
     const living = alive(s);
     switch (step) {
       case 'cupid':
@@ -467,7 +524,8 @@ export function createWerewolfGame(deps: {
     id: GAME_ID,
     minPlayers: MIN_PLAYERS,
     maxPlayers: MAX_PLAYERS,
-    settingsSchema,
+    // Yeni ayarların varsayılanı var: eski istemcilerden eksik gelen ayarlar da kabul edilir.
+    settingsSchema: settingsSchema as unknown as ZodType<WerewolfSettings>,
     defaultSettings,
     actionSchema,
 
@@ -500,7 +558,9 @@ export function createWerewolfGame(deps: {
         session: 0,
         endsAt: 0,
         nightSteps: [],
+        nightStages: [],
         stepIndex: 0,
+        choresDone: [],
         wolfVotes: {},
         wolfVictim: null,
         seerTonight: null,
@@ -558,6 +618,7 @@ export function createWerewolfGame(deps: {
           if (!isAlive(s, action.a) || !isAlive(s, action.b)) throw new GameError('Yalnızca oyundaki kişileri seçebilirsin.');
           s.lovers = [action.a, action.b];
           s.secret.push({ k: 'lovers', night: s.day, a: action.a, b: action.b });
+          maybeEndEarly(ctx, s);
           return { ok: true };
         }
         case 'wolfVote': {
@@ -571,6 +632,7 @@ export function createWerewolfGame(deps: {
             throw new GameError('Hayatta olan ve kurt olmayan birini seç.');
           }
           s.wolfVotes[playerId] = action.target;
+          maybeEndEarly(ctx, s);
           return { ok: true };
         }
         case 'wolfChat': {
@@ -588,6 +650,7 @@ export function createWerewolfGame(deps: {
           s.seerTonight = { id: action.target, wolf };
           s.seerResults.push({ night: s.day, id: action.target, wolf });
           s.secret.push({ k: 'seer', night: s.day, seer: playerId, target: action.target, wolf });
+          maybeEndEarly(ctx, s);
           return { ok: true };
         }
         case 'doctor': {
@@ -600,6 +663,7 @@ export function createWerewolfGame(deps: {
           }
           s.doctorPick = action.target;
           s.secret.push({ k: 'doctor', night: s.day, doctor: playerId, target: action.target });
+          maybeEndEarly(ctx, s);
           return { ok: true };
         }
         case 'witch': {
@@ -624,6 +688,17 @@ export function createWerewolfGame(deps: {
             s.witchPoison = action.poison;
             s.secret.push({ k: 'poison', night: s.day, witch: playerId, target: action.poison });
           }
+          maybeEndEarly(ctx, s);
+          return { ok: true };
+        }
+
+        case 'chores': {
+          if (s.phase !== 'night' || s.session !== action.session) return { ok: true, stale: true };
+          requireSeat(s, playerId);
+          if (!isAlive(s, playerId)) throw new GameError('Ölüler gece uyanmaz. Hayaletler kanalından izleyebilirsin.');
+          if (!simultaneous(s)) return { ok: true, stale: true };
+          if (!s.choresDone.includes(playerId)) s.choresDone.push(playerId);
+          maybeEndEarly(ctx, s);
           return { ok: true };
         }
 
@@ -710,12 +785,14 @@ export function createWerewolfGame(deps: {
       ctx.pushViews();
     },
 
-    onPlayerLeave(ctx) {
+    onPlayerLeave(ctx, s) {
       // Oyuncu oyundan çıkarılmaz; gece sırası süreyle geçer, gündüz oda sahibi erken bitirebilir.
+      maybeEndEarly(ctx, s);
       ctx.pushViews();
     },
 
-    onPlayerConnection(ctx) {
+    onPlayerConnection(ctx, s) {
+      maybeEndEarly(ctx, s);
       ctx.pushViews();
     },
 
@@ -742,6 +819,7 @@ export function createWerewolfGame(deps: {
           doctorLast: myRole === 'doctor' ? s.doctorLast : null,
           potions: myRole === 'witch' ? { ...s.potions } : null,
           turn: turnFor(s, playerId),
+          chores: s.phase === 'night' && simultaneous(s) && !amDead ? s.choresDone.includes(playerId) : null,
           wolfChat: myRole === 'wolf' ? s.wolfChat : null,
         };
       }
@@ -768,6 +846,9 @@ export function createWerewolfGame(deps: {
         day: s.day,
         session: s.session,
         nightSteps: s.nightSteps,
+        nightStages: s.nightStages,
+        nightMode: s.settings.nightMode,
+        stageIndex: s.phase === 'night' ? s.stepIndex : -1,
         nightStep: currentStep(s),
         endsAt: s.endsAt,
         serverNow: s.clock(),

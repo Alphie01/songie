@@ -1,0 +1,40 @@
+name: songie_core
+description: "Songie, İtiraf Köşesi, Casebook ve We Knows uygulamalarının ortak kodu: oturum, sunucu bağlantısı, tasarım, oda ekranları ve oyun modülleri."
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  socket_io_client: ^3.1.6
+  http: ^1.6.0
+  provider: ^6.1.5+1
+  go_router: ^17.2.3
+  shared_preferences: ^2.5.5
+  flutter_secure_storage: ^10.3.4
+  firebase_core: ">=4.1.0 <4.14.0"
+  firebase_auth: ">=6.2.0 <6.3.0"
+  google_sign_in: ^7.2.0
+  just_audio: ^0.10.6
+  flutter_svg: ^2.3.0
+  share_plus: ^12.0.2
+  app_links: ^6.4.1
+  package_info_plus: ^9.0.1
+  unorm_dart: ^0.3.3
+  audio_session: ^0.2.4
+  path_provider: ^2.1.5
+  url_launcher: ^6.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+# Fontlar lib/fonts altında: uygulamalar kendi pubspec'lerinde `packages/songie_core/fonts/...` yoluyla
+# aynı aile adlarıyla (Baloo2, Nunito, …) tanımlar. Böylece TextStyle'larda paket öneki gerekmez.
+flutter:
+  assets:
+    - assets/catalog.json

@@ -12,8 +12,14 @@ export const config = {
   /** Virgülle ayrılmış izinli origin listesi; boşsa aynı origin. */
   allowedOrigins: (process.env.ALLOWED_ORIGINS ?? '').split(',').map((s) => s.trim()).filter(Boolean),
   isProd: process.env.NODE_ENV === 'production',
-  /** Google girişi bu Firebase projesinin ID token'larını kabul eder. */
-  firebaseProjectId: process.env.FIREBASE_PROJECT_ID ?? 'songie-app',
+  /**
+   * Google / Apple girişi bu Firebase projelerinin ID token'larını kabul eder (her mobil uygulamanın
+   * kendi projesi; virgülle ayrılmış). Eski tek proje ayarı `FIREBASE_PROJECT_ID` de okunur.
+   */
+  firebaseProjectIds: (process.env.FIREBASE_PROJECT_IDS ?? process.env.FIREBASE_PROJECT_ID ?? 'songie-app,itiraf-kosesi-app,casebook-monolith,weknows-app')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean),
   /** Bunun altındaki mobil sürümler "güncelle" ekranı gösterir. */
   minAppVersion: process.env.MIN_APP_VERSION ?? '1.0.0',
   /** Davet linklerinin (/r/KOD) uygulamada açılması: iOS Universal Links ve Android App Links. */

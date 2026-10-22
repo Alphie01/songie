@@ -270,4 +270,14 @@ expectPhase(e, 'over');
 write(e, 'e-over-wolves-host', 'p0');
 write(e, 'e-over-wolves-guest', 'p2');
 
+/* ---- F: aynı anda düzeni, 9 kişi, bütün roller, erken bitiş açık. ---- */
+const f = await setup(9, { wolf: 2, seer: 1, doctor: 1, hunter: 1, witch: 1, cupid: 1, fool: 1 }, { nightMode: 'simultaneous', nightEndsEarly: true });
+write(f, 'f-sim-n1-villager', 'p8');
+write(f, 'f-sim-n1-seer', 'p2');
+await act(f, 'p8', { type: 'chores' });
+f.h.advance(1000);
+write(f, 'f-sim-n1-villager-done', 'p8');
+f.h.advance(state(f).endsAt - f.h.now);
+write(f, 'f-sim-n1-witch', 'p5');
+
 out.done();

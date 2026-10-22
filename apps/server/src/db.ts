@@ -46,6 +46,16 @@ export function openDb(dataDir: string, file = 'songie.db'): DB {
     ALTER TABLE players ADD COLUMN email TEXT;
     CREATE UNIQUE INDEX players_firebase_uid ON players(firebase_uid) WHERE firebase_uid IS NOT NULL;
   `);
+  // Her mobil uygulamanın kendi Firebase projesi var: aynı Google/Apple hesabı her projede başka uid alır.
+  // İlk bağlanan uid players.firebase_uid'de, diğer projelerden gelenler burada.
+  migrate(db, 'core-003', `
+    CREATE TABLE player_firebase_uids (
+      uid TEXT PRIMARY KEY,
+      player_id TEXT NOT NULL REFERENCES players(id) ON DELETE CASCADE
+    );
+    CREATE INDEX player_firebase_uids_player ON player_firebase_uids(player_id);
+    ALTER TABLE players ADD COLUMN auth_provider TEXT;
+  `);
   return db;
 }
 

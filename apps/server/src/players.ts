@@ -28,23 +28,23 @@ function toProfile(row: PlayerRow): Profile {
 export class PlayerStore {
   constructor(private db: DB) {}
 
-  create(input: ProfileInput, google?: { uid: string; email: string | null }): { token: string; profile: Profile } {
+  create(input: ProfileInput, google?: { uid: string; email: string | null; provider?: string }): { token: string; profile: Profile } {
     const id = randomId(10);
     const token = randomToken();
     const now = Date.now();
     this.db.transaction(() => {
       this.db
         .prepare(
-          'INSERT INTO players (id, nick, avatar, token_hash, created_at, seen_at, firebase_uid, email) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+          'INSERT INTO players (id, nick, avatar, token_hash, created_at, seen_at, firebase_uid, email, auth_provider) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         )
-        .run(id, input.nick, JSON.stringify(input.avatar), hashToken(token), now, now, google?.uid ?? null, google?.email ?? null);
+        .run(id, input.nick, JSON.stringify(input.avatar), hashToken(token), now, now, google?.uid ?? null, google?.email ?? null, google ? (google.provider ?? 'google.com') : null);
       this.db.prepare('INSERT INTO player_tokens (token_hash, player_id, created_at) VALUES (?, ?, ?)').run(hashToken(token), id, now);
     })();
     return { token, profile: { id, nick: input.nick, avatar: input.avatar } };
   }
 
-  /** Google ile ilk girişte açılan profil: ad Google'dan, renk rastgele. */
-  createFromGoogle(google: { uid: string; email: string | null; name: string | null }): { token: string; profile: Profile } {
+  /** Google / Apple ile ilk girişte açılan profil: ad hesaptan (Apple adı vermezse "Oyuncu"), renk rastgele. */
+  createFromGoogle(google: { uid: string; email: string | null; name: string | null; provider?: string }): { token: string; profile: Profile } {
     const color = AVATAR_COLORS[Math.floor(Math.random() * AVATAR_COLORS.length)]!;
     return this.create({ nick: nickFromName(google.name), avatar: { shape: 'circle', color } }, google);
   }
@@ -59,20 +59,41 @@ export class PlayerStore {
     return toProfile(row);
   }
 
+  /** Doğrulanmış e-postayla hesaba bağlı profil (başka bir uygulamanın Firebase projesinden girilmiş olabilir). */
+  byAccountEmail(email: string): Profile | null {
+    const row = this.db
+      .prepare('SELECT * FROM players WHERE firebase_uid IS NOT NULL AND lower(email) = lower(?) ORDER BY created_at LIMIT 1')
+      .get(email) as PlayerRow | undefined;
+    return row ? toProfile(row) : null;
+  }
+
   byFirebaseUid(uid: string): Profile | null {
-    const row = this.db.prepare('SELECT * FROM players WHERE firebase_uid = ?').get(uid) as PlayerRow | undefined;
+    const row = (this.db.prepare('SELECT * FROM players WHERE firebase_uid = ?').get(uid) ??
+      this.db.prepare('SELECT p.* FROM player_firebase_uids u JOIN players p ON p.id = u.player_id WHERE u.uid = ?').get(uid)) as
+      | PlayerRow
+      | undefined;
     return row ? toProfile(row) : null;
   }
 
   account(id: string): Account | null {
-    const row = this.db.prepare('SELECT firebase_uid, email FROM players WHERE id = ?').get(id) as
-      | Pick<PlayerRow, 'firebase_uid' | 'email'>
+    const row = this.db.prepare('SELECT firebase_uid, email, auth_provider FROM players WHERE id = ?').get(id) as
+      | (Pick<PlayerRow, 'firebase_uid' | 'email'> & { auth_provider: string | null })
       | undefined;
-    return row?.firebase_uid ? { provider: 'google', email: row.email } : null;
+    return row?.firebase_uid ? { provider: row.auth_provider === 'apple.com' ? 'apple' : 'google', email: row.email } : null;
   }
 
-  linkFirebase(id: string, uid: string, email: string | null): void {
-    this.db.prepare('UPDATE players SET firebase_uid = ?, email = ? WHERE id = ?').run(uid, email, id);
+  linkFirebase(id: string, uid: string, email: string | null, provider: string = 'google.com'): void {
+    this.db.prepare('UPDATE players SET firebase_uid = ?, email = ?, auth_provider = ? WHERE id = ?').run(uid, email, provider, id);
+  }
+
+  /** Hesabın ana uid'si bu ise e-postayı tazeler (diğer projelerin uid'lerinde dokunulmaz). */
+  refreshEmail(id: string, uid: string, email: string | null): void {
+    if (email) this.db.prepare('UPDATE players SET email = ? WHERE id = ? AND firebase_uid = ?').run(email, id, uid);
+  }
+
+  /** Bu Firebase kimliği (başka projeden) de bu profile ait: kaydedilir ki sonraki girişte e-posta gerekmesin. */
+  addFirebaseUid(id: string, uid: string): void {
+    this.db.prepare('INSERT OR IGNORE INTO player_firebase_uids (uid, player_id) VALUES (?, ?)').run(uid, id);
   }
 
   /** Aynı profile yeni bir cihaz token'ı (eski cihazların oturumu açık kalır). */
@@ -95,6 +116,7 @@ export class PlayerStore {
       Boolean(this.db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?").get(name));
     this.db.transaction(() => {
       this.db.prepare('UPDATE game_results SET player_id = ? WHERE player_id = ?').run(toId, fromId);
+      this.db.prepare('UPDATE OR IGNORE player_firebase_uids SET player_id = ? WHERE player_id = ?').run(toId, fromId);
       if (hasTable('sg_pool_owners')) {
         this.db
           .prepare('INSERT OR IGNORE INTO sg_pool_owners (pool_id, player_id) SELECT pool_id, ? FROM sg_pool_owners WHERE player_id = ?')
@@ -136,14 +158,15 @@ export class PlayerStore {
     })();
   }
 
-  stats(playerId: string, gameId?: string): ProfileStats {
+  /** `includeSolo`: en yüksek skora tek kişilik oyunlar da girer (galibiyet her zaman çok oyunculu). */
+  stats(playerId: string, gameId?: string, opts: { includeSolo?: boolean } = {}): ProfileStats {
     const where = gameId ? 'player_id = ? AND game_id = ?' : 'player_id = ?';
     const args = gameId ? [playerId, gameId] : [playerId];
     const row = this.db
       .prepare(
         `SELECT COUNT(*) AS games,
                 SUM(CASE WHEN rank = 1 AND player_count > 1 THEN 1 ELSE 0 END) AS wins,
-                MAX(CASE WHEN player_count > 1 THEN score END) AS best,
+                MAX(CASE WHEN player_count > 1 OR ${opts.includeSolo ? 1 : 0} THEN score END) AS best,
                 MAX(CAST(json_extract(meta, '$.streak') AS INTEGER)) AS streak
          FROM game_results WHERE ${where}`,
       )
