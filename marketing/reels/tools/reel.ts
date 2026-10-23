@@ -246,8 +246,82 @@ async function confReel(key: keyof typeof CONF_REELS, args: string[], root: stri
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+/** Aramızdaki En traits safe for Instagram (no +18 packs, no drinking pack), from the game content. */
+export const ML_SAFE = ['genel', 'aliskanliklar', 'arkadaslik', 'ask', 'utanc', 'gelecek', 'is-okul'];
+
+/** Hand-picked flirty traits from the Cesur / Aşk packs: innuendo, never explicit. */
+export const ML_FLIRT = [
+  'çekici',
+  'flörtöz',
+  'yanlış kişiyi öpecek',
+  'aynı gece iki kişiyle öpüşen',
+  'bir gecede çok numara alan',
+  'tuhaf yerde birini öpmüş olan',
+  'ateşli mesajlarda yaratıcı olan',
+  'yanlış kişiye ateşli mesaj atacak',
+  'bu odadaki herkesle flört etmiş olan',
+  'flört uygulamasında çok eşleşme alan',
+  'çok flört eden',
+  'çabuk âşık olan',
+];
+
+export function mlTraits(contentDir: string): string[] {
+  return ML_SAFE.flatMap((f) => {
+    const file = path.join(contentDir, `${f}.json`);
+    return fs.existsSync(file) ? (JSON.parse(fs.readFileSync(file, 'utf8')) as unknown[]).filter((t): t is string => typeof t === 'string') : [];
+  });
+}
+
+const ML_REELS = {
+  mostlikely: { id: 'itiraf-05-aramizdaki-en', cover: 100, music: 'monkeys spinning monkeys kevin macleod', seconds: 18 },
+  mostlikely18: { id: 'itiraf-06-aramizdaki-en-flort', cover: 100, music: 'hot swing kevin macleod', seconds: 18 },
+} as const;
+
+/** `pnpm reel mostlikely[18] [--text "<özellik>"] [--song "…"] [--name X] [--palette N]` */
+async function mlReel(key: keyof typeof ML_REELS, args: string[], root: string) {
+  const cfg = ML_REELS[key];
+  const KNOWN = new Set(['--text', '--music', '--song', '--from', '--name', '--palette']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const pool = key === 'mostlikely18' ? ML_FLIRT : mlTraits(path.resolve(root, '../../games/most-likely/server/content'));
+  const question = (opt('--text') ?? pool[Math.floor(Math.random() * pool.length)]!)
+    .replace(/^aramızdaki en\s+/iu, '')
+    .replace(/\s*kim\?*$/iu, '');
+  const name = opt('--name');
+  const palette = opt('--palette') !== undefined ? Number(opt('--palette')) : Math.floor(Math.random() * 8);
+  if (unknown.length || question.length < 2 || question.length > 60 || (name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette)) {
+    console.error(`${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}kullanım: pnpm reel ${key} [--text "<özellik>"] [--song "<şarkı>"] [--name <isim>] [--palette N]`);
+    process.exit(1);
+  }
+  if (key === 'mostlikely18' && EXPLICIT.test(question)) {
+    console.error('Bu soru Instagram için fazla açık; daha imalı bir şey yaz.');
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicQuery ? musicStart(loudestStart(rmsSteps(music.file), 0.5), cfg.seconds) : 0;
+  const who = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  console.log(`Soru: Aramızdaki en ${question} kim?\nMüzik: ${music.answer} · ${musicFrom} sn'den · ${key === 'mostlikely18' ? 'Flört' : 'Unvan'}: ${who}`);
+  const props = JSON.stringify(
+    key === 'mostlikely18'
+      ? { question, music: music.src, musicFrom, accent: palette % 3, date: who }
+      : { question, music: music.src, musicFrom, palette, solver: who },
+  );
+  const file = `${key}-${slug(question).slice(0, 36)}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in ML_REELS) {
+    await mlReel(args[0] as keyof typeof ML_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] && args[0] in CONF_REELS) {
     await confReel(args[0] as keyof typeof CONF_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;

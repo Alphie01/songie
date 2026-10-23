@@ -82,3 +82,18 @@ describe('music start', () => {
     expect(musicStart(0.5, 16)).toBe(0);
   });
 });
+
+describe('Aramızdaki En pools', () => {
+  it('normal traits come from safe packs; flirt traits pass the explicit filter and exist in the game', async () => {
+    const { mlTraits, ML_FLIRT, EXPLICIT } = await import('../tools/reel');
+    const fs = await import('node:fs');
+    const path = await import('node:path');
+    const dir = path.resolve(__dirname, '../../../games/most-likely/server/content');
+    expect(mlTraits(dir).length).toBeGreaterThan(100);
+    const all = fs.readdirSync(dir).flatMap((f) => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')) as string[]);
+    for (const t of ML_FLIRT) {
+      expect(all).toContain(t);
+      expect(EXPLICIT.test(t)).toBe(false);
+    }
+  });
+});

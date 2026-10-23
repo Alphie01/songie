@@ -142,3 +142,25 @@ Odadaki biri hakkında isimsiz bir itiraf… 😳 Yazan flörtün çıkarsa? �
 #itirafköşesi #isimsizitiraf #kimyazdı #itiraf #arkadaşlarla #flört #oyungecesi #partioyunu #18plus #reels
 
 **Müzik kredisi:** Music: "Investigations" / "Bossa Antigua" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Aramızdaki En (`itiraf-05-aramizdaki-en`) ve Aramızdaki En · Flört +18 (`itiraf-06-aramizdaki-en-flort`)
+
+```sh
+pnpm reel mostlikely                                  # oyunun güvenli paketlerinden rastgele soru
+pnpm reel mostlikely --text "alarmı çok erteleyen" --name Kaan
+pnpm reel mostlikely18 --name Zeynep                  # flört: oyunu flörtüne verirsin, o da sana vermiş 💘
+```
+
+**Açıklama (normal):**
+
+Aramızdaki en… alarmı çok erteleyen kim? 😂 Herkes gizlice oy verir, unvanı biri kapar. Sizin grupta kim? Etiketle! 👇
+
+**Açıklama (flört +18):**
+
+Gizli oylama başladı 😏 Oyunu flörtüne verdin… peki o kime verdi? 💘 İtiraf Köşesi'nde oylar açılınca kim kime belli olur (+18)
+
+**Hashtag'ler:**
+
+#itirafköşesi #aramızdakien #mostlikelyto #arkadaşlarla #oyungecesi #flört #partioyunu #kimdaha #18plus #reels
+
+**Müzik kredisi:** Music: "Monkeys Spinning Monkeys" / "Hot Swing" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

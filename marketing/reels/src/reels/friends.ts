@@ -25,6 +25,15 @@ export function deDa(name: string): string {
   return v && 'aıou'.includes(v) ? 'da' : 'de';
 }
 
+/** Dative with apostrophe: "Zeynep'e", "Can'a", "Ece'ye", "Kaan'a". */
+export function dative(name: string): string {
+  const n = name.trim();
+  const v = [...n.toLocaleLowerCase('tr-TR')].reverse().find((ch) => 'aıoueiöü'.includes(ch));
+  const e = v && 'aıou'.includes(v) ? 'a' : 'e';
+  const endsVowel = 'aıoueiöü'.includes(n.toLocaleLowerCase('tr-TR').slice(-1));
+  return `${n}'${endsVowel ? 'y' : ''}${e}`;
+}
+
 /** Status line under the search box: "Mert, Deniz ve Ece dinliyor." */
 export const listening = (c: Crew) => `${c.solver}, ${c.others[0]} ve ${c.others[1]} dinliyor.`;
 
