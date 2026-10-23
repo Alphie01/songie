@@ -37,6 +37,7 @@ import { I6MostLikelyFlirt, I6_META, i6Schema } from './reels/itiraf/I6MostLikel
 import { I7RedFlag, I7_META, i7Schema } from './reels/itiraf/I7RedFlag';
 import { I8RedFlagFlirt, I8_META, i8Schema } from './reels/itiraf/I8RedFlagFlirt';
 import { I9Paranoia, I9_META, I10_META, i9Schema } from './reels/itiraf/I9Paranoia';
+import { I11Bottle, I11_META, I12_META, i11Schema } from './reels/itiraf/I11Bottle';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -287,6 +288,22 @@ export const RemotionRoot: React.FC = () => (
       schema={i9Schema}
       defaultProps={I10_META.defaultProps}
       durationInFrames={I10_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={I11_META.id}
+      component={I11Bottle}
+      schema={i11Schema}
+      defaultProps={I11_META.defaultProps}
+      durationInFrames={I11_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={I12_META.id}
+      component={I11Bottle}
+      schema={i11Schema}
+      defaultProps={I12_META.defaultProps}
+      durationInFrames={I12_META.durationInFrames}
       {...video}
     />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />

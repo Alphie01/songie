@@ -208,3 +208,26 @@ Gizli soru geldi 😏 "Aramızda kiminle bir gece geçirmek isterdin?" Şimdilik
 #itirafköşesi #paranoya #paranoia #gizlisoru #arkadaşlarla #flört #oyungecesi #partioyunu #18plus #reels
 
 **Müzik kredisi:** Music: "Sneaky Adventure" / "Cool Vibes" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Şişe (`itiraf-11-sise`) ve Şişe · Flört +18 (`itiraf-12-sise-flort`)
+
+```sh
+pnpm reel bottle                                         # oyunun güvenli paketlerinden rastgele doğruluk/cesaret
+pnpm reel bottle --dare "Bir dakika boyunca robot gibi konuş." --name Mert
+pnpm reel bottle --truth "Telefonunda en son arattığın şey neydi?"
+pnpm reel bottle18 --name Zeynep                         # flörtün çevirir, şişe seni gösterir 😏
+```
+
+**Açıklama (normal):**
+
+Şişe döndü… ve seni gösterdi 😱 Doğruluk mu, cesaret mi? 🍾 İtiraf Köşesi'nde şişe herkesin telefonunda aynı anda döner. Arkadaşını etiketle! 👇
+
+**Açıklama (flört +18):**
+
+Zeynep çevirdi, şişe seni gösterdi 😳 Cesaret… kime fısıldarsın? 👀🔥 Bu gece kim cesur? (+18)
+
+**Hashtag'ler:**
+
+#itirafköşesi #şişeçevirmece #doğrulukmucesaretmi #truthordare #arkadaşlarla #flört #oyungecesi #partioyunu #18plus #reels
+
+**Müzik kredisi:** Music: "Carefree" / "Lobby Time" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

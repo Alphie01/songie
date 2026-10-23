@@ -445,8 +445,79 @@ async function pnReel(key: keyof typeof PN_REELS, args: string[], root: string) 
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+export const BT_SAFE = ['arkadaslar', 'ask', 'eglenceli', 'utanc'];
+/** Hand-picked flirty Şişe cards (Aşk / Cesur / Sarhoş gece packs): innuendo, never explicit. */
+export const BT_FLIRT: { kind: 'truth' | 'dare'; text: string }[] = [
+  { kind: 'dare', text: 'Kabul eden birinin kulağına onunla ilgili ateşli bir düşünceni fısılda.' },
+  { kind: 'dare', text: 'Kabul eden birinin kucağına otur ve bir sonraki tura kadar orada kal.' },
+  { kind: 'dare', text: 'Sarhoşken nasıl flört ettiğini kabul eden birinin üzerinde canlandır.' },
+  { kind: 'truth', text: 'Buradakilerden biriyle bir gece geçirmek zorunda olsan kimi seçerdin?' },
+  { kind: 'truth', text: 'Hiç bir partide tanımadığın biriyle öpüştün mü?' },
+  { kind: 'truth', text: 'Sarhoşken attığın en ateşli mesaj neydi?' },
+  { kind: 'truth', text: 'Birine yazıp sonra silip göndermediğin bir mesaj oldu mu?' },
+];
+
+export function btCards(contentDir: string): { kind: 'truth' | 'dare'; text: string }[] {
+  return BT_SAFE.flatMap((f) => {
+    const file = path.join(contentDir, `${f}.json`);
+    if (!fs.existsSync(file)) return [];
+    const j = JSON.parse(fs.readFileSync(file, 'utf8')) as { truth?: string[]; dare?: string[] };
+    return [
+      ...(j.truth ?? []).map((text) => ({ kind: 'truth' as const, text })),
+      ...(j.dare ?? []).map((text) => ({ kind: 'dare' as const, text })),
+    ].filter((c) => c.text.length >= 8 && c.text.length <= 160);
+  });
+}
+
+const BT_REELS = {
+  bottle: { id: 'itiraf-11-sise', music: 'carefree kevin macleod' },
+  bottle18: { id: 'itiraf-12-sise-flort', music: 'lobby time kevin macleod' },
+} as const;
+
+/** `pnpm reel bottle[18] [--truth "…" | --dare "…"] [--song "…"] [--name X] [--palette N]` */
+async function btReel(key: keyof typeof BT_REELS, args: string[], root: string) {
+  const cfg = BT_REELS[key];
+  const flirt = key === 'bottle18';
+  const KNOWN = new Set(['--truth', '--dare', '--music', '--song', '--from', '--name', '--palette']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const pool = flirt ? BT_FLIRT : btCards(path.resolve(root, '../../games/bottle/server/content'));
+  const card = opt('--truth')
+    ? { kind: 'truth' as const, text: opt('--truth')! }
+    : opt('--dare')
+      ? { kind: 'dare' as const, text: opt('--dare')! }
+      : pool[Math.floor(Math.random() * pool.length)]!;
+  const name = opt('--name');
+  const palette = opt('--palette') !== undefined ? Number(opt('--palette')) : Math.floor(Math.random() * 8);
+  if (unknown.length || card.text.length < 8 || card.text.length > 160 || (name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette)) {
+    console.error(`${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}kullanım: pnpm reel ${key} [--truth "<soru>" | --dare "<görev>"] [--song "<şarkı>"] [--name <isim>] [--palette N]`);
+    process.exit(1);
+  }
+  if (flirt && EXPLICIT.test(card.text)) {
+    console.error('Bu metin Instagram için fazla açık; daha imalı bir şey yaz.');
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicQuery ? musicStart(loudestStart(rmsSteps(music.file), 0.5), 18) : 0;
+  const who = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  console.log(`${card.kind === 'dare' ? 'Cesaret' : 'Doğruluk'}: ${card.text}\nMüzik: ${music.answer} · ${musicFrom} sn'den · Çeviren: ${who}`);
+  const props = JSON.stringify({ kind: card.kind, text: card.text, music: music.src, musicFrom, palette, solver: who, flirt });
+  const file = `${key}-${slug(card.text).slice(0, 36)}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, '--frame=100', `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in BT_REELS) {
+    await btReel(args[0] as keyof typeof BT_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] && args[0] in PN_REELS) {
     await pnReel(args[0] as keyof typeof PN_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;
