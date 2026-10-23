@@ -7,6 +7,9 @@ import { loadBrandFonts, VIDEO } from './brand/fonts';
 import { songieTheme } from './themes/songie';
 import { SongPlayScreen } from './brand/app/SongPlayScreen';
 import { PhoneFrame } from './brand/PhoneFrame';
+import { NeverAnswerScreen } from './brand/itiraf/NeverAnswerScreen';
+import { NeverRevealScreen } from './brand/itiraf/NeverRevealScreen';
+import { ITIRAF_CORAL, itirafTheme } from './themes/itiraf';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
 import { R2RealGame, R2_META, r2Schema } from './reels/R2RealGame';
@@ -26,6 +29,34 @@ const PlayScreenPreview: React.FC<{ stage?: number; guess?: string; suggestions?
   <AbsoluteFill style={{ backgroundColor: bg, alignItems: 'center', justifyContent: 'center' }}>
     <PhoneFrame theme={songieTheme}>
       <SongPlayScreen theme={songieTheme} stage={stage} playing={false} timer={14} feed={demoFeed(songieTheme)} scores={demoScores(songieTheme)} {...rest} />
+    </PhoneFrame>
+  </AbsoluteFill>
+);
+
+/** Ben Hiç screens alone in the phone on the coral App Store stage, for checks against ItirafKosesi 01.png. */
+const NeverPreview: React.FC<{ phase: 'answer' | 'reveal' }> = ({ phase }) => (
+  <AbsoluteFill style={{ backgroundColor: ITIRAF_CORAL, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={itirafTheme}>
+      {phase === 'answer' ? (
+        <NeverAnswerScreen theme={itirafTheme} />
+      ) : (
+        <NeverRevealScreen
+          theme={itirafTheme}
+          statement="Ben hiç eski sevgilimin sosyal medyasını gizlice incelemedim."
+          category="Aşk ve ilişki"
+          did={['Ece', 'Mert', 'Selin']}
+          didnt={['Deniz', 'Burak', 'Onur']}
+          lives={3}
+          maxLives={5}
+          you="didnt"
+          doerLives={{ Ece: 2, Mert: 3, Selin: 0 }}
+          eliminated={['Selin']}
+          leader={{ name: 'Ece', count: 4 }}
+          storyteller="Mert"
+          avatarColors={{ Ece: '#3ee0a8', Mert: '#ffd23f', Selin: '#5ab8ff' }}
+          enterAt={-60}
+        />
+      )}
     </PhoneFrame>
   </AbsoluteFill>
 );
@@ -66,6 +97,18 @@ export const RemotionRoot: React.FC = () => (
       id="SongPlayScreenGuess"
       component={PlayScreenPreview}
       defaultProps={{ stage: 1, guess: 'Tarkan', suggestions: ['Tarkan – Şımarık', 'Tarkan – Kuzu Kuzu', 'Tarkan – Dudu'], selected: 1, bg: songieTheme.colors.mint }}
+      width={VIDEO.width}
+      height={VIDEO.height}
+    />
+    <Still id="NeverAnswer" component={NeverPreview} defaultProps={{ phase: 'answer' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="NeverReveal" component={NeverPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still
+      id="ItirafCtaCard"
+      component={() => (
+        <ColorStage theme={itirafTheme} color={ITIRAF_CORAL}>
+          <CtaCard theme={itirafTheme} enterAt={-60} />
+        </ColorStage>
+      )}
       width={VIDEO.width}
       height={VIDEO.height}
     />

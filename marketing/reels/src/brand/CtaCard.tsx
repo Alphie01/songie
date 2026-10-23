@@ -5,6 +5,7 @@ import { FONT_DISPLAY, SAFE } from './fonts';
 import { Headline } from './Headline';
 import { usePop } from './motion';
 import { Sticker } from './Sticker';
+import { ItirafLogo } from './itiraf/ItirafLogo';
 
 /** App icon (apps/songie/assets/icon/icon.png) redrawn: tilted pink tile, ink note, yellow sparkle. */
 export const SongieLogo: React.FC<{ theme: AppTheme; size?: number }> = ({ theme, size = 260 }) => {
@@ -29,8 +30,12 @@ export const SongieLogo: React.FC<{ theme: AppTheme; size?: number }> = ({ theme
   );
 };
 
+/** The theme's app icon (Songie's for apps that have no redraw yet). */
+export const AppLogo: React.FC<{ theme: AppTheme; size?: number }> = ({ theme, size }) =>
+  theme.id === 'itiraf' ? <ItirafLogo theme={theme} size={size} /> : <SongieLogo theme={theme} size={size} />;
+
 /**
- * Closing card for the last 2 s: a tilted paper card (6 px ink line, hard shadow) with the logo, "Songie",
+ * Closing card for the last 2 s: a tilted paper card (6 px ink line, hard shadow) with the app logo, theme.name,
  * theme.cta and the stores sticker. Paper keeps the pink logo readable on every stage color.
  */
 export const CtaCard: React.FC<{ theme: AppTheme; enterAt?: number; cta?: string }> = ({ theme, enterAt = 0, cta = theme.cta }) => {
@@ -58,7 +63,7 @@ export const CtaCard: React.FC<{ theme: AppTheme; enterAt?: number; cta?: string
         }}
       >
         <div style={{ transform: `scale(${logo}) rotate(${interpolate(logo, [0, 1], [-20, 0])}deg)` }}>
-          <SongieLogo theme={theme} size={240} />
+          <AppLogo theme={theme} size={240} />
         </div>
         <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 140, lineHeight: 0.9, color: c.ink }}>{theme.name}</div>
         <Headline theme={theme} text={cta} enterAt={enterAt + 8} size={68} maxWidth={760} />
