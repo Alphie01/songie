@@ -8,6 +8,7 @@ import { CtaCard } from '../brand/CtaCard';
 import { FONT_DISPLAY, SAFE, VIDEO } from '../brand/fonts';
 import { Headline } from '../brand/Headline';
 import { usePop } from '../brand/motion';
+import { scenePalette, stickerOn } from '../brand/palette';
 import { PhoneFrame } from '../brand/PhoneFrame';
 import { Sticker } from '../brand/Sticker';
 import { APP, CLIPS, STOPS, clipShort, clipTr } from '../brand/app/appTokens';
@@ -27,6 +28,8 @@ export const r2Schema = z.object({
   cover: z.string(),
   /** Second of the 30 s preview every stage clip starts from (the game cuts all stages from one offset). */
   songFrom: z.number().min(0).max(27),
+  /** Scene color order (see PALETTES); `pnpm reel` picks one per song. */
+  palette: z.number().int().min(0),
 });
 
 export type R2Props = z.infer<typeof r2Schema>;
@@ -69,6 +72,7 @@ export const R2_META = {
     song: 'assets/songs/16412330.mp3',
     cover: 'assets/songs/16412330.jpg',
     songFrom: 8,
+    palette: 0,
   } as R2Props,
 } as const;
 
@@ -85,14 +89,14 @@ const PHONE_H = 1240;
 const CX = VIDEO.width / 2;
 
 /** 0–70: pink, "Sen ne kadar hızlı bilebilirsin?" and "Hazır ol" with a 3·2·1 countdown underneath. */
-const Hook: React.FC<{ theme: AppTheme }> = ({ theme }) => {
+const Hook: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
   const c = theme.colors;
   const frame = useCurrentFrame();
   const idx = R2.counts.filter((f) => frame >= f).length - 1;
   const at = R2.counts[Math.max(0, idx)]!;
   const pop = usePop(at, 9);
   return (
-    <ColorStage theme={theme} color={c.pink}>
+    <ColorStage theme={theme} color={bg}>
       <Headline
         theme={theme}
         text="Sen ne kadar hızlı bilebilirsin?"
@@ -115,7 +119,7 @@ const Hook: React.FC<{ theme: AppTheme }> = ({ theme }) => {
             boxSizing: 'border-box',
             borderRadius: '50%',
             border: `8px solid ${c.ink}`,
-            background: c.yellow,
+            background: stickerOn(theme, bg, ['yellow', 'pink', 'mint']),
             boxShadow: `12px 12px 0 ${c.ink}`,
             display: 'flex',
             alignItems: 'center',
@@ -169,7 +173,7 @@ export function gameState(frame: number) {
 }
 
 /** 78–243: yellow, the real play screen; 0,1 → Pas → 0,5 → Pas → 2 sn → Pas, then Mert's 0,1 sn solve. */
-const Game: React.FC<{ theme: AppTheme }> = ({ theme }) => {
+const Game: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
   const c = theme.colors;
   const frame = useCurrentFrame();
   const enter = usePop(0, 14);
@@ -177,7 +181,7 @@ const Game: React.FC<{ theme: AppTheme }> = ({ theme }) => {
   const cur = R2.stages[stage]!;
   const lastPass = R2.stages[Math.max(0, passed - 1)]!.pass;
   return (
-    <ColorStage theme={theme} color={c.yellow}>
+    <ColorStage theme={theme} color={bg}>
       <div
         style={{
           position: 'absolute',
@@ -205,7 +209,7 @@ const Game: React.FC<{ theme: AppTheme }> = ({ theme }) => {
         <Sticker
           theme={theme}
           text={`${clipTr(CLIPS[stage]!)} SN`}
-          bg={c.pink}
+          bg={stickerOn(theme, bg, ['pink', 'yellow', 'mint'])}
           rotate={7}
           enterAt={stage === 0 ? 6 : 0}
           size={96}
@@ -229,7 +233,7 @@ const Game: React.FC<{ theme: AppTheme }> = ({ theme }) => {
           <Sticker
             theme={theme}
             text="Ama Mert 0,1 sn'de bildi! +1000"
-            bg={c.mint}
+            bg={stickerOn(theme, bg, ['mint', 'yellow', 'sky'])}
             rotate={-4}
             size={64}
             style={{ position: 'absolute', left: SAFE.side, top: 1340 }}
@@ -241,11 +245,11 @@ const Game: React.FC<{ theme: AppTheme }> = ({ theme }) => {
 };
 
 /** 251–308: mint, the app's reveal screen with the cover; the song plays underneath. */
-const Reveal: React.FC<{ theme: AppTheme; p: R2Props }> = ({ theme, p }) => {
+const Reveal: React.FC<{ theme: AppTheme; p: R2Props; bg: string }> = ({ theme, p, bg }) => {
   const c = theme.colors;
   const enter = usePop(0, 14);
   return (
-    <ColorStage theme={theme} color={c.mint}>
+    <ColorStage theme={theme} color={bg}>
       <div
         style={{
           position: 'absolute',
@@ -270,7 +274,7 @@ const Reveal: React.FC<{ theme: AppTheme; p: R2Props }> = ({ theme, p }) => {
       <Sticker
         theme={theme}
         text="Şarkı buydu! 🎶"
-        bg={c.yellow}
+        bg={stickerOn(theme, bg, ['yellow', 'pink', 'mint'])}
         rotate={-5}
         enterAt={14}
         size={84}
@@ -312,23 +316,23 @@ const Song: React.FC<{ src: string; from: number }> = ({ src, from }) => {
 
 export const R2RealGame: React.FC<R2Props> = (p) => {
   const theme = songieTheme;
-  const c = theme.colors;
+  const [A, B, C, D] = scenePalette(theme, p.palette);
   return (
-    <AbsoluteFill style={{ backgroundColor: c.pink }}>
+    <AbsoluteFill style={{ backgroundColor: A }}>
       <Sequence durationInFrames={R2.wipe1} name="Hook">
-        <Hook theme={theme} />
+        <Hook theme={theme} bg={A} />
       </Sequence>
-      <ColorWipe theme={theme} from={c.pink} to={c.yellow} at={R2.wipe1} durationInFrames={R2.game - R2.wipe1} />
+      <ColorWipe theme={theme} from={A} to={B} at={R2.wipe1} durationInFrames={R2.game - R2.wipe1} />
       <Sequence from={R2.game} durationInFrames={R2.wipe2 - R2.game} name="Game">
-        <Game theme={theme} />
+        <Game theme={theme} bg={B} />
       </Sequence>
-      <ColorWipe theme={theme} from={c.yellow} to={c.mint} at={R2.wipe2} durationInFrames={R2.reveal - R2.wipe2} />
+      <ColorWipe theme={theme} from={B} to={C} at={R2.wipe2} durationInFrames={R2.reveal - R2.wipe2} />
       <Sequence from={R2.reveal} durationInFrames={R2.wipe3 - R2.reveal} name="Reveal">
-        <Reveal theme={theme} p={p} />
+        <Reveal theme={theme} p={p} bg={C} />
       </Sequence>
-      <ColorWipe theme={theme} from={c.mint} to={c.lilac} at={R2.wipe3} durationInFrames={R2.cta - R2.wipe3} />
+      <ColorWipe theme={theme} from={C} to={D} at={R2.wipe3} durationInFrames={R2.cta - R2.wipe3} />
       <Sequence from={R2.cta} name="CTA">
-        <ColorStage theme={theme} color={c.lilac}>
+        <ColorStage theme={theme} color={D}>
           <CtaCard theme={theme} cta={CTA_TEXT} />
         </ColorStage>
       </Sequence>

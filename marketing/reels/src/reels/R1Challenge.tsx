@@ -8,6 +8,7 @@ import { CtaCard } from '../brand/CtaCard';
 import { FONT_DISPLAY, SAFE, VIDEO } from '../brand/fonts';
 import { Headline } from '../brand/Headline';
 import { usePop } from '../brand/motion';
+import { scenePalette, stickerOn } from '../brand/palette';
 import { PhoneFrame } from '../brand/PhoneFrame';
 import { Sticker } from '../brand/Sticker';
 import { APP, CLIPS, clipTr } from '../brand/app/appTokens';
@@ -27,6 +28,8 @@ export const r1Schema = z.object({
   song: z.string(),
   /** Önizlemede 0,1 sn'lik kesitin ve arka plan şarkısının başladığı saniye. */
   songFrom: z.number().min(0).max(29),
+  /** Scene color order (see PALETTES); `pnpm reel` picks one per song. */
+  palette: z.number().int().min(0),
 });
 
 export type R1Props = z.infer<typeof r1Schema>;
@@ -37,7 +40,7 @@ export const R1_META = {
   fps: VIDEO.fps,
   width: VIDEO.width,
   height: VIDEO.height,
-  defaultProps: { answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5 } as R1Props,
+  defaultProps: { answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5, palette: 0 } as R1Props,
 } as const;
 
 /** "Mert 0,1 sn'de bildi +1000": the app's live-feed wording with tr-TR seconds. */
@@ -73,10 +76,9 @@ const Sfx: React.FC<{ name: string; at: number; frames?: number }> = ({ name, at
 const CX = VIDEO.width / 2;
 
 /** 0–30: pink hook. */
-const Hook: React.FC<{ theme: AppTheme }> = ({ theme }) => {
-  const c = theme.colors;
+const Hook: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
   return (
-    <ColorStage theme={theme} color={c.pink}>
+    <ColorStage theme={theme} color={bg}>
       <Headline
         theme={theme}
         text="Bu şarkıyı 0,1 saniyede bilebilir misin?"
@@ -86,7 +88,7 @@ const Hook: React.FC<{ theme: AppTheme }> = ({ theme }) => {
         style={{ position: 'absolute', left: SAFE.side, top: SAFE.top + 40 }}
       />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 900, display: 'flex', justifyContent: 'center' }}>
-        <Sticker theme={theme} text="0,1 SN!" bg={c.yellow} rotate={-7} enterAt={10} size={190} />
+        <Sticker theme={theme} text="0,1 SN!" bg={stickerOn(theme, bg, ['yellow', 'pink', 'mint'])} rotate={-7} enterAt={10} size={190} />
       </div>
     </ColorStage>
   );
@@ -104,7 +106,7 @@ const PHONE_W = 680;
 const PHONE_H = 1240;
 
 /** 30–105: the play screen at stage 0 with the waveform playing, a 3·2·1 countdown and the comments prompt. */
-const Play: React.FC<{ theme: AppTheme; stage: number }> = ({ theme, stage }) => {
+const Play: React.FC<{ theme: AppTheme; stage: number; bg: string }> = ({ theme, stage, bg }) => {
   const c = theme.colors;
   const frame = useCurrentFrame();
   const enter = usePop(0, 14);
@@ -113,7 +115,7 @@ const Play: React.FC<{ theme: AppTheme; stage: number }> = ({ theme, stage }) =>
   // One sticker that pops in on the first tick and gives a little bump on each later one (no blank frame).
   const bump = 1 + 0.18 * (1 - usePop(tickAt, 9)) * (tickAt > 10 ? 1 : 0);
   return (
-    <ColorStage theme={theme} color={c.pink}>
+    <ColorStage theme={theme} color={bg}>
       <div
         style={{
           position: 'absolute',
@@ -136,7 +138,7 @@ const Play: React.FC<{ theme: AppTheme; stage: number }> = ({ theme, stage }) =>
         </PhoneFrame>
       </div>
       <div style={{ position: 'absolute', right: SAFE.side + 10, top: SAFE.top + 10, transform: `scale(${bump})`, transformOrigin: 'right top' }}>
-        <Sticker theme={theme} text={count} bg={c.yellow} rotate={8} enterAt={10} size={110} />
+        <Sticker theme={theme} text={count} bg={stickerOn(theme, bg, ['yellow', 'pink', 'mint'])} rotate={8} enterAt={10} size={110} />
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1360, display: 'flex', justifyContent: 'center' }}>
         <Sticker theme={theme} text="Yorumlara yaz 👇" bg={c.paper} rotate={-4} enterAt={20} size={76} />
@@ -149,17 +151,17 @@ const CLIP_W = 560;
 const CLIP_H = Math.round((CLIP_W * 1280) / 720);
 
 /** 115–190: yellow, the AI reaction clip; Mert jumps up at R1.solve, the others cry foul at R1.cheat. */
-const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage'] }> = ({ theme, stage }) => {
+const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage']; bg: string }> = ({ theme, stage, bg }) => {
   const c = theme.colors;
   const solve = R1.solve - R1.clip;
   const cheat = R1.cheat - R1.clip;
   return (
-    <ColorStage theme={theme} color={c.yellow}>
+    <ColorStage theme={theme} color={bg}>
       <div style={{ position: 'absolute', left: CX - CLIP_W / 2, top: SAFE.top + 120 }}>
         <ClipCard theme={theme} src="assets/r1-react.mp4" from={R1.clipFrom} rotate={-3} width={CLIP_W} height={CLIP_H} />
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: SAFE.top + 10, display: 'flex', justifyContent: 'center' }}>
-        <Sticker theme={theme} text={solveLabel(stage)} bg={c.mint} rotate={-4} enterAt={solve} size={58} />
+        <Sticker theme={theme} text={solveLabel(stage)} bg={stickerOn(theme, bg, ['mint', 'yellow', 'sky'])} rotate={-4} enterAt={solve} size={58} />
       </div>
       <Sticker
         theme={theme}
@@ -175,12 +177,12 @@ const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage'] }> = ({
 };
 
 /** 200–245: mint, the answer on a paper card plus "Sen kaçta bildin?". */
-const Answer: React.FC<{ theme: AppTheme; answer: string }> = ({ theme, answer }) => {
+const Answer: React.FC<{ theme: AppTheme; answer: string; bg: string }> = ({ theme, answer, bg }) => {
   const c = theme.colors;
   const card = usePop(0, 12);
   const label = usePop(2);
   return (
-    <ColorStage theme={theme} color={c.mint}>
+    <ColorStage theme={theme} color={bg}>
       <div
         style={{
           position: 'absolute',
@@ -217,7 +219,7 @@ const Answer: React.FC<{ theme: AppTheme; answer: string }> = ({ theme, answer }
         Cevap:
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: 1170, display: 'flex', justifyContent: 'center' }}>
-        <Sticker theme={theme} text="Sen kaçta bildin?" bg={c.pink} rotate={5} enterAt={15} size={84} />
+        <Sticker theme={theme} text="Sen kaçta bildin?" bg={stickerOn(theme, bg, ['pink', 'yellow', 'mint'])} rotate={5} enterAt={15} size={84} />
       </div>
     </ColorStage>
   );
@@ -252,28 +254,28 @@ const Song: React.FC<{ src: string; from: number }> = ({ src, from }) => {
   );
 };
 
-export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage, song, songFrom }) => {
+export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage, song, songFrom, palette }) => {
   const theme = songieTheme;
-  const c = theme.colors;
+  const [A, B, C, D] = scenePalette(theme, palette);
   return (
-    <AbsoluteFill style={{ backgroundColor: c.pink }}>
+    <AbsoluteFill style={{ backgroundColor: A }}>
       <Sequence durationInFrames={R1.hookEnd} name="Hook">
-        <Hook theme={theme} />
+        <Hook theme={theme} bg={A} />
       </Sequence>
       <Sequence from={R1.hookEnd} durationInFrames={R1.wipe1 - R1.hookEnd} name="Play">
-        <Play theme={theme} stage={solveStage} />
+        <Play theme={theme} stage={solveStage} bg={A} />
       </Sequence>
-      <ColorWipe theme={theme} from={c.pink} to={c.yellow} at={R1.wipe1} durationInFrames={R1.clip - R1.wipe1} />
+      <ColorWipe theme={theme} from={A} to={B} at={R1.wipe1} durationInFrames={R1.clip - R1.wipe1} />
       <Sequence from={R1.clip} durationInFrames={R1.wipe2 - R1.clip} name="Reaction">
-        <Reaction theme={theme} stage={solveStage} />
+        <Reaction theme={theme} stage={solveStage} bg={B} />
       </Sequence>
-      <ColorWipe theme={theme} from={c.yellow} to={c.mint} at={R1.wipe2} durationInFrames={R1.answer - R1.wipe2} />
+      <ColorWipe theme={theme} from={B} to={C} at={R1.wipe2} durationInFrames={R1.answer - R1.wipe2} />
       <Sequence from={R1.answer} durationInFrames={R1.wipe3 - R1.answer} name="Answer">
-        <Answer theme={theme} answer={answer} />
+        <Answer theme={theme} answer={answer} bg={C} />
       </Sequence>
-      <ColorWipe theme={theme} from={c.mint} to={c.lilac} at={R1.wipe3} durationInFrames={R1.cta - R1.wipe3} />
+      <ColorWipe theme={theme} from={C} to={D} at={R1.wipe3} durationInFrames={R1.cta - R1.wipe3} />
       <Sequence from={R1.cta} name="CTA">
-        <ColorStage theme={theme} color={c.lilac}>
+        <ColorStage theme={theme} color={D}>
           <CtaCard theme={theme} />
         </ColorStage>
       </Sequence>

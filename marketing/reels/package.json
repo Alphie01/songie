@@ -9,7 +9,8 @@
     "still": "remotion still src/index.ts",
     "test": "vitest run",
     "gen": "tsx tools/gen.ts",
-    "song": "tsx tools/deezer.ts"
+    "song": "tsx tools/deezer.ts",
+    "reel": "tsx tools/reel.ts"
   },
   "dependencies": {
     "@remotion/cli": "4.0.535",

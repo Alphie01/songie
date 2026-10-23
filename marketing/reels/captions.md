@@ -1,5 +1,18 @@
 # Songie Reels açıklamaları
 
+## Tek komutla üretim
+
+```sh
+pnpm reel r2 "tame impala loser"               # şarkı + kapak indirir, nakaratı bulur, MP4 + kapak üretir
+pnpm reel r1 "tarkan kuzu kuzu"                # 0,1 sn challenge
+pnpm reel r2 "tarkan şımarık" --palette 3      # renk sırasını seç (0–7)
+pnpm reel r2 "sezen aksu firuze" --from 12     # kesit saniyesini elle ver
+```
+
+- Çıktı: `out/<r1|r2>-<şarkı>.mp4` ve `.png`.
+- Renkler: her şarkı kendi paletini alır (aynı şarkı hep aynı renkte çıkar); `--palette` ile değiştir. Palet 0 = pembe → sarı → mint → lila.
+- Kesit: önizlemenin en yüksek sesli 3 sn'si otomatik seçilir; beğenmezsen `--from`.
+
 ## Reels 1 — "0,1 saniye challenge" (`songie-01-challenge`)
 
 **Açıklama:**
