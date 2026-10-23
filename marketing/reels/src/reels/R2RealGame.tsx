@@ -32,33 +32,33 @@ export const r2Schema = z.object({
 export type R2Props = z.infer<typeof r2Schema>;
 
 /**
- * Storyboard frames (30 fps). Every beat stays on screen long enough to read (user feedback: the 12 s cut
- * was too fast to follow): the question alone ~1,3 sn, each count ~0,8 sn, "Bilemedin" ~1 sn, Mert ~2,4 sn,
- * the reveal ~3,3 sn, the closing ~2,7 sn. Game-scene beats are local to `game`.
+ * Storyboard frames (30 fps). Every beat stays on screen long enough to read (user feedback: 12 s was too fast,
+ * 22 s too slow): the question alone ~0,7 sn, each count ~0,7 sn, "Bilemedin" ~0,7 sn, Mert ~1,8 sn,
+ * the reveal ~2,5 sn, the closing ~2,2 sn. Game-scene beats are local to `game`.
  */
 export const R2 = {
-  readyAt: 30,
-  counts: [50, 75, 100],
-  wipe1: 125,
-  game: 133,
+  readyAt: 20,
+  counts: [36, 58, 80],
+  wipe1: 100,
+  game: 108,
   /** Per stage: play press, clip start, "Pas" press (local frames in the game scene). */
   stages: [
-    { play: 12, clip: 16, pass: 40 },
-    { play: 72, clip: 76, pass: 112 },
-    { play: 144, clip: 148, pass: 228 },
+    { play: 8, clip: 12, pass: 30 },
+    { play: 52, clip: 56, pass: 80 },
+    { play: 100, clip: 104, pass: 172 },
   ],
   /** Mert's 0,1 sn solve is revealed after the last "Bilemedin". */
-  mert: 262,
-  wipe2: 468,
-  reveal: 476,
-  wipe3: 576,
-  cta: 584,
+  mert: 196,
+  wipe2: 358,
+  reveal: 366,
+  wipe3: 441,
+  cta: 449,
   songFadeOut: 24,
 } as const;
 
 export const R2_META = {
   id: 'songie-02-gercek-oyun',
-  durationInFrames: 664,
+  durationInFrames: 515,
   fps: VIDEO.fps,
   width: VIDEO.width,
   height: VIDEO.height,

@@ -50,7 +50,7 @@ Uygulamanın kancası: şarkının yalnızca **0,1 sn**'si çalınıyor, bilemey
 
 ## Okunabilir tempo (kullanıcı, 2026-10-23)
 
-"Çok hızlı geçiyorsun, ne izlediğimi bildiğim halde anlamadım." Her sekans izleyicinin okuyabileceği kadar ekranda kalır (tek satır ≥ 0,8 sn, sticker/olay ≥ 1 sn, açılış/kapanış kartı ≥ 2,5 sn). Bu kural 8–12 sn hedefinin önüne geçer; R2 ~22 sn.
+"Çok hızlı geçiyorsun, ne izlediğimi bildiğim halde anlamadım." Her sekans izleyicinin okuyabileceği kadar ekranda kalır (tek satır ≥ 0,8 sn, sticker/olay ≥ 1 sn, açılış/kapanış kartı ≥ 2,5 sn). Bu kural 8–12 sn hedefinin önüne geçer; R2 ~17 sn (12 sn çok hızlı, 22 sn çok yavaş bulundu).
 
 ## AI video kuralı (kullanıcı geri bildirimi, 2026-10-23)
 
