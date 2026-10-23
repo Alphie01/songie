@@ -12,6 +12,8 @@ import { NeverRevealScreen } from './brand/itiraf/NeverRevealScreen';
 import { ConfessionsWriteScreen } from './brand/itiraf/ConfessionsWriteScreen';
 import { ConfessionsGuessScreen } from './brand/itiraf/ConfessionsGuessScreen';
 import { ConfessionsRevealScreen } from './brand/itiraf/ConfessionsRevealScreen';
+import { MostLikelyVoteScreen } from './brand/itiraf/MostLikelyVoteScreen';
+import { MostLikelyResultScreen } from './brand/itiraf/MostLikelyResultScreen';
 import { ITIRAF_CORAL, itirafTheme } from './themes/itiraf';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
@@ -95,6 +97,32 @@ const ConfPreview: React.FC<{ phase: 'write' | 'guess' | 'reveal' }> = ({ phase 
   </AbsoluteFill>
 );
 
+/** Aramızdaki En screens in the phone on the mint App Store stage, for checks against ItirafKosesi 03.png. */
+const MostLikelyPreview: React.FC<{ phase: 'vote' | 'result' }> = ({ phase }) => (
+  <AbsoluteFill style={{ backgroundColor: itirafTheme.colors.mint, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={itirafTheme}>
+      {phase === 'vote' ? (
+        <MostLikelyVoteScreen theme={itirafTheme} />
+      ) : (
+        <MostLikelyResultScreen
+          theme={itirafTheme}
+          votes={{ Kaan: 3, Mert: 2, Bora: 1 }}
+          ballots={[
+            { voter: 'Ece', target: 'Kaan' },
+            { voter: 'Deniz', target: 'Kaan' },
+            { voter: 'Zeynep', target: 'Kaan' },
+            { voter: 'Kaan', target: 'Mert' },
+            { voter: 'Bora', target: 'Mert' },
+            { voter: 'Mert', target: 'Bora' },
+          ]}
+          correctGuessers={['Ece', 'Deniz']}
+          enterAt={-60}
+        />
+      )}
+    </PhoneFrame>
+  </AbsoluteFill>
+);
+
 const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
 
 export const RemotionRoot: React.FC = () => (
@@ -171,6 +199,8 @@ export const RemotionRoot: React.FC = () => (
     <Still id="ConfWrite" component={ConfPreview} defaultProps={{ phase: 'write' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="ConfGuess" component={ConfPreview} defaultProps={{ phase: 'guess' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="ConfReveal" component={ConfPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="MLVote" component={MostLikelyPreview} defaultProps={{ phase: 'vote' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="MLResult" component={MostLikelyPreview} defaultProps={{ phase: 'result' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="ItirafCtaCard"
       component={() => (
