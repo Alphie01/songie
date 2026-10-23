@@ -29,6 +29,20 @@ export type Ctx = { assetsDir: string; ledger: SpendLedger; shots: Shot[]; inter
 
 const cached = (dir: string, id: string) => EXTS.map((e) => path.join(dir, `${id}.${e}`)).find((f) => fs.existsSync(f));
 
+/** Replaces top-level string values like "@ref:friends-ref" with the kie upload URL of that shot's local asset. */
+async function resolveRefs(input: Record<string, unknown>, dir: string): Promise<Record<string, unknown>> {
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(input)) {
+    if (typeof v === 'string' && v.startsWith('@ref:')) {
+      const id = v.slice(5);
+      const f = cached(dir, id);
+      if (!f) throw new Error(`ref shot "${id}" has no local asset yet; generate it first`);
+      out[k] = await uploadFile(f);
+    } else out[k] = v;
+  }
+  return out;
+}
+
 export async function runShot(shot: Shot, ctx: Ctx): Promise<string> {
   const hit = cached(ctx.assetsDir, shot.id);
   if (hit) return hit;
@@ -52,7 +66,7 @@ export async function runShot(shot: Shot, ctx: Ctx): Promise<string> {
   if (!taskId) {
     ctx.ledger.assertCanSpend(shot.estimateUsd);
     const urls = await Promise.all(refPaths.map(uploadFile));
-    const input = { prompt: shot.prompt, ...(urls.length ? { image_urls: urls } : {}), ...shot.input };
+    const input = await resolveRefs({ prompt: shot.prompt, ...(urls.length ? { image_urls: urls } : {}), ...shot.input }, ctx.assetsDir);
     taskId = await createTask(shot.model, input);
     ctx.ledger.record({ id: shot.id, kind: shot.kind, provider: 'kie', usd: 0, estimateUsd: shot.estimateUsd, taskId, state: 'pending' });
   }

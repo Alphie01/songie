@@ -1,0 +1,21 @@
+{
+  "cap": 10,
+  "spent": 0.365,
+  "entries": [
+    {
+      "id": "friends-ref",
+      "kind": "image",
+      "provider": "openai",
+      "usd": 0.05,
+      "state": "done"
+    },
+    {
+      "id": "r1-react",
+      "kind": "video",
+      "provider": "kie",
+      "usd": 0.315,
+      "taskId": "bc7f94a62e2c665e96e9c1741ec342fb",
+      "state": "done"
+    }
+  ]
+}

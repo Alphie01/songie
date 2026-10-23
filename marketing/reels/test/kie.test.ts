@@ -133,4 +133,21 @@ describe('gen', () => {
     await expect(runShot(shot, { assetsDir, ledger, shots: [shot], intervalMs: 1 })).rejects.toBeInstanceOf(KieError);
     expect(ledger.find('s1')).toBeUndefined();
   });
+
+  it('resolves @ref: placeholders in input to the kie upload URL', async () => {
+    const { assetsDir, ledger } = setup();
+    fs.writeFileSync(path.join(assetsDir, 'friends-ref.png'), 'PNG');
+    const bodies: string[] = [];
+    mockFetch((url, init) => {
+      if (url.includes('file-stream-upload')) return json({ code: 200, data: { downloadUrl: 'https://up/f.png' } });
+      if (url.includes('createTask')) bodies.push(String(init?.body));
+      return kieHandler(url);
+    });
+    const s = { ...shot, input: { first_frame_url: '@ref:friends-ref', duration: '4' } };
+    await runShot(s, { assetsDir, ledger, shots: [s], intervalMs: 1 });
+    const sent = JSON.parse(bodies[0]!).input;
+    expect(sent.first_frame_url).toBe('https://up/f.png');
+    expect(sent.image_urls).toBeUndefined();
+    expect(sent.duration).toBe('4');
+  });
 });

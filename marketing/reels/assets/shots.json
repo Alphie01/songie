@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "friends-ref",
+    "kind": "image",
+    "model": "gpt-image-2",
+    "prompt": "Vertical photo, four Turkish friends in their mid-20s (Mert: curly dark hair, mustard hoodie; Deniz: woman, long brown hair, pink sweater; Kaan: short fade, glasses, mint t-shirt; Ece: woman, black bob, lilac cardigan) on a cozy living-room couch at night, each holding a smartphone, warm lamp light, colorful pillows in pink, yellow and mint, candid phone-camera look, natural skin, no text, no logos.",
+    "estimateUsd": 0.05
+  },
+  {
+    "id": "r1-react",
+    "kind": "video",
+    "model": "google/gemini-omni-flash-1-1",
+    "prompt": "Handheld phone video. The friends stare at their phones in silence, then Deniz suddenly jumps up shouting with joy, arms raised, the others react in shock and laugh, one throws a pillow. Natural motion, same people and room, no text.",
+    "input": { "first_frame_url": "@ref:friends-ref", "aspect_ratio": "9:16", "resolution": "720p", "duration": "4" },
+    "estimateUsd": 1.0
+  }
+]
