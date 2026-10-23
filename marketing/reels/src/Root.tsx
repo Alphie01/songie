@@ -20,6 +20,9 @@ import { ParanoiaEnvelopeScreen } from './brand/itiraf/ParanoiaEnvelopeScreen';
 import { ParanoiaAnswerScreen } from './brand/itiraf/ParanoiaAnswerScreen';
 import { ParanoiaRevealScreen } from './brand/itiraf/ParanoiaRevealScreen';
 import { ParanoiaWaitingScreen } from './brand/itiraf/ParanoiaWaitingScreen';
+import { BottleTableScreen } from './brand/itiraf/BottleTableScreen';
+import { BottleChoiceScreen } from './brand/itiraf/BottleChoiceScreen';
+import { BottleTaskScreen } from './brand/itiraf/BottleTaskScreen';
 import { ITIRAF_CORAL, itirafTheme } from './themes/itiraf';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
@@ -160,6 +163,21 @@ const ParanoiaPreview: React.FC<{ phase: 'envelope' | 'answer' | 'waiting' | 're
   </AbsoluteFill>
 );
 
+/** Şişe Çevirmece screens in the phone on the lilac App Store stage, for checks against ItirafKosesi 06.png. */
+const BottlePreview: React.FC<{ phase: 'table' | 'choice' | 'task' }> = ({ phase }) => (
+  <AbsoluteFill style={{ backgroundColor: itirafTheme.colors.lilac, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={itirafTheme}>
+      {phase === 'table' ? (
+        <BottleTableScreen theme={itirafTheme} />
+      ) : phase === 'choice' ? (
+        <BottleChoiceScreen theme={itirafTheme} />
+      ) : (
+        <BottleTaskScreen theme={itirafTheme} votes={{ yes: 3, no: 1, voters: 5, myVote: true, seconds: 14 }} />
+      )}
+    </PhoneFrame>
+  </AbsoluteFill>
+);
+
 const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
 
 export const RemotionRoot: React.FC = () => (
@@ -292,6 +310,9 @@ export const RemotionRoot: React.FC = () => (
     <Still id="PNAnswer" component={ParanoiaPreview} defaultProps={{ phase: 'answer' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="PNWaiting" component={ParanoiaPreview} defaultProps={{ phase: 'waiting' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="PNReveal" component={ParanoiaPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="BTTable" component={BottlePreview} defaultProps={{ phase: 'table' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="BTChoice" component={BottlePreview} defaultProps={{ phase: 'choice' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="BTTask" component={BottlePreview} defaultProps={{ phase: 'task' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="ItirafCtaCard"
       component={() => (
