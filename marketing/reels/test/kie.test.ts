@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { KieError, createTask, setKieKey, waitTask } from '../tools/kie';
+import { BudgetError } from '../tools/spend';
+import { KieError, KieTaskFailed, createTask, setKieKey, waitTask } from '../tools/kie';
 import { runShot } from '../tools/gen';
 import { SpendLedger } from '../tools/spend';
 
@@ -33,6 +34,11 @@ describe('kie', () => {
     const r = await waitTask('t1', { intervalMs: 1, timeoutMs: 5000 });
     expect(r.urls[0]).toBe('https://x/a.mp4');
     expect(r.credits).toBe(40);
+  });
+
+  it('waitTask throws KieError when polling returns code != 200', async () => {
+    mockFetch(() => json({ code: 500, msg: 'server down' }));
+    await expect(waitTask('t1', { intervalMs: 1, timeoutMs: 5000 })).rejects.toBeInstanceOf(KieError);
   });
 
   it('waitTask throws on fail', async () => {
@@ -79,6 +85,46 @@ describe('gen', () => {
     await runShot(shot, { assetsDir, ledger, shots: [shot], intervalMs: 1 });
     expect(calls.length).toBe(before);
     expect(fs.readFileSync(path.join(assetsDir, '..', 'assets', 's1.mp4'), 'utf8')).not.toMatch(/https?:/);
+  });
+
+  it('records the estimate when kie reports no credits', async () => {
+    const { assetsDir, ledger } = setup();
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    mockFetch((url) => {
+      if (url.includes('recordInfo')) return json({ code: 200, data: { state: 'success', resultJson: JSON.stringify({ resultUrls: ['https://cdn/o.mp4'] }) } });
+      return kieHandler(url);
+    });
+    await runShot(shot, { assetsDir, ledger, shots: [shot], intervalMs: 1 });
+    expect(ledger.find('s1')?.usd).toBe(1);
+    expect(warn).toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
+  it('leaves the entry pending when polling times out', async () => {
+    const { assetsDir, ledger } = setup();
+    mockFetch((url) => (url.includes('createTask') ? json({ code: 200, data: { taskId: 'tt' } }) : json({ code: 200, data: { state: 'generating' } })));
+    const ctx = { assetsDir, ledger, shots: [shot], intervalMs: 1, timeoutMs: 20 };
+    await expect(runShot(shot, ctx)).rejects.toThrow(/timed out/);
+    expect(ledger.find('s1')).toMatchObject({ state: 'pending', taskId: 'tt' });
+  });
+
+  it('records failed with usd 0 on kie fail, then creates a new task', async () => {
+    const { assetsDir, ledger } = setup();
+    mockFetch((url) => (url.includes('createTask') ? json({ code: 200, data: { taskId: 'bad' } }) : json({ code: 200, data: { state: 'fail', failMsg: 'nope' } })));
+    await expect(runShot(shot, { assetsDir, ledger, shots: [shot], intervalMs: 1 })).rejects.toBeInstanceOf(KieTaskFailed);
+    expect(ledger.find('s1')).toMatchObject({ state: 'failed', usd: 0 });
+    mockFetch(kieHandler);
+    await runShot(shot, { assetsDir, ledger, shots: [shot], intervalMs: 1 });
+    expect(calls.some((u) => u.includes('createTask'))).toBe(true);
+    expect(ledger.find('s1')?.state).toBe('done');
+  });
+
+  it('BudgetError blocks before any fetch', async () => {
+    const { assetsDir, ledger } = setup();
+    ledger.record({ id: 'x', kind: 'video', provider: 'kie', usd: 9.5, state: 'done' });
+    mockFetch(kieHandler);
+    await expect(runShot(shot, { assetsDir, ledger, shots: [shot], intervalMs: 1 })).rejects.toBeInstanceOf(BudgetError);
+    expect(calls.length).toBe(0);
   });
 
   it('writes nothing to the ledger on a kie error', async () => {

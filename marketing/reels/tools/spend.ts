@@ -6,7 +6,7 @@ export const SPEND_FILE = path.join(path.dirname(fileURLToPath(import.meta.url))
 
 export class BudgetError extends Error {
   constructor(spent: number, estimate: number, cap: number) {
-    super(`Budget exceeded: spent $${spent.toFixed(2)} + estimate $${estimate.toFixed(2)} > cap $${cap.toFixed(2)}. Ask the user before continuing.`);
+    super(`Budget exceeded: spent+reserved $${spent.toFixed(2)} + estimate $${estimate.toFixed(2)} > cap $${cap.toFixed(2)}. Ask the user before continuing.`);
     this.name = 'BudgetError';
   }
 }
@@ -17,6 +17,8 @@ export type SpendEntry = {
   provider: 'kie' | 'openai';
   usd: number;
   taskId?: string;
+  /** Reserved against the cap while `pending`. */
+  estimateUsd?: number;
   state: 'pending' | 'done' | 'failed';
 };
 
@@ -37,7 +39,8 @@ export class SpendLedger {
 
   assertCanSpend(estimateUsd: number): void {
     const spent = this.spent();
-    if (spent + estimateUsd > this.cap + 1e-9) throw new BudgetError(spent, estimateUsd, this.cap);
+    const reserved = this.read().reduce((t, e) => (e.state === 'pending' ? t + (e.estimateUsd ?? e.usd) : t), 0);
+    if (spent + reserved + estimateUsd > this.cap + 1e-9) throw new BudgetError(spent, estimateUsd, this.cap);
   }
 
   /** Upserts by id. */

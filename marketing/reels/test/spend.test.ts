@@ -24,6 +24,14 @@ describe('SpendLedger', () => {
     expect(() => l.assertCanSpend(1)).toThrow(BudgetError);
     expect(() => l.assertCanSpend(0.5)).not.toThrow();
   });
+  it('reserves pending estimates against the cap', () => {
+    const l = new SpendLedger(tmp());
+    l.record({ id: 'a', kind: 'video', provider: 'kie', usd: 8, state: 'done' });
+    l.record({ id: 'b', kind: 'video', provider: 'kie', usd: 0, estimateUsd: 1.5, taskId: 't', state: 'pending' });
+    expect(l.spent()).toBe(8);
+    expect(() => l.assertCanSpend(1)).toThrow(BudgetError);
+    expect(() => l.assertCanSpend(0.5)).not.toThrow();
+  });
   it('record replaces an entry with the same id', () => {
     const l = new SpendLedger(tmp());
     l.record({ id: 'a', kind: 'video', provider: 'kie', usd: 1, taskId: 't', state: 'pending' });

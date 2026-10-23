@@ -6,7 +6,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { KIE_USD_PER_CREDIT, createTask, credits, download, setKieKey, uploadFile, waitTask } from './kie.js';
+import { KIE_USD_PER_CREDIT, KieTaskFailed, createTask, credits, download, setKieKey, uploadFile, waitTask } from './kie.js';
 import { loadKeys } from './env.js';
 import { generateImage, setOpenAIKey } from './openai-image.js';
 import { makeSfx } from './sfx.js';
@@ -25,7 +25,7 @@ export type Shot = {
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const EXTS = ['mp4', 'png'];
 
-export type Ctx = { assetsDir: string; ledger: SpendLedger; shots: Shot[]; intervalMs?: number };
+export type Ctx = { assetsDir: string; ledger: SpendLedger; shots: Shot[]; intervalMs?: number; timeoutMs?: number };
 
 const cached = (dir: string, id: string) => EXTS.map((e) => path.join(dir, `${id}.${e}`)).find((f) => fs.existsSync(f));
 
@@ -54,13 +54,13 @@ export async function runShot(shot: Shot, ctx: Ctx): Promise<string> {
     const urls = await Promise.all(refPaths.map(uploadFile));
     const input = { prompt: shot.prompt, ...(urls.length ? { image_urls: urls } : {}), ...shot.input };
     taskId = await createTask(shot.model, input);
-    ctx.ledger.record({ id: shot.id, kind: shot.kind, provider: 'kie', usd: shot.estimateUsd, taskId, state: 'pending' });
+    ctx.ledger.record({ id: shot.id, kind: shot.kind, provider: 'kie', usd: 0, estimateUsd: shot.estimateUsd, taskId, state: 'pending' });
   }
   let res;
   try {
-    res = await waitTask(taskId, { intervalMs: ctx.intervalMs });
+    res = await waitTask(taskId, { intervalMs: ctx.intervalMs, timeoutMs: ctx.timeoutMs });
   } catch (e) {
-    if (e instanceof Error && /failed \(/.test(e.message)) {
+    if (e instanceof KieTaskFailed) {
       ctx.ledger.record({ id: shot.id, kind: shot.kind, provider: 'kie', usd: 0, taskId, state: 'failed' });
     }
     throw e; // timeout keeps `pending` so a re-run resumes the same task
@@ -69,7 +69,12 @@ export async function runShot(shot: Shot, ctx: Ctx): Promise<string> {
   if (!url) throw new Error(`kie task ${taskId} returned no result URL`);
   const ext = shot.kind === 'video' ? 'mp4' : 'png';
   const out = await download(url, path.join(ctx.assetsDir, `${shot.id}.${ext}`));
-  ctx.ledger.record({ id: shot.id, kind: shot.kind, provider: 'kie', usd: res.credits * KIE_USD_PER_CREDIT, taskId, state: 'done' });
+  let usd = res.credits * KIE_USD_PER_CREDIT;
+  if (!(res.credits > 0)) {
+    usd = shot.estimateUsd;
+    console.warn(`warning: kie reported no creditsConsumed for ${shot.id}; recording the estimate $${usd.toFixed(2)}`);
+  }
+  ctx.ledger.record({ id: shot.id, kind: shot.kind, provider: 'kie', usd, taskId, state: 'done' });
   return out;
 }
 

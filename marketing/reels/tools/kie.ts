@@ -50,6 +50,17 @@ export async function createTask(model: string, input: object): Promise<string> 
 
 type Info = { state: string; resultJson?: string; creditsConsumed?: number; failCode?: string; failMsg?: string };
 
+export class KieTaskFailed extends Error {
+  constructor(
+    public taskId: string,
+    failCode: string | undefined,
+    failMsg: string | undefined,
+  ) {
+    super(`kie task ${taskId} failed (${failCode ?? '?'}): ${failMsg ?? 'no message'}`);
+    this.name = 'KieTaskFailed';
+  }
+}
+
 export async function waitTask(taskId: string, { intervalMs = 10_000, timeoutMs = 15 * 60_000 } = {}): Promise<{ urls: string[]; credits: number }> {
   const start = Date.now();
   for (;;) {
@@ -58,7 +69,7 @@ export async function waitTask(taskId: string, { intervalMs = 10_000, timeoutMs 
       const urls = (JSON.parse(d.resultJson ?? '{}') as { resultUrls?: string[] }).resultUrls ?? [];
       return { urls, credits: d.creditsConsumed ?? 0 };
     }
-    if (d.state === 'fail') throw new Error(`kie task ${taskId} failed (${d.failCode ?? '?'}): ${d.failMsg ?? 'no message'}`);
+    if (d.state === 'fail') throw new KieTaskFailed(taskId, d.failCode, d.failMsg);
     if (Date.now() - start > timeoutMs) throw new Error(`kie task ${taskId} timed out; still pending, re-run to resume`);
     await new Promise((r) => setTimeout(r, intervalMs));
   }
