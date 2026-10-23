@@ -180,24 +180,17 @@ Storyboard (kare @30 fps):
 
 ---
 
-### Task 6: Reels 2 "Kapışma" ve Reels 3 "O kişi" (onaydan sonra)
+### Task 6: Reels 2 "Gerçek oyun" (kullanıcının storyboard'u, AI video yok) — güncellendi 2026-10-23
 
 **Files:**
-- Modify: `assets/shots.json` (`r2-battle`, gerekirse `r3-that-friend`; Reels 3, `r1-react`'ı tekrar kullanabilir)
-- Create: `src/reels/R2Battle.tsx`, `src/reels/R3ThatFriend.tsx`
-- Modify: `src/Root.tsx`, `captions.md`
-- Output: `out/songie-02-kapisma.{mp4,png}`, `out/songie-03-o-kisi.{mp4,png}`
-- Test: `test/r2r3.test.ts`
+- Modify: `tools/deezer.ts` (kapak: `album.cover_xl` → `assets/songs/<id>.jpg`, `SongAsset.cover`)
+- Create: `src/brand/app/RevealScreen.tsx` (web `PlayView` Reveal + `song.css .rv-*`: kapak, "Şarkı buydu" sticker'ı, başlık, sanatçı · albüm, sonuç satırları)
+- Create: `src/reels/R2RealGame.tsx`; Modify: `src/Root.tsx`, `captions.md`
+- Test: `test/r2.test.ts`, `test/deezer.test.ts`
 
-**Interfaces:**
-- Consumes: Task 3 bileşenleri, `friends-ref` (`refs` / `first_frame_url`), `SpendLedger`.
+Storyboard (30 fps, ≤ 12 sn): hook "Sen ne kadar hızlı bilebilirsin?" + altta "Hazır ol" 3·2·1 → telefonda 0,1 sn çalar → Pas → 0,5 sn → Pas → 2 sn → Pas (her aşamada aşama çubuğu ilerler, gerçek şarkı kesiti aynı ofsetten) → aynı turda canlı akışta "Mert 0,1 sn'de bildi +1000" + sticker → RevealScreen kapakla, şarkı arkada çalar → kapanış "Sen de Songie ile arkadaşlarına meydan oku" + logo.
+Props: `{ answer, title, artist, album, song, cover, songFrom }` (zod).
 
-İçerik:
-- **R2 (≈10 sn):** "Cuma akşamı. 4 kişi. 1 şarkı." → hızlı kesitlerle `SongPlayScreen` aşama 0 → 1 (0,1 → 0,5 sn), `LiveFeed` satırları akar ("Mert 0.5s'de bildi +880", "Deniz sanatçıyı bildi +210", "Kaan pas geçti"), AI klip (grup kavgası/sevinç, `r2-battle`, 4 sn), `Scoreboard` sıralama animasyonu (Mert 3.420 lider) → CTA. Kanca: "Arkadaş grubunda şarkıyı ilk kim bilir?"
-- **R3 (≈9 sn):** "Her grupta bir kişi vardır…" → "…şarkıyı 0,1 saniyede bilen" → AI klip (biri gözünü kırpmadan bilir, diğerleri şok) → "Etiketle 👇" sticker → CTA. AI klip olarak `r1-react` tekrar kullanılabilir. Yeni klip yalnızca bütçe kalırsa ve R1 klibi uymazsa üretilir.
+### Task 7: Reels 3 "O kişi" — beklemede
 
-- [ ] **Step 1:** Test: her iki kompozisyonun süresi 240–360 kare, 1080×1920.
-- [ ] **Step 2:** FAIL → çekimleri üret (her biri `assertCanSpend` ile, toplam 10 $'ı geçemez) → kompozisyonları uygula → PASS.
-- [ ] **Step 3:** Task 5 Step 3–4'teki still ve ffprobe kontrolleri.
-- [ ] **Step 4:** `captions.md` güncelle. Commit: `feat(reels): reels 2 and 3`
-- [ ] **Step 5:** Son rapor: 3 MP4 + kapak yolu, toplam harcama / 10 $, yeniden render komutları, diğer uygulamalar için yeni tema ekleme notu (`src/themes/<app>.ts`).
+AI video kuralına göre yeniden planlanacak: klip hikâyenin merkezinde, ≥ 3 sn tam görünür değilse AI kullanılmaz.

@@ -14,7 +14,7 @@ Uygulamanın kancası: şarkının yalnızca **0,1 sn**'si çalınıyor, bilemey
 
 - İlk teslim: 3 Reels (kullanıcı üçünü de onayladı).
   1. **0,1 saniye challenge**: izleyiciyi doğrudan oyuna sokar ("Bu şarkıyı 0,1 saniyede bilebilir misin?"). Bip / dalga formu gösterilir, ardından cevap için kısa bir bekleme ve açılış gelir.
-  2. **Arkadaş grubu kapışması**: evde, telefonlar elde. Biri 0,5 sn'de bilir, ekranda "+880" belirir, diğerleri "hile yapıyorsun!" diye bağırır, en sonda skor tablosu.
+  2. **Gerçek oyun deneyimi** (kullanıcı, 2026-10-23, eski "Kapışma" fikrinin yerine): "Sen ne kadar hızlı bilebilirsin?" + altta "Hazır ol" ve 3'ten geri sayım → telefonda 0,1 sn çalar, bilemez → 0,5 sn, bilemez → 2 sn, bilemez → aynı turda canlı akışta "Mert 0,1 sn'de bildi" → şarkı kapağıyla açılış (gerçek şarkı çalar) → kapanış "Sen de Songie ile arkadaşlarına meydan oku" + logo. AI video yok.
   3. **"Her grupta o bir kişi vardır"**: şarkıyı intro'dan bilen arkadaş. Relatable, etiketlemeye uygun bir meme kurgusu.
 - Her Reels: 1080×1920, 9:16, **8–12 sn** (kullanıcı: ortalama izlenme 8–10 sn), Türkçe. İlk 1 sn'de güçlü bir kanca ve sonda bir CTA ("Songie — App Store / Google Play'de ücretsiz"). Uygulama şu an mağaza onay sürecinde; videolar yayından sonra paylaşılacak, bu yüzden CTA iki mağazayı da anar. *(Claude'un kararı: resmi rozetler yerine marka stilinde sticker metin kullanılır; mağaza linkleri yayında açıklama metnine eklenir.)*
 - Her video için ek çıktılar: kapak görseli (1080×1920 PNG), açıklama metni ve hashtag önerisi.
@@ -47,6 +47,14 @@ Uygulamanın kancası: şarkının yalnızca **0,1 sn**'si çalınıyor, bilemey
 - Her sahne düz renk zeminle açılır. Geçişler renk değişimiyle (pembe → sarı → mint…) olur ve tempo yüksek tutulur.
 - AI ile üretilen gerçekçi insan klipleri ekranı tam doldurmaz. Kalın siyah çerçeveli, hafif eğik bir "kart" olarak renkli zeminin üstüne oturtulur. Kartın üstüne sticker'lar zıplayarak girer ("0,1 SN!", "+1000", "HİLE!").
 - Uygulama anları kodla yeniden çizilir. App Store PNG'leri doğrudan kullanılmaz, böylece animasyonlu ve net kalır.
+
+## AI video kuralı (kullanıcı geri bildirimi, 2026-10-23)
+
+Reels 1'deki kie klibi "hiçbir şey ifade etmedi": 1 sn'den kısa algılanan bir klip için 0,37 $ mantıklı değil. Bundan sonra AI video yalnızca hikâyenin merkezinde, en az ~3 sn tam ekran/okunur görünecek ve sahnede tek başına anlam taşıyacak şekilde planlanırsa üretilir; aksi halde kodla üretilen sahneler kullanılır. Üretmeden önce klibin ne anlatacağı ve kaç saniye görüneceği storyboard'da yazılı olmalı.
+
+## Gerçek şarkı (kullanıcı, 2026-10-23)
+
+Videolarda Deezer 30 sn önizlemesinden gerçek şarkı kullanılır (oyunla aynı kaynak): 0,1 / 0,5 / 2 sn kesitler oyundaki gibi aynı ofsetten, açılışta şarkı arkada çalar; kapak görseli Deezer'dan. Telif riski kullanıcıya bildirildi; dosyalar git'e girmez. Bu, "telifli müzik yok" kaçınma maddesinin yerine geçer.
 
 ## Teknik kararlar
 
