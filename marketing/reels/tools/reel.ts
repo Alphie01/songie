@@ -384,8 +384,73 @@ async function rfReel(key: keyof typeof RF_REELS, args: string[], root: string) 
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+export const PN_SAFE = ['arkadaslik', 'ask', 'gelecek', 'genel', 'utanc', 'yetenek'];
+/** Hand-picked flirty Paranoya questions (Aşk / Cesur / Sarhoş gece packs): innuendo, never explicit. */
+export const PN_FLIRT = [
+  'Aramızda kiminle bir gece geçirmek isterdin?',
+  'Kim gizli bir hayranlık besliyor?',
+  'Kim iyi öpüşüyormuş gibi duruyor ama değildir?',
+  'Aramızda kim en çok flört eder?',
+  'Kim bir gece kulübünde en çok numara alır?',
+  'Aramızda kim sabaha karşı "uyudun mu?" mesajı atar?',
+  'Kim içkiyi bahane edip hoşlandığı kişiye her şeyi söyler?',
+  'Aramızda kim ayıkken yapamayacağı flörtleri içince yapar?',
+  'Aramızda kim bir partide en çok kişiyle öpüşür?',
+  'Kim bir aşk üçgeninin ortasında kalır?',
+];
+
+export function pnQuestions(contentDir: string): string[] {
+  return PN_SAFE.flatMap((f) => {
+    const file = path.join(contentDir, `${f}.json`);
+    return fs.existsSync(file) ? (JSON.parse(fs.readFileSync(file, 'utf8')) as unknown[]).filter((t): t is string => typeof t === 'string') : [];
+  });
+}
+
+const PN_REELS = {
+  paranoia: { id: 'itiraf-09-paranoya', music: 'sneaky adventure kevin macleod' },
+  paranoia18: { id: 'itiraf-10-paranoya-flort', music: 'cool vibes kevin macleod' },
+} as const;
+
+/** `pnpm reel paranoia[18] [--text "<soru>"] [--song "…"] [--name X] [--palette N]` */
+async function pnReel(key: keyof typeof PN_REELS, args: string[], root: string) {
+  const cfg = PN_REELS[key];
+  const flirt = key === 'paranoia18';
+  const KNOWN = new Set(['--text', '--music', '--song', '--from', '--name', '--palette']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const pool = flirt ? PN_FLIRT : pnQuestions(path.resolve(root, '../../games/paranoia/server/content'));
+  const question = opt('--text') ?? pool[Math.floor(Math.random() * pool.length)]!;
+  const name = opt('--name');
+  const palette = opt('--palette') !== undefined ? Number(opt('--palette')) : Math.floor(Math.random() * 8);
+  if (unknown.length || question.length < 8 || question.length > 120 || (name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette)) {
+    console.error(`${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}kullanım: pnpm reel ${key} [--text "<soru>"] [--song "<şarkı>"] [--name <isim>] [--palette N]`);
+    process.exit(1);
+  }
+  if (flirt && EXPLICIT.test(question)) {
+    console.error('Bu soru Instagram için fazla açık; daha imalı bir şey yaz.');
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicQuery ? musicStart(loudestStart(rmsSteps(music.file), 0.5), 18) : 0;
+  const who = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  console.log(`Soru: ${question}\nMüzik: ${music.answer} · ${musicFrom} sn'den · Cevap: ${who}`);
+  const props = JSON.stringify({ question, music: music.src, musicFrom, palette, solver: who, flirt });
+  const file = `${key}-${slug(question).slice(0, 36)}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, '--frame=60', `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in PN_REELS) {
+    await pnReel(args[0] as keyof typeof PN_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] && args[0] in RF_REELS) {
     await rfReel(args[0] as keyof typeof RF_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;

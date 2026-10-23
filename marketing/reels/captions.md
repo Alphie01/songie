@@ -186,3 +186,25 @@ Flörtün buna ne der? 👀 Sen green dedin, o red flag 🚩😳 Bu gece tartı�
 #itirafköşesi #redflag #greenflag #ilkbuluşma #ilişki #flört #arkadaşlarla #oyungecesi #partioyunu #reels
 
 **Müzik kredisi:** Music: "Fluffing a Duck" / "Smooth Lovin'" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Paranoya (`itiraf-09-paranoya`) ve Paranoya · Flört +18 (`itiraf-10-paranoya-flort`)
+
+```sh
+pnpm reel paranoia                                     # oyunun güvenli paketlerinden rastgele soru
+pnpm reel paranoia --text "Aramızda kim zombi kıyametinde ilk ölür?" --name Mert
+pnpm reel paranoia18 --name Zeynep                     # "Aramızda kiminle bir gece geçirmek isterdin?" gibi imalı sorular
+```
+
+**Açıklama (normal):**
+
+Sana gizli bir soru geldi… 🤫 Cevabın odadaki biri olur, sonunda hepsi açılır 😂 Aramızda kim zombi kıyametinde ilk ölür? Etiketle! 👇
+
+**Açıklama (flört +18):**
+
+Gizli soru geldi 😏 "Aramızda kiminle bir gece geçirmek isterdin?" Şimdilik sadece sen biliyorsun… ta ki herkes öğrenene kadar 🔥 (+18)
+
+**Hashtag'ler:**
+
+#itirafköşesi #paranoya #paranoia #gizlisoru #arkadaşlarla #flört #oyungecesi #partioyunu #18plus #reels
+
+**Müzik kredisi:** Music: "Sneaky Adventure" / "Cool Vibes" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

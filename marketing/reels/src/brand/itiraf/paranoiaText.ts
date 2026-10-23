@@ -65,11 +65,15 @@ export const envelopeFrom = (nick: string) => `${nick} sana gönderdi. Kimse gö
 export const confirmPick = (nick: string) => `${nick} seçimini onayla`;
 export const waitHolder = (nick: string) => `${nick} düşünüyor…`;
 export const revealHead = (n: number, total: number) => `Soru ${n}/${total}`;
+/** Reels call the viewer "Sen": that reads as the pronoun, not a nickname ("Sana soruldu", "Senin cevabın"). */
+const isYou = (nick: string) => nick.trim() === 'Sen';
 export const askedTo = (nick: string) => {
+  if (isYou(nick)) return 'Sana soruldu';
   const d = suffix(nick, 'dat');
   return d ? `${d} soruldu` : `Soruldu: ${nick}`;
 };
 export const answerOf = (nick: string) => {
+  if (isYou(nick)) return 'Senin cevabın';
   const g = suffix(nick, 'gen');
   return g ? `${g} cevabı` : `${nick} cevap verdi`;
 };
