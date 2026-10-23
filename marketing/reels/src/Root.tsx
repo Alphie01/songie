@@ -14,6 +14,8 @@ import { ConfessionsGuessScreen } from './brand/itiraf/ConfessionsGuessScreen';
 import { ConfessionsRevealScreen } from './brand/itiraf/ConfessionsRevealScreen';
 import { MostLikelyVoteScreen } from './brand/itiraf/MostLikelyVoteScreen';
 import { MostLikelyResultScreen } from './brand/itiraf/MostLikelyResultScreen';
+import { RedFlagVoteScreen } from './brand/itiraf/RedFlagVoteScreen';
+import { RedFlagRevealScreen } from './brand/itiraf/RedFlagRevealScreen';
 import { ITIRAF_CORAL, itirafTheme } from './themes/itiraf';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
@@ -125,6 +127,15 @@ const MostLikelyPreview: React.FC<{ phase: 'vote' | 'result' }> = ({ phase }) =>
   </AbsoluteFill>
 );
 
+/** Red Flag screens in the phone on the pink App Store stage, for checks against ItirafKosesi 04.png. */
+const RedFlagPreview: React.FC<{ phase: 'vote' | 'reveal' }> = ({ phase }) => (
+  <AbsoluteFill style={{ backgroundColor: itirafTheme.colors.pink, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={itirafTheme}>
+      {phase === 'vote' ? <RedFlagVoteScreen theme={itirafTheme} /> : <RedFlagRevealScreen theme={itirafTheme} enterAt={-60} />}
+    </PhoneFrame>
+  </AbsoluteFill>
+);
+
 const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
 
 export const RemotionRoot: React.FC = () => (
@@ -219,6 +230,8 @@ export const RemotionRoot: React.FC = () => (
     <Still id="ConfReveal" component={ConfPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="MLVote" component={MostLikelyPreview} defaultProps={{ phase: 'vote' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="MLResult" component={MostLikelyPreview} defaultProps={{ phase: 'result' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="RFVote" component={RedFlagPreview} defaultProps={{ phase: 'vote' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="RFReveal" component={RedFlagPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="ItirafCtaCard"
       component={() => (
