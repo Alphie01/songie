@@ -11,3 +11,4 @@ screenshots
 _candidates
 tsconfig.tsbuildinfo
 .DS_Store
+.superpowers/
