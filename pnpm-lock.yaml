@@ -653,6 +653,9 @@ importers:
       '@remotion/layout-utils':
         specifier: 4.0.535
         version: 4.0.535
+      '@remotion/zod-types':
+        specifier: 4.0.535
+        version: 4.0.535(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       react:
         specifier: ^19.3.0
         version: 19.3.0
@@ -662,6 +665,9 @@ importers:
       remotion:
         specifier: 4.0.535
         version: 4.0.535(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      zod:
+        specifier: 4.5.4
+        version: 4.5.4
     devDependencies:
       '@testing-library/react':
         specifier: ^16.3.3

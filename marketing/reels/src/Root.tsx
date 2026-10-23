@@ -8,6 +8,7 @@ import { songieTheme } from './themes/songie';
 import { SongPlayScreen } from './brand/app/SongPlayScreen';
 import { PhoneFrame } from './brand/PhoneFrame';
 import { demoFeed, demoScores } from './BrandSheet';
+import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -34,6 +35,14 @@ export const RemotionRoot: React.FC = () => (
     <Composition id="Hello" component={Hello} durationInFrames={VIDEO.fps} {...video} />
     <Composition id="BrandSheet" component={BrandSheet} durationInFrames={3 * VIDEO.fps} defaultProps={{ theme: songieTheme }} {...video} />
     <Composition id="StoreShot" component={StoreShot} durationInFrames={VIDEO.fps} defaultProps={{ theme: songieTheme }} {...video} />
+    <Composition
+      id={R1_META.id}
+      component={R1Challenge}
+      schema={r1Schema}
+      defaultProps={R1_META.defaultProps}
+      durationInFrames={R1_META.durationInFrames}
+      {...video}
+    />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="SongPlayScreenGuess"
