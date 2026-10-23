@@ -20,7 +20,13 @@ export const AVATAR_COLORS = ['#3ee0a8', '#ffd23f', '#ff6b6b', '#5ab8ff', '#b794
  * The .nv column: drawn at 393 CSS px (padding 72px gutter 22px) and scaled to the PhoneFrame screen,
  * exactly like SongPlayScreen.
  */
-export const NeverCanvas: React.FC<{ theme: AppTheme; children: React.ReactNode }> = ({ theme, children }) => {
+export const NeverCanvas: React.FC<{ theme: AppTheme; children: React.ReactNode; gap?: number; bottom?: number; lineHeight?: number }> = ({
+  theme,
+  children,
+  gap = 14,
+  bottom = 22,
+  lineHeight,
+}) => {
   const c = theme.colors;
   const screen = usePhoneScreen() ?? { width: 798, height: 1746 };
   const scale = screen.width / APP_W;
@@ -38,6 +44,7 @@ export const NeverCanvas: React.FC<{ theme: AppTheme; children: React.ReactNode 
           transformOrigin: '0 0',
           fontFamily: FONT_BODY,
           color: c.paper,
+          lineHeight,
         }}
       >
         <StatusBar color={c.paper} island={c.ink} />
@@ -45,10 +52,10 @@ export const NeverCanvas: React.FC<{ theme: AppTheme; children: React.ReactNode 
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 14,
+            gap,
             height: '100%',
             boxSizing: 'border-box',
-            padding: `72px ${GUTTER}px 22px`,
+            padding: `72px ${GUTTER}px ${bottom}px`,
           }}
         >
           {children}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { MUSIC_VOLUME, SFX_VOLUME } from '../brand/mix';
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import { hasStaticFile } from '../brand/ClipCard';
@@ -88,7 +89,7 @@ const WIN_POINTS = 880;
 
 const Sfx: React.FC<{ name: string; at: number; frames?: number }> = ({ name, at, frames = 15 }) => (
   <Sequence from={at} durationInFrames={frames} layout="none" name={`sfx ${name}`}>
-    <Audio src={staticFile(`sfx/${name}.wav`)} />
+    <Audio src={staticFile(`sfx/${name}.wav`)} volume={SFX_VOLUME} />
   </Sequence>
 );
 
@@ -330,7 +331,7 @@ const Song: React.FC<{ src: string; from: number }> = ({ src, from }) => {
           src={staticFile(src)}
           trimBefore={start}
           volume={(f) =>
-            0.85 *
+            MUSIC_VOLUME *
             interpolate(f, [0, 6, bgFrames - R3.songFadeOut, bgFrames], [0, 1, 1, 0], {
               extrapolateLeft: 'clamp',
               extrapolateRight: 'clamp',

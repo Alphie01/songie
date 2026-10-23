@@ -9,6 +9,9 @@ import { SongPlayScreen } from './brand/app/SongPlayScreen';
 import { PhoneFrame } from './brand/PhoneFrame';
 import { NeverAnswerScreen } from './brand/itiraf/NeverAnswerScreen';
 import { NeverRevealScreen } from './brand/itiraf/NeverRevealScreen';
+import { ConfessionsWriteScreen } from './brand/itiraf/ConfessionsWriteScreen';
+import { ConfessionsGuessScreen } from './brand/itiraf/ConfessionsGuessScreen';
+import { ConfessionsRevealScreen } from './brand/itiraf/ConfessionsRevealScreen';
 import { ITIRAF_CORAL, itirafTheme } from './themes/itiraf';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
@@ -56,6 +59,33 @@ const NeverPreview: React.FC<{ phase: 'answer' | 'reveal' }> = ({ phase }) => (
           leader={{ name: 'Ece', count: 4 }}
           storyteller="Mert"
           avatarColors={{ Ece: '#3ee0a8', Mert: '#ffd23f', Selin: '#5ab8ff' }}
+          enterAt={-60}
+        />
+      )}
+    </PhoneFrame>
+  </AbsoluteFill>
+);
+
+/** Gizli İtiraflar screens in the phone on the yellow App Store stage, for checks against ItirafKosesi 02.png. */
+const ConfPreview: React.FC<{ phase: 'write' | 'guess' | 'reveal' }> = ({ phase }) => (
+  <AbsoluteFill style={{ backgroundColor: itirafTheme.colors.yellow, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={itirafTheme}>
+      {phase === 'write' ? (
+        <ConfessionsWriteScreen theme={itirafTheme} text="Yatmadan önce kapının kilitli olduğunu üç kez" caret isHost />
+      ) : phase === 'guess' ? (
+        <ConfessionsGuessScreen theme={itirafTheme} />
+      ) : (
+        <ConfessionsRevealScreen
+          theme={itirafTheme}
+          confession="Yatmadan önce kapının kilitli olduğunu üç kez kontrol etmeden uyuyamıyorum."
+          topic="Yatmadan önce yaptığın garip bir ritüel"
+          author="Kaan"
+          selected="Mert"
+          votes={{ Mert: 2, Deniz: 1, Kaan: 2, Bora: 1 }}
+          correct={['Deniz', 'Zeynep']}
+          reactions={{ yok: 2, bende: 3, efsane: 1, olamaz: 0 }}
+          seconds={5}
+          isHost
           enterAt={-60}
         />
       )}
@@ -120,6 +150,9 @@ export const RemotionRoot: React.FC = () => (
     />
     <Still id="NeverAnswer" component={NeverPreview} defaultProps={{ phase: 'answer' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="NeverReveal" component={NeverPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="ConfWrite" component={ConfPreview} defaultProps={{ phase: 'write' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="ConfGuess" component={ConfPreview} defaultProps={{ phase: 'guess' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="ConfReveal" component={ConfPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="ItirafCtaCard"
       component={() => (

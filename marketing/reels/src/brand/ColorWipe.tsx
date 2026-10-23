@@ -1,4 +1,5 @@
 import React from 'react';
+import { SFX_VOLUME } from './mix';
 import { AbsoluteFill, Audio, Easing, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import type { AppTheme } from '../themes/types';
 
@@ -42,7 +43,7 @@ export const ColorWipe: React.FC<Props> = ({ theme, from, to, at, durationInFram
       <Wipe theme={theme} from={from} to={to} d={durationInFrames} />
     </Sequence>
     <Sequence from={at} durationInFrames={WHOOSH_FRAMES} layout="none" name="whoosh">
-      <Audio src={staticFile('sfx/whoosh.wav')} />
+      <Audio src={staticFile('sfx/whoosh.wav')} volume={SFX_VOLUME} />
     </Sequence>
   </>
 );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { SFX_VOLUME } from '../../brand/mix';
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import { ColorStage } from '../../brand/ColorStage';
@@ -87,7 +88,7 @@ export function answeredAt(frame: number): number {
 
 const Sfx: React.FC<{ name: string; at: number; frames?: number }> = ({ name, at, frames = 15 }) => (
   <Sequence from={at} durationInFrames={frames} layout="none" name={`sfx ${name}`}>
-    <Audio src={staticFile(`sfx/${name}.wav`)} volume={0.9} />
+    <Audio src={staticFile(`sfx/${name}.wav`)} volume={SFX_VOLUME} />
   </Sequence>
 );
 
@@ -272,7 +273,7 @@ export const I1Never: React.FC<I1Props> = (p) => {
         </ColorStage>
       </Sequence>
 
-      <Music src={p.music} from={p.musicFrom} volume={0.45} />
+      <Music src={p.music} from={p.musicFrom} />
       <Sfx name="pop" at={I1.card} />
       <Sfx name="pop" at={I1.ask} />
       <Sfx name="pop" at={I1.game + I1.press} />

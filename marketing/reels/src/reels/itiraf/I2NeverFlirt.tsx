@@ -1,4 +1,5 @@
 import React from 'react';
+import { SFX_VOLUME } from '../../brand/mix';
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import { ColorWipe } from '../../brand/ColorWipe';
@@ -76,7 +77,7 @@ export const CTA_TEXT = 'Flörtünle oyna… en cesur gece 😈';
 
 const Sfx: React.FC<{ name: string; at: number; frames?: number }> = ({ name, at, frames = 15 }) => (
   <Sequence from={at} durationInFrames={frames} layout="none" name={`sfx ${name}`}>
-    <Audio src={staticFile(`sfx/${name}.wav`)} volume={0.85} />
+    <Audio src={staticFile(`sfx/${name}.wav`)} volume={SFX_VOLUME} />
   </Sequence>
 );
 
@@ -346,7 +347,7 @@ export const I2NeverFlirt: React.FC<I2Props> = (p) => {
         </NightStage>
       </Sequence>
 
-      <Music src={p.music} from={p.musicFrom} volume={0.5} />
+      <Music src={p.music} from={p.musicFrom} />
       <Sfx name="pop" at={I2.card} />
       <Sfx name="whoosh" at={I2.peel} frames={12} />
       <Sfx name="pop" at={I2.ask} />

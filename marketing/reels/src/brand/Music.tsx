@@ -1,6 +1,7 @@
 import React from 'react';
 import { Audio, interpolate, Sequence, staticFile, useVideoConfig } from 'remotion';
 import { hasStaticFile } from './ClipCard';
+import { MUSIC_VOLUME } from './mix';
 
 /**
  * Background music under the whole reel (Deezer preview inside public/): soft fade in, fade out at the end.
@@ -9,7 +10,7 @@ import { hasStaticFile } from './ClipCard';
 export const Music: React.FC<{ src: string; from?: number; volume?: number; fadeOut?: number }> = ({
   src,
   from = 0,
-  volume = 0.4,
+  volume = MUSIC_VOLUME,
   fadeOut = 24,
 }) => {
   const { durationInFrames, fps } = useVideoConfig();
