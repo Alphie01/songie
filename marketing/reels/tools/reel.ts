@@ -23,6 +23,7 @@ export type ReelKey = keyof typeof REELS;
 /** İtiraf Köşesi game reels: a real card from the game's own pool, background music from Deezer. */
 export const GAME_REELS = {
   never: { id: 'itiraf-01-ben-hic', cover: 95, music: 'sneaky snitch kevin macleod' },
+  never18: { id: 'itiraf-02-ben-hic-flort', cover: 100, music: 'deuces kevin macleod' },
 } as const;
 export type GameReelKey = keyof typeof GAME_REELS;
 
@@ -37,10 +38,26 @@ export const NEVER_SAFE_CATEGORIES: Record<string, string> = {
   yemek: 'Yemek',
 };
 
+/** Ben Hiç +18 packs, used for the flirt reel only after the explicit-word filter below. */
+export const NEVER_FLIRT_CATEGORIES: Record<string, string> = {
+  cesur: 'Cesur (+18)',
+  'yatak-odasi': 'Yatak odası (+18)',
+  fantezi: 'Fantezi (+18)',
+  'cift-odasi': 'Çift odası (+18)',
+  'sinir-testi': 'Sınır testi (+18)',
+};
+
+/** Words that make a card explicit (Instagram removes / limits those); flirty innuendo passes. */
+export const EXPLICIT = /seks|seviş|oral|orgazm|porno|prezervatif|squirt|klips|deepthroat|\b69\b|yat(t|m|ıp|ar)|soyun|lateks|bağlan|yetişkin|göğüs|çıplak|grup|mastürb|vibrat|oyuncak|penis|vajina|anal|fetiş|kelepçe|sado|maso/iu;
+
+export function flirtCards(contentDir: string): { text: string; category: string }[] {
+  return neverCards(contentDir, NEVER_FLIRT_CATEGORIES).filter((c) => !EXPLICIT.test(c.text));
+}
+
 /** Every safe Ben Hiç card from games/never/server/content. */
-export function neverCards(contentDir: string): { text: string; category: string }[] {
+export function neverCards(contentDir: string, categories = NEVER_SAFE_CATEGORIES): { text: string; category: string }[] {
   const out: { text: string; category: string }[] = [];
-  for (const [id, name] of Object.entries(NEVER_SAFE_CATEGORIES)) {
+  for (const [id, name] of Object.entries(categories)) {
     const file = path.join(contentDir, `${id}.json`);
     if (!fs.existsSync(file)) continue;
     for (const text of JSON.parse(fs.readFileSync(file, 'utf8')) as unknown[]) {
@@ -113,7 +130,7 @@ function run(cmd: string, args: string[], cwd: string) {
   execFileSync(cmd, args, { cwd, stdio: 'inherit' });
 }
 
-/** `pnpm reel never [--text "Ben hiç …"] [--music "<deezer sorgusu>"] [--name X] [--palette N]` */
+/** `pnpm reel <never|never18> [--text "Ben hiç …"] [--music "<deezer sorgusu>"] [--name X] [--palette N]` */
 async function gameReel(key: GameReelKey, args: string[], root: string) {
   const cfg = GAME_REELS[key];
   const opt = (name: string) => {
@@ -125,10 +142,11 @@ async function gameReel(key: GameReelKey, args: string[], root: string) {
   const palArg = opt('--palette');
   const palette = palArg !== undefined ? Number(palArg) : Math.floor(Math.random() * PALETTES.length);
   if ((name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette) || palette < 0 || palette >= PALETTES.length) {
-    console.error(`kullanım: pnpm reel never [--text "Ben hiç …"] [--music "<şarkı>"] [--name <isim>] [--palette 0-${PALETTES.length - 1}]`);
+    console.error(`kullanım: pnpm reel <never|never18> [--text "Ben hiç …"] [--music "<şarkı>"] [--name <isim>] [--palette 0-${PALETTES.length - 1}]`);
     process.exit(1);
   }
-  const cards = neverCards(path.resolve(root, '../../games/never/server/content'));
+  const contentDir = path.resolve(root, '../../games/never/server/content');
+  const cards = key === 'never18' ? flirtCards(contentDir) : neverCards(contentDir);
   const card = text
     ? { text, category: opt('--category') ?? cards.find((c) => c.text === text)?.category ?? 'Genel' }
     : cards[Math.floor(Math.random() * cards.length)]!;
@@ -140,9 +158,17 @@ async function gameReel(key: GameReelKey, args: string[], root: string) {
   const solver = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
   console.log(`Cümle: ${card.text} (${card.category})${text ? '' : ' — kendi cümlen için --text "Ben hiç …"'}`);
   console.log(`Müzik: ${music.answer}${opt('--music') ? '' : ' — başka müzik için --music "<şarkı>"'}`);
-  console.log(`Renkler: palet ${palette} (${PALETTES[palette]!.join(' → ')}) · Anlatan: ${solver}`);
+  console.log(
+    key === 'never18'
+      ? `Gece ışığı: ${['pembe', 'mercan', 'lila'][palette % 3]} · Flört: ${solver} — değiştirmek için --palette / --name`
+      : `Renkler: palet ${palette} (${PALETTES[palette]!.join(' → ')}) · Anlatan: ${solver}`,
+  );
 
-  const props = JSON.stringify({ statement: card.text, category: card.category, music: music.src, musicFrom: 0, palette, solver });
+  const props = JSON.stringify(
+    key === 'never18'
+      ? { statement: card.text, category: card.category, music: music.src, musicFrom: 0, accent: palette % 3, date: solver }
+      : { statement: card.text, category: card.category, music: music.src, musicFrom: 0, palette, solver },
+  );
   const file = `${key}-${slug(card.text.replace(/^Ben hiç\s+/u, '')).slice(0, 40)}`;
   run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
   run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);

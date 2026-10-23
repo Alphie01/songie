@@ -61,3 +61,15 @@ describe('game reels', () => {
     expect(cards.some((c) => /\+18/.test(c.category))).toBe(false);
   });
 });
+
+describe('flirt cards', () => {
+  it('keeps flirty +18 cards and drops explicit ones', async () => {
+    const { flirtCards, EXPLICIT } = await import('../tools/reel');
+    const path = await import('node:path');
+    const cards = flirtCards(path.resolve(__dirname, '../../../games/never/server/content'));
+    expect(cards.length).toBeGreaterThan(30);
+    expect(cards.every((c) => c.category.includes('+18') && !EXPLICIT.test(c.text))).toBe(true);
+    expect(EXPLICIT.test('Ben hiç balkonda seks yapmadım.')).toBe(true);
+    expect(EXPLICIT.test('Ben hiç bir gecede iki farklı kişiyle öpüşmedim.')).toBe(false);
+  });
+});

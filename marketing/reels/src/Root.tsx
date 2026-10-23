@@ -15,6 +15,7 @@ import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
 import { R2RealGame, R2_META, r2Schema } from './reels/R2RealGame';
 import { R3Winner, R3_META, r3Schema } from './reels/R3Winner';
 import { I1Never, I1_META, i1Schema } from './reels/itiraf/I1Never';
+import { I2NeverFlirt, I2_META, i2Schema } from './reels/itiraf/I2NeverFlirt';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -99,6 +100,14 @@ export const RemotionRoot: React.FC = () => (
       schema={i1Schema}
       defaultProps={I1_META.defaultProps}
       durationInFrames={I1_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={I2_META.id}
+      component={I2NeverFlirt}
+      schema={i2Schema}
+      defaultProps={I2_META.defaultProps}
+      durationInFrames={I2_META.durationInFrames}
       {...video}
     />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />

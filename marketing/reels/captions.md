@@ -95,3 +95,25 @@ Dürüst ol 🤫 Ben hiç… eski sevgilimin sosyal medyasını gizlice inceleme
 **Müzik kredisi** (Kevin MacLeod parçaları CC BY 4.0, açıklamaya eklenmeli):
 
 Music: "Sneaky Snitch" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Ben Hiç · Flört (+18) (`itiraf-02-ben-hic-flort`)
+
+Ayrı tasarım: gece sahnesi (koyu mor, neon pembe ışık, uçuşan kalpler), sansür bandıyla açılan kart, yan yana sen ve flörtünün telefonu (onun cevabı gizli), "İkiniz de yapmışsınız 🔥".
+
+```sh
+pnpm reel never18                                   # +18 paketlerden, açık cinsellik içermeyen rastgele cümle
+pnpm reel never18 --text "Ben hiç bir gecede iki farklı kişiyle öpüşmedim." --name Can --palette 1
+```
+
+- Cümle havuzu: Cesur / Yatak odası / Fantezi / Çift odası / Sınır testi (+18), açık cinsel kelimeler (seks, seviş, porno…) içerenler elenir (Instagram kuralları).
+- `--palette` 0 = pembe, 1 = mercan, 2 = lila gece ışığı; `--name` flörtünün adı.
+
+**Açıklama:**
+
+İlk buluşmada bunu oynadık… 😏 Cevabı kimse görmez, ta ki ikiniz de açıklayana kadar 🔥 Flörtünü etiketle, bu gece İtiraf Köşesi'nde dürüstlük zamanı 😈 (+18)
+
+**Hashtag'ler:**
+
+#itirafköşesi #benhiç #flört #ilkbuluşma #çiftoyunu #neverhaveiever #18plus #gecehayatı #dürüstlük #reels
+
+**Müzik kredisi:** Music: "Deuces" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
