@@ -50,7 +50,7 @@ export const PUZZLES: PuzzleCase[] = [
     clue: { source: 'Operatör kaydı', text: 'Kurbanın telefonu 21:30’da kapandı.' },
     suspects: [
       { name: 'Barış', portrait: P('pera-gecesi/img/p-baris'), voice: 'ash', el: 'fZEjvS1BvpajAoOmWcEO', tag: '[calm]', style: STYLE_M, line: 'En son öğlen konuştuk.' },
-      { name: 'Ece', portrait: P('izmir-santaj/img/p-ece'), voice: 'shimmer', el: 'PVbzZmwmdI99VcmuRK7G', tag: '[quickly, nervous]', style: STYLE_F, line: 'Ona onda mesaj attım, hemen cevap verdi.', liar: true },
+      { name: 'Ece', portrait: P('izmir-santaj/img/p-ece'), voice: 'shimmer', el: 'PVbzZmwmdI99VcmuRK7G', tag: '[quickly, nervous]', style: STYLE_F, line: 'Ona saat onda yazdım, hemen cevap verdi.', liar: true },
       { name: 'Leyla', portrait: P('yalida-son-aksam/img/p-leyla'), voice: 'coral', el: 'KwaeIqNikLVCR098EG82', tag: '[calm, cold]', style: STYLE_F, line: 'Akşam toplantıdaydım, hiç aramadım.' },
     ],
     reveal: 'Ece’ye saat onda kim cevap verdi?',
