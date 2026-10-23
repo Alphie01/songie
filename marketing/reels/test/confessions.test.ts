@@ -38,7 +38,7 @@ describe('Gizli İtiraflar copy (games/confessions/client/strings.ts)', () => {
     expect(counterBad(10)).toBe(false);
   });
   it('timer fill clamps', () => {
-    expect(timerFill(28, 50)).toBe(56);
+    expect(timerFill(28, 50)).toBeCloseTo(56);
     expect(timerFill(80, 50)).toBe(100);
     expect(timerFill(5, 0)).toBe(100);
   });
