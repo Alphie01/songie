@@ -16,6 +16,10 @@ import { MostLikelyVoteScreen } from './brand/itiraf/MostLikelyVoteScreen';
 import { MostLikelyResultScreen } from './brand/itiraf/MostLikelyResultScreen';
 import { RedFlagVoteScreen } from './brand/itiraf/RedFlagVoteScreen';
 import { RedFlagRevealScreen } from './brand/itiraf/RedFlagRevealScreen';
+import { ParanoiaEnvelopeScreen } from './brand/itiraf/ParanoiaEnvelopeScreen';
+import { ParanoiaAnswerScreen } from './brand/itiraf/ParanoiaAnswerScreen';
+import { ParanoiaRevealScreen } from './brand/itiraf/ParanoiaRevealScreen';
+import { ParanoiaWaitingScreen } from './brand/itiraf/ParanoiaWaitingScreen';
 import { ITIRAF_CORAL, itirafTheme } from './themes/itiraf';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
@@ -138,6 +142,23 @@ const RedFlagPreview: React.FC<{ phase: 'vote' | 'reveal' }> = ({ phase }) => (
   </AbsoluteFill>
 );
 
+/** Gizlilik Esas (Paranoya) screens in the phone on the sky App Store stage, for checks against ItirafKosesi 05.png. */
+const ParanoiaPreview: React.FC<{ phase: 'envelope' | 'answer' | 'waiting' | 'reveal' }> = ({ phase }) => (
+  <AbsoluteFill style={{ backgroundColor: itirafTheme.colors.sky, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={itirafTheme}>
+      {phase === 'envelope' ? (
+        <ParanoiaEnvelopeScreen theme={itirafTheme} />
+      ) : phase === 'answer' ? (
+        <ParanoiaAnswerScreen theme={itirafTheme} selected="Kaan" />
+      ) : phase === 'waiting' ? (
+        <ParanoiaWaitingScreen theme={itirafTheme} mine={[{ question: 'Aramızda kim eski sevgilisinin profiline hâlâ bakıyor?', answer: 'Kaan' }]} />
+      ) : (
+        <ParanoiaRevealScreen theme={itirafTheme} />
+      )}
+    </PhoneFrame>
+  </AbsoluteFill>
+);
+
 const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
 
 export const RemotionRoot: React.FC = () => (
@@ -250,6 +271,10 @@ export const RemotionRoot: React.FC = () => (
     <Still id="MLResult" component={MostLikelyPreview} defaultProps={{ phase: 'result' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="RFVote" component={RedFlagPreview} defaultProps={{ phase: 'vote' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still id="RFReveal" component={RedFlagPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="PNEnvelope" component={ParanoiaPreview} defaultProps={{ phase: 'envelope' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="PNAnswer" component={ParanoiaPreview} defaultProps={{ phase: 'answer' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="PNWaiting" component={ParanoiaPreview} defaultProps={{ phase: 'waiting' as const }} width={VIDEO.width} height={VIDEO.height} />
+    <Still id="PNReveal" component={ParanoiaPreview} defaultProps={{ phase: 'reveal' as const }} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="ItirafCtaCard"
       component={() => (
