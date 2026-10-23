@@ -1,19 +1,56 @@
 import React from 'react';
-import { AbsoluteFill, Composition } from 'remotion';
-import { VIDEO } from './brand/fonts';
+import { AbsoluteFill, Composition, Still } from 'remotion';
+import { BrandSheet, StoreShot } from './BrandSheet';
+import { ColorStage } from './brand/ColorStage';
+import { CtaCard } from './brand/CtaCard';
+import { loadBrandFonts, VIDEO } from './brand/fonts';
 import { songieTheme } from './themes/songie';
+import { SongPlayScreen } from './brand/app/SongPlayScreen';
+import { PhoneFrame } from './brand/PhoneFrame';
+import { demoFeed, demoScores } from './BrandSheet';
 
-const Hello: React.FC = () => (
-  <AbsoluteFill style={{ backgroundColor: songieTheme.colors.bg }} />
+// Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
+void loadBrandFonts();
+
+const Hello: React.FC = () => <AbsoluteFill style={{ backgroundColor: songieTheme.colors.bg }} />;
+
+/** The play screen alone in the phone, for side-by-side checks against App Store 02.png / 03.png. */
+const PlayScreenPreview: React.FC<{ stage?: number; guess?: string; suggestions?: string[]; selected?: number; bg?: string }> = ({
+  stage = 0,
+  bg = songieTheme.colors.yellow,
+  ...rest
+}) => (
+  <AbsoluteFill style={{ backgroundColor: bg, alignItems: 'center', justifyContent: 'center' }}>
+    <PhoneFrame theme={songieTheme}>
+      <SongPlayScreen theme={songieTheme} stage={stage} playing={false} timer={14} feed={demoFeed(songieTheme)} scores={demoScores(songieTheme)} {...rest} />
+    </PhoneFrame>
+  </AbsoluteFill>
 );
 
+const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
+
 export const RemotionRoot: React.FC = () => (
-  <Composition
-    id="Hello"
-    component={Hello}
-    durationInFrames={VIDEO.fps}
-    fps={VIDEO.fps}
-    width={VIDEO.width}
-    height={VIDEO.height}
-  />
+  <>
+    <Composition id="Hello" component={Hello} durationInFrames={VIDEO.fps} {...video} />
+    <Composition id="BrandSheet" component={BrandSheet} durationInFrames={3 * VIDEO.fps} defaultProps={{ theme: songieTheme }} {...video} />
+    <Composition id="StoreShot" component={StoreShot} durationInFrames={VIDEO.fps} defaultProps={{ theme: songieTheme }} {...video} />
+    <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
+    <Still
+      id="SongPlayScreenGuess"
+      component={PlayScreenPreview}
+      defaultProps={{ stage: 1, guess: 'Tarkan', suggestions: ['Tarkan – Şımarık', 'Tarkan – Kuzu Kuzu', 'Tarkan – Dudu'], selected: 1, bg: songieTheme.colors.mint }}
+      width={VIDEO.width}
+      height={VIDEO.height}
+    />
+    <Still
+      id="CtaCard"
+      component={() => (
+        <ColorStage theme={songieTheme} color={songieTheme.colors.pink}>
+          <CtaCard theme={songieTheme} enterAt={-60} />
+        </ColorStage>
+      )}
+      width={VIDEO.width}
+      height={VIDEO.height}
+    />
+  </>
 );
