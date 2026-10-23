@@ -7,7 +7,15 @@ import { download } from './kie.js';
  * Deezer 30 sn önizlemesi: oyunun kullandığı kaynakla aynı. Dosyalar `assets/songs/` altına iner
  * (telifli, git'e girmez) ve Remotion'a `assets/songs/<id>.mp3` olarak verilir.
  */
-export type DeezerTrack = { id: number; title: string; artist: string; album: string; preview: string; cover: string | null };
+export type DeezerTrack = {
+  id: number;
+  title: string;
+  artist: string;
+  artistId: number;
+  album: string;
+  preview: string;
+  cover: string | null;
+};
 export type SongAsset = {
   id: number;
   title: string;
@@ -17,13 +25,15 @@ export type SongAsset = {
   /** Public paths for Remotion; `cover` is empty when Deezer has none. */
   src: string;
   cover: string;
+  /** Other songs by the same artist ("Artist – Title"), for the search suggestions. */
+  decoys: string[];
   file: string;
 };
 
 export async function searchTrack(query: string): Promise<DeezerTrack> {
   const res = await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=5`);
   const json = (await res.json()) as {
-    data?: { id: number; title: string; preview: string; artist: { name: string }; album?: { title?: string; cover_xl?: string } }[];
+    data?: { id: number; title: string; preview: string; artist: { id: number; name: string }; album?: { title?: string; cover_xl?: string } }[];
   };
   const hit = json.data?.find((t) => t.preview);
   if (!hit) throw new Error(`Deezer'da önizlemesi olan şarkı bulunamadı: "${query}"`);
@@ -31,10 +41,31 @@ export async function searchTrack(query: string): Promise<DeezerTrack> {
     id: hit.id,
     title: hit.title,
     artist: hit.artist.name,
+    artistId: hit.artist.id,
     album: hit.album?.title ?? '',
     preview: hit.preview,
     cover: hit.album?.cover_xl || null,
   };
+}
+
+/** Up to `n` other hits by the same artist (Deezer artist top), as the app's search would list them. */
+export async function artistDecoys(artistId: number, artist: string, title: string, n = 2): Promise<string[]> {
+  try {
+    const res = await fetch(`https://api.deezer.com/artist/${artistId}/top?limit=15`);
+    const json = (await res.json()) as { data?: { title: string; artist: { name: string } }[] };
+    const base = (t: string) => t.toLocaleLowerCase('tr-TR').replace(/\s*[([].*$/, '').trim();
+    const seen = new Set([base(title)]);
+    const out: string[] = [];
+    for (const t of json.data ?? []) {
+      if (t.artist.name !== artist || seen.has(base(t.title))) continue;
+      seen.add(base(t.title));
+      out.push(`${artist} – ${t.title}`);
+      if (out.length === n) break;
+    }
+    return out;
+  } catch {
+    return [];
+  }
 }
 
 /** Şarkıyı bulur, önizlemesini `<assetsDir>/songs/<id>.mp3` olarak indirir (varsa tekrar indirmez). */
@@ -59,6 +90,7 @@ export async function fetchSong(query: string, assetsDir: string): Promise<SongA
     answer: `${t.artist} – ${t.title}`,
     src: `assets/songs/${t.id}.mp3`,
     cover,
+    decoys: await artistDecoys(t.artistId, t.artist, t.title),
     file,
   };
 }

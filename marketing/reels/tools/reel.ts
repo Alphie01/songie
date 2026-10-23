@@ -15,6 +15,7 @@ import { fetchSong, type SongAsset } from './deezer.js';
 export const REELS = {
   r1: { id: 'songie-01-challenge', cover: 20, maxFrom: 29 },
   r2: { id: 'songie-02-gercek-oyun', cover: 70, maxFrom: 27 },
+  r3: { id: 'songie-03-kazan', cover: 70, maxFrom: 27 },
 } as const;
 export type ReelKey = keyof typeof REELS;
 
@@ -22,7 +23,8 @@ export type ReelOptions = { songFrom: number; palette: number; solver: string };
 
 export function propsFor(reel: ReelKey, s: SongAsset, o: ReelOptions): Record<string, unknown> {
   if (reel === 'r1') return { answer: s.answer, solveStage: 0, song: s.src, ...o };
-  return { title: s.title, artist: s.artist, album: s.album, song: s.src, cover: s.cover, ...o };
+  const base = { title: s.title, artist: s.artist, album: s.album, song: s.src, cover: s.cover, ...o };
+  return reel === 'r3' ? { ...base, decoys: s.decoys } : base;
 }
 
 /** Stable friend name per song, so it is not always Mert. */
@@ -97,7 +99,7 @@ async function main() {
   const bad = (f?: { v: number }) => f !== undefined && !Number.isFinite(f.v);
   const badName = nameIdx >= 0 && (!name || name.length > 12);
   if (!(reel in REELS) || !query || bad(from) || bad(pal) || badName || (pal && (pal.v < 0 || pal.v >= PALETTES.length))) {
-    console.error(`kullanım: pnpm reel <r1|r2> "<sanatçı şarkı>" [--from <saniye>] [--palette 0-${PALETTES.length - 1}] [--name <en çok 12 harf>]`);
+    console.error(`kullanım: pnpm reel <r1|r2|r3> "<sanatçı şarkı>" [--from <saniye>] [--palette 0-${PALETTES.length - 1}] [--name <en çok 12 harf>]`);
     process.exit(1);
   }
   const cfg = REELS[reel];

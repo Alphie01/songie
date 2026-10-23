@@ -5,6 +5,7 @@
 ```sh
 pnpm reel r2 "tame impala loser"               # şarkı + kapak indirir, nakaratı bulur, MP4 + kapak üretir
 pnpm reel r1 "tarkan kuzu kuzu"                # 0,1 sn challenge
+pnpm reel r3 "tarkan şımarık"                  # kazanan sensin: yaz, seç, liderliğe çık
 pnpm reel r2 "tarkan şımarık" --palette 3      # renk sırasını seç (0–7)
 pnpm reel r2 "sezen aksu firuze" --from 12     # kesit saniyesini elle ver
 pnpm reel r2 "tarkan şımarık" --name Zeynep    # bilen arkadaşın adı (en çok 12 harf)
@@ -60,3 +61,13 @@ npx remotion still src/index.ts songie-02-gercek-oyun out/songie-02-gercek-oyun.
 ```
 
 - 0,1 / 0,5 / 2 sn kesitler oyundaki gibi aynı `songFrom` saniyesinden çalar; açılışta (8,1 sn'den) şarkı arkada sona kadar çalar.
+
+## Reels 3 — "Kazan" (`songie-03-kazan`)
+
+**Açıklama:**
+
+0,1'de kaçtı ama 0,5'te yakaladın 😎 Arkadaş grubunda şarkıyı ilk kim bilir? Etiketle, kapışın! 🏆🎶
+
+**Hashtag'ler (10):**
+
+#songie #şarkıyıbil #müzikoyunu #arkadaşlarla #oyungecesi #kimdahahızlı #türkçepop #challenge #musicquiz #guessthesong

@@ -10,6 +10,7 @@ import { PhoneFrame } from './brand/PhoneFrame';
 import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
 import { R2RealGame, R2_META, r2Schema } from './reels/R2RealGame';
+import { R3Winner, R3_META, r3Schema } from './reels/R3Winner';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -50,6 +51,14 @@ export const RemotionRoot: React.FC = () => (
       schema={r2Schema}
       defaultProps={R2_META.defaultProps}
       durationInFrames={R2_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={R3_META.id}
+      component={R3Winner}
+      schema={r3Schema}
+      defaultProps={R3_META.defaultProps}
+      durationInFrames={R3_META.durationInFrames}
       {...video}
     />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />

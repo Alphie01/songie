@@ -10,7 +10,7 @@ const hit = {
   id: 16412320,
   title: 'Kuzu Kuzu',
   preview: 'https://cdn.example/p.mp3',
-  artist: { name: 'Tarkan' },
+  artist: { id: 12, name: 'Tarkan' },
   album: { title: 'Karma', cover_xl: 'https://cdn.example/c.jpg' },
 };
 
@@ -27,8 +27,13 @@ describe('deezer', () => {
 
   it('downloads the preview once into assets/songs and returns the answer and public path', async () => {
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'deezer-'));
+    const others = [hit, { ...hit, title: 'Kuzu Kuzu (Remix)' }, { ...hit, title: 'Şımarık' }, { ...hit, title: 'Dudu' }];
     const fetchMock = vi.fn(async (url: string) =>
-      url.includes('api.deezer.com') ? new Response(JSON.stringify({ data: [hit] })) : new Response(new Uint8Array([1, 2, 3])),
+      url.includes('/artist/12/top')
+        ? new Response(JSON.stringify({ data: others }))
+        : url.includes('api.deezer.com')
+          ? new Response(JSON.stringify({ data: [hit] }))
+          : new Response(new Uint8Array([1, 2, 3])),
     );
     vi.stubGlobal('fetch', fetchMock);
     const s = await fetchSong('tarkan kuzu kuzu', dir);
@@ -37,6 +42,7 @@ describe('deezer', () => {
       album: 'Karma',
       src: 'assets/songs/16412320.mp3',
       cover: 'assets/songs/16412320.jpg',
+      decoys: ['Tarkan – Şımarık', 'Tarkan – Dudu'],
     });
     expect(fs.existsSync(path.join(dir, 'songs', '16412320.jpg'))).toBe(true);
     expect(fs.readFileSync(path.join(dir, 'songs', '16412320.mp3'))).toHaveLength(3);

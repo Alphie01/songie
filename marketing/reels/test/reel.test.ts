@@ -4,6 +4,7 @@ import { FRIEND_NAMES } from '../src/reels/friends';
 import { PALETTES } from '../src/brand/palette';
 import { r1Schema } from '../src/reels/R1Challenge';
 import { r2Schema } from '../src/reels/R2RealGame';
+import { r3Schema } from '../src/reels/R3Winner';
 
 const song = {
   id: 1,
@@ -13,6 +14,7 @@ const song = {
   answer: 'Tame Impala – Loser',
   src: 'assets/songs/1.mp3',
   cover: 'assets/songs/1.jpg',
+  decoys: ['Tame Impala – Borderline'],
   file: '/x/1.mp3',
 };
 
@@ -27,6 +29,7 @@ describe('reel', () => {
 
   it('builds props each composition schema accepts', () => {
     expect(r1Schema.safeParse(propsFor('r1', song, { songFrom: 15, palette: 3, solver: 'Zeynep' })).success).toBe(true);
+    expect(r3Schema.safeParse(propsFor('r3', song, { songFrom: 8, palette: 5, solver: 'Can' })).success).toBe(true);
     expect(r2Schema.safeParse(propsFor('r2', song, { songFrom: 8, palette: 5, solver: 'Can' })).success).toBe(true);
   });
 
