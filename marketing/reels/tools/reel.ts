@@ -22,8 +22,8 @@ export type ReelKey = keyof typeof REELS;
 
 /** İtiraf Köşesi game reels: a real card from the game's own pool, background music from Deezer. */
 export const GAME_REELS = {
-  never: { id: 'itiraf-01-ben-hic', cover: 95, music: 'sneaky snitch kevin macleod' },
-  never18: { id: 'itiraf-02-ben-hic-flort', cover: 100, music: 'deuces kevin macleod' },
+  never: { id: 'itiraf-01-ben-hic', cover: 95, music: 'sneaky snitch kevin macleod', seconds: 16 },
+  never18: { id: 'itiraf-02-ben-hic-flort', cover: 100, music: 'deuces kevin macleod', seconds: 18 },
 } as const;
 export type GameReelKey = keyof typeof GAME_REELS;
 
@@ -115,6 +115,11 @@ export function loudestStart(rms: number[], stepSec: number, windowSec = 3, minS
   return Math.round(best * stepSec * 10) / 10;
 }
 
+/** Background start: 1 s before the loud part, never so late that the 30 s preview runs out under the reel. */
+export function musicStart(loud: number, reelSeconds: number, previewSeconds = 30): number {
+  return Math.round(Math.max(0, Math.min(loud - 1, previewSeconds - reelSeconds - 0.5)) * 10) / 10;
+}
+
 /** RMS dB per 0.5 s step of an audio file, via ffmpeg astats. */
 function rmsSteps(file: string, stepSec = 0.5): number[] {
   const out = spawnSync(
@@ -137,12 +142,28 @@ async function gameReel(key: GameReelKey, args: string[], root: string) {
     const i = args.indexOf(name);
     return i >= 0 ? args[i + 1]?.trim() : undefined;
   };
+  const KNOWN = new Set(['--text', '--category', '--music', '--song', '--from', '--name', '--palette']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  if (unknown.length) {
+    console.error(`Bilinmeyen seçenek: ${unknown.join(', ')} (geçerli: ${[...KNOWN].join(' ')})`);
+    process.exit(1);
+  }
   const text = opt('--text');
   const name = opt('--name');
+  const musicQuery = opt('--music') ?? opt('--song');
+  const fromArg = opt('--from');
   const palArg = opt('--palette');
   const palette = palArg !== undefined ? Number(palArg) : Math.floor(Math.random() * PALETTES.length);
-  if ((name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette) || palette < 0 || palette >= PALETTES.length) {
-    console.error(`kullanım: pnpm reel <never|never18> [--text "Ben hiç …"] [--music "<şarkı>"] [--name <isim>] [--palette 0-${PALETTES.length - 1}]`);
+  if (
+    (name !== undefined && (!name || name.length > 12)) ||
+    !Number.isInteger(palette) ||
+    palette < 0 ||
+    palette >= PALETTES.length ||
+    (fromArg !== undefined && !Number.isFinite(Number(fromArg)))
+  ) {
+    console.error(
+      `kullanım: pnpm reel <never|never18> [--text "Ben hiç …"] [--song "<şarkı>"] [--from <saniye>] [--name <isim>] [--palette 0-${PALETTES.length - 1}]`,
+    );
     process.exit(1);
   }
   const contentDir = path.resolve(root, '../../games/never/server/content');
@@ -154,10 +175,13 @@ async function gameReel(key: GameReelKey, args: string[], root: string) {
     console.error('Cümle "Ben hiç" ile başlamalı.');
     process.exit(1);
   }
-  const music = await fetchSong(opt('--music') ?? cfg.music, path.join(root, 'assets'));
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  // Own song: start a little before its loudest part, but leave enough of the 30 s preview for the whole reel.
+  const musicFrom =
+    fromArg !== undefined ? Number(fromArg) : musicQuery ? musicStart(loudestStart(rmsSteps(music.file), 0.5), cfg.seconds) : 0;
   const solver = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
   console.log(`Cümle: ${card.text} (${card.category})${text ? '' : ' — kendi cümlen için --text "Ben hiç …"'}`);
-  console.log(`Müzik: ${music.answer}${opt('--music') ? '' : ' — başka müzik için --music "<şarkı>"'}`);
+  console.log(`Müzik: ${music.answer} · ${musicFrom} sn'den${musicQuery ? '' : ' — başka şarkı için --song "<şarkı>"'}`);
   console.log(
     key === 'never18'
       ? `Gece ışığı: ${['pembe', 'mercan', 'lila'][palette % 3]} · Flört: ${solver} — değiştirmek için --palette / --name`
@@ -166,8 +190,8 @@ async function gameReel(key: GameReelKey, args: string[], root: string) {
 
   const props = JSON.stringify(
     key === 'never18'
-      ? { statement: card.text, category: card.category, music: music.src, musicFrom: 0, accent: palette % 3, date: solver }
-      : { statement: card.text, category: card.category, music: music.src, musicFrom: 0, palette, solver },
+      ? { statement: card.text, category: card.category, music: music.src, musicFrom, accent: palette % 3, date: solver }
+      : { statement: card.text, category: card.category, music: music.src, musicFrom, palette, solver },
   );
   const file = `${key}-${slug(card.text.replace(/^Ben hiç\s+/u, '')).slice(0, 40)}`;
   run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);

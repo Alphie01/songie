@@ -92,7 +92,8 @@ export const ConfNote: React.FC<{ theme: AppTheme; text: string; style?: React.C
           position: 'absolute',
           top: -14,
           left: '50%',
-          zIndex: 1,
+          // App Store 02.png shows the tape tucked under the note's top edge (lavender over the purple),
+          // so it is drawn first, without the CSS z-index: 1.
           width: 80,
           height: 24,
           marginLeft: -40,
@@ -114,7 +115,23 @@ export const ConfNote: React.FC<{ theme: AppTheme; text: string; style?: React.C
           fontSize: 16,
         }}
       >
-        <span style={{ fontFamily: FONT_DISPLAY, fontSize: 46, fontWeight: 800, lineHeight: 0.5, color: CF.quote }}>“</span>
+        {/* .cf-quote (46 / 0.5) on the blockquote's 16 / 1.45 line; Flutter's strut puts it ~3.5 px lower and the
+            text ~6.5 px lower than the browser does, which is what 02.png shows. */}
+        <span
+          style={{
+            display: 'block',
+            boxSizing: 'border-box',
+            height: 30,
+            paddingTop: 3.5,
+            fontFamily: FONT_DISPLAY,
+            fontSize: 46,
+            fontWeight: 800,
+            lineHeight: '23px',
+            color: CF.quote,
+          }}
+        >
+          “
+        </span>
         <p style={{ margin: 0, fontFamily: FONT_DISPLAY, fontSize: 23, fontWeight: 700, lineHeight: 1.15, overflowWrap: 'anywhere' }}>{text}</p>
       </div>
     </div>

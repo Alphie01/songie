@@ -73,3 +73,12 @@ describe('flirt cards', () => {
     expect(EXPLICIT.test('Ben hiç bir gecede iki farklı kişiyle öpüşmedim.')).toBe(false);
   });
 });
+
+describe('music start', () => {
+  it('starts a second before the loud part but keeps the whole reel inside the preview', async () => {
+    const { musicStart } = await import('../tools/reel');
+    expect(musicStart(8, 18)).toBe(7);
+    expect(musicStart(20, 18)).toBe(11.5);
+    expect(musicStart(0.5, 16)).toBe(0);
+  });
+});

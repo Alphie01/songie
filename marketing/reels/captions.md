@@ -81,7 +81,7 @@ npx remotion still src/index.ts songie-02-gercek-oyun out/songie-02-gercek-oyun.
 ```sh
 pnpm reel never                                              # oyunun kendi havuzundan rastgele (+18 hariç) cümle, rastgele renk ve isim
 pnpm reel never --text "Ben hiç sevgilimin telefonunu karıştırmadım."
-pnpm reel never --music "monkeys spinning monkeys kevin macleod" --name Zeynep --palette 4
+pnpm reel never --song "monkeys spinning monkeys kevin macleod" --name Zeynep --palette 4
 ```
 
 **Açıklama:**
@@ -102,7 +102,7 @@ Ayrı tasarım: gece sahnesi (koyu mor, neon pembe ışık, uçuşan kalpler), s
 
 ```sh
 pnpm reel never18                                   # +18 paketlerden, açık cinsellik içermeyen rastgele cümle
-pnpm reel never18 --text "Ben hiç bir gecede iki farklı kişiyle öpüşmedim." --name Can --palette 1
+pnpm reel never18 --text "Ben hiç bir gecede iki farklı kişiyle öpüşmedim." --song "The Weeknd Often" --name Can --palette 1
 ```
 
 - Cümle havuzu: Cesur / Yatak odası / Fantezi / Çift odası / Sınır testi (+18), açık cinsel kelimeler (seks, seviş, porno…) içerenler elenir (Instagram kuralları).
