@@ -48,6 +48,10 @@ Uygulamanın kancası: şarkının yalnızca **0,1 sn**'si çalınıyor, bilemey
 - AI ile üretilen gerçekçi insan klipleri ekranı tam doldurmaz. Kalın siyah çerçeveli, hafif eğik bir "kart" olarak renkli zeminin üstüne oturtulur. Kartın üstüne sticker'lar zıplayarak girer ("0,1 SN!", "+1000", "HİLE!").
 - Uygulama anları kodla yeniden çizilir. App Store PNG'leri doğrudan kullanılmaz, böylece animasyonlu ve net kalır.
 
+## Okunabilir tempo (kullanıcı, 2026-10-23)
+
+"Çok hızlı geçiyorsun, ne izlediğimi bildiğim halde anlamadım." Her sekans izleyicinin okuyabileceği kadar ekranda kalır (tek satır ≥ 0,8 sn, sticker/olay ≥ 1 sn, açılış/kapanış kartı ≥ 2,5 sn). Bu kural 8–12 sn hedefinin önüne geçer; R2 ~22 sn.
+
 ## AI video kuralı (kullanıcı geri bildirimi, 2026-10-23)
 
 Reels 1'deki kie klibi "hiçbir şey ifade etmedi": 1 sn'den kısa algılanan bir klip için 0,37 $ mantıklı değil. Bundan sonra AI video yalnızca hikâyenin merkezinde, en az ~3 sn tam ekran/okunur görünecek ve sahnede tek başına anlam taşıyacak şekilde planlanırsa üretilir; aksi halde kodla üretilen sahneler kullanılır. Üretmeden önce klibin ne anlatacağı ve kaç saniye görüneceği storyboard'da yazılı olmalı.

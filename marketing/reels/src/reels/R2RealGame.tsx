@@ -31,30 +31,34 @@ export const r2Schema = z.object({
 
 export type R2Props = z.infer<typeof r2Schema>;
 
-/** Storyboard frames (30 fps). Game-scene beats are local to `game`. */
+/**
+ * Storyboard frames (30 fps). Every beat stays on screen long enough to read (user feedback: the 12 s cut
+ * was too fast to follow): the question alone ~1,3 sn, each count ~0,8 sn, "Bilemedin" ~1 sn, Mert ~2,4 sn,
+ * the reveal ~3,3 sn, the closing ~2,7 sn. Game-scene beats are local to `game`.
+ */
 export const R2 = {
-  wipe1: 70,
-  game: 78,
-  wipe2: 243,
-  reveal: 251,
-  wipe3: 308,
-  cta: 316,
-  /** Countdown 3·2·1 on the hook. */
-  counts: [10, 30, 50],
+  readyAt: 30,
+  counts: [50, 75, 100],
+  wipe1: 125,
+  game: 133,
   /** Per stage: play press, clip start, "Pas" press (local frames in the game scene). */
   stages: [
-    { play: 8, clip: 12, pass: 26 },
-    { play: 38, clip: 42, pass: 66 },
-    { play: 78, clip: 82, pass: 146 },
+    { play: 12, clip: 16, pass: 40 },
+    { play: 72, clip: 76, pass: 112 },
+    { play: 144, clip: 148, pass: 228 },
   ],
-  /** Mert's 0,1 sn solve is revealed after the last pass. */
-  mert: 150,
-  songFadeOut: 20,
+  /** Mert's 0,1 sn solve is revealed after the last "Bilemedin". */
+  mert: 262,
+  wipe2: 468,
+  reveal: 476,
+  wipe3: 576,
+  cta: 584,
+  songFadeOut: 24,
 } as const;
 
 export const R2_META = {
   id: 'songie-02-gercek-oyun',
-  durationInFrames: 360,
+  durationInFrames: 664,
   fps: VIDEO.fps,
   width: VIDEO.width,
   height: VIDEO.height,
@@ -98,7 +102,7 @@ const Hook: React.FC<{ theme: AppTheme }> = ({ theme }) => {
         style={{ position: 'absolute', left: SAFE.side, top: SAFE.top + 40 }}
       />
       <div style={{ position: 'absolute', left: 0, right: 0, top: 960, display: 'flex', justifyContent: 'center' }}>
-        <Sticker theme={theme} text="Hazır ol" bg={c.paper} rotate={-4} enterAt={4} size={92} />
+        <Sticker theme={theme} text="Hazır ol" bg={c.paper} rotate={-4} enterAt={R2.readyAt} size={92} />
       </div>
       {idx >= 0 && (
         <div
@@ -208,7 +212,7 @@ const Game: React.FC<{ theme: AppTheme }> = ({ theme }) => {
           style={{ position: 'absolute', right: SAFE.side, top: SAFE.top }}
         />
       </Sequence>
-      {passed > 0 && frame < R2.mert && frame < lastPass + 22 && (
+      {passed > 0 && frame < R2.mert && frame < (R2.stages[passed]?.play ?? R2.mert) && (
         <Sequence from={lastPass} layout="none" key={`miss${passed}`}>
           <Sticker
             theme={theme}
