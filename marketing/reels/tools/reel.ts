@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { PALETTES } from '../src/brand/palette.js';
 import { FRIEND_NAMES } from '../src/reels/friends.js';
 import { CONFESSION_PAIRS, FLIRT_PAIRS } from '../src/reels/itiraf/confessionPairs.js';
+import { caseProps } from './casebook.js';
 import { fetchSong, type SongAsset } from './deezer.js';
 
 /**
@@ -512,8 +513,47 @@ async function btReel(key: keyof typeof BT_REELS, args: string[], root: string) 
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+/** `pnpm reel case [<vaka>] [--song "…"] [--from s] [--name X]`: Casebook noir reel from a real case file. */
+export const CASE_MUSIC = 'hitman kevin macleod';
+async function caseReel(args: string[], root: string) {
+  const casesDir = path.resolve(root, '../../games/detective/server/cases');
+  const slugs = (JSON.parse(fs.readFileSync(path.join(casesDir, 'published.json'), 'utf8')) as string[]).filter((s) =>
+    fs.existsSync(path.join(casesDir, s, 'case.json')),
+  );
+  const KNOWN = new Set(['--music', '--song', '--from', '--name']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const free = args.filter((a, i) => !a.startsWith('--') && !KNOWN.has(args[i - 1] ?? ''));
+  const id = free[0] ?? slugs[Math.floor(Math.random() * slugs.length)]!;
+  const name = opt('--name');
+  if (unknown.length || !slugs.includes(id) || (name !== undefined && (!name || name.length > 12))) {
+    console.error(
+      `${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}${slugs.includes(id) ? '' : `Böyle bir vaka yok: ${id}\n`}kullanım: pnpm reel case [<vaka>] [--song "<şarkı>"] [--from <saniye>] [--name <isim>]\nvakalar: ${slugs.join(', ')}`,
+    );
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? CASE_MUSIC, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicStart(loudestStart(rmsSteps(music.file), 0.5), 18);
+  const solver = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  const props = caseProps(path.join(casesDir, id), id, { music: music.src, musicFrom, solver });
+  console.log(`Vaka: ${props.title} (${props.subtitle})\nAnlatıcı: ${props.act.narration ? `“${props.act.line}” ${props.act.narrationSec} sn` : 'yok'}\nMüzik: ${music.answer} · ${musicFrom} sn'den · Ekip: ${solver}`);
+  const file = `case-${id}${name ? `-${slug(name)}` : ''}`;
+  const json = JSON.stringify(props);
+  run('npx', ['remotion', 'render', 'src/index.ts', 'casebook-01-vaka', `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${json}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', 'casebook-01-vaka', `out/${file}.png`, '--frame=70', `--props=${json}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] === 'case') {
+    await caseReel(args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] && args[0] in BT_REELS) {
     await btReel(args[0] as keyof typeof BT_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;

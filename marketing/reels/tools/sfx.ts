@@ -14,7 +14,7 @@ function bin(name: string): string {
 export const ffmpegBin = () => bin('ffmpeg');
 export const ffprobeBin = () => bin('ffprobe');
 
-export type SfxName = 'bip' | 'ding' | 'whoosh' | 'pop' | 'buzz' | 'tick';
+export type SfxName = 'bip' | 'ding' | 'whoosh' | 'pop' | 'buzz' | 'tick' | 'type' | 'stamp' | 'shutter';
 
 const SPECS: Record<SfxName, { src: string; af?: string; t: number }> = {
   bip: { src: 'sine=frequency=1200:duration=0.1', af: 'afade=t=out:st=0.08:d=0.02', t: 0.1 },
@@ -30,6 +30,14 @@ const SPECS: Record<SfxName, { src: string; af?: string; t: number }> = {
   pop: { src: "aevalsrc='0.8*sin(2*PI*(600*t-4000*t*t))*exp(-30*t)':d=0.05", t: 0.05 },
   buzz: { src: "aevalsrc='0.4*sgn(sin(2*PI*110*t))':d=0.3", af: 'afade=t=out:st=0.27:d=0.03', t: 0.3 },
   tick: { src: "aevalsrc='0.9*sin(2*PI*3000*t)*exp(-300*t)':d=0.02", t: 0.02 },
+  /** Casebook: typewriter key, rubber stamp thud, camera shutter. */
+  type: { src: "aevalsrc='0.7*(random(0)*2-1)*exp(-140*t)+0.4*sin(2*PI*180*t)*exp(-60*t)':d=0.05", af: 'highpass=f=300', t: 0.05 },
+  stamp: { src: "aevalsrc='0.9*sin(2*PI*85*t)*exp(-16*t)+0.5*(random(0)*2-1)*exp(-70*t)':d=0.3", af: 'lowpass=f=1800', t: 0.3 },
+  shutter: {
+    src: "aevalsrc='(random(0)*2-1)*(exp(-160*t)+0.8*gt(t,0.09)*exp(-160*(t-0.09)))':d=0.2",
+    af: 'highpass=f=900,volume=0.8',
+    t: 0.2,
+  },
 };
 
 export async function makeSfx(dir: string): Promise<Record<SfxName, string>> {

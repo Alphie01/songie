@@ -231,3 +231,25 @@ Zeynep çevirdi, şişe seni gösterdi 😳 Cesaret… kime fısıldarsın? 👀
 #itirafköşesi #şişeçevirmece #doğrulukmucesaretmi #truthordare #arkadaşlarla #flört #oyungecesi #partioyunu #18plus #reels
 
 **Müzik kredisi:** Music: "Carefree" / "Lobby Time" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+# Casebook
+
+## Vaka (`casebook-01-vaka`), noir
+
+```sh
+pnpm reel case                          # yayındaki 15 vakadan rastgele biri
+pnpm reel case bodrum-zehir --name Ece  # vaka seç; panoda işaret koyan ekip arkadaşı
+pnpm reel case yalida-son-aksam --song "i knew a guy kevin macleod"
+```
+
+Kapak + GİZLİ damgası → ilk bölümün fotoğrafı ve oyunun kendi anlatıcısı (ilk cümle) → kanıtlar (fotoğraf + rapor, ekip notu) → şüpheli panosu (ekip işaretleri; gerçek fail asla işaretlenmez) → "Sence kim?" → logo. Çözüm hiçbir yerde gösterilmez.
+
+**Açıklama (Son Tadım örneği):**
+
+Bir basın gecesi, sekiz tabaklık bir menü ve kanında hiç kullanmadığı bir kalp ilacı 🕯️ Casebook'ta dosyayı ekibinle açıyorsun: ifadeler, raporlar, kamera kayıtları. Sence kim? Yorumlara yaz 🔎
+
+**Hashtag'ler:**
+
+#casebook #dedektif #polisiye #cinayet #gizem #vakadosyası #arkadaşlarla #oyungecesi #truecrime #reels
+
+**Müzik kredisi:** Music: "Hitman" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
