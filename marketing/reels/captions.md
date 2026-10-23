@@ -164,3 +164,25 @@ Gizli oylama başladı 😏 Oyunu flörtüne verdin… peki o kime verdi? 💘 �
 #itirafköşesi #aramızdakien #mostlikelyto #arkadaşlarla #oyungecesi #flört #partioyunu #kimdaha #18plus #reels
 
 **Müzik kredisi:** Music: "Monkeys Spinning Monkeys" / "Hot Swing" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Red Flag (`itiraf-07-red-flag`) ve Red Flag · Flört +18 (`itiraf-08-red-flag-flort`)
+
+```sh
+pnpm reel redflag                                     # oyunun güvenli kategorilerinden rastgele durum
+pnpm reel redflag --text "İlk buluşmada garsona kaba davrandı." --category "İlk buluşma"
+pnpm reel redflag18 --name Zeynep                     # sen green dersin, flörtün red flag der 🚩
+```
+
+**Açıklama (normal):**
+
+İlk buluşmada yarım saat eski sevgilisinden bahsetti… Red flag mı, green flag mı? 🚩💚 Bayrağını yorumlarda kaldır! İtiraf Köşesi'nde herkes gizlice oy verir, sonra tartışma başlar 😂
+
+**Açıklama (flört +18):**
+
+Flörtün buna ne der? 👀 Sen green dedin, o red flag 🚩😳 Bu gece tartışma garanti 🔥 Flörtünü etiketle! (+18)
+
+**Hashtag'ler:**
+
+#itirafköşesi #redflag #greenflag #ilkbuluşma #ilişki #flört #arkadaşlarla #oyungecesi #partioyunu #reels
+
+**Müzik kredisi:** Music: "Fluffing a Duck" / "Smooth Lovin'" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

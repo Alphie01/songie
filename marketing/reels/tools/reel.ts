@@ -316,8 +316,80 @@ async function mlReel(key: keyof typeof ML_REELS, args: string[], root: string) 
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+/** Red Flag categories with the app's labels; normal reels use the safe ones, flirt reels the dating ones. */
+export const RF_NAMES: Record<string, string> = {
+  iliski: 'İlişki',
+  'ilk-bulusma': 'İlk buluşma',
+  arkadaslik: 'Arkadaşlık',
+  'ev-arkadasi': 'Ev arkadaşı',
+  is: 'İş',
+  aile: 'Aile',
+  'sosyal-medya': 'Sosyal medya',
+  aliskanliklar: 'Alışkanlıklar',
+  cesur: 'Cesur (+18)',
+};
+export const RF_SAFE = ['iliski', 'ilk-bulusma', 'arkadaslik', 'ev-arkadasi', 'is', 'aile', 'sosyal-medya', 'aliskanliklar'];
+export const RF_FLIRT = ['ilk-bulusma', 'iliski', 'sosyal-medya', 'cesur'];
+
+export function rfSituations(contentDir: string, cats: string[]): { text: string; category: string }[] {
+  return cats.flatMap((id) => {
+    const file = path.join(contentDir, `${id}.json`);
+    if (!fs.existsSync(file)) return [];
+    return (JSON.parse(fs.readFileSync(file, 'utf8')) as unknown[])
+      .filter((t): t is string => typeof t === 'string' && t.length >= 10 && t.length <= 200 && !EXPLICIT.test(t))
+      .map((text) => ({ text, category: RF_NAMES[id]! }));
+  });
+}
+
+const RF_REELS = {
+  redflag: { id: 'itiraf-07-red-flag', cover: 100, music: 'fluffing a duck kevin macleod', seconds: 18, cats: RF_SAFE },
+  redflag18: { id: 'itiraf-08-red-flag-flort', cover: 100, music: 'smooth lovin kevin macleod', seconds: 18, cats: RF_FLIRT },
+} as const;
+
+/** `pnpm reel redflag[18] [--text "<durum>" --category "<etiket>"] [--song "…"] [--name X] [--palette N]` */
+async function rfReel(key: keyof typeof RF_REELS, args: string[], root: string) {
+  const cfg = RF_REELS[key];
+  const KNOWN = new Set(['--text', '--category', '--music', '--song', '--from', '--name', '--palette']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const pool = rfSituations(path.resolve(root, '../../games/red-flag/server/content'), [...cfg.cats]);
+  const text = opt('--text');
+  const card = text ? { text, category: opt('--category') ?? pool.find((x) => x.text === text)?.category ?? 'İlişki' } : pool[Math.floor(Math.random() * pool.length)]!;
+  const name = opt('--name');
+  const palette = opt('--palette') !== undefined ? Number(opt('--palette')) : Math.floor(Math.random() * 8);
+  if (unknown.length || card.text.length < 10 || card.text.length > 200 || (name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette)) {
+    console.error(`${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}kullanım: pnpm reel ${key} [--text "<durum>" --category "<etiket>"] [--song "<şarkı>"] [--name <isim>] [--palette N]`);
+    process.exit(1);
+  }
+  if (key === 'redflag18' && EXPLICIT.test(card.text)) {
+    console.error('Bu durum Instagram için fazla açık; daha imalı bir şey yaz.');
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicQuery ? musicStart(loudestStart(rmsSteps(music.file), 0.5), cfg.seconds) : 0;
+  const who = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  console.log(`Durum: ${card.text} (${card.category})\nMüzik: ${music.answer} · ${musicFrom} sn'den · ${key === 'redflag18' ? 'Flört' : 'Arkadaş'}: ${who}`);
+  const props = JSON.stringify(
+    key === 'redflag18'
+      ? { situation: card.text, category: card.category, music: music.src, musicFrom, accent: palette % 3, date: who }
+      : { situation: card.text, category: card.category, music: music.src, musicFrom, palette, solver: who },
+  );
+  const file = `${key}-${slug(card.text).slice(0, 36)}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in RF_REELS) {
+    await rfReel(args[0] as keyof typeof RF_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] && args[0] in ML_REELS) {
     await mlReel(args[0] as keyof typeof ML_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;
