@@ -1,5 +1,6 @@
 import React from 'react';
 import type { AppTheme } from '../../themes/types';
+import { FONT_DISPLAY } from '../fonts';
 import { APP } from './appTokens';
 
 export type ScoreRow = { name: string; score: number; color: string; me?: boolean };
@@ -29,7 +30,7 @@ export const Scoreboard: React.FC<{ theme: AppTheme; rows: ScoreRow[] }> = ({ th
           }}
         >
           <span style={{ maxWidth: '100%', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{r.name}</span>
-          <span style={{ fontFamily: "'Baloo 2', sans-serif", fontSize: 16, lineHeight: 1.2 }}>
+          <span style={{ fontFamily: FONT_DISPLAY, fontSize: 16, lineHeight: 1.2 }}>
             {r.score.toLocaleString('tr-TR')}
           </span>
         </div>

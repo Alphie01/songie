@@ -13,6 +13,9 @@ type Props = {
   durationInFrames?: number;
 };
 
+/** public/sfx/whoosh.wav is 0.4 s = 12 frames at 30 fps. */
+const WHOOSH_FRAMES = 12;
+
 const Wipe: React.FC<{ theme: AppTheme; from: string; to: string; d: number }> = ({ theme, from, to, d }) => {
   const frame = useCurrentFrame();
   const p = interpolate(frame, [0, d - 1], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: Easing.inOut(Easing.cubic) });
@@ -38,7 +41,7 @@ export const ColorWipe: React.FC<Props> = ({ theme, from, to, at, durationInFram
     <Sequence from={at} durationInFrames={durationInFrames} layout="none" name="ColorWipe">
       <Wipe theme={theme} from={from} to={to} d={durationInFrames} />
     </Sequence>
-    <Sequence from={at} layout="none" name="whoosh">
+    <Sequence from={at} durationInFrames={WHOOSH_FRAMES} layout="none" name="whoosh">
       <Audio src={staticFile('sfx/whoosh.wav')} />
     </Sequence>
   </>
