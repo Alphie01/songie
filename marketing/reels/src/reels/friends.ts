@@ -19,6 +19,12 @@ export function crew(solver: string): Crew {
   return { solver: solver.trim(), others: [others[0]!, others[1]!, others[2]!] };
 }
 
+/** Turkish "de/da" after a name (vowel harmony on the last vowel): "Mert de", "Can da". */
+export function deDa(name: string): string {
+  const v = [...name.toLocaleLowerCase('tr-TR')].reverse().find((ch) => 'aıoueiöü'.includes(ch));
+  return v && 'aıou'.includes(v) ? 'da' : 'de';
+}
+
 /** Status line under the search box: "Mert, Deniz ve Ece dinliyor." */
 export const listening = (c: Crew) => `${c.solver}, ${c.others[0]} ve ${c.others[1]} dinliyor.`;
 

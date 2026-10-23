@@ -1,4 +1,5 @@
 import { execFileSync, spawnSync } from 'node:child_process';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PALETTES } from '../src/brand/palette.js';
@@ -18,6 +19,36 @@ export const REELS = {
   r3: { id: 'songie-03-kazan', cover: 70, maxFrom: 27 },
 } as const;
 export type ReelKey = keyof typeof REELS;
+
+/** İtiraf Köşesi game reels: a real card from the game's own pool, background music from Deezer. */
+export const GAME_REELS = {
+  never: { id: 'itiraf-01-ben-hic', cover: 95, music: 'sneaky snitch kevin macleod' },
+} as const;
+export type GameReelKey = keyof typeof GAME_REELS;
+
+/** Ben Hiç categories safe for Instagram (no +18 packs), with the app's display names. */
+export const NEVER_SAFE_CATEGORIES: Record<string, string> = {
+  genel: 'Genel',
+  'okul-is': 'Okul ve iş',
+  'ask-iliski': 'Aşk ve ilişki',
+  seyahat: 'Seyahat',
+  utanc: 'Utanç',
+  teknoloji: 'Teknoloji',
+  yemek: 'Yemek',
+};
+
+/** Every safe Ben Hiç card from games/never/server/content. */
+export function neverCards(contentDir: string): { text: string; category: string }[] {
+  const out: { text: string; category: string }[] = [];
+  for (const [id, name] of Object.entries(NEVER_SAFE_CATEGORIES)) {
+    const file = path.join(contentDir, `${id}.json`);
+    if (!fs.existsSync(file)) continue;
+    for (const text of JSON.parse(fs.readFileSync(file, 'utf8')) as unknown[]) {
+      if (typeof text === 'string' && /^Ben hiç\s/u.test(text.trim())) out.push({ text: text.trim(), category: name });
+    }
+  }
+  return out;
+}
 
 export type ReelOptions = { songFrom: number; palette: number; solver: string };
 
@@ -82,8 +113,48 @@ function run(cmd: string, args: string[], cwd: string) {
   execFileSync(cmd, args, { cwd, stdio: 'inherit' });
 }
 
+/** `pnpm reel never [--text "Ben hiç …"] [--music "<deezer sorgusu>"] [--name X] [--palette N]` */
+async function gameReel(key: GameReelKey, args: string[], root: string) {
+  const cfg = GAME_REELS[key];
+  const opt = (name: string) => {
+    const i = args.indexOf(name);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const text = opt('--text');
+  const name = opt('--name');
+  const palArg = opt('--palette');
+  const palette = palArg !== undefined ? Number(palArg) : Math.floor(Math.random() * PALETTES.length);
+  if ((name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette) || palette < 0 || palette >= PALETTES.length) {
+    console.error(`kullanım: pnpm reel never [--text "Ben hiç …"] [--music "<şarkı>"] [--name <isim>] [--palette 0-${PALETTES.length - 1}]`);
+    process.exit(1);
+  }
+  const cards = neverCards(path.resolve(root, '../../games/never/server/content'));
+  const card = text
+    ? { text, category: opt('--category') ?? cards.find((c) => c.text === text)?.category ?? 'Genel' }
+    : cards[Math.floor(Math.random() * cards.length)]!;
+  if (!/^Ben hiç\s/u.test(card.text)) {
+    console.error('Cümle "Ben hiç" ile başlamalı.');
+    process.exit(1);
+  }
+  const music = await fetchSong(opt('--music') ?? cfg.music, path.join(root, 'assets'));
+  const solver = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  console.log(`Cümle: ${card.text} (${card.category})${text ? '' : ' — kendi cümlen için --text "Ben hiç …"'}`);
+  console.log(`Müzik: ${music.answer}${opt('--music') ? '' : ' — başka müzik için --music "<şarkı>"'}`);
+  console.log(`Renkler: palet ${palette} (${PALETTES[palette]!.join(' → ')}) · Anlatan: ${solver}`);
+
+  const props = JSON.stringify({ statement: card.text, category: card.category, music: music.src, musicFrom: 0, palette, solver });
+  const file = `${key}-${slug(card.text.replace(/^Ben hiç\s+/u, '')).slice(0, 40)}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in GAME_REELS) {
+    await gameReel(args[0] as GameReelKey, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   const reel = args[0] as ReelKey;
   const flag = (name: string) => {
     const i = args.indexOf(name);
@@ -99,7 +170,7 @@ async function main() {
   const bad = (f?: { v: number }) => f !== undefined && !Number.isFinite(f.v);
   const badName = nameIdx >= 0 && (!name || name.length > 12);
   if (!(reel in REELS) || !query || bad(from) || bad(pal) || badName || (pal && (pal.v < 0 || pal.v >= PALETTES.length))) {
-    console.error(`kullanım: pnpm reel <r1|r2|r3> "<sanatçı şarkı>" [--from <saniye>] [--palette 0-${PALETTES.length - 1}] [--name <en çok 12 harf>]`);
+    console.error(`kullanım: pnpm reel <r1|r2|r3> "<sanatçı şarkı>" | pnpm reel never [--text …] [--from <saniye>] [--palette 0-${PALETTES.length - 1}] [--name <en çok 12 harf>]`);
     process.exit(1);
   }
   const cfg = REELS[reel];

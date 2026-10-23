@@ -71,3 +71,27 @@ npx remotion still src/index.ts songie-02-gercek-oyun out/songie-02-gercek-oyun.
 **Hashtag'ler (10):**
 
 #songie #şarkıyıbil #müzikoyunu #arkadaşlarla #oyungecesi #kimdahahızlı #türkçepop #challenge #musicquiz #guessthesong
+
+---
+
+# İtiraf Köşesi
+
+## Ben Hiç (`itiraf-01-ben-hic`)
+
+```sh
+pnpm reel never                                              # oyunun kendi havuzundan rastgele (+18 hariç) cümle, rastgele renk ve isim
+pnpm reel never --text "Ben hiç sevgilimin telefonunu karıştırmadım."
+pnpm reel never --music "monkeys spinning monkeys kevin macleod" --name Zeynep --palette 4
+```
+
+**Açıklama:**
+
+Dürüst ol 🤫 Ben hiç… eski sevgilimin sosyal medyasını gizlice incelemedim. Sen yaptın mı? Yorumlara yaz, arkadaşını etiketle! İtiraf Köşesi'nde cevabını kimse görmez… ta ki herkes açıklayana kadar 😂
+
+**Hashtag'ler:**
+
+#itirafköşesi #benhiç #neverhaveiever #arkadaşlarla #oyungecesi #partioyunu #itiraf #dürüstlük #eğlence #reels
+
+**Müzik kredisi** (Kevin MacLeod parçaları CC BY 4.0, açıklamaya eklenmeli):
+
+Music: "Sneaky Snitch" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

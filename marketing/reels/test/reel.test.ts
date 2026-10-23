@@ -49,3 +49,15 @@ describe('reel', () => {
     expect(slug('tame impala loser')).toBe('tame-impala-loser');
   });
 });
+
+describe('game reels', () => {
+  it('reads only safe Ben Hiç cards (no +18 packs) from the game content', async () => {
+    const { neverCards, NEVER_SAFE_CATEGORIES } = await import('../tools/reel');
+    const path = await import('node:path');
+    const cards = neverCards(path.resolve(__dirname, '../../../games/never/server/content'));
+    expect(cards.length).toBeGreaterThan(50);
+    expect(cards.every((c) => c.text.startsWith('Ben hiç '))).toBe(true);
+    expect(new Set(cards.map((c) => c.category))).toEqual(new Set(Object.values(NEVER_SAFE_CATEGORIES).filter((n) => cards.some((c) => c.category === n))));
+    expect(cards.some((c) => /\+18/.test(c.category))).toBe(false);
+  });
+});
