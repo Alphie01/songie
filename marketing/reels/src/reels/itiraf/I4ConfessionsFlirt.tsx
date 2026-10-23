@@ -137,7 +137,6 @@ const Hook: React.FC<{ theme: AppTheme; accent: string; p: I4Props }> = ({ theme
             SANSÜRLÜ 🔞
           </div>
         </BigNote>
-        <div style={{ marginTop: 30, fontFamily: FONT_BODY, fontWeight: 800, fontSize: 32, color: c.paper, opacity: 0.85 }}>Konu: {p.topic}</div>
       </div>
       <Sticker
         theme={theme}

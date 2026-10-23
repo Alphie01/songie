@@ -148,9 +148,6 @@ const Hook: React.FC<{ theme: AppTheme; bg: string; p: I3Props }> = ({ theme, bg
     />
     <div style={{ position: 'absolute', left: SAFE.side, top: 560 }}>
       <BigNote theme={theme} text={p.confession} enterAt={I3.card} />
-      <div style={{ marginTop: 34, fontFamily: FONT_BODY, fontWeight: 800, fontSize: 34, color: theme.colors.ink, opacity: 0.8 }}>
-        Konu: {p.topic}
-      </div>
     </div>
     <Sticker
       theme={theme}
