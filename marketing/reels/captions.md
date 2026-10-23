@@ -117,3 +117,28 @@ pnpm reel never18 --text "Ben hiç bir gecede iki farklı kişiyle öpüşmedim.
 #itirafköşesi #benhiç #flört #ilkbuluşma #çiftoyunu #neverhaveiever #18plus #gecehayatı #dürüstlük #reels
 
 **Müzik kredisi:** Music: "Deuces" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## İtiraf (`itiraf-03-itiraf`) ve İtiraf · Flört +18 (`itiraf-04-itiraf-flort`)
+
+```sh
+pnpm reel confessions                         # oyunun konularından biri + örnek itiraf, rastgele renk ve şüpheli
+pnpm reel confessions --topic "Hiç kimsenin bilmediği bir alışkanlığın" --text "Duşta her sabah konser veriyorum."
+pnpm reel confessions18 --name Zeynep --palette 1   # gece sahnesi, sansürlü not, yazan flörtün çıkar
+```
+
+- Konular oyunun kendi havuzundan; itiraflar oyuncunun yazacağı örnekler (10–240 harf, oyundaki gibi). `--text` ile kendi itirafını yaz.
+- Flört versiyonunda açık cinsel kelime içeren metin reddedilir (Instagram).
+
+**Açıklama (normal):**
+
+İsimsiz bir itiraf geldi… ✍️ Sence kim yazdı? 🤔 İtiraf Köşesi'nde herkes isimsiz yazar, sonra kim yazdı tahmin edersiniz. Yanılırsan… o kazanır 😂
+
+**Açıklama (flört +18):**
+
+Odadaki biri hakkında isimsiz bir itiraf… 😳 Yazan flörtün çıkarsa? 👀 Etiketle, bu gece İtiraf Köşesi'nde kim kızaracak görelim 😏 (+18)
+
+**Hashtag'ler:**
+
+#itirafköşesi #isimsizitiraf #kimyazdı #itiraf #arkadaşlarla #flört #oyungecesi #partioyunu #18plus #reels
+
+**Müzik kredisi:** Music: "Investigations" / "Bossa Antigua" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PALETTES } from '../src/brand/palette.js';
 import { FRIEND_NAMES } from '../src/reels/friends.js';
+import { CONFESSION_PAIRS, FLIRT_PAIRS } from '../src/reels/itiraf/confessionPairs.js';
 import { fetchSong, type SongAsset } from './deezer.js';
 
 /**
@@ -199,8 +200,58 @@ async function gameReel(key: GameReelKey, args: string[], root: string) {
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+const CONF_REELS = {
+  confessions: { id: 'itiraf-03-itiraf', cover: 100, music: 'investigations kevin macleod', seconds: 18, pairs: CONFESSION_PAIRS },
+  confessions18: { id: 'itiraf-04-itiraf-flort', cover: 105, music: 'bossa antigua kevin macleod', seconds: 18, pairs: FLIRT_PAIRS },
+} as const;
+
+/** `pnpm reel confessions[18] [--topic "…" --text "…"] [--song "…"] [--name X] [--palette N]` */
+async function confReel(key: keyof typeof CONF_REELS, args: string[], root: string) {
+  const cfg = CONF_REELS[key];
+  const KNOWN = new Set(['--topic', '--text', '--music', '--song', '--from', '--name', '--palette']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const name = opt('--name');
+  const palette = opt('--palette') !== undefined ? Number(opt('--palette')) : Math.floor(Math.random() * 8);
+  const pick = cfg.pairs[Math.floor(Math.random() * cfg.pairs.length)]!;
+  const topic = opt('--topic') ?? pick.topic;
+  const text = opt('--text') ?? (opt('--topic') ? undefined : pick.confession);
+  if (unknown.length || !text || text.length < 10 || text.length > 240 || (name !== undefined && (!name || name.length > 12)) || !Number.isInteger(palette)) {
+    console.error(
+      `${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}kullanım: pnpm reel ${key} [--topic "<konu>" --text "<itiraf, 10–240 harf>"] [--song "<şarkı>"] [--name <isim>] [--palette N]`,
+    );
+    process.exit(1);
+  }
+  if (key === 'confessions18' && EXPLICIT.test(`${topic} ${text}`)) {
+    console.error('Bu metin Instagram için fazla açık (seks, seviş, porno…); daha imalı bir şey yaz.');
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicQuery ? musicStart(loudestStart(rmsSteps(music.file), 0.5), cfg.seconds) : 0;
+  const who = name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!;
+  console.log(`Konu: ${topic}\nİtiraf: ${text}`);
+  console.log(`Müzik: ${music.answer} · ${musicFrom} sn'den · ${key === 'confessions18' ? 'Flört' : 'Şüpheli'}: ${who}`);
+  const props = JSON.stringify(
+    key === 'confessions18'
+      ? { topic, confession: text, music: music.src, musicFrom, accent: palette % 3, date: who }
+      : { topic, confession: text, music: music.src, musicFrom, palette, solver: who },
+  );
+  const file = `${key}-${slug(text).slice(0, 36)}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in CONF_REELS) {
+    await confReel(args[0] as keyof typeof CONF_REELS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] && args[0] in GAME_REELS) {
     await gameReel(args[0] as GameReelKey, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;

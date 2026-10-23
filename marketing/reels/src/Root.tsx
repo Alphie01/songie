@@ -19,6 +19,8 @@ import { R2RealGame, R2_META, r2Schema } from './reels/R2RealGame';
 import { R3Winner, R3_META, r3Schema } from './reels/R3Winner';
 import { I1Never, I1_META, i1Schema } from './reels/itiraf/I1Never';
 import { I2NeverFlirt, I2_META, i2Schema } from './reels/itiraf/I2NeverFlirt';
+import { I3Confessions, I3_META, i3Schema } from './reels/itiraf/I3Confessions';
+import { I4ConfessionsFlirt, I4_META, i4Schema } from './reels/itiraf/I4ConfessionsFlirt';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -138,6 +140,22 @@ export const RemotionRoot: React.FC = () => (
       schema={i2Schema}
       defaultProps={I2_META.defaultProps}
       durationInFrames={I2_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={I3_META.id}
+      component={I3Confessions}
+      schema={i3Schema}
+      defaultProps={I3_META.defaultProps}
+      durationInFrames={I3_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={I4_META.id}
+      component={I4ConfessionsFlirt}
+      schema={i4Schema}
+      defaultProps={I4_META.defaultProps}
+      durationInFrames={I4_META.durationInFrames}
       {...video}
     />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
