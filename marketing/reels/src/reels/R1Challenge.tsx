@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
-import { ClipCard } from '../brand/ClipCard';
+import { ClipCard, hasStaticFile } from '../brand/ClipCard';
 import { ColorStage } from '../brand/ColorStage';
 import { ColorWipe } from '../brand/ColorWipe';
 import { CtaCard } from '../brand/CtaCard';
@@ -23,17 +23,21 @@ export const r1Schema = z.object({
   answer: z.string().refine((s) => s.trim().length > 0, { message: 'answer must not be empty' }),
   /** Stage Mert solved it at (0 = 0,1 sn). */
   solveStage: z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3), z.literal(4)]),
+  /** Deezer önizlemesi, public/ içinde (`pnpm song "<sorgu>"` indirir). Boşsa şarkısız. */
+  song: z.string(),
+  /** Önizlemede 0,1 sn'lik kesitin ve arka plan şarkısının başladığı saniye. */
+  songFrom: z.number().min(0).max(29),
 });
 
 export type R1Props = z.infer<typeof r1Schema>;
 
 export const R1_META = {
   id: 'songie-01-challenge',
-  durationInFrames: 300,
+  durationInFrames: 330,
   fps: VIDEO.fps,
   width: VIDEO.width,
   height: VIDEO.height,
-  defaultProps: { answer: 'Tarkan – Kuzu Kuzu', solveStage: 0 } satisfies R1Props as R1Props,
+  defaultProps: { answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5 } as R1Props,
 } as const;
 
 /** "Mert 0,1 sn'de bildi +1000": the app's live-feed wording with tr-TR seconds. */
@@ -44,15 +48,21 @@ export const R1 = {
   hookEnd: 30,
   wipe1: 105,
   clip: 115,
-  wipe2: 190,
-  answer: 200,
-  wipe3: 245,
-  cta: 253,
-  /** Source frame the reaction clip starts from (0.5 s in), so Mert's jump lands at ~frame 145. */
-  clipFrom: 15,
-  solve: 145,
-  cheat: 160,
+  wipe2: 220,
+  answer: 230,
+  wipe3: 275,
+  cta: 283,
+  /** The reaction clip plays from its first frame (3,5 of its 4 sn); Mert jumps ~1,5 sn in. */
+  clipFrom: 0,
+  solve: 160,
+  cheat: 178,
+  /** Play press in the phone (Play scene frame 6) → the 0,1 sn snippet; replayed after "3·2". */
+  snippets: [36, 70],
+  songFadeOut: 20,
 } as const;
+
+/** 0,1 sn = 3 kare. */
+const SNIPPET_FRAMES = 3;
 
 const Sfx: React.FC<{ name: string; at: number; frames?: number }> = ({ name, at, frames = 15 }) => (
   <Sequence from={at} durationInFrames={frames} layout="none" name={`sfx ${name}`}>
@@ -135,7 +145,7 @@ const Play: React.FC<{ theme: AppTheme; stage: number }> = ({ theme, stage }) =>
   );
 };
 
-const CLIP_W = 640;
+const CLIP_W = 560;
 const CLIP_H = Math.round((CLIP_W * 1280) / 720);
 
 /** 115–190: yellow, the AI reaction clip; Mert jumps up at R1.solve, the others cry foul at R1.cheat. */
@@ -145,7 +155,7 @@ const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage'] }> = ({
   const cheat = R1.cheat - R1.clip;
   return (
     <ColorStage theme={theme} color={c.yellow}>
-      <div style={{ position: 'absolute', left: CX - CLIP_W / 2, top: SAFE.top + 70 }}>
+      <div style={{ position: 'absolute', left: CX - CLIP_W / 2, top: SAFE.top + 120 }}>
         <ClipCard theme={theme} src="assets/r1-react.mp4" from={R1.clipFrom} rotate={-3} width={CLIP_W} height={CLIP_H} />
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: SAFE.top + 10, display: 'flex', justifyContent: 'center' }}>
@@ -157,8 +167,8 @@ const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage'] }> = ({
         bg={c.coral}
         rotate={9}
         enterAt={cheat}
-        size={140}
-        style={{ position: 'absolute', right: SAFE.side + 30, top: 1260 }}
+        size={110}
+        style={{ position: 'absolute', right: SAFE.side + 40, top: 1385 }}
       />
     </ColorStage>
   );
@@ -213,7 +223,36 @@ const Answer: React.FC<{ theme: AppTheme; answer: string }> = ({ theme, answer }
   );
 };
 
-export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage }) => {
+/** The real song: 0,1 sn snippets while the phone plays, then the song from Mert's solve to the end. */
+const Song: React.FC<{ src: string; from: number }> = ({ src, from }) => {
+  if (!hasStaticFile(src)) return null;
+  const start = Math.round(from * VIDEO.fps);
+  const bgFrames = R1_META.durationInFrames - R1.solve;
+  return (
+    <>
+      {R1.snippets.map((at) => (
+        <Sequence key={at} from={at} durationInFrames={SNIPPET_FRAMES} layout="none" name="0,1 sn">
+          <Audio src={staticFile(src)} trimBefore={start} />
+        </Sequence>
+      ))}
+      <Sequence from={R1.solve} durationInFrames={bgFrames} layout="none" name="şarkı">
+        <Audio
+          src={staticFile(src)}
+          trimBefore={start}
+          volume={(f) =>
+            0.85 *
+            interpolate(f, [0, 8, bgFrames - R1.songFadeOut, bgFrames], [0, 1, 1, 0], {
+              extrapolateLeft: 'clamp',
+              extrapolateRight: 'clamp',
+            })
+          }
+        />
+      </Sequence>
+    </>
+  );
+};
+
+export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage, song, songFrom }) => {
   const theme = songieTheme;
   const c = theme.colors;
   return (
@@ -239,6 +278,7 @@ export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage }) => {
         </ColorStage>
       </Sequence>
 
+      <Song src={song} from={songFrom} />
       <Sfx name="bip" at={20} />
       <Sfx name="tick" at={R1.hookEnd + 10} />
       <Sfx name="tick" at={R1.hookEnd + 30} />
