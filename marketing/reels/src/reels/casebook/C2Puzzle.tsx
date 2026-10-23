@@ -1,16 +1,13 @@
 import React from 'react';
-import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import { hasStaticFile } from '../../brand/ClipCard';
-import { BigCaps, caps, CasePhoto, ClueCard, Countdown, Flash, NoirStage, PoliceLights, Stamp, Typewriter, Waveform } from '../../brand/casebook/Noir';
-import { FONT_HEAD, FONT_MONO, SAFE, VIDEO } from '../../brand/fonts';
+import { Black, Bug, EASE, ED, Fact, Rise, Shot, useIn, Words } from '../../brand/casebook/Editorial';
+import { FONT_SERIF, VIDEO } from '../../brand/fonts';
 import { SFX_VOLUME } from '../../brand/mix';
-import { usePop } from '../../brand/motion';
 import { Music } from '../../brand/Music';
-import { casebookTheme } from '../../themes/casebook';
-import { CasebookCta } from './C1Case';
+import { EditorialCta } from './C5Trailer';
 
-const c = casebookTheme.colors;
 const FPS = VIDEO.fps;
 
 const clip = z.object({ src: z.string(), sec: z.number().min(0.3).max(5) });
@@ -68,7 +65,7 @@ export const C2_META = {
       { src: 'assets/voices/pz-yagmur-1.mp3', sec: 3.25 },
       { src: 'assets/voices/pz-yagmur-2.mp3', sec: 2.64 },
     ],
-    reveal: 'Yağmur 22:30’da başladı. Kerem dokuzda nasıl ıslandı?',
+    reveal: 'Kerem dokuzda nasıl ıslandı?',
     music: 'assets/songs/3919579631.mp3',
     musicFrom: 0,
   } as C2Props,
@@ -80,28 +77,21 @@ const Sfx: React.FC<{ name: string; at: number; frames?: number; volume?: number
   </Sequence>
 );
 
-const ROW = { y: 660, w: 300, h: 380, x: [60, 390, 720] } as const;
+/** Contact-sheet row of the three suspects, edge to edge on the grid. */
+const COL = { y: 700, w: (ED.W - 12) / 3, h: 470 } as const;
 
-/** One suspect card: portrait, name; lit and lifted while talking, dimmed while the others talk. */
-const SuspectCard: React.FC<{ s: C2Props['suspects'][number]; x: number; enterAt: number; talking: boolean; dim: boolean }> = ({ s, x, enterAt, talking, dim }) => {
-  const p = usePop(enterAt, 13);
+/** Clue as a fact line: UV bar, source in sans, the fact in the serif. */
+const Clue: React.FC<{ source: string; text: string; at: number; mark?: number }> = ({ source, text, at, mark = 0 }) => {
+  const t = useIn(at, 16);
   return (
-    <div
-      style={{
-        position: 'absolute',
-        left: x,
-        top: ROW.y,
-        width: ROW.w,
-        opacity: Math.min(1, p * 2),
-        transform: `translateY(${interpolate(p, [0, 1], [80, 0])}px) scale(${talking ? 1.07 : 1})`,
-        filter: dim ? 'brightness(0.45)' : 'none',
-        transition: 'none',
-      }}
-    >
-      <div style={{ border: `6px solid ${talking ? c.yellow : 'rgba(243,230,196,0.25)'}`, boxShadow: talking ? `0 0 60px rgba(255,210,63,0.35)` : '0 20px 40px rgba(0,0,0,0.6)' }}>
-        <CasePhoto src={s.portrait} style={{ width: '100%', height: ROW.h }} dim={0.95} zoom={[1, 1]} position="center 25%" />
+    <div style={{ display: 'flex', gap: 24, opacity: t, transform: `translateY(${(1 - t) * 24}px)` }}>
+      <div style={{ width: 6, background: ED.uv }} />
+      <div>
+        <Fact size={28}>{source}</Fact>
+        <div style={{ fontFamily: FONT_SERIF, fontSize: 62, lineHeight: 1.05, color: ED.bone, letterSpacing: -0.6 }}>
+          <span style={{ backgroundImage: `linear-gradient(${ED.uv}, ${ED.uv})`, backgroundRepeat: 'no-repeat', backgroundPosition: '0 92%', backgroundSize: `${mark * 100}% 6px` }}>{text}</span>
+        </div>
       </div>
-      <div style={{ marginTop: 10, fontFamily: FONT_HEAD, fontSize: 64, color: talking ? c.yellow : c.paper, textAlign: 'center' }}>{caps(s.name)}</div>
     </div>
   );
 };
@@ -111,91 +101,119 @@ const Board: React.FC<{ p: C2Props; b: ReturnType<typeof puzzleBeats> }> = ({ p,
   const speaking = b.talk.findIndex((t) => frame >= t.at && frame < t.at + t.len);
   const last = b.talk.reduce((k, t, i) => (frame >= t.at ? i : k), -1);
   const paused = frame >= b.pauseAt;
-  const dimAll = interpolate(frame, [b.pauseAt, b.pauseAt + 8], [0, 0.35], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const local = (f: number) => f - b.board;
+  const timer = interpolate(frame, [b.s0, b.reveal], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
   const sub = speaking >= 0 ? speaking : last;
-  const subLine = sub >= 0 && !paused ? p.suspects[sub]! : null;
-  const subIn = sub >= 0 ? interpolate(frame, [b.talk[sub]!.at, b.talk[sub]!.at + 6], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' }) : 0;
   return (
-    <NoirStage>
-      <CasePhoto src={p.scene} style={{ position: 'absolute', inset: 0 }} dim={0.28} frames={b.reveal - b.board} zoom={[1.15, 1]} />
-      <Typewriter text={p.premise} enterAt={4} charsPerFrame={1.8} size={48} style={{ position: 'absolute', left: SAFE.side, top: SAFE.top - 20, width: 960 }} />
-      <div style={{ position: 'absolute', left: SAFE.side, top: 350 }}>
-        <ClueCard source={p.clue.source} text={p.clue.text} enterAt={b.clueAt} width={960} size={52} />
+    <Black>
+      <Bug />
+      <div style={{ position: 'absolute', left: ED.M, top: 320, width: ED.W }}>
+        <Words text={p.premise} at={2} frames={26} size={58} italic color={ED.dim} />
       </div>
-      {p.suspects.map((s, i) => (
-        <SuspectCard key={i} s={s} x={ROW.x[i]!} enterAt={b.clueAt + 22 + i * 6 - 0} talking={speaking === i} dim={speaking >= 0 && speaking !== i} />
-      ))}
-      {subLine && (
-        <div style={{ position: 'absolute', left: SAFE.side, top: 1185, width: 960, opacity: subIn }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-            <div style={{ fontFamily: FONT_HEAD, fontSize: 52, color: c.yellow }}>{caps(subLine.name)}</div>
-            <Waveform active={speaking >= 0} />
+      <div style={{ position: 'absolute', left: ED.M, top: 450, width: ED.W }}>
+        <Clue source={p.clue.source} text={p.clue.text} at={b.clueAt} />
+      </div>
+      {p.suspects.map((s, i) => {
+        const on = useInStatic(frame, b.board + b.clueAt + 18 + i * 4);
+        const lit = speaking === i;
+        return (
+          <div key={i} style={{ position: 'absolute', left: ED.M + i * (COL.w + 6), top: COL.y, width: COL.w, height: COL.h, overflow: 'hidden', clipPath: `inset(${(1 - on) * 100}% 0 0 0)` }}>
+            {hasStaticFile(s.portrait) && (
+              <Img
+                src={staticFile(s.portrait)}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center 22%',
+                  filter: `grayscale(1) contrast(1.15) brightness(${speaking < 0 || lit ? 0.95 : 0.4})`,
+                  transform: `scale(${lit ? 1.06 : 1})`,
+                }}
+              />
+            )}
+            <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: 4, background: lit ? ED.uv : 'transparent' }} />
+            <Fact size={28} weight={600} color={ED.bone} style={{ position: 'absolute', left: 14, bottom: 14, textShadow: '0 1px 10px #000' }}>
+              {s.name}
+            </Fact>
           </div>
-          <div style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 54, lineHeight: 1.15, color: c.paper }}>“{subLine.line}”</div>
-        </div>
-      )}
-      <AbsoluteFill style={{ backgroundColor: `rgba(5,4,7,${dimAll})` }} />
+        );
+      })}
+      {/* what the speaker says, under the faces */}
+      <div style={{ position: 'absolute', left: ED.M, top: COL.y + COL.h + 34, width: ED.W }}>
+        {!paused && sub >= 0 && (
+          <Sequence from={local(b.talk[sub]!.at)} layout="none" key={sub}>
+            <Fact size={28} weight={600} color={ED.uv}>
+              {p.suspects[sub]!.name}
+            </Fact>
+            <Words text={`“${p.suspects[sub]!.line}”`} at={0} frames={b.talk[sub]!.len - 8} size={60} italic />
+          </Sequence>
+        )}
+        {paused && (
+          <>
+            <Words text="Sence kim?" at={local(b.pauseAt)} frames={10} size={110} />
+            <Fact style={{ marginTop: 10 }}>Durdur, düşün, cevabını yorumlara yaz.</Fact>
+          </>
+        )}
+      </div>
+      {/* the timer is a hairline that runs out */}
       {frame >= b.s0 && (
-        <div style={{ position: 'absolute', right: SAFE.side, top: 1370 }}>
-          <Countdown from={b.s0 - b.board} frames={b.reveal - b.s0} seconds={b.seconds} />
+        <div style={{ position: 'absolute', left: ED.M, top: 1500, width: ED.W, height: 3, background: ED.rule }}>
+          <div style={{ width: `${timer * 100}%`, height: '100%', background: timer < 0.3 ? ED.uv : ED.bone }} />
         </div>
       )}
-      {paused && (
-        <>
-          <BigCaps text={'DURDUR.\nSENCE KİM?'} enterAt={b.pauseAt - b.board} size={150} style={{ position: 'absolute', left: SAFE.side, top: 1150 }} />
-          <div style={{ position: 'absolute', left: SAFE.side, top: 1440, fontFamily: FONT_MONO, fontWeight: 700, fontSize: 46, color: c.yellow }}>Cevabını yorumlara yaz.</div>
-        </>
-      )}
-    </NoirStage>
+    </Black>
   );
 };
 
-const Reveal: React.FC<{ p: C2Props }> = ({ p }) => {
+const useInStatic = (frame: number, at: number, frames = 16) =>
+  interpolate(frame, [at, at + frames], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: EASE });
+
+const Reveal: React.FC<{ p: C2Props; len: number }> = ({ p, len }) => {
   const liar = p.suspects.find((s) => s.liar) ?? p.suspects[0]!;
-  const card = usePop(0, 14);
+  const frame = useCurrentFrame();
+  const mark = interpolate(frame, [22, 40], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: EASE });
   return (
-    <NoirStage>
-      <div
-        style={{
-          position: 'absolute',
-          left: 250,
-          top: SAFE.top,
-          width: 580,
-          padding: 16,
-          background: c.paper,
-          boxShadow: '0 30px 60px rgba(0,0,0,0.75)',
-          transform: `rotate(-3deg) scale(${interpolate(card, [0, 1], [1.25, 1])})`,
-          opacity: Math.min(1, card * 2),
-        }}
-      >
-        <CasePhoto src={liar.portrait} style={{ width: '100%', height: 620 }} dim={0.9} zoom={[1.05, 1.12]} frames={84} position="center 25%" />
-        <div style={{ fontFamily: FONT_HEAD, fontSize: 80, color: c.ink, textAlign: 'center', paddingTop: 8 }}>{caps(liar.name)}</div>
-        <Stamp text="YALANCI" enterAt={10} size={110} rotate={-14} style={{ position: 'absolute', left: 40, top: 300, background: 'rgba(243,230,196,0.85)', mixBlendMode: 'normal' }} />
+    <Black>
+      <Shot src={liar.portrait} frames={len} bw from={1.04} to={1.12} pos="center 18%" />
+      <AbsoluteFill style={{ background: 'linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.9) 60%, #000 66%)' }} />
+      <div style={{ position: 'absolute', left: ED.M, top: 930, width: ED.W }}>
+        <Words text={liar.name} at={2} frames={8} size={200} italic color={ED.uv} />
+        <Rise at={10} style={{ marginTop: 4 }}>
+          <Fact size={36} color={ED.bone}>
+            yalan söylüyor.
+          </Fact>
+        </Rise>
       </div>
-      <div style={{ position: 'absolute', left: SAFE.side, top: 1110 }}>
-        <ClueCard source={p.clue.source} text={p.clue.text} enterAt={18} markAt={26} width={960} size={46} rotate={1} />
+      <div style={{ position: 'absolute', left: ED.M, top: 1230, width: ED.W }}>
+        <Clue source={p.clue.source} text={p.clue.text} at={16} mark={mark} />
+        <Words text={p.reveal} at={34} frames={30} size={46} italic color={ED.dim} style={{ marginTop: 16 }} />
       </div>
-      <Typewriter text={p.reveal} enterAt={34} charsPerFrame={2.2} size={48} style={{ position: 'absolute', left: SAFE.side, top: 1330, width: 960 }} />
-    </NoirStage>
+      <Bug />
+    </Black>
   );
 };
 
 const Hook: React.FC<{ p: C2Props }> = ({ p }) => (
-  <NoirStage lamp={false}>
-    <CasePhoto src={p.scene} style={{ position: 'absolute', inset: 0 }} dim={0.55} frames={60} zoom={[1.2, 1.1]} />
-    <PoliceLights strength={0.75} />
-    <BigCaps text={'BİRİ YALAN\nSÖYLÜYOR.'} enterAt={3} size={200} style={{ position: 'absolute', left: SAFE.side, top: 640 }} />
-    <div style={{ position: 'absolute', left: SAFE.side, top: 1050 }}>
-      <Typewriter text="Bulabilir misin?" enterAt={20} charsPerFrame={1.4} size={64} color={c.yellow} />
+  <Black>
+    <Shot src={p.scene} frames={45} from={1.15} to={1.08} />
+    <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.9) 75%)' }} />
+    <div style={{ position: 'absolute', left: ED.M, top: 900, width: ED.W }}>
+      <Words text="Biri yalan söylüyor." at={2} frames={16} size={150} />
+      <Rise at={18} style={{ marginTop: 18 }}>
+        <Fact size={40} color={ED.bone}>
+          Üç ifade, tek ipucu. Bulabilir misin?
+        </Fact>
+      </Rise>
     </div>
-  </NoirStage>
+    <Bug />
+  </Black>
 );
 
 /** "10 saniyelik vaka": three voiced alibis, one clue, a timer, then the liar. Ad-only cases (adCases.ts). */
 export const C2Puzzle: React.FC<C2Props> = (p) => {
   const b = puzzleBeats(p.voices);
   return (
-    <AbsoluteFill style={{ backgroundColor: c.bgDeep }}>
+    <AbsoluteFill style={{ backgroundColor: ED.black }}>
       <Sequence durationInFrames={b.board} name="Hook">
         <Hook p={p} />
       </Sequence>
@@ -203,14 +221,11 @@ export const C2Puzzle: React.FC<C2Props> = (p) => {
         <Board p={p} b={b} />
       </Sequence>
       <Sequence from={b.reveal} durationInFrames={b.cta - b.reveal} name="Reveal">
-        <Reveal p={p} />
+        <Reveal p={p} len={b.cta - b.reveal} />
       </Sequence>
       <Sequence from={b.cta} name="CTA">
-        <CasebookCta kicker="Bu sadece bir ipucuydu." tagline="Her vakada onlarca belge, 8 şüpheli, 1 ekip" />
+        <EditorialCta line="Bu sadece bir ipucuydu." sub="Casebook’ta her vaka onlarca belge ve senin ekibin." />
       </Sequence>
-      <Flash at={b.board} />
-      <Flash at={b.reveal} frames={9} />
-      <Flash at={b.cta} />
 
       <Music src={p.music} from={p.musicFrom} duck={{ from: b.s0, to: b.pauseAt, level: 0.35 }} />
       {p.voices.map((v, i) =>
@@ -220,16 +235,12 @@ export const C2Puzzle: React.FC<C2Props> = (p) => {
           </Sequence>
         ) : null,
       )}
-      <Sfx name="siren" at={0} frames={27} volume={1.4} />
-      <Sfx name="stamp" at={3} frames={10} volume={1.6} />
-      <Sfx name="stamp" at={b.board + b.clueAt} frames={10} volume={1.4} />
+      <Sfx name="tick" at={b.board + b.clueAt} frames={3} volume={1.4} />
       {Array.from({ length: Math.floor((b.reveal - b.pauseAt) / 15) }, (_, k) => (
         <Sfx key={k} name="clock" at={b.pauseAt + k * 15} frames={3} volume={1.6} />
       ))}
       <Sfx name="heart" at={b.pauseAt + 4} frames={18} volume={1.5} />
-      <Sfx name="shutter" at={b.reveal} />
-      <Sfx name="stamp" at={b.reveal + 10} frames={10} volume={2} />
-      <Sfx name="stamp" at={b.cta + 2} frames={10} />
+      <Sfx name="stamp" at={b.reveal} frames={10} volume={1.6} />
     </AbsoluteFill>
   );
 };

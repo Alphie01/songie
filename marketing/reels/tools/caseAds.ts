@@ -6,13 +6,13 @@ import { audioSeconds, speak, type VoiceLine } from './tts.js';
 export type Clip = { src: string; sec: number };
 
 export const puzzleLines = (p: PuzzleCase): VoiceLine[] =>
-  p.suspects.map((s, i) => ({ id: `pz-${p.id}-${i}`, text: s.line, voice: s.voice, style: s.style }));
+  p.suspects.map((s, i) => ({ id: `pz-${p.id}-${i}`, text: s.line, voice: s.voice, style: s.style, el: s.el, tag: s.tag }));
 
 export const interrogationLines = (iv: Interrogation): VoiceLine[] => [
   { id: `iv-${iv.id}-q1`, text: iv.q1, ...DETECTIVE_VOICE },
-  { id: `iv-${iv.id}-a1`, text: iv.a1, voice: iv.suspect.voice, style: iv.suspect.style },
+  { id: `iv-${iv.id}-a1`, text: iv.a1, voice: iv.suspect.voice, style: iv.suspect.style, el: iv.suspect.el, tag: iv.suspect.tag },
   { id: `iv-${iv.id}-q2`, text: iv.q2, ...DETECTIVE_VOICE },
-  { id: `iv-${iv.id}-a2`, text: iv.a2, voice: iv.suspect.voice, style: `${iv.suspect.style} Bu cümleyi soğuk ve kısık söyle.` },
+  { id: `iv-${iv.id}-a2`, text: iv.a2, voice: iv.suspect.voice, style: `${iv.suspect.style} Bu cümleyi soğuk ve kısık söyle.`, el: iv.suspect.el, tag: '[cold, quiet, after a pause]' },
 ];
 
 /** Generates (or reuses) the clips into assets/voices/ → public/assets/voices/. */

@@ -42,6 +42,8 @@ import { C1Case, C1_META, c1Schema } from './reels/casebook/C1Case';
 import { C2Puzzle, C2_META, c2Schema, puzzleBeats } from './reels/casebook/C2Puzzle';
 import { C3Interrogation, C3_META, c3Schema, interrogationBeats } from './reels/casebook/C3Interrogation';
 import { C4Squad, C4_META, c4Schema } from './reels/casebook/C4Squad';
+import { C5Trailer, C5_META, c5Schema, trailerBeats } from './reels/casebook/C5Trailer';
+import { C6Timeline, C6_META, c6Schema } from './reels/casebook/C6Timeline';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -342,6 +344,23 @@ export const RemotionRoot: React.FC = () => (
       schema={c4Schema}
       defaultProps={C4_META.defaultProps}
       durationInFrames={C4_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={C5_META.id}
+      component={C5Trailer}
+      schema={c5Schema}
+      defaultProps={C5_META.defaultProps}
+      durationInFrames={trailerBeats(C5_META.defaultProps.shots).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: trailerBeats(props.shots).total })}
+      {...video}
+    />
+    <Composition
+      id={C6_META.id}
+      component={C6Timeline}
+      schema={c6Schema}
+      defaultProps={C6_META.defaultProps}
+      durationInFrames={C6_META.durationInFrames}
       {...video}
     />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />

@@ -52,3 +52,31 @@ describe('Casebook ad reels', () => {
     expect(caps('bir ipucuydu')).toBe('BİR İPUCUYDU');
   });
 });
+
+import { C5_META, c5Schema, trailerBeats } from '../src/reels/casebook/C5Trailer';
+import { C6_META, TL, c6Schema } from '../src/reels/casebook/C6Timeline';
+
+describe('Casebook editorial reels', () => {
+  it('trailer: valid, ~18 s, clips inside the narration file and in order', () => {
+    const p = C5_META.defaultProps;
+    expect(c5Schema.safeParse(p).success).toBe(true);
+    expect(trailerBeats(p.shots).total / 30).toBeLessThanOrEqual(18.5);
+    const len = audioSeconds(pub(p.narration));
+    for (const s of p.shots) {
+      expect(s.clip.end).toBeGreaterThan(s.clip.start);
+      expect(s.clip.end).toBeLessThanOrEqual(len + 0.05);
+      if (s.image) expect(fs.existsSync(pub(s.image)), s.image).toBe(true);
+    }
+  });
+
+  it('timeline: one liar whose claimed interval covers the camera time; the caption never names them', () => {
+    const p = C6_META.defaultProps;
+    expect(c6Schema.safeParse(p).success).toBe(true);
+    const liars = p.rows.filter((r) => r.liar);
+    expect(liars).toHaveLength(1);
+    expect(liars[0]!.from <= p.at && liars[0]!.to >= p.at).toBe(true);
+    expect(p.evidence.text).not.toContain(liars[0]!.name);
+    expect(TL.total / 30).toBeLessThanOrEqual(19);
+    expect(TL.reveal - TL.ask).toBeGreaterThanOrEqual(75); // time to think
+  });
+});

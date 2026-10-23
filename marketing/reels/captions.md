@@ -298,3 +298,31 @@ Grubun dedektifi kim? 🔎 Etiketle, bu hafta sonu dosyayı birlikte açın. Cas
 **Hashtag'ler:** #casebook #arkadaşgrubu #dedektif #oyungecesi #gizem #polisiye #reels
 
 **Müzik kredisi:** Music: "Hitman" / "Crypto" / "I Knew a Guy" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0. Seslendirme: OpenAI TTS (yapay zekâ sesi).
+
+## Editoryal sistem (2026-10-24)
+
+Yalancı kim? ve Sorgu odası yeni tasarıma geçti: siyah + kemik beyazı + tek vurgu adli UV moru, Instrument Serif (vakanın sesi) + Inter Tight (bilgiler), 72 px kenar boşluğu, maske açılışları, damga/post-it/Bebas yok. ElevenLabs anahtarı `~/works/liste/.env` içine `ELEVENLABS_API_KEY` olarak eklenince aynı komutlar oyunun Türkçe sesleriyle (Adam anlatıcı + cast.json sesleri) yeniden üretir.
+
+## Vaka fragmanı (`casebook-05-fragman`)
+
+```sh
+pnpm reel fragman
+```
+
+Oyunun kendi anlatıcısı (ElevenLabs "Adam") ilk bölümden beş cümle okur; her cümle bir kesme: vaka kapağı, devrilmiş sandalye, kurban, masadaki altı yüz, vaka adı. Çözüm yok.
+
+**Açıklama:** “Kanında dijoksin çıktı.” Gümüşlük’te bir basın gecesi, sekiz tabak, yedi kişi. Son Tadım, Casebook’ta. Dosyayı ekibinle aç.
+
+**Hashtag'ler:** #casebook #sontadım #dedektif #polisiye #truecrime #gizem #reels
+
+## Saat 22:14 (`casebook-06-saat`), izleyici çözer
+
+```sh
+pnpm reel saat
+```
+
+Saat 21:00’den 22:14’e döner → üç ifade zaman çizelgesinde çubuk olur (araçlarıyla) → kamera karesi: dükkânın önünde beyaz minibüs → 22:14 çizgisi → “Kim yalan söylüyor?” → Burak’ın çubuğu kırılır → “Saatler yalan söylemez.”
+
+**Açıklama:** 22:14. Üç ifade, bir kamera. Kim yalan söylüyor? Cevabını yorumlara yaz. Casebook’ta zaman çizelgesini ekibinle kur.
+
+**Hashtag'ler:** #casebook #bulmaca #dedektif #yalancıkim #polisiye #gizem #reels

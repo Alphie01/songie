@@ -555,6 +555,8 @@ export const CASE_ADS = {
   yalanci: { id: 'casebook-02-yalanci', music: 'hitman kevin macleod', cover: 30, ids: PUZZLES.map((p) => p.id) },
   sorgu: { id: 'casebook-03-sorgu', music: 'crypto kevin macleod', cover: 140, ids: INTERROGATIONS.map((p) => p.id) },
   ekip: { id: 'casebook-04-ekip', music: 'i knew a guy kevin macleod', cover: 40, ids: [] as string[] },
+  fragman: { id: 'casebook-05-fragman', music: 'hitman kevin macleod', cover: 70, ids: [] as string[] },
+  saat: { id: 'casebook-06-saat', music: 'hitman kevin macleod', cover: 360, ids: [] as string[] },
 } as const;
 
 async function caseAdReel(key: keyof typeof CASE_ADS, args: string[], root: string) {
@@ -588,6 +590,8 @@ async function caseAdReel(key: keyof typeof CASE_ADS, args: string[], root: stri
     const voices = await voiceClips(interrogationLines(iv), root);
     props = { name: iv.suspect.name, portrait: iv.suspect.portrait, q1: iv.q1, a1: iv.a1, evidence: iv.evidence, q2: iv.q2, a2: iv.a2, voices };
     console.log(`Sorgu: ${iv.suspect.name}`);
+  } else if (key === 'fragman' || key === 'saat') {
+    props = {}; // the composition's own case (defaultProps); only the music changes
   } else {
     props = { solver: name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!, backdrop: 'cases/sahnede-olum/img/scene-1.webp' };
     console.log(`Ekip: ${props.solver as string}`);

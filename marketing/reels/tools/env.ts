@@ -18,3 +18,13 @@ export function loadKeys(file = DEFAULT_ENV): { kie: string; openai: string } {
   }
   return { kie: found.KIE_API_KEY!, openai: found.OPENAI_API_KEY! };
 }
+
+/** Optional ELEVENLABS_API_KEY from the same file (undefined when missing). Never logged. */
+export function loadElevenKey(file = DEFAULT_ENV): string | undefined {
+  if (!fs.existsSync(file)) return undefined;
+  for (const line of fs.readFileSync(file, 'utf8').split('\n')) {
+    const m = /^\s*(?:export\s+)?ELEVENLABS_API_KEY\s*=\s*(.*?)\s*$/.exec(line);
+    if (m && m[1]) return m[1].replace(/^['"]|['"]$/g, '');
+  }
+  return undefined;
+}

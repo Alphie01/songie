@@ -2,14 +2,13 @@ import React from 'react';
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import { hasStaticFile } from '../../brand/ClipCard';
-import { caps, ClueCard, Flash, Grain, Stamp, Typewriter, Vignette, Waveform } from '../../brand/casebook/Noir';
-import { FONT_HEAD, FONT_MONO, SAFE, VIDEO } from '../../brand/fonts';
+import { Grain, Vignette } from '../../brand/casebook/Noir';
+import { Bug, EASE, ED, Fact, Rise, Words } from '../../brand/casebook/Editorial';
+import { FONT_SERIF, SAFE, VIDEO } from '../../brand/fonts';
 import { SFX_VOLUME } from '../../brand/mix';
 import { Music } from '../../brand/Music';
-import { casebookTheme } from '../../themes/casebook';
-import { CasebookCta } from './C1Case';
+import { EditorialCta } from './C5Trailer';
 
-const c = casebookTheme.colors;
 const FPS = VIDEO.fps;
 
 const clip = z.object({ src: z.string(), sec: z.number().min(0.3).max(6) });
@@ -119,20 +118,38 @@ const Room: React.FC<{ p: C3Props; b: ReturnType<typeof interrogationBeats> }> =
   );
 };
 
-/** Subtitle block: who speaks (SEN = the detective, you), the line typing in step with the voice. */
-const Line: React.FC<{ who: string; text: string; at: number; sec: number; you?: boolean }> = ({ who, text, at, sec, you }) => {
+/** Evidence lands as a fact line across the frame: UV bar, source, the record in the serif with a UV underline. */
+const Evidence: React.FC<{ source: string; text: string }> = ({ source, text }) => {
   const frame = useCurrentFrame();
-  const talking = frame >= at && frame < at + f(sec);
+  const t = interpolate(frame, [0, 14], [0, 1], { extrapolateRight: 'clamp', easing: EASE });
+  const u = interpolate(frame, [14, 30], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: EASE });
   return (
-    <div style={{ position: 'absolute', left: SAFE.side, top: 1250, width: 960 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-        <div style={{ fontFamily: FONT_HEAD, fontSize: 54, color: you ? c.yellow : c.paper }}>{caps(who)}</div>
-        <Waveform active={talking} color={you ? c.yellow : c.paper} />
+    <div style={{ position: 'absolute', left: 0, top: 960, width: 1080, padding: `26px ${ED.M}px 30px`, boxSizing: 'border-box', background: 'rgba(0,0,0,0.78)', clipPath: `inset(0 ${(1 - t) * 100}% 0 0)` }}>
+      <div style={{ display: 'flex', gap: 24 }}>
+        <div style={{ width: 6, background: ED.uv }} />
+        <div>
+          <Fact size={28}>{source}</Fact>
+          <div style={{ fontFamily: FONT_SERIF, fontSize: 60, lineHeight: 1.05, color: ED.bone }}>
+            <span style={{ backgroundImage: `linear-gradient(${ED.uv}, ${ED.uv})`, backgroundRepeat: 'no-repeat', backgroundPosition: '0 92%', backgroundSize: `${u * 100}% 5px` }}>{text}</span>
+          </div>
+        </div>
       </div>
-      <Typewriter text={`“${text}”`} enterAt={at} charsPerFrame={Math.max(0.8, (text.length + 2) / Math.max(1, f(sec)))} size={56} color={you ? c.yellow : c.paper} />
     </div>
   );
 };
+
+/** Subtitle block: who speaks (Sen = you, the detective, in UV), the line rising word by word with the voice. */
+const Line: React.FC<{ who: string; text: string; at: number; sec: number; you?: boolean; struck?: number }> = ({ who, text, at, sec, you, struck = 0 }) => (
+  <div style={{ position: 'absolute', left: ED.M, top: 1250, width: ED.W }}>
+    <Fact size={30} weight={600} color={you ? ED.uv : ED.bone}>
+      {who}
+    </Fact>
+    <div style={{ position: 'relative', display: 'inline-block' }}>
+      <Words text={`“${text}”`} at={at} frames={f(sec)} size={64} italic color={you ? ED.dim : ED.bone} />
+      {struck > 0 && <div style={{ position: 'absolute', left: 0, top: '55%', height: 4, width: `${struck * 100}%`, background: ED.uv }} />}
+    </div>
+  </div>
+);
 
 /** "Sorgu odası": you question a suspect, evidence lands, the suspect breaks. Ad-only (adCases.ts). */
 export const C3Interrogation: React.FC<C3Props> = (p) => {
@@ -142,9 +159,14 @@ export const C3Interrogation: React.FC<C3Props> = (p) => {
     <AbsoluteFill style={{ backgroundColor: '#030304' }}>
       <Sequence durationInFrames={b.cta} name="Sorgu">
         <Room p={p} b={b} />
-        <div style={{ position: 'absolute', left: SAFE.side, top: SAFE.top - 30, fontFamily: FONT_HEAD, fontSize: 70, color: c.paper, opacity: 0.85 }}>
-          {caps('Sorgu odası')}
-          <div style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 36, color: c.yellow }}>Gece 23:52, kayıt açık</div>
+        <Bug />
+        <div style={{ position: 'absolute', left: ED.M, top: 300 }}>
+          <Rise at={4}>
+            <div style={{ fontFamily: FONT_SERIF, fontSize: 96, lineHeight: 1, color: ED.bone }}>Sorgu odası</div>
+          </Rise>
+          <Rise at={10}>
+            <Fact size={30}>Gece 23:52. Kayıt açık.</Fact>
+          </Rise>
         </div>
         <Sequence from={b.q1} durationInFrames={b.a1 - b.q1} layout="none">
           <Line who="Sen" text={p.q1} at={0} sec={v[0]!.sec} you />
@@ -153,9 +175,7 @@ export const C3Interrogation: React.FC<C3Props> = (p) => {
           <Line who={p.name} text={p.a1} at={0} sec={v[1]!.sec} />
         </Sequence>
         <Sequence from={b.ev} layout="none">
-          <div style={{ position: 'absolute', left: SAFE.side, top: 960 }}>
-            <ClueCard source={p.evidence.source} text={p.evidence.text} enterAt={0} markAt={14} width={960} size={50} rotate={-2} />
-          </div>
+          <Evidence source={p.evidence.source} text={p.evidence.text} />
         </Sequence>
         <Sequence from={b.q2} durationInFrames={b.a2 - b.q2} layout="none">
           <Line who="Sen" text={p.q2} at={0} sec={v[2]!.sec} you />
@@ -164,16 +184,14 @@ export const C3Interrogation: React.FC<C3Props> = (p) => {
           <Line who={p.name} text={p.a2} at={0} sec={v[3]!.sec} />
         </Sequence>
         <Sequence from={b.lie} layout="none">
-          <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', paddingBottom: 300 }}>
-            <Stamp text="YALAN" color="#ff3b30" enterAt={0} size={200} rotate={-12} style={{ background: 'rgba(5,4,7,0.55)', mixBlendMode: 'normal' }} />
-          </AbsoluteFill>
+          <div style={{ position: 'absolute', left: ED.M, top: 700 }}>
+            <Words text="Yalan." at={0} frames={6} size={220} italic color={ED.uv} />
+          </div>
         </Sequence>
       </Sequence>
       <Sequence from={b.cta} name="CTA">
-        <CasebookCta kicker="Herkes bir şey saklıyor." tagline="Sorguyu sen yönet, ekibinle çöz" />
+        <EditorialCta line="Herkes bir şey saklıyor." sub="Sorguyu sen yönet, ekibinle çöz." />
       </Sequence>
-      <Flash at={b.ev} frames={6} />
-      <Flash at={b.cta} />
 
       <Music src={p.music} from={p.musicFrom} volume={0.75} duck={{ from: b.q1, to: b.lie, level: 0.35 }} />
       {[b.q1, b.a1, b.q2, b.a2].map((at, i) =>
@@ -187,7 +205,6 @@ export const C3Interrogation: React.FC<C3Props> = (p) => {
       <Sfx name="stamp" at={b.ev} frames={10} volume={1.6} />
       <Sfx name="heart" at={b.silence} frames={18} volume={2} />
       <Sfx name="stamp" at={b.lie} frames={10} volume={2.2} />
-      <Sfx name="stamp" at={b.cta + 2} frames={10} />
     </AbsoluteFill>
   );
 };

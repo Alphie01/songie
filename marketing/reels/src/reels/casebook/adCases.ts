@@ -4,7 +4,8 @@
  */
 const P = (path: string) => `cases/${path}.webp`;
 
-export type Speaker = { name: string; portrait: string; voice: string; style: string };
+/** `voice` is the OpenAI fallback, `el` the ElevenLabs voice from the game's Turkish cast (games/detective cast.json). */
+export type Speaker = { name: string; portrait: string; voice: string; style: string; el?: string; tag?: string };
 export type PuzzleCase = {
   id: string;
   scene: string;
@@ -24,11 +25,11 @@ export const PUZZLES: PuzzleCase[] = [
     premise: 'Kurban 22:40’ta evinde ölü bulundu.',
     clue: { source: 'Meteoroloji kaydı', text: 'Yağmur 22:30’da başladı.' },
     suspects: [
-      { name: 'Selin', portrait: P('bodrum-zehir/img/p-selin'), voice: 'coral', style: STYLE_F, line: 'Bütün akşam spor salonundaydım.' },
-      { name: 'Kerem', portrait: P('ayvalik-miras/img/p-kerem'), voice: 'ash', style: STYLE_M, line: 'Dokuzda geldim, yağmurdan sırılsıklamdım.', liar: true },
-      { name: 'Nur', portrait: P('sahnede-olum/img/p-nur'), voice: 'sage', style: STYLE_F, line: 'Sekizden beri annemlerdeydim.' },
+      { name: 'Selin', portrait: P('bodrum-zehir/img/p-selin'), voice: 'coral', el: 'mBUB5zYuPwfVE6DTcEjf', tag: '[calm, confident]', style: STYLE_F, line: 'Bütün akşam spor salonundaydım.' },
+      { name: 'Kerem', portrait: P('ayvalik-miras/img/p-kerem'), voice: 'ash', el: 'D1U9fDt671vz7Bpo0FQM', tag: '[nervous, defensive]', style: STYLE_M, line: 'Dokuzda geldim, yağmurdan sırılsıklamdım.', liar: true },
+      { name: 'Nur', portrait: P('sahnede-olum/img/p-nur'), voice: 'sage', el: 'xbDrc2x8CZgoKHbSCuRg', tag: '[tired, calm]', style: STYLE_F, line: 'Sekizden beri annemlerdeydim.' },
     ],
-    reveal: 'Yağmur 22:30’da başladı. Kerem dokuzda nasıl ıslandı?',
+    reveal: 'Kerem dokuzda nasıl ıslandı?',
   },
   {
     id: 'elektrik',
@@ -36,11 +37,11 @@ export const PUZZLES: PuzzleCase[] = [
     premise: 'Kurban apartman dairesinde ölü bulundu.',
     clue: { source: 'Elektrik idaresi', text: 'Binada elektrik 21:10–21:40 arası kesikti.' },
     suspects: [
-      { name: 'Gizem', portrait: P('uludag-firtina/img/p-gizem'), voice: 'nova', style: STYLE_F, line: 'Işıklar gidince mum yaktım, evdeydim.' },
-      { name: 'Onur', portrait: P('ankara-ihalesi/img/p-onur'), voice: 'verse', style: STYLE_M, line: 'Dokuzda nöbete girdim, hastanedeydim.' },
-      { name: 'Tarık', portrait: P('yalida-son-aksam/img/p-tarik'), voice: 'echo', style: STYLE_M, line: 'Dokuz buçukta asansörle yukarı çıktım.', liar: true },
+      { name: 'Gizem', portrait: P('uludag-firtina/img/p-gizem'), voice: 'nova', el: '4XsbOSxQHw4NUVaEeo2o', tag: '[calm]', style: STYLE_F, line: 'Işıklar gidince mum yaktım, evdeydim.' },
+      { name: 'Onur', portrait: P('ankara-ihalesi/img/p-onur'), voice: 'verse', el: 'BQnJrtsrT9aT7kziS653', tag: '[tired]', style: STYLE_M, line: 'Dokuzda nöbete girdim, hastanedeydim.' },
+      { name: 'Tarık', portrait: P('yalida-son-aksam/img/p-tarik'), voice: 'echo', el: '5nr6ATQepuidiLb6OT3B', tag: '[confident, slightly nervous]', style: STYLE_M, line: 'Dokuz buçukta asansörle yukarı çıktım.', liar: true },
     ],
-    reveal: 'Elektrik kesikken asansör çalışmaz. Tarık yalan söylüyor.',
+    reveal: 'Elektrik kesikken Tarık asansöre nasıl bindi?',
   },
   {
     id: 'telefon',
@@ -48,11 +49,11 @@ export const PUZZLES: PuzzleCase[] = [
     premise: 'Kurban gece yarısı sahilde bulundu.',
     clue: { source: 'Operatör kaydı', text: 'Kurbanın telefonu 21:30’da kapandı.' },
     suspects: [
-      { name: 'Barış', portrait: P('pera-gecesi/img/p-baris'), voice: 'ash', style: STYLE_M, line: 'En son öğlen konuştuk.' },
-      { name: 'Ece', portrait: P('izmir-santaj/img/p-ece'), voice: 'shimmer', style: STYLE_F, line: 'Ona onda mesaj attım, hemen cevap verdi.', liar: true },
-      { name: 'Leyla', portrait: P('yalida-son-aksam/img/p-leyla'), voice: 'coral', style: STYLE_F, line: 'Akşam toplantıdaydım, hiç aramadım.' },
+      { name: 'Barış', portrait: P('pera-gecesi/img/p-baris'), voice: 'ash', el: 'fZEjvS1BvpajAoOmWcEO', tag: '[calm]', style: STYLE_M, line: 'En son öğlen konuştuk.' },
+      { name: 'Ece', portrait: P('izmir-santaj/img/p-ece'), voice: 'shimmer', el: 'PVbzZmwmdI99VcmuRK7G', tag: '[quickly, nervous]', style: STYLE_F, line: 'Ona onda mesaj attım, hemen cevap verdi.', liar: true },
+      { name: 'Leyla', portrait: P('yalida-son-aksam/img/p-leyla'), voice: 'coral', el: 'KwaeIqNikLVCR098EG82', tag: '[calm, cold]', style: STYLE_F, line: 'Akşam toplantıdaydım, hiç aramadım.' },
     ],
-    reveal: 'Telefon 21:30’da kapanmıştı. Ece’ye onda kim cevap verdi?',
+    reveal: 'Ece’ye saat onda kim cevap verdi?',
   },
 ];
 
@@ -67,12 +68,13 @@ export type Interrogation = {
   a2: string;
 };
 
-export const DETECTIVE_VOICE = { voice: 'onyx', style: 'Derin, yavaş ve soğuk bir polisiye dedektif sesi. Sorgu odasında, alçak sesle.' };
+/** Detective = the game's narrator "Adam" (the voice the user approved for Casebook). */
+export const DETECTIVE_VOICE = { voice: 'onyx', style: 'Derin, yavaş ve soğuk bir polisiye dedektif sesi. Sorgu odasında, alçak sesle.', el: 'J17lijyP1BHYcM7ld0Rg', tag: '[serious, slow, low voice]' };
 
 export const INTERROGATIONS: Interrogation[] = [
   {
     id: 'volkan',
-    suspect: { name: 'Volkan', portrait: P('koza-han-yangini/img/p-volkan'), voice: 'ballad', style: 'Sert, savunmacı bir erkek; sorguda sıkıştırılıyor. Kısa ve net.' },
+    suspect: { name: 'Volkan', portrait: P('koza-han-yangini/img/p-volkan'), voice: 'ballad', el: 'mF7tIc9VLrznhGooGjaT', tag: '[defensive, low voice]', style: 'Sert, savunmacı bir erkek; sorguda sıkıştırılıyor. Kısa ve net.' },
     q1: 'O gece neredeydin?',
     a1: 'Evdeydim. Onda yattım, sabaha kadar uyudum.',
     evidence: { source: 'Apartman kartlı geçiş kaydı', text: 'Daire 7, Volkan D. Çıkış: 23:47' },
@@ -81,7 +83,7 @@ export const INTERROGATIONS: Interrogation[] = [
   },
   {
     id: 'nihan',
-    suspect: { name: 'Nihan', portrait: P('mersin-limani/img/p-nihan'), voice: 'shimmer', style: 'Soğukkanlı, kibar ama gergin bir kadın; sorguda sıkıştırılıyor. Kısa ve net.' },
+    suspect: { name: 'Nihan', portrait: P('mersin-limani/img/p-nihan'), voice: 'shimmer', el: 'I8PntRGWO35zIGM4lnWO', tag: '[cold, controlled]', style: 'Soğukkanlı, kibar ama gergin bir kadın; sorguda sıkıştırılıyor. Kısa ve net.' },
     q1: 'Onu en son ne zaman gördün?',
     a1: 'Bir haftadır görmüyorum. Şehir dışındaydım.',
     evidence: { source: 'Otopark kamerası', text: 'Nihan Ö., dün gece 23:12, olay yerinin önünde' },
