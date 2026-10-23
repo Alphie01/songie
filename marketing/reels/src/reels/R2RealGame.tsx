@@ -16,6 +16,7 @@ import { RevealScreen } from '../brand/app/RevealScreen';
 import { SongPlayScreen, type FeedLine, type ScoreRow } from '../brand/app/SongPlayScreen';
 import { songieTheme } from '../themes/songie';
 import type { AppTheme } from '../themes/types';
+import { crew, crewScores, listening, solverSchema, type Crew } from './friends';
 
 const nonEmpty = z.string().refine((s) => s.trim().length > 0, { message: 'must not be empty' });
 
@@ -30,6 +31,8 @@ export const r2Schema = z.object({
   songFrom: z.number().min(0).max(27),
   /** Scene color order (see PALETTES); `pnpm reel` picks one per song. */
   palette: z.number().int().min(0),
+  /** The friend who knew it at 0,1 sn. */
+  solver: solverSchema,
 });
 
 export type R2Props = z.infer<typeof r2Schema>;
@@ -73,6 +76,7 @@ export const R2_META = {
     cover: 'assets/songs/16412330.jpg',
     songFrom: 8,
     palette: 0,
+    solver: 'Mert',
   } as R2Props,
 } as const;
 
@@ -139,19 +143,13 @@ const Hook: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
   );
 };
 
-const scores = (t: AppTheme): ScoreRow[] => [
-  { name: 'Mert', score: 2420, color: t.colors.mint },
-  { name: 'Sen', score: 2150, color: t.colors.yellow, me: true },
-  { name: 'Deniz', score: 1780, color: t.colors.panel },
-  { name: 'Ece', score: 920, color: t.colors.panel },
-];
 
 /** 0..1 press curve around `at`. */
 const pressAt = (frame: number, at: number) =>
   interpolate(frame, [at, at + 3, at + 8], [0, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
 
 /** Game state at a local frame: open stage, progress fill, playing, feed. */
-export function gameState(frame: number) {
+export function gameState(frame: number, solver = 'Mert') {
   const passed = R2.stages.filter((s) => frame >= s.pass + 4).length;
   const stage = Math.min(passed, 2);
   const s = R2.stages[stage]!;
@@ -168,16 +166,16 @@ export function gameState(frame: number) {
   const playing = frame >= s.clip && frame < s.clip + Math.max(clipFrames, 6);
   const feed: FeedLine[] = [];
   for (let i = 0; i < passed; i++) feed.push({ name: 'Sen', text: 'pas geçti', color: APP.red });
-  if (frame >= R2.mert) feed.unshift({ name: 'Mert', text: `${clipShort(CLIPS[0]!)}’de bildi`, points: 1000, color: songieTheme.colors.mint });
+  if (frame >= R2.mert) feed.unshift({ name: solver, text: `${clipShort(CLIPS[0]!)}’de bildi`, points: 1000, color: songieTheme.colors.mint });
   return { stage, fill, playing, feed: feed.slice(0, 3), passed };
 }
 
 /** 78–243: yellow, the real play screen; 0,1 → Pas → 0,5 → Pas → 2 sn → Pas, then Mert's 0,1 sn solve. */
-const Game: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
+const Game: React.FC<{ theme: AppTheme; bg: string; c8: Crew }> = ({ theme, bg, c8 }) => {
   const c = theme.colors;
   const frame = useCurrentFrame();
   const enter = usePop(0, 14);
-  const { stage, fill, playing, feed, passed } = gameState(frame);
+  const { stage, fill, playing, feed, passed } = gameState(frame, c8.solver);
   const cur = R2.stages[stage]!;
   const lastPass = R2.stages[Math.max(0, passed - 1)]!.pass;
   return (
@@ -199,8 +197,8 @@ const Game: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
             press={pressAt(frame, cur.play)}
             skipPress={R2.stages.reduce((m, s) => Math.max(m, pressAt(frame, s.pass)), 0)}
             feed={feed}
-            scores={scores(theme)}
-            status="Mert, Deniz ve Ece dinliyor."
+            scores={crewScores(theme, c8)}
+            status={listening(c8)}
           />
         </PhoneFrame>
       </div>
@@ -232,7 +230,7 @@ const Game: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
         <Sequence from={R2.mert} layout="none">
           <Sticker
             theme={theme}
-            text="Ama Mert 0,1 sn'de bildi! +1000"
+            text={`Ama ${c8.solver} 0,1 sn'de bildi! +1000`}
             bg={stickerOn(theme, bg, ['mint', 'yellow', 'sky'])}
             rotate={-4}
             size={64}
@@ -266,7 +264,7 @@ const Reveal: React.FC<{ theme: AppTheme; p: R2Props; bg: string }> = ({ theme, 
             album={p.album}
             cover={hasStaticFile(p.cover) ? p.cover : ''}
             won={false}
-            results={[{ name: 'Mert', how: `${clipShort(CLIPS[0]!)}’de`, points: 1000, color: c.mint }]}
+            results={[{ name: p.solver.trim(), how: `${clipShort(CLIPS[0]!)}’de`, points: 1000, color: c.mint }]}
             enterAt={6}
           />
         </PhoneFrame>
@@ -324,7 +322,7 @@ export const R2RealGame: React.FC<R2Props> = (p) => {
       </Sequence>
       <ColorWipe theme={theme} from={A} to={B} at={R2.wipe1} durationInFrames={R2.game - R2.wipe1} />
       <Sequence from={R2.game} durationInFrames={R2.wipe2 - R2.game} name="Game">
-        <Game theme={theme} bg={B} />
+        <Game theme={theme} bg={B} c8={crew(p.solver)} />
       </Sequence>
       <ColorWipe theme={theme} from={B} to={C} at={R2.wipe2} durationInFrames={R2.reveal - R2.wipe2} />
       <Sequence from={R2.reveal} durationInFrames={R2.wipe3 - R2.reveal} name="Reveal">

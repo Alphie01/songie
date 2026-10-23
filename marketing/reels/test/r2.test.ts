@@ -43,3 +43,14 @@ describe('R2RealGame composition', () => {
     expect(gameState(s.clip + 15).playing).toBe(false);
   });
 });
+
+describe('solver name', () => {
+  it('puts the chosen friend in the feed and keeps the room free of duplicates', async () => {
+    const { crew, listening } = await import('../src/reels/friends');
+    expect(gameState(R2.mert, 'Zeynep').feed[0]).toMatchObject({ name: 'Zeynep', points: 1000 });
+    const c = crew('Deniz');
+    expect(c.others).not.toContain('Deniz');
+    expect(listening(c)).toBe('Deniz, Mert ve Ece dinliyor.');
+    expect(r2Schema.safeParse({ ...R2_META.defaultProps, solver: 'Çok uzun bir isim' }).success).toBe(false);
+  });
+});

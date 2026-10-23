@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { loudestStart, paletteFor, propsFor, slug } from '../tools/reel';
+import { loudestStart, paletteFor, propsFor, slug, solverFor } from '../tools/reel';
+import { FRIEND_NAMES } from '../src/reels/friends';
 import { PALETTES } from '../src/brand/palette';
 import { r1Schema } from '../src/reels/R1Challenge';
 import { r2Schema } from '../src/reels/R2RealGame';
@@ -25,14 +26,19 @@ describe('reel', () => {
   });
 
   it('builds props each composition schema accepts', () => {
-    expect(r1Schema.safeParse(propsFor('r1', song, 15, 3)).success).toBe(true);
-    expect(r2Schema.safeParse(propsFor('r2', song, 8, 5)).success).toBe(true);
+    expect(r1Schema.safeParse(propsFor('r1', song, { songFrom: 15, palette: 3, solver: 'Zeynep' })).success).toBe(true);
+    expect(r2Schema.safeParse(propsFor('r2', song, { songFrom: 8, palette: 5, solver: 'Can' })).success).toBe(true);
   });
 
   it('gives each song a stable palette in range', () => {
     expect(paletteFor(3602329332)).toBe(paletteFor(3602329332));
     expect(paletteFor(16412330)).toBeGreaterThanOrEqual(0);
     expect(paletteFor(16412330)).toBeLessThan(PALETTES.length);
+  });
+
+  it('rotates the solver name per song', () => {
+    expect(FRIEND_NAMES).toContain(solverFor(3602329332));
+    expect(new Set([1, 2, 3, 4].map(solverFor)).size).toBe(4);
   });
 
   it('makes file-safe names from Turkish queries', () => {

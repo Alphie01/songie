@@ -16,21 +16,21 @@ describe('R1Challenge composition', () => {
 
   it('accepts the default props', () => {
     expect(r1Schema.safeParse(R1_META.defaultProps).success).toBe(true);
-    expect(R1_META.defaultProps).toEqual({ answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5, palette: 0 });
+    expect(R1_META.defaultProps).toEqual({ answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5, palette: 0, solver: 'Mert' });
   });
 
   it("rejects answer: ''", () => {
-    expect(r1Schema.safeParse({ answer: '', solveStage: 0, song: '', songFrom: 0, palette: 0 }).success).toBe(false);
-    expect(r1Schema.safeParse({ answer: '   ', solveStage: 0, song: '', songFrom: 0, palette: 0 }).success).toBe(false);
+    expect(r1Schema.safeParse({ answer: '', solveStage: 0, song: '', songFrom: 0, palette: 0, solver: 'Mert' }).success).toBe(false);
+    expect(r1Schema.safeParse({ answer: '   ', solveStage: 0, song: '', songFrom: 0, palette: 0, solver: 'Mert' }).success).toBe(false);
   });
 
   it('rejects solveStage outside 0..4', () => {
-    expect(r1Schema.safeParse({ answer: 'x', solveStage: 5, song: '', songFrom: 0, palette: 0 }).success).toBe(false);
-    expect(r1Schema.safeParse({ answer: 'x', solveStage: 1.5, song: '', songFrom: 0, palette: 0 }).success).toBe(false);
+    expect(r1Schema.safeParse({ answer: 'x', solveStage: 5, song: '', songFrom: 0, palette: 0, solver: 'Mert' }).success).toBe(false);
+    expect(r1Schema.safeParse({ answer: 'x', solveStage: 1.5, song: '', songFrom: 0, palette: 0, solver: 'Mert' }).success).toBe(false);
   });
 
   it('rejects a song offset past the 30 s preview', () => {
-    expect(r1Schema.safeParse({ answer: 'x', solveStage: 0, song: '', songFrom: 29.5, palette: 0 }).success).toBe(false);
+    expect(r1Schema.safeParse({ answer: 'x', solveStage: 0, song: '', songFrom: 29.5, palette: 0, solver: 'Mert' }).success).toBe(false);
   });
 
   it('labels the solve with the app stage seconds (tr-TR) and points', () => {

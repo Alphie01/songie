@@ -2,6 +2,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { PALETTES } from '../src/brand/palette.js';
+import { FRIEND_NAMES } from '../src/reels/friends.js';
 import { fetchSong, type SongAsset } from './deezer.js';
 
 /**
@@ -9,6 +10,7 @@ import { fetchSong, type SongAsset } from './deezer.js';
  *   pnpm reel r2 "tame impala loser"            → out/r2-tame-impala-loser.mp4 + .png
  *   pnpm reel r1 "tarkan kuzu kuzu" --from 15.5  → kesit saniyesini elle ver
  *   pnpm reel r2 "tarkan şımarık" --palette 3     → renk sırasını seç (0–7; verilmezse şarkıya göre)
+ *   pnpm reel r2 "tarkan şımarık" --name Zeynep   → bilen arkadaşın adı (verilmezse şarkıya göre)
  */
 export const REELS = {
   r1: { id: 'songie-01-challenge', cover: 20, maxFrom: 29 },
@@ -16,9 +18,16 @@ export const REELS = {
 } as const;
 export type ReelKey = keyof typeof REELS;
 
-export function propsFor(reel: ReelKey, s: SongAsset, songFrom: number, palette: number): Record<string, unknown> {
-  if (reel === 'r1') return { answer: s.answer, solveStage: 0, song: s.src, songFrom, palette };
-  return { title: s.title, artist: s.artist, album: s.album, song: s.src, cover: s.cover, songFrom, palette };
+export type ReelOptions = { songFrom: number; palette: number; solver: string };
+
+export function propsFor(reel: ReelKey, s: SongAsset, o: ReelOptions): Record<string, unknown> {
+  if (reel === 'r1') return { answer: s.answer, solveStage: 0, song: s.src, ...o };
+  return { title: s.title, artist: s.artist, album: s.album, song: s.src, cover: s.cover, ...o };
+}
+
+/** Stable friend name per song, so it is not always Mert. */
+export function solverFor(songId: number): string {
+  return FRIEND_NAMES[Math.abs(songId) % FRIEND_NAMES.length]!;
 }
 
 /** Stable palette per song, so every song gets its own colors but re-renders look the same. */
@@ -80,12 +89,15 @@ async function main() {
   };
   const from = flag('--from');
   const pal = flag('--palette');
-  const skip = new Set([from?.i, from && from.i + 1, pal?.i, pal && pal.i + 1]);
+  const nameIdx = args.indexOf('--name');
+  const name = nameIdx >= 0 ? args[nameIdx + 1]?.trim() : undefined;
+  const skip = new Set([from?.i, from && from.i + 1, pal?.i, pal && pal.i + 1, nameIdx >= 0 ? nameIdx : undefined, nameIdx >= 0 ? nameIdx + 1 : undefined]);
   const query = args.filter((_, i) => i > 0 && !skip.has(i)).join(' ');
   const manualFrom = from?.v;
   const bad = (f?: { v: number }) => f !== undefined && !Number.isFinite(f.v);
-  if (!(reel in REELS) || !query || bad(from) || bad(pal) || (pal && (pal.v < 0 || pal.v >= PALETTES.length))) {
-    console.error(`kullanım: pnpm reel <r1|r2> "<sanatçı şarkı>" [--from <saniye>] [--palette 0-${PALETTES.length - 1}]`);
+  const badName = nameIdx >= 0 && (!name || name.length > 12);
+  if (!(reel in REELS) || !query || bad(from) || bad(pal) || badName || (pal && (pal.v < 0 || pal.v >= PALETTES.length))) {
+    console.error(`kullanım: pnpm reel <r1|r2> "<sanatçı şarkı>" [--from <saniye>] [--palette 0-${PALETTES.length - 1}] [--name <en çok 12 harf>]`);
     process.exit(1);
   }
   const cfg = REELS[reel];
@@ -97,11 +109,14 @@ async function main() {
   console.log(`Şarkı: ${song.answer} (${song.album}) · kesit ${songFrom} sn'den${manualFrom === undefined ? ' (otomatik: en yüksek sesli bölüm)' : ''}`);
   console.log(`Renkler: palet ${palette} (${PALETTES[palette]!.join(' → ')})${pal ? '' : ' — başka renk için --palette 0-' + (PALETTES.length - 1)}`);
 
-  const props = JSON.stringify(propsFor(reel, song, songFrom, palette));
-  const name = `${reel}-${slug(query)}${pal ? `-p${palette}` : ''}`;
-  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${name}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
-  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${name}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);
-  console.log(`\nHazır:\n  ${path.join(root, 'out', `${name}.mp4`)}\n  ${path.join(root, 'out', `${name}.png`)}`);
+  const solver = name ?? solverFor(song.id);
+  console.log(`Bilen: ${solver}${name ? '' : ' — başka isim için --name <isim>'}`);
+
+  const props = JSON.stringify(propsFor(reel, song, { songFrom, palette, solver }));
+  const file = `${reel}-${slug(query)}${pal ? `-p${palette}` : ''}${name ? `-${slug(name)}` : ''}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${props}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${props}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

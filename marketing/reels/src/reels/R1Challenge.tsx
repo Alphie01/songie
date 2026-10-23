@@ -15,6 +15,7 @@ import { APP, CLIPS, clipTr } from '../brand/app/appTokens';
 import { SongPlayScreen, type FeedLine, type ScoreRow } from '../brand/app/SongPlayScreen';
 import { songieTheme } from '../themes/songie';
 import type { AppTheme } from '../themes/types';
+import { crew, crewScores, listening, solverSchema, type Crew } from './friends';
 
 /** Points per stage in song-guess (0,1 / 0,5 / 2 / 8 / 15 sn). */
 const POINTS = [1000, 700, 450, 250, 100] as const;
@@ -30,6 +31,8 @@ export const r1Schema = z.object({
   songFrom: z.number().min(0).max(29),
   /** Scene color order (see PALETTES); `pnpm reel` picks one per song. */
   palette: z.number().int().min(0),
+  /** The friend who knows it (the one jumping up in the clip). */
+  solver: solverSchema,
 });
 
 export type R1Props = z.infer<typeof r1Schema>;
@@ -40,11 +43,12 @@ export const R1_META = {
   fps: VIDEO.fps,
   width: VIDEO.width,
   height: VIDEO.height,
-  defaultProps: { answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5, palette: 0 } as R1Props,
+  defaultProps: { answer: 'Tarkan – Kuzu Kuzu', solveStage: 0, song: 'assets/songs/16412320.mp3', songFrom: 15.5, palette: 0, solver: 'Mert' } as R1Props,
 } as const;
 
 /** "Mert 0,1 sn'de bildi +1000": the app's live-feed wording with tr-TR seconds. */
-export const solveLabel = (stage: R1Props['solveStage']) => `Mert ${clipTr(CLIPS[stage]!)} sn'de bildi +${POINTS[stage]}`;
+export const solveLabel = (stage: R1Props['solveStage'], solver = 'Mert') =>
+  `${solver.trim()} ${clipTr(CLIPS[stage]!)} sn'de bildi +${POINTS[stage]}`;
 
 /** Storyboard frames (30 fps). Each wipe ends where the next scene starts on the new color. */
 export const R1 = {
@@ -94,19 +98,13 @@ const Hook: React.FC<{ theme: AppTheme; bg: string }> = ({ theme, bg }) => {
   );
 };
 
-const feed = (): FeedLine[] => [{ name: 'Kaan', text: 'pas geçti', color: APP.red }];
-const scores = (t: AppTheme): ScoreRow[] => [
-  { name: 'Mert', score: 2420, color: t.colors.mint },
-  { name: 'Sen', score: 2150, color: t.colors.yellow, me: true },
-  { name: 'Deniz', score: 1780, color: t.colors.panel },
-  { name: 'Ece', score: 920, color: t.colors.panel },
-];
+const feed = (c8: Crew): FeedLine[] => [{ name: c8.others[2], text: 'pas geçti', color: APP.red }];
 
 const PHONE_W = 680;
 const PHONE_H = 1240;
 
 /** 30–105: the play screen at stage 0 with the waveform playing, a 3·2·1 countdown and the comments prompt. */
-const Play: React.FC<{ theme: AppTheme; stage: number; bg: string }> = ({ theme, stage, bg }) => {
+const Play: React.FC<{ theme: AppTheme; stage: number; bg: string; c8: Crew }> = ({ theme, stage, bg, c8 }) => {
   const c = theme.colors;
   const frame = useCurrentFrame();
   const enter = usePop(0, 14);
@@ -131,9 +129,9 @@ const Play: React.FC<{ theme: AppTheme; stage: number; bg: string }> = ({ theme,
             playing
             press={interpolate(frame, [4, 8, 14], [0, 1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' })}
             timer={Math.max(1, 15 - Math.floor(frame / 30))}
-            feed={feed()}
-            scores={scores(theme)}
-            status="Mert, Deniz ve Ece dinliyor."
+            feed={feed(c8)}
+            scores={crewScores(theme, c8)}
+            status={listening(c8)}
           />
         </PhoneFrame>
       </div>
@@ -151,7 +149,7 @@ const CLIP_W = 560;
 const CLIP_H = Math.round((CLIP_W * 1280) / 720);
 
 /** 115–190: yellow, the AI reaction clip; Mert jumps up at R1.solve, the others cry foul at R1.cheat. */
-const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage']; bg: string }> = ({ theme, stage, bg }) => {
+const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage']; bg: string; solver: string }> = ({ theme, stage, bg, solver }) => {
   const c = theme.colors;
   const solve = R1.solve - R1.clip;
   const cheat = R1.cheat - R1.clip;
@@ -161,7 +159,7 @@ const Reaction: React.FC<{ theme: AppTheme; stage: R1Props['solveStage']; bg: st
         <ClipCard theme={theme} src="assets/r1-react.mp4" from={R1.clipFrom} rotate={-3} width={CLIP_W} height={CLIP_H} />
       </div>
       <div style={{ position: 'absolute', left: 0, right: 0, top: SAFE.top + 10, display: 'flex', justifyContent: 'center' }}>
-        <Sticker theme={theme} text={solveLabel(stage)} bg={stickerOn(theme, bg, ['mint', 'yellow', 'sky'])} rotate={-4} enterAt={solve} size={58} />
+        <Sticker theme={theme} text={solveLabel(stage, solver)} bg={stickerOn(theme, bg, ['mint', 'yellow', 'sky'])} rotate={-4} enterAt={solve} size={58} />
       </div>
       <Sticker
         theme={theme}
@@ -254,7 +252,7 @@ const Song: React.FC<{ src: string; from: number }> = ({ src, from }) => {
   );
 };
 
-export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage, song, songFrom, palette }) => {
+export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage, song, songFrom, palette, solver }) => {
   const theme = songieTheme;
   const [A, B, C, D] = scenePalette(theme, palette);
   return (
@@ -263,11 +261,11 @@ export const R1Challenge: React.FC<R1Props> = ({ answer, solveStage, song, songF
         <Hook theme={theme} bg={A} />
       </Sequence>
       <Sequence from={R1.hookEnd} durationInFrames={R1.wipe1 - R1.hookEnd} name="Play">
-        <Play theme={theme} stage={solveStage} bg={A} />
+        <Play theme={theme} stage={solveStage} bg={A} c8={crew(solver)} />
       </Sequence>
       <ColorWipe theme={theme} from={A} to={B} at={R1.wipe1} durationInFrames={R1.clip - R1.wipe1} />
       <Sequence from={R1.clip} durationInFrames={R1.wipe2 - R1.clip} name="Reaction">
-        <Reaction theme={theme} stage={solveStage} bg={B} />
+        <Reaction theme={theme} stage={solveStage} bg={B} solver={solver} />
       </Sequence>
       <ColorWipe theme={theme} from={B} to={C} at={R1.wipe2} durationInFrames={R1.answer - R1.wipe2} />
       <Sequence from={R1.answer} durationInFrames={R1.wipe3 - R1.answer} name="Answer">
