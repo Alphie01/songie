@@ -39,6 +39,9 @@ import { I8RedFlagFlirt, I8_META, i8Schema } from './reels/itiraf/I8RedFlagFlirt
 import { I9Paranoia, I9_META, I10_META, i9Schema } from './reels/itiraf/I9Paranoia';
 import { I11Bottle, I11_META, I12_META, i11Schema } from './reels/itiraf/I11Bottle';
 import { C1Case, C1_META, c1Schema } from './reels/casebook/C1Case';
+import { C2Puzzle, C2_META, c2Schema, puzzleBeats } from './reels/casebook/C2Puzzle';
+import { C3Interrogation, C3_META, c3Schema, interrogationBeats } from './reels/casebook/C3Interrogation';
+import { C4Squad, C4_META, c4Schema } from './reels/casebook/C4Squad';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -313,6 +316,32 @@ export const RemotionRoot: React.FC = () => (
       schema={c1Schema}
       defaultProps={C1_META.defaultProps}
       durationInFrames={C1_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={C2_META.id}
+      component={C2Puzzle}
+      schema={c2Schema}
+      defaultProps={C2_META.defaultProps}
+      durationInFrames={puzzleBeats(C2_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: puzzleBeats(props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={C3_META.id}
+      component={C3Interrogation}
+      schema={c3Schema}
+      defaultProps={C3_META.defaultProps}
+      durationInFrames={interrogationBeats(C3_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: interrogationBeats(props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={C4_META.id}
+      component={C4Squad}
+      schema={c4Schema}
+      defaultProps={C4_META.defaultProps}
+      durationInFrames={C4_META.durationInFrames}
       {...video}
     />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />

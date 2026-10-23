@@ -6,6 +6,8 @@ import { PALETTES } from '../src/brand/palette.js';
 import { FRIEND_NAMES } from '../src/reels/friends.js';
 import { CONFESSION_PAIRS, FLIRT_PAIRS } from '../src/reels/itiraf/confessionPairs.js';
 import { caseProps } from './casebook.js';
+import { interrogationById, interrogationLines, puzzleById, puzzleLines, voiceClips } from './caseAds.js';
+import { INTERROGATIONS, PUZZLES } from '../src/reels/casebook/adCases.js';
 import { fetchSong, type SongAsset } from './deezer.js';
 
 /**
@@ -548,8 +550,62 @@ async function caseReel(args: string[], root: string) {
   console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
 }
 
+/** Casebook ad reels: `yalanci [<vaka>]`, `sorgu [<şüpheli>]`, `ekip [--name X]`, each with `--song`/`--from`. */
+export const CASE_ADS = {
+  yalanci: { id: 'casebook-02-yalanci', music: 'hitman kevin macleod', cover: 30, ids: PUZZLES.map((p) => p.id) },
+  sorgu: { id: 'casebook-03-sorgu', music: 'crypto kevin macleod', cover: 140, ids: INTERROGATIONS.map((p) => p.id) },
+  ekip: { id: 'casebook-04-ekip', music: 'i knew a guy kevin macleod', cover: 40, ids: [] as string[] },
+} as const;
+
+async function caseAdReel(key: keyof typeof CASE_ADS, args: string[], root: string) {
+  const cfg = CASE_ADS[key];
+  const KNOWN = new Set(['--music', '--song', '--from', '--name']);
+  const unknown = args.filter((a, i) => a.startsWith('--') && !KNOWN.has(a) && !KNOWN.has(args[i - 1] ?? ''));
+  const opt = (n: string) => {
+    const i = args.indexOf(n);
+    return i >= 0 ? args[i + 1]?.trim() : undefined;
+  };
+  const free = args.filter((a, i) => !a.startsWith('--') && !KNOWN.has(args[i - 1] ?? ''));
+  const pick = free[0] ?? cfg.ids[Math.floor(Math.random() * cfg.ids.length)];
+  const name = opt('--name');
+  if (unknown.length || (cfg.ids.length && !cfg.ids.includes(pick!)) || (name !== undefined && (!name || name.length > 12))) {
+    console.error(
+      `${unknown.length ? `Bilinmeyen seçenek: ${unknown.join(', ')}\n` : ''}kullanım: pnpm reel ${key}${cfg.ids.length ? ` [${cfg.ids.join('|')}]` : ' [--name <isim>]'} [--song "<şarkı>"] [--from <saniye>]`,
+    );
+    process.exit(1);
+  }
+  const musicQuery = opt('--music') ?? opt('--song');
+  const music = await fetchSong(musicQuery ?? cfg.music, path.join(root, 'assets'));
+  const musicFrom = opt('--from') !== undefined ? Number(opt('--from')) : musicStart(loudestStart(rmsSteps(music.file), 0.5), 20);
+  let props: Record<string, unknown>;
+  if (key === 'yalanci') {
+    const pz = puzzleById(pick!)!;
+    const voices = await voiceClips(puzzleLines(pz), root);
+    props = { scene: pz.scene, premise: pz.premise, clue: pz.clue, suspects: pz.suspects.map(({ name: n, portrait, line, liar }) => ({ name: n, portrait, line, liar })), voices, reveal: pz.reveal };
+    console.log(`Vaka: ${pz.premise} İpucu: ${pz.clue.text}`);
+  } else if (key === 'sorgu') {
+    const iv = interrogationById(pick!)!;
+    const voices = await voiceClips(interrogationLines(iv), root);
+    props = { name: iv.suspect.name, portrait: iv.suspect.portrait, q1: iv.q1, a1: iv.a1, evidence: iv.evidence, q2: iv.q2, a2: iv.a2, voices };
+    console.log(`Sorgu: ${iv.suspect.name}`);
+  } else {
+    props = { solver: name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!, backdrop: 'cases/sahnede-olum/img/scene-1.webp' };
+    console.log(`Ekip: ${props.solver as string}`);
+  }
+  console.log(`Müzik: ${music.answer} · ${musicFrom} sn'den`);
+  const json = JSON.stringify({ ...props, music: music.src, musicFrom });
+  const file = `${key}${pick ? `-${pick}` : ''}${name ? `-${slug(name)}` : ''}`;
+  run('npx', ['remotion', 'render', 'src/index.ts', cfg.id, `out/${file}.mp4`, '--codec=h264', '--crf=18', `--props=${json}`], root);
+  run('npx', ['remotion', 'still', 'src/index.ts', cfg.id, `out/${file}.png`, `--frame=${cfg.cover}`, `--props=${json}`], root);
+  console.log(`\nHazır:\n  ${path.join(root, 'out', `${file}.mp4`)}\n  ${path.join(root, 'out', `${file}.png`)}`);
+}
+
 async function main() {
   const args = process.argv.slice(2);
+  if (args[0] && args[0] in CASE_ADS) {
+    await caseAdReel(args[0] as keyof typeof CASE_ADS, args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
+    return;
+  }
   if (args[0] === 'case') {
     await caseReel(args.slice(1), path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'));
     return;

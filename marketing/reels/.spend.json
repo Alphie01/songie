@@ -1,6 +1,6 @@
 {
   "cap": 10,
-  "spent": 0.365,
+  "spent": 0.5650000000000002,
   "entries": [
     {
       "id": "friends-ref",
@@ -15,6 +15,146 @@
       "provider": "kie",
       "usd": 0.315,
       "taskId": "bc7f94a62e2c665e96e9c1741ec342fb",
+      "state": "done"
+    },
+    {
+      "id": "tts-t-kerem",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-t-det",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-t-selin",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-yagmur-0",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-yagmur-1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-yagmur-2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-elektrik-0",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-elektrik-1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-elektrik-2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-telefon-0",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-telefon-1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-pz-telefon-2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-volkan-q1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-volkan-a1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-volkan-q2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-volkan-a2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-nihan-q1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-nihan-a1",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-nihan-q2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "tts-iv-nihan-a2",
+      "kind": "audio",
+      "provider": "openai",
+      "usd": 0.01,
       "state": "done"
     }
   ]

@@ -2,8 +2,8 @@ import React from 'react';
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
 import { hasStaticFile } from '../../brand/ClipCard';
-import { CaseFolder, CasebookLogo, CasePhoto, Flash, Note, NoirStage, Pin, Polaroid, Stamp, Typewriter } from '../../brand/casebook/Noir';
-import { FONT_DISPLAY, FONT_MONO, SAFE, VIDEO } from '../../brand/fonts';
+import { caps, CaseFolder, CasebookLogo, CasePhoto, Flash, Note, NoirStage, Pin, Polaroid, Stamp, Typewriter } from '../../brand/casebook/Noir';
+import { FONT_DISPLAY, FONT_HEAD, FONT_MONO, SAFE, VIDEO } from '../../brand/fonts';
 import { SFX_VOLUME } from '../../brand/mix';
 import { usePop } from '../../brand/motion';
 import { Music } from '../../brand/Music';
@@ -331,21 +331,28 @@ const Board: React.FC<{ p: C1Props }> = ({ p }) => {
   );
 };
 
-const Cta: React.FC = () => {
+/** Closing card; `kicker` is a line above the logo ("Bu sadece bir ipucuydu."), `tagline` replaces the case count. */
+export const CasebookCta: React.FC<{ kicker?: string; tagline?: string }> = ({ kicker, tagline = '15 vaka, 1–8 dedektif, herkes aynı ekipte' }) => {
+  const kick = usePop(0, 16);
   const logo = usePop(4, 12);
   const name = usePop(10, 14);
   const stores = usePop(30, 12);
   return (
     <NoirStage>
       <AbsoluteFill style={{ alignItems: 'center', justifyContent: 'center', padding: `${SAFE.top}px ${SAFE.side}px ${SAFE.bottom - 120}px`, gap: 26 }}>
+        {kicker && (
+          <div style={{ fontFamily: FONT_HEAD, fontSize: 104, lineHeight: 0.95, color: c.yellow, textAlign: 'center', marginBottom: 20, opacity: Math.min(1, kick * 2), transform: `scale(${interpolate(kick, [0, 1], [1.3, 1])})` }}>
+            {caps(kicker)}
+          </div>
+        )}
         <div style={{ transform: `scale(${logo}) rotate(${interpolate(logo, [0, 1], [-14, 0])}deg)` }}>
-          <CasebookLogo size={300} />
+          <CasebookLogo size={kicker ? 240 : 300} />
         </div>
         <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 150, lineHeight: 0.9, color: c.paper, opacity: Math.min(1, name * 2), transform: `translateY(${interpolate(name, [0, 1], [40, 0])}px)` }}>
           {casebookTheme.name}
         </div>
         <Typewriter text={casebookTheme.cta} enterAt={14} charsPerFrame={1.6} size={60} style={{ textAlign: 'center', width: 960 }} />
-        <div style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 36, color: NOIR.dim }}>15 vaka, 1–8 dedektif, herkes aynı ekipte</div>
+        <div style={{ fontFamily: FONT_MONO, fontWeight: 700, fontSize: 36, color: NOIR.dim }}>{tagline}</div>
         <div
           style={{
             marginTop: 20,
@@ -389,7 +396,7 @@ export const C1Case: React.FC<C1Props> = (p) => {
         <Board p={p} />
       </Sequence>
       <Sequence from={CB.cta} name="CTA">
-        <Cta />
+        <CasebookCta />
       </Sequence>
       <Flash at={CB.scene} />
       <Flash at={CB.evidence} />

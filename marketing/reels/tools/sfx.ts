@@ -14,7 +14,7 @@ function bin(name: string): string {
 export const ffmpegBin = () => bin('ffmpeg');
 export const ffprobeBin = () => bin('ffprobe');
 
-export type SfxName = 'bip' | 'ding' | 'whoosh' | 'pop' | 'buzz' | 'tick' | 'type' | 'stamp' | 'shutter';
+export type SfxName = 'bip' | 'ding' | 'whoosh' | 'pop' | 'buzz' | 'tick' | 'type' | 'stamp' | 'shutter' | 'siren' | 'heart' | 'clock' | 'msg';
 
 const SPECS: Record<SfxName, { src: string; af?: string; t: number }> = {
   bip: { src: 'sine=frequency=1200:duration=0.1', af: 'afade=t=out:st=0.08:d=0.02', t: 0.1 },
@@ -37,6 +37,22 @@ const SPECS: Record<SfxName, { src: string; af?: string; t: number }> = {
     src: "aevalsrc='(random(0)*2-1)*(exp(-160*t)+0.8*gt(t,0.09)*exp(-160*(t-0.09)))':d=0.2",
     af: 'highpass=f=900,volume=0.8',
     t: 0.2,
+  },
+  /** Two-tone police wail, a heartbeat (lub-dub), a heavy clock tick, a chat message blip. */
+  siren: {
+    src: "aevalsrc='0.5*sin(2*PI*(700+250*sgn(sin(2*PI*2.5*t)))*t)*min(1,t*8)*min(1,(0.9-t)*6)':d=0.9",
+    af: 'lowpass=f=3000',
+    t: 0.9,
+  },
+  heart: {
+    src: "aevalsrc='0.95*sin(2*PI*55*t)*exp(-25*t)+0.75*gt(t,0.22)*sin(2*PI*50*(t-0.22))*exp(-25*(t-0.22))':d=0.6",
+    af: 'lowpass=f=300,volume=2',
+    t: 0.6,
+  },
+  clock: { src: "aevalsrc='0.9*sin(2*PI*1800*t)*exp(-200*t)+0.5*sin(2*PI*600*t)*exp(-90*t)':d=0.06", t: 0.06 },
+  msg: {
+    src: "aevalsrc='0.6*sin(2*PI*1320*t)*exp(-18*t)*lt(t,0.09)+0.6*gt(t,0.09)*sin(2*PI*1760*(t-0.09))*exp(-18*(t-0.09))':d=0.3",
+    t: 0.3,
   },
 };
 

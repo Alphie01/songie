@@ -13,7 +13,7 @@ export class BudgetError extends Error {
 
 export type SpendEntry = {
   id: string;
-  kind: 'image' | 'video';
+  kind: 'image' | 'video' | 'audio';
   provider: 'kie' | 'openai';
   usd: number;
   taskId?: string;

@@ -253,3 +253,48 @@ Bir basın gecesi, sekiz tabaklık bir menü ve kanında hiç kullanmadığı bi
 #casebook #dedektif #polisiye #cinayet #gizem #vakadosyası #arkadaşlarla #oyungecesi #truecrime #reels
 
 **Müzik kredisi:** Music: "Hitman" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Yalancı kim? (`casebook-02-yalanci`), izleyici çözer
+
+```sh
+pnpm reel yalanci            # yagmur | elektrik | telefon (verilmezse rastgele)
+pnpm reel yalanci elektrik --song "crypto kevin macleod"
+```
+
+Polis ışığı + "BİRİ YALAN SÖYLÜYOR." → olay + tek ipucu → 3 şüpheli sesli ifade verir, geri sayım → "Durdur. Sence kim?" → YALANCI damgası + ipucu → "Bu sadece bir ipucuydu." + logo. Mini vakalar reklama özel yazıldı (`src/reels/casebook/adCases.ts`); oyundaki vakaları bozmaz. Sesler OpenAI TTS ile bir kez üretilir (`assets/voices/`).
+
+**Açıklama:**
+
+Biri yalan söylüyor 🕵️ 3 şüpheli, 1 ipucu, 10 saniye. Yalancıyı buldun mu? Cevabını yorumlara yaz, sonra videonun sonuna bak 👀 Casebook'ta gerçek vakaları ekibinle çöz.
+
+**Hashtag'ler:** #casebook #yalancıkim #dedektif #bulmaca #gizem #polisiye #beyinjimnastiği #arkadaşlarla #reels
+
+## Sorgu odası (`casebook-03-sorgu`)
+
+```sh
+pnpm reel sorgu              # volkan | nihan
+```
+
+Tek ampul, şüpheli, sen soruyorsun → cevap → kanıt düşer → ikinci soru → "Avukatımı istiyorum." → YALAN → "Herkes bir şey saklıyor." + logo.
+
+**Açıklama:**
+
+"O gece neredeydin?" 🔦 Sorguyu sen yönetiyorsun. Kanıt masada, şüpheli köşede. Casebook'ta herkes bir şey saklıyor.
+
+**Hashtag'ler:** #casebook #sorgu #dedektif #polisiye #truecrime #gizem #reels
+
+## Ekip gecesi (`casebook-04-ekip`)
+
+```sh
+pnpm reel ekip --name Mert   # sohbetteki ilk arkadaşın adı
+```
+
+"Arkadaş grubunun dedektifi kim?" → grubun vaka sohbeti (kamera fotoğrafı, tartışma) → "BULDUM 🔎" → Başkomiser, DOSYA KAPANDI → "Grubun dedektifi sen ol."
+
+**Açıklama:**
+
+Grubun dedektifi kim? 🔎 Etiketle, bu hafta sonu dosyayı birlikte açın. Casebook: 15 vaka, 1–8 kişi, herkes aynı ekipte.
+
+**Hashtag'ler:** #casebook #arkadaşgrubu #dedektif #oyungecesi #gizem #polisiye #reels
+
+**Müzik kredisi:** Music: "Hitman" / "Crypto" / "I Knew a Guy" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0. Seslendirme: OpenAI TTS (yapay zekâ sesi).

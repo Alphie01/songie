@@ -1,7 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from 'remotion';
 import { NOIR, casebookTheme } from '../../themes/casebook';
-import { FONT_DISPLAY, FONT_MONO } from '../fonts';
+import { FONT_DISPLAY, FONT_HEAD, FONT_MONO } from '../fonts';
 import { hasStaticFile } from '../ClipCard';
 import { usePop } from '../motion';
 
@@ -320,3 +320,138 @@ export const Note: React.FC<{ text: string; enterAt?: number; rotate?: number; w
 export const CasebookLogo: React.FC<{ size?: number }> = ({ size = 260 }) => (
   <Img src={staticFile('casebook/icon/icon.png')} style={{ width: size, height: size, borderRadius: size * 0.22 }} />
 );
+
+/** Red/blue police strobe washing over the frame from both sides (true-crime opener). */
+export const PoliceLights: React.FC<{ from?: number; to?: number; strength?: number }> = ({ from = 0, to = 9999, strength = 0.55 }) => {
+  const frame = useCurrentFrame();
+  if (frame < from || frame > to) return null;
+  const t = frame - from;
+  const phase = Math.floor(t / 4) % 4; // red, red, blue, blue with a dark gap between
+  const fade = interpolate(frame, [to - 10, to], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  const red = phase === 0 ? 1 : phase === 1 ? 0.35 : 0;
+  const blue = phase === 2 ? 1 : phase === 3 ? 0.35 : 0;
+  return (
+    <AbsoluteFill style={{ pointerEvents: 'none', mixBlendMode: 'screen', opacity: strength * fade }}>
+      <AbsoluteFill style={{ opacity: red, background: 'radial-gradient(ellipse 70% 55% at 0% 30%, #ff1a1a 0%, transparent 70%)' }} />
+      <AbsoluteFill style={{ opacity: blue, background: 'radial-gradient(ellipse 70% 55% at 100% 30%, #1a5cff 0%, transparent 70%)' }} />
+    </AbsoluteFill>
+  );
+};
+
+/** Condensed true-crime caps that punch in (scale 1.4 → 1) at `enterAt`. */
+export const BigCaps: React.FC<{ text: string; enterAt?: number; size?: number; color?: string; style?: React.CSSProperties }> = ({
+  text,
+  enterAt = 0,
+  size = 170,
+  color = c.paper,
+  style,
+}) => {
+  const frame = useCurrentFrame();
+  const p = usePop(enterAt, 18);
+  if (frame < enterAt) return null;
+  return (
+    <div
+      style={{
+        fontFamily: FONT_HEAD,
+        fontSize: size,
+        lineHeight: 0.92,
+        color,
+        letterSpacing: size * 0.01,
+        textShadow: '0 8px 30px rgba(0,0,0,0.8)',
+        opacity: Math.min(1, p * 2),
+        transform: `scale(${interpolate(p, [0, 1], [1.4, 1])})`,
+        transformOrigin: 'left center',
+        whiteSpace: 'pre-line',
+        ...style,
+      }}
+    >
+      {caps(text)}
+    </div>
+  );
+};
+
+/** Bebas Neue has caps only: lowercase "i" would show as dotless "I", so uppercase the Turkish way first. */
+export const caps = (s: string) => s.toLocaleUpperCase('tr-TR');
+
+/** Little live waveform while someone talks. */
+export const Waveform: React.FC<{ active: boolean; color?: string; bars?: number; height?: number }> = ({ active, color = c.yellow, bars = 7, height = 44 }) => {
+  const frame = useCurrentFrame();
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, height }}>
+      {Array.from({ length: bars }, (_, i) => {
+        const h = active ? 0.25 + 0.75 * Math.abs(Math.sin(frame * 0.45 + i * 1.7) * hash(i + Math.floor(frame / 3))) : 0.15;
+        return <div key={i} style={{ width: 8, height: height * h, borderRadius: 4, background: color }} />;
+      })}
+    </div>
+  );
+};
+
+/** Evidence card: source line in mono, the fact big; optional yellow marker sweep at `markAt`. */
+export const ClueCard: React.FC<{ source: string; text: string; enterAt?: number; markAt?: number; width?: number; size?: number; rotate?: number; style?: React.CSSProperties }> = ({
+  source,
+  text,
+  enterAt = 0,
+  markAt,
+  width = 900,
+  size = 54,
+  rotate = -1.5,
+  style,
+}) => {
+  const frame = useCurrentFrame();
+  const p = usePop(enterAt, 14);
+  const mark = markAt === undefined ? 0 : interpolate(frame, [markAt, markAt + 14], [0, 100], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
+  if (frame < enterAt) return null;
+  return (
+    <div
+      style={{
+        width,
+        boxSizing: 'border-box',
+        padding: '26px 34px 30px',
+        background: NOIR.doc,
+        color: NOIR.docInk,
+        fontFamily: FONT_MONO,
+        boxShadow: '0 24px 50px rgba(0,0,0,0.7)',
+        borderLeft: `14px solid ${c.coral}`,
+        opacity: Math.min(1, p * 2),
+        transform: `rotate(${rotate}deg) translateY(${interpolate(p, [0, 1], [-160, 0])}px)`,
+        ...style,
+      }}
+    >
+      <div style={{ fontSize: Math.round(size * 0.52), fontWeight: 700, opacity: 0.6 }}>{source}</div>
+      <div style={{ marginTop: 8, fontSize: size, fontWeight: 700, lineHeight: 1.15 }}>
+        <span
+          style={{
+            backgroundImage: `linear-gradient(${c.yellow}, ${c.yellow})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: `${mark}% 100%`,
+            boxDecorationBreak: 'clone',
+            WebkitBoxDecorationBreak: 'clone',
+          }}
+        >
+          {text}
+        </span>
+      </div>
+    </div>
+  );
+};
+
+/** Countdown ring with the seconds left in the middle; turns red under 4. */
+export const Countdown: React.FC<{ from: number; frames: number; seconds: number; size?: number }> = ({ from, frames, seconds, size = 150 }) => {
+  const frame = useCurrentFrame();
+  const t = Math.min(1, Math.max(0, (frame - from) / frames));
+  const left = Math.ceil(seconds * (1 - t));
+  const r = size / 2 - 10;
+  const len = 2 * Math.PI * r;
+  const col = left <= 3 ? '#ff3b30' : c.paper;
+  return (
+    <div style={{ position: 'relative', width: size, height: size }}>
+      <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="rgba(5,4,7,0.7)" stroke="rgba(243,230,196,0.18)" strokeWidth={10} />
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={col} strokeWidth={10} strokeDasharray={len} strokeDashoffset={len * t} strokeLinecap="round" />
+      </svg>
+      <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONT_HEAD, fontSize: size * 0.5, color: col, paddingTop: 6 }}>
+        {left}
+      </div>
+    </div>
+  );
+};
