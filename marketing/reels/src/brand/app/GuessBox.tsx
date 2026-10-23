@@ -12,10 +12,12 @@ type Props = {
   /** Caret blink: pass false on odd beats. */
   caret?: boolean;
   skipLabel?: string;
+  /** 0..1 press-down of the "Pas" button. */
+  skipPress?: number;
 };
 
 /** .sg-answer: white search box ("Şarkıyı bul") + yellow "Pas" button, with the suggestion list (.guess-list). */
-export const GuessBox: React.FC<Props> = ({ theme, guess, suggestions, selected, caret = false, skipLabel = 'Pas' }) => {
+export const GuessBox: React.FC<Props> = ({ theme, guess, suggestions, selected, caret = false, skipLabel = 'Pas', skipPress = 0 }) => {
   const c = theme.colors;
   const box: React.CSSProperties = {
     minHeight: 58,
@@ -82,7 +84,8 @@ export const GuessBox: React.FC<Props> = ({ theme, guess, suggestions, selected,
           justifyContent: 'center',
           background: c.yellow,
           color: APP.ink2,
-          boxShadow: `0 5px 0 ${c.ink}`,
+          boxShadow: `0 ${5 - 4 * skipPress}px 0 ${c.ink}`,
+          transform: `translateY(${4 * skipPress}px)`,
           fontWeight: 800,
         }}
       >

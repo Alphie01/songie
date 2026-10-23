@@ -33,7 +33,7 @@ export const SongieLogo: React.FC<{ theme: AppTheme; size?: number }> = ({ theme
  * Closing card for the last 2 s: a tilted paper card (6 px ink line, hard shadow) with the logo, "Songie",
  * theme.cta and the stores sticker. Paper keeps the pink logo readable on every stage color.
  */
-export const CtaCard: React.FC<{ theme: AppTheme; enterAt?: number }> = ({ theme, enterAt = 0 }) => {
+export const CtaCard: React.FC<{ theme: AppTheme; enterAt?: number; cta?: string }> = ({ theme, enterAt = 0, cta = theme.cta }) => {
   const c = theme.colors;
   const card = usePop(enterAt, 12);
   const logo = usePop(enterAt + 4, 9);
@@ -61,7 +61,7 @@ export const CtaCard: React.FC<{ theme: AppTheme; enterAt?: number }> = ({ theme
           <SongieLogo theme={theme} size={240} />
         </div>
         <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 800, fontSize: 140, lineHeight: 0.9, color: c.ink }}>{theme.name}</div>
-        <Headline theme={theme} text={theme.cta} enterAt={enterAt + 8} size={68} maxWidth={760} />
+        <Headline theme={theme} text={cta} enterAt={enterAt + 8} size={68} maxWidth={760} />
         <Sticker
           theme={theme}
           text={theme.stores}

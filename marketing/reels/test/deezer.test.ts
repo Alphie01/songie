@@ -6,7 +6,13 @@ import { fetchSong, searchTrack } from '../tools/deezer';
 
 afterEach(() => vi.unstubAllGlobals());
 
-const hit = { id: 16412320, title: 'Kuzu Kuzu', preview: 'https://cdn.example/p.mp3', artist: { name: 'Tarkan' } };
+const hit = {
+  id: 16412320,
+  title: 'Kuzu Kuzu',
+  preview: 'https://cdn.example/p.mp3',
+  artist: { name: 'Tarkan' },
+  album: { title: 'Karma', cover_xl: 'https://cdn.example/c.jpg' },
+};
 
 describe('deezer', () => {
   it('skips results without a preview', async () => {
@@ -26,9 +32,15 @@ describe('deezer', () => {
     );
     vi.stubGlobal('fetch', fetchMock);
     const s = await fetchSong('tarkan kuzu kuzu', dir);
-    expect(s).toMatchObject({ answer: 'Tarkan – Kuzu Kuzu', src: 'assets/songs/16412320.mp3' });
+    expect(s).toMatchObject({
+      answer: 'Tarkan – Kuzu Kuzu',
+      album: 'Karma',
+      src: 'assets/songs/16412320.mp3',
+      cover: 'assets/songs/16412320.jpg',
+    });
+    expect(fs.existsSync(path.join(dir, 'songs', '16412320.jpg'))).toBe(true);
     expect(fs.readFileSync(path.join(dir, 'songs', '16412320.mp3'))).toHaveLength(3);
     await fetchSong('tarkan kuzu kuzu', dir);
-    expect(fetchMock.mock.calls.filter(([u]) => !String(u).includes('api.deezer.com'))).toHaveLength(1);
+    expect(fetchMock.mock.calls.filter(([u]) => !String(u).includes('api.deezer.com'))).toHaveLength(2);
   });
 });

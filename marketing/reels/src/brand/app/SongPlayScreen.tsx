@@ -32,10 +32,14 @@ type Props = {
   code?: string;
   /** 0..1 press-down of the play button. */
   press?: number;
+  /** 0..1 press-down of the "Pas" button. */
+  skipPress?: number;
+  /** Progress fill override (%), for animating between stages. */
+  fill?: number;
 };
 
 /** iOS status bar as in the App Store shots: 9:41, dynamic island, signal / wifi / battery. */
-const StatusBar: React.FC<{ color: string; island: string }> = ({ color, island }) => (
+export const StatusBar: React.FC<{ color: string; island: string }> = ({ color, island }) => (
   <div style={{ position: 'absolute', inset: '0 0 auto 0', height: 54 }}>
     <span style={{ position: 'absolute', left: 40, top: 21, fontSize: 17, fontWeight: 800, lineHeight: '22px', color }}>
       9:41
@@ -72,6 +76,8 @@ export const SongPlayScreen: React.FC<Props> = ({
   round = 'Tur 4/10',
   code = 'ODAK',
   press = 0,
+  skipPress = 0,
+  fill,
 }) => {
   const c = theme.colors;
   const screen = usePhoneScreen() ?? { width: 798, height: 1746 };
@@ -122,7 +128,7 @@ export const SongPlayScreen: React.FC<Props> = ({
             <span style={{ fontSize: 13, fontWeight: 800, letterSpacing: 2, color: APP.text3 }}>{code}</span>
           </div>
 
-          <StageBar theme={theme} stage={stage} />
+          <StageBar theme={theme} stage={stage} fill={fill} />
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10, padding: '4px 0' }}>
             <PlayButton theme={theme} playing={playing} press={press} />
@@ -149,7 +155,7 @@ export const SongPlayScreen: React.FC<Props> = ({
             </span>
           </div>
 
-          <GuessBox theme={theme} guess={guess} suggestions={suggestions} selected={selected} caret={caret} />
+          <GuessBox theme={theme} guess={guess} suggestions={suggestions} selected={selected} caret={caret} skipPress={skipPress} />
 
           {status && (
             <p style={{ margin: 0, fontSize: 14, fontWeight: 700, color: APP.text2, textAlign: 'center' }}>{status}</p>
