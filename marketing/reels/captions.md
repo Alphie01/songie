@@ -383,7 +383,7 @@ Grup sohbeti: "bu akşam olmaz" → **Olsun.** "Bu akşam kafamı dinliyorum." �
 
 ## Entrika: üç kreatif
 
-Gerçek oyun ekranları (`src/brand/weknows/intrigue/InScreens.tsx`, "Songie Arayüz" Entrika.dc.html + web oyunu), mum ışıklı saray odası (gpt-image-2), Cormorant, ElevenLabs sesleri (anlatıcı "Ergun Kalbak", doğrulamalı).
+Gerçek oyun ekranları (`src/brand/weknows/intrigue/InScreens.tsx`, "Songie Arayüz" Entrika.dc.html + web oyunu). 2026-10-24 kullanıcı kararıyla renkli Songie dili (`src/brand/weknows/Bright.tsx`), seslendirme yok, enerjik müzik.
 
 ```sh
 pnpm reel entrika-engel  # "Sen ne yapardın?": Mert Fedai'yim deyip suikast yapar; elinde Muhafız var, engellersin, "Yalan!" der, kaybeder
@@ -398,4 +398,4 @@ pnpm reel entrika-say    # "Kart say": her rolden 3 kart; 2 Fedai açık, 1'i se
 
 **Hashtag'ler:** #weknows #entrika #coup #blöf #masaoyunu #arkadaşlarla #oyungecesi #reels
 
-**Müzik kredisi:** Music: "Crypto" / "Thief in the Night" / "I Knew a Guy" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+**Müzik kredisi:** Music: "Scheming Weasel (Faster)" / "Sneaky Snitch" / "Monkeys Spinning Monkeys" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

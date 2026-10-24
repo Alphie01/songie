@@ -8,16 +8,16 @@ import { IN_COUNT } from '../src/reels/weknows/intrigueAds';
 const root = path.resolve(__dirname, '..');
 
 describe('We Knows · Entrika reels', () => {
-  it('valid defaults, voices on disk, 15–20,5 s each', () => {
+  it('valid defaults, music only, 14–20,5 s each', () => {
     for (const [meta, schema, key] of [
       [EN1_META, en1Schema, 'i1'],
       [EN2_META, en2Schema, 'i2'],
       [EN3_META, en3Schema, 'i3'],
     ] as const) {
       expect(schema.safeParse(meta.defaultProps).success, meta.id).toBe(true);
-      for (const v of meta.defaultProps.voices) expect(fs.existsSync(path.join(root, 'public', v.src)), v.src).toBe(true);
+      for (const v of meta.defaultProps.voices) expect(v.src, 'music only, no voice-over').toBe('');
       const sec = shotBeats(EN_SHOTS[key], meta.defaultProps.voices).total / 30;
-      expect(sec, meta.id).toBeGreaterThanOrEqual(15);
+      expect(sec, meta.id).toBeGreaterThanOrEqual(14);
       expect(sec, meta.id).toBeLessThanOrEqual(20.5);
     }
   });

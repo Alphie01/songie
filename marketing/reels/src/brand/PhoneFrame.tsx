@@ -21,12 +21,14 @@ type Props = {
   tilt?: number;
   width?: number;
   height?: number;
+  /** Corner radius (default PHONE.radius, sized for the 840 px phone; smaller phones need less). */
+  radius?: number;
   style?: React.CSSProperties;
   children?: React.ReactNode;
 };
 
 /** The dark purple phone from the App Store shots: panel rim, thick ink bezel, hard ink shadow. */
-export const PhoneFrame: React.FC<Props> = ({ theme, tilt = 0, width = PHONE.width, height = PHONE.height, style, children }) => {
+export const PhoneFrame: React.FC<Props> = ({ theme, tilt = 0, width = PHONE.width, height = PHONE.height, radius = PHONE.radius, style, children }) => {
   const c = theme.colors;
   const inset = PHONE.rim + PHONE.bezel;
   const screen = { width: width - 2 * inset, height: height - 2 * inset };
@@ -37,7 +39,7 @@ export const PhoneFrame: React.FC<Props> = ({ theme, tilt = 0, width = PHONE.wid
         width,
         height,
         boxSizing: 'border-box',
-        borderRadius: PHONE.radius,
+        borderRadius: radius,
         border: `${PHONE.rim}px solid ${c.panel}`,
         background: c.ink,
         boxShadow: `${PHONE.shadow}px ${PHONE.shadow}px 0 ${c.ink}`,
@@ -52,7 +54,7 @@ export const PhoneFrame: React.FC<Props> = ({ theme, tilt = 0, width = PHONE.wid
           top: PHONE.bezel,
           width: screen.width,
           height: screen.height,
-          borderRadius: PHONE.radius - inset,
+          borderRadius: radius - inset,
           overflow: 'hidden',
           background: c.bg,
         }}

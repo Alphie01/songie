@@ -1,13 +1,12 @@
 import React from 'react';
-import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from 'remotion';
 import { z } from 'zod';
+import { silent, voiced } from './silent';
 import { hasStaticFile } from '../../brand/ClipCard';
-import { EASE } from '../../brand/casebook/Editorial';
-import { FONT_COURT, VIDEO } from '../../brand/fonts';
+import { VIDEO } from '../../brand/fonts';
 import { SFX_VOLUME } from '../../brand/mix';
 import { Music } from '../../brand/Music';
-import { Court, CourtLine, IN, InUi } from '../../brand/weknows/Court';
-import { AppPhone } from '../../brand/weknows/Night';
+import { BT, BrightShot, BrightThink, STAGES, WkBrightCta } from '../../brand/weknows/Bright';
 import { type InPlayer, InChallenge, InPickAction, InResult, InReveal } from '../../brand/weknows/intrigue/InScreens';
 import { shotBeats } from './H1Hitler';
 import { IN_BLOCK, IN_BLUFF, IN_COUNT } from './intrigueAds';
@@ -20,9 +19,8 @@ export const en1Schema = schemaOf(6);
 export const en2Schema = schemaOf(5);
 export const en3Schema = schemaOf(4);
 type Props = z.infer<typeof en1Schema>;
-const vo = (id: string, sec: number) => ({ src: `assets/voices/${id}.el.mp3`, sec });
 
-type Shot = { voice?: number; hold: number; render: (len: number) => React.ReactNode };
+type Shot = { voice?: number; hold: number; render: (len: number, color: string) => React.ReactNode };
 
 const Sfx: React.FC<{ name: string; at: number; frames?: number; volume?: number }> = ({ name, at, frames = 15, volume = 1 }) => (
   <Sequence from={at} durationInFrames={frames} layout="none" name={`sfx ${name}`}>
@@ -30,79 +28,27 @@ const Sfx: React.FC<{ name: string; at: number; frames?: number; volume?: number
   </Sequence>
 );
 
-/** Shot frame: the candlelit chamber, the line above, the real game screen in the phone. */
-const PhoneShot: React.FC<{ line?: string; who?: string; len: number; glow?: string; lineColor?: string; children: React.ReactNode }> = ({ line, who, len, glow = IN.ember, lineColor = IN.bone, children }) => (
-  <AbsoluteFill>
-    <Court dim={0.42} frames={len} />
-    {line && (
-      <div style={{ position: 'absolute', left: IN.M, top: 222, width: IN.W }}>
-        {who && (
-          <InUi size={30} color={IN.gold}>
-            {who}
-          </InUi>
-        )}
-        <CourtLine text={line} at={4} frames={Math.min(40, len)} size={66} color={lineColor} />
-      </div>
-    )}
-    <AppPhone glow={glow}>{children}</AppPhone>
-  </AbsoluteFill>
+/** Music only since 2026-10-24 (user: no voice-over from Entrika on); lines stay on screen for their reading time. */
+
+/** Shot frame: a colour field, the line on top, the game's real screen in the brand phone. */
+const PhoneShot: React.FC<{ line?: string; who?: string; len: number; color: string; glow?: string; lineColor?: string; children: React.ReactNode }> = ({ line, who, len, color, children }) => (
+  <BrightShot color={color} line={line} who={who} len={len}>
+    {children}
+  </BrightShot>
 );
 
-const Think: React.FC<{ len: number; text: string }> = ({ len, text }) => {
-  const frame = useCurrentFrame();
-  const t = interpolate(frame, [len - 52, len], [1, 0], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp' });
-  if (frame < len - 54) return null;
-  return (
-    <div style={{ position: 'absolute', left: IN.M, top: 1560, width: IN.W }}>
-      <InUi size={28} weight={500} color={IN.dim}>
-        {text}
-      </InUi>
-      <div style={{ marginTop: 10, height: 3, background: 'rgba(243,234,216,0.2)' }}>
-        <div style={{ width: `${t * 100}%`, height: '100%', background: t < 0.35 ? IN.red : IN.gold }} />
-      </div>
-    </div>
-  );
-};
-
-const InCta: React.FC<{ line: string; sub: string }> = ({ line, sub }) => {
-  const frame = useCurrentFrame();
-  const a = interpolate(frame, [2, 16], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: EASE });
-  const b = interpolate(frame, [14, 28], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: EASE });
-  return (
-    <AbsoluteFill>
-      <Court dim={0.5} frames={70} push={[1.14, 1.18]} />
-      <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(12,7,5,0.25), rgba(12,7,5,0.9) 70%)' }} />
-      <div style={{ position: 'absolute', left: IN.M, top: 600, width: IN.W, opacity: a, transform: `translateY(${(1 - a) * 20}px)` }}>
-        <div style={{ fontFamily: FONT_COURT, fontStyle: 'italic', fontWeight: 600, fontSize: 160, lineHeight: 0.92, color: IN.bone }}>{line}</div>
-        <InUi size={44} weight={500} style={{ marginTop: 24 }}>
-          {sub}
-        </InUi>
-      </div>
-      <div style={{ position: 'absolute', left: IN.M, top: 1230, display: 'flex', alignItems: 'center', gap: 26, opacity: b }}>
-        {hasStaticFile('weknows/icon/icon.png') && <Img src={staticFile('weknows/icon/icon.png')} style={{ width: 128, height: 128, borderRadius: 30 }} />}
-        <div>
-          <InUi size={64} weight={700}>
-            We Knows
-          </InUi>
-          <InUi size={30} weight={500} color={IN.dim}>
-            App Store ve Google Play’de ücretsiz
-          </InUi>
-        </div>
-      </div>
-    </AbsoluteFill>
-  );
-};
+const Think: React.FC<{ len: number; text: string }> = ({ len, text }) => <BrightThink len={len} text={text} />;
 
 const Reel: React.FC<{ p: Props; shots: Shot[]; cta: { line: string; sub: string }; extra?: (b: ReturnType<typeof shotBeats>) => React.ReactNode }> = ({ p, shots, cta, extra }) => {
   const b = shotBeats(shots, p.voices);
   return (
-    <AbsoluteFill style={{ backgroundColor: IN.deep }}>
+    <AbsoluteFill style={{ backgroundColor: BT.colors.bg }}>
       {shots.map((s, i) => {
         const len = (b.at[i + 1] ?? b.cta) - b.at[i]!;
         const v = s.voice !== undefined ? p.voices[s.voice] : undefined;
         return (
           <Sequence key={i} from={b.at[i]} durationInFrames={len} name={`shot ${i + 1}`}>
-            {s.render(len)}
+            {s.render(len, STAGES[i % STAGES.length]!)}
             {v && hasStaticFile(v.src) && (
               <Sequence from={4} durationInFrames={f(v.sec) + 8} layout="none">
                 <Audio src={staticFile(v.src)} volume={1.1} />
@@ -112,9 +58,9 @@ const Reel: React.FC<{ p: Props; shots: Shot[]; cta: { line: string; sub: string
         );
       })}
       <Sequence from={b.cta} name="CTA">
-        <InCta {...cta} />
+        <WkBrightCta cta={cta.line} />
       </Sequence>
-      <Music src={p.music} from={p.musicFrom} volume={0.9} duck={{ from: 0, to: b.cta - 6, level: 0.38 }} />
+      <Music src={p.music} from={p.musicFrom} duck={voiced(p.voices) ? { from: 0, to: b.cta - 6, level: 0.38 } : undefined} />
       {extra?.(b)}
     </AbsoluteFill>
   );
@@ -138,31 +84,31 @@ export const EN1_META = {
   fps: FPS,
   width: VIDEO.width,
   height: VIDEO.height,
-  defaultProps: { voices: [vo('in-b1', 3.5), vo('in-b2', 1.64), vo('in-b3', 1.57), vo('in-b4', 1.89), vo('in-b5', 0.86), vo('in-b6', 4.37)], music: 'assets/songs/3919656801.mp3', musicFrom: 0 } as Props,
+  defaultProps: { voices: silent(IN_BLOCK.map((l) => l.text)), music: 'assets/songs/3919489751.mp3', musicFrom: 0 } as Props,
 } as const;
 
 const EN1_SHOTS: Shot[] = [
-  { voice: 0, hold: 2, render: (len) => <PhoneShot line={IN_BLOCK[0]!.text} len={len} glow={IN.red}><Ch1 mine={null} from={8} /></PhoneShot> },
-  { voice: 1, hold: 6, render: (len) => <PhoneShot who="Mert" line={`“${IN_BLOCK[1]!.text}”`} len={len} glow={IN.red}><Ch1 mine={null} from={6} /></PhoneShot> },
+  { voice: 0, hold: 2, render: (len, color) => <PhoneShot color={color} line={IN_BLOCK[0]!.text} len={len}><Ch1 mine={null} from={8} /></PhoneShot> },
+  { voice: 1, hold: 6, render: (len, color) => <PhoneShot color={color} who="Mert" line={`“${IN_BLOCK[1]!.text}”`} len={len}><Ch1 mine={null} from={6} /></PhoneShot> },
   {
     voice: 2,
     hold: 52,
-    render: (len) => (
+    render: (len, color) => (
       <AbsoluteFill>
-        <PhoneShot line={IN_BLOCK[2]!.text} len={len} glow={IN.gold}>
+        <PhoneShot color={color} line={IN_BLOCK[2]!.text} len={len}>
           <Ch1 mine={null} from={5} />
         </PhoneShot>
         <Think len={len} text="Yalan mı dersin, engeller misin, geçer misin? Yorumlara yaz." />
       </AbsoluteFill>
     ),
   },
-  { voice: 3, hold: 6, render: (len) => <PhoneShot who="Sen" line={`“${IN_BLOCK[3]!.text}”`} len={len} glow={'#5ab8ff'}><Ch1 mine="block" from={2} /></PhoneShot> },
-  { voice: 4, hold: 10, render: (len) => <PhoneShot who="Mert" line={`“${IN_BLOCK[4]!.text}”`} len={len} glow={IN.red}><Ch1 mine="block" from={2} /></PhoneShot> },
+  { voice: 3, hold: 6, render: (len, color) => <PhoneShot color={color} who="Sen" line={`“${IN_BLOCK[3]!.text}”`} len={len}><Ch1 mine="block" from={2} /></PhoneShot> },
+  { voice: 4, hold: 10, render: (len, color) => <PhoneShot color={color} who="Mert" line={`“${IN_BLOCK[4]!.text}”`} len={len}><Ch1 mine="block" from={2} /></PhoneShot> },
   {
     voice: 5,
     hold: 12,
-    render: (len) => (
-      <PhoneShot line={IN_BLOCK[5]!.text} len={len} glow={'#5ab8ff'}>
+    render: (len, color) => (
+      <PhoneShot color={color} line={IN_BLOCK[5]!.text} len={len}>
         <InReveal players={TABLE} {...MY_HAND} who="Sen" role="guard" truthful loser="Mert" />
       </PhoneShot>
     ),
@@ -215,7 +161,7 @@ export const EN2_META = {
   fps: FPS,
   width: VIDEO.width,
   height: VIDEO.height,
-  defaultProps: { voices: [vo('in-f1', 2.41), vo('in-f2', 2.19), vo('in-f3', 1.73), vo('in-f4', 2.24), vo('in-f5', 3.31)], music: 'assets/songs/3919655981.mp3', musicFrom: 0 } as Props,
+  defaultProps: { voices: silent(IN_BLUFF.map((l) => l.text)), music: 'assets/songs/2124280777.mp3', musicFrom: 0 } as Props,
 } as const;
 
 /** "Kimse yalan demedi.": the window closes 3/3, then the gold climbs to 8 over two more taxes. */
@@ -231,15 +177,15 @@ const NobodyCalls: React.FC<{ len: number }> = ({ len }) => {
 };
 
 const EN2_SHOTS: Shot[] = [
-  { voice: 0, hold: 10, render: (len) => <PhoneShot line={IN_BLUFF[0]!.text} len={len}><InPickAction players={TABLE2()} {...BLUFF_HAND(2)} /></PhoneShot> },
-  { voice: 1, hold: 8, render: (len) => <PhoneShot who="Sen" line={`“${IN_BLUFF[1]!.text}”`} len={len} glow={IN.gold}><InPickAction players={TABLE2()} {...BLUFF_HAND(2)} selected="Vergi" /></PhoneShot> },
-  { voice: 2, hold: 40, render: (len) => <PhoneShot line={IN_BLUFF[2]!.text} len={len} glow={IN.gold}><NobodyCalls len={len} /></PhoneShot> },
-  { voice: 3, hold: 12, render: (len) => <PhoneShot line={IN_BLUFF[3]!.text} len={len} glow={IN.red}><InPickAction players={TABLE2(true)} {...BLUFF_HAND(8)} selected="Darbe" target="Mert" timerFill={0.4} /></PhoneShot> },
+  { voice: 0, hold: 10, render: (len, color) => <PhoneShot color={color} line={IN_BLUFF[0]!.text} len={len}><InPickAction players={TABLE2()} {...BLUFF_HAND(2)} /></PhoneShot> },
+  { voice: 1, hold: 8, render: (len, color) => <PhoneShot color={color} who="Sen" line={`“${IN_BLUFF[1]!.text}”`} len={len}><InPickAction players={TABLE2()} {...BLUFF_HAND(2)} selected="Vergi" /></PhoneShot> },
+  { voice: 2, hold: 40, render: (len, color) => <PhoneShot color={color} line={IN_BLUFF[2]!.text} len={len}><NobodyCalls len={len} /></PhoneShot> },
+  { voice: 3, hold: 12, render: (len, color) => <PhoneShot color={color} line={IN_BLUFF[3]!.text} len={len}><InPickAction players={TABLE2(true)} {...BLUFF_HAND(8)} selected="Darbe" target="Mert" timerFill={0.4} /></PhoneShot> },
   {
     voice: 4,
     hold: 18,
-    render: (len) => (
-      <PhoneShot line={IN_BLUFF[4]!.text} len={len} glow={IN.gold}>
+    render: (len, color) => (
+      <PhoneShot color={color} line={IN_BLUFF[4]!.text} len={len}>
         <InResult winner="Sen" me="Sen" ranking={[{ name: 'Sen' }, { name: 'Mert' }, { name: 'Zeynep' }, { name: 'Deniz' }]} />
       </PhoneShot>
     ),
@@ -278,7 +224,7 @@ export const EN3_META = {
   fps: FPS,
   width: VIDEO.width,
   height: VIDEO.height,
-  defaultProps: { voices: [vo('in-c1', 2.64), vo('in-c2', 4.2), vo('in-c3', 2.14), vo('in-c4', 2.57)], music: 'assets/songs/3919638451.mp3', musicFrom: 0 } as Props,
+  defaultProps: { voices: silent(IN_COUNT.lines.map((l) => l.text)), music: 'assets/songs/2124184357.mp3', musicFrom: 0 } as Props,
 } as const;
 
 const Ch3: React.FC<{ mine: 'lie' | null; from: number }> = ({ mine, from }) => {
@@ -288,15 +234,15 @@ const Ch3: React.FC<{ mine: 'lie' | null; from: number }> = ({ mine, from }) => 
 };
 
 const EN3_SHOTS: Shot[] = [
-  { voice: 0, hold: 10, render: (len) => <PhoneShot line={IN_COUNT.lines[0]!.text} len={len}><Ch3 mine={null} from={12} /></PhoneShot> },
-  { voice: 1, hold: 16, render: (len) => <PhoneShot line={IN_COUNT.lines[1]!.text} len={len} glow={IN.red}><Ch3 mine={null} from={11} /></PhoneShot> },
-  { voice: 2, hold: 6, render: (len) => <PhoneShot who="Mert" line={`“${IN_COUNT.lines[2]!.text}”`} len={len} glow={IN.red}><Ch3 mine={null} from={7} /></PhoneShot> },
+  { voice: 0, hold: 10, render: (len, color) => <PhoneShot color={color} line={IN_COUNT.lines[0]!.text} len={len}><Ch3 mine={null} from={12} /></PhoneShot> },
+  { voice: 1, hold: 16, render: (len, color) => <PhoneShot color={color} line={IN_COUNT.lines[1]!.text} len={len}><Ch3 mine={null} from={11} /></PhoneShot> },
+  { voice: 2, hold: 6, render: (len, color) => <PhoneShot color={color} who="Mert" line={`“${IN_COUNT.lines[2]!.text}”`} len={len}><Ch3 mine={null} from={7} /></PhoneShot> },
   {
     voice: 3,
     hold: 52,
-    render: (len) => (
+    render: (len, color) => (
       <AbsoluteFill>
-        <PhoneShot line={IN_COUNT.lines[3]!.text} len={len} glow={IN.gold}>
+        <PhoneShot color={color} line={IN_COUNT.lines[3]!.text} len={len}>
           <Ch3 mine={null} from={5} />
         </PhoneShot>
         <Think len={len} text="Kartları say. Durdur, cevabını yorumlara yaz." />
@@ -305,8 +251,8 @@ const EN3_SHOTS: Shot[] = [
   },
   {
     hold: 64,
-    render: (len) => (
-      <PhoneShot line="Üç Fedai’nin üçü de görünüyordu. Mert blöf yaptı." len={len} glow={IN.red}>
+    render: (len, color) => (
+      <PhoneShot color={color} line="Üç Fedai’nin üçü de görünüyordu. Mert blöf yaptı." len={len}>
         <InReveal players={TABLE3} {...HAND3} who="Mert" role="assassin" truthful={false} loser="Mert" />
       </PhoneShot>
     ),

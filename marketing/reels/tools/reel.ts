@@ -564,9 +564,9 @@ export const CASE_ADS = {
   // Songie · "Olsun" (solo; the in-game song is Pilli Bebek – Olsun, also the music)
   olsun: { id: 'songie-04-olsun', music: 'pilli bebek olsun', cover: 70, ids: [] as string[] },
   // We Knows · Entrika (voices: assets/voices/in-*.el.mp3)
-  'entrika-engel': { id: 'weknows-entrika-01-ne-yapardin', music: 'crypto kevin macleod', cover: 260, ids: [] as string[] },
-  'entrika-blof': { id: 'weknows-entrika-02-kartin-yoktu', music: 'thief in the night kevin macleod', cover: 130, ids: [] as string[] },
-  'entrika-say': { id: 'weknows-entrika-03-kart-say', music: 'i knew a guy kevin macleod', cover: 300, ids: [] as string[] },
+  'entrika-engel': { id: 'weknows-entrika-01-ne-yapardin', music: 'scheming weasel kevin macleod', cover: 260, ids: [] as string[] },
+  'entrika-blof': { id: 'weknows-entrika-02-kartin-yoktu', music: 'sneaky snitch kevin macleod', cover: 130, ids: [] as string[] },
+  'entrika-say': { id: 'weknows-entrika-03-kart-say', music: 'monkeys spinning monkeys kevin macleod', cover: 300, ids: [] as string[] },
   // We Knows · Secret Hitler (voices: assets/voices/sh-*.el.mp3)
   'hitler-ja': { id: 'weknows-hitler-01-ja-nein', music: 'interloper kevin macleod', cover: 230, ids: [] as string[] },
   'hitler-yalan': { id: 'weknows-hitler-02-kim-yalan', music: 'thief in the night kevin macleod', cover: 50, ids: [] as string[] },
