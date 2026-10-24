@@ -1,6 +1,6 @@
 {
   "cap": 10,
-  "spent": 0.5650000000000002,
+  "spent": 0.6650000000000003,
   "entries": [
     {
       "id": "friends-ref",
@@ -155,6 +155,20 @@
       "kind": "audio",
       "provider": "openai",
       "usd": 0.01,
+      "state": "done"
+    },
+    {
+      "id": "ww-night",
+      "kind": "image",
+      "provider": "openai",
+      "usd": 0.05,
+      "state": "done"
+    },
+    {
+      "id": "ww-dawn",
+      "kind": "image",
+      "provider": "openai",
+      "usd": 0.05,
       "state": "done"
     }
   ]

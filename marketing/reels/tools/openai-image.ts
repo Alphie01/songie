@@ -19,7 +19,11 @@ export async function generateImage(o: { prompt: string; out: string; size?: str
     form.append('prompt', o.prompt);
     form.append('size', size);
     form.append('quality', quality);
-    for (const r of o.refs) form.append('image[]', new Blob([fs.readFileSync(r)]), path.basename(r));
+    for (const r of o.refs) {
+      const ext = path.extname(r).slice(1).toLowerCase();
+      const type = ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : ext === 'webp' ? 'image/webp' : 'image/png';
+      form.append('image[]', new Blob([fs.readFileSync(r)], { type }), path.basename(r));
+    }
     res = await fetch('https://api.openai.com/v1/images/edits', { method: 'POST', headers, body: form });
   } else {
     res = await fetch('https://api.openai.com/v1/images/generations', {

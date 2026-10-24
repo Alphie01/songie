@@ -326,3 +326,24 @@ Saat 21:00’den 22:14’e döner → üç ifade zaman çizelgesinde çubuk olur
 **Açıklama:** 22:14. Üç ifade, bir kamera. Kim yalan söylüyor? Cevabını yorumlara yaz. Casebook’ta zaman çizelgesini ekibinle kur.
 
 **Hashtag'ler:** #casebook #bulmaca #dedektif #yalancıkim #polisiye #gizem #reels
+
+# We Knows
+
+## Kurt Adam: üç kreatif
+
+Gerçek oyun ekranları (`src/brand/weknows/kurt/KurtScreens.tsx`, "Songie Arayüz" KurtAdam.dc.html + web oyunu), ElevenLabs sesleri (anlatıcı "Sinan", oyuncular cast havuzundan; her replik transkripsiyonla doğrulanır: `tools/verifyVoices.ts`), gpt-image-2 köy (gece/şafak).
+
+```sh
+pnpm reel kurt-koy   # "Köy uyusun": anlatıcı bir geceyi yönetir: kurtlar Mert'i seçer, kahin Deniz'e bakar, sabah Mert ölü
+pnpm reel kurt-kim   # "Kim kurt?": Ece öldü, doktorun koruduğu ölmez; üç iddia; Deniz kurt (izleyici çözer)
+pnpm reel kurt-rol   # "Rolün: Kurt": basılı tut, kurtsun; masa sana döner; oylama bir eksik; kurtlar kazandı
+```
+
+**Açıklamalar:**
+- Köy uyusun: "Gece oldu. Köy uyusun." 🌕 Kurtlar aranızda. We Knows'ta Kurt Adam, anlatıcı telefonda, herkes aynı odada.
+- Kim kurt?: Ece öldü. Deniz "Ece'yi korudum" diyor. Kurt kim? Cevabını yorumlara yaz.
+- Rolün: Kurt: Rolün kurt çıktı. Arkadaşlarına yalan söyleyebilir misin? 🐺
+
+**Hashtag'ler:** #weknows #kurtadam #vampirköylü #werewolf #arkadaşlarla #oyungecesi #partioyunu #reels
+
+**Müzik kredisi:** Music: "Myst on the Moor" / "Dark Fog" / "Night of Chaos" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

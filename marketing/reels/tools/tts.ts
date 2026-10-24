@@ -17,6 +17,8 @@ export type VoiceLine = {
   /** ElevenLabs voice id (the game's Turkish cast) and an optional v3 delivery tag, e.g. "[nervous]". */
   el?: string;
   tag?: string;
+  /** Playback speed after trimming (default 1.12; 1 keeps a dramatic read intact). */
+  tempo?: number;
 };
 
 /**
@@ -29,15 +31,15 @@ export async function speak(line: VoiceLine, outDir: string, ledger = new SpendL
   const out = path.join(outDir, `${base}.mp3`);
   const raw = path.join(outDir, `${base}.raw.mp3`);
   if (!fs.existsSync(raw)) await (eleven ? fetchEleven(line, raw, eleven) : fetchSpeech(line, raw, ledger));
-  if (!fs.existsSync(out) || fs.statSync(out).mtimeMs < fs.statSync(raw).mtimeMs) tighten(raw, out);
+  if (!fs.existsSync(out) || fs.statSync(out).mtimeMs < fs.statSync(raw).mtimeMs) tighten(raw, out, line.tempo);
   return out;
 }
 
 /** Reels pace: no lead-in/tail silence, pauses cut to 0,12 s, 12 % faster (pitch kept), loudness -15 LUFS over the music. */
-export function tighten(src: string, out: string): void {
+export function tighten(src: string, out: string, tempo = 1.12): void {
   execFileSync(ffmpegBin(), [
     '-hide_banner', '-loglevel', 'error', '-y', '-i', src,
-    '-af', 'silenceremove=start_periods=1:start_threshold=-42dB:stop_periods=-1:stop_duration=0.15:stop_silence=0.12:stop_threshold=-42dB,atempo=1.12,loudnorm=I=-15:TP=-1.5:LRA=7,apad=pad_dur=0.08',
+    '-af', `silenceremove=start_periods=1:start_threshold=-42dB:stop_periods=-1:stop_duration=0.15:stop_silence=0.12:stop_threshold=-42dB,atempo=${tempo},loudnorm=I=-15:TP=-1.5:LRA=7,apad=pad_dur=0.08`,
     '-ar', '44100', out,
   ]);
 }

@@ -44,6 +44,21 @@ import { C3Interrogation, C3_META, c3Schema, interrogationBeats } from './reels/
 import { C4Squad, C4_META, c4Schema } from './reels/casebook/C4Squad';
 import { C5Trailer, C5_META, c5Schema, trailerBeats } from './reels/casebook/C5Trailer';
 import { C6Timeline, C6_META, c6Schema } from './reels/casebook/C6Timeline';
+import { W1Night, W1_META, nightBeats, w1Schema } from './reels/weknows/W1Night';
+import { W2WhoWolf, W2_META, w2Schema, whoBeats } from './reels/weknows/W2WhoWolf';
+import { W3YouWolf, W3_META, w3Schema, youBeats } from './reels/weknows/W3YouWolf';
+import {
+  KURT_PLAYERS,
+  KurtDawn,
+  KurtDiscuss,
+  KurtNightSeer,
+  KurtNightSleep,
+  KurtNightWolf,
+  KurtResult,
+  KurtVerdict,
+  KurtVote,
+  Screen390,
+} from './brand/weknows/kurt/KurtScreens';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -184,6 +199,83 @@ const BottlePreview: React.FC<{ phase: 'table' | 'choice' | 'task' }> = ({ phase
     </PhoneFrame>
   </AbsoluteFill>
 );
+
+/** Kurt Adam ad screens at the artboard's 390×844 (render with --scale=2 for checks against KurtAdam.dc.html). */
+const KurtPreview: React.FC<{ screen: string }> = ({ screen }) => {
+  const P = KURT_PLAYERS;
+  const body =
+    screen === 'wolf' ? (
+      <KurtNightWolf players={P} pick={null} timer={18} cardOpen={false} />
+    ) : screen === 'wolfPick' ? (
+      <KurtNightWolf players={P} pick={2} timer={18} cardOpen />
+    ) : screen === 'sleep' ? (
+      <KurtNightSleep players={P} timer={18} cardOpen={false} />
+    ) : screen === 'seer' ? (
+      <KurtNightSeer players={P} pick={null} result={null} timer={21} />
+    ) : screen === 'seerResult' ? (
+      <KurtNightSeer players={P} pick={2} result={{ name: 'Deniz', wolf: false }} timer={12} cardOpen />
+    ) : screen === 'dawn' ? (
+      <KurtDawn nightNo={2} dead={['Deniz']} players={P} roles={{ Deniz: 'villager' }} />
+    ) : screen === 'discuss' ? (
+      <KurtDiscuss
+        dayNo={2}
+        players={P}
+        me="Sude"
+        myNomination="Bora"
+        candidates={[
+          { name: 'Bora', by: ['Sude', 'Ece'] },
+          { name: 'Mert', by: ['Zeynep'] },
+        ]}
+        timer={74}
+        readyCount={[2, 6]}
+      />
+    ) : screen === 'vote' ? (
+      <KurtVote
+        options={[
+          { name: 'Bora', votes: 3, by: ['Ece', 'Sude', 'Zeynep'] },
+          { name: 'Mert', votes: 1, by: ['Deniz'] },
+        ]}
+        noneVotes={0}
+        mine="Bora"
+        progress={[4, 6]}
+      />
+    ) : screen === 'verdict' ? (
+      <KurtVerdict
+        hanged="Bora"
+        role="wolf"
+        tally={[
+          { name: 'Bora', votes: 4 },
+          { name: 'Mert', votes: 1 },
+          { name: 'Kimseyi asma', votes: 1 },
+        ]}
+      />
+    ) : screen === 'spared' ? (
+      <KurtVerdict hanged={null} spared="tie" tally={[{ name: 'Bora', votes: 3 }, { name: 'Mert', votes: 3 }]} />
+    ) : screen === 'resultWolves' ? (
+      <KurtResult winner="wolves" reason="wolvesParity" />
+    ) : (
+      <KurtResult
+        winner="village"
+        reason="wolvesDead"
+        roles={[
+          { name: 'Kaan', role: 'wolf', dead: true },
+          { name: 'Bora', role: 'wolf', dead: true },
+          { name: 'Ece', role: 'seer' },
+          { name: 'Mert', role: 'doctor' },
+          { name: 'Deniz', role: 'villager', dead: true },
+          { name: 'Zeynep', role: 'witch' },
+          { name: 'Sude', role: 'villager' },
+        ]}
+      />
+    );
+  return (
+    <Screen390 width={390} height={844}>
+      {body}
+    </Screen390>
+  );
+};
+
+const KURT_STILLS = ['wolf', 'wolfPick', 'sleep', 'seer', 'seerResult', 'dawn', 'discuss', 'vote', 'verdict', 'spared', 'resultWolves', 'resultVillage'];
 
 const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
 
@@ -363,6 +455,33 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={C6_META.durationInFrames}
       {...video}
     />
+    <Composition
+      id={W1_META.id}
+      component={W1Night}
+      schema={w1Schema}
+      defaultProps={W1_META.defaultProps}
+      durationInFrames={nightBeats(W1_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: nightBeats(props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={W2_META.id}
+      component={W2WhoWolf}
+      schema={w2Schema}
+      defaultProps={W2_META.defaultProps}
+      durationInFrames={whoBeats(W2_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: whoBeats(props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={W3_META.id}
+      component={W3YouWolf}
+      schema={w3Schema}
+      defaultProps={W3_META.defaultProps}
+      durationInFrames={youBeats(W3_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: youBeats(props.voices).total })}
+      {...video}
+    />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="SongPlayScreenGuess"
@@ -407,5 +526,8 @@ export const RemotionRoot: React.FC = () => (
       width={VIDEO.width}
       height={VIDEO.height}
     />
+    {KURT_STILLS.map((k) => (
+      <Still key={k} id={`Kurt-${k}`} component={KurtPreview} defaultProps={{ screen: k }} width={390} height={844} />
+    ))}
   </>
 );
