@@ -399,3 +399,22 @@ pnpm reel entrika-say    # "Kart say": her rolden 3 kart; 2 Fedai açık, 1'i se
 **Hashtag'ler:** #weknows #entrika #coup #blöf #masaoyunu #arkadaşlarla #oyungecesi #reels
 
 **Müzik kredisi:** Music: "Scheming Weasel (Faster)" / "Sneaky Snitch" / "Monkeys Spinning Monkeys" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Ajanlar: üç kreatif (renkli, seslendirmesiz)
+
+Gerçek oyun ekranları (`src/brand/weknows/agents/AgScreens.tsx`, "Songie Arayüz" Ajanlar.dc.html + web oyunu), renkli Songie dili (`Bright.tsx`).
+
+```sh
+pnpm reel ajanlar-su      # "SU 2": hangi iki kart? BALIK, BUZ; BARDAK tarafsız tuzak (izleyici çözer)
+pnpm reel ajanlar-yanlis  # "Tek yanlış kart": BAHÇE doğru, fazladan hakla BIÇAK → suikastçı, oyun biter
+pnpm reel ajanlar-lider   # "Lider sensin": renkleri sadece sen görüyorsun; poker yüzü
+```
+
+**Açıklamalar:**
+- SU 2: Liderin ipucu "SU 2". Hangi iki karta basardın? Yorumlara yaz 👀
+- Tek yanlış kart: Bir hak daha vardı… BIÇAK'a basmasaydık 😭
+- Lider sensin: Takımın yanlış karta uzanırken yüzün bir şey belli etmesin.
+
+**Hashtag'ler:** #weknows #ajanlar #codenames #kelimeoyunu #takımoyunu #arkadaşlarla #oyungecesi #reels
+
+**Müzik kredisi:** Music: "Run Amok" / "Pixelland" / "Funkorama" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

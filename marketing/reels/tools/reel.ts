@@ -567,6 +567,10 @@ export const CASE_ADS = {
   'entrika-engel': { id: 'weknows-entrika-01-ne-yapardin', music: 'scheming weasel kevin macleod', cover: 260, ids: [] as string[] },
   'entrika-blof': { id: 'weknows-entrika-02-kartin-yoktu', music: 'sneaky snitch kevin macleod', cover: 130, ids: [] as string[] },
   'entrika-say': { id: 'weknows-entrika-03-kart-say', music: 'monkeys spinning monkeys kevin macleod', cover: 300, ids: [] as string[] },
+  // We Knows · Ajanlar (bright, music only)
+  'ajanlar-su': { id: 'weknows-ajanlar-01-su-2', music: 'run amok kevin macleod', cover: 150, ids: [] as string[] },
+  'ajanlar-yanlis': { id: 'weknows-ajanlar-02-tek-yanlis', music: 'pixelland kevin macleod', cover: 200, ids: [] as string[] },
+  'ajanlar-lider': { id: 'weknows-ajanlar-03-lider-sensin', music: 'funkorama kevin macleod', cover: 200, ids: [] as string[] },
   // We Knows · Secret Hitler (voices: assets/voices/sh-*.el.mp3)
   'hitler-ja': { id: 'weknows-hitler-01-ja-nein', music: 'interloper kevin macleod', cover: 230, ids: [] as string[] },
   'hitler-yalan': { id: 'weknows-hitler-02-kim-yalan', music: 'thief in the night kevin macleod', cover: 50, ids: [] as string[] },
@@ -604,7 +608,7 @@ async function caseAdReel(key: keyof typeof CASE_ADS, args: string[], root: stri
     const voices = await voiceClips(interrogationLines(iv), root);
     props = { name: iv.suspect.name, portrait: iv.suspect.portrait, q1: iv.q1, a1: iv.a1, evidence: iv.evidence, q2: iv.q2, a2: iv.a2, voices };
     console.log(`Sorgu: ${iv.suspect.name}`);
-  } else if (key === 'fragman' || key === 'saat' || key.startsWith('kurt-') || key.startsWith('hitler-') || key.startsWith('entrika-') || key === 'olsun') {
+  } else if (key === 'fragman' || key === 'saat' || key.startsWith('kurt-') || key.startsWith('hitler-') || key.startsWith('entrika-') || key.startsWith('ajanlar-') || key === 'olsun') {
     props = {}; // the composition's own case (defaultProps); only the music changes
   } else {
     props = { solver: name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!, backdrop: 'cases/sahnede-olum/img/scene-1.webp' };

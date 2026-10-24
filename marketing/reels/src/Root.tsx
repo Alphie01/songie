@@ -48,6 +48,8 @@ import { C6Timeline, C6_META, c6Schema } from './reels/casebook/C6Timeline';
 import { W1Night, W1_META, nightBeats, w1Schema } from './reels/weknows/W1Night';
 import { W2WhoWolf, W2_META, w2Schema, whoBeats } from './reels/weknows/W2WhoWolf';
 import { W3YouWolf, W3_META, w3Schema, youBeats } from './reels/weknows/W3YouWolf';
+import { AG1Clue, AG1_META, AG2Assassin, AG2_META, AG3Leader, AG3_META, AG_SHOTS, agSchema } from './reels/weknows/A1Agents';
+import { brightBeats } from './brand/weknows/Bright';
 import { EN1Block, EN1_META, EN2Bluff, EN2_META, EN3Count, EN3_META, EN_SHOTS, en1Schema, en2Schema, en3Schema } from './reels/weknows/I1Intrigue';
 import { H1Vote, H1_META, H2Liar, H2_META, H3You, H3_META, H_SHOTS, h1Schema, h2Schema, h3Schema, shotBeats } from './reels/weknows/H1Hitler';
 import {
@@ -73,6 +75,7 @@ import {
   ShVoteResult,
 } from './brand/weknows/hitler/ShScreens';
 import { IN_HAND, IN_PLAYERS, InChallenge, InLoseCard, InPickAction, InResult, InReveal } from './brand/weknows/intrigue/InScreens';
+import { AG_OPEN, AgBoard, AgGiveClue, AgResult } from './brand/weknows/agents/AgScreens';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -395,6 +398,32 @@ const InPreview: React.FC<{ screen: string }> = ({ screen }) => {
 };
 const IN_STILLS = ['pick', 'pickTarget', 'pickCoup', 'challenge', 'challengePassed', 'challengeSteal', 'challengeOther', 'reveal', 'revealBluff', 'lose', 'losePicked', 'result'];
 
+/** Ajanlar ad screens at the artboard's 390×844 (render with --scale=2 for checks against Ajanlar.dc.html). */
+const AgPreview: React.FC<{ screen: string }> = ({ screen }) => {
+  const body =
+    screen === 'member' ? (
+      <AgBoard open={AG_OPEN} />
+    ) : screen === 'leader' ? (
+      <AgBoard open={AG_OPEN} leader />
+    ) : screen === 'pressing' ? (
+      <AgBoard open={AG_OPEN} pressing={22} />
+    ) : screen === 'clue' ? (
+      <AgGiveClue open={AG_OPEN} word="su" count={2} />
+    ) : screen === 'error' ? (
+      <AgGiveClue open={AG_OPEN} word="balıkçı" count={2} />
+    ) : screen === 'resultAgents' ? (
+      <AgResult winner="g" reason="agents" open={[...AG_OPEN, 0, 3, 6, 7, 10, 13, 18, 5, 12]} />
+    ) : (
+      <AgResult winner="g" reason="assassin" open={[...AG_OPEN, 0, 3, 6, 5, 12, 11]} />
+    );
+  return (
+    <Screen390 width={390} height={844}>
+      {body}
+    </Screen390>
+  );
+};
+const AG_STILLS = ['member', 'leader', 'pressing', 'clue', 'error', 'resultAgents', 'resultAssassin'];
+
 const SH_STILLS = [
   'vote',
   'voteJa',
@@ -684,6 +713,30 @@ export const RemotionRoot: React.FC = () => (
       calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(EN_SHOTS.i3, props.voices).total })}
       {...video}
     />
+    <Composition
+      id={AG1_META.id}
+      component={AG1Clue}
+      schema={agSchema}
+      defaultProps={AG1_META.defaultProps}
+      durationInFrames={brightBeats(AG_SHOTS.a1).total}
+      {...video}
+    />
+    <Composition
+      id={AG2_META.id}
+      component={AG2Assassin}
+      schema={agSchema}
+      defaultProps={AG2_META.defaultProps}
+      durationInFrames={brightBeats(AG_SHOTS.a2).total}
+      {...video}
+    />
+    <Composition
+      id={AG3_META.id}
+      component={AG3Leader}
+      schema={agSchema}
+      defaultProps={AG3_META.defaultProps}
+      durationInFrames={brightBeats(AG_SHOTS.a3).total}
+      {...video}
+    />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="SongPlayScreenGuess"
@@ -736,6 +789,9 @@ export const RemotionRoot: React.FC = () => (
     ))}
     {IN_STILLS.map((k) => (
       <Still key={k} id={`In-${k}`} component={InPreview} defaultProps={{ screen: k }} width={390} height={844} />
+    ))}
+    {AG_STILLS.map((k) => (
+      <Still key={k} id={`Ag-${k}`} component={AgPreview} defaultProps={{ screen: k }} width={390} height={844} />
     ))}
   </>
 );

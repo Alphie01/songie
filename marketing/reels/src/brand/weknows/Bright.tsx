@@ -119,3 +119,19 @@ export const WkBrightCta: React.FC<{ cta: string; color?: string }> = ({ cta, co
     </ColorStage>
   );
 };
+
+/** A bright reel: one colour per shot, each shot holds its line's reading time plus a breath, then the CTA. Music only. */
+export type BrightShotSpec = { line: string; hold?: number; render: (len: number, color: string) => React.ReactNode };
+
+/** Reading time for a line on screen: ~3 words a second, 1,4–4,5 s. */
+export const readFrames = (text: string, fps = 30) => Math.round(Math.min(4.5, Math.max(1.4, text.trim().split(/\s+/).length / 3 + 0.5)) * fps);
+
+export function brightBeats(shots: { line: string; hold?: number }[]) {
+  let t = 0;
+  const at = shots.map((s) => {
+    const a = t;
+    t += readFrames(s.line) + (s.hold ?? 10);
+    return a;
+  });
+  return { at, cta: t, total: t + 66 };
+}
