@@ -563,6 +563,10 @@ export const CASE_ADS = {
   'kurt-rol': { id: 'weknows-kurt-03-rolun-kurt', music: 'night of chaos kevin macleod', cover: 60, ids: [] as string[] },
   // Songie · "Olsun" (solo; the in-game song is Pilli Bebek – Olsun, also the music)
   olsun: { id: 'songie-04-olsun', music: 'pilli bebek olsun', cover: 70, ids: [] as string[] },
+  // We Knows · Entrika (voices: assets/voices/in-*.el.mp3)
+  'entrika-engel': { id: 'weknows-entrika-01-ne-yapardin', music: 'crypto kevin macleod', cover: 260, ids: [] as string[] },
+  'entrika-blof': { id: 'weknows-entrika-02-kartin-yoktu', music: 'thief in the night kevin macleod', cover: 130, ids: [] as string[] },
+  'entrika-say': { id: 'weknows-entrika-03-kart-say', music: 'i knew a guy kevin macleod', cover: 300, ids: [] as string[] },
   // We Knows · Secret Hitler (voices: assets/voices/sh-*.el.mp3)
   'hitler-ja': { id: 'weknows-hitler-01-ja-nein', music: 'interloper kevin macleod', cover: 230, ids: [] as string[] },
   'hitler-yalan': { id: 'weknows-hitler-02-kim-yalan', music: 'thief in the night kevin macleod', cover: 50, ids: [] as string[] },
@@ -600,7 +604,7 @@ async function caseAdReel(key: keyof typeof CASE_ADS, args: string[], root: stri
     const voices = await voiceClips(interrogationLines(iv), root);
     props = { name: iv.suspect.name, portrait: iv.suspect.portrait, q1: iv.q1, a1: iv.a1, evidence: iv.evidence, q2: iv.q2, a2: iv.a2, voices };
     console.log(`Sorgu: ${iv.suspect.name}`);
-  } else if (key === 'fragman' || key === 'saat' || key.startsWith('kurt-') || key.startsWith('hitler-') || key === 'olsun') {
+  } else if (key === 'fragman' || key === 'saat' || key.startsWith('kurt-') || key.startsWith('hitler-') || key.startsWith('entrika-') || key === 'olsun') {
     props = {}; // the composition's own case (defaultProps); only the music changes
   } else {
     props = { solver: name ?? FRIEND_NAMES[Math.floor(Math.random() * FRIEND_NAMES.length)]!, backdrop: 'cases/sahnede-olum/img/scene-1.webp' };

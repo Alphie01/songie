@@ -31,8 +31,17 @@ export async function verifiedVoices(lines: VoiceLine[], dir: string, tries = 3)
     let heard = '';
     for (let t = 0; t < tries; t++) {
       const file = await speak(l, dir);
+      const ok = `${file}.ok`;
+      // a take that passed once stays: transcription varies run to run, the audio does not
+      if (fs.existsSync(ok) && fs.statSync(ok).mtimeMs >= fs.statSync(file).mtimeMs) {
+        heard = fs.readFileSync(ok, 'utf8');
+        break;
+      }
       heard = await transcribe(file);
-      if (words(heard).join(' ') === words(l.text).join(' ')) break;
+      if (words(heard).join(' ') === words(l.text).join(' ')) {
+        fs.writeFileSync(ok, heard);
+        break;
+      }
       const base = file.replace(/\.mp3$/, '');
       for (const f of [file, `${base}.raw.mp3`]) fs.rmSync(f, { force: true });
       heard += ' ✗';

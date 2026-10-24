@@ -49,8 +49,24 @@ export async function shImages(): Promise<{ hall: string }> {
   return { hall };
 }
 
+const COURT =
+  'Cinematic night photograph, vertical frame. An empty Ottoman-era palace chamber lit only by candles: a low wooden table with scattered gold coins and two face-down playing cards, rich red and deep green fabrics, carved wooden screens, brass lantern, deep shadows, secretive and luxurious, no people, no text, no symbols, shot on 35mm film, natural grain.';
+
+/** Entrika backdrop: a candlelit palace chamber with coins and face-down cards. */
+export async function inImages(): Promise<{ court: string }> {
+  const ledger = new SpendLedger(SPEND_FILE);
+  const court = path.join(DIR, 'in-court.png');
+  if (!fs.existsSync(court)) {
+    ledger.assertCanSpend(OPENAI_IMAGE_ESTIMATE_USD);
+    await generateImage({ prompt: COURT, out: court, size: '1024x1536', quality: 'medium' });
+    ledger.record({ id: 'in-court', kind: 'image', provider: 'openai', usd: OPENAI_IMAGE_ESTIMATE_USD, state: 'done' });
+  }
+  return { court };
+}
+
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
   wwImages()
     .then(() => shImages())
+    .then(() => inImages())
     .then((r) => console.log(r, `spent $${new SpendLedger(SPEND_FILE).spent().toFixed(3)}`));
 }

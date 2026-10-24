@@ -48,6 +48,7 @@ import { C6Timeline, C6_META, c6Schema } from './reels/casebook/C6Timeline';
 import { W1Night, W1_META, nightBeats, w1Schema } from './reels/weknows/W1Night';
 import { W2WhoWolf, W2_META, w2Schema, whoBeats } from './reels/weknows/W2WhoWolf';
 import { W3YouWolf, W3_META, w3Schema, youBeats } from './reels/weknows/W3YouWolf';
+import { EN1Block, EN1_META, EN2Bluff, EN2_META, EN3Count, EN3_META, EN_SHOTS, en1Schema, en2Schema, en3Schema } from './reels/weknows/I1Intrigue';
 import { H1Vote, H1_META, H2Liar, H2_META, H3You, H3_META, H_SHOTS, h1Schema, h2Schema, h3Schema, shotBeats } from './reels/weknows/H1Hitler';
 import {
   KURT_PLAYERS,
@@ -71,6 +72,7 @@ import {
   ShVote,
   ShVoteResult,
 } from './brand/weknows/hitler/ShScreens';
+import { IN_HAND, IN_PLAYERS, InChallenge, InLoseCard, InPickAction, InResult, InReveal } from './brand/weknows/intrigue/InScreens';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -355,6 +357,44 @@ const ShPreview: React.FC<{ screen: string }> = ({ screen }) => {
   );
 };
 
+/** Entrika ad screens at the artboard's 390×844 (render with --scale=2 for checks against Entrika.dc.html). */
+const IN_WINDOW = { actor: 'Mert', action: 'assassinate', claim: 'assassin' as const, target: 'Sen', countdown: 5, passed: 1, needed: 3 };
+const InPreview: React.FC<{ screen: string }> = ({ screen }) => {
+  const t = { players: IN_PLAYERS, ...IN_HAND };
+  const body =
+    screen === 'pick' ? (
+      <InPickAction {...t} />
+    ) : screen === 'pickTarget' ? (
+      <InPickAction {...t} selected="assassinate" target="Mert" />
+    ) : screen === 'pickCoup' ? (
+      <InPickAction {...t} gold={8} selected="coup" target="Zeynep" />
+    ) : screen === 'challenge' ? (
+      <InChallenge {...t} {...IN_WINDOW} />
+    ) : screen === 'challengePassed' ? (
+      <InChallenge {...t} {...IN_WINDOW} passed={2} mine="pass" />
+    ) : screen === 'challengeSteal' ? (
+      <InChallenge {...t} actor="Mert" action="steal" claim="pirate" target="Sen" countdown={6} countdownFill={0.75} passed={0} needed={3} />
+    ) : screen === 'challengeOther' ? (
+      <InChallenge {...t} actor="Mert" action="steal" claim="pirate" target="Zeynep" countdown={4} passed={1} needed={3} mine="lie" />
+    ) : screen === 'reveal' ? (
+      <InReveal {...t} who="Mert" role="assassin" truthful loser="Sen" under={IN_WINDOW} />
+    ) : screen === 'revealBluff' ? (
+      <InReveal {...t} who="Mert" role="assassin" truthful={false} loser="Mert" under={IN_WINDOW} />
+    ) : screen === 'lose' ? (
+      <InLoseCard {...t} reason="assassinate" picked={null} />
+    ) : screen === 'losePicked' ? (
+      <InLoseCard {...t} reason="challenge" picked={1} />
+    ) : (
+      <InResult winner="Zeynep" me="Sen" ranking={[{ name: 'Zeynep' }, { name: 'Sen' }, { name: 'Mert' }, { name: 'Deniz' }]} />
+    );
+  return (
+    <Screen390 width={390} height={844}>
+      {body}
+    </Screen390>
+  );
+};
+const IN_STILLS = ['pick', 'pickTarget', 'pickCoup', 'challenge', 'challengePassed', 'challengeSteal', 'challengeOther', 'reveal', 'revealBluff', 'lose', 'losePicked', 'result'];
+
 const SH_STILLS = [
   'vote',
   'voteJa',
@@ -617,6 +657,33 @@ export const RemotionRoot: React.FC = () => (
       calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(H_SHOTS.h3, props.voices).total })}
       {...video}
     />
+    <Composition
+      id={EN1_META.id}
+      component={EN1Block}
+      schema={en1Schema}
+      defaultProps={EN1_META.defaultProps}
+      durationInFrames={shotBeats(EN_SHOTS.i1, EN1_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(EN_SHOTS.i1, props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={EN2_META.id}
+      component={EN2Bluff}
+      schema={en2Schema}
+      defaultProps={EN2_META.defaultProps}
+      durationInFrames={shotBeats(EN_SHOTS.i2, EN2_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(EN_SHOTS.i2, props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={EN3_META.id}
+      component={EN3Count}
+      schema={en3Schema}
+      defaultProps={EN3_META.defaultProps}
+      durationInFrames={shotBeats(EN_SHOTS.i3, EN3_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(EN_SHOTS.i3, props.voices).total })}
+      {...video}
+    />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="SongPlayScreenGuess"
@@ -666,6 +733,9 @@ export const RemotionRoot: React.FC = () => (
     ))}
     {SH_STILLS.map((k) => (
       <Still key={k} id={`Sh-${k}`} component={ShPreview} defaultProps={{ screen: k }} width={390} height={844} />
+    ))}
+    {IN_STILLS.map((k) => (
+      <Still key={k} id={`In-${k}`} component={InPreview} defaultProps={{ screen: k }} width={390} height={844} />
     ))}
   </>
 );

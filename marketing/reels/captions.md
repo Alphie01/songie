@@ -380,3 +380,22 @@ Grup sohbeti: "bu akşam olmaz" → **Olsun.** "Bu akşam kafamı dinliyorum." �
 **Hashtag'ler:** #songie #şarkıyıbil #pillibebek #olsun #tekbaşına #müzik #reels
 
 **Müzik:** Pilli Bebek – Olsun (Deezer önizlemesi; telifli, yalnızca organik paylaşım için).
+
+## Entrika: üç kreatif
+
+Gerçek oyun ekranları (`src/brand/weknows/intrigue/InScreens.tsx`, "Songie Arayüz" Entrika.dc.html + web oyunu), mum ışıklı saray odası (gpt-image-2), Cormorant, ElevenLabs sesleri (anlatıcı "Ergun Kalbak", doğrulamalı).
+
+```sh
+pnpm reel entrika-engel  # "Sen ne yapardın?": Mert Fedai'yim deyip suikast yapar; elinde Muhafız var, engellersin, "Yalan!" der, kaybeder
+pnpm reel entrika-blof   # "Kartın yoktu": Hazinedar'ın yok ama vergi alırsın, kimse yalan demez; 7 altın, darbe, kazanırsın
+pnpm reel entrika-say    # "Kart say": her rolden 3 kart; 2 Fedai açık, 1'i sende → Mert blöf yapıyor (izleyici çözer)
+```
+
+**Açıklamalar:**
+- Sen ne yapardın?: Mert "Fedai'yim" diyor ve sana suikast yapıyor. Yalan mı dersin, engeller misin, geçer misin?
+- Kartın yoktu: Elinde Hazinedar yoktu. Kimse yalan demedi. 👑
+- Kart say: Her rolden 3 kart var. İkisi masada, biri sende. Mert blöf mü yapıyor?
+
+**Hashtag'ler:** #weknows #entrika #coup #blöf #masaoyunu #arkadaşlarla #oyungecesi #reels
+
+**Müzik kredisi:** Music: "Crypto" / "Thief in the Night" / "I Knew a Guy" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

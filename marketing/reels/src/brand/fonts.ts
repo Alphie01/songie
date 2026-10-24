@@ -13,6 +13,8 @@ export const FONT_SANS = "'Inter Tight', 'Nunito', sans-serif";
 export const FONT_FABLE = "'Fraunces', Georgia, serif";
 /** Secret Hitler: Playfair Display, a high-contrast political-drama serif (OFL). */
 export const FONT_DRAMA = "'Playfair Display', Georgia, serif";
+/** Entrika: Cormorant, a courtly old-style serif (OFL). */
+export const FONT_COURT = "'Cormorant', Georgia, serif";
 
 export const VIDEO = { width: 1080, height: 1920, fps: 30 } as const;
 export const SAFE = { top: 250, bottom: 400, side: 60 } as const;
@@ -32,6 +34,8 @@ const FACES = [
   { family: 'Fraunces', weight: '100 900', style: 'italic', file: 'assets/fonts/Fraunces-Italic.ttf' },
   { family: 'Playfair Display', weight: '400 900', file: 'assets/fonts/PlayfairDisplay.ttf' },
   { family: 'Playfair Display', weight: '400 900', style: 'italic', file: 'assets/fonts/PlayfairDisplay-Italic.ttf' },
+  { family: 'Cormorant', weight: '300 700', file: 'assets/fonts/Cormorant.ttf' },
+  { family: 'Cormorant', weight: '300 700', style: 'italic', file: 'assets/fonts/Cormorant-Italic.ttf' },
 ] as { family: string; weight: string; file: string; style?: string }[];
 
 let loading: Promise<void> | null = null;

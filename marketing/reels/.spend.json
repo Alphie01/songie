@@ -1,6 +1,6 @@
 {
   "cap": 10,
-  "spent": 0.7150000000000003,
+  "spent": 0.7650000000000003,
   "entries": [
     {
       "id": "friends-ref",
@@ -173,6 +173,13 @@
     },
     {
       "id": "sh-hall",
+      "kind": "image",
+      "provider": "openai",
+      "usd": 0.05,
+      "state": "done"
+    },
+    {
+      "id": "in-court",
       "kind": "image",
       "provider": "openai",
       "usd": 0.05,
