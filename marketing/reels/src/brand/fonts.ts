@@ -11,6 +11,8 @@ export const FONT_SERIF = "'Instrument Serif', Georgia, serif";
 export const FONT_SANS = "'Inter Tight', 'Nunito', sans-serif";
 /** We Knows hidden-role games (Kurt Adam…): Fraunces, a soft old-style serif with a folk-tale voice (OFL). */
 export const FONT_FABLE = "'Fraunces', Georgia, serif";
+/** Secret Hitler: Playfair Display, a high-contrast political-drama serif (OFL). */
+export const FONT_DRAMA = "'Playfair Display', Georgia, serif";
 
 export const VIDEO = { width: 1080, height: 1920, fps: 30 } as const;
 export const SAFE = { top: 250, bottom: 400, side: 60 } as const;
@@ -28,6 +30,8 @@ const FACES = [
   { family: 'Inter Tight', weight: '100 900', file: 'assets/fonts/InterTight.ttf' },
   { family: 'Fraunces', weight: '100 900', file: 'assets/fonts/Fraunces.ttf' },
   { family: 'Fraunces', weight: '100 900', style: 'italic', file: 'assets/fonts/Fraunces-Italic.ttf' },
+  { family: 'Playfair Display', weight: '400 900', file: 'assets/fonts/PlayfairDisplay.ttf' },
+  { family: 'Playfair Display', weight: '400 900', style: 'italic', file: 'assets/fonts/PlayfairDisplay-Italic.ttf' },
 ] as { family: string; weight: string; file: string; style?: string }[];
 
 let loading: Promise<void> | null = null;

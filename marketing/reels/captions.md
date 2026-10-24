@@ -347,3 +347,22 @@ pnpm reel kurt-rol   # "Rolün: Kurt": basılı tut, kurtsun; masa sana döner; 
 **Hashtag'ler:** #weknows #kurtadam #vampirköylü #werewolf #arkadaşlarla #oyungecesi #partioyunu #reels
 
 **Müzik kredisi:** Music: "Myst on the Moor" / "Dark Fog" / "Night of Chaos" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Secret Hitler: üç kreatif
+
+Gerçek oyun ekranları (`src/brand/weknows/hitler/ShScreens.tsx`, "Songie Arayüz" SecretHitler.dc.html + web oyunu), meclis salonu (gpt-image-2), Playfair Display, ElevenLabs sesleri (anlatıcı "Celil", doğrulamalı). Not: Meta reklam politikası "Hitler" adını içeren tanıtımları reddedebilir; oyun CC BY-NC-SA lisanslı.
+
+```sh
+pnpm reel hitler-ja     # "Ja! mı, Nein mi?": 3 faşist yasa, Mert aday, sen olsan? → Mert Hitler'di
+pnpm reel hitler-yalan  # "Kim yalan söylüyor?": başkanın gerçek elini izleyici görür; Ece liberali attı (izleyici çözer)
+pnpm reel hitler-rol    # "Rolün: Hitler": basılı tut, Hitler'sin; güveni kazan, şansölye seçil; faşistler kazanır
+```
+
+**Açıklamalar:**
+- Ja! mı, Nein mi?: Üç faşist yasa çıktı. Mert şansölye adayı. Sen olsan Ja! mı derdin, Nein mi? 🗳️
+- Kim yalan söylüyor?: Başkan "sana liberal verdim" diyor, şansölye "iki faşist geldi" diyor. Kartları gördün, yalancı kim?
+- Rolün: Hitler: Herkes sana güveniyor. Yüzün hiç kızarmaz mı?
+
+**Hashtag'ler:** #weknows #secrethitler #gizlirol #blöf #arkadaşlarla #oyungecesi #masaoyunu #reels
+
+**Müzik kredisi:** Music: "Interloper" / "Thief in the Night" / "Volatile Reaction" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0

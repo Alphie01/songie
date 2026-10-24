@@ -47,6 +47,7 @@ import { C6Timeline, C6_META, c6Schema } from './reels/casebook/C6Timeline';
 import { W1Night, W1_META, nightBeats, w1Schema } from './reels/weknows/W1Night';
 import { W2WhoWolf, W2_META, w2Schema, whoBeats } from './reels/weknows/W2WhoWolf';
 import { W3YouWolf, W3_META, w3Schema, youBeats } from './reels/weknows/W3YouWolf';
+import { H1Vote, H1_META, H2Liar, H2_META, H3You, H3_META, H_SHOTS, h1Schema, h2Schema, h3Schema, shotBeats } from './reels/weknows/H1Hitler';
 import {
   KURT_PLAYERS,
   KurtDawn,
@@ -59,6 +60,16 @@ import {
   KurtVote,
   Screen390,
 } from './brand/weknows/kurt/KurtScreens';
+import {
+  ShChancellorEnact,
+  ShEnacted,
+  ShExecution,
+  ShInvestigate,
+  ShPresidentDraw,
+  ShResult,
+  ShVote,
+  ShVoteResult,
+} from './brand/weknows/hitler/ShScreens';
 
 // Load Baloo 2 / Nunito once for every composition (holds the render until they are ready).
 void loadBrandFonts();
@@ -275,6 +286,94 @@ const KurtPreview: React.FC<{ screen: string }> = ({ screen }) => {
   );
 };
 
+/** Secret Hitler ad screens at the artboard's 390×844 (render with --scale=2 for checks against SecretHitler.dc.html). */
+const SH_VOTES = [
+  { name: 'Ece', ja: true },
+  { name: 'Mert', ja: true },
+  { name: 'Deniz', ja: false },
+  { name: 'Kaan', ja: true },
+  { name: 'Zeynep', ja: true },
+  { name: 'Sude', ja: false },
+];
+const ShPreview: React.FC<{ screen: string }> = ({ screen }) => {
+  const board = { liberal: 2, fascist: 3, tracker: 1 };
+  const body =
+    screen === 'vote' ? (
+      <ShVote {...board} president="Ece" nominee="Mert" mine={null} voted={4} total={7} />
+    ) : screen === 'voteJa' ? (
+      <ShVote {...board} president="Ece" nominee="Mert" mine="ja" voted={5} total={7} cardOpen />
+    ) : screen === 'voteNein' ? (
+      <ShVote {...board} president="Ece" nominee="Mert" mine="nein" voted={5} total={7} cardOpen role="hitler" />
+    ) : screen === 'voteFascist' ? (
+      <ShVote {...board} president="Ece" nominee="Mert" mine="ja" voted={5} total={7} cardOpen role="fascist" me="Sude" team={[{ name: 'Kaan', role: 'fascist' }, { name: 'Zeynep', role: 'hitler' }]} />
+    ) : screen === 'votePassed' ? (
+      <ShVoteResult {...board} president="Ece" nominee="Mert" votes={SH_VOTES} passed />
+    ) : screen === 'voteFailed' ? (
+      <ShVoteResult {...board} tracker={2} president="Ece" nominee="Mert" votes={SH_VOTES.map((v) => ({ ...v, ja: !v.ja }))} passed={false} />
+    ) : screen === 'president' ? (
+      <ShPresidentDraw {...board} cards={['fascist', 'liberal', 'fascist']} discarded={null} votes={SH_VOTES} />
+    ) : screen === 'presidentPick' ? (
+      <ShPresidentDraw {...board} cards={['fascist', 'liberal', 'fascist']} discarded={0} votes={SH_VOTES} />
+    ) : screen === 'chancellor' ? (
+      <ShChancellorEnact {...board} deck={6} cards={['liberal', 'fascist']} enacted={1} votes={SH_VOTES} />
+    ) : screen === 'enactedLiberal' ? (
+      <ShEnacted liberal={3} fascist={3} tracker={0} deck={6} discard={5} policy="liberal" votes={SH_VOTES} />
+    ) : screen === 'enactedFascist' ? (
+      <ShEnacted liberal={2} fascist={4} tracker={0} deck={6} discard={5} policy="fascist" votes={SH_VOTES} />
+    ) : screen === 'investigate' ? (
+      <ShInvestigate liberal={2} fascist={2} tracker={0} target="Deniz" result={null} />
+    ) : screen === 'investigateResult' ? (
+      <ShInvestigate liberal={2} fascist={2} tracker={0} target="Deniz" result="liberal" />
+    ) : screen === 'execution' ? (
+      <ShExecution liberal={2} fascist={4} tracker={0} target="Mert" role="liberal" />
+    ) : screen === 'executionDone' ? (
+      <ShExecution liberal={2} fascist={4} tracker={0} target="Mert" done />
+    ) : screen === 'resultFascist' ? (
+      <ShResult winner="fascist" reason="hitlerChancellor" />
+    ) : (
+      <ShResult
+        winner="liberal"
+        reason="hitlerExecuted"
+        liberal={3}
+        fascist={4}
+        players={[
+          { name: 'Ece', color: '#FF7AC6' },
+          { name: 'Mert', color: '#3EE0A8', dead: true },
+          { name: 'Deniz', color: '#5AB8FF' },
+          { name: 'Kaan', color: '#B794FF' },
+          { name: 'Bora', color: '#FF8A5B', dead: true },
+          { name: 'Zeynep', color: '#FFD23F' },
+          { name: 'Sude', color: '#FFFFFF' },
+        ]}
+      />
+    );
+  return (
+    <Screen390 width={390} height={844}>
+      {body}
+    </Screen390>
+  );
+};
+
+const SH_STILLS = [
+  'vote',
+  'voteJa',
+  'voteNein',
+  'voteFascist',
+  'votePassed',
+  'voteFailed',
+  'president',
+  'presidentPick',
+  'chancellor',
+  'enactedLiberal',
+  'enactedFascist',
+  'investigate',
+  'investigateResult',
+  'execution',
+  'executionDone',
+  'resultFascist',
+  'resultLiberal',
+];
+
 const KURT_STILLS = ['wolf', 'wolfPick', 'sleep', 'seer', 'seerResult', 'dawn', 'discuss', 'vote', 'verdict', 'spared', 'resultWolves', 'resultVillage'];
 
 const video = { fps: VIDEO.fps, width: VIDEO.width, height: VIDEO.height };
@@ -482,6 +581,33 @@ export const RemotionRoot: React.FC = () => (
       calculateMetadata={({ props }) => ({ durationInFrames: youBeats(props.voices).total })}
       {...video}
     />
+    <Composition
+      id={H1_META.id}
+      component={H1Vote}
+      schema={h1Schema}
+      defaultProps={H1_META.defaultProps}
+      durationInFrames={shotBeats(H_SHOTS.h1, H1_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(H_SHOTS.h1, props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={H2_META.id}
+      component={H2Liar}
+      schema={h2Schema}
+      defaultProps={H2_META.defaultProps}
+      durationInFrames={shotBeats(H_SHOTS.h2, H2_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(H_SHOTS.h2, props.voices).total })}
+      {...video}
+    />
+    <Composition
+      id={H3_META.id}
+      component={H3You}
+      schema={h3Schema}
+      defaultProps={H3_META.defaultProps}
+      durationInFrames={shotBeats(H_SHOTS.h3, H3_META.defaultProps.voices).total}
+      calculateMetadata={({ props }) => ({ durationInFrames: shotBeats(H_SHOTS.h3, props.voices).total })}
+      {...video}
+    />
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="SongPlayScreenGuess"
@@ -528,6 +654,9 @@ export const RemotionRoot: React.FC = () => (
     />
     {KURT_STILLS.map((k) => (
       <Still key={k} id={`Kurt-${k}`} component={KurtPreview} defaultProps={{ screen: k }} width={390} height={844} />
+    ))}
+    {SH_STILLS.map((k) => (
+      <Still key={k} id={`Sh-${k}`} component={ShPreview} defaultProps={{ screen: k }} width={390} height={844} />
     ))}
   </>
 );
