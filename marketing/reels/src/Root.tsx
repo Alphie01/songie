@@ -28,6 +28,7 @@ import { demoFeed, demoScores } from './BrandSheet';
 import { R1Challenge, R1_META, r1Schema } from './reels/R1Challenge';
 import { R2RealGame, R2_META, r2Schema } from './reels/R2RealGame';
 import { R3Winner, R3_META, r3Schema } from './reels/R3Winner';
+import { R4Solo, R4_META, r4Schema } from './reels/R4Solo';
 import { I1Never, I1_META, i1Schema } from './reels/itiraf/I1Never';
 import { I2NeverFlirt, I2_META, i2Schema } from './reels/itiraf/I2NeverFlirt';
 import { I3Confessions, I3_META, i3Schema } from './reels/itiraf/I3Confessions';
@@ -405,6 +406,14 @@ export const RemotionRoot: React.FC = () => (
       schema={r3Schema}
       defaultProps={R3_META.defaultProps}
       durationInFrames={R3_META.durationInFrames}
+      {...video}
+    />
+    <Composition
+      id={R4_META.id}
+      component={R4Solo}
+      schema={r4Schema}
+      defaultProps={R4_META.defaultProps}
+      durationInFrames={R4_META.durationInFrames}
       {...video}
     />
     <Composition

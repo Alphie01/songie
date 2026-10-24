@@ -68,8 +68,35 @@ export async function artistDecoys(artistId: number, artist: string, title: stri
   }
 }
 
-/** Şarkıyı bulur, önizlemesini `<assetsDir>/songs/<id>.mp3` olarak indirir (varsa tekrar indirmez). */
+/** Query → song cache (assets/songs/cache.json, gitignored with the songs): renders keep working when Deezer is down. */
+const cacheFile = (assetsDir: string) => path.join(assetsDir, 'songs', 'cache.json');
+const norm = (q: string) => q.trim().toLocaleLowerCase('tr-TR').replace(/\s+/g, ' ');
+function readCache(assetsDir: string): Record<string, SongAsset> {
+  try {
+    return JSON.parse(fs.readFileSync(cacheFile(assetsDir), 'utf8')) as Record<string, SongAsset>;
+  } catch {
+    return {};
+  }
+}
+
 export async function fetchSong(query: string, assetsDir: string): Promise<SongAsset> {
+  const cache = readCache(assetsDir);
+  const hit = cache[norm(query)];
+  try {
+    const song = await fetchFromDeezer(query, assetsDir);
+    fs.writeFileSync(cacheFile(assetsDir), JSON.stringify({ ...readCache(assetsDir), [norm(query)]: song }, null, 2));
+    return song;
+  } catch (e) {
+    if (hit && fs.existsSync(hit.file)) {
+      console.warn(`Deezer'a ulaşılamadı (${e instanceof Error ? e.message.slice(0, 60) : e}); önbellekteki şarkı kullanılıyor: ${hit.answer}`);
+      return hit;
+    }
+    throw e;
+  }
+}
+
+/** Şarkıyı bulur, önizlemesini `<assetsDir>/songs/<id>.mp3` olarak indirir (varsa tekrar indirmez). */
+async function fetchFromDeezer(query: string, assetsDir: string): Promise<SongAsset> {
   const t = await searchTrack(query);
   const file = path.join(assetsDir, 'songs', `${t.id}.mp3`);
   if (!fs.existsSync(file)) {

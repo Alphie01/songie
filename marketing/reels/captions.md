@@ -366,3 +366,17 @@ pnpm reel hitler-rol    # "Rolün: Hitler": basılı tut, Hitler'sin; güveni ka
 **Hashtag'ler:** #weknows #secrethitler #gizlirol #blöf #arkadaşlarla #oyungecesi #masaoyunu #reels
 
 **Müzik kredisi:** Music: "Interloper" / "Thief in the Night" / "Volatile Reaction" Kevin MacLeod (incompetech.com) · Licensed under Creative Commons: By Attribution 4.0
+
+## Songie · "Olsun" (`songie-04-olsun`), tek başına
+
+```sh
+pnpm reel olsun
+```
+
+Grup sohbeti: "bu akşam olmaz" → **Olsun.** "Bu akşam kafamı dinliyorum." → gerçek ana ekran, "Tek başına oyna" → 0,5 sn'de Pilli Bebek – Olsun → Seri ×7 "Rakibin sensin." → "Tek başına da çalar."
+
+**Açıklama:** Herkesin işi mi var? Olsun. 🎧 Songie'de tek başına da oynarsın: tur sınırı yok, serini büyüt. #kafamıdinliyorum
+
+**Hashtag'ler:** #songie #şarkıyıbil #pillibebek #olsun #tekbaşına #müzik #reels
+
+**Müzik:** Pilli Bebek – Olsun (Deezer önizlemesi; telifli, yalnızca organik paylaşım için).
