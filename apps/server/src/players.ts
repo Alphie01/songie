@@ -137,6 +137,32 @@ export class PlayerStore {
     })();
   }
 
+  /**
+   * Hesabı ve verilerini siler (App Store 5.1.1(v), "Gizlilik tercihleri" sayfası): profil, token'lar, oyun
+   * sonuçları ve hesap bağlantıları (CASCADE), şarkı listesi sahiplikleri; dedektif dosyalarından çıkarılır,
+   * üyesi kalmayan dosya silinir.
+   */
+  remove(id: string): void {
+    const hasTable = (name: string) =>
+      Boolean(this.db.prepare("SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?").get(name));
+    this.db.transaction(() => {
+      if (hasTable('sg_pool_owners')) this.db.prepare('DELETE FROM sg_pool_owners WHERE player_id = ?').run(id);
+      if (hasTable('detective_sessions')) {
+        const rows = this.db
+          .prepare('SELECT s.id, s.members FROM detective_sessions s, json_each(s.members) m WHERE m.value = ?')
+          .all(id) as { id: string; members: string }[];
+        for (const r of rows) {
+          const members = (JSON.parse(r.members) as string[]).filter((m) => m !== id);
+          if (members.length) this.db.prepare('UPDATE detective_sessions SET members = ? WHERE id = ?').run(JSON.stringify(members), r.id);
+          else this.db.prepare('DELETE FROM detective_sessions WHERE id = ?').run(r.id);
+        }
+      }
+      // açıkça da sil: CASCADE foreign_keys ayarına bağlı kalmasın
+      for (const t of ['game_results', 'player_tokens', 'player_firebase_uids']) this.db.prepare(`DELETE FROM ${t} WHERE player_id = ?`).run(id);
+      this.db.prepare('DELETE FROM players WHERE id = ?').run(id);
+    })();
+  }
+
   update(id: string, input: ProfileInput): Profile {
     this.db.prepare('UPDATE players SET nick = ?, avatar = ? WHERE id = ?').run(input.nick, JSON.stringify(input.avatar), id);
     return { id, nick: input.nick, avatar: input.avatar };

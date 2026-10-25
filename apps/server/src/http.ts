@@ -147,6 +147,16 @@ export async function registerHttp(
     return { ok: true };
   });
 
+  /** Hesabı ve bütün verilerini siler; odadan çıkarır, bağlantısını keser. */
+  app.delete('/api/me', async (req, reply) => {
+    if (!req.profile) return reply.code(401).send({ error: 'Profil bulunamadı.' });
+    const id = req.profile.id;
+    rooms.leave(id);
+    deps.disconnectPlayer(id);
+    players.remove(id);
+    return { ok: true };
+  });
+
   app.put('/api/me', async (req, reply) => {
     if (!req.profile) return reply.code(401).send({ error: 'Profil bulunamadı.' });
     const parsed = profileInputSchema.safeParse(req.body);

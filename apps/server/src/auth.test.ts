@@ -223,3 +223,22 @@ describe('firebaseVerifier', () => {
     await expect(verify(await sign({ firebase: { sign_in_provider: 'anonymous' } }))).rejects.toThrow();
   });
 });
+
+describe('Hesabı silme (App Store 5.1.1(v))', () => {
+  it('profili, token’ları ve hesap bağlantısını siler; aynı token artık geçmez', async () => {
+    const a = await anon('Silinecek');
+    await google('uid-silinecek', a.token);
+    expect((await me(a.token)).statusCode).toBe(200);
+    const del = await app.http.inject({ method: 'DELETE', url: '/api/me', headers: auth(a.token) });
+    expect(del.statusCode).toBe(200);
+    expect((await me(a.token)).statusCode).toBe(401);
+    // aynı Google hesabıyla yeniden giriş yeni, boş bir profil açar
+    const again = (await google('uid-silinecek')).json() as AuthResponse;
+    expect(again.profile.id).not.toBe(a.id);
+  });
+
+  it('profil olmadan 401 döner', async () => {
+    const res = await app.http.inject({ method: 'DELETE', url: '/api/me' });
+    expect(res.statusCode).toBe(401);
+  });
+});
