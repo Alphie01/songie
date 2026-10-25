@@ -1,0 +1,131 @@
+/* Gizlilik politikası ve gizlilik tercihleri: herkese açık, profil gerektirmez. Kartlar ui.css ile aynı dil. */
+.legal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 32px;
+  padding-bottom: 40px;
+}
+
+.legal-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.legal-brand {
+  align-self: flex-start;
+  text-decoration: none;
+}
+
+.legal-title {
+  margin: 12px 0 0;
+  font-size: 40px;
+  line-height: 1;
+}
+
+.legal-lead {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--text-2);
+}
+
+.legal-updated {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-3);
+}
+
+.legal-card {
+  padding: 18px 18px 16px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 22px;
+  background: var(--panel);
+}
+
+.legal-card h2 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.legal-card h3 {
+  margin: 0 0 6px;
+  font-size: 19px;
+}
+
+.legal-card p,
+.legal-card li {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+.legal-card p + p {
+  margin-top: 8px;
+}
+
+.legal-card ul {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.legal-card a {
+  color: var(--yellow);
+  font-weight: 800;
+}
+
+.legal-note {
+  margin-top: 10px !important;
+  font-weight: 800 !important;
+  color: var(--text) !important;
+}
+
+.legal-danger {
+  margin-top: 14px;
+  padding: 14px;
+  border: var(--bw) solid var(--ink);
+  border-radius: 18px;
+  background: var(--panel-2);
+}
+
+.legal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.legal-delete {
+  background: var(--red);
+  color: var(--ink-2);
+}
+
+.legal-done {
+  font-weight: 800 !important;
+  color: var(--mint) !important;
+}
+
+.legal-links {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0 0;
+}
+
+/* Onay penceresi: sağ üstteki kapatma düğmesinin altına metin girmesin. */
+.legal-confirm {
+  padding-right: 52px;
+}
+
+.legal-confirm h2 {
+  margin: 0 0 8px;
+}

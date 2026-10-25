@@ -150,4 +150,116 @@ export const tr = {
     save: 'Kaydet',
     saved: 'Profil kaydedildi.',
   },
+  legal: {
+    updated: 'Son güncelleme: 25 Ekim 2026',
+    contactEmail: 'info@monolithyazilim.com',
+    toChoices: 'Gizlilik tercihlerine git',
+    toPolicy: 'Gizlilik politikasını oku',
+    home: 'Oyunlara dön',
+    privacy: {
+      title: 'Gizlilik Politikası',
+      lead: 'Songie, İtiraf Köşesi, Casebook ve We Knows uygulamaları ile bu web sitesi Monolith Yazılım tarafından sunulur. Bu sayfa hangi verileri neden tuttuğumuzu ve onları nasıl silebileceğini anlatır.',
+      sections: [
+        {
+          title: 'Kısaca',
+          items: [
+            'Reklam göstermiyoruz, seni izlemiyoruz, verini satmıyoruz.',
+            'Analitik, reklam ya da izleme SDK’sı kullanmıyoruz; App Store’un tanımıyla seni uygulamalar ve siteler arasında takip etmiyoruz.',
+            'Oynamak için yalnızca bir takma ad yeter. Google ya da Apple ile giriş isteğe bağlıdır.',
+            'Hesabını ve verilerini istediğin an silebilirsin.',
+          ],
+        },
+        {
+          title: 'Topladığımız veriler',
+          items: [
+            'Profil: seçtiğin takma ad ve avatar (şekil ve renk).',
+            'Oturum anahtarı: cihazında saklanır; sunucuda yalnızca tek yönlü özeti (hash) tutulur.',
+            'Google ya da Apple ile giriş yaparsan: e-posta adresin, hesabın kimlik numarası ve giriş sağlayıcısı. Girişi Google Firebase Authentication doğrular; şifreni hiçbir zaman görmeyiz.',
+            'Oyun sonuçları: oynadığın oyun, puanın, sıran, odadaki oyuncu sayısı, oda kodu ve tarih. Profilindeki istatistikler ve rekorlar buradan hesaplanır.',
+            'Oyun sırasında yazdıkların ve seçtiklerin (sohbet, itiraflar, cevaplar, oylar): yalnızca oyun sürerken sunucunun belleğinde tutulur, oda kapanınca silinir. Casebook (dedektif) vaka dosyaları ve ekibin notları, dosyaya sonra devam edebilesiniz diye saklanır.',
+            'Teknik kayıtlar: bağlantı ve güvenlik için IP adresi ve istek kayıtları sunucu ve Cloudflare tarafından kısa süreli tutulur.',
+          ],
+        },
+        {
+          title: 'Toplamadıklarımız',
+          items: [
+            'Konum, rehber, fotoğraflar, mikrofon ya da kamera verisi.',
+            'Reklam kimliği (IDFA) ya da cihaz parmak izi.',
+            'Ödeme bilgisi: uygulamalar ücretsizdir.',
+          ],
+        },
+        {
+          title: 'Verileri neden kullanıyoruz',
+          items: [
+            'Seni odada arkadaşlarına adınla göstermek ve oyunu oynatmak.',
+            'Profilini cihazlar arasında taşımak (Google ya da Apple ile giriş yaptıysan).',
+            'Skorları, rekorları ve istatistikleri göstermek.',
+            'Hizmeti güvenli ve çalışır tutmak.',
+          ],
+        },
+        {
+          title: 'Paylaştığımız hizmet sağlayıcılar',
+          items: [
+            'Google Firebase Authentication ve Sign in with Apple: yalnızca giriş yaptığında, kimliğini doğrulamak için.',
+            'Cloudflare: siteye ve sunucuya güvenli bağlantı için.',
+            'Deezer: Songie’deki şarkı önizlemeleri sunucumuz üzerinden Deezer’dan alınır; Deezer’a senin hakkında veri gönderilmez.',
+          ],
+          note: 'Verini bunların dışında kimseyle paylaşmayız, satmayız ve reklam için kullanmayız.',
+        },
+        {
+          title: 'Ne kadar saklıyoruz',
+          items: [
+            'Profil, oyun sonuçları ve hesap bağlantısı: sen silene kadar.',
+            'Oyun içi yazışmalar ve cevaplar: oda kapanana kadar.',
+            'Casebook vaka dosyaları: dosyanın son üyesi hesabını silene kadar.',
+          ],
+        },
+        {
+          title: 'Hakların',
+          paras: [
+            'KVKK ve GDPR kapsamında verine erişme, düzeltme, silme ve işlenmesine itiraz etme hakkın var. Takma adını ve avatarını Profil sayfasından değiştirebilir, hesabını ve bütün verilerini Gizlilik tercihleri sayfasından silebilirsin. Diğer talepler için bize e-posta gönder.',
+          ],
+        },
+        {
+          title: 'Çocuklar',
+          paras: ['Uygulamalar 13 yaşından küçük çocuklara yönelik değildir ve onlardan bilerek veri toplamayız. İtiraf Köşesi’ndeki bazı kart paketleri yalnızca yetişkinler içindir.'],
+        },
+        {
+          title: 'Değişiklikler',
+          paras: ['Bu politikayı güncellersek tarihi bu sayfada değiştiririz. Önemli değişiklikleri uygulamalarda da duyururuz.'],
+        },
+      ] as { title: string; items?: string[]; paras?: string[]; note?: string }[],
+      contact: 'İletişim',
+      contactLead: 'Gizlilikle ilgili her soru ve talep için:',
+      english: 'In English',
+      englishText:
+        'Songie, İtiraf Köşesi, Casebook and We Knows (by Monolith Yazılım) show no ads, use no analytics or tracking SDKs and do not track you across apps or websites. We store a nickname and avatar, a hashed session token, your game results and, only if you sign in with Google or Apple, your email address and account ID (verified by Firebase Authentication). In-game messages live in server memory until the room closes; Casebook case files and notes are kept so a team can resume. You can delete your account and all its data at any time on the Privacy Choices page or by emailing us.',
+    },
+    choices: {
+      title: 'Gizlilik Tercihleri',
+      lead: 'Verilerin üzerinde söz senin. Buradan hesabını ve bütün verilerini silebilir, bu cihazdaki oturumu kapatabilirsin.',
+      tracking: 'Reklam ve izleme',
+      trackingText: 'Reklam göstermiyor, izleme yapmıyor ve analitik kullanmıyoruz. Kapatman gereken bir şey yok.',
+      account: 'Hesabın',
+      noProfile: 'Bu tarayıcıda bir profil yok. Uygulamada Google ile giriş yaptıysan aynı hesapla burada giriş yapıp silebilirsin. Apple ile giriş yaptıysan ya da giriş yapmadan oynadıysan bize e-posta gönder.',
+      signedInAs: (nick: string) => `Bu tarayıcıda “${nick}” profiliyle oturum açık.`,
+      linked: (email: string) => `Bağlı hesap: ${email}`,
+      anonymous: 'Profilin bir Google ya da Apple hesabına bağlı değil; yalnızca bu tarayıcıda saklanıyor.',
+      deleteTitle: 'Hesabımı ve verilerimi sil',
+      deleteText: 'Profilin, oyun sonuçların, istatistiklerin, hesap bağlantın ve oturum anahtarların kalıcı olarak silinir; Casebook dosyalarından çıkarılırsın. Bu işlem geri alınamaz.',
+      deleteBtn: 'Hesabımı sil',
+      confirmTitle: 'Emin misin?',
+      confirmText: 'Bütün verilerin kalıcı olarak silinecek. Aynı Google ya da Apple hesabıyla yeniden girersen sıfırdan yeni bir profil açılır.',
+      confirmBtn: 'Evet, kalıcı olarak sil',
+      cancel: 'Vazgeç',
+      deleting: 'Siliniyor…',
+      deleted: 'Hesabın ve bütün verilerin silindi.',
+      failed: 'Silinemedi. Tekrar dene ya da bize e-posta gönder.',
+      signOut: 'Bu cihazda oturumu kapat',
+      apps: 'Mobil uygulamalarda',
+      appsText: 'Songie, İtiraf Köşesi, Casebook ya da We Knows’ta Google ile giriş yaptıysan, aynı hesapla burada giriş yapıp silebilirsin. Apple ile giriş yaptıysan ya da giriş yapmadan oynadıysan bize e-posta gönder; uygulamadaki takma adını ve hangi uygulamayı kullandığını yazman yeterli.',
+      email: 'E-posta ile talep',
+      emailText: 'Erişim, düzeltme ya da silme taleplerini e-postayla da iletebilirsin; en geç 30 gün içinde yanıtlarız.',
+    },
+  },
 };
