@@ -12,6 +12,7 @@ import '../session/google_auth.dart';
 import '../session/session.dart';
 import '../shared/models.dart';
 import '../shared/text.dart';
+import '../ui/dialog.dart';
 import '../ui/icons.dart';
 import '../ui/page.dart';
 import '../ui/tokens.dart';
@@ -468,6 +469,51 @@ class AccountCard extends StatelessWidget {
             ),
           ),
           const Positioned(top: -14, right: 16, child: Sticker(TrAccount.sticker, color: C.mint, rotate: 4)),
+        ],
+      ),
+    );
+  }
+}
+
+/// Profilin en altı: hesabı ve sunucudaki bütün verileri kalıcı olarak silme (App Store 5.1.1(v)).
+class DeleteAccountSection extends StatefulWidget {
+  const DeleteAccountSection({super.key});
+
+  @override
+  State<DeleteAccountSection> createState() => _DeleteAccountSectionState();
+}
+
+class _DeleteAccountSectionState extends State<DeleteAccountSection> {
+  bool _busy = false;
+
+  Future<void> _delete() async {
+    final session = context.read<Session>();
+    if (!await confirmDialog(context, TrAccount.deleteConfirm, ok: TrAccount.deleteOk)) return;
+    setState(() => _busy = true);
+    try {
+      await session.deleteAccount();
+      session.notify(TrAccount.deleted);
+    } on GoogleCancelled {
+      // Apple penceresi kapatıldı: hiçbir şey silinmedi.
+    } on Object {
+      session.notify(TrAccount.deleteFailed);
+    }
+    if (mounted) setState(() => _busy = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final apple = context.select<Session, bool>((s) => s.account?.provider == 'apple') && appleSignInAvailable;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(TrAccount.deleteTitle, style: T.d(19, color: C.text)),
+          const SizedBox(height: 4),
+          Text(apple ? '${TrAccount.deleteText} ${TrAccount.deleteTextApple}' : TrAccount.deleteText, style: T.b(13, color: C.text3, weight: FontWeight.w700)),
+          const SizedBox(height: 12),
+          SGhostButton(label: _busy ? TrAccount.deleting : TrAccount.delete, color: C.red, onPressed: _busy ? null : _delete),
         ],
       ),
     );

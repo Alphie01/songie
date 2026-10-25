@@ -26,6 +26,7 @@ class Api {
   Future<Json> get(String path) => _request('GET', path);
   Future<Json> post(String path, Object? body) => _request('POST', path, body);
   Future<Json> put(String path, Object? body) => _request('PUT', path, body);
+  Future<Json> delete(String path) => _request('DELETE', path);
 
   Future<Json> _request(String method, String path, [Object? body]) async {
     final token = tokenOf();

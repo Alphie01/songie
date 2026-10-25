@@ -80,6 +80,7 @@ class ProfileScreen extends StatelessWidget {
                   const AccountCard(),
                 ],
               ),
+              after: const DeleteAccountSection(),
             ),
           ),
         ],

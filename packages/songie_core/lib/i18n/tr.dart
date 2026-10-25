@@ -160,6 +160,15 @@ abstract final class TrAccount {
   static const appleFailed = 'Apple ile giriş yapılamadı. Tekrar dene.';
   static const linkedToast = 'Profilin Google hesabına bağlandı.';
   static const linkedToastApple = 'Profilin Apple hesabına bağlandı.';
+  static const deleteTitle = 'Hesabımı ve verilerimi sil';
+  static const deleteText = 'Profilin, oyun sonuçların, istatistiklerin ve hesap bağlantın kalıcı olarak silinir. Bu işlem geri alınamaz.';
+  static const deleteTextApple = 'Apple bağlantını kaldırmak için Apple penceresi bir kez daha açılır.';
+  static const delete = 'Hesabımı sil';
+  static const deleteConfirm = 'Hesabın ve bütün verilerin kalıcı olarak silinsin mi?';
+  static const deleteOk = 'Evet, sil';
+  static const deleting = 'Siliniyor…';
+  static const deleted = 'Hesabın ve bütün verilerin silindi.';
+  static const deleteFailed = 'Silinemedi. Tekrar dene ya da info@monolithyazilim.com adresine yaz.';
 }
 
 abstract final class TrProfile {

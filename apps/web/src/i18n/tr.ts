@@ -217,7 +217,7 @@ export const tr = {
         {
           title: 'Hakların',
           paras: [
-            'KVKK ve GDPR kapsamında verine erişme, düzeltme, silme ve işlenmesine itiraz etme hakkın var. Takma adını ve avatarını Profil sayfasından değiştirebilir, hesabını ve bütün verilerini Gizlilik tercihleri sayfasından silebilirsin. Diğer talepler için bize e-posta gönder.',
+            'KVKK ve GDPR kapsamında verine erişme, düzeltme, silme ve işlenmesine itiraz etme hakkın var. Takma adını ve avatarını Profil sayfasından değiştirebilir, hesabını ve bütün verilerini uygulamadaki Profil sayfasından ya da Gizlilik tercihleri sayfasından silebilirsin. Diğer talepler için bize e-posta gönder.',
           ],
         },
         {
@@ -241,7 +241,7 @@ export const tr = {
       tracking: 'Reklam ve izleme',
       trackingText: 'Reklam göstermiyor, izleme yapmıyor ve analitik kullanmıyoruz. Kapatman gereken bir şey yok.',
       account: 'Hesabın',
-      noProfile: 'Bu tarayıcıda bir profil yok. Uygulamada Google ile giriş yaptıysan aynı hesapla burada giriş yapıp silebilirsin. Apple ile giriş yaptıysan ya da giriş yapmadan oynadıysan bize e-posta gönder.',
+      noProfile: 'Bu tarayıcıda bir profil yok. Uygulamada oynadıysan hesabını uygulamanın Profil sayfasındaki “Hesabımı sil” ile silebilirsin. Google ile giriş yaptıysan aynı hesapla burada giriş yapıp da silebilirsin.',
       signedInAs: (nick: string) => `Bu tarayıcıda “${nick}” profiliyle oturum açık.`,
       linked: (email: string) => `Bağlı hesap: ${email}`,
       anonymous: 'Profilin bir Google ya da Apple hesabına bağlı değil; yalnızca bu tarayıcıda saklanıyor.',
@@ -257,7 +257,7 @@ export const tr = {
       failed: 'Silinemedi. Tekrar dene ya da bize e-posta gönder.',
       signOut: 'Bu cihazda oturumu kapat',
       apps: 'Mobil uygulamalarda',
-      appsText: 'Songie, İtiraf Köşesi, Casebook ya da We Knows’ta Google ile giriş yaptıysan, aynı hesapla burada giriş yapıp silebilirsin. Apple ile giriş yaptıysan ya da giriş yapmadan oynadıysan bize e-posta gönder; uygulamadaki takma adını ve hangi uygulamayı kullandığını yazman yeterli.',
+      appsText: 'Songie, İtiraf Köşesi, Casebook ve We Knows’ta Profil sayfasının en altındaki “Hesabımı sil” düğmesi hesabını ve bütün verilerini siler; Apple ile giriş yaptıysan Apple bağlantın da iptal edilir. Uygulamaya erişemiyorsan bize e-posta gönder; takma adını ve hangi uygulamayı kullandığını yazman yeterli.',
       email: 'E-posta ile talep',
       emailText: 'Erişim, düzeltme ya da silme taleplerini e-postayla da iletebilirsin; en geç 30 gün içinde yanıtlarız.',
     },
