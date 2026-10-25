@@ -253,6 +253,20 @@ class Session extends ChangeNotifier with WidgetsBindingObserver {
       // token zaten geçersiz olabilir
     }
     await googleSignOut();
+    await _reset();
+  }
+
+  /// Hesabı ve sunucudaki bütün verileri kalıcı olarak siler (DELETE /api/me), sonra bu cihazı sıfırlar.
+  /// Apple hesabında önce Apple bağlantısı iptal edilir; kullanıcı Apple penceresini kapatırsa [GoogleCancelled] fırlar.
+  Future<void> deleteAccount() async {
+    if (account?.provider == 'apple') await appleRevoke();
+    await api.delete('/api/me');
+    await firebaseDeleteUser();
+    await googleSignOut();
+    await _reset();
+  }
+
+  Future<void> _reset() async {
     _closeSocket();
     await _setToken(null);
     profile = null;
