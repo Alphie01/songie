@@ -50,6 +50,7 @@ import { W2WhoWolf, W2_META, w2Schema, whoBeats } from './reels/weknows/W2WhoWol
 import { W3YouWolf, W3_META, w3Schema, youBeats } from './reels/weknows/W3YouWolf';
 import { AG1Clue, AG1_META, AG2Assassin, AG2_META, AG3Leader, AG3_META, AG_SHOTS, agSchema } from './reels/weknows/A1Agents';
 import { brightBeats } from './brand/weknows/Bright';
+import { STORE_SIZES, StoreArt } from './store/StoreArt';
 import { EN1Block, EN1_META, EN2Bluff, EN2_META, EN3Count, EN3_META, EN_SHOTS, en1Schema, en2Schema, en3Schema } from './reels/weknows/I1Intrigue';
 import { H1Vote, H1_META, H2Liar, H2_META, H3You, H3_META, H_SHOTS, h1Schema, h2Schema, h3Schema, shotBeats } from './reels/weknows/H1Hitler';
 import {
@@ -737,6 +738,11 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={brightBeats(AG_SHOTS.a3).total}
       {...video}
     />
+    {(['songie', 'itiraf', 'casebook', 'weknows'] as const).flatMap((app) =>
+      STORE_SIZES.map((sz) => (
+        <Still key={`${app}-${sz.id}`} id={`Store-${app}-${sz.id}`} component={() => <StoreArt app={app} w={sz.width} h={sz.height} />} width={sz.width} height={sz.height} />
+      )),
+    )}
     <Still id="SongPlayScreen" component={PlayScreenPreview} width={VIDEO.width} height={VIDEO.height} />
     <Still
       id="SongPlayScreenGuess"
